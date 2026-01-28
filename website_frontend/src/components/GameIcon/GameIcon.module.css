@@ -1,0 +1,8 @@
+.gameImage {
+  border-radius: 1.563rem;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.gameImage:hover {
+  box-shadow: 0 0 1.563rem .188rem rgba(153, 102, 255, 0.8);
+}

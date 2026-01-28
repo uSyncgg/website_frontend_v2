@@ -1,0 +1,8 @@
+.gameChildren {
+    transition: box-shadow 0.3s ease-in-out;
+    border-radius: 1.563rem;
+}
+
+.gameChildren:hover{
+    box-shadow: 0 0 1.563rem .188rem rgba(255, 255, 255, 0.8);
+}

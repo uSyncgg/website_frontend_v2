@@ -1,0 +1,10 @@
+.bannerImage {
+    /* width: 90%;
+    height: auto; */
+    border-radius: 1.813rem;
+    transition: filter 0.7s;
+}
+
+.bannerImage:hover {
+  filter: brightness(135%);
+}

@@ -1,0 +1,13 @@
+.bannerTitle {
+    color: white; 
+    font-size: 2rem;
+    text-shadow: .125rem .125rem .25rem rgba(0, 0, 0, 0.8);
+    font-family: 'Helvetica';
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 768px) {
+    .bannerTitle {
+        display: none;
+    }
+}
