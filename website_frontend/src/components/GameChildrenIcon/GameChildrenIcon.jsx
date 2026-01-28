@@ -1,0 +1,1 @@
+// This will be for the LAN/Tourney/League/Wager/H2H icons within each game, similar to GameIcon

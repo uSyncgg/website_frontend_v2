@@ -1,0 +1,1 @@
+// This will be for each individual event on the pages like Call of Duty Leagues.
