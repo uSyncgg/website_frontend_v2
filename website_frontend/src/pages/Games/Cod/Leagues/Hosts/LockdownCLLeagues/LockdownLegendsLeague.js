@@ -1,8 +1,6 @@
 
-const LockdownLegendsLeague = () => {
+export const LockdownLegendsLeague = () => {
     return (
         <></>
     );
 }
-
-export default LockdownLegendsLeague;

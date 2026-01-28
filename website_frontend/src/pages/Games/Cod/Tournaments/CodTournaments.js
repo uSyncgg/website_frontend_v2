@@ -1,8 +1,6 @@
 
-const CodTournaments = () => {
+export const CodTournaments = () => {
     return (
         <></>
     );
 }
-
-export default CodTournaments;

@@ -1,8 +1,6 @@
 
-const Tournaments = () => {
+export const Tournaments = () => {
     return (
         <></>
     );
 }
-
-export default Tournaments;

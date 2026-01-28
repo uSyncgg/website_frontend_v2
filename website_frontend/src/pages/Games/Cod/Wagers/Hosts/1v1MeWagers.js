@@ -1,8 +1,6 @@
 
-const OneVOneMeWagers = () => {
+export const OneVOneMeWagers = () => {
     return (
         <></>
     );
 }
-
-export default OneVOneMeWagers;

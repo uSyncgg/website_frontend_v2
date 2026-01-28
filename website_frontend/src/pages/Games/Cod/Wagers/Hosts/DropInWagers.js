@@ -1,8 +1,6 @@
 
-const DropInWagers = () => {
+export const DropInWagers = () => {
     return (
         <></>
     );
 }
-
-export default DropInWagers;

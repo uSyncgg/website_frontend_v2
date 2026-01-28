@@ -1,8 +1,6 @@
 
-const CmgWagers = () => {
+export const CmgWagers = () => {
     return (
         <></>
     );
 }
-
-export default CmgWagers;

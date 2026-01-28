@@ -1,8 +1,6 @@
 
-const FemaleCodLeague = () => {
+export const FemaleCodLeague = () => {
     return (
         <></>
     );
 }
-
-export default FemaleCodLeague;

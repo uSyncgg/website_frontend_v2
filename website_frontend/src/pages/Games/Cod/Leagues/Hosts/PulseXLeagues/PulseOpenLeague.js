@@ -1,8 +1,6 @@
 
-const PulseOpenLeague = () => {
+export const PulseOpenLeague = () => {
     return (
         <></>
     );
 }
-
-export default PulseOpenLeague;

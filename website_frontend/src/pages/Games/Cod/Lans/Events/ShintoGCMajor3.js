@@ -1,8 +1,6 @@
 
-const ShintoGCMajor3 = () => {
+export const ShintoGCMajor3 = () => {
     return (
         <></>
     );
 }
-
-export default ShintoGCMajor3;

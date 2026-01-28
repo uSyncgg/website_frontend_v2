@@ -1,8 +1,6 @@
 
-const CollegeXPVarsityLeague = () => {
+export const CollegeXPVarsityLeague = () => {
     return (
         <></>
     );
 }
-
-export default CollegeXPVarsityLeague;

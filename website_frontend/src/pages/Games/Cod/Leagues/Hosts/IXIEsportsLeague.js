@@ -1,8 +1,6 @@
 
-const IXIEsportsLeague = () => {
+export const IXIEsportsLeague = () => {
     return (
         <></>
     );
 }
-
-export default IXIEsportsLeague;

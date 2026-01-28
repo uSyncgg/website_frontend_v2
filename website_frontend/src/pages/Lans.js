@@ -1,8 +1,6 @@
 
-const Lans = () => {
+export const Lans = () => {
     return (
         <></>
     );
 }
-
-export default Lans;

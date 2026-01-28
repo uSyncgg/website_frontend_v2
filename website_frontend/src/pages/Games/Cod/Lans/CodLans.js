@@ -1,8 +1,6 @@
 
-const CodLans = () => {
+export const CodLans = () => {
     return (
         <></>
     );
 }
-
-export default CodLans;

@@ -1,8 +1,6 @@
 
-const AirForceGamingLeague = () => {
+export const AirForceGamingLeague = () => {
     return (
         <></>
     );
 }
-
-export default AirForceGamingLeague;

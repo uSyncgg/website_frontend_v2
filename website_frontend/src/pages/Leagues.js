@@ -1,8 +1,6 @@
 
-const Leagues = () => {
+export const Leagues = () => {
     return (
         <></>
     );
 }
-
-export default Leagues;

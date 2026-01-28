@@ -1,6 +1,6 @@
 import { GameIcon, GameChildrenIcon, HostBanner } from "components";
 
-const Home = () => {
+export const Home = () => {
     return (
         <div style={{backgroundColor: "black"}}>
             <h1>Home Page</h1>
@@ -16,5 +16,3 @@ const Home = () => {
         </div>
     );
 }
-
-export default Home;

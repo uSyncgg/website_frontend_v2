@@ -1,8 +1,6 @@
 
-const U18CodLeague = () => {
+export const U18CodLeague = () => {
     return (
         <></>
     );
 }
-
-export default U18CodLeague;

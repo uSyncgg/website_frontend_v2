@@ -1,8 +1,6 @@
 
-const CorporateCodLeague = () => {
+export const CorporateCodLeague = () => {
     return (
         <></>
     );
 }
-
-export default CorporateCodLeague;

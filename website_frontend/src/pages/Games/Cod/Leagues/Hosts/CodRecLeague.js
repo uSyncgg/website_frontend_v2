@@ -1,8 +1,6 @@
 
-const CodRecLeague = () => {
+export const CodRecLeague = () => {
     return (
         <></>
     );
 }
-
-export default CodRecLeague;

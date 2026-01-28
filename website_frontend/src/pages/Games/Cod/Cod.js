@@ -1,8 +1,8 @@
 
-const Cod = () => {
+export const Cod = () => {
     return (
-        <></>
+        <>
+            <h1>Cod</h1>
+        </>
     );
 }
-
-export default Cod;

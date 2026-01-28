@@ -1,8 +1,6 @@
 
-const TPCWomensCodLeague = () => {
+export const TPCWomensCodLeague = () => {
     return (
         <></>
     );
 }
-
-export default TPCWomensCodLeague;

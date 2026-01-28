@@ -1,8 +1,6 @@
 
-const CollegeCodLeague = () => {
+export const CollegeCodLeague = () => {
     return (
         <></>
     );
 }
-
-export default CollegeCodLeague;

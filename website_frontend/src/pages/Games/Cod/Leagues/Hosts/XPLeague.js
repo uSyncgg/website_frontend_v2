@@ -1,8 +1,6 @@
 
-const XPLeague = () => {
+export const XPLeague = () => {
     return (
         <></>
     );
 }
-
-export default XPLeague;

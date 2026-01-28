@@ -1,8 +1,6 @@
 
-const CollegeXPOpenLeague = () => {
+export const CollegeXPOpenLeague = () => {
     return (
         <></>
     );
 }
-
-export default CollegeXPOpenLeague;

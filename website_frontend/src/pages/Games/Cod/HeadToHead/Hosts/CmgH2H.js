@@ -1,8 +1,6 @@
 
-const CmgH2H = () => {
+export const CmgH2H = () => {
     return (
         <></>
     );
 }
-
-export default CmgH2H;

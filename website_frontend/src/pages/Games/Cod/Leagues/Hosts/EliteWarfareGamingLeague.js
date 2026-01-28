@@ -1,8 +1,6 @@
 
-const EliteWarfareGamingLeague = () => {
+export const EliteWarfareGamingLeague = () => {
     return (
         <></>
     );
 }
-
-export default EliteWarfareGamingLeague;

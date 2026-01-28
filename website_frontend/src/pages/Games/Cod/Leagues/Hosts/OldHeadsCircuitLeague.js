@@ -1,8 +1,6 @@
 
-const OldHeadsCircuitLeague = () => {
+export const OldHeadsCircuitLeague = () => {
     return (
         <></>
     );
 }
-
-export default OldHeadsCircuitLeague;

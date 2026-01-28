@@ -1,8 +1,7 @@
 
-const ZonedOutGamingLeague = () => {
+export const ZonedOutGamingLeague = () => {
     return (
         <></>
     );
 }
 
-export default ZonedOutGamingLeague;

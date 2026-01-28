@@ -1,8 +1,6 @@
 
-const EsportsHubWagers = () => {
+export const EsportsHubWagers = () => {
     return (
         <></>
     );
 }
-
-export default EsportsHubWagers;

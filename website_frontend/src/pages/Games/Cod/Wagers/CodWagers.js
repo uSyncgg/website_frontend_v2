@@ -1,8 +1,6 @@
 
-const CodWagers = () => {
+export const CodWagers = () => {
     return (
         <></>
     );
 }
-
-export default CodWagers;

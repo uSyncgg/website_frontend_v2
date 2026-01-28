@@ -1,8 +1,6 @@
 
-const KineticLeague = () => {
+export const KineticLeague = () => {
     return (
         <></>
     );
 }
-
-export default KineticLeague;

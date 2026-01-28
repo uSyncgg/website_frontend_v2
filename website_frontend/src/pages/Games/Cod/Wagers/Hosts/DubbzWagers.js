@@ -1,8 +1,6 @@
 
-const DubbzWagers = () => {
+export const DubbzWagers = () => {
     return (
         <></>
     );
 }
-
-export default DubbzWagers;

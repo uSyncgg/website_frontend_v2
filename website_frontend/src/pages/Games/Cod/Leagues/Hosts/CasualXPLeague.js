@@ -1,8 +1,6 @@
 
-const CasualXPLeague = () => {
+export const CasualXPLeague = () => {
     return (
         <></>
     );
 }
-
-export default CasualXPLeague;

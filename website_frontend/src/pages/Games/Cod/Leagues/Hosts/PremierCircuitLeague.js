@@ -1,8 +1,6 @@
 
-const PremierCircuitLeague = () => {
+export const PremierCircuitLeague = () => {
     return (
         <></>
     );
 }
-
-export default PremierCircuitLeague;

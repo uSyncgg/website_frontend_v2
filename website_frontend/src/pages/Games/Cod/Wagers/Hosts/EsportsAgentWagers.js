@@ -1,8 +1,6 @@
 
-const EsportsAgentWagers = () => {
+export const EsportsAgentWagers = () => {
     return (
         <></>
     );
 }
-
-export default EsportsAgentWagers;

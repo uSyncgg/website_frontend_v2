@@ -1,8 +1,6 @@
 
-const EsportsAgentH2H = () => {
+export const EsportsAgentH2H = () => {
     return (
         <></>
     );
 }
-
-export default EsportsAgentH2H;
