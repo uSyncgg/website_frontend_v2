@@ -1,8 +1,6 @@
 
-const ItalianSerieBLeague = () => {
+export const ItalianSerieBLeague = () => {
     return (
         <></>
     );
 }
-
-export default ItalianSerieBLeague;

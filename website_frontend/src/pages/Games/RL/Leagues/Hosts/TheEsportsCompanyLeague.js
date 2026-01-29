@@ -1,8 +1,6 @@
 
-const TheEsportsCompanyLeague = () => {
+export const TheEsportsCompanyLeague = () => {
     return (
         <></>
     );
 }
-
-export default TheEsportsCompanyLeague;

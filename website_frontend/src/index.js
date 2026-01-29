@@ -210,6 +210,83 @@ import { DubbzWagers as DubbzLoLWagers } from 'pages/Games/Lol/Wagers/Hosts/Dubb
 import { Ewagers as LoLEWagers } from 'pages/Games/Lol/Wagers/Hosts/Ewagers';
 
 // RL Specific Pages minus LANs
+import { RL } from 'pages/Games/RL/RL';
+// H2H
+import { RLHeadToHead } from 'pages/Games/RL/HeadToHead/RLHeadToHead';
+import { GanksterH2H as GanksterRLH2H } from 'pages/Games/RL/HeadToHead/Hosts/GanksterH2H';
+import { PraccH2H as PraccRLH2H } from 'pages/Games/RL/HeadToHead/Hosts/PraccH2H';
+// Leagues
+import { RLLeagues } from 'pages/Games/RL/Leagues/RLLeagues';
+import { FrontierDoublesLeagues } from 'pages/Games/RL/Leagues/Hosts/FrontierDoublesLeagues/FrontierDoublesLeagues';
+import { FrontierEliteLeague } from 'pages/Games/RL/Leagues/Hosts/FrontierDoublesLeagues/FrontierEliteLeague';
+import { FrontierExpertLeague } from 'pages/Games/RL/Leagues/Hosts/FrontierDoublesLeagues/FrontierExpertLeague';
+import { FrontierOriginLeague } from 'pages/Games/RL/Leagues/Hosts/FrontierDoublesLeagues/FrontierOriginLeague';
+import { FrontierStarLeague } from 'pages/Games/RL/Leagues/Hosts/FrontierDoublesLeagues/FrontierStarLeague';
+import { ItalianRocketChampLeagues } from 'pages/Games/RL/Leagues/Hosts/ItalianRocketChampLeagues/ItalianRocketChampLeagues';
+import { ItalianSerieALeague } from 'pages/Games/RL/Leagues/Hosts/ItalianRocketChampLeagues/ItalianSerieALeague';
+import { ItalianSerieBLeague } from 'pages/Games/RL/Leagues/Hosts/ItalianRocketChampLeagues/ItalianSerieBLeague';
+import { MinorLeagueEsportsLeagues } from 'pages/Games/RL/Leagues/Hosts/MinorLeagueEsportsLeagues/MinorLeagueEsportsLeagues';
+import { MinorLeagueAcademyLeague } from 'pages/Games/RL/Leagues/Hosts/MinorLeagueEsportsLeagues/MinorLeagueAcademyLeague';
+import { MinorLeagueChampionLeague } from 'pages/Games/RL/Leagues/Hosts/MinorLeagueEsportsLeagues/MinorLeagueChampionLeague';
+import { MinorLeagueFoundationLeague } from 'pages/Games/RL/Leagues/Hosts/MinorLeagueEsportsLeagues/MinorLeagueFoundationLeague';
+import { MinorLeagueMasterLeague } from 'pages/Games/RL/Leagues/Hosts/MinorLeagueEsportsLeagues/MinorLeagueMasterLeague';
+import { MinorLeaguePremierLeague } from 'pages/Games/RL/Leagues/Hosts/MinorLeagueEsportsLeagues/MinorLeaguePremierLeague';
+import { NemesisLeagues } from 'pages/Games/RL/Leagues/Hosts/NemesisLeagues/NemesisLeagues';
+import { NemesisChallengerLeague } from 'pages/Games/RL/Leagues/Hosts/NemesisLeagues/NemesisChallengerLeague';
+import { NemesisNoviceLeague } from 'pages/Games/RL/Leagues/Hosts/NemesisLeagues/NemesisNoviceLeague';
+import { NemesisProspectLeague } from 'pages/Games/RL/Leagues/Hosts/NemesisLeagues/NemesisProspectLeague';
+import { NemesisRivalLeague } from 'pages/Games/RL/Leagues/Hosts/NemesisLeagues/NemesisRivalLeague';
+import { NemesisTitanLeague } from 'pages/Games/RL/Leagues/Hosts/NemesisLeagues/NemesisTitanLeague';
+import { OCEDraftLeagues } from 'pages/Games/RL/Leagues/Hosts/OCEDraftLeagues/OCEDraftLeagues';
+import { OCEDivisions } from 'pages/Games/RL/Leagues/Hosts/OCEDraftLeagues/OCEDivisions';
+import { RLPCLeagues } from 'pages/Games/RL/Leagues/Hosts/RLPCLeagues/RLPCLeagues';
+import { RLPCDoubleALeague } from 'pages/Games/RL/Leagues/Hosts/RLPCLeagues/RLPCDoubleALeague';
+import { RLPCSingleALeague } from 'pages/Games/RL/Leagues/Hosts/RLPCLeagues/RLPCSingleALeague';
+import { RLPCTripleALeague } from 'pages/Games/RL/Leagues/Hosts/RLPCLeagues/RLPCTripleALeague';
+import { RocketSoccarConfederationLeagues } from 'pages/Games/RL/Leagues/Hosts/RocketSoccarConfederationLeagues/RocketSoccarConfederationLeagues';
+import { RSC2v2League } from 'pages/Games/RL/Leagues/Hosts/RocketSoccarConfederationLeagues/RSC2v2League';
+import { RSC3v3EULeague } from 'pages/Games/RL/Leagues/Hosts/RocketSoccarConfederationLeagues/RSC3v3EULeague';
+import { RSC3v3NALeague } from 'pages/Games/RL/Leagues/Hosts/RocketSoccarConfederationLeagues/RSC3v3NALeague';
+import { TeamFrontlineLeagues as TeamFrontlineRLLeagues } from 'pages/Games/RL/Leagues/Hosts/TeamFrontlineLeagues/TeamFrontlineLeagues';
+import { TeamFrontlineChallengerLeague } from 'pages/Games/RL/Leagues/Hosts/TeamFrontlineLeagues/TeamFrontlineChallengerLeague';
+import { TeamFrontlineChampLeague } from 'pages/Games/RL/Leagues/Hosts/TeamFrontlineLeagues/TeamFrontlineChampLeague';
+import { TeamFrontlineProspectLeague } from 'pages/Games/RL/Leagues/Hosts/TeamFrontlineLeagues/TeamFrontlineProspectLeague';
+import { TeamFrontlineVanguardLeague } from 'pages/Games/RL/Leagues/Hosts/TeamFrontlineLeagues/TeamFrontlineVanguardLeague';
+import { UltimateRocketLeagueLeagues } from 'pages/Games/RL/Leagues/Hosts/UltimateRocketLeagueLeagues/UltimateRocketLeagueLeagues';
+import { UltimateRL2v2League } from 'pages/Games/RL/Leagues/Hosts/UltimateRocketLeagueLeagues/UltimateRL2v2League';
+import { UltimateRL3v3League } from 'pages/Games/RL/Leagues/Hosts/UltimateRocketLeagueLeagues/UltimateRL3v3League';
+import { AirforceGamingLeague as AirforceRLLeague } from 'pages/Games/RL/Leagues/Hosts/AirforceGamingLeague';
+import { AustralianEsportsHSLeague } from 'pages/Games/RL/Leagues/Hosts/AustralianEsportsHSLeague';
+import { AustralianEsportsLeague as AustralianRLEsportsLeague } from 'pages/Games/RL/Leagues/Hosts/AustralianEsportsLeague';
+import { CollegeCarballAssociationLeague } from 'pages/Games/RL/Leagues/Hosts/CollegeCarballAssociationLeague';
+import { CorporateRLLeague } from 'pages/Games/RL/Leagues/Hosts/CorporateRLLeague';
+import { CSMGLeague as CSMGRLLeague } from 'pages/Games/RL/Leagues/Hosts/CSMGLeague';
+import { ECACEsportsLeague as ECACRLLeague } from 'pages/Games/RL/Leagues/Hosts/ECACEsportsLeague';
+import { EGFCLeague as EGFCRLLeague } from 'pages/Games/RL/Leagues/Hosts/EGFCLeague';
+import { EGFHLeague as EGFHRLLeague } from 'pages/Games/RL/Leagues/Hosts/EGFHLeague';
+import { FaceitCollegiateLeague as FaceitRLLeague } from 'pages/Games/RL/Leagues/Hosts/FaceitCollegiateLeague';
+import { FinalityLeague } from 'pages/Games/RL/Leagues/Hosts/FinalityLeague';
+import { HighSchoolEsportsLeague as HighSchoolRLLeague } from 'pages/Games/RL/Leagues/Hosts/HighSchoolEsportsLeague';
+import { NASEFLeague as NASEFRLLeague } from 'pages/Games/RL/Leagues/Hosts/NASEFLeague';
+import { NationalStudentEsportsLeague as NationalStudentRLLeague } from 'pages/Games/RL/Leagues/Hosts/NationalStudentEsportsLeague';
+import { NECCLeague as NECCRLLeague } from 'pages/Games/RL/Leagues/Hosts/NECCLeague';
+import { NJCAAELeague as NJCAAERLLeague } from 'pages/Games/RL/Leagues/Hosts/NJCAAELeague';
+import { PlayflyCollegeLeague as PlayflyRLLeague } from 'pages/Games/RL/Leagues/Hosts/PlayflyCollegeLeague';
+import { PlayVSLeague as PlayVSRLLeague } from 'pages/Games/RL/Leagues/Hosts/PlayVSLeague';
+import { RaketLigaenLeague } from 'pages/Games/RL/Leagues/Hosts/RaketLigaenLeague';
+import { TheEsportsCompanyLeague } from 'pages/Games/RL/Leagues/Hosts/TheEsportsCompanyLeague';
+import { UGCBattleAcademyLeague as UGCRLBattleAcademy } from 'pages/Games/RL/Leagues/Hosts/UGCBattleAcademyLeague';
+import { UGCHSBattleAcademyLeague } from 'pages/Games/RL/Leagues/Hosts/UGCHSBattleAcademyLeague';
+import { UnitedRogueLeague as UnitedRogueRLLeague } from 'pages/Games/RL/Leagues/Hosts/UnitedRogueLeague';
+import { VantaGGLeague as VantaGGRLLeague } from 'pages/Games/RL/Leagues/Hosts/VantaGGLeague';
+// Wagers
+import { RLWagers } from 'pages/Games/RL/Wagers/RLWagers';
+import { CmgWagers as CmgRLWagers } from 'pages/Games/RL/Wagers/Hosts/CmgWagers';
+import { DropInGamingWagers as DropInRLWagers } from 'pages/Games/RL/Wagers/Hosts/DropInGamingWagers';
+import { DubbzWagers as DubbzRLWagers } from 'pages/Games/RL/Wagers/Hosts/DubbzWagers';
+import { Ewagers as RLEWagers } from 'pages/Games/RL/Wagers/Hosts/Ewagers';
+import { GamerSaloonWagers as GamerSaloonRLWagers } from 'pages/Games/RL/Wagers/Hosts/GamerSaloonWagers';
+import { RLPCMajorLeague } from 'pages/Games/RL/Leagues/Hosts/RLPCLeagues/RLPCMajorLeague';
 
 // Valorant Specific Pages minus LANs
 
@@ -407,7 +484,7 @@ root.render(
       <Route path='/games/LoL/leagues/low-budget-leagues/economy' element={<LowBudgetEconomyLeague />} />
       <Route path='/games/LoL/leagues/meta-shift-leagues' element={<MetaShiftLeagues />} />
       <Route path='/games/LoL/leagues/meta-shift-leagues/radon' element={<MetaShiftRadonLeague />} />
-      <Route path='/games/LoL/leagues/meta-shift-leagues/xenon' element={<MetaShiftXenonLeague />} />
+      <Route path='/games/LoL/leagues/meta-shifts-leagues/xenon' element={<MetaShiftXenonLeague />} />
       <Route path='/games/LoL/leagues/meta-shift-leagues/krypton' element={<MetaShiftKryptonLeague />} />
       <Route path='/games/LoL/leagues/meta-shift-leagues/argon' element={<MetaShiftArgonLeague />} />
       <Route path='/games/LoL/leagues/meta-shift-leagues/nitrogen' element={<MetaShiftNitrogenLeague />} />
@@ -431,7 +508,84 @@ root.render(
       <Route path='/games/LoL/wagers/dubbz' element={<DubbzLoLWagers />} />
       <Route path='/games/LoL/wagers/ewagers' element={<LoLEWagers />} />
 
-      
+      {/* RL Pages Minus LANs */}
+      <Route path='/games/RocketLeague' element={<RL />} />
+      {/* H2H */}
+      <Route path='/games/RocketLeague/head-to-head' element={<RLHeadToHead />} />
+      <Route path='/games/RocketLeague/head-to-head/gankster' element={<GanksterRLH2H />} />
+      <Route path='/games/RocketLeague/head-to-head/pracc' element={<PraccRLH2H />} />
+      {/* Leagues */}
+      <Route path='/games/RocketLeague/leagues' element={<RLLeagues />} />
+      <Route path='/games/RocketLeague/leagues/rlpc-leagues' element={<RLPCLeagues />} />
+      <Route path='/games/RocketLeague/leagues/rlpc-leagues/major' element={<RLPCMajorLeague />} />
+      <Route path='/games/RocketLeague/leagues/rlpc-leagues/aaa' element={<RLPCTripleALeague />} />
+      <Route path='/games/RocketLeague/leagues/rlpc-leagues/aa' element={<RLPCDoubleALeague />} />
+      <Route path='/games/RocketLeague/leagues/rlpc-leagues/a' element={<RLPCSingleALeague />} />
+      <Route path='/games/RocketLeague/leagues/rsc-leagues' element={<RocketSoccarConfederationLeagues />} />
+      <Route path='/games/RocketLeague/leagues/rsc-leagues/3v3-na' element={<RSC3v3NALeague />} />
+      <Route path='/games/RocketLeague/leagues/rsc-leagues/3v3-eu' element={<RSC3v3EULeague />} />
+      <Route path='/games/RocketLeague/leagues/rsc-leagues/2v2' element={<RSC2v2League />} />
+      <Route path='/games/RocketLeague/leagues/frontline-leagues' element={<TeamFrontlineRLLeagues />} />
+      <Route path='/games/RocketLeague/leagues/frontline-leagues/champ' element={<TeamFrontlineChampLeague />} />
+      <Route path='/games/RocketLeague/leagues/frontline-leagues/vanguard' element={<TeamFrontlineVanguardLeague />} />
+      <Route path='/games/RocketLeague/leagues/frontline-leagues/challenger' element={<TeamFrontlineChallengerLeague />} />
+      <Route path='/games/RocketLeague/leagues/frontline-leagues/prospect' element={<TeamFrontlineProspectLeague />} />
+      <Route path='/games/RocketLeague/leagues/url-leagues' element={<UltimateRocketLeagueLeagues />} />
+      <Route path='/games/RocketLeague/leagues/2s' element={<UltimateRL2v2League />} />
+      <Route path='/games/RocketLeague/leagues/3s' element={<UltimateRL3v3League />} />
+      <Route path='/games/RocketLeague/leagues/mle-leagues' element={<MinorLeagueEsportsLeagues />} />
+      <Route path='/games/RocketLeague/leagues/mle-leagues/premier' element={<MinorLeaguePremierLeague />} />
+      <Route path='/games/RocketLeague/leagues/mle-leagues/master' element={<MinorLeagueMasterLeague />} />
+      <Route path='/games/RocketLeague/leagues/mle-leagues/champ' element={<MinorLeagueChampionLeague />} />
+      <Route path='/games/RocketLeague/leagues/mle-leagues/academy' element={<MinorLeagueAcademyLeague />} />
+      <Route path='/games/RocketLeague/leagues/mle-leagues/foundation' element={<MinorLeagueFoundationLeague />} />
+      <Route path='/games/RoketLeague/leagues/united-rogue' element={<UnitedRogueRLLeague />} />
+      <Route path='/games/RocketLeague/leagues/italian-leagues' element={<ItalianRocketChampLeagues />} />
+      <Route path='/games/RocketLeague/leagues/italian-leagues/serie-a' element={<ItalianSerieALeague />} />
+      <Route path='/games/RocketLeague/leagues/italian-leagues/serie-b' element={<ItalianSerieBLeague />} />
+      <Route path='/games/RocketLeague/leagues/nemesis-leagues' element={<NemesisLeagues />} />
+      <Route path='/games/RocketLeague/leagues/nemesis-leagues/titan' element={<NemesisTitanLeague />} />
+      <Route path='/games/RocketLeague/leagues/nemesis-leagues/rival' element={<NemesisRivalLeague />} />
+      <Route path='/games/RocketLeague/leagues/nemesis-leagues/challanger' element={<NemesisChallengerLeague />} />
+      <Route path='/games/RocketLeague/leagues/nemesis-leagues/prospect' element={<NemesisProspectLeague />} />
+      <Route path='/games/RocketLeague/leagues/nemesis-leagues/novice' element={<NemesisNoviceLeague />} />
+      <Route path='/games/RocketLeague/leagues/raket-ligaen' element={<RaketLigaenLeague />} />
+      <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues' element={<FrontierDoublesLeagues />} />
+      <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues/elite' element={<FrontierEliteLeague />} />
+      <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues/star' element={<FrontierStarLeague />} />
+      <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues/expert' element={<FrontierExpertLeague />} />
+      <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues/origin' element={<FrontierOriginLeague />} />
+      <Route path='/games/RocketLeague/leagues/oce-leagues' element={<OCEDraftLeagues />} />
+      <Route path='/games/RocketLeague/leagues/oce-leagues/divisions' element={<OCEDivisions />} />
+      <Route path='/games/RocketLeague/leagues/finality' element={<FinalityLeague />} />
+      <Route path='/games/RocketLeague/leagues/corporate' element={<CorporateRLLeague />} />
+      <Route path='/games/RocketLeague/leagues/airforce' element={<AirforceRLLeague />} />
+      <Route path='/games/RocketLeague/leagues/cca' element={<CollegeCarballAssociationLeague />} />
+      <Route path='/games/RocketLeague/leagues/playfly' element={<PlayflyRLLeague />} />
+      <Route path='/games/RocketLeague/leagues/ecac' element={<ECACRLLeague />} />
+      <Route path='/games/RocketLeague/leagues/necc' element={<NECCRLLeague />} />
+      <Route path='/games/RocketLeague/leagues/csmg' elemente={<CSMGRLLeague />} />
+      <Route path='/games/RocketLeague/leagues/njcaae' element={<NJCAAERLLeague />} />
+      <Route path='/games/RocketLeague/leagues/egfc' element={<EGFCRLLeague />} />
+      <Route path='/games/RocketLeague/leagues/ugc' element={<UGCRLBattleAcademy />} />
+      <Route path='/games/RocketLeague/leagues/ael' element={<AustralianRLEsportsLeague />} />
+      <Route path='/games/RocketLeague/leagues/faceit' element={<FaceitRLLeague />} />
+      <Route path='/games/RocketLeague/leagues/nse' element={<NationalStudentRLLeague />} />
+      <Route path='/games/RocketLeague/leagues/hsel' element={<HighSchoolRLLeague />} />
+      <Route path='/games/RocketLeague/leagues/playvs' element={<PlayVSRLLeague />} />
+      <Route path='/games/RocketLeague/leagues/tec' element={<TheEsportsCompanyLeague />} />
+      <Route path='/games/RocketLeague/leagues/vantagg' element={<VantaGGRLLeague />} />
+      <Route path='/games/RocketLeague/leagues/nasef' element={<NASEFRLLeague />} />
+      <Route path='/games/RocketLeague/leagues/egfh' element={<EGFHRLLeague />} />
+      <Route path='/games/RocketLeague/leagues/aelhs' element={<AustralianEsportsHSLeague />} />
+      <Route path='/games/RocketLeague/leagues/ugc-hs' element={<UGCHSBattleAcademyLeague />} />
+      {/* Wagers */}
+      <Route path='/games/RocketLeague/wagers' element={<RLWagers />} />
+      <Route path='/games/RocketLeague/wagers/cmg' element={<CmgRLWagers />} />
+      <Route path='/games/RocketLeague/wagers/dropingaming' element={<DropInRLWagers />} />
+      <Route path='/games/RocketLeague/wagers/gamersaloon' element={<GamerSaloonRLWagers />} />
+      <Route path='/games/RocketLeague/wagers/dubbz' element={<DubbzRLWagers />} />
+      <Route path='/games/RocketLeague/wagers/ewagers' element={<RLEWagers />} />
     </Routes>
   </BrowserRouter>
   // </React.StrictMode>

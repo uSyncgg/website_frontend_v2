@@ -1,8 +1,6 @@
 
-const RLWagers = () => {
+export const RLWagers = () => {
     return (
         <></>
     );
 }
-
-export default RLWagers;

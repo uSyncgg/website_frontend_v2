@@ -1,8 +1,6 @@
 
-const RaketLigaenLeague = () => {
+export const RaketLigaenLeague = () => {
     return (
         <></>
     );
 }
-
-export default RaketLigaenLeague;

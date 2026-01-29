@@ -1,8 +1,6 @@
 
-const RLHeadToHead = () => {
+export const RLHeadToHead = () => {
     return (
         <></>
     );
 }
-
-export default RLHeadToHead;

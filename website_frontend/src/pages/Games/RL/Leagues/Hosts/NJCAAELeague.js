@@ -1,8 +1,6 @@
 
-const NJCAAELeague = () => {
+export const NJCAAELeague = () => {
     return (
         <></>
     );
 }
-
-export default NJCAAELeague;

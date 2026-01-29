@@ -1,8 +1,6 @@
 
-const FinalityLeague = () => {
+export const FinalityLeague = () => {
     return (
         <></>
     );
 }
-
-export default FinalityLeague;

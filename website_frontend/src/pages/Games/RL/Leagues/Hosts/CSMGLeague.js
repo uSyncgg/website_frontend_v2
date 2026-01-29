@@ -1,8 +1,6 @@
 
-const CSMGLeague = () => {
+export const CSMGLeague = () => {
     return (
         <></>
     );
 }
-
-export default CSMGLeague;

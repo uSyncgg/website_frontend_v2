@@ -1,8 +1,6 @@
 
-const TeamFrontlineVanguardLeague = () => {
+export const TeamFrontlineVanguardLeague = () => {
     return (
         <></>
     );
 }
-
-export default TeamFrontlineVanguardLeague;

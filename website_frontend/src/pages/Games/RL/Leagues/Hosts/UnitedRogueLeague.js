@@ -1,8 +1,6 @@
 
-const UnitedRogueLeague = () => {
+export const UnitedRogueLeague = () => {
     return (
         <></>
     );
 }
-
-export default UnitedRogueLeague;

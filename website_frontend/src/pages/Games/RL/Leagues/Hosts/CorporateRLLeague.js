@@ -1,8 +1,6 @@
 
-const CorporateRLLeague = () => {
+export const CorporateRLLeague = () => {
     return (
         <></>
     );
 }
-
-export default CorporateRLLeague;

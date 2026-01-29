@@ -1,8 +1,6 @@
 
-const NemesisNoviceLeague = () => {
+export const NemesisNoviceLeague = () => {
     return (
         <></>
     );
 }
-
-export default NemesisNoviceLeague;

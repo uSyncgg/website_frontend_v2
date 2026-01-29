@@ -1,8 +1,6 @@
 
-const UGCBattleAcademyLeague = () => {
+export const UGCBattleAcademyLeague = () => {
     return (
         <></>
     );
 }
-
-export default UGCBattleAcademyLeague;

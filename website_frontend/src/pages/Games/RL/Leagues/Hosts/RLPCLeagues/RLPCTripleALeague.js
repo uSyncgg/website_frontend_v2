@@ -1,8 +1,6 @@
 
-const RLPCTripleALeague = () => {
+export const RLPCTripleALeague = () => {
     return (
         <></>
     );
 }
-
-export default RLPCTripleALeague;

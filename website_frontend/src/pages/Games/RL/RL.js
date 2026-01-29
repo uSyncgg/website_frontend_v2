@@ -1,8 +1,6 @@
 
-const RL = () => {
+export const RL = () => {
     return (
         <></>
     );
 }
-
-export default RL;

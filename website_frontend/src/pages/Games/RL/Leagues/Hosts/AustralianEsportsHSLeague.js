@@ -1,8 +1,6 @@
 
-const AustralianEsportsHSLeague = () => {
+export const AustralianEsportsHSLeague = () => {
     return (
         <></>
     );
 }
-
-export default AustralianEsportsHSLeague;

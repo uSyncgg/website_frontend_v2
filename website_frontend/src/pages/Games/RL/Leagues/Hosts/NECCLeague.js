@@ -1,8 +1,6 @@
 
-const NECCLeague = () => {
+export const NECCLeague = () => {
     return (
         <></>
     );
 }
-
-export default NECCLeague;

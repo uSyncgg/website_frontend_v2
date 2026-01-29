@@ -1,8 +1,6 @@
 
-const RLLeagues = () => {
+export const RLLeagues = () => {
     return (
         <></>
     );
 }
-
-export default RLLeagues;

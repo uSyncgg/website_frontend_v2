@@ -1,8 +1,6 @@
 
-const RLPCMajorLeague = () => {
+export const RLPCMajorLeague = () => {
     return (
         <></>
     );
 }
-
-export default RLPCMajorLeague;

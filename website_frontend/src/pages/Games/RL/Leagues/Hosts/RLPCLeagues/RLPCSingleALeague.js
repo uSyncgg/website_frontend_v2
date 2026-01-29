@@ -1,8 +1,6 @@
 
-const RLPCSingleALeague = () => {
+export const RLPCSingleALeague = () => {
     return (
         <></>
     );
 }
-
-export default RLPCSingleALeague;

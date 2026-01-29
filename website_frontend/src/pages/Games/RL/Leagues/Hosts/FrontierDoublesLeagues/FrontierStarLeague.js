@@ -1,8 +1,6 @@
 
-const FrontierStarLeague = () => {
+export const FrontierStarLeague = () => {
     return (
         <></>
     );
 }
-
-export default FrontierStarLeague;

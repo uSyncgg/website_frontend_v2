@@ -1,8 +1,6 @@
 
-const RLPCDoubleALeague = () => {
+export const RLPCDoubleALeague = () => {
     return (
         <></>
     );
 }
-
-export default RLPCDoubleALeague;

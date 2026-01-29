@@ -1,8 +1,6 @@
 
-const NASEFLeague = () => {
+export const NASEFLeague = () => {
     return (
         <></>
     );
 }
-
-export default NASEFLeague;

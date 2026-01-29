@@ -1,8 +1,6 @@
 
-const MinorLeaguePremierLeague = () => {
+export const MinorLeaguePremierLeague = () => {
     return (
         <></>
     );
 }
-
-export default MinorLeaguePremierLeague;
