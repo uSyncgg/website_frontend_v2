@@ -1,8 +1,6 @@
 
-const WzHeadToHead = () => {
+export const WzHeadToHead = () => {
     return (
         <></>
     );
 }
-
-export default WzHeadToHead;

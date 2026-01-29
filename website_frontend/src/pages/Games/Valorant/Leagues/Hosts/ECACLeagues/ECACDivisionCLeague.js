@@ -1,8 +1,6 @@
 
-const ECACDivisionCLeague = () => {
+export const ECACDivisionCLeague = () => {
     return (
         <></>
     );
 }
-
-export default ECACDivisionCLeague;

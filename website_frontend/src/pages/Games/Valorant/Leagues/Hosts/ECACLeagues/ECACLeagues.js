@@ -1,5 +1,5 @@
 
-export const VantaGGLeague = () => {
+export const ECACLeagues = () => {
     return (
         <></>
     );

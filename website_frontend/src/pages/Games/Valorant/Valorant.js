@@ -1,8 +1,6 @@
 
-const Valorant = () => {
+export const Valorant = () => {
     return (
         <></>
     );
 }
-
-export default Valorant;

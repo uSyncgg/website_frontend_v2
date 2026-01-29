@@ -1,8 +1,6 @@
 
-const UnifiedPremierLeague = () => {
+export const UnifiedPremierLeague = () => {
     return (
         <></>
     );
 }
-
-export default UnifiedPremierLeague;

@@ -289,8 +289,71 @@ import { GamerSaloonWagers as GamerSaloonRLWagers } from 'pages/Games/RL/Wagers/
 import { RLPCMajorLeague } from 'pages/Games/RL/Leagues/Hosts/RLPCLeagues/RLPCMajorLeague';
 
 // Valorant Specific Pages minus LANs
+import { Valorant } from 'pages/Games/Valorant/Valorant';
+// H2H
+import { ValorantHeadToHead } from 'pages/Games/Valorant/HeadToHead/ValorantHeadToHead';
+import { CollegiateValorantHubScrimsH2H } from 'pages/Games/Valorant/HeadToHead/Hosts/CollegiateValorantHubScrimsH2H';
+import { DropInGamingH2H } from 'pages/Games/Valorant/HeadToHead/Hosts/DropInGamingH2H';
+import { EsportsScrimH2H } from 'pages/Games/Valorant/HeadToHead/Hosts/EsportsScrimH2H';
+import { GanksterGGH2H as GanksterValH2H } from 'pages/Games/Valorant/HeadToHead/Hosts/GanksterGGH2H';
+import { PraccH2H as PraccValH2H } from 'pages/Games/Valorant/HeadToHead/Hosts/PraccH2H';
+// Leagues
+import { ValorantLeagues } from 'pages/Games/Valorant/Leagues/ValorantLeagues';
+import { ECACLeagues as ECACValLeagues } from 'pages/Games/Valorant/Leagues/Hosts/ECACLeagues/ECACLeagues';
+import { ECACDivisionALeague } from 'pages/Games/Valorant/Leagues/Hosts/ECACLeagues/ECACDivisionALeague';
+import { ECACDivisionBLeague } from 'pages/Games/Valorant/Leagues/Hosts/ECACLeagues/ECACDivisionBLeague';
+import { ECACDivisionCLeague } from 'pages/Games/Valorant/Leagues/Hosts/ECACLeagues/ECACDivisionCLeague';
+import { LPLLeagues } from 'pages/Games/Valorant/Leagues/Hosts/LPLLeagues/LPLLeagues';
+import { LPLBronzeDivisionLeague } from 'pages/Games/Valorant/Leagues/Hosts/LPLLeagues/LPLBronzeDivisionLeague';
+import { LPLGoldDivisionLeague } from 'pages/Games/Valorant/Leagues/Hosts/LPLLeagues/LPLGoldDivisionLeague';
+import { LPLSilverDivisionLeague } from 'pages/Games/Valorant/Leagues/Hosts/LPLLeagues/LPLSilverDivisionLeague';
+import { LPLOpenDivisionLeague } from 'pages/Games/Valorant/Leagues/Hosts/LPLLeagues/LPLOpenDivisionLeague';
+import { PlayflyCollegeLeagues } from 'pages/Games/Valorant/Leagues/Hosts/PlayflyCollegeLeagues/PlayflyCollegeLeagues';
+import { PlayflyOpenLeague } from 'pages/Games/Valorant/Leagues/Hosts/PlayflyCollegeLeagues/PlayflyOpenLeague';
+import { PlayflyVarsityLeague } from 'pages/Games/Valorant/Leagues/Hosts/PlayflyCollegeLeagues/PlayflyVarsityLeague';
+import { TeamFrontlineLeagues as TeamFrontlineValLeagues } from 'pages/Games/Valorant/Leagues/Hosts/TeamFrontlineLeagues/TeamFrontlineLeagues';
+import { TeamFrontlineAcademyLeague } from 'pages/Games/Valorant/Leagues/Hosts/TeamFrontlineLeagues/TeamFrontlineAcademyLeague';
+import { TeamFrontlinePrimeLeague } from 'pages/Games/Valorant/Leagues/Hosts/TeamFrontlineLeagues/TeamFrontlinePrimeLeague';
+import { CollegeValorantLeague } from 'pages/Games/Valorant/Leagues/Hosts/CollegeValorantLeague';
+import { CorporateValorantLeague } from 'pages/Games/Valorant/Leagues/Hosts/CorporateValorantLeague';
+import { CSMGLeague } from 'pages/Games/RL/Leagues/Hosts/CSMGLeague';
+import { EGFCLeague as EGFCVALLeague } from 'pages/Games/Valorant/Leagues/Hosts/EGFCLeague';
+import { EGFHLeague as EGFHVALLeague } from 'pages/Games/Valorant/Leagues/Hosts/EGFHLeague';
+import { EsportsCompanyLeague } from 'pages/Games/Valorant/Leagues/Hosts/EsportsCompanyLeague';
+import { FaceitCollegiateLeague as FaceitValLeague } from 'pages/Games/Valorant/Leagues/Hosts/FaceitCollegiateLeague';
+import { HighSchoolEsportsLeague as HighSchoolValLeague } from 'pages/Games/Valorant/Leagues/Hosts/HighSchoolEsportsLeague';
+import { NASEFLeague as NASEFValLeague } from 'pages/Games/Valorant/Leagues/Hosts/NASEFLeague';
+import { NationalStudentEsportsLeague as NationalStudentValLeague } from 'pages/Games/Valorant/Leagues/Hosts/NationalStudentEsportsLeague';
+import { NECCLeague as NECCValLeague } from 'pages/Games/Valorant/Leagues/Hosts/NECCLeague';
+import { NJCAAELeague as NJCAAEVALLeague } from 'pages/Games/Valorant/Leagues/Hosts/NJCAAELeague';
+import { UGCBattleAcademyLeague as UGCValBattleAcademy } from 'pages/Games/Valorant/Leagues/Hosts/UGCBattleAcademyLeague';
+import { UnifiedPremierLeague } from 'pages/Games/Valorant/Leagues/Hosts/UnifiedPremierLeague';
+import { VantaGGLeague as VantaGGValLeague } from 'pages/Games/Valorant/Leagues/Hosts/VantaGGLeague';
+// Wagers
+import { ValorantWagers } from 'pages/Games/Valorant/Wagers/ValorantWagers';
+import { DropInGamingWagers as DropInValWagers } from 'pages/Games/Valorant/Wagers/Hosts/DropInGamingWagers';
+import { Ewagers as ValEwagers } from 'pages/Games/Valorant/Wagers/Hosts/Ewagers';
 
 // Warzone Specific Pages minus LANs
+import { Wz } from 'pages/Games/Wz/Wz';
+import { WzLans } from 'pages/Games/Wz/Lans/WzLans';
+// H2H
+import { WzHeadToHead } from 'pages/Games/Wz/HeadToHead/WzHeadToHead';
+import { CmgH2H as CmgWzH2H } from 'pages/Games/Wz/HeadToHead/Hosts/CmgH2H';
+// Leagues
+import { WzLeagues } from 'pages/Games/Wz/Leagues/WzLeagues';
+import { AirForceGamingLeague as AirForceWzLeague } from 'pages/Games/Wz/Leagues/Hosts/AirForceGamingLeague';
+import { GMHLGamingLeague } from 'pages/Games/Wz/Leagues/Hosts/GMHLGamingLeague';
+import { NJCAAELeague as NJCAAEWzLeague } from 'pages/Games/Wz/Leagues/Hosts/NJCAAELeague';
+// Wagers
+import { WzWagers } from 'pages/Games/Wz/Wagers/WzWagers';
+import { OneVOneMeWagers as OneVOneWzWagers } from 'pages/Games/Wz/Wagers/Hosts/1v1MeWagers';
+import { CmgWagers as CmgWzWagers } from 'pages/Games/Wz/Wagers/Hosts/CmgWagers';
+import { DropInGamingWagers as DropInWzWagers } from 'pages/Games/Wz/Wagers/Hosts/DropInGamingWagers';
+import { DubbzWagers as DubbzWzWagers } from 'pages/Games/Wz/Wagers/Hosts/DubbzWagers';
+import { Ewagers as WzEwagers } from 'pages/Games/Wz/Wagers/Hosts/Ewagers';
+import { GamerSaloonWagers as GamerSaloonWzWagers } from 'pages/Games/Wz/Wagers/Hosts/GamerSaloonWagers';
+import { OneUpWagers as OneUpWzWagers } from 'pages/Games/Wz/Wagers/Hosts/OneUpWagers';
 
 // Other Pages
 

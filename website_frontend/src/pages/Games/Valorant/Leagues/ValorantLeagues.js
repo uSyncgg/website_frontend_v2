@@ -1,8 +1,6 @@
 
-const ValorantLeagues = () => {
+export const ValorantLeagues = () => {
     return (
         <></>
     );
 }
-
-export default ValorantLeagues;

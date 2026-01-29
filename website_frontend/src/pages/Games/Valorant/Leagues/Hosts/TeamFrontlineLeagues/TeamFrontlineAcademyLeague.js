@@ -1,8 +1,6 @@
 
-const TeamFrontlineAcademyLeague = () => {
+export const TeamFrontlineAcademyLeague = () => {
     return (
         <></>
     );
 }
-
-export default TeamFrontlineAcademyLeague;

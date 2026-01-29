@@ -1,8 +1,6 @@
 
-const WzWagers = () => {
+export const WzWagers = () => {
     return (
         <></>
     );
 }
-
-export default WzWagers;

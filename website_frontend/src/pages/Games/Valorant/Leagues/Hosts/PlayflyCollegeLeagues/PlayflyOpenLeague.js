@@ -1,8 +1,6 @@
 
-const PlayflyOpenLeague = () => {
+export const PlayflyOpenLeague = () => {
     return (
         <></>
     );
 }
-
-export default PlayflyOpenLeague;

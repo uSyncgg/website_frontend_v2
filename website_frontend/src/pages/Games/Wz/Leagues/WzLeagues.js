@@ -1,8 +1,6 @@
 
-const WzLeagues = () => {
+export const WzLeagues = () => {
     return (
         <></>
     );
 }
-
-export default WzLeagues;

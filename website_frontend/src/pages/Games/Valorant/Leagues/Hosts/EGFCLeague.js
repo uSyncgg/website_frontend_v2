@@ -1,8 +1,6 @@
 
-const EGFCLeague = () => {
+export const EGFCLeague = () => {
     return (
         <></>
     );
 }
-
-export default EGFCLeague;

@@ -1,8 +1,6 @@
 
-const LPLGoldDivisionLeague = () => {
+export const LPLGoldDivisionLeague = () => {
     return (
         <></>
     );
 }
-
-export default LPLGoldDivisionLeague;

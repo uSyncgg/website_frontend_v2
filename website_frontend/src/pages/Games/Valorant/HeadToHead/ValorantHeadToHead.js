@@ -1,8 +1,6 @@
 
-const ValorantHeadToHead = () => {
+export const ValorantHeadToHead = () => {
     return (
         <></>
     );
 }
-
-export default ValorantHeadToHead;

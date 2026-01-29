@@ -1,8 +1,6 @@
 
-const CorporateValorantLeague = () => {
+export const CorporateValorantLeague = () => {
     return (
         <></>
     );
 }
-
-export default CorporateValorantLeague;

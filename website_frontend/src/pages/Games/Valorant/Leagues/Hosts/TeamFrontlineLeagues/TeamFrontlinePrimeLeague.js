@@ -1,8 +1,6 @@
 
-const TeamFrontlinePrimeLeague = () => {
+export const TeamFrontlinePrimeLeague = () => {
     return (
         <></>
     );
 }
-
-export default TeamFrontlinePrimeLeague;

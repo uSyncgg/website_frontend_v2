@@ -1,8 +1,6 @@
 
-const CollegiateValorantHubScrimsH2H = () => {
+export const CollegiateValorantHubScrimsH2H = () => {
     return (
         <></>
     );
 }
-
-export default CollegiateValorantHubScrimsH2H;

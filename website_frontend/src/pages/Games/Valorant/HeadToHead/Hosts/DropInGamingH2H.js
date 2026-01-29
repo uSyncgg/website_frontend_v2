@@ -1,8 +1,6 @@
 
-const DropInGamingH2H = () => {
+export const DropInGamingH2H = () => {
     return (
         <></>
     );
 }
-
-export default DropInGamingH2H;

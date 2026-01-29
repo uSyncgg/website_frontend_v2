@@ -1,8 +1,6 @@
 
-const ValorantWagers = () => {
+export const ValorantWagers = () => {
     return (
         <></>
     );
 }
-
-export default ValorantWagers;

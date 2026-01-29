@@ -1,8 +1,6 @@
 
-const LPLBronzeDivisionLeague = () => {
+export const LPLBronzeDivisionLeague = () => {
     return (
         <></>
     );
 }
-
-export default LPLBronzeDivisionLeague;

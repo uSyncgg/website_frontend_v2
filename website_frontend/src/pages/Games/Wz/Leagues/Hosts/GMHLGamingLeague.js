@@ -1,8 +1,6 @@
 
-const GMHLGamingLeague = () => {
+export const GMHLGamingLeague = () => {
     return (
         <></>
     );
 }
-
-export default GMHLGamingLeague;
