@@ -1,8 +1,6 @@
 
-const TitanImmortalLeague = () => {
+export const TitanImmortalLeague = () => {
     return (
         <></>
     );
 }
-
-export default TitanImmortalLeague;

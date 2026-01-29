@@ -1,8 +1,6 @@
 
-const AegisExecutionersLeague = () => {
+export const AegisExecutionersLeague = () => {
     return (
         <></>
     );
 }
-
-export default AegisExecutionersLeague;

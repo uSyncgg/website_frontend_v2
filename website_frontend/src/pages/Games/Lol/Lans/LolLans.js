@@ -1,8 +1,6 @@
 
-const LolLans = () => {
+export const LolLans = () => {
     return (
         <></>
     );
 }
-
-export default LolLans;

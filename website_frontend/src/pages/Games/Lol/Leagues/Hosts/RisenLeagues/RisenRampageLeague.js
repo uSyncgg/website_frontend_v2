@@ -1,8 +1,6 @@
 
-const RisenRampageLeague = () => {
+export const RisenRampageLeague = () => {
     return (
         <></>
     );
 }
-
-export default RisenRampageLeague;

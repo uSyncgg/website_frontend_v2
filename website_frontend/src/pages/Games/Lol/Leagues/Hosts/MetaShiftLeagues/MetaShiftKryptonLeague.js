@@ -1,8 +1,6 @@
 
-const MetaShiftKryptonLeague = () => {
+export const MetaShiftKryptonLeague = () => {
     return (
         <></>
     );
 }
-
-export default MetaShiftKryptonLeague;

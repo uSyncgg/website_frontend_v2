@@ -1,8 +1,6 @@
 
-const MetaShiftArgonLeague = () => {
+export const MetaShiftArgonLeague = () => {
     return (
         <></>
     );
 }
-
-export default MetaShiftArgonLeague;

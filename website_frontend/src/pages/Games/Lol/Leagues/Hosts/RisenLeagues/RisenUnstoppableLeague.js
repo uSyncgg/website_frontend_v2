@@ -1,8 +1,6 @@
 
-const RisenUnstoppableLeague = () => {
+export const RisenUnstoppableLeague = () => {
     return (
         <></>
     );
 }
-
-export default RisenUnstoppableLeague;

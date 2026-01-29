@@ -1,8 +1,6 @@
 
-const LowBudgetExecutiveLeague = () => {
+export const LowBudgetExecutiveLeague = () => {
     return (
         <></>
     );
 }
-
-export default LowBudgetExecutiveLeague;

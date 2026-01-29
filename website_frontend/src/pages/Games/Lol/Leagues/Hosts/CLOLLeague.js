@@ -1,8 +1,6 @@
 
-const CLOLLeague = () => {
+export const CLOLLeague = () => {
     return (
         <></>
     );
 }
-
-export default CLOLLeague;

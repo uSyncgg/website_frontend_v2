@@ -1,8 +1,6 @@
 
-const SDCLeague = () => {
+export const SDCLeague = () => {
     return (
         <></>
     );
 }
-
-export default SDCLeague;

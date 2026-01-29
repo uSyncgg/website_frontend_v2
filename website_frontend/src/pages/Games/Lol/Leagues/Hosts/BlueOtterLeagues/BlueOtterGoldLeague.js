@@ -1,8 +1,6 @@
 
-const BlueOtterGoldLeague = () => {
+export const BlueOtterGoldLeague = () => {
     return (
         <></>
     );
 }
-
-export default BlueOtterGoldLeague;

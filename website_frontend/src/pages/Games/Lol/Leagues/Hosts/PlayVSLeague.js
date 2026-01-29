@@ -1,8 +1,6 @@
 
-const PlayVSLeague = () => {
+export const PlayVSLeague = () => {
     return (
         <></>
     );
 }
-
-export default PlayVSLeague;

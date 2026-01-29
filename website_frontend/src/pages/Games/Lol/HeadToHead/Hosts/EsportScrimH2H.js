@@ -1,8 +1,6 @@
 
-const EsportScrimH2H = () => {
+export const EsportScrimH2H = () => {
     return (
         <></>
     );
 }
-
-export default EsportScrimH2H;

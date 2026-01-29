@@ -1,8 +1,6 @@
 
-const LowBudgetEconomyLeague = () => {
+export const LowBudgetEconomyLeague = () => {
     return (
         <></>
     );
 }
-
-export default LowBudgetEconomyLeague;

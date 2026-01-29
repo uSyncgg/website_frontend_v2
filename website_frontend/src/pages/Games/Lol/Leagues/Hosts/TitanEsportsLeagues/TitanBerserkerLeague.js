@@ -1,8 +1,6 @@
 
-const TitanBerserkerLeague = () => {
+export const TitanBerserkerLeague = () => {
     return (
         <></>
     );
 }
-
-export default TitanBerserkerLeague;

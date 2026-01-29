@@ -1,8 +1,6 @@
 
-const CWLRiseLeague = () => {
+export const CWLRiseLeague = () => {
     return (
         <></>
     );
 }
-
-export default CWLRiseLeague;

@@ -1,8 +1,6 @@
 
-const GanksterGGH2H = () => {
+export const GanksterGGH2H = () => {
     return (
         <></>
     );
 }
-
-export default GanksterGGH2H;

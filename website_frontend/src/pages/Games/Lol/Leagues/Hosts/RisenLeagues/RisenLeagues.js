@@ -1,5 +1,5 @@
 
-export const LolLeagues = () => {
+export const RisenLeagues = () => {
     return (
         <></>
     );

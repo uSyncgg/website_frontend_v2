@@ -1,8 +1,6 @@
 
-const RisenDominateLeague = () => {
+export const RisenDominateLeague = () => {
     return (
         <></>
     );
 }
-
-export default RisenDominateLeague;

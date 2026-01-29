@@ -1,8 +1,6 @@
 
-const LolHeadToHead = () => {
+export const LolHeadToHead = () => {
     return (
         <></>
     );
 }
-
-export default LolHeadToHead;

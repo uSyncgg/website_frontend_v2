@@ -1,8 +1,6 @@
 
-const MetaShiftNeonLeague = () => {
+export const MetaShiftNeonLeague = () => {
     return (
         <></>
     );
 }
-
-export default MetaShiftNeonLeague;

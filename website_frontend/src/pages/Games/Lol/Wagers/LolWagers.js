@@ -1,8 +1,6 @@
 
-const LolWagers = () => {
+export const LolWagers = () => {
     return (
         <></>
     );
 }
-
-export default LolWagers;

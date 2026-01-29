@@ -1,8 +1,6 @@
 
-const VantaGGLeague = () => {
+export const VantaGGLeague = () => {
     return (
         <></>
     );
 }
-
-export default VantaGGLeague;

@@ -1,8 +1,6 @@
 
-const PraccH2H = () => {
+export const PraccH2H = () => {
     return (
         <></>
     );
 }
-
-export default PraccH2H;

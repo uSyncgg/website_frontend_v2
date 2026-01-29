@@ -1,8 +1,6 @@
 
-const MetaShiftNitrogenLeague = () => {
+export const MetaShiftNitrogenLeague = () => {
     return (
         <></>
     );
 }
-
-export default MetaShiftNitrogenLeague;

@@ -1,8 +1,6 @@
 
-const BlackTwitchLeague = () => {
+export const BlackTwitchLeague = () => {
     return (
         <></>
     );
 }
-
-export default BlackTwitchLeague;

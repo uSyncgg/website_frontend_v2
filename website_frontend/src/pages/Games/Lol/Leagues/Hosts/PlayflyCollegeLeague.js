@@ -1,8 +1,6 @@
 
-const PlayflyCollegeLeague = () => {
+export const PlayflyCollegeLeague = () => {
     return (
         <></>
     );
 }
-
-export default PlayflyCollegeLeague;

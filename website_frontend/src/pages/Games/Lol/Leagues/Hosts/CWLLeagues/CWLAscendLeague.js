@@ -1,8 +1,6 @@
 
-const CWLAscendLeague = () => {
+export const CWLAscendLeague = () => {
     return (
         <></>
     );
 }
-
-export default CWLAscendLeague;

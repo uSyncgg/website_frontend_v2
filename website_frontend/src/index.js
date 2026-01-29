@@ -140,6 +140,74 @@ import { Ewagers as HaloEwagers } from 'pages/Games/Halo/Wagers/Hosts/Ewagers';
 import { OneUpWagers as OneUpHaloWagers } from 'pages/Games/Halo/Wagers/Hosts/OneUpWagers';
 
 // LoL Specific Pages minus LANs
+import { Lol } from 'pages/Games/Lol/Lol';
+import { LolLans } from 'pages/Games/Lol/Lans/LolLans';
+// H2H
+import { LolHeadToHead } from 'pages/Games/Lol/HeadToHead/LolHeadToHead';
+import { EsportScrimH2H as LoLEsportsScrim } from 'pages/Games/Lol/HeadToHead/Hosts/EsportScrimH2H';
+import { GanksterGGH2H as GanksterLoLH2H } from 'pages/Games/Lol/HeadToHead/Hosts/GanksterGGH2H';
+import { PraccH2H as PraccLoLH2H } from 'pages/Games/Lol/HeadToHead/Hosts/PraccH2H';
+// Leagues
+import { LolLeagues } from 'pages/Games/Lol/Leagues/LolLeagues';
+import { AegisLeagues } from 'pages/Games/Lol/Leagues/Hosts/AegisLeagues/AegisLeagues';
+import { AegisChampionsLeague } from 'pages/Games/Lol/Leagues/Hosts/AegisLeagues/AegisChampionsLeague';
+import { AegisDefendersLeague } from 'pages/Games/Lol/Leagues/Hosts/AegisLeagues/AegisDefendersLeague';
+import { AegisExecutionersLeague } from 'pages/Games/Lol/Leagues/Hosts/AegisLeagues/AegisExecutionersLeague';
+import { AegisMarauderLeague } from 'pages/Games/Lol/Leagues/Hosts/AegisLeagues/AegisMarauderLeague';
+import { AegisProtectorsLeague } from 'pages/Games/Lol/Leagues/Hosts/AegisLeagues/AegisProtectorsLeague';
+import { BlueOtterLeagues } from 'pages/Games/Lol/Leagues/Hosts/BlueOtterLeagues/BlueOtterLeagues';
+import { BlueOtterDiamondLeague } from 'pages/Games/Lol/Leagues/Hosts/BlueOtterLeagues/BlueOtterDiamondLeague';
+import { BlueOtterDraftLeague } from 'pages/Games/Lol/Leagues/Hosts/BlueOtterLeagues/BlueOtterDraftLeague';
+import { BlueOtterEmeraldLeague } from 'pages/Games/Lol/Leagues/Hosts/BlueOtterLeagues/BlueOtterEmeraldLeague';
+import { BlueOtterGoldLeague } from 'pages/Games/Lol/Leagues/Hosts/BlueOtterLeagues/BlueOtterGoldLeague';
+import { BlueOtterMastersLeague } from 'pages/Games/Lol/Leagues/Hosts/BlueOtterLeagues/BlueOtterMastersLeague';
+import { BlueOtterPlatinumLeague } from 'pages/Games/Lol/Leagues/Hosts/BlueOtterLeagues/BlueOtterPlatinumLeague';
+import { CWLLeagues } from 'pages/Games/Lol/Leagues/Hosts/CWLLeagues/CWLLeagues';
+import { CWLAscendLeague } from 'pages/Games/Lol/Leagues/Hosts/CWLLeagues/CWLAscendLeague';
+import { CWLDefyLeague } from 'pages/Games/Lol/Leagues/Hosts/CWLLeagues/CWLDefyLeague';
+import { CWLRiseLeague } from 'pages/Games/Lol/Leagues/Hosts/CWLLeagues/CWLRiseLeague';
+import { LowBudgetLCSLeagues } from 'pages/Games/Lol/Leagues/Hosts/LowBudgetLCSLeagues/LowBudgetLCSLeagues';
+import { LowBudgetCommercialLeague } from 'pages/Games/Lol/Leagues/Hosts/LowBudgetLCSLeagues/LowBudgetCommercialLeague';
+import { LowBudgetExecutiveLeague } from 'pages/Games/Lol/Leagues/Hosts/LowBudgetLCSLeagues/LowBudgetExecutiveLeague';
+import { LowBudgetEconomyLeague } from 'pages/Games/Lol/Leagues/Hosts/LowBudgetLCSLeagues/LowBudgetEconomyLeague';
+import { LowBudgetFinancialLeague } from 'pages/Games/Lol/Leagues/Hosts/LowBudgetLCSLeagues/LowBudgetFinancialLeague';
+import { MetaShiftLeagues } from 'pages/Games/Lol/Leagues/Hosts/MetaShiftLeagues/MetaShiftLeagues';
+import { MetaShiftArgonLeague } from 'pages/Games/Lol/Leagues/Hosts/MetaShiftLeagues/MetaShiftArgonLeague';
+import { MetaShiftKryptonLeague } from 'pages/Games/Lol/Leagues/Hosts/MetaShiftLeagues/MetaShiftKryptonLeague';
+import { MetaShiftNeonLeague } from 'pages/Games/Lol/Leagues/Hosts/MetaShiftLeagues/MetaShiftNeonLeague';
+import { MetaShiftNitrogenLeague } from 'pages/Games/Lol/Leagues/Hosts/MetaShiftLeagues/MetaShiftNitrogenLeague';
+import { MetaShiftRadonLeague } from 'pages/Games/Lol/Leagues/Hosts/MetaShiftLeagues/MetaShiftRadonLeague';
+import { MetaShiftXenonLeague } from 'pages/Games/Lol/Leagues/Hosts/MetaShiftLeagues/MetaShiftXenonLeague';
+import { RisenLeagues } from 'pages/Games/Lol/Leagues/Hosts/RisenLeagues/RisenLeagues';
+import { RisenChampionsLeague } from 'pages/Games/Lol/Leagues/Hosts/RisenLeagues/RisenChampionsLeague';
+import { RisenDominateLeague } from 'pages/Games/Lol/Leagues/Hosts/RisenLeagues/RisenDominateLeague';
+import { RisenDraftLeague } from 'pages/Games/Lol/Leagues/Hosts/RisenLeagues/RisenDraftLeague';
+import { RisenRampageLeague } from 'pages/Games/Lol/Leagues/Hosts/RisenLeagues/RisenRampageLeague';
+import { RisenUnstoppableLeague } from 'pages/Games/Lol/Leagues/Hosts/RisenLeagues/RisenUnstoppableLeague';
+import { TitanEsportsLeagues } from 'pages/Games/Lol/Leagues/Hosts/TitanEsportsLeagues/TitanEsportsLeagues';
+import { TitanBerserkerLeague } from 'pages/Games/Lol/Leagues/Hosts/TitanEsportsLeagues/TitanBerserkerLeague';
+import { TitanConquerorLeague } from 'pages/Games/Lol/Leagues/Hosts/TitanEsportsLeagues/TitanConquerorLeague';
+import { TitanDivinityLeague } from 'pages/Games/Lol/Leagues/Hosts/TitanEsportsLeagues/TitanDivinityLeague';
+import { TitanEternalLeague } from 'pages/Games/Lol/Leagues/Hosts/TitanEsportsLeagues/TitanEternalLeague';
+import { TitanGladiatorLeague } from 'pages/Games/Lol/Leagues/Hosts/TitanEsportsLeagues/TitanGladiatorLeague';
+import { TitanImmortalLeague } from 'pages/Games/Lol/Leagues/Hosts/TitanEsportsLeagues/TitanImmortalLeague';
+import { TitanOlympusLeague } from 'pages/Games/Lol/Leagues/Hosts/TitanEsportsLeagues/TitanOlympusLeague';
+import { TitanVanquisherLeague } from 'pages/Games/Lol/Leagues/Hosts/TitanEsportsLeagues/TitanVanquisherLeague';
+import { BlackTwitchLeague } from 'pages/Games/Lol/Leagues/Hosts/BlackTwitchLeague';
+import { CLOLLeague } from 'pages/Games/Lol/Leagues/Hosts/CLOLLeague';
+import { CorporateLoLLeague } from 'pages/Games/Lol/Leagues/Hosts/CorporateLoLLeague';
+import { ECACEsportsLeague as ECACLoLLeague } from 'pages/Games/Lol/Leagues/Hosts/ECACEsportsLegaue';
+import { NationalStudentEsportsLeague as NationalStudentLoLLeague } from 'pages/Games/Lol/Leagues/Hosts/NationalStudentsEsportsLeague';
+import { PlayflyCollegeLeague as PlayflyLoLLeague } from 'pages/Games/Lol/Leagues/Hosts/PlayflyCollegeLeague';
+import { PlayVSLeague as PlayVSLoLLeague } from 'pages/Games/Lol/Leagues/Hosts/PlayVSLeague';
+import { SDCLeague } from 'pages/Games/Lol/Leagues/Hosts/SDCLeague';
+import { VantaGGLeague as VantaGGLoLLeague } from 'pages/Games/Lol/Leagues/Hosts/VantaGGLeague';
+import { NECCLeague as NECCLoLLeague } from 'pages/Games/Lol/Leagues/Hosts/NECCLeague';
+// Wagers
+import { LolWagers } from 'pages/Games/Lol/Wagers/LolWagers';
+import { DropInGamingWagers as DropInLoLWagers } from 'pages/Games/Lol/Wagers/Hosts/DropInGamingWagers';
+import { DubbzWagers as DubbzLoLWagers } from 'pages/Games/Lol/Wagers/Hosts/DubbzWagers';
+import { Ewagers as LoLEWagers } from 'pages/Games/Lol/Wagers/Hosts/Ewagers';
 
 // RL Specific Pages minus LANs
 
@@ -293,7 +361,77 @@ root.render(
       <Route path='/games/halo/wagers/oneup' element={<OneUpHaloWagers />} />
       <Route path='/games/halo/wagers/ewagers' element={<HaloEwagers />} />
       
+      {/* LoL Pages Minus LANs */}
+      <Route path='/games/LoL' element={<Lol />} />
+      <Route path='/games/LoL/lans' element={<LolLans />} />
+      {/* H2H */}
+      <Route path='/games/LoL/head-to-head' element={<LolHeadToHead />} />
+      <Route path='/games/LoL/head-to-head/gankster' element={<GanksterLoLH2H />} />
+      <Route path='/games/LoL/head-to-head/esport-scrim' element={<LoLEsportsScrim />} />
+      <Route path='/games/LoL/head-to-head/pracc' element={<PraccLoLH2H />} />
+      {/* Leagues */}
+      <Route path='/games/LoL/leagues' element={<LolLeagues />} />
+      <Route path='/games/LoL/leagues/titan-leagues' element={<TitanEsportsLeagues />} />
+      <Route path='/games/LoL/leagues/titan-leagues/immortal' element={<TitanImmortalLeague />} />
+      <Route path='/games/LoL/leagues/titan-leagues/vanquisher' element={<TitanVanquisherLeague />} />
+      <Route path='/games/LoL/leagues/titan-leagues/eternal' element={<TitanEternalLeague />} />
+      <Route path='/games/LoL/leagues/titan-leagues/conqueror' element={<TitanConquerorLeague />} />
+      <Route path='/games/LoL/leagues/titan-leagues/olympus' element={<TitanOlympusLeague />} />
+      <Route path='/games/LoL/leagues/titan-leagues/divinity' element={<TitanDivinityLeague />} />
+      <Route path='/games/LoL/leagues/titan-leagues/berserker' element={<TitanBerserkerLeague />} />
+      <Route path='/games/LoL/leagues/titan-leagues/gladiator' element={<TitanGladiatorLeague />} />
+      <Route path='/games/LoL/leagues/risen-leagues' element={<RisenLeagues />} />
+      <Route path='/games/LoL/leagues/risen-leagues/champions' element={<RisenChampionsLeague />} />
+      <Route path='/games/LoL/leagues/risen-leagues/dominate' element={<RisenDominateLeague />} />
+      <Route path='/games/LoL/leagues/risen-leagues/unstoppable' element={<RisenUnstoppableLeague />} />
+      <Route path='/games/LoL/leagues/risen-leagues/rampage' element={<RisenRampageLeague />} />
+      <Route path='/games/LoL/leagues/risen-leagues/draft' element={<RisenDraftLeague />} />
+      <Route path='/games/LoL/leagues/aegis-leagues' element={<AegisLeagues />} />
+      <Route path='/games/LoL/leagues/aegis-leagues/champ' element={<AegisChampionsLeague />} />
+      <Route path='/games/LoL/leagues/aegis-leagues/marauder' element={<AegisMarauderLeague />} />
+      <Route path='/games/LoL/leagues/aegis-leagues/defenders' element={<AegisDefendersLeague />} />
+      <Route path='/games/LoL/leagues/aegis-leagues/executioners' element={<AegisExecutionersLeague />} />
+      <Route path='/games/LoL/leagues/aegis-leagues/protectors' element={<AegisProtectorsLeague />} />
+      <Route path='/games/LoL/leagues/blue-otter-leagues' element={<BlueOtterLeagues />} />
+      <Route path='/games/LoL/leagues/blue-otter-leagues/masters' element={<BlueOtterMastersLeague />} />
+      <Route path='/games/LoL/leagues/blue-otter-leagues/diamond' element={<BlueOtterDiamondLeague />} />
+      <Route path='/games/LoL/leagues/blue-otter-league/emerald' element={<BlueOtterEmeraldLeague />} />
+      <Route path='/games/LoL/leagues/blue-otter-leagues/plat' element={<BlueOtterPlatinumLeague />} />
+      <Route path='/games/LoL/leagues/blue-otter-leagues/gold' element={<BlueOtterGoldLeague />} />
+      <Route path='/games/LoL/leagues/blue-otter-leagues/draft' element={<BlueOtterDraftLeague />} />
+      <Route path='/games/LoL/leagues/black-twitch-league' element={<BlackTwitchLeague />} />
+      <Route path='/games/LoL/leagues/low-budget-leagues' element={<LowBudgetLCSLeagues />} />
+      <Route path='/games/LoL/leagues/low-budget-leagues/executive' element={<LowBudgetExecutiveLeague />} />
+      <Route path='/games/LoL/leagues/low-budget-leagues/financial' element={<LowBudgetFinancialLeague />} />
+      <Route path='/games/LoL/leagues/low-budget-leagues/commercial' element={<LowBudgetCommercialLeague />} />
+      <Route path='/games/LoL/leagues/low-budget-leagues/economy' element={<LowBudgetEconomyLeague />} />
+      <Route path='/games/LoL/leagues/meta-shift-leagues' element={<MetaShiftLeagues />} />
+      <Route path='/games/LoL/leagues/meta-shift-leagues/radon' element={<MetaShiftRadonLeague />} />
+      <Route path='/games/LoL/leagues/meta-shift-leagues/xenon' element={<MetaShiftXenonLeague />} />
+      <Route path='/games/LoL/leagues/meta-shift-leagues/krypton' element={<MetaShiftKryptonLeague />} />
+      <Route path='/games/LoL/leagues/meta-shift-leagues/argon' element={<MetaShiftArgonLeague />} />
+      <Route path='/games/LoL/leagues/meta-shift-leagues/nitrogen' element={<MetaShiftNitrogenLeague />} />
+      <Route path='/games/LoL/leagues/meta-shift-leagues/neon' element={<MetaShiftNeonLeague />} />
+      <Route path='/games/LoL/leagues/sdc' element={<SDCLeague />} />
+      <Route path='/games/LoL/leagues/cobalt-winds-leagues' element={<CWLLeagues />} />
+      <Route path='/games/LoL/leagues/cobalt-winds-leagues/cwl-ascend' element={<CWLAscendLeague />} />
+      <Route path='/games/LoL/leagues/cobalt-winds-leagues/cwl-defy' element={<CWLDefyLeague />} />
+      <Route path='/games/LoL/leagues/cobalt-winds-leagues/cwl-rise' element={<CWLRiseLeague />} />
+      <Route path='/games/LoL/leagues/corporate-league' element={<CorporateLoLLeague />} />
+      <Route path='/games/LoL/leagues/clol' element={<CLOLLeague />} />
+      <Route path='/games/LoL/leagues/playfly' element={<PlayflyLoLLeague />} />
+      <Route path='/games/LoL/leagues/necc' element={<NECCLoLLeague />} />
+      <Route path='/games/LoL/leagues/ecac' element={<ECACLoLLeague />} />
+      <Route path='/games/LoL/leagues/nse' element={<NationalStudentLoLLeague />} />
+      <Route path='/games/LoL/leagues/vantagg' element={<VantaGGLoLLeague />} />
+      <Route path='/games/LoL/leagues/playvs' element={<PlayVSLoLLeague />} />
+      {/* Wagers */}
+      <Route path='/games/LoL/wagers' element={<LolWagers />} />
+      <Route path='/games/LoL/wagers/dropingaming' element={<DropInLoLWagers />} />
+      <Route path='/games/LoL/wagers/dubbz' element={<DubbzLoLWagers />} />
+      <Route path='/games/LoL/wagers/ewagers' element={<LoLEWagers />} />
 
+      
     </Routes>
   </BrowserRouter>
   // </React.StrictMode>

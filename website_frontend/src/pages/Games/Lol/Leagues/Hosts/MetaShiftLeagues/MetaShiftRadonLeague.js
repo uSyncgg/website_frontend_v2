@@ -1,8 +1,6 @@
 
-const MetaShiftRadonLeague = () => {
+export const MetaShiftRadonLeague = () => {
     return (
         <></>
     );
 }
-
-export default MetaShiftRadonLeague;
