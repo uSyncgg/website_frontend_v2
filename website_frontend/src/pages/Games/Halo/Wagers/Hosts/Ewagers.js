@@ -1,8 +1,6 @@
 
-const Ewagers = () => {
+export const Ewagers = () => {
     return (
         <></>
     );
 }
-
-export default Ewagers;

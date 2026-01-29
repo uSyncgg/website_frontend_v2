@@ -73,7 +73,7 @@ import { OneUpWagers as OneUpCodWagers } from 'pages/Games/Cod/Wagers/Hosts/OneU
 
 // CS Specific Pages minus LANs
 import { CS } from 'pages/Games/CS/CS';
-// Head to Head
+// H2H
 import { CSHeadToHead } from 'pages/Games/CS/HeadToHead/CSHeadToHead';
 import { CKRASH2H } from 'pages/Games/CS/HeadToHead/Hosts/CKRASH2H';
 import { EsportScrimH2H as CSEsportScrimH2H } from 'pages/Games/CS/HeadToHead/Hosts/EsportScrimH2H';
@@ -116,6 +116,28 @@ import { GamerSaloonWagers as GamerSaloonCSWagers } from 'pages/Games/CS/Wagers/
 import { ShowdownGamingWagers } from 'pages/Games/CS/Wagers/Hosts/ShowdownGamingWagers';
 
 // Halo Specific Pages minus LANs
+import { Halo } from 'pages/Games/Halo/Halo';
+import { HaloLans } from 'pages/Games/Halo/Lans/HaloLans';
+// H2H
+import { HaloHeadToHead } from 'pages/Games/Halo/HeadToHead/HaloHeadToHead';
+import { ArenaH2H as ArenaHaloH2H } from 'pages/Games/Halo/HeadToHead/Hosts/ArenaH2H';
+import { HaloRecLeagueScrimsH2H } from 'pages/Games/Halo/HeadToHead/Hosts/HaloRecLeagueScrimsH2H';
+import { SaunaScrimsH2H } from 'pages/Games/Halo/HeadToHead/Hosts/SaunaScrimsH2H';
+import { UGCCollegeHaloScrimsH2H } from 'pages/Games/Halo/HeadToHead/Hosts/UGCCollegeHaloScrimsH2H';
+// Leagues
+import { HaloLeagues } from 'pages/Games/Halo/Leagues/HaloLeagues';
+import { AscendingBaselineLeagues } from 'pages/Games/Halo/Leagues/Hosts/AscendingBaselineLeagues/AscendingBaselineLeagues';
+import { AscendingBaselineABLeague } from 'pages/Games/Halo/Leagues/Hosts/AscendingBaselineLeagues/AscendingBaselineABLeague';
+import { AscendingBaselinePandemoniumGamesLeague } from 'pages/Games/Halo/Leagues/Hosts/AscendingBaselineLeagues/AscendingBaselinePandemoniumGamesLeague';
+import { CollegeHaloLeague } from 'pages/Games/Halo/Leagues/Hosts/CollegeHaloLeague';
+import { HaloAgentLeague } from 'pages/Games/Halo/Leagues/Hosts/HaloAgentLeague';
+import { HaloRecLeague } from 'pages/Games/Halo/Leagues/Hosts/HaloRecLeague';
+import { HighSchoolEsportsLeague as HighSchoolHaloLeague } from 'pages/Games/Halo/Leagues/Hosts/HighSchoolEsportsLeague';
+// Wagers
+import { HaloWagers } from 'pages/Games/Halo/Wagers/HaloWagers';
+import { CmgWagers as CmgHaloWagers } from 'pages/Games/Halo/Wagers/Hosts/CmgWagers';
+import { Ewagers as HaloEwagers } from 'pages/Games/Halo/Wagers/Hosts/Ewagers';
+import { OneUpWagers as OneUpHaloWagers } from 'pages/Games/Halo/Wagers/Hosts/OneUpWagers';
 
 // LoL Specific Pages minus LANs
 
@@ -247,6 +269,30 @@ root.render(
       <Route path='/games/CS2/wagers/showdowngaming_cs2' element={<ShowdownGamingWagers />} />
       <Route path='/games/CS2/wagers/gamersaloon_cs2' element={<GamerSaloonCSWagers />} />
 
+      {/* Halo Pages Minus LANs */}
+      <Route path='/games/halo' element={<Halo />} />
+      <Route path='/games/halo/lans' element={<HaloLans />} />
+      {/* H2H */}
+      <Route path='/games/halo/head-to-head' element={<HaloHeadToHead />} />
+      <Route path='/games/halo/head-to-head/ugc-scrim' element={<UGCCollegeHaloScrimsH2H />} />
+      <Route path='/games/halo/head-to-head/rec-xp' element={<HaloRecLeagueScrimsH2H />} />
+      <Route path='/games/halo/head-to-head/arena' element={<ArenaHaloH2H />} />
+      <Route path='/games/halo/head-to-head/sauna' element={<SaunaScrimsH2H />} />
+      {/* Leagues */}
+      <Route path='/games/halo/leagues' element={<HaloLeagues />} />
+      <Route path='/games/halo/leagues/halo-rec-league' element={<HaloRecLeague />} />
+      <Route path='/games/halo/leagues/ascending-baseline' element={<AscendingBaselineLeagues />} />
+      <Route path='/games/halo/leagues/ascending-baseline/ab' element={<AscendingBaselineABLeague />} />
+      <Route path='/games/halo/leagues/ascending-baseline/pandemonium-games' element={<AscendingBaselinePandemoniumGamesLeague />} />
+      <Route path='/games/halo/leagues/halo-agent' element={<HaloAgentLeague />} />
+      <Route path='/games/halo/leagues/ugc-halo' element={<CollegeHaloLeague />} />
+      <Route path='/games/halo/leagues/hsel' element={<HighSchoolHaloLeague />} />
+      {/* Wagers */}
+      <Route path='/games/halo/wagers' element={<HaloWagers />} />
+      <Route path='/games/halo/wagers/cmg' element={<CmgHaloWagers />} />
+      <Route path='/games/halo/wagers/oneup' element={<OneUpHaloWagers />} />
+      <Route path='/games/halo/wagers/ewagers' element={<HaloEwagers />} />
+      
 
     </Routes>
   </BrowserRouter>

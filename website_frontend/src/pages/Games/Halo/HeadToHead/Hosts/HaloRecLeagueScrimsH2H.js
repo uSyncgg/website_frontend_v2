@@ -1,8 +1,6 @@
 
-const HaloRecLeagueScrimsH2H = () => {
+export const HaloRecLeagueScrimsH2H = () => {
     return (
         <></>
     );
 }
-
-export default HaloRecLeagueScrimsH2H;

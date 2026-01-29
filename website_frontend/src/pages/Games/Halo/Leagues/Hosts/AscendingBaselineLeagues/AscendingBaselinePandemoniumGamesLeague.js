@@ -1,8 +1,6 @@
 
-const AscendingBaselinePandemoniumGamesLeague = () => {
+export const AscendingBaselinePandemoniumGamesLeague = () => {
     return (
         <></>
     );
 }
-
-export default AscendingBaselinePandemoniumGamesLeague;

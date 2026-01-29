@@ -1,8 +1,6 @@
 
-const HaloAgentLeague = () => {
+export const HaloAgentLeague = () => {
     return (
         <></>
     );
 }
-
-export default HaloAgentLeague;

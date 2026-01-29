@@ -1,8 +1,6 @@
 
-const ArenaH2H = () => {
+export const ArenaH2H = () => {
     return (
         <></>
     );
 }
-
-export default ArenaH2H;

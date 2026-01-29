@@ -1,8 +1,6 @@
 
-const HaloHeadToHead = () => {
+export const HaloHeadToHead = () => {
     return (
         <></>
     );
 }
-
-export default HaloHeadToHead;

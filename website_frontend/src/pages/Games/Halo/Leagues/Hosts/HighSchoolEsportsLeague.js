@@ -1,8 +1,6 @@
 
-const HighSchoolEsportsLeague = () => {
+export const HighSchoolEsportsLeague = () => {
     return (
         <></>
     );
 }
-
-export default HighSchoolEsportsLeague;

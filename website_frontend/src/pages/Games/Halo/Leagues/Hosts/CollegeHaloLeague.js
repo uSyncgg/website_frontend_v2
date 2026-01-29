@@ -1,8 +1,6 @@
 
-const CollegeHaloLeague = () => {
+export const CollegeHaloLeague = () => {
     return (
         <></>
     );
 }
-
-export default CollegeHaloLeague;

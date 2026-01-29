@@ -1,8 +1,6 @@
 
-const SaunaScrimsH2H = () => {
+export const SaunaScrimsH2H = () => {
     return (
         <></>
     );
 }
-
-export default SaunaScrimsH2H;

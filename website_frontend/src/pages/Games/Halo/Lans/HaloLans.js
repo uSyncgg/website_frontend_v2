@@ -1,8 +1,6 @@
 
-const HaloLans = () => {
+export const HaloLans = () => {
     return (
         <></>
     );
 }
-
-export default HaloLans;

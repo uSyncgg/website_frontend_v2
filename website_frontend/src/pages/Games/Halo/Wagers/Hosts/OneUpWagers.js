@@ -1,8 +1,6 @@
 
-const OneUpWagers = () => {
+export const OneUpWagers = () => {
     return (
         <></>
     );
 }
-
-export default OneUpWagers;

@@ -1,8 +1,6 @@
 
-const Halo = () => {
+export const Halo = () => {
     return (
         <></>
     );
 }
-
-export default Halo;
