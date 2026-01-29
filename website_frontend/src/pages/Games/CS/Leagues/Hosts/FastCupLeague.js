@@ -1,8 +1,6 @@
 
-const FastCupLeague = () => {
+export const FastCupLeague = () => {
     return (
         <></>
     );
 }
-
-export default FastCupLeague;

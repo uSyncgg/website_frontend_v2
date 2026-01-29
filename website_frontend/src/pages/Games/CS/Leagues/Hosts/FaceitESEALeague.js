@@ -1,8 +1,6 @@
 
-const FaceitESEALeague = () => {
+export const FaceitESEALeague = () => {
     return (
         <></>
     );
 }
-
-export default FaceitESEALeague;

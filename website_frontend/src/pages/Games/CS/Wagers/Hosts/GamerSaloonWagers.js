@@ -1,8 +1,6 @@
 
-const GamerSaloonWagers = () => {
+export const GamerSaloonWagers = () => {
     return (
         <></>
     );
 }
-
-export default GamerSaloonWagers;

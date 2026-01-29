@@ -1,8 +1,6 @@
 
-const HyperfibreSocialLeague = () => {
+export const HyperfibreSocialLeague = () => {
     return (
         <></>
     );
 }
-
-export default HyperfibreSocialLeague;

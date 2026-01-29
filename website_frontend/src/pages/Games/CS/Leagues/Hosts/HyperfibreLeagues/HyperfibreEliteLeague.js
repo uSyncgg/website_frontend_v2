@@ -1,8 +1,6 @@
 
-const HyperfibreEliteLeague = () => {
+export const HyperfibreEliteLeague = () => {
     return (
         <></>
     );
 }
-
-export default HyperfibreEliteLeague;

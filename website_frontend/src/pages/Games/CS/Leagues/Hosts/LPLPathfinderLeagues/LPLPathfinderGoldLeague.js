@@ -1,8 +1,6 @@
 
-const LPLPathfinderGoldLeague = () => {
+export const LPLPathfinderGoldLeague = () => {
     return (
         <></>
     );
 }
-
-export default LPLPathfinderGoldLeague;

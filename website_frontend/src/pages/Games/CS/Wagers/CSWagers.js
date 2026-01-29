@@ -1,8 +1,6 @@
 
-const CSWagers = () => {
+export const CSWagers = () => {
     return (
         <></>
     );
 }
-
-export default CSWagers;

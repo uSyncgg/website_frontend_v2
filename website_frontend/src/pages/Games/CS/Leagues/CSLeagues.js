@@ -1,8 +1,6 @@
 
-const CSLeagues = () => {
+export const CSLeagues = () => {
     return (
         <></>
     );
 }
-
-export default CSLeagues;

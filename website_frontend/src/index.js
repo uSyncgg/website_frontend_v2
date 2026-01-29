@@ -72,6 +72,48 @@ import { Ewagers as CodEwagers } from 'pages/Games/Cod/Wagers/Hosts/Ewagers';
 import { OneUpWagers as OneUpCodWagers } from 'pages/Games/Cod/Wagers/Hosts/OneUpWagers';
 
 // CS Specific Pages minus LANs
+import { CS } from 'pages/Games/CS/CS';
+// Head to Head
+import { CSHeadToHead } from 'pages/Games/CS/HeadToHead/CSHeadToHead';
+import { CKRASH2H } from 'pages/Games/CS/HeadToHead/Hosts/CKRASH2H';
+import { EsportScrimH2H as CSEsportScrimH2H } from 'pages/Games/CS/HeadToHead/Hosts/EsportScrimH2H';
+import { FaceitH2H } from 'pages/Games/CS/HeadToHead/Hosts/FaceitH2H';
+import { PraccH2H as PraccCSH2H } from 'pages/Games/CS/HeadToHead/Hosts/PraccH2H';
+// Leagues
+import { CSLeagues } from 'pages/Games/CS/Leagues/CSLeagues';
+import { HyperfibreLeagues } from 'pages/Games/CS/Leagues/Hosts/HyperfibreLeagues/HyperfibreLeagues';
+import { HyperfibreEliteLeague } from 'pages/Games/CS/Leagues/Hosts/HyperfibreLeagues/HyperfibreEliteLeague';
+import { HyperfibreSocialLeague } from 'pages/Games/CS/Leagues/Hosts/HyperfibreLeagues/HyperfibreSocialLeague';
+import { LPLPathfinderLeagues as LPLPathfinderLeaguesCS } from 'pages/Games/CS/Leagues/Hosts/LPLPathfinderLeagues/LPLPathfinderLeagues';
+import { LPLPathfinderBronzeLeague as LPLPathfinderBronzeLeagueCS } from 'pages/Games/CS/Leagues/Hosts/LPLPathfinderLeagues/LPLPathfinderBronzeLeague';
+import { LPLPathfinderGoldLeague as LPLPathfinderGoldLeagueCS } from 'pages/Games/CS/Leagues/Hosts/LPLPathfinderLeagues/LPLPathfinderGoldLeague';
+import { LPLPathfinderOpenLeague as LPLPathfinderOpenLeagueCS } from 'pages/Games/CS/Leagues/Hosts/LPLPathfinderLeagues/LPLPathfinderOpenLeague';
+import { LPLPathfinderSilverLeague as LPLPathfinderSilverLeagueCS } from 'pages/Games/CS/Leagues/Hosts/LPLPathfinderLeagues/LPLPathfinderSilverLeague';
+import { SCLLeagues } from 'pages/Games/CS/Leagues/Hosts/SCLLeagues/SCLLeagues';
+import { SCLChallengerLeague } from 'pages/Games/CS/Leagues/Hosts/SCLLeagues/SCLChallengerLeague';
+import { SCLIntermediateLeague } from 'pages/Games/CS/Leagues/Hosts/SCLLeagues/SCLIntermediateLeague';
+import { SCLMasterLeague } from 'pages/Games/CS/Leagues/Hosts/SCLLeagues/SCLMasterLeague';
+import { SCLPublicLeague } from 'pages/Games/CS/Leagues/Hosts/SCLLeagues/SCLPublicLeague';
+import { AustralianEsportsLeague as AustralianCSEsportsLeague } from 'pages/Games/CS/Leagues/Hosts/AustralianEsportsLeague';
+import { CorporateCS2League } from 'pages/Games/CS/Leagues/Hosts/CorporateCS2League';
+import { ECACLeague as ECACCSLeague } from 'pages/Games/CS/Leagues/Hosts/ECACLeague';
+import { EGFCLeague as EGFCCSLeague } from 'pages/Games/CS/Leagues/Hosts/EGFCLeague';
+import { FaceitCollegiateLeague as FaceitCSCollegiate } from 'pages/Games/CS/Leagues/Hosts/FaceitCollegiateLeague';
+import { FaceitESEALeague } from 'pages/Games/CS/Leagues/Hosts/FaceitESEALeague';
+import { FastCupLeague } from 'pages/Games/CS/Leagues/Hosts/FastCupLeague';
+import { FiReLeague } from 'pages/Games/CS/Leagues/Hosts/FiReLeague';
+import { HighSchoolEsportsLeague as HighSchoolCSLeague } from 'pages/Games/CS/Leagues/Hosts/HighSchoolEsportsLeague';
+import { NationalStudentEsportsLeague as NationalStudentCSLeague } from 'pages/Games/CS/Leagues/Hosts/NationalStudentEsportsLeague';
+import { NECCLeague as NECCCSLeague } from 'pages/Games/CS/Leagues/Hosts/NECCLeague';
+import { NJCAAELeague as NJCAAECSLeague } from 'pages/Games/CS/Leagues/Hosts/NJCAAELeague';
+import { PlayflyCollegeLeague as PlayflyCSLeague } from 'pages/Games/CS/Leagues/Hosts/PlayflyCollegeLeague';
+import { UnitedTwentyOneLeague } from 'pages/Games/CS/Leagues/Hosts/UnitedTwentyOneLeague';
+import { VantaGGLeague as VantaGGCSLeague } from 'pages/Games/CS/Leagues/Hosts/VantaGGLeague';
+// Wagers
+import { CSWagers } from 'pages/Games/CS/Wagers/CSWagers';
+import { DubbzWagers as DubbzCSWagers } from 'pages/Games/CS/Wagers/Hosts/DubbzWagers';
+import { GamerSaloonWagers as GamerSaloonCSWagers } from 'pages/Games/CS/Wagers/Hosts/GamerSaloonWagers';
+import { ShowdownGamingWagers } from 'pages/Games/CS/Wagers/Hosts/ShowdownGamingWagers';
 
 // Halo Specific Pages minus LANs
 
@@ -161,7 +203,50 @@ root.render(
       <Route path='/games/call-of-duty/wagers/the-esports-hub' element={<EsportsHubWagers />} />
       <Route path='/games/call-of-duty/wagers/ewagers' element={<CodEwagers />} />
 
-      {/* CS2 */}
+      {/* CS2 Pages Minus LANs */}
+      <Route path='/games/CS2' element={<CS />} />
+      {/* H2H */}
+      <Route path='/games/CS2/head-to-head' element={<CSHeadToHead />} />
+      <Route path='/games/CS2/head-to-head/faceit' element={<FaceitH2H />} />
+      <Route path='/games/CS2/head-to-head/pracc' element={<PraccCSH2H />} />
+      <Route path='/games/CS2/head-to-head/esport-scrim' element={<CSEsportScrimH2H />} />
+      <Route path='/games/CS2/head-to-head/ckras' element={<CKRASH2H />} />
+      {/* Leagues */}
+      <Route path='/games/CS2/leagues' element={<CSLeagues />} />
+      <Route path='/games/CS2/leagues/faceitesea' element={<FaceitESEALeague />} />
+      <Route path='/games/CS2/leagues/lpl-leagues' element={<LPLPathfinderLeaguesCS />} />
+      <Route path='/games/CS2/leagues/lpl-leagues/lpl-gold' element={<LPLPathfinderGoldLeagueCS />} />
+      <Route path='/games/CS2/leagues/lpl-leagues/lpl-silver' element={<LPLPathfinderSilverLeagueCS />} />
+      <Route path='/games/CS2/leagues/lpl-leagues/lpl-bronze' element={<LPLPathfinderBronzeLeagueCS />} />
+      <Route path='/games/CS2/leagues/lpl-leagues/lpl-open' element={<LPLPathfinderOpenLeagueCS />} />
+      <Route path='/games/CS2/leagues/fastcup' element={<FastCupLeague />} />
+      <Route path='/games/CS2/leagues/corporate' element={<CorporateCS2League />} />
+      <Route path='/games/CS2/leagues/fireleague' element={<FiReLeague />} />
+      <Route path='/games/CS2/leagues/unitedtwentyone' element={<UnitedTwentyOneLeague />} />
+      <Route path='/games/CS2/leagues/scl-leagues' element={<SCLLeagues />} />
+      <Route path='/games/CS2/leagues/scl-leagues/challenger' element={<SCLChallengerLeague />} />
+      <Route path='/games/CS2/leagues/scl-leagues/masters' element={<SCLMasterLeague />} />
+      <Route path='/games/CS2/leagues/scl-leagues/intermediate' element={<SCLIntermediateLeague />} />
+      <Route path='/games/CS2/leagues/scl-leagues/public' element={<SCLPublicLeague />} />
+      <Route path='/games/CS2/leagues/hyperfibre-leagues' element={<HyperfibreLeagues />} />
+      <Route path='/games/CS2/leagues/hyperfibre-leagues/elite' element={<HyperfibreEliteLeague />} />
+      <Route path='/games/CS2/leagues/hyperfibre-leagues/social' element={<HyperfibreSocialLeague />} />
+      <Route path='/games/CS2/leagues/njcaae' element={<NJCAAECSLeague />} />
+      <Route path='/games/CS2/leagues/necc' element={<NECCCSLeague />} />
+      <Route path='/games/CS2/leagues/ecac' element={<ECACCSLeague />} />
+      <Route path='/games/CS2/leagues/egfc' element={<EGFCCSLeague />} />
+      <Route path='/games/CS2/leagues/faceitcollegiate' element={<FaceitCSCollegiate />} />
+      <Route path='/games/CS2/leagues/nse' element={<NationalStudentCSLeague />} />
+      <Route path='/games/CS2/leagues/playfly' element={<PlayflyCSLeague />} />
+      <Route path='/games/CS2/leagues/ael' element={<AustralianCSEsportsLeague />} />
+      <Route path='/games/CS2/leagues/hsel' element={<HighSchoolCSLeague />} />
+      <Route path='/games/CS2/leagues/vantagg' element={<VantaGGCSLeague />} />
+      {/* Wagers */}
+      <Route path='/games/CS2/wagers' element={<CSWagers />} />
+      <Route path='/games/CS2/wagers/dubbzcs2' element={<DubbzCSWagers />} />
+      <Route path='/games/CS2/wagers/showdowngaming_cs2' element={<ShowdownGamingWagers />} />
+      <Route path='/games/CS2/wagers/gamersaloon_cs2' element={<GamerSaloonCSWagers />} />
+
 
     </Routes>
   </BrowserRouter>

@@ -1,8 +1,6 @@
 
-const ECACLeague = () => {
+export const ECACLeague = () => {
     return (
         <></>
     );
 }
-
-export default ECACLeague;

@@ -1,8 +1,6 @@
 
-const FaceitH2H = () => {
+export const FaceitH2H = () => {
     return (
         <></>
     );
 }
-
-export default FaceitH2H;

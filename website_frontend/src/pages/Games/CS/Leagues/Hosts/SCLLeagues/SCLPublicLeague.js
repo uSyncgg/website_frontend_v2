@@ -1,8 +1,6 @@
 
-const SCLPublicLeague = () => {
+export const SCLPublicLeague = () => {
     return (
         <></>
     );
 }
-
-export default SCLPublicLeague;

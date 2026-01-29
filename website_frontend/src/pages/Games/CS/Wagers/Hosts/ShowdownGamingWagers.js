@@ -1,8 +1,6 @@
 
-const ShowdownGamingWagers = () => {
+export const ShowdownGamingWagers = () => {
     return (
         <></>
     );
 }
-
-export default ShowdownGamingWagers;

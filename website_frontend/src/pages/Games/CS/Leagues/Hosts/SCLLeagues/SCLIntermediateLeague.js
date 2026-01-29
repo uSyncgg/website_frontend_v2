@@ -1,8 +1,6 @@
 
-const SCLIntermediateLeague = () => {
+export const SCLIntermediateLeague = () => {
     return (
         <></>
     );
 }
-
-export default SCLIntermediateLeague;
