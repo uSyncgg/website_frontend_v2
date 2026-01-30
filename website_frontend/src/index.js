@@ -370,6 +370,20 @@ import { GamerSaloonWagers as GamerSaloonWzWagers } from 'pages/Games/Wz/Wagers/
 import { OneUpWagers as OneUpWzWagers } from 'pages/Games/Wz/Wagers/Hosts/OneUpWagers';
 
 // LAN Pages Ordered By Game: CoD, Warzone, Halo, LoL, Conventions
+import { GSiteBO7 } from 'pages/Games/Cod/Lans/Events/G-SiteBO7';
+import { ShintoGCMajor3 } from 'pages/Games/Cod/Lans/Events/ShintoGCMajor3';
+import { CharlestonCrownSeries } from 'pages/Games/Cod/Lans/Events/CharlestonCrownSeries';
+import { Heartland2026 } from 'pages/Games/Lol/Lans/Events/Heartland2026';
+import { KamiCon17 } from 'pages/Games/Lol/Lans/Events/Kami-Con17';
+import { MidwestBattleground2026 } from 'pages/Games/Lol/Lans/Events/MidwestBattleground2026';
+import { BelowZeroLANWinter2026 } from 'pages/Games/Conventions/BelowZeroLANWinter2026';
+import { Conventions } from 'pages/Games/Conventions/Conventions';
+import { DreamHackBirmingham } from 'pages/Games/Conventions/DreamHackBirmingham';
+import { EmeraldCityLAN2026 } from 'pages/Games/Conventions/EmeraldCityLAN2026';
+import { FortLANSpring2026 } from 'pages/Games/Conventions/FortLANSpring2026';
+import { GACSOperationCupid } from 'pages/Games/Conventions/GACSOperationCupid';
+import { LANAllNightSpring2026 } from 'pages/Games/Conventions/LANAllNightSpring2026';
+import { LowPingLAN } from 'pages/Games/Conventions/LowPingLAN';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -744,7 +758,20 @@ root.render(
       <Route path='/games/warzone/wagers/ewagers' element={<WzEwagers />} />
 
       {/* LANs Ordered By Game: CoD, Warzone, Halo, LoL, Conventions */}
-
+      <Route path='/lans/charleston-crown-series' element={<CharlestonCrownSeries />} />
+      <Route path='/lans/shintogc-major-iii-2026' element={<ShintoGCMajor3 />} />
+      <Route path='/lans/g-site-bo7' element={<GSiteBO7 />} />
+      <Route path='/lans/heartland-2026' element={<Heartland2026 />} />
+      <Route path='/lans/midwest-battleground-2026' element={<MidwestBattleground2026 />} />
+      <Route path='/lans/kamicon-17' element={<KamiCon17 />} />
+      <Route path='/other-lans' element={<Conventions />} />
+      <Route path='/lans/dreamhack-birmingham' element={<DreamHackBirmingham />} />
+      <Route path='/lans/emerald-city-2026' element={<EmeraldCityLAN2026 />} />
+      <Route path='/lans/operation-cupid' element={<GACSOperationCupid />} />
+      <Route path='/lans/forlan-spring-2026' element={<FortLANSpring2026 />} />
+      <Route path='/lans/lan-all-night-spring-26' element={<LANAllNightSpring2026 />} />
+      <Route path='/lans/belowzerolan-winter-26' element={<BelowZeroLANWinter2026 />} />
+      <Route path='/lans/low-ping-lan-2026' element={<LowPingLAN />} />
 
     </Routes>
   </BrowserRouter>

@@ -1,5 +1,5 @@
 
-export const KamiCon17 = () => {
+export const LowPingLAN = () => {
     return (
         <></>
     );
