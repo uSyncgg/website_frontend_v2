@@ -316,7 +316,7 @@ import { TeamFrontlineAcademyLeague } from 'pages/Games/Valorant/Leagues/Hosts/T
 import { TeamFrontlinePrimeLeague } from 'pages/Games/Valorant/Leagues/Hosts/TeamFrontlineLeagues/TeamFrontlinePrimeLeague';
 import { CollegeValorantLeague } from 'pages/Games/Valorant/Leagues/Hosts/CollegeValorantLeague';
 import { CorporateValorantLeague } from 'pages/Games/Valorant/Leagues/Hosts/CorporateValorantLeague';
-import { CSMGLeague } from 'pages/Games/RL/Leagues/Hosts/CSMGLeague';
+import { CSMGLeague as CSMGValLeague } from 'pages/Games/RL/Leagues/Hosts/CSMGLeague';
 import { EGFCLeague as EGFCVALLeague } from 'pages/Games/Valorant/Leagues/Hosts/EGFCLeague';
 import { EGFHLeague as EGFHVALLeague } from 'pages/Games/Valorant/Leagues/Hosts/EGFHLeague';
 import { EsportsCompanyLeague } from 'pages/Games/Valorant/Leagues/Hosts/EsportsCompanyLeague';
@@ -649,6 +649,74 @@ root.render(
       <Route path='/games/RocketLeague/wagers/gamersaloon' element={<GamerSaloonRLWagers />} />
       <Route path='/games/RocketLeague/wagers/dubbz' element={<DubbzRLWagers />} />
       <Route path='/games/RocketLeague/wagers/ewagers' element={<RLEWagers />} />
+
+      {/* Valorant Pages Minus LANs */}
+      <Route path='/games/Valorant' element={<Valorant />} />
+      {/* H2H */}
+      <Route path='/games/Valorant/head-to-head' element={<ValorantHeadToHead />} />
+      <Route path='/games/Valorant/head-to-head/gankster' element={<GanksterValH2H />} />
+      <Route path='/games/Valorant/head-to-head/esport-scrim' element={<EsportsScrimH2H />} />
+      <Route path='/games/Valorant/head-to-head/dropingaming' element={<DropInGamingH2H />} />
+      <Route path='/games/Valorant/head-to-head/college-hub' element={<CollegiateValorantHubScrimsH2H />} />
+      <Route path='/games/Valorant/head-to-head/pracc' element={<PraccValH2H />} />
+      {/* Leagues */}
+      <Route path='/games/Valorant/leagues' element={<ValorantLeagues />} />
+      <Route path='/games/Valorant/leagues/lpl-leagues' element={<LPLLeagues />} />
+      <Route path='/games/Valorant/leagues/lpl-leagues/gold' element={<LPLGoldDivisionLeague />} />
+      <Route path='/games/Valorant/leagues/lpl-leagues/silver' element={<LPLSilverDivisionLeague />} />
+      <Route path='/games/Valorant/leagues/lpl-leagues/bronze' element={<LPLBronzeDivisionLeague />} />
+      <Route path='/games/Valorant/leagues/lpl-leagues/open' element={<LPLOpenDivisionLeague />} />
+      <Route path='/games/Valorant/leagues/frontline-leagues' element={<TeamFrontlineValLeagues />} />
+      <Route path='/games/Valorant/leagues/frontline-leagues/prime' element={<TeamFrontlinePrimeLeague />} />
+      <Route path='/games/Valorant/leagues/frontline-leagues/academy' element={<TeamFrontlineAcademyLeague />} />
+      <Route path='/games/Valorant/leagues/corporate' element={<CorporateValorantLeague />} />
+      <Route path='/games/Valorant/leagues/unified' element={<UnifiedPremierLeague />} />
+      <Route path='/games/Valorant/leagues/riot' element={<CollegeValorantLeague />} />
+      <Route path='/games/Valorant/leagues/ecac-leagues' element={<ECACValLeagues />} />
+      <Route path='/games/Valorant/leagues/ecac-leagues/division-a' element={<ECACDivisionALeague />} />
+      <Route path='/games/Valorant/leagues/ecac-leagues/division-b' element={<ECACDivisionBLeague />} />
+      <Route path='/games/Valorant/leagues/ecac-leagues/division-c' element={<ECACDivisionCLeague />} />
+      <Route path='/games/Valorant/leagues/njcaae' element={<NJCAAEVALLeague />} />
+      <Route path='/games/Valorant/leagues/necc' element={<NECCValLeague />} />
+      <Route path='/games/Valorant/leagues/egfc' element={<EGFCVALLeague />} />
+      <Route path='/games/Valorant/leagues/playfly-leagues' element={<PlayflyCollegeLeagues />} />
+      <Route path='/games/Valorant/leagues/playfly-leagues/varsity' element={<PlayflyVarsityLeague />} />
+      <Route path='/games/Valorant/leagues/playfly-leagues/open' element={<PlayflyOpenLeague />} />
+      <Route path='/games/Valorant/leagues/csmg' element={<CSMGValLeague />} />
+      <Route path='/games/Valorant/leagues/faceit' element={<FaceitValLeague />} />
+      <Route path='/games/Valorant/leagues/nse' element={<NationalStudentValLeague />} />
+      <Route path='/games/Valorant/leagues/ugc-college' element={<UGCValBattleAcademy />} />
+      <Route path='/games/Valorant/leagues/hsel' element={<HighSchoolValLeague />} />
+      <Route path='/games/Valorant/leagues/tec' element={<EsportsCompanyLeague />} />
+      <Route path='/games/Valorant/leagues/vantagg' element={<VantaGGValLeague />} />
+      <Route path='/games/Valorant/leagues/nasef' element={<NASEFValLeague />} />
+      <Route path='/games/Valorant/leagues/egfh' element={<EGFHVALLeague />} />
+      {/* Wagers */}
+      <Route path='/games/Valorant/wagers' element={<ValorantWagers />} />
+      <Route path='/games/Valorant/wagers/dropingaming' element={<DropInValWagers />} />
+      <Route path='/games/Valorant/wagers/ewagers' element={<ValEwagers />} />
+
+      {/* Warzone Pages Mins LANs */}
+      <Route path='/games/warzone' element={<Wz />} />
+      <Route path='/games/warzone/lans' element={<WzLans />} />
+      {/* H2H */}
+      <Route path='/games/warzone/head-to-head' element={<WzHeadToHead />} />
+      <Route path='/games/warzone/cmg' element={<CmgWzH2H />} />
+      {/* Leagues */}
+      <Route path='/games/warzone/leagues' element={<WzLeagues />} />
+      <Route path='/games/warzone/leagues/airforce' element={<AirForceWzLeague />} />
+      <Route path='/games/warzone/leagues/ghml' element={<GMHLGamingLeague />} />
+      <Route path='/games/warzone/leagues/njcaae' element={<NJCAAEWzLeague />} />
+      {/* Wagers */}
+      <Route path='/games/warzone/wagers' element={<WzWagers />} />
+      <Route path='/games/warzone/wagers/cmg' element={<CmgWzWagers />} />
+      <Route path='/games/warzone/wagers/oneup' element={<OneUpWzWagers />} />
+      <Route path='/games/warzone/wagers/1v1me' element={<OneVOneWzWagers />} />
+      <Route path='/games/warzone/wagers/gamersaloon' element={<GamerSaloonWzWagers />} />
+      <Route path='/games/warzone/wagers/dropingaming' element={<DropInWzWagers />} />
+      <Route path='/games/warzone/wagers/dubbz' element={<DubbzWzWagers />} />
+      <Route path='/games/warzone/wagers/ewagers' element={<WzEwagers />} />
+
     </Routes>
   </BrowserRouter>
   // </React.StrictMode>
