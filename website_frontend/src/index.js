@@ -11,6 +11,20 @@ import { Leagues } from 'pages/Leagues';
 import { Lans } from 'pages/Lans';
 import { Tournaments } from 'pages/Tournaments';
 
+// More Pages
+import { Articles } from 'pages/More/Articles';
+import { ContactUs } from 'pages/More/ContactUs';
+import { Faqs } from 'pages/More/Faqs';
+import { PostYourEvent } from 'pages/More/PostYourEvent';
+import { Verification } from 'pages/More/Verification';
+
+// Articles
+import { HowEsportsCanBeBetter } from 'pages/More/Articles/HowEsportsCanBeBetter';
+import { HowWeFixIt } from 'pages/More/Articles/HowWeFixIt';
+import { JoiningEsportsLeague } from 'pages/More/Articles/JoiningEsportsLeague';
+import { ProblemWithEsports } from 'pages/More/Articles/ProblemWithEsports';
+import { WhatWeProvide } from 'pages/More/Articles/WhatWeProvide';
+
 // Cod Specific Pages
 import { Cod } from 'pages/Games/Cod/Cod';
 import { CodLans } from 'pages/Games/Cod/Lans/CodLans';
@@ -355,9 +369,7 @@ import { Ewagers as WzEwagers } from 'pages/Games/Wz/Wagers/Hosts/Ewagers';
 import { GamerSaloonWagers as GamerSaloonWzWagers } from 'pages/Games/Wz/Wagers/Hosts/GamerSaloonWagers';
 import { OneUpWagers as OneUpWzWagers } from 'pages/Games/Wz/Wagers/Hosts/OneUpWagers';
 
-// Other Pages
-
-// LAN Pages
+// LAN Pages Ordered By Game: CoD, Warzone, Halo, LoL, Conventions
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -372,6 +384,20 @@ root.render(
       <Route path='/leagues' element={<Leagues />} />
       <Route path='/lans' element={<Lans />} />
       <Route path='/tournaments' element={<Tournaments />} />
+
+      {/* More Pages */}
+      <Route path='/more/verification' element={<Verification />} />
+      <Route path='/more/eventhost' element={<PostYourEvent />} />
+      <Route path='/more/contactus' element={<ContactUs />} />
+      <Route path='/more/FAQ' element={<Faqs />} />
+      <Route path='/more/articles' element={<Articles />} />
+
+      {/* Articles */}
+      <Route path='/more/FAQ/The-Problem-With-Esports' element={<ProblemWithEsports />} />
+      <Route path='/more/FAQ/How-Esports-Can-Be-Better' element={<HowEsportsCanBeBetter />} />
+      <Route path='/more/FAQ/How-We-Fix-It' element={<HowWeFixIt />} />
+      <Route path='/more/FAQ/What-We-Provide' element={<WhatWeProvide />} />
+      <Route path='/more/FAQ/How-to-Join-an-Esports-League' element={<JoiningEsportsLeague />} />
 
       {/* CoD Pages Minus LANs */}
       <Route path='/games/call-of-duty' element={<Cod />} />
@@ -716,6 +742,9 @@ root.render(
       <Route path='/games/warzone/wagers/dropingaming' element={<DropInWzWagers />} />
       <Route path='/games/warzone/wagers/dubbz' element={<DubbzWzWagers />} />
       <Route path='/games/warzone/wagers/ewagers' element={<WzEwagers />} />
+
+      {/* LANs Ordered By Game: CoD, Warzone, Halo, LoL, Conventions */}
+
 
     </Routes>
   </BrowserRouter>

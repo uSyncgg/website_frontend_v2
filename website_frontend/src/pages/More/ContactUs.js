@@ -1,8 +1,6 @@
 
-const ContactUs = () => {
+export const ContactUs = () => {
     return (
         <></>
     );
 }
-
-export default ContactUs;

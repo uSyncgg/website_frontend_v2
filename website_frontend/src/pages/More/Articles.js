@@ -1,8 +1,6 @@
 
-const Articles = () => {
+export const Articles = () => {
     return (
         <></>
     );
 }
-
-export default Articles;

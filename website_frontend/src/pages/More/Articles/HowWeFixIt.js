@@ -1,8 +1,6 @@
 
-const HowWeFixIt = () => {
+export const HowWeFixIt = () => {
     return (
         <></>
     );
 }
-
-export default HowWeFixIt;

@@ -1,8 +1,6 @@
 
-const ProblemWithEsports = () => {
+export const ProblemWithEsports = () => {
     return (
         <></>
     );
 }
-
-export default ProblemWithEsports;

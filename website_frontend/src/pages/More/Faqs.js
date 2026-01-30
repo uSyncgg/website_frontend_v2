@@ -1,8 +1,6 @@
 
-const Faqs = () => {
+export const Faqs = () => {
     return (
         <></>
     );
 }
-
-export default Faqs;

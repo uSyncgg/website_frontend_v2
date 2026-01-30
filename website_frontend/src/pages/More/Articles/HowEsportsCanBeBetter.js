@@ -1,8 +1,6 @@
 
-const HowEsportsCanBeBetter = () => {
+export const HowEsportsCanBeBetter = () => {
     return (
         <></>
     );
 }
-
-export default HowEsportsCanBeBetter;

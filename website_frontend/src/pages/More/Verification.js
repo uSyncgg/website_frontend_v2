@@ -1,8 +1,6 @@
 
-const Verification = () => {
+export const Verification = () => {
     return (
         <></>
     );
 }
-
-export default Verification;

@@ -1,8 +1,6 @@
 
-const WhatWeProvide = () => {
+export const WhatWeProvide = () => {
     return (
         <></>
     );
 }
-
-export default WhatWeProvide;

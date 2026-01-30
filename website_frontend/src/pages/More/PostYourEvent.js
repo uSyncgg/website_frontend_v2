@@ -1,8 +1,6 @@
 
-const PostYourEvent = () => {
+export const PostYourEvent = () => {
     return (
         <></>
     );
 }
-
-export default PostYourEvent;
