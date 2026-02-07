@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router';
 
 // Navbar & Footer
-import { Navbar } from 'components';
+import { Navbar, Footer } from 'components';
 
 // Home + Top Level Pages
 import { Home } from 'pages/Home';
@@ -20,6 +20,7 @@ import { ContactUs } from 'pages/More/ContactUs';
 import { Faqs } from 'pages/More/Faqs';
 import { PostYourEvent } from 'pages/More/PostYourEvent';
 import { Verification } from 'pages/More/Verification';
+import { ReportProblem } from 'pages/More/ReportProblem';
 
 // Articles
 import { HowEsportsCanBeBetter } from 'pages/More/Articles/HowEsportsCanBeBetter';
@@ -392,392 +393,400 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
   <BrowserRouter>
-  <Navbar />
-    <Routes>
-      {/* Home Page */}
-      <Route path='/' element={<Home />} />
+    <div className='app-container'>
+      <Navbar />
 
-      {/* Top Level Pages */}
-      <Route path='/games' element={<Games />} />
-      <Route path='/leagues' element={<Leagues />} />
-      <Route path='/lans' element={<Lans />} />
-      <Route path='/tournaments' element={<Tournaments />} />
+      <main className='main-content'>
+        <Routes>
+          {/* Home Page */}
+          <Route path='/' element={<Home />} />
 
-      {/* More Pages */}
-      <Route path='/more/verification' element={<Verification />} />
-      <Route path='/more/eventhost' element={<PostYourEvent />} />
-      <Route path='/more/contactus' element={<ContactUs />} />
-      <Route path='/more/FAQ' element={<Faqs />} />
-      <Route path='/more/articles' element={<Articles />} />
+          {/* Top Level Pages */}
+          <Route path='/games' element={<Games />} />
+          <Route path='/leagues' element={<Leagues />} />
+          <Route path='/lans' element={<Lans />} />
+          <Route path='/tournaments' element={<Tournaments />} />
 
-      {/* Articles */}
-      <Route path='/more/FAQ/The-Problem-With-Esports' element={<ProblemWithEsports />} />
-      <Route path='/more/FAQ/How-Esports-Can-Be-Better' element={<HowEsportsCanBeBetter />} />
-      <Route path='/more/FAQ/How-We-Fix-It' element={<HowWeFixIt />} />
-      <Route path='/more/FAQ/What-We-Provide' element={<WhatWeProvide />} />
-      <Route path='/more/FAQ/How-to-Join-an-Esports-League' element={<JoiningEsportsLeague />} />
+          {/* More Pages */}
+          <Route path='/more/verification' element={<Verification />} />
+          <Route path='/more/eventhost' element={<PostYourEvent />} />
+          <Route path='/more/contactus' element={<ContactUs />} />
+          <Route path='/more/FAQ' element={<Faqs />} />
+          <Route path='/more/articles' element={<Articles />} />
+          <Route path='/reportproblem' element={<ReportProblem />} />
 
-      {/* CoD Pages Minus LANs */}
-      <Route path='/games/call-of-duty' element={<Cod />} />
-      <Route path='/games/call-of-duty/lans' element={<CodLans />} />
-      {/* H2H */}
-      <Route path='/games/call-of-duty/head-to-head' element={<CodHeadToHead />} />
-      <Route path='/games/call-of-duty/head-to-head/cmg' element={<CmgCodH2H />} />
-      <Route path='/games/call-of-duty/head-to-head/eagent' element={<EsportsAgentH2H />} />
-      <Route path='/games/call-of-duty/head-to-head/arena' element={<ArenaCodH2H />} />
-      {/* Leagues */}
-      <Route path='/games/call-of-duty/leagues' element={<CodLeagues />} />
-      <Route path='/games/call-of-duty/leagues/lockdowncl-leagues' element={<LockdownCLLeagues />} />
-      <Route path='/games/call-of-duty/leagues/lockdowncl-leagues/legends' element={<LockdownLegendsLeague />} />
-      <Route path='/games/call-of-duty/leagues/lockdowncl-leagues/uppers' element={<LockdownUppersLeague />} />
-      <Route path='/games/call-of-duty/leagues/lockdowncl-leagues/lowers' element={<LockdownLowersLeague />} />
-      <Route path='/games/call-of-duty/leagues/lockdowncl-leagues/womens' element={<LockdownWomensLeague />} />
-      <Route path='/games/call-of-duty/leagues/pulse-x-leagues' element={<PulseXLeagues />} />
-      <Route path='/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-uppers' element={<PulseUppersLeague />} />
-      <Route path='/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-lowers' element={<PulseLowersLeague />} />
-      <Route path='/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-open' element={<PulseOpenLeague />} />
-      <Route path='/games/call-of-duty/leagues/xp-league-cod' element={<XPLeague />} />
-      <Route path='/games/call-of-duty/leagues/cod-beer-league' element={<BeerLeague />} />
-      <Route path='/games/call-of-duty/leagues/u18-league' element={<U18CodLeague />} />
-      <Route path='/games/call-of-duty/leagues/united-rogue-league' element={<UnitedRogueCodLeague />} />
-      <Route path='/games/call-of-duty/leagues/tpc-womens-cod' element={<TPCWomensCodLeague />} />
-      <Route path='/games/call-of-duty/leagues/fcl' element={<FemaleCodLeague />} />
-      <Route path='/games/call-of-duty/leagues/zoned-out' element={<ZonedOutGamingLeague />} />
-      <Route path='/games/call-of-duty/leagues/airforce-league' element={<AirForceCodLeague />} />
-      <Route path='/games/call-of-duty/leagues/corporate-cod-league' element={<CorporateCodLeague />} />
-      <Route path='/games/call-of-duty/leagues/kinetic-league' element={<KineticLeague />} />
-      <Route path='/games/call-of-duty/leagues/House-of-esports-leagues' element={<HouseOfEsportsLeagues />} />
-      <Route path='/games/call-of-duty/leagues/House-of-esports-leagues/hoe-amateur' element={<HouseOfEsportsAmateursLeague />} />
-      <Route path='/games/call-of-duty/leagues/House-of-esports-leagues/hoe-challengers' element={<HouseOfEsportsChallengersLeague />} />
-      <Route path='/games/call-of-duty/leagues/ixi-esports' element={<IXIEsportsLeague />} />
-      <Route path='/games/call-of-duty/leagues/tpc-league' element={<PremierCircuitLeague />} />
-      <Route path='/games/call-of-duty/leagues/cod-rec-league' element={<CodRecLeague />} />
-      <Route path='/games/call-of-duty/leagues/retired-challengers' element={<RetiredChallengersLeague />} />
-      <Route path='/games/call-of-duty/leagues/elite-gaming-warfare-league' element={<EliteWarfareGamingLeague />} />
-      <Route path='/games/call-of-duty/leagues/casual-xp-league' element={<CasualXPLeague />} />
-      <Route path='/games/call-of-duty/leagues/old-heads-circuit' element={<OldHeadsCircuitLeague />} />
-      <Route path='/games/call-of-duty/leagues/cxp-leagues' element={<CollegeXPLeagues />} />
-      <Route path='/games/call-of-duty/leagues/cxp-leagues/cxp-varsity' element={<CollegeXPVarsityLeague />} />
-      <Route path='/games/call-of-duty/leagues/cxp-leagues/cxp-open' element={<CollegeXPOpenLeague />} />
-      <Route path='/games/call-of-duty/leagues/cxp-leagues/cxp-club' element={<CollegeXPClubLeague />} />
-      <Route path='/games/call-of-duty/leagues/playfly-cod-league' element={<PlayflyCodLeague />} />
-      <Route path='/games/call-of-duty/leagues/ccl-league' element={<CollegeCodLeague />} />
-      <Route path='/games/call-of-duty/leagues/ecac' element={<ECACCodLeague />} />
-      <Route path='/games/call-of-duty/leagues/njcaae' element={<NJCAAECodLeague />} />
-      {/* Tournaments   */}
-      <Route path='/tournaments/call-of-duty-tournaments' element={<CodTournaments />} />
-      {/* Wagers */}
-      <Route path='/games/call-of-duty/wagers' element={<CodWagers />} />
-      <Route path='/games/call-of-duty/wagers/cmg' element={<CmgCodWagers />} />
-      <Route path='/games/call-of-duty/wagers/eagent' element={<EsportsAgentWagers />} />
-      <Route path='/games/call-of-duty/wagers/oneup' element={<OneUpCodWagers />} />
-      <Route path='/games/call-of-duty/wagers/dropin' element={<DropInCodWagers />} />
-      <Route path='/games/call-of-duty/wagers/1v1me' element={<OneVOneCodWagers />} />
-      <Route path='/games/call-of-duty/wagers/dubbz' element={<DubbzCodWagers />} />
-      <Route path='/games/call-of-duty/wagers/the-esports-hub' element={<EsportsHubWagers />} />
-      <Route path='/games/call-of-duty/wagers/ewagers' element={<CodEwagers />} />
+          {/* Articles */}
+          <Route path='/more/FAQ/The-Problem-With-Esports' element={<ProblemWithEsports />} />
+          <Route path='/more/FAQ/How-Esports-Can-Be-Better' element={<HowEsportsCanBeBetter />} />
+          <Route path='/more/FAQ/How-We-Fix-It' element={<HowWeFixIt />} />
+          <Route path='/more/FAQ/What-We-Provide' element={<WhatWeProvide />} />
+          <Route path='/more/FAQ/How-to-Join-an-Esports-League' element={<JoiningEsportsLeague />} />
 
-      {/* CS2 Pages Minus LANs */}
-      <Route path='/games/CS2' element={<CS />} />
-      {/* H2H */}
-      <Route path='/games/CS2/head-to-head' element={<CSHeadToHead />} />
-      <Route path='/games/CS2/head-to-head/faceit' element={<FaceitH2H />} />
-      <Route path='/games/CS2/head-to-head/pracc' element={<PraccCSH2H />} />
-      <Route path='/games/CS2/head-to-head/esport-scrim' element={<CSEsportScrimH2H />} />
-      <Route path='/games/CS2/head-to-head/ckras' element={<CKRASH2H />} />
-      {/* Leagues */}
-      <Route path='/games/CS2/leagues' element={<CSLeagues />} />
-      <Route path='/games/CS2/leagues/faceitesea' element={<FaceitESEALeague />} />
-      <Route path='/games/CS2/leagues/lpl-leagues' element={<LPLPathfinderLeaguesCS />} />
-      <Route path='/games/CS2/leagues/lpl-leagues/lpl-gold' element={<LPLPathfinderGoldLeagueCS />} />
-      <Route path='/games/CS2/leagues/lpl-leagues/lpl-silver' element={<LPLPathfinderSilverLeagueCS />} />
-      <Route path='/games/CS2/leagues/lpl-leagues/lpl-bronze' element={<LPLPathfinderBronzeLeagueCS />} />
-      <Route path='/games/CS2/leagues/lpl-leagues/lpl-open' element={<LPLPathfinderOpenLeagueCS />} />
-      <Route path='/games/CS2/leagues/fastcup' element={<FastCupLeague />} />
-      <Route path='/games/CS2/leagues/corporate' element={<CorporateCS2League />} />
-      <Route path='/games/CS2/leagues/fireleague' element={<FiReLeague />} />
-      <Route path='/games/CS2/leagues/unitedtwentyone' element={<UnitedTwentyOneLeague />} />
-      <Route path='/games/CS2/leagues/scl-leagues' element={<SCLLeagues />} />
-      <Route path='/games/CS2/leagues/scl-leagues/challenger' element={<SCLChallengerLeague />} />
-      <Route path='/games/CS2/leagues/scl-leagues/masters' element={<SCLMasterLeague />} />
-      <Route path='/games/CS2/leagues/scl-leagues/intermediate' element={<SCLIntermediateLeague />} />
-      <Route path='/games/CS2/leagues/scl-leagues/public' element={<SCLPublicLeague />} />
-      <Route path='/games/CS2/leagues/hyperfibre-leagues' element={<HyperfibreLeagues />} />
-      <Route path='/games/CS2/leagues/hyperfibre-leagues/elite' element={<HyperfibreEliteLeague />} />
-      <Route path='/games/CS2/leagues/hyperfibre-leagues/social' element={<HyperfibreSocialLeague />} />
-      <Route path='/games/CS2/leagues/njcaae' element={<NJCAAECSLeague />} />
-      <Route path='/games/CS2/leagues/necc' element={<NECCCSLeague />} />
-      <Route path='/games/CS2/leagues/ecac' element={<ECACCSLeague />} />
-      <Route path='/games/CS2/leagues/egfc' element={<EGFCCSLeague />} />
-      <Route path='/games/CS2/leagues/faceitcollegiate' element={<FaceitCSCollegiate />} />
-      <Route path='/games/CS2/leagues/nse' element={<NationalStudentCSLeague />} />
-      <Route path='/games/CS2/leagues/playfly' element={<PlayflyCSLeague />} />
-      <Route path='/games/CS2/leagues/ael' element={<AustralianCSEsportsLeague />} />
-      <Route path='/games/CS2/leagues/hsel' element={<HighSchoolCSLeague />} />
-      <Route path='/games/CS2/leagues/vantagg' element={<VantaGGCSLeague />} />
-      {/* Wagers */}
-      <Route path='/games/CS2/wagers' element={<CSWagers />} />
-      <Route path='/games/CS2/wagers/dubbzcs2' element={<DubbzCSWagers />} />
-      <Route path='/games/CS2/wagers/showdowngaming_cs2' element={<ShowdownGamingWagers />} />
-      <Route path='/games/CS2/wagers/gamersaloon_cs2' element={<GamerSaloonCSWagers />} />
+          {/* CoD Pages Minus LANs */}
+          <Route path='/games/call-of-duty' element={<Cod />} />
+          <Route path='/games/call-of-duty/lans' element={<CodLans />} />
+          {/* H2H */}
+          <Route path='/games/call-of-duty/head-to-head' element={<CodHeadToHead />} />
+          <Route path='/games/call-of-duty/head-to-head/cmg' element={<CmgCodH2H />} />
+          <Route path='/games/call-of-duty/head-to-head/eagent' element={<EsportsAgentH2H />} />
+          <Route path='/games/call-of-duty/head-to-head/arena' element={<ArenaCodH2H />} />
+          {/* Leagues */}
+          <Route path='/games/call-of-duty/leagues' element={<CodLeagues />} />
+          <Route path='/games/call-of-duty/leagues/lockdowncl-leagues' element={<LockdownCLLeagues />} />
+          <Route path='/games/call-of-duty/leagues/lockdowncl-leagues/legends' element={<LockdownLegendsLeague />} />
+          <Route path='/games/call-of-duty/leagues/lockdowncl-leagues/uppers' element={<LockdownUppersLeague />} />
+          <Route path='/games/call-of-duty/leagues/lockdowncl-leagues/lowers' element={<LockdownLowersLeague />} />
+          <Route path='/games/call-of-duty/leagues/lockdowncl-leagues/womens' element={<LockdownWomensLeague />} />
+          <Route path='/games/call-of-duty/leagues/pulse-x-leagues' element={<PulseXLeagues />} />
+          <Route path='/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-uppers' element={<PulseUppersLeague />} />
+          <Route path='/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-lowers' element={<PulseLowersLeague />} />
+          <Route path='/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-open' element={<PulseOpenLeague />} />
+          <Route path='/games/call-of-duty/leagues/xp-league-cod' element={<XPLeague />} />
+          <Route path='/games/call-of-duty/leagues/cod-beer-league' element={<BeerLeague />} />
+          <Route path='/games/call-of-duty/leagues/u18-league' element={<U18CodLeague />} />
+          <Route path='/games/call-of-duty/leagues/united-rogue-league' element={<UnitedRogueCodLeague />} />
+          <Route path='/games/call-of-duty/leagues/tpc-womens-cod' element={<TPCWomensCodLeague />} />
+          <Route path='/games/call-of-duty/leagues/fcl' element={<FemaleCodLeague />} />
+          <Route path='/games/call-of-duty/leagues/zoned-out' element={<ZonedOutGamingLeague />} />
+          <Route path='/games/call-of-duty/leagues/airforce-league' element={<AirForceCodLeague />} />
+          <Route path='/games/call-of-duty/leagues/corporate-cod-league' element={<CorporateCodLeague />} />
+          <Route path='/games/call-of-duty/leagues/kinetic-league' element={<KineticLeague />} />
+          <Route path='/games/call-of-duty/leagues/House-of-esports-leagues' element={<HouseOfEsportsLeagues />} />
+          <Route path='/games/call-of-duty/leagues/House-of-esports-leagues/hoe-amateur' element={<HouseOfEsportsAmateursLeague />} />
+          <Route path='/games/call-of-duty/leagues/House-of-esports-leagues/hoe-challengers' element={<HouseOfEsportsChallengersLeague />} />
+          <Route path='/games/call-of-duty/leagues/ixi-esports' element={<IXIEsportsLeague />} />
+          <Route path='/games/call-of-duty/leagues/tpc-league' element={<PremierCircuitLeague />} />
+          <Route path='/games/call-of-duty/leagues/cod-rec-league' element={<CodRecLeague />} />
+          <Route path='/games/call-of-duty/leagues/retired-challengers' element={<RetiredChallengersLeague />} />
+          <Route path='/games/call-of-duty/leagues/elite-gaming-warfare-league' element={<EliteWarfareGamingLeague />} />
+          <Route path='/games/call-of-duty/leagues/casual-xp-league' element={<CasualXPLeague />} />
+          <Route path='/games/call-of-duty/leagues/old-heads-circuit' element={<OldHeadsCircuitLeague />} />
+          <Route path='/games/call-of-duty/leagues/cxp-leagues' element={<CollegeXPLeagues />} />
+          <Route path='/games/call-of-duty/leagues/cxp-leagues/cxp-varsity' element={<CollegeXPVarsityLeague />} />
+          <Route path='/games/call-of-duty/leagues/cxp-leagues/cxp-open' element={<CollegeXPOpenLeague />} />
+          <Route path='/games/call-of-duty/leagues/cxp-leagues/cxp-club' element={<CollegeXPClubLeague />} />
+          <Route path='/games/call-of-duty/leagues/playfly-cod-league' element={<PlayflyCodLeague />} />
+          <Route path='/games/call-of-duty/leagues/ccl-league' element={<CollegeCodLeague />} />
+          <Route path='/games/call-of-duty/leagues/ecac' element={<ECACCodLeague />} />
+          <Route path='/games/call-of-duty/leagues/njcaae' element={<NJCAAECodLeague />} />
+          {/* Tournaments   */}
+          <Route path='/tournaments/call-of-duty-tournaments' element={<CodTournaments />} />
+          {/* Wagers */}
+          <Route path='/games/call-of-duty/wagers' element={<CodWagers />} />
+          <Route path='/games/call-of-duty/wagers/cmg' element={<CmgCodWagers />} />
+          <Route path='/games/call-of-duty/wagers/eagent' element={<EsportsAgentWagers />} />
+          <Route path='/games/call-of-duty/wagers/oneup' element={<OneUpCodWagers />} />
+          <Route path='/games/call-of-duty/wagers/dropin' element={<DropInCodWagers />} />
+          <Route path='/games/call-of-duty/wagers/1v1me' element={<OneVOneCodWagers />} />
+          <Route path='/games/call-of-duty/wagers/dubbz' element={<DubbzCodWagers />} />
+          <Route path='/games/call-of-duty/wagers/the-esports-hub' element={<EsportsHubWagers />} />
+          <Route path='/games/call-of-duty/wagers/ewagers' element={<CodEwagers />} />
 
-      {/* Halo Pages Minus LANs */}
-      <Route path='/games/halo' element={<Halo />} />
-      <Route path='/games/halo/lans' element={<HaloLans />} />
-      {/* H2H */}
-      <Route path='/games/halo/head-to-head' element={<HaloHeadToHead />} />
-      <Route path='/games/halo/head-to-head/ugc-scrim' element={<UGCCollegeHaloScrimsH2H />} />
-      <Route path='/games/halo/head-to-head/rec-xp' element={<HaloRecLeagueScrimsH2H />} />
-      <Route path='/games/halo/head-to-head/arena' element={<ArenaHaloH2H />} />
-      <Route path='/games/halo/head-to-head/sauna' element={<SaunaScrimsH2H />} />
-      {/* Leagues */}
-      <Route path='/games/halo/leagues' element={<HaloLeagues />} />
-      <Route path='/games/halo/leagues/halo-rec-league' element={<HaloRecLeague />} />
-      <Route path='/games/halo/leagues/ascending-baseline' element={<AscendingBaselineLeagues />} />
-      <Route path='/games/halo/leagues/ascending-baseline/ab' element={<AscendingBaselineABLeague />} />
-      <Route path='/games/halo/leagues/ascending-baseline/pandemonium-games' element={<AscendingBaselinePandemoniumGamesLeague />} />
-      <Route path='/games/halo/leagues/halo-agent' element={<HaloAgentLeague />} />
-      <Route path='/games/halo/leagues/ugc-halo' element={<CollegeHaloLeague />} />
-      <Route path='/games/halo/leagues/hsel' element={<HighSchoolHaloLeague />} />
-      {/* Wagers */}
-      <Route path='/games/halo/wagers' element={<HaloWagers />} />
-      <Route path='/games/halo/wagers/cmg' element={<CmgHaloWagers />} />
-      <Route path='/games/halo/wagers/oneup' element={<OneUpHaloWagers />} />
-      <Route path='/games/halo/wagers/ewagers' element={<HaloEwagers />} />
+          {/* CS2 Pages Minus LANs */}
+          <Route path='/games/CS2' element={<CS />} />
+          {/* H2H */}
+          <Route path='/games/CS2/head-to-head' element={<CSHeadToHead />} />
+          <Route path='/games/CS2/head-to-head/faceit' element={<FaceitH2H />} />
+          <Route path='/games/CS2/head-to-head/pracc' element={<PraccCSH2H />} />
+          <Route path='/games/CS2/head-to-head/esport-scrim' element={<CSEsportScrimH2H />} />
+          <Route path='/games/CS2/head-to-head/ckras' element={<CKRASH2H />} />
+          {/* Leagues */}
+          <Route path='/games/CS2/leagues' element={<CSLeagues />} />
+          <Route path='/games/CS2/leagues/faceitesea' element={<FaceitESEALeague />} />
+          <Route path='/games/CS2/leagues/lpl-leagues' element={<LPLPathfinderLeaguesCS />} />
+          <Route path='/games/CS2/leagues/lpl-leagues/lpl-gold' element={<LPLPathfinderGoldLeagueCS />} />
+          <Route path='/games/CS2/leagues/lpl-leagues/lpl-silver' element={<LPLPathfinderSilverLeagueCS />} />
+          <Route path='/games/CS2/leagues/lpl-leagues/lpl-bronze' element={<LPLPathfinderBronzeLeagueCS />} />
+          <Route path='/games/CS2/leagues/lpl-leagues/lpl-open' element={<LPLPathfinderOpenLeagueCS />} />
+          <Route path='/games/CS2/leagues/fastcup' element={<FastCupLeague />} />
+          <Route path='/games/CS2/leagues/corporate' element={<CorporateCS2League />} />
+          <Route path='/games/CS2/leagues/fireleague' element={<FiReLeague />} />
+          <Route path='/games/CS2/leagues/unitedtwentyone' element={<UnitedTwentyOneLeague />} />
+          <Route path='/games/CS2/leagues/scl-leagues' element={<SCLLeagues />} />
+          <Route path='/games/CS2/leagues/scl-leagues/challenger' element={<SCLChallengerLeague />} />
+          <Route path='/games/CS2/leagues/scl-leagues/masters' element={<SCLMasterLeague />} />
+          <Route path='/games/CS2/leagues/scl-leagues/intermediate' element={<SCLIntermediateLeague />} />
+          <Route path='/games/CS2/leagues/scl-leagues/public' element={<SCLPublicLeague />} />
+          <Route path='/games/CS2/leagues/hyperfibre-leagues' element={<HyperfibreLeagues />} />
+          <Route path='/games/CS2/leagues/hyperfibre-leagues/elite' element={<HyperfibreEliteLeague />} />
+          <Route path='/games/CS2/leagues/hyperfibre-leagues/social' element={<HyperfibreSocialLeague />} />
+          <Route path='/games/CS2/leagues/njcaae' element={<NJCAAECSLeague />} />
+          <Route path='/games/CS2/leagues/necc' element={<NECCCSLeague />} />
+          <Route path='/games/CS2/leagues/ecac' element={<ECACCSLeague />} />
+          <Route path='/games/CS2/leagues/egfc' element={<EGFCCSLeague />} />
+          <Route path='/games/CS2/leagues/faceitcollegiate' element={<FaceitCSCollegiate />} />
+          <Route path='/games/CS2/leagues/nse' element={<NationalStudentCSLeague />} />
+          <Route path='/games/CS2/leagues/playfly' element={<PlayflyCSLeague />} />
+          <Route path='/games/CS2/leagues/ael' element={<AustralianCSEsportsLeague />} />
+          <Route path='/games/CS2/leagues/hsel' element={<HighSchoolCSLeague />} />
+          <Route path='/games/CS2/leagues/vantagg' element={<VantaGGCSLeague />} />
+          {/* Wagers */}
+          <Route path='/games/CS2/wagers' element={<CSWagers />} />
+          <Route path='/games/CS2/wagers/dubbzcs2' element={<DubbzCSWagers />} />
+          <Route path='/games/CS2/wagers/showdowngaming_cs2' element={<ShowdownGamingWagers />} />
+          <Route path='/games/CS2/wagers/gamersaloon_cs2' element={<GamerSaloonCSWagers />} />
+
+          {/* Halo Pages Minus LANs */}
+          <Route path='/games/halo' element={<Halo />} />
+          <Route path='/games/halo/lans' element={<HaloLans />} />
+          {/* H2H */}
+          <Route path='/games/halo/head-to-head' element={<HaloHeadToHead />} />
+          <Route path='/games/halo/head-to-head/ugc-scrim' element={<UGCCollegeHaloScrimsH2H />} />
+          <Route path='/games/halo/head-to-head/rec-xp' element={<HaloRecLeagueScrimsH2H />} />
+          <Route path='/games/halo/head-to-head/arena' element={<ArenaHaloH2H />} />
+          <Route path='/games/halo/head-to-head/sauna' element={<SaunaScrimsH2H />} />
+          {/* Leagues */}
+          <Route path='/games/halo/leagues' element={<HaloLeagues />} />
+          <Route path='/games/halo/leagues/halo-rec-league' element={<HaloRecLeague />} />
+          <Route path='/games/halo/leagues/ascending-baseline' element={<AscendingBaselineLeagues />} />
+          <Route path='/games/halo/leagues/ascending-baseline/ab' element={<AscendingBaselineABLeague />} />
+          <Route path='/games/halo/leagues/ascending-baseline/pandemonium-games' element={<AscendingBaselinePandemoniumGamesLeague />} />
+          <Route path='/games/halo/leagues/halo-agent' element={<HaloAgentLeague />} />
+          <Route path='/games/halo/leagues/ugc-halo' element={<CollegeHaloLeague />} />
+          <Route path='/games/halo/leagues/hsel' element={<HighSchoolHaloLeague />} />
+          {/* Wagers */}
+          <Route path='/games/halo/wagers' element={<HaloWagers />} />
+          <Route path='/games/halo/wagers/cmg' element={<CmgHaloWagers />} />
+          <Route path='/games/halo/wagers/oneup' element={<OneUpHaloWagers />} />
+          <Route path='/games/halo/wagers/ewagers' element={<HaloEwagers />} />
+          
+          {/* LoL Pages Minus LANs */}
+          <Route path='/games/LoL' element={<Lol />} />
+          <Route path='/games/LoL/lans' element={<LolLans />} />
+          {/* H2H */}
+          <Route path='/games/LoL/head-to-head' element={<LolHeadToHead />} />
+          <Route path='/games/LoL/head-to-head/gankster' element={<GanksterLoLH2H />} />
+          <Route path='/games/LoL/head-to-head/esport-scrim' element={<LoLEsportsScrim />} />
+          <Route path='/games/LoL/head-to-head/pracc' element={<PraccLoLH2H />} />
+          {/* Leagues */}
+          <Route path='/games/LoL/leagues' element={<LolLeagues />} />
+          <Route path='/games/LoL/leagues/titan-leagues' element={<TitanEsportsLeagues />} />
+          <Route path='/games/LoL/leagues/titan-leagues/immortal' element={<TitanImmortalLeague />} />
+          <Route path='/games/LoL/leagues/titan-leagues/vanquisher' element={<TitanVanquisherLeague />} />
+          <Route path='/games/LoL/leagues/titan-leagues/eternal' element={<TitanEternalLeague />} />
+          <Route path='/games/LoL/leagues/titan-leagues/conqueror' element={<TitanConquerorLeague />} />
+          <Route path='/games/LoL/leagues/titan-leagues/olympus' element={<TitanOlympusLeague />} />
+          <Route path='/games/LoL/leagues/titan-leagues/divinity' element={<TitanDivinityLeague />} />
+          <Route path='/games/LoL/leagues/titan-leagues/berserker' element={<TitanBerserkerLeague />} />
+          <Route path='/games/LoL/leagues/titan-leagues/gladiator' element={<TitanGladiatorLeague />} />
+          <Route path='/games/LoL/leagues/risen-leagues' element={<RisenLeagues />} />
+          <Route path='/games/LoL/leagues/risen-leagues/champions' element={<RisenChampionsLeague />} />
+          <Route path='/games/LoL/leagues/risen-leagues/dominate' element={<RisenDominateLeague />} />
+          <Route path='/games/LoL/leagues/risen-leagues/unstoppable' element={<RisenUnstoppableLeague />} />
+          <Route path='/games/LoL/leagues/risen-leagues/rampage' element={<RisenRampageLeague />} />
+          <Route path='/games/LoL/leagues/risen-leagues/draft' element={<RisenDraftLeague />} />
+          <Route path='/games/LoL/leagues/aegis-leagues' element={<AegisLeagues />} />
+          <Route path='/games/LoL/leagues/aegis-leagues/champ' element={<AegisChampionsLeague />} />
+          <Route path='/games/LoL/leagues/aegis-leagues/marauder' element={<AegisMarauderLeague />} />
+          <Route path='/games/LoL/leagues/aegis-leagues/defenders' element={<AegisDefendersLeague />} />
+          <Route path='/games/LoL/leagues/aegis-leagues/executioners' element={<AegisExecutionersLeague />} />
+          <Route path='/games/LoL/leagues/aegis-leagues/protectors' element={<AegisProtectorsLeague />} />
+          <Route path='/games/LoL/leagues/blue-otter-leagues' element={<BlueOtterLeagues />} />
+          <Route path='/games/LoL/leagues/blue-otter-leagues/masters' element={<BlueOtterMastersLeague />} />
+          <Route path='/games/LoL/leagues/blue-otter-leagues/diamond' element={<BlueOtterDiamondLeague />} />
+          <Route path='/games/LoL/leagues/blue-otter-league/emerald' element={<BlueOtterEmeraldLeague />} />
+          <Route path='/games/LoL/leagues/blue-otter-leagues/plat' element={<BlueOtterPlatinumLeague />} />
+          <Route path='/games/LoL/leagues/blue-otter-leagues/gold' element={<BlueOtterGoldLeague />} />
+          <Route path='/games/LoL/leagues/blue-otter-leagues/draft' element={<BlueOtterDraftLeague />} />
+          <Route path='/games/LoL/leagues/black-twitch-league' element={<BlackTwitchLeague />} />
+          <Route path='/games/LoL/leagues/low-budget-leagues' element={<LowBudgetLCSLeagues />} />
+          <Route path='/games/LoL/leagues/low-budget-leagues/executive' element={<LowBudgetExecutiveLeague />} />
+          <Route path='/games/LoL/leagues/low-budget-leagues/financial' element={<LowBudgetFinancialLeague />} />
+          <Route path='/games/LoL/leagues/low-budget-leagues/commercial' element={<LowBudgetCommercialLeague />} />
+          <Route path='/games/LoL/leagues/low-budget-leagues/economy' element={<LowBudgetEconomyLeague />} />
+          <Route path='/games/LoL/leagues/meta-shift-leagues' element={<MetaShiftLeagues />} />
+          <Route path='/games/LoL/leagues/meta-shift-leagues/radon' element={<MetaShiftRadonLeague />} />
+          <Route path='/games/LoL/leagues/meta-shifts-leagues/xenon' element={<MetaShiftXenonLeague />} />
+          <Route path='/games/LoL/leagues/meta-shift-leagues/krypton' element={<MetaShiftKryptonLeague />} />
+          <Route path='/games/LoL/leagues/meta-shift-leagues/argon' element={<MetaShiftArgonLeague />} />
+          <Route path='/games/LoL/leagues/meta-shift-leagues/nitrogen' element={<MetaShiftNitrogenLeague />} />
+          <Route path='/games/LoL/leagues/meta-shift-leagues/neon' element={<MetaShiftNeonLeague />} />
+          <Route path='/games/LoL/leagues/sdc' element={<SDCLeague />} />
+          <Route path='/games/LoL/leagues/cobalt-winds-leagues' element={<CWLLeagues />} />
+          <Route path='/games/LoL/leagues/cobalt-winds-leagues/cwl-ascend' element={<CWLAscendLeague />} />
+          <Route path='/games/LoL/leagues/cobalt-winds-leagues/cwl-defy' element={<CWLDefyLeague />} />
+          <Route path='/games/LoL/leagues/cobalt-winds-leagues/cwl-rise' element={<CWLRiseLeague />} />
+          <Route path='/games/LoL/leagues/corporate-league' element={<CorporateLoLLeague />} />
+          <Route path='/games/LoL/leagues/clol' element={<CLOLLeague />} />
+          <Route path='/games/LoL/leagues/playfly' element={<PlayflyLoLLeague />} />
+          <Route path='/games/LoL/leagues/necc' element={<NECCLoLLeague />} />
+          <Route path='/games/LoL/leagues/ecac' element={<ECACLoLLeague />} />
+          <Route path='/games/LoL/leagues/nse' element={<NationalStudentLoLLeague />} />
+          <Route path='/games/LoL/leagues/vantagg' element={<VantaGGLoLLeague />} />
+          <Route path='/games/LoL/leagues/playvs' element={<PlayVSLoLLeague />} />
+          {/* Wagers */}
+          <Route path='/games/LoL/wagers' element={<LolWagers />} />
+          <Route path='/games/LoL/wagers/dropingaming' element={<DropInLoLWagers />} />
+          <Route path='/games/LoL/wagers/dubbz' element={<DubbzLoLWagers />} />
+          <Route path='/games/LoL/wagers/ewagers' element={<LoLEWagers />} />
+
+          {/* RL Pages Minus LANs */}
+          <Route path='/games/RocketLeague' element={<RL />} />
+          {/* H2H */}
+          <Route path='/games/RocketLeague/head-to-head' element={<RLHeadToHead />} />
+          <Route path='/games/RocketLeague/head-to-head/gankster' element={<GanksterRLH2H />} />
+          <Route path='/games/RocketLeague/head-to-head/pracc' element={<PraccRLH2H />} />
+          {/* Leagues */}
+          <Route path='/games/RocketLeague/leagues' element={<RLLeagues />} />
+          <Route path='/games/RocketLeague/leagues/rlpc-leagues' element={<RLPCLeagues />} />
+          <Route path='/games/RocketLeague/leagues/rlpc-leagues/major' element={<RLPCMajorLeague />} />
+          <Route path='/games/RocketLeague/leagues/rlpc-leagues/aaa' element={<RLPCTripleALeague />} />
+          <Route path='/games/RocketLeague/leagues/rlpc-leagues/aa' element={<RLPCDoubleALeague />} />
+          <Route path='/games/RocketLeague/leagues/rlpc-leagues/a' element={<RLPCSingleALeague />} />
+          <Route path='/games/RocketLeague/leagues/rsc-leagues' element={<RocketSoccarConfederationLeagues />} />
+          <Route path='/games/RocketLeague/leagues/rsc-leagues/3v3-na' element={<RSC3v3NALeague />} />
+          <Route path='/games/RocketLeague/leagues/rsc-leagues/3v3-eu' element={<RSC3v3EULeague />} />
+          <Route path='/games/RocketLeague/leagues/rsc-leagues/2v2' element={<RSC2v2League />} />
+          <Route path='/games/RocketLeague/leagues/frontline-leagues' element={<TeamFrontlineRLLeagues />} />
+          <Route path='/games/RocketLeague/leagues/frontline-leagues/champ' element={<TeamFrontlineChampLeague />} />
+          <Route path='/games/RocketLeague/leagues/frontline-leagues/vanguard' element={<TeamFrontlineVanguardLeague />} />
+          <Route path='/games/RocketLeague/leagues/frontline-leagues/challenger' element={<TeamFrontlineChallengerLeague />} />
+          <Route path='/games/RocketLeague/leagues/frontline-leagues/prospect' element={<TeamFrontlineProspectLeague />} />
+          <Route path='/games/RocketLeague/leagues/url-leagues' element={<UltimateRocketLeagueLeagues />} />
+          <Route path='/games/RocketLeague/leagues/2s' element={<UltimateRL2v2League />} />
+          <Route path='/games/RocketLeague/leagues/3s' element={<UltimateRL3v3League />} />
+          <Route path='/games/RocketLeague/leagues/mle-leagues' element={<MinorLeagueEsportsLeagues />} />
+          <Route path='/games/RocketLeague/leagues/mle-leagues/premier' element={<MinorLeaguePremierLeague />} />
+          <Route path='/games/RocketLeague/leagues/mle-leagues/master' element={<MinorLeagueMasterLeague />} />
+          <Route path='/games/RocketLeague/leagues/mle-leagues/champ' element={<MinorLeagueChampionLeague />} />
+          <Route path='/games/RocketLeague/leagues/mle-leagues/academy' element={<MinorLeagueAcademyLeague />} />
+          <Route path='/games/RocketLeague/leagues/mle-leagues/foundation' element={<MinorLeagueFoundationLeague />} />
+          <Route path='/games/RoketLeague/leagues/united-rogue' element={<UnitedRogueRLLeague />} />
+          <Route path='/games/RocketLeague/leagues/italian-leagues' element={<ItalianRocketChampLeagues />} />
+          <Route path='/games/RocketLeague/leagues/italian-leagues/serie-a' element={<ItalianSerieALeague />} />
+          <Route path='/games/RocketLeague/leagues/italian-leagues/serie-b' element={<ItalianSerieBLeague />} />
+          <Route path='/games/RocketLeague/leagues/nemesis-leagues' element={<NemesisLeagues />} />
+          <Route path='/games/RocketLeague/leagues/nemesis-leagues/titan' element={<NemesisTitanLeague />} />
+          <Route path='/games/RocketLeague/leagues/nemesis-leagues/rival' element={<NemesisRivalLeague />} />
+          <Route path='/games/RocketLeague/leagues/nemesis-leagues/challanger' element={<NemesisChallengerLeague />} />
+          <Route path='/games/RocketLeague/leagues/nemesis-leagues/prospect' element={<NemesisProspectLeague />} />
+          <Route path='/games/RocketLeague/leagues/nemesis-leagues/novice' element={<NemesisNoviceLeague />} />
+          <Route path='/games/RocketLeague/leagues/raket-ligaen' element={<RaketLigaenLeague />} />
+          <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues' element={<FrontierDoublesLeagues />} />
+          <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues/elite' element={<FrontierEliteLeague />} />
+          <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues/star' element={<FrontierStarLeague />} />
+          <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues/expert' element={<FrontierExpertLeague />} />
+          <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues/origin' element={<FrontierOriginLeague />} />
+          <Route path='/games/RocketLeague/leagues/oce-leagues' element={<OCEDraftLeagues />} />
+          <Route path='/games/RocketLeague/leagues/oce-leagues/divisions' element={<OCEDivisions />} />
+          <Route path='/games/RocketLeague/leagues/finality' element={<FinalityLeague />} />
+          <Route path='/games/RocketLeague/leagues/corporate' element={<CorporateRLLeague />} />
+          <Route path='/games/RocketLeague/leagues/airforce' element={<AirforceRLLeague />} />
+          <Route path='/games/RocketLeague/leagues/cca' element={<CollegeCarballAssociationLeague />} />
+          <Route path='/games/RocketLeague/leagues/playfly' element={<PlayflyRLLeague />} />
+          <Route path='/games/RocketLeague/leagues/ecac' element={<ECACRLLeague />} />
+          <Route path='/games/RocketLeague/leagues/necc' element={<NECCRLLeague />} />
+          <Route path='/games/RocketLeague/leagues/csmg' elemente={<CSMGRLLeague />} />
+          <Route path='/games/RocketLeague/leagues/njcaae' element={<NJCAAERLLeague />} />
+          <Route path='/games/RocketLeague/leagues/egfc' element={<EGFCRLLeague />} />
+          <Route path='/games/RocketLeague/leagues/ugc' element={<UGCRLBattleAcademy />} />
+          <Route path='/games/RocketLeague/leagues/ael' element={<AustralianRLEsportsLeague />} />
+          <Route path='/games/RocketLeague/leagues/faceit' element={<FaceitRLLeague />} />
+          <Route path='/games/RocketLeague/leagues/nse' element={<NationalStudentRLLeague />} />
+          <Route path='/games/RocketLeague/leagues/hsel' element={<HighSchoolRLLeague />} />
+          <Route path='/games/RocketLeague/leagues/playvs' element={<PlayVSRLLeague />} />
+          <Route path='/games/RocketLeague/leagues/tec' element={<TheEsportsCompanyLeague />} />
+          <Route path='/games/RocketLeague/leagues/vantagg' element={<VantaGGRLLeague />} />
+          <Route path='/games/RocketLeague/leagues/nasef' element={<NASEFRLLeague />} />
+          <Route path='/games/RocketLeague/leagues/egfh' element={<EGFHRLLeague />} />
+          <Route path='/games/RocketLeague/leagues/aelhs' element={<AustralianEsportsHSLeague />} />
+          <Route path='/games/RocketLeague/leagues/ugc-hs' element={<UGCHSBattleAcademyLeague />} />
+          {/* Wagers */}
+          <Route path='/games/RocketLeague/wagers' element={<RLWagers />} />
+          <Route path='/games/RocketLeague/wagers/cmg' element={<CmgRLWagers />} />
+          <Route path='/games/RocketLeague/wagers/dropingaming' element={<DropInRLWagers />} />
+          <Route path='/games/RocketLeague/wagers/gamersaloon' element={<GamerSaloonRLWagers />} />
+          <Route path='/games/RocketLeague/wagers/dubbz' element={<DubbzRLWagers />} />
+          <Route path='/games/RocketLeague/wagers/ewagers' element={<RLEWagers />} />
+
+          {/* Valorant Pages Minus LANs */}
+          <Route path='/games/Valorant' element={<Valorant />} />
+          {/* H2H */}
+          <Route path='/games/Valorant/head-to-head' element={<ValorantHeadToHead />} />
+          <Route path='/games/Valorant/head-to-head/gankster' element={<GanksterValH2H />} />
+          <Route path='/games/Valorant/head-to-head/esport-scrim' element={<EsportsScrimH2H />} />
+          <Route path='/games/Valorant/head-to-head/dropingaming' element={<DropInGamingH2H />} />
+          <Route path='/games/Valorant/head-to-head/college-hub' element={<CollegiateValorantHubScrimsH2H />} />
+          <Route path='/games/Valorant/head-to-head/pracc' element={<PraccValH2H />} />
+          {/* Leagues */}
+          <Route path='/games/Valorant/leagues' element={<ValorantLeagues />} />
+          <Route path='/games/Valorant/leagues/lpl-leagues' element={<LPLLeagues />} />
+          <Route path='/games/Valorant/leagues/lpl-leagues/gold' element={<LPLGoldDivisionLeague />} />
+          <Route path='/games/Valorant/leagues/lpl-leagues/silver' element={<LPLSilverDivisionLeague />} />
+          <Route path='/games/Valorant/leagues/lpl-leagues/bronze' element={<LPLBronzeDivisionLeague />} />
+          <Route path='/games/Valorant/leagues/lpl-leagues/open' element={<LPLOpenDivisionLeague />} />
+          <Route path='/games/Valorant/leagues/frontline-leagues' element={<TeamFrontlineValLeagues />} />
+          <Route path='/games/Valorant/leagues/frontline-leagues/prime' element={<TeamFrontlinePrimeLeague />} />
+          <Route path='/games/Valorant/leagues/frontline-leagues/academy' element={<TeamFrontlineAcademyLeague />} />
+          <Route path='/games/Valorant/leagues/corporate' element={<CorporateValorantLeague />} />
+          <Route path='/games/Valorant/leagues/unified' element={<UnifiedPremierLeague />} />
+          <Route path='/games/Valorant/leagues/riot' element={<CollegeValorantLeague />} />
+          <Route path='/games/Valorant/leagues/ecac-leagues' element={<ECACValLeagues />} />
+          <Route path='/games/Valorant/leagues/ecac-leagues/division-a' element={<ECACDivisionALeague />} />
+          <Route path='/games/Valorant/leagues/ecac-leagues/division-b' element={<ECACDivisionBLeague />} />
+          <Route path='/games/Valorant/leagues/ecac-leagues/division-c' element={<ECACDivisionCLeague />} />
+          <Route path='/games/Valorant/leagues/njcaae' element={<NJCAAEVALLeague />} />
+          <Route path='/games/Valorant/leagues/necc' element={<NECCValLeague />} />
+          <Route path='/games/Valorant/leagues/egfc' element={<EGFCVALLeague />} />
+          <Route path='/games/Valorant/leagues/playfly-leagues' element={<PlayflyCollegeLeagues />} />
+          <Route path='/games/Valorant/leagues/playfly-leagues/varsity' element={<PlayflyVarsityLeague />} />
+          <Route path='/games/Valorant/leagues/playfly-leagues/open' element={<PlayflyOpenLeague />} />
+          <Route path='/games/Valorant/leagues/csmg' element={<CSMGValLeague />} />
+          <Route path='/games/Valorant/leagues/faceit' element={<FaceitValLeague />} />
+          <Route path='/games/Valorant/leagues/nse' element={<NationalStudentValLeague />} />
+          <Route path='/games/Valorant/leagues/ugc-college' element={<UGCValBattleAcademy />} />
+          <Route path='/games/Valorant/leagues/hsel' element={<HighSchoolValLeague />} />
+          <Route path='/games/Valorant/leagues/tec' element={<EsportsCompanyLeague />} />
+          <Route path='/games/Valorant/leagues/vantagg' element={<VantaGGValLeague />} />
+          <Route path='/games/Valorant/leagues/nasef' element={<NASEFValLeague />} />
+          <Route path='/games/Valorant/leagues/egfh' element={<EGFHVALLeague />} />
+          {/* Wagers */}
+          <Route path='/games/Valorant/wagers' element={<ValorantWagers />} />
+          <Route path='/games/Valorant/wagers/dropingaming' element={<DropInValWagers />} />
+          <Route path='/games/Valorant/wagers/ewagers' element={<ValEwagers />} />
+
+          {/* Warzone Pages Mins LANs */}
+          <Route path='/games/warzone' element={<Wz />} />
+          <Route path='/games/warzone/lans' element={<WzLans />} />
+          {/* H2H */}
+          <Route path='/games/warzone/head-to-head' element={<WzHeadToHead />} />
+          <Route path='/games/warzone/cmg' element={<CmgWzH2H />} />
+          {/* Leagues */}
+          <Route path='/games/warzone/leagues' element={<WzLeagues />} />
+          <Route path='/games/warzone/leagues/airforce' element={<AirForceWzLeague />} />
+          <Route path='/games/warzone/leagues/ghml' element={<GMHLGamingLeague />} />
+          <Route path='/games/warzone/leagues/njcaae' element={<NJCAAEWzLeague />} />
+          {/* Wagers */}
+          <Route path='/games/warzone/wagers' element={<WzWagers />} />
+          <Route path='/games/warzone/wagers/cmg' element={<CmgWzWagers />} />
+          <Route path='/games/warzone/wagers/oneup' element={<OneUpWzWagers />} />
+          <Route path='/games/warzone/wagers/1v1me' element={<OneVOneWzWagers />} />
+          <Route path='/games/warzone/wagers/gamersaloon' element={<GamerSaloonWzWagers />} />
+          <Route path='/games/warzone/wagers/dropingaming' element={<DropInWzWagers />} />
+          <Route path='/games/warzone/wagers/dubbz' element={<DubbzWzWagers />} />
+          <Route path='/games/warzone/wagers/ewagers' element={<WzEwagers />} />
+
+          {/* LANs Ordered By Game: CoD, Warzone, Halo, LoL, Conventions */}
+          <Route path='/lans/charleston-crown-series' element={<CharlestonCrownSeries />} />
+          <Route path='/lans/shintogc-major-iii-2026' element={<ShintoGCMajor3 />} />
+          <Route path='/lans/g-site-bo7' element={<GSiteBO7 />} />
+          <Route path='/lans/heartland-2026' element={<Heartland2026 />} />
+          <Route path='/lans/midwest-battleground-2026' element={<MidwestBattleground2026 />} />
+          <Route path='/lans/kamicon-17' element={<KamiCon17 />} />
+          <Route path='/other-lans' element={<Conventions />} />
+          <Route path='/lans/dreamhack-birmingham' element={<DreamHackBirmingham />} />
+          <Route path='/lans/emerald-city-2026' element={<EmeraldCityLAN2026 />} />
+          <Route path='/lans/operation-cupid' element={<GACSOperationCupid />} />
+          <Route path='/lans/forlan-spring-2026' element={<FortLANSpring2026 />} />
+          <Route path='/lans/lan-all-night-spring-26' element={<LANAllNightSpring2026 />} />
+          <Route path='/lans/belowzerolan-winter-26' element={<BelowZeroLANWinter2026 />} />
+          <Route path='/lans/low-ping-lan-2026' element={<LowPingLAN />} />
+
+        </Routes>
+      </main>
       
-      {/* LoL Pages Minus LANs */}
-      <Route path='/games/LoL' element={<Lol />} />
-      <Route path='/games/LoL/lans' element={<LolLans />} />
-      {/* H2H */}
-      <Route path='/games/LoL/head-to-head' element={<LolHeadToHead />} />
-      <Route path='/games/LoL/head-to-head/gankster' element={<GanksterLoLH2H />} />
-      <Route path='/games/LoL/head-to-head/esport-scrim' element={<LoLEsportsScrim />} />
-      <Route path='/games/LoL/head-to-head/pracc' element={<PraccLoLH2H />} />
-      {/* Leagues */}
-      <Route path='/games/LoL/leagues' element={<LolLeagues />} />
-      <Route path='/games/LoL/leagues/titan-leagues' element={<TitanEsportsLeagues />} />
-      <Route path='/games/LoL/leagues/titan-leagues/immortal' element={<TitanImmortalLeague />} />
-      <Route path='/games/LoL/leagues/titan-leagues/vanquisher' element={<TitanVanquisherLeague />} />
-      <Route path='/games/LoL/leagues/titan-leagues/eternal' element={<TitanEternalLeague />} />
-      <Route path='/games/LoL/leagues/titan-leagues/conqueror' element={<TitanConquerorLeague />} />
-      <Route path='/games/LoL/leagues/titan-leagues/olympus' element={<TitanOlympusLeague />} />
-      <Route path='/games/LoL/leagues/titan-leagues/divinity' element={<TitanDivinityLeague />} />
-      <Route path='/games/LoL/leagues/titan-leagues/berserker' element={<TitanBerserkerLeague />} />
-      <Route path='/games/LoL/leagues/titan-leagues/gladiator' element={<TitanGladiatorLeague />} />
-      <Route path='/games/LoL/leagues/risen-leagues' element={<RisenLeagues />} />
-      <Route path='/games/LoL/leagues/risen-leagues/champions' element={<RisenChampionsLeague />} />
-      <Route path='/games/LoL/leagues/risen-leagues/dominate' element={<RisenDominateLeague />} />
-      <Route path='/games/LoL/leagues/risen-leagues/unstoppable' element={<RisenUnstoppableLeague />} />
-      <Route path='/games/LoL/leagues/risen-leagues/rampage' element={<RisenRampageLeague />} />
-      <Route path='/games/LoL/leagues/risen-leagues/draft' element={<RisenDraftLeague />} />
-      <Route path='/games/LoL/leagues/aegis-leagues' element={<AegisLeagues />} />
-      <Route path='/games/LoL/leagues/aegis-leagues/champ' element={<AegisChampionsLeague />} />
-      <Route path='/games/LoL/leagues/aegis-leagues/marauder' element={<AegisMarauderLeague />} />
-      <Route path='/games/LoL/leagues/aegis-leagues/defenders' element={<AegisDefendersLeague />} />
-      <Route path='/games/LoL/leagues/aegis-leagues/executioners' element={<AegisExecutionersLeague />} />
-      <Route path='/games/LoL/leagues/aegis-leagues/protectors' element={<AegisProtectorsLeague />} />
-      <Route path='/games/LoL/leagues/blue-otter-leagues' element={<BlueOtterLeagues />} />
-      <Route path='/games/LoL/leagues/blue-otter-leagues/masters' element={<BlueOtterMastersLeague />} />
-      <Route path='/games/LoL/leagues/blue-otter-leagues/diamond' element={<BlueOtterDiamondLeague />} />
-      <Route path='/games/LoL/leagues/blue-otter-league/emerald' element={<BlueOtterEmeraldLeague />} />
-      <Route path='/games/LoL/leagues/blue-otter-leagues/plat' element={<BlueOtterPlatinumLeague />} />
-      <Route path='/games/LoL/leagues/blue-otter-leagues/gold' element={<BlueOtterGoldLeague />} />
-      <Route path='/games/LoL/leagues/blue-otter-leagues/draft' element={<BlueOtterDraftLeague />} />
-      <Route path='/games/LoL/leagues/black-twitch-league' element={<BlackTwitchLeague />} />
-      <Route path='/games/LoL/leagues/low-budget-leagues' element={<LowBudgetLCSLeagues />} />
-      <Route path='/games/LoL/leagues/low-budget-leagues/executive' element={<LowBudgetExecutiveLeague />} />
-      <Route path='/games/LoL/leagues/low-budget-leagues/financial' element={<LowBudgetFinancialLeague />} />
-      <Route path='/games/LoL/leagues/low-budget-leagues/commercial' element={<LowBudgetCommercialLeague />} />
-      <Route path='/games/LoL/leagues/low-budget-leagues/economy' element={<LowBudgetEconomyLeague />} />
-      <Route path='/games/LoL/leagues/meta-shift-leagues' element={<MetaShiftLeagues />} />
-      <Route path='/games/LoL/leagues/meta-shift-leagues/radon' element={<MetaShiftRadonLeague />} />
-      <Route path='/games/LoL/leagues/meta-shifts-leagues/xenon' element={<MetaShiftXenonLeague />} />
-      <Route path='/games/LoL/leagues/meta-shift-leagues/krypton' element={<MetaShiftKryptonLeague />} />
-      <Route path='/games/LoL/leagues/meta-shift-leagues/argon' element={<MetaShiftArgonLeague />} />
-      <Route path='/games/LoL/leagues/meta-shift-leagues/nitrogen' element={<MetaShiftNitrogenLeague />} />
-      <Route path='/games/LoL/leagues/meta-shift-leagues/neon' element={<MetaShiftNeonLeague />} />
-      <Route path='/games/LoL/leagues/sdc' element={<SDCLeague />} />
-      <Route path='/games/LoL/leagues/cobalt-winds-leagues' element={<CWLLeagues />} />
-      <Route path='/games/LoL/leagues/cobalt-winds-leagues/cwl-ascend' element={<CWLAscendLeague />} />
-      <Route path='/games/LoL/leagues/cobalt-winds-leagues/cwl-defy' element={<CWLDefyLeague />} />
-      <Route path='/games/LoL/leagues/cobalt-winds-leagues/cwl-rise' element={<CWLRiseLeague />} />
-      <Route path='/games/LoL/leagues/corporate-league' element={<CorporateLoLLeague />} />
-      <Route path='/games/LoL/leagues/clol' element={<CLOLLeague />} />
-      <Route path='/games/LoL/leagues/playfly' element={<PlayflyLoLLeague />} />
-      <Route path='/games/LoL/leagues/necc' element={<NECCLoLLeague />} />
-      <Route path='/games/LoL/leagues/ecac' element={<ECACLoLLeague />} />
-      <Route path='/games/LoL/leagues/nse' element={<NationalStudentLoLLeague />} />
-      <Route path='/games/LoL/leagues/vantagg' element={<VantaGGLoLLeague />} />
-      <Route path='/games/LoL/leagues/playvs' element={<PlayVSLoLLeague />} />
-      {/* Wagers */}
-      <Route path='/games/LoL/wagers' element={<LolWagers />} />
-      <Route path='/games/LoL/wagers/dropingaming' element={<DropInLoLWagers />} />
-      <Route path='/games/LoL/wagers/dubbz' element={<DubbzLoLWagers />} />
-      <Route path='/games/LoL/wagers/ewagers' element={<LoLEWagers />} />
-
-      {/* RL Pages Minus LANs */}
-      <Route path='/games/RocketLeague' element={<RL />} />
-      {/* H2H */}
-      <Route path='/games/RocketLeague/head-to-head' element={<RLHeadToHead />} />
-      <Route path='/games/RocketLeague/head-to-head/gankster' element={<GanksterRLH2H />} />
-      <Route path='/games/RocketLeague/head-to-head/pracc' element={<PraccRLH2H />} />
-      {/* Leagues */}
-      <Route path='/games/RocketLeague/leagues' element={<RLLeagues />} />
-      <Route path='/games/RocketLeague/leagues/rlpc-leagues' element={<RLPCLeagues />} />
-      <Route path='/games/RocketLeague/leagues/rlpc-leagues/major' element={<RLPCMajorLeague />} />
-      <Route path='/games/RocketLeague/leagues/rlpc-leagues/aaa' element={<RLPCTripleALeague />} />
-      <Route path='/games/RocketLeague/leagues/rlpc-leagues/aa' element={<RLPCDoubleALeague />} />
-      <Route path='/games/RocketLeague/leagues/rlpc-leagues/a' element={<RLPCSingleALeague />} />
-      <Route path='/games/RocketLeague/leagues/rsc-leagues' element={<RocketSoccarConfederationLeagues />} />
-      <Route path='/games/RocketLeague/leagues/rsc-leagues/3v3-na' element={<RSC3v3NALeague />} />
-      <Route path='/games/RocketLeague/leagues/rsc-leagues/3v3-eu' element={<RSC3v3EULeague />} />
-      <Route path='/games/RocketLeague/leagues/rsc-leagues/2v2' element={<RSC2v2League />} />
-      <Route path='/games/RocketLeague/leagues/frontline-leagues' element={<TeamFrontlineRLLeagues />} />
-      <Route path='/games/RocketLeague/leagues/frontline-leagues/champ' element={<TeamFrontlineChampLeague />} />
-      <Route path='/games/RocketLeague/leagues/frontline-leagues/vanguard' element={<TeamFrontlineVanguardLeague />} />
-      <Route path='/games/RocketLeague/leagues/frontline-leagues/challenger' element={<TeamFrontlineChallengerLeague />} />
-      <Route path='/games/RocketLeague/leagues/frontline-leagues/prospect' element={<TeamFrontlineProspectLeague />} />
-      <Route path='/games/RocketLeague/leagues/url-leagues' element={<UltimateRocketLeagueLeagues />} />
-      <Route path='/games/RocketLeague/leagues/2s' element={<UltimateRL2v2League />} />
-      <Route path='/games/RocketLeague/leagues/3s' element={<UltimateRL3v3League />} />
-      <Route path='/games/RocketLeague/leagues/mle-leagues' element={<MinorLeagueEsportsLeagues />} />
-      <Route path='/games/RocketLeague/leagues/mle-leagues/premier' element={<MinorLeaguePremierLeague />} />
-      <Route path='/games/RocketLeague/leagues/mle-leagues/master' element={<MinorLeagueMasterLeague />} />
-      <Route path='/games/RocketLeague/leagues/mle-leagues/champ' element={<MinorLeagueChampionLeague />} />
-      <Route path='/games/RocketLeague/leagues/mle-leagues/academy' element={<MinorLeagueAcademyLeague />} />
-      <Route path='/games/RocketLeague/leagues/mle-leagues/foundation' element={<MinorLeagueFoundationLeague />} />
-      <Route path='/games/RoketLeague/leagues/united-rogue' element={<UnitedRogueRLLeague />} />
-      <Route path='/games/RocketLeague/leagues/italian-leagues' element={<ItalianRocketChampLeagues />} />
-      <Route path='/games/RocketLeague/leagues/italian-leagues/serie-a' element={<ItalianSerieALeague />} />
-      <Route path='/games/RocketLeague/leagues/italian-leagues/serie-b' element={<ItalianSerieBLeague />} />
-      <Route path='/games/RocketLeague/leagues/nemesis-leagues' element={<NemesisLeagues />} />
-      <Route path='/games/RocketLeague/leagues/nemesis-leagues/titan' element={<NemesisTitanLeague />} />
-      <Route path='/games/RocketLeague/leagues/nemesis-leagues/rival' element={<NemesisRivalLeague />} />
-      <Route path='/games/RocketLeague/leagues/nemesis-leagues/challanger' element={<NemesisChallengerLeague />} />
-      <Route path='/games/RocketLeague/leagues/nemesis-leagues/prospect' element={<NemesisProspectLeague />} />
-      <Route path='/games/RocketLeague/leagues/nemesis-leagues/novice' element={<NemesisNoviceLeague />} />
-      <Route path='/games/RocketLeague/leagues/raket-ligaen' element={<RaketLigaenLeague />} />
-      <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues' element={<FrontierDoublesLeagues />} />
-      <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues/elite' element={<FrontierEliteLeague />} />
-      <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues/star' element={<FrontierStarLeague />} />
-      <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues/expert' element={<FrontierExpertLeague />} />
-      <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues/origin' element={<FrontierOriginLeague />} />
-      <Route path='/games/RocketLeague/leagues/oce-leagues' element={<OCEDraftLeagues />} />
-      <Route path='/games/RocketLeague/leagues/oce-leagues/divisions' element={<OCEDivisions />} />
-      <Route path='/games/RocketLeague/leagues/finality' element={<FinalityLeague />} />
-      <Route path='/games/RocketLeague/leagues/corporate' element={<CorporateRLLeague />} />
-      <Route path='/games/RocketLeague/leagues/airforce' element={<AirforceRLLeague />} />
-      <Route path='/games/RocketLeague/leagues/cca' element={<CollegeCarballAssociationLeague />} />
-      <Route path='/games/RocketLeague/leagues/playfly' element={<PlayflyRLLeague />} />
-      <Route path='/games/RocketLeague/leagues/ecac' element={<ECACRLLeague />} />
-      <Route path='/games/RocketLeague/leagues/necc' element={<NECCRLLeague />} />
-      <Route path='/games/RocketLeague/leagues/csmg' elemente={<CSMGRLLeague />} />
-      <Route path='/games/RocketLeague/leagues/njcaae' element={<NJCAAERLLeague />} />
-      <Route path='/games/RocketLeague/leagues/egfc' element={<EGFCRLLeague />} />
-      <Route path='/games/RocketLeague/leagues/ugc' element={<UGCRLBattleAcademy />} />
-      <Route path='/games/RocketLeague/leagues/ael' element={<AustralianRLEsportsLeague />} />
-      <Route path='/games/RocketLeague/leagues/faceit' element={<FaceitRLLeague />} />
-      <Route path='/games/RocketLeague/leagues/nse' element={<NationalStudentRLLeague />} />
-      <Route path='/games/RocketLeague/leagues/hsel' element={<HighSchoolRLLeague />} />
-      <Route path='/games/RocketLeague/leagues/playvs' element={<PlayVSRLLeague />} />
-      <Route path='/games/RocketLeague/leagues/tec' element={<TheEsportsCompanyLeague />} />
-      <Route path='/games/RocketLeague/leagues/vantagg' element={<VantaGGRLLeague />} />
-      <Route path='/games/RocketLeague/leagues/nasef' element={<NASEFRLLeague />} />
-      <Route path='/games/RocketLeague/leagues/egfh' element={<EGFHRLLeague />} />
-      <Route path='/games/RocketLeague/leagues/aelhs' element={<AustralianEsportsHSLeague />} />
-      <Route path='/games/RocketLeague/leagues/ugc-hs' element={<UGCHSBattleAcademyLeague />} />
-      {/* Wagers */}
-      <Route path='/games/RocketLeague/wagers' element={<RLWagers />} />
-      <Route path='/games/RocketLeague/wagers/cmg' element={<CmgRLWagers />} />
-      <Route path='/games/RocketLeague/wagers/dropingaming' element={<DropInRLWagers />} />
-      <Route path='/games/RocketLeague/wagers/gamersaloon' element={<GamerSaloonRLWagers />} />
-      <Route path='/games/RocketLeague/wagers/dubbz' element={<DubbzRLWagers />} />
-      <Route path='/games/RocketLeague/wagers/ewagers' element={<RLEWagers />} />
-
-      {/* Valorant Pages Minus LANs */}
-      <Route path='/games/Valorant' element={<Valorant />} />
-      {/* H2H */}
-      <Route path='/games/Valorant/head-to-head' element={<ValorantHeadToHead />} />
-      <Route path='/games/Valorant/head-to-head/gankster' element={<GanksterValH2H />} />
-      <Route path='/games/Valorant/head-to-head/esport-scrim' element={<EsportsScrimH2H />} />
-      <Route path='/games/Valorant/head-to-head/dropingaming' element={<DropInGamingH2H />} />
-      <Route path='/games/Valorant/head-to-head/college-hub' element={<CollegiateValorantHubScrimsH2H />} />
-      <Route path='/games/Valorant/head-to-head/pracc' element={<PraccValH2H />} />
-      {/* Leagues */}
-      <Route path='/games/Valorant/leagues' element={<ValorantLeagues />} />
-      <Route path='/games/Valorant/leagues/lpl-leagues' element={<LPLLeagues />} />
-      <Route path='/games/Valorant/leagues/lpl-leagues/gold' element={<LPLGoldDivisionLeague />} />
-      <Route path='/games/Valorant/leagues/lpl-leagues/silver' element={<LPLSilverDivisionLeague />} />
-      <Route path='/games/Valorant/leagues/lpl-leagues/bronze' element={<LPLBronzeDivisionLeague />} />
-      <Route path='/games/Valorant/leagues/lpl-leagues/open' element={<LPLOpenDivisionLeague />} />
-      <Route path='/games/Valorant/leagues/frontline-leagues' element={<TeamFrontlineValLeagues />} />
-      <Route path='/games/Valorant/leagues/frontline-leagues/prime' element={<TeamFrontlinePrimeLeague />} />
-      <Route path='/games/Valorant/leagues/frontline-leagues/academy' element={<TeamFrontlineAcademyLeague />} />
-      <Route path='/games/Valorant/leagues/corporate' element={<CorporateValorantLeague />} />
-      <Route path='/games/Valorant/leagues/unified' element={<UnifiedPremierLeague />} />
-      <Route path='/games/Valorant/leagues/riot' element={<CollegeValorantLeague />} />
-      <Route path='/games/Valorant/leagues/ecac-leagues' element={<ECACValLeagues />} />
-      <Route path='/games/Valorant/leagues/ecac-leagues/division-a' element={<ECACDivisionALeague />} />
-      <Route path='/games/Valorant/leagues/ecac-leagues/division-b' element={<ECACDivisionBLeague />} />
-      <Route path='/games/Valorant/leagues/ecac-leagues/division-c' element={<ECACDivisionCLeague />} />
-      <Route path='/games/Valorant/leagues/njcaae' element={<NJCAAEVALLeague />} />
-      <Route path='/games/Valorant/leagues/necc' element={<NECCValLeague />} />
-      <Route path='/games/Valorant/leagues/egfc' element={<EGFCVALLeague />} />
-      <Route path='/games/Valorant/leagues/playfly-leagues' element={<PlayflyCollegeLeagues />} />
-      <Route path='/games/Valorant/leagues/playfly-leagues/varsity' element={<PlayflyVarsityLeague />} />
-      <Route path='/games/Valorant/leagues/playfly-leagues/open' element={<PlayflyOpenLeague />} />
-      <Route path='/games/Valorant/leagues/csmg' element={<CSMGValLeague />} />
-      <Route path='/games/Valorant/leagues/faceit' element={<FaceitValLeague />} />
-      <Route path='/games/Valorant/leagues/nse' element={<NationalStudentValLeague />} />
-      <Route path='/games/Valorant/leagues/ugc-college' element={<UGCValBattleAcademy />} />
-      <Route path='/games/Valorant/leagues/hsel' element={<HighSchoolValLeague />} />
-      <Route path='/games/Valorant/leagues/tec' element={<EsportsCompanyLeague />} />
-      <Route path='/games/Valorant/leagues/vantagg' element={<VantaGGValLeague />} />
-      <Route path='/games/Valorant/leagues/nasef' element={<NASEFValLeague />} />
-      <Route path='/games/Valorant/leagues/egfh' element={<EGFHVALLeague />} />
-      {/* Wagers */}
-      <Route path='/games/Valorant/wagers' element={<ValorantWagers />} />
-      <Route path='/games/Valorant/wagers/dropingaming' element={<DropInValWagers />} />
-      <Route path='/games/Valorant/wagers/ewagers' element={<ValEwagers />} />
-
-      {/* Warzone Pages Mins LANs */}
-      <Route path='/games/warzone' element={<Wz />} />
-      <Route path='/games/warzone/lans' element={<WzLans />} />
-      {/* H2H */}
-      <Route path='/games/warzone/head-to-head' element={<WzHeadToHead />} />
-      <Route path='/games/warzone/cmg' element={<CmgWzH2H />} />
-      {/* Leagues */}
-      <Route path='/games/warzone/leagues' element={<WzLeagues />} />
-      <Route path='/games/warzone/leagues/airforce' element={<AirForceWzLeague />} />
-      <Route path='/games/warzone/leagues/ghml' element={<GMHLGamingLeague />} />
-      <Route path='/games/warzone/leagues/njcaae' element={<NJCAAEWzLeague />} />
-      {/* Wagers */}
-      <Route path='/games/warzone/wagers' element={<WzWagers />} />
-      <Route path='/games/warzone/wagers/cmg' element={<CmgWzWagers />} />
-      <Route path='/games/warzone/wagers/oneup' element={<OneUpWzWagers />} />
-      <Route path='/games/warzone/wagers/1v1me' element={<OneVOneWzWagers />} />
-      <Route path='/games/warzone/wagers/gamersaloon' element={<GamerSaloonWzWagers />} />
-      <Route path='/games/warzone/wagers/dropingaming' element={<DropInWzWagers />} />
-      <Route path='/games/warzone/wagers/dubbz' element={<DubbzWzWagers />} />
-      <Route path='/games/warzone/wagers/ewagers' element={<WzEwagers />} />
-
-      {/* LANs Ordered By Game: CoD, Warzone, Halo, LoL, Conventions */}
-      <Route path='/lans/charleston-crown-series' element={<CharlestonCrownSeries />} />
-      <Route path='/lans/shintogc-major-iii-2026' element={<ShintoGCMajor3 />} />
-      <Route path='/lans/g-site-bo7' element={<GSiteBO7 />} />
-      <Route path='/lans/heartland-2026' element={<Heartland2026 />} />
-      <Route path='/lans/midwest-battleground-2026' element={<MidwestBattleground2026 />} />
-      <Route path='/lans/kamicon-17' element={<KamiCon17 />} />
-      <Route path='/other-lans' element={<Conventions />} />
-      <Route path='/lans/dreamhack-birmingham' element={<DreamHackBirmingham />} />
-      <Route path='/lans/emerald-city-2026' element={<EmeraldCityLAN2026 />} />
-      <Route path='/lans/operation-cupid' element={<GACSOperationCupid />} />
-      <Route path='/lans/forlan-spring-2026' element={<FortLANSpring2026 />} />
-      <Route path='/lans/lan-all-night-spring-26' element={<LANAllNightSpring2026 />} />
-      <Route path='/lans/belowzerolan-winter-26' element={<BelowZeroLANWinter2026 />} />
-      <Route path='/lans/low-ping-lan-2026' element={<LowPingLAN />} />
-
-    </Routes>
+      <Footer />
+    </div>
   </BrowserRouter>
   // </React.StrictMode>
 );

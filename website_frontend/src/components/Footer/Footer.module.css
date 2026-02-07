@@ -1,0 +1,43 @@
+footer {
+    background-color: #434343;
+    text-align: center;
+    padding-top: 1.5rem;
+}
+
+.report {
+    color: #8e6ace;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.paragraph {
+    color: #000;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 1rem;
+    word-spacing: 2px;
+    line-height: 1.5;
+}
+
+.paragraph a {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+footer img {
+    margin: 1%;
+    position: relative;
+    width: 3%;
+}
+
+img {
+    vertical-align: middle;
+}
+
+@media only screen and (max-width: 768px) {
+    footer img {
+        width: 18%;
+        padding: 0.1rem;
+    }
+}
