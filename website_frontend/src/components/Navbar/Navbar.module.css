@@ -1,0 +1,276 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    height: 66px;
+    z-index: 9999999;
+    background: rgb(33, 37, 31);
+    position: relative;
+}
+
+.headerLeft {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
+    width: 12rem;
+    height: auto;
+    margin-left: 1.5rem;
+}
+
+.headerLeft img {
+    width: 100%;
+    margin-top: 7px;
+}
+
+.headerMiddle {
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    max-width: 50%;
+}
+
+.headerRight {
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    margin-right: 1.5rem;
+}
+
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: #79796d;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-left: 1.5rem;
+    z-index: 10000000;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 150%;
+    width: 1.25rem;
+}
+
+/* Main navigation menu - using flexbox for horizontal layout */
+.menu {
+    display: flex;
+    gap: clamp(1rem, 2vw, 2rem);
+    align-items: center;
+    height: 66px; /* Match header height */
+}
+
+/* Individual nav item wrapper (for items with dropdowns) */
+.navItem {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+/* All navigation links (both regular and dropdown triggers) */
+.navLink {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    background: transparent;
+    transition: color 0.3s ease;
+    font-size: 1.25rem;
+    white-space: nowrap;
+    padding: 0;
+}
+
+.navLink:hover,
+.navItem:hover .navLink {
+    color: rgb(142, 106, 206);
+}
+
+/* Active state for parent nav items */
+.activeParent {
+    color: #8e6ace !important;
+}
+
+/* Dropdown container */
+.dropdown {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    opacity: 0;
+    visibility: hidden;
+    min-width: max-content;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    z-index: 1000;
+}
+
+/* Show dropdown on hover */
+.navItem:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5);
+}
+
+/* Dropdown items */
+.dropdownItem {
+    display: block;
+    padding: 1rem;
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+.dropdownItem:hover {
+    color: rgb(142, 106, 206);
+    background-color: rgba(142, 106, 206, 0.1);
+}
+
+.regButton {
+    color: white;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    background: rgb(142, 106, 206);
+    border: none;
+    margin-top: 16px;
+    margin-right: 1rem;
+}
+
+.logButton {
+    color: white;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    background: rgb(85, 84, 87);
+    border: none;
+}
+
+/* Mobile styles - 768px and below */
+@media only screen and (max-width: 768px) {
+    /* Show hamburger menu */
+    .hamburger {
+        display: block;
+    }
+
+    /* Header adjustments */
+    .header {
+        flex-wrap: wrap;
+        height: auto;
+        min-height: 66px;
+        justify-content: left;
+        gap: 0;
+    }
+
+    /* Hide navigation menu by default on mobile */
+    .headerMiddle {
+        display: none;
+        left: 0;
+        width: 100%;
+        max-width: 100%;
+        background: rgb(33, 37, 31);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        text-align: left;
+    }
+
+    /* Show menu when open */
+    .headerMiddle.menuOpen {
+        display: block;
+    }
+
+    /* Change menu to vertical layout */
+    .menu {
+        flex-direction: column;
+        height: auto;
+        align-items: stretch;
+        gap: 0;
+        padding: 1rem 0;
+    }
+
+    /* Nav items take full width */
+    .navItem {
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navLink {
+        width: 100%;
+        height: auto;
+        padding: 1rem 1.5rem;
+        justify-content: flex-start;
+    }
+
+    .dropdownItem {
+        padding: 0.75rem 1.5rem;
+    }
+
+    .dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        box-shadow: none;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        width: 100%;
+    }
+
+    /* Hide register/login buttons by default on mobile */
+    .headerRight {
+        display: none;
+        left: 0;
+        width: 100%;
+        background: rgb(33, 37, 31);
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        margin: 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Show buttons when menu is open */
+    .headerRight.menuOpen {
+        display: flex;
+    }
+
+    .regButton,
+    .logButton {
+        width: 100%;
+        justify-content: center;
+        margin: 0.5rem 0;
+    }
+
+    .disabledDropdown {
+        max-height: 0 !important;
+    }
+    
+    .activeDropdown {
+        max-height: 600px;
+    }
+}

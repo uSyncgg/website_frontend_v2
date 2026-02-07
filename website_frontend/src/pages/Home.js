@@ -3,7 +3,7 @@ import { GameIcon, GameChildrenIcon, HostBanner } from "components";
 export const Home = () => {
     return (
         <div style={{backgroundColor: "black"}}>
-            <h1>Home Page</h1>
+            {/* <h1>Home Page</h1> */}
             {/* <GameIcon path = "/Games" imgUrl = "https://i.imgur.com/gNvoNEo.png" alt = "Call of Duty" /> */}
             {/* <GameChildrenIcon path="/Games" imgUrl = "https://i.imgur.com/NXTgpHd.png" alt = "Call of Duty LANs" /> */}
             {/* <MoreInfoButton title="All Leagues" path="/Games" /> */}

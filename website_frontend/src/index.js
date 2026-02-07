@@ -4,6 +4,9 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router';
 
+// Navbar & Footer
+import { Navbar } from 'components';
+
 // Home + Top Level Pages
 import { Home } from 'pages/Home';
 import { Games } from 'pages/Games';
@@ -389,6 +392,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
   <BrowserRouter>
+  <Navbar />
     <Routes>
       {/* Home Page */}
       <Route path='/' element={<Home />} />
