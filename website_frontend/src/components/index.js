@@ -3,6 +3,7 @@ import GameChildrenIcon from "./GameChildrenIcon/GameChildrenIcon";
 import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer/Footer";
 import { HostBanner } from "./HostBanner/HostBanner";
+import MapCoverHome from "./MapCover/MapCoverHome";
 
 export {
     GameIcon,
@@ -10,5 +11,5 @@ export {
     Navbar,
     Footer,
     HostBanner,
-
+    MapCoverHome,
 };
