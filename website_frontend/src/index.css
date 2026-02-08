@@ -21,3 +21,12 @@ code {
 .main-content {
   flex: 1;
 }
+
+.standardContainer {
+  background-color: #313131;
+}
+
+.hr {
+  border-top: .1rem solid white;
+  margin: 0 10rem;
+}
