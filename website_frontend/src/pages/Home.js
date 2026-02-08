@@ -13,9 +13,9 @@ export const Home = () => {
                     <h1 className={styles.white}>THE WORLD'S LARGEST</h1>
                     <h1 className={styles.purple}>ESPORTS HUB</h1>
                     <h2>
-                        Find Verified LANs, Tournaments, and more.
+                        Find Verified LANs, Tournaments, and More.
                         <br />
-                        An all-in-one platform built for players and hosts.
+                        The All-In-One Platform built for Players and Hosts.
                     </h2>
                     <Link to="/games" className={styles.start}>Get Started {'>'}</Link>
                 </div>
