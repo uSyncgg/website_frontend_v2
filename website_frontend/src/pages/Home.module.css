@@ -24,6 +24,7 @@
 .sectionOneContainer h2 {
     color: rgb(109, 106, 114);
     margin-top: .25rem;
+    letter-spacing: .1rem;
 }
 
 .white {
@@ -48,10 +49,10 @@
     font-weight: 600;
     letter-spacing: 0.5px;
     transition: all 0.2s ease;
-    /* background: rgb(33, 37, 31); */
     background: transparent;
     border: 2px solid rgb(142, 106, 206);
     margin-bottom: .25rem;
+    cursor: auto;
 }
 
 .start {
@@ -67,7 +68,7 @@
     transition: all 0.2s ease;
     background: rgb(142, 106, 206);
     border: none;
-    margin-top: .5rem;
+    margin-top: 1rem;
 }
 
 .start:hover {
