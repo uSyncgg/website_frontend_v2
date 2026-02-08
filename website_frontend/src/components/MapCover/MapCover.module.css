@@ -1,0 +1,20 @@
+.cover {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
+    width: 80%;
+    height: 100%;
+    border-radius: .5rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.coverText {
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+}
