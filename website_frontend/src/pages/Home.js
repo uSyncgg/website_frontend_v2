@@ -9,7 +9,7 @@ export const Home = () => {
         <div className="standardContainer">
             <div className={styles.sectionOne}>
                 <div className={styles.sectionOneContainer}>
-                    <Link to="/games" className={styles.compete}>$ Compete in Esports Events</Link>
+                    <Link to="#" className={styles.compete}>$ Compete in Esports Events</Link>
                     <h1 className={styles.white}>THE WORLD'S LARGEST</h1>
                     <h1 className={styles.purple}>ESPORTS HUB</h1>
                     <h2>

@@ -23,6 +23,7 @@
 
 .sectionOneContainer h1 {
     font-size: 75px;
+    line-height: 1.1;
 }
 
 .sectionOneContainer h2 {
@@ -33,12 +34,10 @@
 
 .white {
     color: white;
-    line-height: 1.1;
 }
 
 .purple {
     color: #8e6ace;
-    line-height: 1.1;
 }
 
 .compete {
@@ -64,8 +63,8 @@
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    padding: 10px 20px;
-    border-radius: 20px;
+    padding: 10px 25px;
+    border-radius: 18px;
     font-size: 20px;
     font-weight: 600;
     letter-spacing: 0.5px;
