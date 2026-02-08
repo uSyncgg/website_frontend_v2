@@ -21,10 +21,14 @@
     text-align: left;
 }
 
+.sectionOneContainer h1 {
+    font-size: 65px;
+}
+
 .sectionOneContainer h2 {
     color: rgb(109, 106, 114);
     margin-top: .25rem;
-    letter-spacing: .1rem;
+    font-size: 30px;
 }
 
 .white {
