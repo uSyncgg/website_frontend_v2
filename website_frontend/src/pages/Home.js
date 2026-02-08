@@ -15,7 +15,7 @@ export const Home = () => {
                     <h2>
                         Find Verified LANs, Tournaments, and More.
                         <br />
-                        The All-In-One Platform built for Players and Hosts.
+                        The All-In-One Platform Built for Players and Hosts.
                     </h2>
                     <Link to="/games" className={styles.start}>Get Started {'>'}</Link>
                 </div>
