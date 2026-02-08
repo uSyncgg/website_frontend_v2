@@ -12,7 +12,7 @@
     height: 66px;
     z-index: 9999999;
     background: rgb(33, 37, 31);
-    position: relative;
+    position: fixed;
 }
 
 .headerLeft {
@@ -171,7 +171,7 @@
 }
 
 /* Mobile styles - 768px and below */
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1000px) {
     /* Show hamburger menu */
     .hamburger {
         display: block;
