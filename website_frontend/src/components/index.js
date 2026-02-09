@@ -5,6 +5,10 @@ import Footer from "./Footer/Footer";
 import { HostBanner } from "./HostBanner/HostBanner";
 import MapCoverHome from "./MapCover/MapCoverHome";
 
+// Payment Form
+import { PaymentForm } from "./PaymentForm/PaymentForm";
+import { PaymentCart } from "./PaymentCart/PaymentCart";
+
 export {
     GameIcon,
     GameChildrenIcon,
@@ -12,4 +16,6 @@ export {
     Footer,
     HostBanner,
     MapCoverHome,
+    PaymentForm,
+    PaymentCart
 };
