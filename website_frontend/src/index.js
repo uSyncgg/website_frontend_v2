@@ -373,6 +373,9 @@ import { Ewagers as WzEwagers } from 'pages/Games/Wz/Wagers/Hosts/Ewagers';
 import { GamerSaloonWagers as GamerSaloonWzWagers } from 'pages/Games/Wz/Wagers/Hosts/GamerSaloonWagers';
 import { OneUpWagers as OneUpWzWagers } from 'pages/Games/Wz/Wagers/Hosts/OneUpWagers';
 
+// Payment Imports
+import GeneralPaymentForm from 'pages/Payment/GeneralPaymentForm/GeneralPaymentForm';
+
 // LAN Pages Ordered By Game: CoD, Warzone, Halo, LoL, Conventions
 import { GSiteBO7 } from 'pages/Games/Cod/Lans/Events/G-SiteBO7';
 import { ShintoGCMajor3 } from 'pages/Games/Cod/Lans/Events/ShintoGCMajor3';
@@ -765,6 +768,9 @@ root.render(
           <Route path='/games/warzone/wagers/dropingaming' element={<DropInWzWagers />} />
           <Route path='/games/warzone/wagers/dubbz' element={<DubbzWzWagers />} />
           <Route path='/games/warzone/wagers/ewagers' element={<WzEwagers />} />
+
+          {/* Payment Routes */}
+          <Route path='/paymentform' element={<GeneralPaymentForm />} />
 
           {/* LANs Ordered By Game: CoD, Warzone, Halo, LoL, Conventions */}
           <Route path='/lans/charleston-crown-series' element={<CharlestonCrownSeries />} />

@@ -24,9 +24,14 @@ code {
 
 .standardContainer {
   background-color: #313131;
+  min-height: 100vh;
 }
 
 .hr {
   border-top: .1rem solid white;
   margin: 0 10rem;
+}
+
+main {
+  padding-top: 66px;
 }

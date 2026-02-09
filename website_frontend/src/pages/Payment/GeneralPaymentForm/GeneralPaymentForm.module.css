@@ -1,0 +1,47 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    /* gap: 2rem; */
+    padding: 2rem 2rem;
+}
+
+.sectionOne {
+    flex: 1 1 auto;
+    margin-left: 4rem;
+    margin-right: -7rem;
+    max-width: 80%;
+}
+
+.sectionTwo {
+    max-width: 30%;
+    flex: 1 1 auto;
+}
+
+.formGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.fullWidth {
+    grid-column: 1 / -1;
+}
+
+.fullWidth label, input {
+    width: 100%;
+}
+
+.formGrid button {
+    grid-column: 1 / -1;
+}
+
+@media only screen and (max-width: 1300px) {
+    .container {
+        flex-direction: column;
+    }
+    .sectionOne, .sectionTwo {
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}

@@ -1,0 +1,55 @@
+.required {
+    margin-bottom: .5rem;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+    /* text-align: center; */
+}
+
+.required span {
+    color: red;
+}
+
+.input {
+    padding: .75rem 1rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background-color: rgb(93, 66, 133);
+    color: rgb(255, 255, 255);
+    outline: none;
+    transition: border .2s ease-in-out;
+    text-align: center;
+}
+
+.button {
+    margin-top: 1.5rem;
+    width: 100%;
+    padding: 1rem;
+    background-color: #8f5cff;
+    border: none;
+    color: rgb(255, 255, 255);
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s ease-in-out;
+}
+
+.formContainer {
+    background-color: rgb(49, 49, 49);
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 700px;
+    margin: 0 auto;
+    box-shadow: 0 4px 12px rgb(0, 0, 0);
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.error {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+    font-weight: bold;
+}
