@@ -9,6 +9,8 @@ import MapCoverHome from "./MapCover/MapCoverHome";
 import { PaymentForm } from "./PaymentForm/PaymentForm";
 import { PaymentCart } from "./PaymentCart/PaymentCart";
 
+import { PaymentComponent } from "./PaymentComponent/PaymentComponent";
+
 export {
     GameIcon,
     GameChildrenIcon,
@@ -17,5 +19,6 @@ export {
     HostBanner,
     MapCoverHome,
     PaymentForm,
-    PaymentCart
+    PaymentCart,
+    PaymentComponent,
 };

@@ -375,6 +375,8 @@ import { OneUpWagers as OneUpWzWagers } from 'pages/Games/Wz/Wagers/Hosts/OneUpW
 
 // Payment Imports
 import GeneralPaymentForm from 'pages/Payment/GeneralPaymentForm/GeneralPaymentForm';
+// PAYMENT IS A TESTING PAGE - NOT MEANT FOR PRODUCTION
+import Payment from 'pages/Payment/PaymentCheckouts/Payment';
 
 // LAN Pages Ordered By Game: CoD, Warzone, Halo, LoL, Conventions
 import { GSiteBO7 } from 'pages/Games/Cod/Lans/Events/G-SiteBO7';
@@ -771,6 +773,8 @@ root.render(
 
           {/* Payment Routes */}
           <Route path='/paymentform' element={<GeneralPaymentForm />} />
+          {/* PAYMENT IS A TESTING PAGE NOT MEANT FOR PRODUCTION */}
+          <Route path='/payment' element={<Payment />} />
 
           {/* LANs Ordered By Game: CoD, Warzone, Halo, LoL, Conventions */}
           <Route path='/lans/charleston-crown-series' element={<CharlestonCrownSeries />} />
