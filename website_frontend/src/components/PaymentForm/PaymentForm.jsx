@@ -26,7 +26,7 @@ export const PaymentForm = ({ children }) => {
 
     return (
         <FormProvider {...methods}>
-            <h1>Submit Your Team Info</h1>
+            <h1 className={styles.formTitle}>Submit Your Team Info</h1>
             <div className={styles.formContainer}>
                 <form onSubmit={methods.handleSubmit(onSubmit)}>
                     {children}

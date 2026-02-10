@@ -16,7 +16,7 @@ export const FormTextInput = ({ id, required, name, placeholder, type='' }) => {
         />
 
         {errors[name] && (
-            <span className={styles.error}>{errors[name].message}</span>
+            <span className={styles.formError}>{errors[name].message}</span>
         )}
         </div>
     )  
