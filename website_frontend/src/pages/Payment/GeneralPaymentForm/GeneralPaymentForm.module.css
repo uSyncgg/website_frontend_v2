@@ -1,18 +1,18 @@
-.container {
+.generalFormContainer {
     display: flex;
     justify-content: space-between;
     /* gap: 2rem; */
     padding: 2rem 2rem;
 }
 
-.sectionOne {
+.sectionOneForm {
     flex: 1 1 auto;
     margin-left: 4rem;
     margin-right: -7rem;
     max-width: 80%;
 }
 
-.sectionTwo {
+.sectionTwoForm {
     max-width: 30%;
     flex: 1 1 auto;
 }
@@ -27,7 +27,7 @@
     grid-column: 1 / -1;
 }
 
-.fullWidth label, input {
+.fullWidth label, .fullWidth input {
     width: 100%;
 }
 
@@ -39,7 +39,7 @@
     .container {
         flex-direction: column;
     }
-    .sectionOne, .sectionTwo {
+    .sectionOneForm, .sectionTwoForm {
         max-width: 100%;
         margin-left: 0;
         margin-right: 0;
