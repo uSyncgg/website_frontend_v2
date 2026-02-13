@@ -58,9 +58,9 @@ function GeneralPaymentForm(
     
     return (
         <div className={`standardContainer ${styles.generalFormContainer}`}>
-            {isLoading && (
+            {/* {isLoading && (
                 <LoadingWheel />
-            )}
+            )} */}
 
             <div className={styles.sectionOneForm}>
                 <PaymentForm 
