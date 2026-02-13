@@ -375,6 +375,7 @@ import { OneUpWagers as OneUpWzWagers } from 'pages/Games/Wz/Wagers/Hosts/OneUpW
 
 // Payment Imports
 import GeneralPaymentForm from 'pages/Payment/GeneralPaymentForm/GeneralPaymentForm';
+import Checkout from 'pages/Payment/Checkout';
 // PAYMENT IS A TESTING PAGE - NOT MEANT FOR PRODUCTION
 import Payment from 'pages/Payment/PaymentCheckouts/Payment';
 
@@ -772,7 +773,9 @@ root.render(
           <Route path='/games/warzone/wagers/ewagers' element={<WzEwagers />} />
 
           {/* Payment Routes */}
-          <Route path='/paymentform' element={<GeneralPaymentForm />} />
+          <Route path='/paymentform' element={<GeneralPaymentForm review={false} />} />
+          <Route path='/paymentform/review' element={<GeneralPaymentForm review={true} />} />
+          <Route path='/checkout' element={<Checkout />} />
           {/* PAYMENT IS A TESTING PAGE NOT MEANT FOR PRODUCTION */}
           <Route path='/payment' element={<Payment />} />
 

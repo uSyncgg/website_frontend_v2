@@ -1,12 +1,14 @@
 import { PaymentComponent } from 'components';
+import { useLocation } from 'react-router';
 
 // PLEASE NOTE THIS IS A PAGE FOR TESTING NOT PRODUCTION
 
 function Payment() {
+    const location = useLocation();
 
     return (
         <div className="standardContainer">
-            <PaymentComponent id={"test_env"} price={2625} />
+            <PaymentComponent id={location.state?.id} price={location.state?.price} />
         </div>
     );
 }
