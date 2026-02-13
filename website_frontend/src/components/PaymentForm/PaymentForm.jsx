@@ -6,7 +6,7 @@ import { FormTextInput } from "./FormTextInput";
 import { FormSubmission } from "./FormSubmission";
 import styles from './PaymentForm.module.css'
 
-export const PaymentForm = ({ children, review, formType, reviewEndpoint, id, price }) => {
+export const PaymentForm = ({ children, review, formType, reviewEndpoint, id, price, title }) => {
     const methods = useForm();
     const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ export const PaymentForm = ({ children, review, formType, reviewEndpoint, id, pr
 
     return (
         <FormProvider {...methods}>
-            <h1 className={styles.formTitle}>Submit Your Team Info</h1>
+            <h1 className={styles.formTitle}>{title}</h1>
             <div className={styles.formContainer}>
                 <form onSubmit={methods.handleSubmit(onSubmit)}>
                     {children}

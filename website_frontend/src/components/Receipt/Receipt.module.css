@@ -1,0 +1,45 @@
+.secondContainer {
+    max-width: 70%;
+}
+
+.secondContainer h1 {
+    color: white;
+    text-align: center;
+}
+
+.cartContainer {
+    background-color: rgb(93, 66, 133);
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.cartItem {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+    color: white;
+}
+
+.cartTotal {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cartDivider {
+    height: 1px;
+    background: rgb(255, 255, 255);
+    margin: 1rem 0;
+}
+
+@media only screen and (max-width: 1300px) {
+    .secondContainer {
+        max-width: 80%;
+        margin: 1rem 20%;
+    }
+}

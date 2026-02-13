@@ -1,72 +1,38 @@
 import React, { useEffect, useState, useRef } from "react";
-import styles from './GeneralPaymentForm.module.css';
-import { PaymentForm , PaymentCart, FormDataCheck, LoadingWheel } from "components";
+import styles from '../GeneralPaymentForm/GeneralPaymentForm.module.css';
+import { PaymentForm , Receipt } from "components";
 import { useLocation } from "react-router";
 
-function GeneralPaymentForm(
-    { 
-        review = false, 
-        reviewEndpoint = "review/general-test", 
-        formType = "generaltests", 
-        formTitle = "Submit Your Team Info",
-        id = "test_env",
+function GeneralPaymentReceipt(
+    {
+        // reviewEndpoint = "review/general-test", 
+        // formType = "generaltests", 
+        formTitle = "Test Event",
+        // id = "test_env",
         passPrice = 2500 
     }
 ) {
-    const location = useLocation();
-    const formData = location.state?.formData;
-    const takenRef = useRef([]);
-
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(false); // debating
-
-    const totalPrice = ((passPrice) * 0.05) + passPrice;
-    const fee = (passPrice / 100) * 0.05;
-
-    // Note: this is a testing endpoint for general review - will need specific ones for specific payments
-    // const reviewEndpoint = "review/general-test";
-    // const formType = 'generaltests';
-
+    const [formData, setFormData] = useState(null);
 
     useEffect(() => {
-        if (review) {
-            setIsLoading(true);
-
-            const formCheck = {
-                team_name: formData.team_name
-            }
-
-            const fetchData = async () => {
-                const result = await FormDataCheck({ endpoint: reviewEndpoint, formData: formCheck, collectionName: formType });
-                
-                if (result.success) {
-                    takenRef.current = [];
-                    setError(false);
-                } else {
-                    takenRef.current = Object.keys(result.errorData);
-                    setError(true);
-                }
-
-                setIsLoading(false);
-            }
-            
-            fetchData();
+        const storedData = sessionStorage.getItem('formData');
+        console.log(storedData)
+        if (storedData) {
+            setFormData(JSON.parse(storedData));
+            // Optional: clean up after retrieving
+            sessionStorage.removeItem('formData');
         }
+    }, []);
 
-    }, [review]);
+    const totalPrice = ((passPrice / 100) * 0.05) + (passPrice / 100);
     
     return (
         <div className={`standardContainer ${styles.generalFormContainer}`}>
-            {isLoading && (
-                <LoadingWheel />
-            )}
-
             <div className={styles.sectionOneForm}>
-                <PaymentForm 
-                    review={review} 
-                    formType={formType} 
-                    reviewEndpoint={reviewEndpoint} 
-                    id={id} 
+                <PaymentForm
+                    // formType={formType} 
+                    // reviewEndpoint={reviewEndpoint} 
+                    // id={id} 
                     price={totalPrice} 
                     title={formTitle}
                 >
@@ -79,15 +45,14 @@ function GeneralPaymentForm(
                             required={"Team Name is Required."} 
                             name={"team_name"} 
                             placeholder={"uSync"}
-                            disabled={review}
-                            taken={takenRef.current.includes("team_name") ? "Team Name" : ""}
+                            disabled={true}
                         />
                         <PaymentForm.TextInput 
                             id={"captain_activision"} 
                             required={false} 
                             name={"captain_activision"} 
                             placeholder={"temp acti"} 
-                            disabled={review}
+                            disabled={true}
                         />
 
                         <PaymentForm.RequiredLabel htmlFor={"player1_activision"}>Player 1 Activision</PaymentForm.RequiredLabel>
@@ -98,14 +63,14 @@ function GeneralPaymentForm(
                             required={"Player 1's Activision is Required."}
                             name={"player1_activision"}
                             placeholder={"temp acti"}
-                            disabled={review}
+                            disabled={true}
                         />
                         <PaymentForm.TextInput 
                             id={"player1_twitter"}
                             required={"Player 1's Twitter is Required."}
                             name={"player1_twitter"}
                             placeholder={"@uSyncGG"}
-                            disabled={review}
+                            disabled={true}
                         />
 
                         <PaymentForm.RequiredLabel htmlFor={"player2_activision"}>Player 2 Activision</PaymentForm.RequiredLabel>
@@ -116,14 +81,14 @@ function GeneralPaymentForm(
                             required={"Player 2's Activision is Required."}
                             name={"player2_activision"}
                             placeholder={"temp acti"}
-                            disabled={review}
+                            disabled={true}
                         />
                         <PaymentForm.TextInput 
                             id={"player2_twitter"}
                             required={"Player 2's Twitter is Required."}
                             name={"player2_twitter"}
                             placeholder={"@uSyncGG"}
-                            disabled={review}
+                            disabled={true}
                         />
 
                         <PaymentForm.RequiredLabel htmlFor={"player3_activision"}>Player 3 Activision</PaymentForm.RequiredLabel>
@@ -134,14 +99,14 @@ function GeneralPaymentForm(
                             required={"Player 3's Activision is Required."}
                             name={"player3_activision"}
                             placeholder={"temp acti"}
-                            disabled={review}
+                            disabled={true}
                         />
                         <PaymentForm.TextInput 
                             id={"player3_twitter"}
                             required={"Player 3's Twitter is Required."}
                             name={"player3_twitter"}
                             placeholder={"@uSyncGG"}
-                            disabled={review}
+                            disabled={true}
                         />
                         
                         <PaymentForm.RequiredLabel htmlFor={"player4_activision"}>Player 4 Activision</PaymentForm.RequiredLabel>
@@ -152,14 +117,14 @@ function GeneralPaymentForm(
                             required={"Player 4's Activision is Required."}
                             name={"player4_activision"}
                             placeholder={"temp acti"}
-                            disabled={review}
+                            disabled={true}
                         />
                         <PaymentForm.TextInput 
                             id={"player4_twitter"}
                             required={"Player 4's Twitter is Required."}
                             name={"player4_twitter"}
                             placeholder={"@uSyncGG"}
-                            disabled={review}
+                            disabled={true}
                         />
 
                         <div className={styles.fullWidth}>
@@ -172,19 +137,18 @@ function GeneralPaymentForm(
                                 name={"email"} 
                                 placeholder={"usyncgg@gmail.com"} 
                                 type={"email"}
-                                disabled={review}
+                                disabled={true}
                             />
                         </div>
-                        <PaymentForm.Submission review={review} disabled={error} />
                     </div>
                 </PaymentForm>
             </div>
 
             <div className={styles.sectionTwoForm}>
-                <PaymentCart pass={passPrice / 100} fee={fee} />
+                <Receipt totalPrice={totalPrice} eventTitle={formTitle} />
             </div>
         </div>
     )
 }
 
-export default GeneralPaymentForm;
+export default GeneralPaymentReceipt;

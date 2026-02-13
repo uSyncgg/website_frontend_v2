@@ -10,6 +10,7 @@ import { FormDataCheck } from "./FormDataCheck/FormDataCheck";
 // Payment Form
 import { PaymentForm } from "./PaymentForm/PaymentForm";
 import { PaymentCart } from "./PaymentCart/PaymentCart";
+import { Receipt } from "./Receipt/Receipt";
 
 import { PaymentComponent } from "./PaymentComponent/PaymentComponent";
 
@@ -25,4 +26,5 @@ export {
     PaymentComponent,
     LoadingWheel,
     FormDataCheck,
+    Receipt,
 };
