@@ -4,6 +4,8 @@ import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer/Footer";
 import { HostBanner } from "./HostBanner/HostBanner";
 import MapCoverHome from "./MapCover/MapCoverHome";
+import { LoadingWheel } from "./LoadingWheel/LoadingWheel";
+import { FormDataCheck } from "./FormDataCheck/FormDataCheck";
 
 // Payment Form
 import { PaymentForm } from "./PaymentForm/PaymentForm";
@@ -21,4 +23,6 @@ export {
     PaymentForm,
     PaymentCart,
     PaymentComponent,
+    LoadingWheel,
+    FormDataCheck,
 };

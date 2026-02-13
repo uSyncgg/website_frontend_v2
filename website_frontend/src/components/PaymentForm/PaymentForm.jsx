@@ -1,12 +1,12 @@
 import { useForm, FormProvider } from "react-hook-form";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
-import { RequiredLabel } from "./RequiredLabel";
+import { RequiredLabel, RegularLabel } from "./FormLabels";
 import { FormTextInput } from "./FormTextInput";
 import { FormSubmission } from "./FormSubmission";
 import styles from './PaymentForm.module.css'
 
-export const PaymentForm = ({ children }) => {
+export const PaymentForm = ({ children, review, formType, reviewEndpoint, id, price }) => {
     const methods = useForm();
     const navigate = useNavigate();
 
@@ -21,7 +21,11 @@ export const PaymentForm = ({ children }) => {
     const onSubmit = (data) => {
         sessionStorage.setItem('formData', JSON.stringify(data));
 
-        navigate('/checkout', {state: { formData: data } });
+        if (review) {
+            navigate('/payment', {state: { formData: data, formType: formType, reviewEndpoint: reviewEndpoint, id: id, price: price } });
+        } else {
+            navigate('/paymentform/review', {state: { formData: data, formType: formType, reviewEndpoint: reviewEndpoint, id: id, price: price } });
+        }
     }
 
     return (
@@ -37,5 +41,6 @@ export const PaymentForm = ({ children }) => {
 }
 
 PaymentForm.RequiredLabel = RequiredLabel;
+PaymentForm.RegularLabel = RegularLabel;
 PaymentForm.TextInput = FormTextInput;
 PaymentForm.Submission = FormSubmission;

@@ -14,7 +14,8 @@
     font-size: 1rem;
     border-radius: 8px;
     border: 1px solid #444;
-    background-color: rgb(93, 66, 133);
+    background-color: rgba(93, 66, 133, 0.3);
+    filter: brightness(120%);
     color: rgb(255, 255, 255);
     outline: none;
     transition: border .2s ease-in-out;
@@ -28,6 +29,24 @@
     background-color: #8f5cff;
     border: none;
     color: rgb(255, 255, 255);
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s ease-in-out;
+}
+
+.formButton:disabled {
+    filter: brightness(50%);
+}
+
+.formEditButton {
+    margin-top: 1.5rem;
+    width: 100%;
+    padding: 1rem;
+    background-color: rgb(29, 34, 27);
+    border: none;
+    color: #8f5cff;
     font-size: 1.1rem;
     border-radius: 8px;
     cursor: pointer;

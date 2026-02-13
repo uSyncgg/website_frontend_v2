@@ -2,6 +2,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
 import { NestedPaymentComponent } from './NestedPaymentComponent';
+import { useLocation } from 'react-router';
 
 export const PaymentComponent = ({ id, price }) => {
     // FOR LIVE
@@ -16,6 +17,9 @@ export const PaymentComponent = ({ id, price }) => {
     const [clientSecret, setClientSecret] = useState("");
 
     // Test Credit Card - 4242 4242 4242 4242 with any 3 digit svc and any valid date
+    const location = useLocation();
+    const formData = location.state?.formData;
+    const formType = location.state?.formType;
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
@@ -24,7 +28,7 @@ export const PaymentComponent = ({ id, price }) => {
         fetch("http://localhost:4242/usyncPayments/generalPayment", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ items: [{ id: id, amount: price }] }),
+            body: JSON.stringify({ items: [{ id: id, amount: price, formData: formData, formType: formType }] }),
         })
             .then((res) => res.json())
             .then((data) => setClientSecret(data.clientSecret));

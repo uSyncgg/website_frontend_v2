@@ -19,12 +19,18 @@ export const NestedPaymentComponent = ({ price }) => {
 
         setLoading(true);
 
+        // Dont think i need
+        // Test URL: http://localhost:4242/usyncApp/lans
+        // Production URL: 
+
         const { error } = await stripe.confirmPayment({
             elements,
             confirmParams: {
-                return_url: "https://usync.gg/complete",
+                return_url: "http://localhost:3000/paymentform",
             },
         });
+
+        console.log(`ERROR TYPE: ${error.type}`)
 
         if (error.type === "card_error" || error.type === "validation_error") {
             setMessage(error.message);
