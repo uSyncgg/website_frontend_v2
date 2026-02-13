@@ -10,7 +10,8 @@ function GeneralPaymentForm(
         formType = "generaltests", 
         formTitle = "Submit Your Team Info",
         id = "test_env",
-        passPrice = 2500 
+        passPrice = 2500,
+        eventName = "Test Event"
     }
 ) {
     const location = useLocation();
@@ -67,8 +68,9 @@ function GeneralPaymentForm(
                     formType={formType} 
                     reviewEndpoint={reviewEndpoint} 
                     id={id} 
-                    price={totalPrice} 
+                    price={100} 
                     title={formTitle}
+                    eventName={eventName}
                 >
                     <div className={styles.formGrid}>
                         <PaymentForm.RequiredLabel htmlFor={"team_name"}>Team Name</PaymentForm.RequiredLabel>

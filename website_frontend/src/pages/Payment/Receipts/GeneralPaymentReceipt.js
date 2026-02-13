@@ -1,38 +1,19 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import styles from '../GeneralPaymentForm/GeneralPaymentForm.module.css';
 import { PaymentForm , Receipt } from "components";
-import { useLocation } from "react-router";
 
 function GeneralPaymentReceipt(
     {
-        // reviewEndpoint = "review/general-test", 
-        // formType = "generaltests", 
         formTitle = "Test Event",
-        // id = "test_env",
         passPrice = 2500 
     }
 ) {
-    const [formData, setFormData] = useState(null);
-
-    useEffect(() => {
-        const storedData = sessionStorage.getItem('formData');
-        console.log(storedData)
-        if (storedData) {
-            setFormData(JSON.parse(storedData));
-            // Optional: clean up after retrieving
-            sessionStorage.removeItem('formData');
-        }
-    }, []);
-
     const totalPrice = ((passPrice / 100) * 0.05) + (passPrice / 100);
     
     return (
         <div className={`standardContainer ${styles.generalFormContainer}`}>
             <div className={styles.sectionOneForm}>
                 <PaymentForm
-                    // formType={formType} 
-                    // reviewEndpoint={reviewEndpoint} 
-                    // id={id} 
                     price={totalPrice} 
                     title={formTitle}
                 >

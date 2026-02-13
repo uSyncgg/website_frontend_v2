@@ -20,6 +20,7 @@ export const PaymentComponent = ({ id, price }) => {
     const location = useLocation();
     const formData = location.state?.formData;
     const formType = location.state?.formType;
+    const eventName = location.state?.eventName;
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
@@ -28,7 +29,7 @@ export const PaymentComponent = ({ id, price }) => {
         fetch("http://localhost:4242/usyncPayments/generalPayment", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ items: [{ id: id, amount: price, formData: formData, formType: formType }] }),
+            body: JSON.stringify({ items: [{ id: id, amount: price, formData: formData, formType: formType, eventName: eventName }] }),
         })
             .then((res) => res.json())
             .then((data) => setClientSecret(data.clientSecret));

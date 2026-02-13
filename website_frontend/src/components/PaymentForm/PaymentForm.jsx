@@ -6,7 +6,7 @@ import { FormTextInput } from "./FormTextInput";
 import { FormSubmission } from "./FormSubmission";
 import styles from './PaymentForm.module.css'
 
-export const PaymentForm = ({ children, review, formType, reviewEndpoint, id, price, title }) => {
+export const PaymentForm = ({ children, review, formType, reviewEndpoint, id, price, title, eventName }) => {
     const methods = useForm();
     const navigate = useNavigate();
 
@@ -22,9 +22,13 @@ export const PaymentForm = ({ children, review, formType, reviewEndpoint, id, pr
         sessionStorage.setItem('formData', JSON.stringify(data));
 
         if (review) {
-            navigate('/payment', {state: { formData: data, formType: formType, reviewEndpoint: reviewEndpoint, id: id, price: price } });
+            navigate('/payment', {
+                state: { formData: data, formType: formType, reviewEndpoint: reviewEndpoint, id: id, price: price, eventName: eventName } 
+            });
         } else {
-            navigate('/paymentform/review', {state: { formData: data, formType: formType, reviewEndpoint: reviewEndpoint, id: id, price: price } });
+            navigate('/paymentform/review', {
+                state: { formData: data, formType: formType, reviewEndpoint: reviewEndpoint, id: id, price: price, eventName: eventName } 
+            });
         }
     }
 
