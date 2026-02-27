@@ -1,0 +1,42 @@
+.eventBannerContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.hrEvents {
+  border-bottom: solid white;
+  margin: 0 0 2rem 0;
+  width: 90%;
+}
+
+.eventSeparationContainer {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.eventSeparationTitle {
+  font-size: 5rem;
+  color: white;
+  font-weight: 450;
+}
+
+.lanMapContainer {
+  border-radius: .5rem;
+  position: relative;
+  margin-bottom: 4rem;
+}
+
+.lanMap {
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+  height: 50rem;
+  display: block;
+  margin: 0 auto;
+}
+
