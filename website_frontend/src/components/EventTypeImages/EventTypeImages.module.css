@@ -1,0 +1,26 @@
+.imageEventContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    max-width: 80%;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+}
+
+.imageEventContainer img {
+    border-radius: 1.563rem;
+    height: auto;
+    margin: auto;
+    transition: box-shadow .3s ease-in-out;
+    width: 28rem;
+}
+
+.imageEventContainer img:hover {
+    box-shadow: 0 0 1.563rem .188rem rgba(255, 255, 255, 0.8);
+}
+
+.soloImage {
+    padding-bottom: 3rem;
+}
+

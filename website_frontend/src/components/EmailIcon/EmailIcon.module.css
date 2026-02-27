@@ -1,0 +1,19 @@
+.white {
+    color: white;
+    font-size: 1.25rem;
+}
+
+.mailContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mailContainer a {
+    width: 50%;
+    margin-bottom: .5rem;
+}
+
+.mailContainer img {
+    width: 80%;
+}
