@@ -30,8 +30,14 @@ code {
 .hr {
   border-top: .1rem solid white;
   margin: 0 10rem;
+  z-index: 2;
 }
 
 main {
   padding-top: 66px;
+}
+
+.underlineImg {
+  width: 100%;
+  margin-bottom: 2rem;
 }

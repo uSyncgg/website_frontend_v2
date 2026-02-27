@@ -387,14 +387,18 @@ import { CharlestonCrownSeries } from 'pages/Games/Cod/Lans/Events/CharlestonCro
 import { Heartland2026 } from 'pages/Games/Lol/Lans/Events/Heartland2026';
 import { KamiCon17 } from 'pages/Games/Lol/Lans/Events/Kami-Con17';
 import { MidwestBattleground2026 } from 'pages/Games/Lol/Lans/Events/MidwestBattleground2026';
-import { BelowZeroLANWinter2026 } from 'pages/Games/Conventions/BelowZeroLANWinter2026';
 import { Conventions } from 'pages/Games/Conventions/Conventions';
 import { DreamHackBirmingham } from 'pages/Games/Conventions/DreamHackBirmingham';
-import { EmeraldCityLAN2026 } from 'pages/Games/Conventions/EmeraldCityLAN2026';
 import { FortLANSpring2026 } from 'pages/Games/Conventions/FortLANSpring2026';
-import { GACSOperationCupid } from 'pages/Games/Conventions/GACSOperationCupid';
-import { LANAllNightSpring2026 } from 'pages/Games/Conventions/LANAllNightSpring2026';
 import { LowPingLAN } from 'pages/Games/Conventions/LowPingLAN';
+import { TomorrowLAN2026 } from 'pages/Games/Conventions/TomorrowLAN2026';
+
+// Archived LANs Below
+// 2026
+import { GACSOperationCupid } from 'pages/Games/Conventions/Archived/GACSOperationCupid';
+import { LANAllNightSpring2026 } from 'pages/Games/Conventions/Archived/LANAllNightSpring2026';
+import { EmeraldCityLAN2026 } from 'pages/Games/Conventions/Archived/EmeraldCityLAN2026';
+import { BelowZeroLANWinter2026 } from 'pages/Games/Conventions/Archived/BelowZeroLANWinter2026';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -790,12 +794,16 @@ root.render(
           <Route path='/lans/kamicon-17' element={<KamiCon17 />} />
           <Route path='/other-lans' element={<Conventions />} />
           <Route path='/lans/dreamhack-birmingham' element={<DreamHackBirmingham />} />
+          <Route path='/lans/forlan-spring-2026' element={<FortLANSpring2026 />} />
+          <Route path='/lans/low-ping-lan-2026' element={<LowPingLAN />} />
+          <Route path='/lans/tomorrowlan_2026' element={<TomorrowLAN2026 />} />
+
+          {/* Archived LANs */}
+          {/* 2026 */}
           <Route path='/lans/emerald-city-2026' element={<EmeraldCityLAN2026 />} />
           <Route path='/lans/operation-cupid' element={<GACSOperationCupid />} />
-          <Route path='/lans/forlan-spring-2026' element={<FortLANSpring2026 />} />
           <Route path='/lans/lan-all-night-spring-26' element={<LANAllNightSpring2026 />} />
           <Route path='/lans/belowzerolan-winter-26' element={<BelowZeroLANWinter2026 />} />
-          <Route path='/lans/low-ping-lan-2026' element={<LowPingLAN />} />
 
         </Routes>
       </main>

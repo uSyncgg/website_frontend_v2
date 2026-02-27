@@ -2,7 +2,7 @@ import React from "react";
 import styles from './Home.module.css';
 import '../index.css';
 import { Link } from "react-router";
-import { MapCoverHome } from "components";
+import { MapCoverHome, GameImage } from "components";
 
 export const Home = () => {
     return (
@@ -22,43 +22,27 @@ export const Home = () => {
             </div>
 
             <div className={styles.sectionTwo}>
-                <h2 className={styles.white}>Explore Events</h2>
-                <img className={styles.underline} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
 
-                <div className={styles.imageContainer}>
-                    <Link to="/games/call-of-duty">
-                        <img src="https://i.imgur.com/gNvoNEo.png" alt="Call of Duty" />
-                    </Link>
+                <GameImage 
+                    games={
+                        {
+                            "Call of Duty": "/games/call-of-duty",
+                            "Warzone": "/games/warzone",
+                            "Halo": "/games/halo",
+                            "League of Legends": "/games/LoL",
+                            "Rocket League": "/games/RocketLeague",
+                            "Valorant": "/games/Valorant",
+                            "CS2": "/games/CS2"
+                        }
+                    }
 
-                    <Link to="/games/warzone">
-                        <img src="https://i.imgur.com/IBGIbY2.png" alt="Warzone" />
-                    </Link>
-
-                    <Link to="/games/halo">
-                        <img src="https://i.imgur.com/wqKJfEu.png" alt="Halo" />
-                    </Link>
-
-                    <Link to="/games/LoL">
-                        <img src="https://i.imgur.com/5riYNow.png" alt="League of Legends" />
-                    </Link>
-
-                    <Link to="/games/RocketLeague">
-                        <img src="https://i.imgur.com/GJO8JIZ.png" alt="Rocket League" />
-                    </Link>
-
-                    <Link to="/games/Valorant">
-                        <img src="https://i.imgur.com/Gsl3oIp.png" alt="Valorant" />
-                    </Link>
-
-                    <Link to="/games/CS2">
-                        <img src="https://i.imgur.com/60FwDKN.png" alt="Counter-Strike 2" />
-                    </Link>
-                </div>
+                    title={"Explore Events"} 
+                />
 
                 <div className="hr" />
 
                 <h2 className={styles.white}>LAN Events</h2>
-                <img className={styles.underline} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
+                <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
 
                 <div className={styles.mapContainer}>
                     <iframe 
@@ -78,26 +62,18 @@ export const Home = () => {
 
                 <div className="hr" />
 
-                <h2 className={styles.white}>Coming Soon!</h2>
-                <img className={styles.underline} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
+                <GameImage 
+                    games={
+                        {
+                            "Fortnite": "/Comingsoon", 
+                            "Apex Legends": "/Comingsoon", 
+                            "Super Smash Bros": "/Comingsoon", 
+                            "Overwatch 2": "/Comingsoon"
+                        }
+                    }
 
-                <div className={styles.imageContainer}>
-                    <Link to="/Comingsoon">
-                        <img src="https://i.imgur.com/ybSqQK4.png" alt="Fortnite Coming Soon" />
-                    </Link>
-
-                    <Link to="/Comingsoon">
-                        <img src="https://i.imgur.com/MUcaqmt.png" alt="Apex Legends Coming Soon" />
-                    </Link>
-
-                    <Link to="/Comingsoon">
-                        <img src="https://i.imgur.com/qpQDtRJ.png" alt="Super Smash Bros. Ultimate Coming Soon" />
-                    </Link>
-
-                    <Link to="/Comingsoon">
-                        <img src="https://i.imgur.com/XxOYZiE.png" alt="Overwatch 2 Coming Soon" />
-                    </Link>
-                </div>
+                    title={"Coming Soon!"} 
+                />
 
                 <div className={`hr ${styles.bottomSpace}`} />
             </div>
