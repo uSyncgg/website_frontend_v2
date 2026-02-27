@@ -1,0 +1,30 @@
+.imageContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.imageContainer img {
+    border-radius: 1.563rem;
+    height: auto;
+    margin: 0 1% 2rem;
+    transition: box-shadow .3s ease-in-out;
+    width: 12rem;
+}
+
+.imageContainer img:hover {
+    box-shadow: 0 0 1.563rem .188rem rgba(153, 102, 255, 0.8);
+}
+
+/* Below conflicts with Home.module.css but it isn't the biggest deal  */
+.white {
+    color: white;
+    text-align: center;
+    font-size: 3rem;
+    padding-top: .9rem;
+    margin-bottom: .5rem;
+}
+
