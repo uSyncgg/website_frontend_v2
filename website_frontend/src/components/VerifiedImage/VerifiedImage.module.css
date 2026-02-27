@@ -1,0 +1,12 @@
+.bannerVerified {
+    position: absolute;
+    width: 6%;
+    height: auto;
+    right: 8%;
+    top: 5%;
+    z-index: 2;
+}
+
+.bannerVerified:hover {
+    filter: brightness(120%);
+}
