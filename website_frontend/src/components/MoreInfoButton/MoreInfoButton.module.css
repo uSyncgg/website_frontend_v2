@@ -6,6 +6,11 @@
     border-radius: .5rem;
     font-weight: bold;
     font-family: 'Helvetica';
+    width: 90%;
+    height: 2.5rem;
+    font-size: inherit;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
 }
 
 .button:hover {

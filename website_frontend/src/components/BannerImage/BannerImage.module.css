@@ -1,6 +1,12 @@
+.bannerImageWrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
 .bannerImage {
-    /* width: 90%;
-    height: auto; */
+    width: 90%;
+    height: auto;
     border-radius: 1.813rem;
     transition: filter 0.7s;
 }

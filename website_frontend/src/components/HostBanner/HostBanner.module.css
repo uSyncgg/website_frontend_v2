@@ -1,4 +1,11 @@
 .banner {
-    width: 100%;
+    width: 55rem;
     height: 100%;
+    text-align: center;
+}
+
+.noneUpcoming {
+    color: white;
+    font-size: 3rem;
+    margin-bottom: 2rem;
 }
