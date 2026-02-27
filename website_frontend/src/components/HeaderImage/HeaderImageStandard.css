@@ -1,0 +1,143 @@
+
+.gamesPage {
+    --bg-image: url("https://i.imgur.com/S9U4H7T.png");
+}
+
+.lansPage {
+    --bg-image: url("https://i.imgur.com/YeUPAmO.png");
+}
+
+.articlesPage {
+    --bg-image: url("https://i.imgur.com/jGdypyL.png");
+}
+
+.leaguesPage {
+    --bg-image: url("https://i.imgur.com/fackjly.png");
+}
+
+.tournamentsPage {
+    --bg-image: url("https://i.imgur.com/6nqLPyu.png");
+}
+
+.comingSoonPage {
+    --bg-image: url("https://i.imgur.com/gbB3YxJ.png");
+}
+
+.reportPage {
+    --bg-image: url("https://i.imgur.com/PoCqBT9.png");
+}
+
+.codGamePage {
+    --bg-image: url("https://i.imgur.com/kZaSdKo.png");
+}
+
+.codh2hPage {
+    --bg-image: url("https://i.imgur.com/8Psf9G6.png");
+}
+
+.codWagersPage {
+    --bg-image: url("https://i.imgur.com/wvSwn4l.png");
+}
+
+.rlGamePage {
+    --bg-image: url("https://i.imgur.com/fomqXSz.png");
+}
+
+.rlh2hPage {
+    --bg-image: url("https://i.imgur.com/lw7RZun.png");
+}
+
+.rlLeaguePage {
+    --bg-image: url("https://i.imgur.com/7mjxr12.png");
+}
+
+.cs2GamePage {
+    --bg-image: url("https://i.imgur.com/8dwjkca.png");
+}
+
+.cs2LeaguePage {
+    --bg-image: url("https://i.imgur.com/uzLeW90.png");
+}
+
+.cs2h2hPage {
+    --bg-image: url("https://i.imgur.com/JU7dWGw.png");
+}
+
+.cs2WagersPage {
+    --bg-image: url("https://i.imgur.com/hIpj6hZ.png");
+}
+
+.haloGamePage {
+    --bg-image: url("https://i.imgur.com/0aE94AJ.png");
+}
+
+.haloLeaguePage {
+    --bg-image: url("https://i.imgur.com/Jsdvjf3.png");
+}
+
+.haloWagersPage {
+    --bg-image: url("https://i.imgur.com/1Kelw3D.png");
+}
+
+.lolGamePage {
+    --bg-image: url("https://i.imgur.com/W9afnxj.png");
+}
+
+.lolLeaguePage {
+    --bg-image: url("https://i.imgur.com/NycBCVA.png");
+}
+
+.lolWagersPage {
+    --bg-image: url("https://i.imgur.com/IG80Jig.png");
+}
+
+.valGamePage {
+    --bg-image: url("https://i.imgur.com/HqldA9u.png");
+}
+
+.valLeaguePage {
+    --bg-image: url("https://i.imgur.com/4Hsf0iz.png");
+}
+
+.wzGamePage {
+    --bg-image: url("https://i.imgur.com/BdD5G0Y.png");
+}
+
+.wzLeaguePage {
+    --bg-image: url("https://i.imgur.com/5uwlggv.png");
+}
+
+.nonVerifiedPage {
+    --bg-image: linear-gradient(#00000080,#00000080), url("https://i.imgur.com/UDHxFWg.png");
+}
+
+.verificationPage {
+    --bg-image: url("https://i.imgur.com/r1fPsVm.png");
+    background-position: 50%;
+    background-size: 120% 100%;
+}
+
+/* Verified Leagues */
+.lockdownCODLeagues {
+    --bg-image: url("https://i.imgur.com/qf800QP.png");
+}
+
+.titanLOLLeagues {
+    --bg-image: url("https://i.imgur.com/ZK40Aqp.png");
+}
+
+.risenLOLLeagues {
+    --bg-image: url("https://i.imgur.com/wL0VUZr.png");
+}
+
+.aegisLOLLeagues {
+    --bg-image: url("https://i.imgur.com/Ic2JpQO.png");
+}
+
+.rplcRLLeagues {
+    --bg-image: url("https://i.imgur.com/TFi8yMS.png");
+}
+
+.lplVALLeagues {
+    --bg-image: url("https://i.imgur.com/PGxAVgC.png");
+}

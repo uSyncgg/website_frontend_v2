@@ -1,0 +1,44 @@
+.headerImage {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: 2rem;
+}
+
+.noTitle {
+  padding-bottom: 10%;
+  padding-top: 6%;
+}
+
+.headerImage h2 {
+    color: white;
+    font-size: 5rem;
+    text-align: center;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.headerImageTitle {
+  margin-top: 2.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.verificationContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.verification {
+  width: 12.5%;
+  height: auto;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+/* THIS IS A NOTE TO CHECK THE OLD SITE FOR SPECIFIC STYLINGS OF IMAGES USED FOR GAME PAGES */
