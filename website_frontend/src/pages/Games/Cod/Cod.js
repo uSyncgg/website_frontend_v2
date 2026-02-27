@@ -1,8 +1,10 @@
+import { HeaderImage, EventTypeImages } from "components";
 
 export const Cod = () => {
     return (
-        <>
-            <h1>Cod</h1>
-        </>
+        <div className="standardContainer">
+            <HeaderImage imageClass={"codGamePage"} />
+            <EventTypeImages page={"Call of Duty"} />
+        </div>
     );
 }
