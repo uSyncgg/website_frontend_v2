@@ -1,0 +1,16 @@
+.eventInfoCardContainer {
+    max-width: 100%;
+    display: flex;
+    /* flex-direction: row; */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.eventButtonContainer {
+    justify-content: center;
+    display: flex;
+    margin: auto auto;
+    padding-bottom: 2rem;
+    margin-top: 2rem;
+}

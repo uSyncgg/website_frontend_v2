@@ -1,0 +1,37 @@
+.eventCard {
+    background: linear-gradient(180deg,rgba(27, 27, 27, 1) 50%, rgba(142, 106, 206, 0.5) 90%);
+    /* background: radial-gradient(circle at bottom, rgba(27, 27, 27, 1) 1%, rgba(142, 106, 206, 0.88) 100%); */
+    /* background: radial-gradient(circle at bottom, rgba(142, 106, 206, 0.5) 10%, rgba(27, 27, 27, 1) 100%); */
+    border-bottom: 3px solid #8e6ace;
+    border-radius: 8px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: auto auto;
+    width: 350px;
+    height: 300px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.25rem, 0.5rem, 1rem);
+}
+
+.ul {
+    display: inline-block;
+    text-align: left;
+    color: white;
+    padding: 0.5rem;
+    font-weight: bold;
+    font-size: larger;
+    margin: auto auto;
+}
+
+.title {
+    color: #8e6ace;
+    text-decoration: underline;
+}
+
+.eventItem {
+    margin-bottom: 1rem;
+}
