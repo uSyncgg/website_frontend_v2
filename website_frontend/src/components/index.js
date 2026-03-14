@@ -21,6 +21,10 @@ import { Receipt } from "./Receipt/Receipt";
 
 import { PaymentComponent } from "./PaymentComponent/PaymentComponent";
 
+import { EventInfoCard } from "./EventInfoCard/EventInfoCard";
+
+import { ExternalButton } from "./ExternalButton/ExternalButton";
+
 export {
     GameIcon,
     GameChildrenIcon,
@@ -40,5 +44,7 @@ export {
     MapCoverGame,
     MoreInfoButton,
     EmailIcon,
-    TeamPhoto
+    TeamPhoto,
+    EventInfoCard,
+    ExternalButton
 };
