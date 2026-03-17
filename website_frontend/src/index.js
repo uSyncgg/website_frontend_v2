@@ -21,6 +21,7 @@ import { Faqs } from 'pages/More/Faqs';
 import { PostYourEvent } from 'pages/More/PostYourEvent';
 import { Verification } from 'pages/More/Verification';
 import { ReportProblem } from 'pages/More/ReportProblem';
+import { ComingSoon } from 'pages/More/ComingSoon';
 
 // Articles
 import { HowEsportsCanBeBetter } from 'pages/More/Articles/HowEsportsCanBeBetter';
@@ -425,6 +426,7 @@ root.render(
           <Route path='/more/FAQ' element={<Faqs />} />
           <Route path='/more/articles' element={<Articles />} />
           <Route path='/reportproblem' element={<ReportProblem />} />
+          <Route path='/Comingsoon' element={<ComingSoon />} />
 
           {/* Articles */}
           <Route path='/more/FAQ/The-Problem-With-Esports' element={<ProblemWithEsports />} />

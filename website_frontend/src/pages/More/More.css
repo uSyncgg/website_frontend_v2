@@ -1,0 +1,21 @@
+.white {
+    color: white;
+    text-align: center;
+}
+
+.comingSoonDesc {
+    font-size: large;
+    width: 80%;
+}
+
+.comingSoonContainer {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.comingSoonTitle {
+    font-size: 3rem;
+    padding-top: .9rem;
+    margin-bottom: .5rem;
+}
