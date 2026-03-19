@@ -1,6 +1,28 @@
+import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import '../../../EventInformation.css';
 
 export const EsportsAgentH2H = () => {
     return (
-        <></>
+        <div className="standardContainer">
+            <HeaderImage title={"Esports Agent"} imageClass={"eventPage"} />
+
+            <div className="eventInfoCardContainer">
+                <div>
+                    <EventInfoCard title={"Fees"} infoList={["Free XP Matches"]} />
+                </div>
+
+                <div>
+                    <EventInfoCard title={"Details"} infoList={["24/7 Live Support On Site", "Consistent Rule Updates", "Small Number of Daily Users", "CDL Ruleset and Select GAs"]} />
+                </div>
+
+                <div>
+                    <EventInfoCard title={"Restrictions"} infoList={["Available Worldwide"]} />
+                </div>
+            </div>
+
+            <div className="eventButtonContainer">
+                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://esportsagent.gg/wagers"} />
+            </div>
+        </div>
     );
 }

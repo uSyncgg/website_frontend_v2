@@ -205,6 +205,14 @@ export const EventTypeImages = ({ page }) => {
                     </Link>
                 </div>
             }
+
+            {page === "Coming Soon" && 
+                <div className={styles.imageEventContainer}>
+                    <Link to={"#"}>
+                        <img src='https://i.imgur.com/8ZFHAM6.png' alt='Online Tournaments' />
+                    </Link>
+                </div>
+            }
         </div>
     )
 }

@@ -4,7 +4,7 @@
     /* flex-direction: row; */
     flex-wrap: wrap;
     justify-content: center;
-    gap: 15px;
+    gap: 40px;
 }
 
 .eventButtonContainer {
@@ -13,4 +13,4 @@
     margin: auto auto;
     padding-bottom: 2rem;
     margin-top: 2rem;
-}
+} 

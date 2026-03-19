@@ -1,5 +1,5 @@
 .eventCard {
-    background: linear-gradient(180deg,rgba(27, 27, 27, 1) 50%, rgba(142, 106, 206, 0.5) 90%);
+    background: linear-gradient(135deg,rgba(27, 27, 27, 1) 50%, rgba(142, 106, 206, 0.5) 90%);
     /* background: radial-gradient(circle at bottom, rgba(27, 27, 27, 1) 1%, rgba(142, 106, 206, 0.88) 100%); */
     /* background: radial-gradient(circle at bottom, rgba(142, 106, 206, 0.5) 10%, rgba(27, 27, 27, 1) 100%); */
     border-bottom: 3px solid #8e6ace;
@@ -9,8 +9,8 @@
     padding-left: 1rem;
     padding-right: 1rem;
     margin: auto auto;
-    width: 350px;
-    height: 300px;
+    width: 450px;
+    height: 400px;
     text-align: center;
     display: flex;
     flex-direction: column;
