@@ -3,6 +3,7 @@
     text-align: center;
 }
 
+/* Coming Soon Styling */
 .comingSoonDesc {
     font-size: large;
     width: 80%;
@@ -19,3 +20,89 @@
     padding-top: .9rem;
     margin-bottom: .5rem;
 }
+
+/* FAQ Styling */
+.faqSectionOne { 
+    flex: 1.3;
+}
+
+.faqSectionTwo {
+    flex: 2.7;
+}
+
+.faqLink {
+    text-decoration: none;
+    font-size: xx-large;
+}
+
+.faqContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    text-align: center;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.faqGameImage {
+    border-radius: 1.563rem;
+    height: auto;
+    transition: box-shadow .3s ease-in-out;
+    width: 10rem;
+}
+
+.faqGameContainer {
+    border: .19rem solid #8d7db5;
+    border-radius: .33rem;
+    gap: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 88%;
+    margin: 0 auto;
+}
+
+.faqQuestion {
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: bolder;
+    padding-left: .5rem;
+    padding-right: .5rem;
+    padding-top: .5rem;
+}
+
+.faqAnswer {
+    color: #8d7db5;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: .5rem;
+    padding-right: .5rem;
+}
+
+.faqAnswerLink {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.faqTextContainer {
+    text-align: left;
+    border: .19rem solid #8d7db5;
+    border-radius: .33rem;
+    width: 95%;
+    margin-bottom: 1rem;
+}
+
+.faqTitle {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.faqLinkTitle {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+}
+
+/* Articles Styling */
