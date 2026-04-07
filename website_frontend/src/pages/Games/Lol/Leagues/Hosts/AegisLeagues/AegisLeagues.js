@@ -4,11 +4,11 @@ import { useCheckResize } from "hooks";
 export const AegisLeagues = () => {
     const isMobile = useCheckResize();
 
-    const champs = isMobile ? "Champions League - Uncapped" : "Uncapped";
+    const challenger = isMobile ? "Challenger League - Uncapped" : "Uncapped";
     const marauder = isMobile ? "Marauder League - Master 600 LP Cap" : "Master 600 LP Cap";
     const defenders = isMobile ? "Defenders League - 100 LP Cap" : "100 LP Cap";
     const executioners = isMobile ? "Executioners League - Diamond 4 Cap" : "Diamond 4 Cap";
-    const protectors = isMobile ? "Protectors League - Emerald 4 Cap" : "Emerald 4 Cap";
+    const vanguard = isMobile ? "Vanguard League - 1000 LP Cap" : "1000 LP Cap";
 
     return (
         <div className="standardContainer">
@@ -16,16 +16,30 @@ export const AegisLeagues = () => {
 
             <div className="eventBannerContainer">
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/aegis-leagues/champ"}>Champions League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/aegis-leagues/challenger"}>Challenger League</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/games/LoL/leagues/aegis-leagues/champ"} 
+                        path={"/games/LoL/leagues/aegis-leagues/challenger"} 
                         imgUrl={"https://i.imgur.com/iy67hgo.png"} 
                         alt={"Aegis Leagues"}
                         verified={true}
                     />
-                    <HostBanner.Region>{champs}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/aegis-leagues/champ"} />
+                    <HostBanner.Region>{challenger}</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/aegis-leagues/challenger"} />
                 </HostBanner>
+
+                <HostBanner>
+                    <HostBanner.Title path={"/games/LoL/leagues/aegis-leagues/vanguard"}>Vanguard League</HostBanner.Title>
+                    <HostBanner.Image 
+                        path={"/games/LoL/leagues/aegis-leagues/vanguard"} 
+                        imgUrl={"https://i.imgur.com/iy67hgo.png"} 
+                        alt={"Aegis Leagues"}
+                        verified={true}
+                    />
+                    <HostBanner.Region>{vanguard}</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/aegis-leagues/vanguard"} />
+                </HostBanner>
+
+                <div className="hrEvents" />
 
                 <HostBanner>
                     <HostBanner.Title path={"/games/LoL/leagues/aegis-leagues/marauder"}>Marauder League</HostBanner.Title>
@@ -39,8 +53,6 @@ export const AegisLeagues = () => {
                     <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/aegis-leagues/marauder"} />
                 </HostBanner>
 
-                <div className="hrEvents" />
-
                 <HostBanner>
                     <HostBanner.Title path={"/games/LoL/leagues/aegis-leagues/defenders"}>Defenders League</HostBanner.Title>
                     <HostBanner.Image 
@@ -53,6 +65,8 @@ export const AegisLeagues = () => {
                     <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/aegis-leagues/defenders"} />
                 </HostBanner>
 
+                <div className="hrEvents" />
+
                 <HostBanner>
                     <HostBanner.Title path={"/games/LoL/leagues/aegis-leagues/executioners"}>Executioners League</HostBanner.Title>
                     <HostBanner.Image 
@@ -63,21 +77,7 @@ export const AegisLeagues = () => {
                     />
                     <HostBanner.Region>{executioners}</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/aegis-leagues/executioners"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/aegis-leagues/protectors"}>Protectors League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/LoL/leagues/aegis-leagues/protectors"} 
-                        imgUrl={"https://i.imgur.com/iy67hgo.png"} 
-                        alt={"Aegis Leagues"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{protectors}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/aegis-leagues/protectors"} />
-                </HostBanner>
+                </HostBanner>               
 
                 <div className="hrEvents" />
             </div>

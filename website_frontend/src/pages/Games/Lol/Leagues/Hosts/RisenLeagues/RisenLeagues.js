@@ -5,8 +5,8 @@ export const RisenLeagues = () => {
     const isMobile = useCheckResize();
 
     const champs = isMobile ? "Champions League - Must Qualify" : "Must Qualify";
-    const dominate = isMobile ? "Dominate League - Diamond 1 Cap" : "Diamond 1 Cap";
-    const unstoppable = isMobile ? "Unstoppable League - Emerald 1 Cap" : "Emerald 1 Cap";
+    const dominate = isMobile ? "Dominate League - Masters 100 LP Cap" : "Masters 100 LP Cap";
+    const unstoppable = isMobile ? "Unstoppable League - Diamond 4 Cap" : "Diamond 4 Cap";
     const rampage = isMobile ? "Rampage League - Emerald 4 Cap" : "Emerald 4 Cap";
     const draft = isMobile ? "Draft League - Account Level 100" : "Account Level 100";
 

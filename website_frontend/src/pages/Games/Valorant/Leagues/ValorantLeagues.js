@@ -7,32 +7,6 @@ export const ValorantLeagues = () => {
 
             <div className="eventBannerContainer">
                 <HostBanner>
-                    <HostBanner.Title path={"/games/Valorant/leagues/lpl-leagues"}>LPL Leagues</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/Valorant/leagues/lpl-leagues"} 
-                        imgUrl={"https://i.imgur.com/bqbNpmT.png"} 
-                        alt={"LPL Leagues"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>OCE</HostBanner.Region>
-                    <HostBanner.Button title={"All Leagues"} path={"/games/Valorant/leagues/lpl-leagues"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/Valorant/leagues/frontline-leagues"}>Team Frontline Leagues</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/Valorant/leagues/frontline-leagues"} 
-                        imgUrl={"https://i.imgur.com/pjxLzXe.png"} 
-                        alt={"Team Frontline Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"All Leagues"} path={"/games/Valorant/leagues/frontline-leagues"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
                     <HostBanner.Title path={"/games/Valorant/leagues/corporate"}>Corporate League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/Valorant/leagues/corporate"} 
@@ -76,20 +50,6 @@ export const ValorantLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/Valorant/leagues/ecac-leagues"}>ECAC Esports</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/Valorant/leagues/ecac-leagues"} 
-                        imgUrl={"https://i.imgur.com/VCXkcNL.png"} 
-                        alt={"ECAC Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>USA</HostBanner.Region>
-                    <HostBanner.Button title={"All Leagues"} path={"/games/Valorant/leagues/ecac-leagues"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
                     <HostBanner.Title path={"/games/Valorant/leagues/njcaae"}>NJCAAE</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/Valorant/leagues/njcaae"} 
@@ -100,6 +60,8 @@ export const ValorantLeagues = () => {
                     <HostBanner.Region>USA</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/Valorant/leagues/njcaae"} />
                 </HostBanner>
+
+                <div className="hrEvents" />
 
                 <HostBanner>
                     <HostBanner.Title path={"/games/Valorant/leagues/necc"}>NECC</HostBanner.Title>
@@ -113,8 +75,6 @@ export const ValorantLeagues = () => {
                     <HostBanner.Button title={"More Info"} path={"/games/Valorant/leagues/necc"} />
                 </HostBanner>
 
-                <div className="hrEvents" />
-
                 <HostBanner>
                     <HostBanner.Title path={"/games/Valorant/leagues/egfc"}>EGFC League</HostBanner.Title>
                     <HostBanner.Image 
@@ -126,6 +86,8 @@ export const ValorantLeagues = () => {
                     <HostBanner.Region>USA</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/Valorant/leagues/egfc"} />
                 </HostBanner>
+
+                <div className="hrEvents" />
 
                 <HostBanner>
                     <HostBanner.Title path={"/games/Valorant/leagues/playfly-leagues"}>Playfly College</HostBanner.Title>
@@ -139,8 +101,6 @@ export const ValorantLeagues = () => {
                     <HostBanner.Button title={"All Leagues"} path={"/games/Valorant/leagues/playfly-leagues"} />
                 </HostBanner>
 
-                <div className="hrEvents" />
-
                 <HostBanner>
                     <HostBanner.Title path={"/games/Valorant/leagues/csmg"}>CSMG League</HostBanner.Title>
                     <HostBanner.Image 
@@ -151,18 +111,6 @@ export const ValorantLeagues = () => {
                     />
                     <HostBanner.Region>USA</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/Valorant/leagues/csmg"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/Valorant/leagues/faceit"}>FACEIT Collegiate</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/Valorant/leagues/faceit"} 
-                        imgUrl={"https://i.imgur.com/e1oqsLF.png"} 
-                        alt={"FACEIT"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/Valorant/leagues/faceit"} />
                 </HostBanner>
 
                 <div className="hrEvents" />
@@ -178,18 +126,6 @@ export const ValorantLeagues = () => {
                     <HostBanner.Region>UK</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/Valorant/leagues/nse"} />
                 </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/Valorant/leagues/ugc-college"}>UGC Battle Academy</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/Valorant/leagues/ugc-college"} 
-                        imgUrl={"https://i.imgur.com/SVdtnVw.png"} 
-                        alt={"UGC"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>USA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/Valorant/leagues/ugc-college"} />
-                </HostBanner>
                 
                 <div className="hrEvents" />
 
@@ -197,18 +133,6 @@ export const ValorantLeagues = () => {
                 <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
                 
                 <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/Valorant/leagues/hsel"}>High School Esports League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/Valorant/leagues/hsel"} 
-                        imgUrl={"https://i.imgur.com/fYpPNR1.png"} 
-                        alt={"High School Esports League"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/Valorant/leagues/hsel"} />
-                </HostBanner>
 
                 <HostBanner>
                     <HostBanner.Title path={"/games/Valorant/leagues/tec"}>The Esports Company League</HostBanner.Title>
@@ -220,20 +144,6 @@ export const ValorantLeagues = () => {
                     />
                     <HostBanner.Region>USA</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/Valorant/leagues/tec"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/Valorant/leagues/vantagg"}>VantaGG</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/Valorant/leagues/vantagg"} 
-                        imgUrl={"https://i.imgur.com/4Lv3iRp.png"} 
-                        alt={"VantaGG"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>USA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/Valorant/leagues/vantagg"} />
                 </HostBanner>
 
                 <HostBanner>

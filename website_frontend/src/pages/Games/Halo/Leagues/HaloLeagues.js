@@ -64,25 +64,6 @@ export const HaloLeagues = () => {
                 </HostBanner>
 
                 <div className="hrEvents" />
-
-                <h2 className="eventSeparationTitle">High School Leagues</h2>
-                <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
-                
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/halo/leagues/hsel"}>High School Esports League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/halo/leagues/hsel"} 
-                        imgUrl={"https://i.imgur.com/fYpPNR1.png"} 
-                        alt={"High School Esports League"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/halo/leagues/hsel"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
             </div>
         </div>
     );

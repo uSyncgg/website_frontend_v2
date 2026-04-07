@@ -33,32 +33,6 @@ export const RLLeagues = () => {
                 <div className="hrEvents" />
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/frontline-leagues"}>Team Frontline Leagues</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/frontline-leagues"} 
-                        imgUrl={"https://i.imgur.com/pjxLzXe.png"} 
-                        alt={"Team Frontline Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"All Leagues"} path={"/games/RocketLeague/leagues/frontline-leagues"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/url-leagues"}>Ultimate Rocket League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/url-leagues"} 
-                        imgUrl={"https://i.imgur.com/MAt6qsf.png"} 
-                        alt={"URL Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"All Leagues"} path={"/games/RocketLeague/leagues/url-leagues"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
                     <HostBanner.Title path={"/games/RocketLeague/leagues/mle-leagues"}>Minor League Esports</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/RocketLeague/leagues/mle-leagues"} 
@@ -111,18 +85,6 @@ export const RLLeagues = () => {
                 <div className="hrEvents" />
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/raket-ligaen"}>Raket Ligaen</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/raket-ligaen"} 
-                        imgUrl={"https://i.imgur.com/dTZMWkR.png"} 
-                        alt={"Raket Ligaen"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>DK</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/raket-ligaen"} />
-                </HostBanner>
-
-                <HostBanner>
                     <HostBanner.Title path={"/games/RocketLeague/leagues/frontier-doubles-leagues"}>Frontier Doubles Leagues</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/RocketLeague/leagues/frontier-doubles-leagues"} 
@@ -133,34 +95,6 @@ export const RLLeagues = () => {
                     <HostBanner.Region>NA</HostBanner.Region>
                     <HostBanner.Button title={"All Leagues"} path={"/games/RocketLeague/leagues/frontier-doubles-leagues"} />
                 </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/oce-leagues"}>OCE Draft Leagues</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/oce-leagues"} 
-                        imgUrl={"https://i.imgur.com/NxauxTy.png"} 
-                        alt={"OCE Draft Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>OCE</HostBanner.Region>
-                    <HostBanner.Button title={"All Leagues"} path={"/games/RocketLeague/leagues/oce-leagues"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/finality"}>Finality League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/finality"} 
-                        imgUrl={"https://i.imgur.com/Q2G6QqM.png"} 
-                        alt={"Finality League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/finality"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
 
                 <HostBanner>
                     <HostBanner.Title path={"/games/RocketLeague/leagues/corporate"}>Corporate League</HostBanner.Title>
@@ -173,6 +107,8 @@ export const RLLeagues = () => {
                     <HostBanner.Region>NA</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/corporate"} />
                 </HostBanner>
+
+                <div className="hrEvents" />
 
                 <HostBanner>
                     <HostBanner.Title path={"/games/RocketLeague/leagues/airforce"}>Airforce Gaming League</HostBanner.Title>
@@ -246,15 +182,15 @@ export const RLLeagues = () => {
                 <div className="hrEvents" />
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/csmg"}>CSMG League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/RocketLeague/leagues/cecc"}>CECC League</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/csmg"} 
+                        path={"/games/RocketLeague/leagues/cecc"} 
                         imgUrl={"https://i.imgur.com/2EsJOXo.png"} 
-                        alt={"CSMG League"}
+                        alt={"CECC League"}
                         verified={false}
                     />
                     <HostBanner.Region>USA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/csmg"} />
+                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/cecc"} />
                 </HostBanner>
 
                 <HostBanner>
@@ -284,20 +220,6 @@ export const RLLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/ugc"}>UGC Battle Academy</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/ugc"} 
-                        imgUrl={"https://i.imgur.com/SVdtnVw.png"} 
-                        alt={"UGC"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>USA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/ugc"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
                     <HostBanner.Title path={"/games/RocketLeague/leagues/ael"}>Australian Esports League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/RocketLeague/leagues/ael"} 
@@ -309,50 +231,12 @@ export const RLLeagues = () => {
                     <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/ael"} />
                 </HostBanner>
 
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/faceit"}>FACEIT Collegiate</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/faceit"} 
-                        imgUrl={"https://i.imgur.com/e1oqsLF.png"} 
-                        alt={"Faceit"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/faceit"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/nse"}>National Student Esports</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/nse"} 
-                        imgUrl={"https://i.imgur.com/mJJJD6e.png"} 
-                        alt={"National Student Esports"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>EU</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/nse"} />
-                </HostBanner>
-
                 <div className="hrEvents" />
 
                 <h2 className="eventSeparationTitle">High School Leagues</h2>
                 <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
                 
                 <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/hsel"}>High School Esports League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/hsel"} 
-                        imgUrl={"https://i.imgur.com/fYpPNR1.png"} 
-                        alt={"High School Esports League"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/hsel"} />
-                </HostBanner>
 
                 <HostBanner>
                     <HostBanner.Title path={"/games/RocketLeague/leagues/playvs"}>PlayVS</HostBanner.Title>
@@ -366,8 +250,6 @@ export const RLLeagues = () => {
                     <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/playvs"} />
                 </HostBanner>
 
-                <div className="hrEvents" />
-
                 <HostBanner>
                     <HostBanner.Title path={"/games/RocketLeague/leagues/tec"}>The Esports Company League</HostBanner.Title>
                     <HostBanner.Image 
@@ -380,31 +262,7 @@ export const RLLeagues = () => {
                     <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/tec"} />
                 </HostBanner>
 
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/vantagg"}>VantaGG</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/vantagg"} 
-                        imgUrl={"https://i.imgur.com/4Lv3iRp.png"} 
-                        alt={"Vanta GG"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>USA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/vantagg"} />
-                </HostBanner>
-
                 <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/nasef"}>NASEF League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/nasef"} 
-                        imgUrl={"https://i.imgur.com/x0SaVuR.png"} 
-                        alt={"NASEF League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>USA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/nasef"} />
-                </HostBanner>
 
                 <HostBanner>
                     <HostBanner.Title path={"/games/RocketLeague/leagues/egfh"}>EGFH League</HostBanner.Title>
@@ -418,8 +276,6 @@ export const RLLeagues = () => {
                     <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/egfh"} />
                 </HostBanner>
 
-                <div className="hrEvents" />
-
                 <HostBanner>
                     <HostBanner.Title path={"/games/RocketLeague/leagues/aelhs"}>Australian Esports League</HostBanner.Title>
                     <HostBanner.Image 
@@ -430,18 +286,6 @@ export const RLLeagues = () => {
                     />
                     <HostBanner.Region>AUS</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/aelhs"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/ugc-hs"}>UGC HS Battle Academy</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/ugc-hs"} 
-                        imgUrl={"https://i.imgur.com/SVdtnVw.png"} 
-                        alt={"UGC HS"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>USA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/ugc-hs"} />
                 </HostBanner>
 
                 <div className="hrEvents" />

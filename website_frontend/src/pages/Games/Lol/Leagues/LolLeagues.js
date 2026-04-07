@@ -213,18 +213,6 @@ export const LolLeagues = () => {
                 <div className="hrEvents" />
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/vantagg"}>VantaGG</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/LoL/leagues/vantagg"} 
-                        imgUrl={"https://i.imgur.com/4Lv3iRp.png"} 
-                        alt={"VantaGG"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>USA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/vantagg"} />
-                </HostBanner>
-
-                <HostBanner>
                     <HostBanner.Title path={"/games/LoL/leagues/playvs"}>PlayVS</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/LoL/leagues/playvs"} 

@@ -150,32 +150,6 @@ export const CodLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/call-of-duty/leagues/kinetic-league"}>Kinetic League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/call-of-duty/leagues/kinetic-league"} 
-                        imgUrl={"https://i.imgur.com/zRAMO6t.png"} 
-                        alt={"Kinetic League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/kinetic-league"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/call-of-duty/leagues/House-of-esports-leagues"}>House of Esports</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/call-of-duty/leagues/House-of-esports-leagues"} 
-                        imgUrl={"https://i.imgur.com/47wczZC.png"} 
-                        alt={"House of Esports Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>All Regions</HostBanner.Region>
-                    <HostBanner.Button title={"All Leagues"} path={"/games/call-of-duty/leagues/House-of-esports-leagues"} />
-                </HostBanner>
-
-                <HostBanner>
                     <HostBanner.Title path={"/games/call-of-duty/leagues/ixi-esports"}>IXI Esports</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/call-of-duty/leagues/ixi-esports"} 
@@ -202,30 +176,18 @@ export const CodLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/call-of-duty/leagues/cod-rec-league"}>COD Rec League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/call-of-duty/leagues/cod-rec-leagues"}>COD Rec Leagues</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/games/call-of-duty/leagues/cod-rec-league"} 
+                        path={"/games/call-of-duty/leagues/cod-rec-leagues"} 
                         imgUrl={"https://i.imgur.com/qbmhh4T.png"} 
-                        alt={"CoD Rec League"}
+                        alt={"CoD Rec Leagues"}
                         verified={false}
                     />
-                    <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/cod-rec-league"} />
+                    <HostBanner.Region>All Leagues</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/cod-rec-leagues"} />
                 </HostBanner>
 
                 <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/call-of-duty/leagues/retired-challengers"}>Retired Challengers League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/call-of-duty/leagues/retired-challengers"} 
-                        imgUrl={"https://i.imgur.com/SlHiOMp.png"} 
-                        alt={"Retired Challengers League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/retired-challengers"} />
-                </HostBanner>
 
                 <HostBanner>
                     <HostBanner.Title path={"/games/call-of-duty/leagues/elite-gaming-warfare-league"}>Elite Warfare Gaming League</HostBanner.Title>
@@ -239,8 +201,6 @@ export const CodLeagues = () => {
                     <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/elite-gaming-warfare-league"} />
                 </HostBanner>
 
-                <div className="hrEvents" />
-
                 <HostBanner>
                     <HostBanner.Title path={"/games/call-of-duty/leagues/casual-xp-league"}>Casual XP League</HostBanner.Title>
                     <HostBanner.Image 
@@ -252,6 +212,8 @@ export const CodLeagues = () => {
                     <HostBanner.Region>All Regions</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/casual-xp-league"} />
                 </HostBanner>
+
+                <div className="hrEvents" />
 
                 <HostBanner>
                     <HostBanner.Title path={"/games/call-of-duty/leagues/old-heads-circuit"}>Old Heads Circuit</HostBanner.Title>

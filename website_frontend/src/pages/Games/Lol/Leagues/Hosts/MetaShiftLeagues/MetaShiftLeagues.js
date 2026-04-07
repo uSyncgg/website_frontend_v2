@@ -4,12 +4,12 @@ import { useCheckResize } from "hooks";
 export const MetaShiftLeagues = () => {
     const isMobile = useCheckResize();
 
-    const radon = isMobile ? "Radon League - Tier 1" : "Tier 1";
-    const xenon = isMobile ? "Xenon League - Tier 2" : "Tier 2";
-    const krypton = isMobile ? "Krypton League - Tier 3" : "Tier 3";
-    const argon = isMobile ? "Argon League - Tier 4" : "Tier 4";
-    const nitrogen = isMobile ? "Nitrogen League - Tier 5" : "Tier 5";
-    const neon = isMobile ? "Neon League - Tier 6" : "Tier 6";
+    const noble = isMobile ? "Noble League - Tier 1" : "Tier 1";
+    const diamond = isMobile ? "Diamond League - Tier 2" : "Tier 2";
+    const emerald = isMobile ? "Emerald League - Tier 3" : "Tier 3";
+    const cyanide = isMobile ? "Cyanide League - Tier 4" : "Tier 4";
+    const platinum = isMobile ? "Platinum League - Tier 5" : "Tier 5";
+    const draft = isMobile ? "Draft League" : "Draft";
 
     return (
         <div className="standardContainer">
@@ -17,79 +17,79 @@ export const MetaShiftLeagues = () => {
 
             <div className="eventBannerContainer">
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/meta-shift-leagues/radon"}>Radon League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/meta-shift-leagues/noble"}>Noble League</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/games/LoL/leagues/meta-shift-leagues/radon"} 
+                        path={"/games/LoL/leagues/meta-shift-leagues/noble"} 
                         imgUrl={"https://i.imgur.com/XiFomA7.png"} 
                         alt={"MetaShift Leagues"}
                         verified={false}
                     />
-                    <HostBanner.Region>{radon}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/meta-shift-leagues/radon"} />
+                    <HostBanner.Region>{noble}</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/meta-shift-leagues/noble"} />
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/meta-shift-leagues/xenon"}>Xenon League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/meta-shift-leagues/diamond"}>Diamond League</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/games/LoL/leagues/meta-shift-leagues/xenon"} 
+                        path={"/games/LoL/leagues/meta-shift-leagues/diamond"} 
                         imgUrl={"https://i.imgur.com/XiFomA7.png"} 
                         alt={"MetaShift Leagues"}
                         verified={false}
                     />
-                    <HostBanner.Region>{xenon}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/meta-shift-leagues/xenon"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/meta-shift-leagues/krypton"}>Krypton League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/LoL/leagues/meta-shift-leagues/krypton"} 
-                        imgUrl={"https://i.imgur.com/XiFomA7.png"} 
-                        alt={"MetaShift Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{krypton}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/meta-shift-leagues/krypton"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/meta-shift-leagues/argon"}>Argon League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/LoL/leagues/meta-shift-leagues/argon"} 
-                        imgUrl={"https://i.imgur.com/XiFomA7.png"} 
-                        alt={"MetaShift Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{argon}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/meta-shift-leagues/argon"} />
+                    <HostBanner.Region>{diamond}</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/meta-shift-leagues/diamond"} />
                 </HostBanner>
 
                 <div className="hrEvents" />
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/meta-shift-leagues/nitrogen"}>Nitrogen League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/meta-shift-leagues/emerald"}>Emerald League</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/games/LoL/leagues/meta-shift-leagues/nitrogen"} 
+                        path={"/games/LoL/leagues/meta-shift-leagues/emerald"} 
                         imgUrl={"https://i.imgur.com/XiFomA7.png"} 
                         alt={"MetaShift Leagues"}
                         verified={false}
                     />
-                    <HostBanner.Region>{nitrogen}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/meta-shift-leagues/nitrogen"} />
+                    <HostBanner.Region>{emerald}</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/meta-shift-leagues/emerald"} />
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/meta-shift-leagues/neon"}>Neon League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/meta-shift-leagues/cyanide"}>Cyanide League</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/games/LoL/leagues/meta-shift-leagues/neon"} 
+                        path={"/games/LoL/leagues/meta-shift-leagues/cyanide"} 
                         imgUrl={"https://i.imgur.com/XiFomA7.png"} 
                         alt={"MetaShift Leagues"}
                         verified={false}
                     />
-                    <HostBanner.Region>{neon}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/meta-shift-leagues/neon"} />
+                    <HostBanner.Region>{cyanide}</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/meta-shift-leagues/cyanide"} />
+                </HostBanner>
+
+                <div className="hrEvents" />
+
+                <HostBanner>
+                    <HostBanner.Title path={"/games/LoL/leagues/meta-shift-leagues/platinum"}>Platinum League</HostBanner.Title>
+                    <HostBanner.Image 
+                        path={"/games/LoL/leagues/meta-shift-leagues/platinum"} 
+                        imgUrl={"https://i.imgur.com/XiFomA7.png"} 
+                        alt={"MetaShift Leagues"}
+                        verified={false}
+                    />
+                    <HostBanner.Region>{platinum}</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/meta-shift-leagues/platinum"} />
+                </HostBanner>
+
+                <HostBanner>
+                    <HostBanner.Title path={"/games/LoL/leagues/meta-shift-leagues/draft"}>Draft League</HostBanner.Title>
+                    <HostBanner.Image 
+                        path={"/games/LoL/leagues/meta-shift-leagues/draft"} 
+                        imgUrl={"https://i.imgur.com/XiFomA7.png"} 
+                        alt={"MetaShift Leagues"}
+                        verified={false}
+                    />
+                    <HostBanner.Region>{draft}</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/meta-shift-leagues/draft"} />
                 </HostBanner>
 
                 <div className="hrEvents" />

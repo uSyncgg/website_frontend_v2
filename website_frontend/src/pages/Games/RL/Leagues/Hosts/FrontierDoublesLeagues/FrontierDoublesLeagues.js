@@ -4,10 +4,11 @@ import { useCheckResize } from "hooks";
 export const FrontierDoublesLeagues = () => {
     const isMobile = useCheckResize();
 
-    const elite = isMobile ? "Elite League - 1600 - 1799 MMR" : "1600 - 1799 MMR";
-    const star = isMobile ? "Star League - 1400 - 1599 MMR" : "1400 - 1599 MMR";
-    const expert = isMobile ? "Expert League - 1200 - 1399 MMR" : "1200 - 1399 MMR";
-    const origin = isMobile ? "Origin League - 0 - 1199 MMR" : "0 - 1199 MMR";
+    const elite = isMobile ? "Elite League - 37.5 Salary Cap" : "37.5 Salary Cap";
+    const star = isMobile ? "Star League - 48 Salary Cap" : "48 Salary Cap";
+    const expert = isMobile ? "Expert League - 42 Salary Cap" : "42 Salary Cap";
+    const adept = isMobile ? "Adept Leaue - 36 Salary Cap" : "36 Salary Cap";
+    const origin = isMobile ? "Origin League - 30 Salary Cap" : "30 Salary Cap";
 
     return (
         <div className="standardContainer">
@@ -51,6 +52,20 @@ export const FrontierDoublesLeagues = () => {
                     <HostBanner.Region>{expert}</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/frontier-doubles-leagues/expert"} />
                 </HostBanner>
+
+                <HostBanner>
+                    <HostBanner.Title path={"/games/RocketLeague/leagues/frontier-doubles-leagues/adept"}>Adept League</HostBanner.Title>
+                    <HostBanner.Image 
+                        path={"/games/RocketLeague/leagues/frontier-doubles-leagues/adept"} 
+                        imgUrl={"https://i.imgur.com/JRaBjWV.png"} 
+                        alt={"Frontier Doubles Leagues"}
+                        verified={false}
+                    />
+                    <HostBanner.Region>{adept}</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/frontier-doubles-leagues/adept"} />
+                </HostBanner>
+
+                <div className="hrEvents" />
 
                 <HostBanner>
                     <HostBanner.Title path={"/games/RocketLeague/leagues/frontier-doubles-leagues/origin"}>Origin League</HostBanner.Title>

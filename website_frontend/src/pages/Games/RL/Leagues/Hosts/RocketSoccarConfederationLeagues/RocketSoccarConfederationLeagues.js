@@ -6,7 +6,6 @@ export const RocketSoccarConfederationLeagues = () => {
 
     const na = isMobile ? "3v3 NA League - Draft Format" : "Draft Format";
     const eu = isMobile ? "3v3 EU League - Draft Format" : "Draft Format";
-    const duo = isMobile ? "2v2 League - Draft Format" : "Draft Format";
 
     return (
         <div className="standardContainer">
@@ -35,20 +34,6 @@ export const RocketSoccarConfederationLeagues = () => {
                     />
                     <HostBanner.Region>{eu}</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/rsc-leagues/3v3-eu"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/rsc-leagues/2v2"}>2v2 League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/rsc-leagues/2v2"} 
-                        imgUrl={"https://i.imgur.com/QiNSeyE.png"} 
-                        alt={"Rocket Soccar Confederation"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{duo}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/rsc-leagues/2v2"} />
                 </HostBanner>
 
                 <div className="hrEvents" />

@@ -1,6 +1,28 @@
+import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import '../../../EventInformation.css';
 
 export const AustralianEsportsLeague = () => {
     return (
-        <></>
+        <div className="standardContainer">
+            <HeaderImage title={"Australian Esports League"} imageClass={"eventPage"} />
+
+            <div className="eventInfoCardContainer">
+                <div>
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} />
+                </div>
+
+                <div>
+                    <EventInfoCard title={"Details"} infoList={["$3,500 Prize Pool over 2 Seasons (Estimated)", "Stage 1 (Regular Season): Best of 1 Matches", "Stage 2 (Playoffs): Best of 3 Matches", "Top Teams from Stage 1 Move to Stage 2", "Open Series = Any University Can Join", "Elite Series = Invitational-Only Universities", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - AUS"]}/>
+                </div>
+
+                <div>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD", "Must be enrolled at an Australian University"]} />
+                </div>
+            </div>
+
+            <div className="eventButtonContainer">
+                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://ael.org.au/uni/"} />
+            </div>
+        </div>
     );
 }

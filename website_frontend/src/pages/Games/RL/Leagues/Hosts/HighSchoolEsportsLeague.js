@@ -1,6 +1,0 @@
-
-export const HighSchoolEsportsLeague = () => {
-    return (
-        <></>
-    );
-}

@@ -42,11 +42,7 @@ import { EsportsAgentH2H } from 'pages/Games/Cod/HeadToHead/Hosts/EsportsAgentH2
 import { CodLeagues } from 'pages/Games/Cod/Leagues/CodLeagues';
 import { CollegeXPLeagues } from 'pages/Games/Cod/Leagues/Hosts/CollegeXPLeagues/CollegeXPLeagues';
 import { CollegeXPClubLeague } from 'pages/Games/Cod/Leagues/Hosts/CollegeXPLeagues/CollegeXPClubLeague';
-import { CollegeXPOpenLeague } from 'pages/Games/Cod/Leagues/Hosts/CollegeXPLeagues/CollegeXPOpenLeague';
 import { CollegeXPVarsityLeague } from 'pages/Games/Cod/Leagues/Hosts/CollegeXPLeagues/CollegeXPVarsityLeague';
-import { HouseOfEsportsLeagues } from 'pages/Games/Cod/Leagues/Hosts/HouseOfEsportsLeagues/HouseOfEsportsLeagues';
-import { HouseOfEsportsAmateursLeague } from 'pages/Games/Cod/Leagues/Hosts/HouseOfEsportsLeagues/HouseOfEsportsAmateursLeague';
-import { HouseOfEsportsChallengersLeague } from 'pages/Games/Cod/Leagues/Hosts/HouseOfEsportsLeagues/HouseOfEsportsChallengersLeague';
 import { LockdownCLLeagues } from 'pages/Games/Cod/Leagues/Hosts/LockdownCLLeagues/LockdownCLLeagues';
 import { LockdownLegendsLeague } from 'pages/Games/Cod/Leagues/Hosts/LockdownCLLeagues/LockdownLegendsLeague';
 import { LockdownLowersLeague } from 'pages/Games/Cod/Leagues/Hosts/LockdownCLLeagues/LockdownLowersLeague';
@@ -59,19 +55,19 @@ import { PulseUppersLeague } from 'pages/Games/Cod/Leagues/Hosts/PulseXLeagues/P
 import { AirForceGamingLeague as AirForceCodLeague } from 'pages/Games/Cod/Leagues/Hosts/AirForceGamingLeague';
 import { BeerLeague } from 'pages/Games/Cod/Leagues/Hosts/BeerLeague';
 import { CasualXPLeague } from 'pages/Games/Cod/Leagues/Hosts/CasualXPLeague';
-import { CodRecLeague } from 'pages/Games/Cod/Leagues/Hosts/CodRecLeague';
+import { CodRecLeagues } from 'pages/Games/Cod/Leagues/Hosts/CollegeRecLeagues/CodRecLeagues';
+import { CodRecPremadeLeague } from 'pages/Games/Cod/Leagues/Hosts/CollegeRecLeagues/CodRecPremadeLeague';
+import { CodRecOpenLeague } from 'pages/Games/Cod/Leagues/Hosts/CollegeRecLeagues/CodRecOpenLeague';
 import { CollegeCodLeague } from 'pages/Games/Cod/Leagues/Hosts/CollegeCodLeague';
 import { CorporateCodLeague } from 'pages/Games/Cod/Leagues/Hosts/CorporateCodLeague';
 import { ECACEsportsLeague as ECACCodLeague } from 'pages/Games/Cod/Leagues/Hosts/ECACEsportsLeague';
 import { EliteWarfareGamingLeague } from 'pages/Games/Cod/Leagues/Hosts/EliteWarfareGamingLeague';
 import { FemaleCodLeague } from 'pages/Games/Cod/Leagues/Hosts/FemaleCodLeague';
 import { IXIEsportsLeague } from 'pages/Games/Cod/Leagues/Hosts/IXIEsportsLeague';
-import { KineticLeague } from 'pages/Games/Cod/Leagues/Hosts/KineticLeague';
 import { NJCAAELeague as NJCAAECodLeague } from 'pages/Games/Cod/Leagues/Hosts/NJCAAELeague';
 import { OldHeadsCircuitLeague } from 'pages/Games/Cod/Leagues/Hosts/OldHeadsCircuitLeague';
 import { PlayflyCollegeLeague as PlayflyCodLeague } from 'pages/Games/Cod/Leagues/Hosts/PlayflyCollegeLeague';
 import { PremierCircuitLeague } from 'pages/Games/Cod/Leagues/Hosts/PremierCircuitLeague';
-import { RetiredChallengersLeague } from 'pages/Games/Cod/Leagues/Hosts/RetiredChallengersLeague';
 import { TPCWomensCodLeague } from 'pages/Games/Cod/Leagues/Hosts/TPCWomensCodLeague';
 import { U18CodLeague } from 'pages/Games/Cod/Leagues/Hosts/U18CodLeague';
 import { UnitedRogueLeague as UnitedRogueCodLeague } from 'pages/Games/Cod/Leagues/Hosts/UnitedRogureLeague';
@@ -103,31 +99,16 @@ import { CSLeagues } from 'pages/Games/CS/Leagues/CSLeagues';
 import { HyperfibreLeagues } from 'pages/Games/CS/Leagues/Hosts/HyperfibreLeagues/HyperfibreLeagues';
 import { HyperfibreEliteLeague } from 'pages/Games/CS/Leagues/Hosts/HyperfibreLeagues/HyperfibreEliteLeague';
 import { HyperfibreSocialLeague } from 'pages/Games/CS/Leagues/Hosts/HyperfibreLeagues/HyperfibreSocialLeague';
-import { LPLPathfinderLeagues as LPLPathfinderLeaguesCS } from 'pages/Games/CS/Leagues/Hosts/LPLPathfinderLeagues/LPLPathfinderLeagues';
-import { LPLPathfinderBronzeLeague as LPLPathfinderBronzeLeagueCS } from 'pages/Games/CS/Leagues/Hosts/LPLPathfinderLeagues/LPLPathfinderBronzeLeague';
-import { LPLPathfinderGoldLeague as LPLPathfinderGoldLeagueCS } from 'pages/Games/CS/Leagues/Hosts/LPLPathfinderLeagues/LPLPathfinderGoldLeague';
-import { LPLPathfinderOpenLeague as LPLPathfinderOpenLeagueCS } from 'pages/Games/CS/Leagues/Hosts/LPLPathfinderLeagues/LPLPathfinderOpenLeague';
-import { LPLPathfinderSilverLeague as LPLPathfinderSilverLeagueCS } from 'pages/Games/CS/Leagues/Hosts/LPLPathfinderLeagues/LPLPathfinderSilverLeague';
-import { SCLLeagues } from 'pages/Games/CS/Leagues/Hosts/SCLLeagues/SCLLeagues';
-import { SCLChallengerLeague } from 'pages/Games/CS/Leagues/Hosts/SCLLeagues/SCLChallengerLeague';
-import { SCLIntermediateLeague } from 'pages/Games/CS/Leagues/Hosts/SCLLeagues/SCLIntermediateLeague';
-import { SCLMasterLeague } from 'pages/Games/CS/Leagues/Hosts/SCLLeagues/SCLMasterLeague';
-import { SCLPublicLeague } from 'pages/Games/CS/Leagues/Hosts/SCLLeagues/SCLPublicLeague';
 import { AustralianEsportsLeague as AustralianCSEsportsLeague } from 'pages/Games/CS/Leagues/Hosts/AustralianEsportsLeague';
 import { CorporateCS2League } from 'pages/Games/CS/Leagues/Hosts/CorporateCS2League';
-import { ECACLeague as ECACCSLeague } from 'pages/Games/CS/Leagues/Hosts/ECACLeague';
 import { EGFCLeague as EGFCCSLeague } from 'pages/Games/CS/Leagues/Hosts/EGFCLeague';
-import { FaceitCollegiateLeague as FaceitCSCollegiate } from 'pages/Games/CS/Leagues/Hosts/FaceitCollegiateLeague';
 import { FaceitESEALeague } from 'pages/Games/CS/Leagues/Hosts/FaceitESEALeague';
 import { FastCupLeague } from 'pages/Games/CS/Leagues/Hosts/FastCupLeague';
 import { FiReLeague } from 'pages/Games/CS/Leagues/Hosts/FiReLeague';
-import { HighSchoolEsportsLeague as HighSchoolCSLeague } from 'pages/Games/CS/Leagues/Hosts/HighSchoolEsportsLeague';
-import { NationalStudentEsportsLeague as NationalStudentCSLeague } from 'pages/Games/CS/Leagues/Hosts/NationalStudentEsportsLeague';
 import { NECCLeague as NECCCSLeague } from 'pages/Games/CS/Leagues/Hosts/NECCLeague';
 import { NJCAAELeague as NJCAAECSLeague } from 'pages/Games/CS/Leagues/Hosts/NJCAAELeague';
 import { PlayflyCollegeLeague as PlayflyCSLeague } from 'pages/Games/CS/Leagues/Hosts/PlayflyCollegeLeague';
 import { UnitedTwentyOneLeague } from 'pages/Games/CS/Leagues/Hosts/UnitedTwentyOneLeague';
-import { VantaGGLeague as VantaGGCSLeague } from 'pages/Games/CS/Leagues/Hosts/VantaGGLeague';
 // Wagers
 import { CSWagers } from 'pages/Games/CS/Wagers/CSWagers';
 import { DubbzWagers as DubbzCSWagers } from 'pages/Games/CS/Wagers/Hosts/DubbzWagers';
@@ -151,7 +132,6 @@ import { AscendingBaselinePandemoniumGamesLeague } from 'pages/Games/Halo/League
 import { CollegeHaloLeague } from 'pages/Games/Halo/Leagues/Hosts/CollegeHaloLeague';
 import { HaloAgentLeague } from 'pages/Games/Halo/Leagues/Hosts/HaloAgentLeague';
 import { HaloRecLeague } from 'pages/Games/Halo/Leagues/Hosts/HaloRecLeague';
-import { HighSchoolEsportsLeague as HighSchoolHaloLeague } from 'pages/Games/Halo/Leagues/Hosts/HighSchoolEsportsLeague';
 // Wagers
 import { HaloWagers } from 'pages/Games/Halo/Wagers/HaloWagers';
 import { CmgWagers as CmgHaloWagers } from 'pages/Games/Halo/Wagers/Hosts/CmgWagers';
@@ -169,11 +149,11 @@ import { PraccH2H as PraccLoLH2H } from 'pages/Games/Lol/HeadToHead/Hosts/PraccH
 // Leagues
 import { LolLeagues } from 'pages/Games/Lol/Leagues/LolLeagues';
 import { AegisLeagues } from 'pages/Games/Lol/Leagues/Hosts/AegisLeagues/AegisLeagues';
-import { AegisChampionsLeague } from 'pages/Games/Lol/Leagues/Hosts/AegisLeagues/AegisChampionsLeague';
+import { AegisChallengerLeague } from 'pages/Games/Lol/Leagues/Hosts/AegisLeagues/AegisChallengerLeague';
 import { AegisDefendersLeague } from 'pages/Games/Lol/Leagues/Hosts/AegisLeagues/AegisDefendersLeague';
 import { AegisExecutionersLeague } from 'pages/Games/Lol/Leagues/Hosts/AegisLeagues/AegisExecutionersLeague';
 import { AegisMarauderLeague } from 'pages/Games/Lol/Leagues/Hosts/AegisLeagues/AegisMarauderLeague';
-import { AegisProtectorsLeague } from 'pages/Games/Lol/Leagues/Hosts/AegisLeagues/AegisProtectorsLeague';
+import { AegisVanguardLeague } from 'pages/Games/Lol/Leagues/Hosts/AegisLeagues/AegisVanguardLeague';
 import { BlueOtterLeagues } from 'pages/Games/Lol/Leagues/Hosts/BlueOtterLeagues/BlueOtterLeagues';
 import { BlueOtterDiamondLeague } from 'pages/Games/Lol/Leagues/Hosts/BlueOtterLeagues/BlueOtterDiamondLeague';
 import { BlueOtterDraftLeague } from 'pages/Games/Lol/Leagues/Hosts/BlueOtterLeagues/BlueOtterDraftLeague';
@@ -190,13 +170,15 @@ import { LowBudgetCommercialLeague } from 'pages/Games/Lol/Leagues/Hosts/LowBudg
 import { LowBudgetExecutiveLeague } from 'pages/Games/Lol/Leagues/Hosts/LowBudgetLCSLeagues/LowBudgetExecutiveLeague';
 import { LowBudgetEconomyLeague } from 'pages/Games/Lol/Leagues/Hosts/LowBudgetLCSLeagues/LowBudgetEconomyLeague';
 import { LowBudgetFinancialLeague } from 'pages/Games/Lol/Leagues/Hosts/LowBudgetLCSLeagues/LowBudgetFinancialLeague';
+import { LowBudgetCEOLeague } from 'pages/Games/Lol/Leagues/Hosts/LowBudgetLCSLeagues/LowBudgetCEOLeague';
+import { LowBudgetLTALeague } from 'pages/Games/Lol/Leagues/Hosts/LowBudgetLCSLeagues/LowBudgetLTALeague';
 import { MetaShiftLeagues } from 'pages/Games/Lol/Leagues/Hosts/MetaShiftLeagues/MetaShiftLeagues';
-import { MetaShiftArgonLeague } from 'pages/Games/Lol/Leagues/Hosts/MetaShiftLeagues/MetaShiftArgonLeague';
-import { MetaShiftKryptonLeague } from 'pages/Games/Lol/Leagues/Hosts/MetaShiftLeagues/MetaShiftKryptonLeague';
-import { MetaShiftNeonLeague } from 'pages/Games/Lol/Leagues/Hosts/MetaShiftLeagues/MetaShiftNeonLeague';
-import { MetaShiftNitrogenLeague } from 'pages/Games/Lol/Leagues/Hosts/MetaShiftLeagues/MetaShiftNitrogenLeague';
-import { MetaShiftRadonLeague } from 'pages/Games/Lol/Leagues/Hosts/MetaShiftLeagues/MetaShiftRadonLeague';
-import { MetaShiftXenonLeague } from 'pages/Games/Lol/Leagues/Hosts/MetaShiftLeagues/MetaShiftXenonLeague';
+import { MetaShiftCyanideLeague } from 'pages/Games/Lol/Leagues/Hosts/MetaShiftLeagues/MetaShiftCyanideLeague';
+import { MetaShiftEmeraldLeague } from 'pages/Games/Lol/Leagues/Hosts/MetaShiftLeagues/MetaShiftEmeraldLeague';
+import { MetaShiftDraftLeague } from 'pages/Games/Lol/Leagues/Hosts/MetaShiftLeagues/MetaShiftDraftLeague';
+import { MetaShiftPlatinumLeague } from 'pages/Games/Lol/Leagues/Hosts/MetaShiftLeagues/MetaShiftPlatinumLeague';
+import { MetaShiftNobleLeague } from 'pages/Games/Lol/Leagues/Hosts/MetaShiftLeagues/MetaShiftNobleLeague';
+import { MetaShiftDiamondLeague } from 'pages/Games/Lol/Leagues/Hosts/MetaShiftLeagues/MetaShiftDiamondLeague';
 import { RisenLeagues } from 'pages/Games/Lol/Leagues/Hosts/RisenLeagues/RisenLeagues';
 import { RisenChampionsLeague } from 'pages/Games/Lol/Leagues/Hosts/RisenLeagues/RisenChampionsLeague';
 import { RisenDominateLeague } from 'pages/Games/Lol/Leagues/Hosts/RisenLeagues/RisenDominateLeague';
@@ -204,7 +186,6 @@ import { RisenDraftLeague } from 'pages/Games/Lol/Leagues/Hosts/RisenLeagues/Ris
 import { RisenRampageLeague } from 'pages/Games/Lol/Leagues/Hosts/RisenLeagues/RisenRampageLeague';
 import { RisenUnstoppableLeague } from 'pages/Games/Lol/Leagues/Hosts/RisenLeagues/RisenUnstoppableLeague';
 import { TitanEsportsLeagues } from 'pages/Games/Lol/Leagues/Hosts/TitanEsportsLeagues/TitanEsportsLeagues';
-import { TitanBerserkerLeague } from 'pages/Games/Lol/Leagues/Hosts/TitanEsportsLeagues/TitanBerserkerLeague';
 import { TitanConquerorLeague } from 'pages/Games/Lol/Leagues/Hosts/TitanEsportsLeagues/TitanConquerorLeague';
 import { TitanDivinityLeague } from 'pages/Games/Lol/Leagues/Hosts/TitanEsportsLeagues/TitanDivinityLeague';
 import { TitanEternalLeague } from 'pages/Games/Lol/Leagues/Hosts/TitanEsportsLeagues/TitanEternalLeague';
@@ -220,7 +201,6 @@ import { NationalStudentEsportsLeague as NationalStudentLoLLeague } from 'pages/
 import { PlayflyCollegeLeague as PlayflyLoLLeague } from 'pages/Games/Lol/Leagues/Hosts/PlayflyCollegeLeague';
 import { PlayVSLeague as PlayVSLoLLeague } from 'pages/Games/Lol/Leagues/Hosts/PlayVSLeague';
 import { SDCLeague } from 'pages/Games/Lol/Leagues/Hosts/SDCLeague';
-import { VantaGGLeague as VantaGGLoLLeague } from 'pages/Games/Lol/Leagues/Hosts/VantaGGLeague';
 import { NECCLeague as NECCLoLLeague } from 'pages/Games/Lol/Leagues/Hosts/NECCLeague';
 // Wagers
 import { LolWagers } from 'pages/Games/Lol/Wagers/LolWagers';
@@ -241,6 +221,7 @@ import { FrontierEliteLeague } from 'pages/Games/RL/Leagues/Hosts/FrontierDouble
 import { FrontierExpertLeague } from 'pages/Games/RL/Leagues/Hosts/FrontierDoublesLeagues/FrontierExpertLeague';
 import { FrontierOriginLeague } from 'pages/Games/RL/Leagues/Hosts/FrontierDoublesLeagues/FrontierOriginLeague';
 import { FrontierStarLeague } from 'pages/Games/RL/Leagues/Hosts/FrontierDoublesLeagues/FrontierStarLeague';
+import { FrontierAdeptLeague } from 'pages/Games/RL/Leagues/Hosts/FrontierDoublesLeagues/FrontierAdeptLeague';
 import { ItalianRocketChampLeagues } from 'pages/Games/RL/Leagues/Hosts/ItalianRocketChampLeagues/ItalianRocketChampLeagues';
 import { ItalianSerieALeague } from 'pages/Games/RL/Leagues/Hosts/ItalianRocketChampLeagues/ItalianSerieALeague';
 import { ItalianSerieBLeague } from 'pages/Games/RL/Leagues/Hosts/ItalianRocketChampLeagues/ItalianSerieBLeague';
@@ -256,48 +237,25 @@ import { NemesisNoviceLeague } from 'pages/Games/RL/Leagues/Hosts/NemesisLeagues
 import { NemesisProspectLeague } from 'pages/Games/RL/Leagues/Hosts/NemesisLeagues/NemesisProspectLeague';
 import { NemesisRivalLeague } from 'pages/Games/RL/Leagues/Hosts/NemesisLeagues/NemesisRivalLeague';
 import { NemesisTitanLeague } from 'pages/Games/RL/Leagues/Hosts/NemesisLeagues/NemesisTitanLeague';
-import { OCEDraftLeagues } from 'pages/Games/RL/Leagues/Hosts/OCEDraftLeagues/OCEDraftLeagues';
-import { OCEDivisions } from 'pages/Games/RL/Leagues/Hosts/OCEDraftLeagues/OCEDivisions';
 import { RLPCLeagues } from 'pages/Games/RL/Leagues/Hosts/RLPCLeagues/RLPCLeagues';
 import { RLPCDoubleALeague } from 'pages/Games/RL/Leagues/Hosts/RLPCLeagues/RLPCDoubleALeague';
 import { RLPCSingleALeague } from 'pages/Games/RL/Leagues/Hosts/RLPCLeagues/RLPCSingleALeague';
 import { RLPCTripleALeague } from 'pages/Games/RL/Leagues/Hosts/RLPCLeagues/RLPCTripleALeague';
-import { RocketSoccarConfederationLeagues } from 'pages/Games/RL/Leagues/Hosts/RocketSoccarConfederationLeagues/RocketSoccarConfederationLeagues';
-import { RSC2v2League } from 'pages/Games/RL/Leagues/Hosts/RocketSoccarConfederationLeagues/RSC2v2League';
-import { RSC3v3EULeague } from 'pages/Games/RL/Leagues/Hosts/RocketSoccarConfederationLeagues/RSC3v3EULeague';
-import { RSC3v3NALeague } from 'pages/Games/RL/Leagues/Hosts/RocketSoccarConfederationLeagues/RSC3v3NALeague';
-import { TeamFrontlineLeagues as TeamFrontlineRLLeagues } from 'pages/Games/RL/Leagues/Hosts/TeamFrontlineLeagues/TeamFrontlineLeagues';
-import { TeamFrontlineChallengerLeague } from 'pages/Games/RL/Leagues/Hosts/TeamFrontlineLeagues/TeamFrontlineChallengerLeague';
-import { TeamFrontlineChampLeague } from 'pages/Games/RL/Leagues/Hosts/TeamFrontlineLeagues/TeamFrontlineChampLeague';
-import { TeamFrontlineProspectLeague } from 'pages/Games/RL/Leagues/Hosts/TeamFrontlineLeagues/TeamFrontlineProspectLeague';
-import { TeamFrontlineVanguardLeague } from 'pages/Games/RL/Leagues/Hosts/TeamFrontlineLeagues/TeamFrontlineVanguardLeague';
-import { UltimateRocketLeagueLeagues } from 'pages/Games/RL/Leagues/Hosts/UltimateRocketLeagueLeagues/UltimateRocketLeagueLeagues';
-import { UltimateRL2v2League } from 'pages/Games/RL/Leagues/Hosts/UltimateRocketLeagueLeagues/UltimateRL2v2League';
-import { UltimateRL3v3League } from 'pages/Games/RL/Leagues/Hosts/UltimateRocketLeagueLeagues/UltimateRL3v3League';
 import { AirforceGamingLeague as AirforceRLLeague } from 'pages/Games/RL/Leagues/Hosts/AirforceGamingLeague';
 import { AustralianEsportsHSLeague } from 'pages/Games/RL/Leagues/Hosts/AustralianEsportsHSLeague';
 import { AustralianEsportsLeague as AustralianRLEsportsLeague } from 'pages/Games/RL/Leagues/Hosts/AustralianEsportsLeague';
 import { CollegeCarballAssociationLeague } from 'pages/Games/RL/Leagues/Hosts/CollegeCarballAssociationLeague';
 import { CorporateRLLeague } from 'pages/Games/RL/Leagues/Hosts/CorporateRLLeague';
-import { CSMGLeague as CSMGRLLeague } from 'pages/Games/RL/Leagues/Hosts/CSMGLeague';
+import { CECCLeague as CECCRLLeague } from 'pages/Games/RL/Leagues/Hosts/CECCLeague';
 import { ECACEsportsLeague as ECACRLLeague } from 'pages/Games/RL/Leagues/Hosts/ECACEsportsLeague';
 import { EGFCLeague as EGFCRLLeague } from 'pages/Games/RL/Leagues/Hosts/EGFCLeague';
 import { EGFHLeague as EGFHRLLeague } from 'pages/Games/RL/Leagues/Hosts/EGFHLeague';
-import { FaceitCollegiateLeague as FaceitRLLeague } from 'pages/Games/RL/Leagues/Hosts/FaceitCollegiateLeague';
-import { FinalityLeague } from 'pages/Games/RL/Leagues/Hosts/FinalityLeague';
-import { HighSchoolEsportsLeague as HighSchoolRLLeague } from 'pages/Games/RL/Leagues/Hosts/HighSchoolEsportsLeague';
-import { NASEFLeague as NASEFRLLeague } from 'pages/Games/RL/Leagues/Hosts/NASEFLeague';
-import { NationalStudentEsportsLeague as NationalStudentRLLeague } from 'pages/Games/RL/Leagues/Hosts/NationalStudentEsportsLeague';
 import { NECCLeague as NECCRLLeague } from 'pages/Games/RL/Leagues/Hosts/NECCLeague';
 import { NJCAAELeague as NJCAAERLLeague } from 'pages/Games/RL/Leagues/Hosts/NJCAAELeague';
 import { PlayflyCollegeLeague as PlayflyRLLeague } from 'pages/Games/RL/Leagues/Hosts/PlayflyCollegeLeague';
 import { PlayVSLeague as PlayVSRLLeague } from 'pages/Games/RL/Leagues/Hosts/PlayVSLeague';
-import { RaketLigaenLeague } from 'pages/Games/RL/Leagues/Hosts/RaketLigaenLeague';
 import { TheEsportsCompanyLeague } from 'pages/Games/RL/Leagues/Hosts/TheEsportsCompanyLeague';
-import { UGCBattleAcademyLeague as UGCRLBattleAcademy } from 'pages/Games/RL/Leagues/Hosts/UGCBattleAcademyLeague';
-import { UGCHSBattleAcademyLeague } from 'pages/Games/RL/Leagues/Hosts/UGCHSBattleAcademyLeague';
 import { UnitedRogueLeague as UnitedRogueRLLeague } from 'pages/Games/RL/Leagues/Hosts/UnitedRogueLeague';
-import { VantaGGLeague as VantaGGRLLeague } from 'pages/Games/RL/Leagues/Hosts/VantaGGLeague';
 // Wagers
 import { RLWagers } from 'pages/Games/RL/Wagers/RLWagers';
 import { CmgWagers as CmgRLWagers } from 'pages/Games/RL/Wagers/Hosts/CmgWagers';
@@ -318,36 +276,20 @@ import { GanksterGGH2H as GanksterValH2H } from 'pages/Games/Valorant/HeadToHead
 import { PraccH2H as PraccValH2H } from 'pages/Games/Valorant/HeadToHead/Hosts/PraccH2H';
 // Leagues
 import { ValorantLeagues } from 'pages/Games/Valorant/Leagues/ValorantLeagues';
-import { ECACLeagues as ECACValLeagues } from 'pages/Games/Valorant/Leagues/Hosts/ECACLeagues/ECACLeagues';
-import { ECACDivisionALeague } from 'pages/Games/Valorant/Leagues/Hosts/ECACLeagues/ECACDivisionALeague';
-import { ECACDivisionBLeague } from 'pages/Games/Valorant/Leagues/Hosts/ECACLeagues/ECACDivisionBLeague';
-import { ECACDivisionCLeague } from 'pages/Games/Valorant/Leagues/Hosts/ECACLeagues/ECACDivisionCLeague';
-import { LPLLeagues } from 'pages/Games/Valorant/Leagues/Hosts/LPLLeagues/LPLLeagues';
-import { LPLBronzeDivisionLeague } from 'pages/Games/Valorant/Leagues/Hosts/LPLLeagues/LPLBronzeDivisionLeague';
-import { LPLGoldDivisionLeague } from 'pages/Games/Valorant/Leagues/Hosts/LPLLeagues/LPLGoldDivisionLeague';
-import { LPLSilverDivisionLeague } from 'pages/Games/Valorant/Leagues/Hosts/LPLLeagues/LPLSilverDivisionLeague';
-import { LPLOpenDivisionLeague } from 'pages/Games/Valorant/Leagues/Hosts/LPLLeagues/LPLOpenDivisionLeague';
 import { PlayflyCollegeLeagues } from 'pages/Games/Valorant/Leagues/Hosts/PlayflyCollegeLeagues/PlayflyCollegeLeagues';
 import { PlayflyOpenLeague } from 'pages/Games/Valorant/Leagues/Hosts/PlayflyCollegeLeagues/PlayflyOpenLeague';
 import { PlayflyVarsityLeague } from 'pages/Games/Valorant/Leagues/Hosts/PlayflyCollegeLeagues/PlayflyVarsityLeague';
-import { TeamFrontlineLeagues as TeamFrontlineValLeagues } from 'pages/Games/Valorant/Leagues/Hosts/TeamFrontlineLeagues/TeamFrontlineLeagues';
-import { TeamFrontlineAcademyLeague } from 'pages/Games/Valorant/Leagues/Hosts/TeamFrontlineLeagues/TeamFrontlineAcademyLeague';
-import { TeamFrontlinePrimeLeague } from 'pages/Games/Valorant/Leagues/Hosts/TeamFrontlineLeagues/TeamFrontlinePrimeLeague';
 import { CollegeValorantLeague } from 'pages/Games/Valorant/Leagues/Hosts/CollegeValorantLeague';
 import { CorporateValorantLeague } from 'pages/Games/Valorant/Leagues/Hosts/CorporateValorantLeague';
-import { CSMGLeague as CSMGValLeague } from 'pages/Games/RL/Leagues/Hosts/CSMGLeague';
+import { CECCLeague as CECCValLeague } from 'pages/Games/Valorant/Leagues/Hosts/CECCLeague';
 import { EGFCLeague as EGFCVALLeague } from 'pages/Games/Valorant/Leagues/Hosts/EGFCLeague';
 import { EGFHLeague as EGFHVALLeague } from 'pages/Games/Valorant/Leagues/Hosts/EGFHLeague';
 import { EsportsCompanyLeague } from 'pages/Games/Valorant/Leagues/Hosts/EsportsCompanyLeague';
-import { FaceitCollegiateLeague as FaceitValLeague } from 'pages/Games/Valorant/Leagues/Hosts/FaceitCollegiateLeague';
-import { HighSchoolEsportsLeague as HighSchoolValLeague } from 'pages/Games/Valorant/Leagues/Hosts/HighSchoolEsportsLeague';
 import { NASEFLeague as NASEFValLeague } from 'pages/Games/Valorant/Leagues/Hosts/NASEFLeague';
 import { NationalStudentEsportsLeague as NationalStudentValLeague } from 'pages/Games/Valorant/Leagues/Hosts/NationalStudentEsportsLeague';
 import { NECCLeague as NECCValLeague } from 'pages/Games/Valorant/Leagues/Hosts/NECCLeague';
 import { NJCAAELeague as NJCAAEVALLeague } from 'pages/Games/Valorant/Leagues/Hosts/NJCAAELeague';
-import { UGCBattleAcademyLeague as UGCValBattleAcademy } from 'pages/Games/Valorant/Leagues/Hosts/UGCBattleAcademyLeague';
 import { UnifiedPremierLeague } from 'pages/Games/Valorant/Leagues/Hosts/UnifiedPremierLeague';
-import { VantaGGLeague as VantaGGValLeague } from 'pages/Games/Valorant/Leagues/Hosts/VantaGGLeague';
 // Wagers
 import { ValorantWagers } from 'pages/Games/Valorant/Wagers/ValorantWagers';
 import { DropInGamingWagers as DropInValWagers } from 'pages/Games/Valorant/Wagers/Hosts/DropInGamingWagers';
@@ -361,9 +303,6 @@ import { WzHeadToHead } from 'pages/Games/Wz/HeadToHead/WzHeadToHead';
 import { CmgH2H as CmgWzH2H } from 'pages/Games/Wz/HeadToHead/Hosts/CmgH2H';
 // Leagues
 import { WzLeagues } from 'pages/Games/Wz/Leagues/WzLeagues';
-import { AirForceGamingLeague as AirForceWzLeague } from 'pages/Games/Wz/Leagues/Hosts/AirForceGamingLeague';
-import { GMHLGamingLeague } from 'pages/Games/Wz/Leagues/Hosts/GMHLGamingLeague';
-import { NJCAAELeague as NJCAAEWzLeague } from 'pages/Games/Wz/Leagues/Hosts/NJCAAELeague';
 // Wagers
 import { WzWagers } from 'pages/Games/Wz/Wagers/WzWagers';
 import { OneVOneMeWagers as OneVOneWzWagers } from 'pages/Games/Wz/Wagers/Hosts/1v1MeWagers';
@@ -463,20 +402,16 @@ root.render(
           <Route path='/games/call-of-duty/leagues/zoned-out' element={<ZonedOutGamingLeague />} />
           <Route path='/games/call-of-duty/leagues/airforce-league' element={<AirForceCodLeague />} />
           <Route path='/games/call-of-duty/leagues/corporate-cod-league' element={<CorporateCodLeague />} />
-          <Route path='/games/call-of-duty/leagues/kinetic-league' element={<KineticLeague />} />
-          <Route path='/games/call-of-duty/leagues/House-of-esports-leagues' element={<HouseOfEsportsLeagues />} />
-          <Route path='/games/call-of-duty/leagues/House-of-esports-leagues/hoe-amateur' element={<HouseOfEsportsAmateursLeague />} />
-          <Route path='/games/call-of-duty/leagues/House-of-esports-leagues/hoe-challengers' element={<HouseOfEsportsChallengersLeague />} />
           <Route path='/games/call-of-duty/leagues/ixi-esports' element={<IXIEsportsLeague />} />
           <Route path='/games/call-of-duty/leagues/tpc-league' element={<PremierCircuitLeague />} />
-          <Route path='/games/call-of-duty/leagues/cod-rec-league' element={<CodRecLeague />} />
-          <Route path='/games/call-of-duty/leagues/retired-challengers' element={<RetiredChallengersLeague />} />
+          <Route path='/games/call-of-duty/leagues/cod-rec-leagues' element={<CodRecLeagues />} />
+          <Route path='/games/call-of-duty/leagues/cod-rec-leagues/cod-rec-premade-league' element={<CodRecPremadeLeague />} />
+          <Route path='/games/call-of-duty/leagues/cod-rec-leagues/cod-rec-open-league' element={<CodRecOpenLeague />} />
           <Route path='/games/call-of-duty/leagues/elite-gaming-warfare-league' element={<EliteWarfareGamingLeague />} />
           <Route path='/games/call-of-duty/leagues/casual-xp-league' element={<CasualXPLeague />} />
           <Route path='/games/call-of-duty/leagues/old-heads-circuit' element={<OldHeadsCircuitLeague />} />
           <Route path='/games/call-of-duty/leagues/cxp-leagues' element={<CollegeXPLeagues />} />
           <Route path='/games/call-of-duty/leagues/cxp-leagues/cxp-varsity' element={<CollegeXPVarsityLeague />} />
-          <Route path='/games/call-of-duty/leagues/cxp-leagues/cxp-open' element={<CollegeXPOpenLeague />} />
           <Route path='/games/call-of-duty/leagues/cxp-leagues/cxp-club' element={<CollegeXPClubLeague />} />
           <Route path='/games/call-of-duty/leagues/playfly-cod-league' element={<PlayflyCodLeague />} />
           <Route path='/games/call-of-duty/leagues/ccl-league' element={<CollegeCodLeague />} />
@@ -506,33 +441,18 @@ root.render(
           {/* Leagues */}
           <Route path='/games/CS2/leagues' element={<CSLeagues />} />
           <Route path='/games/CS2/leagues/faceitesea' element={<FaceitESEALeague />} />
-          <Route path='/games/CS2/leagues/lpl-leagues' element={<LPLPathfinderLeaguesCS />} />
-          <Route path='/games/CS2/leagues/lpl-leagues/lpl-gold' element={<LPLPathfinderGoldLeagueCS />} />
-          <Route path='/games/CS2/leagues/lpl-leagues/lpl-silver' element={<LPLPathfinderSilverLeagueCS />} />
-          <Route path='/games/CS2/leagues/lpl-leagues/lpl-bronze' element={<LPLPathfinderBronzeLeagueCS />} />
-          <Route path='/games/CS2/leagues/lpl-leagues/lpl-open' element={<LPLPathfinderOpenLeagueCS />} />
           <Route path='/games/CS2/leagues/fastcup' element={<FastCupLeague />} />
           <Route path='/games/CS2/leagues/corporate' element={<CorporateCS2League />} />
           <Route path='/games/CS2/leagues/fireleague' element={<FiReLeague />} />
           <Route path='/games/CS2/leagues/unitedtwentyone' element={<UnitedTwentyOneLeague />} />
-          <Route path='/games/CS2/leagues/scl-leagues' element={<SCLLeagues />} />
-          <Route path='/games/CS2/leagues/scl-leagues/challenger' element={<SCLChallengerLeague />} />
-          <Route path='/games/CS2/leagues/scl-leagues/masters' element={<SCLMasterLeague />} />
-          <Route path='/games/CS2/leagues/scl-leagues/intermediate' element={<SCLIntermediateLeague />} />
-          <Route path='/games/CS2/leagues/scl-leagues/public' element={<SCLPublicLeague />} />
           <Route path='/games/CS2/leagues/hyperfibre-leagues' element={<HyperfibreLeagues />} />
           <Route path='/games/CS2/leagues/hyperfibre-leagues/elite' element={<HyperfibreEliteLeague />} />
           <Route path='/games/CS2/leagues/hyperfibre-leagues/social' element={<HyperfibreSocialLeague />} />
           <Route path='/games/CS2/leagues/njcaae' element={<NJCAAECSLeague />} />
           <Route path='/games/CS2/leagues/necc' element={<NECCCSLeague />} />
-          <Route path='/games/CS2/leagues/ecac' element={<ECACCSLeague />} />
           <Route path='/games/CS2/leagues/egfc' element={<EGFCCSLeague />} />
-          <Route path='/games/CS2/leagues/faceitcollegiate' element={<FaceitCSCollegiate />} />
-          <Route path='/games/CS2/leagues/nse' element={<NationalStudentCSLeague />} />
           <Route path='/games/CS2/leagues/playfly' element={<PlayflyCSLeague />} />
           <Route path='/games/CS2/leagues/ael' element={<AustralianCSEsportsLeague />} />
-          <Route path='/games/CS2/leagues/hsel' element={<HighSchoolCSLeague />} />
-          <Route path='/games/CS2/leagues/vantagg' element={<VantaGGCSLeague />} />
           {/* Wagers */}
           <Route path='/games/CS2/wagers' element={<CSWagers />} />
           <Route path='/games/CS2/wagers/dubbzcs2' element={<DubbzCSWagers />} />
@@ -556,7 +476,6 @@ root.render(
           <Route path='/games/halo/leagues/ascending-baseline/pandemonium-games' element={<AscendingBaselinePandemoniumGamesLeague />} />
           <Route path='/games/halo/leagues/halo-agent' element={<HaloAgentLeague />} />
           <Route path='/games/halo/leagues/ugc-halo' element={<CollegeHaloLeague />} />
-          <Route path='/games/halo/leagues/hsel' element={<HighSchoolHaloLeague />} />
           {/* Wagers */}
           <Route path='/games/halo/wagers' element={<HaloWagers />} />
           <Route path='/games/halo/wagers/cmg' element={<CmgHaloWagers />} />
@@ -580,7 +499,6 @@ root.render(
           <Route path='/games/LoL/leagues/titan-leagues/conqueror' element={<TitanConquerorLeague />} />
           <Route path='/games/LoL/leagues/titan-leagues/olympus' element={<TitanOlympusLeague />} />
           <Route path='/games/LoL/leagues/titan-leagues/divinity' element={<TitanDivinityLeague />} />
-          <Route path='/games/LoL/leagues/titan-leagues/berserker' element={<TitanBerserkerLeague />} />
           <Route path='/games/LoL/leagues/titan-leagues/gladiator' element={<TitanGladiatorLeague />} />
           <Route path='/games/LoL/leagues/risen-leagues' element={<RisenLeagues />} />
           <Route path='/games/LoL/leagues/risen-leagues/champions' element={<RisenChampionsLeague />} />
@@ -589,11 +507,11 @@ root.render(
           <Route path='/games/LoL/leagues/risen-leagues/rampage' element={<RisenRampageLeague />} />
           <Route path='/games/LoL/leagues/risen-leagues/draft' element={<RisenDraftLeague />} />
           <Route path='/games/LoL/leagues/aegis-leagues' element={<AegisLeagues />} />
-          <Route path='/games/LoL/leagues/aegis-leagues/champ' element={<AegisChampionsLeague />} />
+          <Route path='/games/LoL/leagues/aegis-leagues/challenger' element={<AegisChallengerLeague />} />
           <Route path='/games/LoL/leagues/aegis-leagues/marauder' element={<AegisMarauderLeague />} />
           <Route path='/games/LoL/leagues/aegis-leagues/defenders' element={<AegisDefendersLeague />} />
           <Route path='/games/LoL/leagues/aegis-leagues/executioners' element={<AegisExecutionersLeague />} />
-          <Route path='/games/LoL/leagues/aegis-leagues/protectors' element={<AegisProtectorsLeague />} />
+          <Route path='/games/LoL/leagues/aegis-leagues/vanguard' element={<AegisVanguardLeague />} />
           <Route path='/games/LoL/leagues/blue-otter-leagues' element={<BlueOtterLeagues />} />
           <Route path='/games/LoL/leagues/blue-otter-leagues/masters' element={<BlueOtterMastersLeague />} />
           <Route path='/games/LoL/leagues/blue-otter-leagues/diamond' element={<BlueOtterDiamondLeague />} />
@@ -607,13 +525,15 @@ root.render(
           <Route path='/games/LoL/leagues/low-budget-leagues/financial' element={<LowBudgetFinancialLeague />} />
           <Route path='/games/LoL/leagues/low-budget-leagues/commercial' element={<LowBudgetCommercialLeague />} />
           <Route path='/games/LoL/leagues/low-budget-leagues/economy' element={<LowBudgetEconomyLeague />} />
+          <Route path='/games/LoL/leagues/low-budget-leagues/ceo' element={<LowBudgetCEOLeague />} />
+          <Route path='/games/LoL/leagues/low-budget-leagues/lta' element={<LowBudgetLTALeague />} />
           <Route path='/games/LoL/leagues/meta-shift-leagues' element={<MetaShiftLeagues />} />
-          <Route path='/games/LoL/leagues/meta-shift-leagues/radon' element={<MetaShiftRadonLeague />} />
-          <Route path='/games/LoL/leagues/meta-shifts-leagues/xenon' element={<MetaShiftXenonLeague />} />
-          <Route path='/games/LoL/leagues/meta-shift-leagues/krypton' element={<MetaShiftKryptonLeague />} />
-          <Route path='/games/LoL/leagues/meta-shift-leagues/argon' element={<MetaShiftArgonLeague />} />
-          <Route path='/games/LoL/leagues/meta-shift-leagues/nitrogen' element={<MetaShiftNitrogenLeague />} />
-          <Route path='/games/LoL/leagues/meta-shift-leagues/neon' element={<MetaShiftNeonLeague />} />
+          <Route path='/games/LoL/leagues/meta-shift-leagues/noble' element={<MetaShiftNobleLeague />} />
+          <Route path='/games/LoL/leagues/meta-shifts-leagues/diamond' element={<MetaShiftDiamondLeague />} />
+          <Route path='/games/LoL/leagues/meta-shift-leagues/emerald' element={<MetaShiftEmeraldLeague />} />
+          <Route path='/games/LoL/leagues/meta-shift-leagues/cyanide' element={<MetaShiftCyanideLeague />} />
+          <Route path='/games/LoL/leagues/meta-shift-leagues/platinum' element={<MetaShiftPlatinumLeague />} />
+          <Route path='/games/LoL/leagues/meta-shift-leagues/draft' element={<MetaShiftDraftLeague />} />
           <Route path='/games/LoL/leagues/sdc' element={<SDCLeague />} />
           <Route path='/games/LoL/leagues/cobalt-winds-leagues' element={<CWLLeagues />} />
           <Route path='/games/LoL/leagues/cobalt-winds-leagues/cwl-ascend' element={<CWLAscendLeague />} />
@@ -625,7 +545,6 @@ root.render(
           <Route path='/games/LoL/leagues/necc' element={<NECCLoLLeague />} />
           <Route path='/games/LoL/leagues/ecac' element={<ECACLoLLeague />} />
           <Route path='/games/LoL/leagues/nse' element={<NationalStudentLoLLeague />} />
-          <Route path='/games/LoL/leagues/vantagg' element={<VantaGGLoLLeague />} />
           <Route path='/games/LoL/leagues/playvs' element={<PlayVSLoLLeague />} />
           {/* Wagers */}
           <Route path='/games/LoL/wagers' element={<LolWagers />} />
@@ -646,18 +565,6 @@ root.render(
           <Route path='/games/RocketLeague/leagues/rlpc-leagues/aaa' element={<RLPCTripleALeague />} />
           <Route path='/games/RocketLeague/leagues/rlpc-leagues/aa' element={<RLPCDoubleALeague />} />
           <Route path='/games/RocketLeague/leagues/rlpc-leagues/a' element={<RLPCSingleALeague />} />
-          <Route path='/games/RocketLeague/leagues/rsc-leagues' element={<RocketSoccarConfederationLeagues />} />
-          <Route path='/games/RocketLeague/leagues/rsc-leagues/3v3-na' element={<RSC3v3NALeague />} />
-          <Route path='/games/RocketLeague/leagues/rsc-leagues/3v3-eu' element={<RSC3v3EULeague />} />
-          <Route path='/games/RocketLeague/leagues/rsc-leagues/2v2' element={<RSC2v2League />} />
-          <Route path='/games/RocketLeague/leagues/frontline-leagues' element={<TeamFrontlineRLLeagues />} />
-          <Route path='/games/RocketLeague/leagues/frontline-leagues/champ' element={<TeamFrontlineChampLeague />} />
-          <Route path='/games/RocketLeague/leagues/frontline-leagues/vanguard' element={<TeamFrontlineVanguardLeague />} />
-          <Route path='/games/RocketLeague/leagues/frontline-leagues/challenger' element={<TeamFrontlineChallengerLeague />} />
-          <Route path='/games/RocketLeague/leagues/frontline-leagues/prospect' element={<TeamFrontlineProspectLeague />} />
-          <Route path='/games/RocketLeague/leagues/url-leagues' element={<UltimateRocketLeagueLeagues />} />
-          <Route path='/games/RocketLeague/leagues/2s' element={<UltimateRL2v2League />} />
-          <Route path='/games/RocketLeague/leagues/3s' element={<UltimateRL3v3League />} />
           <Route path='/games/RocketLeague/leagues/mle-leagues' element={<MinorLeagueEsportsLeagues />} />
           <Route path='/games/RocketLeague/leagues/mle-leagues/premier' element={<MinorLeaguePremierLeague />} />
           <Route path='/games/RocketLeague/leagues/mle-leagues/master' element={<MinorLeagueMasterLeague />} />
@@ -674,36 +581,26 @@ root.render(
           <Route path='/games/RocketLeague/leagues/nemesis-leagues/challanger' element={<NemesisChallengerLeague />} />
           <Route path='/games/RocketLeague/leagues/nemesis-leagues/prospect' element={<NemesisProspectLeague />} />
           <Route path='/games/RocketLeague/leagues/nemesis-leagues/novice' element={<NemesisNoviceLeague />} />
-          <Route path='/games/RocketLeague/leagues/raket-ligaen' element={<RaketLigaenLeague />} />
           <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues' element={<FrontierDoublesLeagues />} />
           <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues/elite' element={<FrontierEliteLeague />} />
           <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues/star' element={<FrontierStarLeague />} />
           <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues/expert' element={<FrontierExpertLeague />} />
           <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues/origin' element={<FrontierOriginLeague />} />
-          <Route path='/games/RocketLeague/leagues/oce-leagues' element={<OCEDraftLeagues />} />
-          <Route path='/games/RocketLeague/leagues/oce-leagues/divisions' element={<OCEDivisions />} />
-          <Route path='/games/RocketLeague/leagues/finality' element={<FinalityLeague />} />
+          <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues/adept' element={<FrontierAdeptLeague />} />
           <Route path='/games/RocketLeague/leagues/corporate' element={<CorporateRLLeague />} />
           <Route path='/games/RocketLeague/leagues/airforce' element={<AirforceRLLeague />} />
           <Route path='/games/RocketLeague/leagues/cca' element={<CollegeCarballAssociationLeague />} />
           <Route path='/games/RocketLeague/leagues/playfly' element={<PlayflyRLLeague />} />
           <Route path='/games/RocketLeague/leagues/ecac' element={<ECACRLLeague />} />
           <Route path='/games/RocketLeague/leagues/necc' element={<NECCRLLeague />} />
-          <Route path='/games/RocketLeague/leagues/csmg' elemente={<CSMGRLLeague />} />
+          <Route path='/games/RocketLeague/leagues/cecc' elemente={<CECCRLLeague />} />
           <Route path='/games/RocketLeague/leagues/njcaae' element={<NJCAAERLLeague />} />
           <Route path='/games/RocketLeague/leagues/egfc' element={<EGFCRLLeague />} />
-          <Route path='/games/RocketLeague/leagues/ugc' element={<UGCRLBattleAcademy />} />
           <Route path='/games/RocketLeague/leagues/ael' element={<AustralianRLEsportsLeague />} />
-          <Route path='/games/RocketLeague/leagues/faceit' element={<FaceitRLLeague />} />
-          <Route path='/games/RocketLeague/leagues/nse' element={<NationalStudentRLLeague />} />
-          <Route path='/games/RocketLeague/leagues/hsel' element={<HighSchoolRLLeague />} />
           <Route path='/games/RocketLeague/leagues/playvs' element={<PlayVSRLLeague />} />
           <Route path='/games/RocketLeague/leagues/tec' element={<TheEsportsCompanyLeague />} />
-          <Route path='/games/RocketLeague/leagues/vantagg' element={<VantaGGRLLeague />} />
-          <Route path='/games/RocketLeague/leagues/nasef' element={<NASEFRLLeague />} />
           <Route path='/games/RocketLeague/leagues/egfh' element={<EGFHRLLeague />} />
           <Route path='/games/RocketLeague/leagues/aelhs' element={<AustralianEsportsHSLeague />} />
-          <Route path='/games/RocketLeague/leagues/ugc-hs' element={<UGCHSBattleAcademyLeague />} />
           {/* Wagers */}
           <Route path='/games/RocketLeague/wagers' element={<RLWagers />} />
           <Route path='/games/RocketLeague/wagers/cmg' element={<CmgRLWagers />} />
@@ -723,34 +620,18 @@ root.render(
           <Route path='/games/Valorant/head-to-head/pracc' element={<PraccValH2H />} />
           {/* Leagues */}
           <Route path='/games/Valorant/leagues' element={<ValorantLeagues />} />
-          <Route path='/games/Valorant/leagues/lpl-leagues' element={<LPLLeagues />} />
-          <Route path='/games/Valorant/leagues/lpl-leagues/gold' element={<LPLGoldDivisionLeague />} />
-          <Route path='/games/Valorant/leagues/lpl-leagues/silver' element={<LPLSilverDivisionLeague />} />
-          <Route path='/games/Valorant/leagues/lpl-leagues/bronze' element={<LPLBronzeDivisionLeague />} />
-          <Route path='/games/Valorant/leagues/lpl-leagues/open' element={<LPLOpenDivisionLeague />} />
-          <Route path='/games/Valorant/leagues/frontline-leagues' element={<TeamFrontlineValLeagues />} />
-          <Route path='/games/Valorant/leagues/frontline-leagues/prime' element={<TeamFrontlinePrimeLeague />} />
-          <Route path='/games/Valorant/leagues/frontline-leagues/academy' element={<TeamFrontlineAcademyLeague />} />
           <Route path='/games/Valorant/leagues/corporate' element={<CorporateValorantLeague />} />
           <Route path='/games/Valorant/leagues/unified' element={<UnifiedPremierLeague />} />
           <Route path='/games/Valorant/leagues/riot' element={<CollegeValorantLeague />} />
-          <Route path='/games/Valorant/leagues/ecac-leagues' element={<ECACValLeagues />} />
-          <Route path='/games/Valorant/leagues/ecac-leagues/division-a' element={<ECACDivisionALeague />} />
-          <Route path='/games/Valorant/leagues/ecac-leagues/division-b' element={<ECACDivisionBLeague />} />
-          <Route path='/games/Valorant/leagues/ecac-leagues/division-c' element={<ECACDivisionCLeague />} />
           <Route path='/games/Valorant/leagues/njcaae' element={<NJCAAEVALLeague />} />
           <Route path='/games/Valorant/leagues/necc' element={<NECCValLeague />} />
           <Route path='/games/Valorant/leagues/egfc' element={<EGFCVALLeague />} />
           <Route path='/games/Valorant/leagues/playfly-leagues' element={<PlayflyCollegeLeagues />} />
           <Route path='/games/Valorant/leagues/playfly-leagues/varsity' element={<PlayflyVarsityLeague />} />
           <Route path='/games/Valorant/leagues/playfly-leagues/open' element={<PlayflyOpenLeague />} />
-          <Route path='/games/Valorant/leagues/csmg' element={<CSMGValLeague />} />
-          <Route path='/games/Valorant/leagues/faceit' element={<FaceitValLeague />} />
+          <Route path='/games/Valorant/leagues/cecc' element={<CECCValLeague />} />
           <Route path='/games/Valorant/leagues/nse' element={<NationalStudentValLeague />} />
-          <Route path='/games/Valorant/leagues/ugc-college' element={<UGCValBattleAcademy />} />
-          <Route path='/games/Valorant/leagues/hsel' element={<HighSchoolValLeague />} />
           <Route path='/games/Valorant/leagues/tec' element={<EsportsCompanyLeague />} />
-          <Route path='/games/Valorant/leagues/vantagg' element={<VantaGGValLeague />} />
           <Route path='/games/Valorant/leagues/nasef' element={<NASEFValLeague />} />
           <Route path='/games/Valorant/leagues/egfh' element={<EGFHVALLeague />} />
           {/* Wagers */}
@@ -763,12 +644,9 @@ root.render(
           <Route path='/games/warzone/lans' element={<WzLans />} />
           {/* H2H */}
           <Route path='/games/warzone/head-to-head' element={<WzHeadToHead />} />
-          <Route path='/games/warzone/cmg' element={<CmgWzH2H />} />
+          <Route path='/games/warzone/head-to-head/cmg' element={<CmgWzH2H />} />
           {/* Leagues */}
           <Route path='/games/warzone/leagues' element={<WzLeagues />} />
-          <Route path='/games/warzone/leagues/airforce' element={<AirForceWzLeague />} />
-          <Route path='/games/warzone/leagues/ghml' element={<GMHLGamingLeague />} />
-          <Route path='/games/warzone/leagues/njcaae' element={<NJCAAEWzLeague />} />
           {/* Wagers */}
           <Route path='/games/warzone/wagers' element={<WzWagers />} />
           <Route path='/games/warzone/wagers/cmg' element={<CmgWzWagers />} />

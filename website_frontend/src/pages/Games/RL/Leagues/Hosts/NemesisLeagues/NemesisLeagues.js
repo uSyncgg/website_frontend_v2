@@ -4,11 +4,11 @@ import { useCheckResize } from "hooks";
 export const NemesisLeagues = () => {
     const isMobile = useCheckResize();
 
-    const titan = isMobile ? "Titan League - 1790+ MMR" : "1790+ MMR";
-    const rival = isMobile ? "Rival League - 1611 - 1789 MMR" : "1611 - 1789 MMR";
-    const challenger = isMobile ? "Challenger League - 1474 - 1610 MMR" : "1474 - 1610 MMR";
-    const prospect = isMobile ? "Prospect League - 1316 - 1747 MMR" : "1316 - 1747 MMR";
-    const novice = isMobile ? "Novice League - 1315 MMR & Below" : "1315 MMR & Below";
+    const titan = isMobile ? "Titan League - 1746+ MMR" : "1746+ MMR";
+    const rival = isMobile ? "Rival League - 1608 - 1745 MMR" : "1608 - 1745 MMR";
+    const challenger = isMobile ? "Challenger League - 1499 - 1607 MMR" : "1499 - 1607 MMR";
+    const prospect = isMobile ? "Prospect League - 1320 - 1498 MMR" : "1320 - 1498 MMR";
+    const novice = isMobile ? "Novice League - 1100 - 1319 MMR" : "1100 - 1319 MMR";
 
     return (
         <div className="standardContainer">

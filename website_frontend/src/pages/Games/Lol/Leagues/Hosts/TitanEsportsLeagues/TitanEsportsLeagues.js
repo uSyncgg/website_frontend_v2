@@ -10,7 +10,6 @@ export const TitanEsportsLeagues = () => {
     const conqueror = isMobile ? "Conqueror League - Diamond 4 Cap | Wednesdays" : "Diamond 4 Cap | Wednesdays";
     const olympus = isMobile ? "Olympus League - Diamond 4 Cap | Fridays" : "Diamond 4 Cap | Fridays";
     const divinity = isMobile ? "Divinity League - Emerald 4 Cap | Mondays" : "Emerald 4 Cap | Mondays";
-    const berserker = isMobile ? "Berserker League - Emerald 4 Cap | Thursdays" : "Emerald 4 Cap | Thursdays";
     const gladiator = isMobile ? "Gladiator League - Platinum 4 Cap | Tuesdays" : "Platinum 4 Cap | Tuesdays";
 
     return (
@@ -95,18 +94,6 @@ export const TitanEsportsLeagues = () => {
                 </HostBanner>
 
                 <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/berserker"}>Berserker League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/LoL/leagues/titan-leagues/berserker"} 
-                        imgUrl={"https://i.imgur.com/SoRhxEf.png"} 
-                        alt={"Titan Leagues"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{berserker}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/titan-leagues/berserker"} />
-                </HostBanner>
 
                 <HostBanner>
                     <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/gladiator"}>Gladiator League</HostBanner.Title>

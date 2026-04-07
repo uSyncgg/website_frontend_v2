@@ -1,6 +1,0 @@
-
-export const TitanBerserkerLeague = () => {
-    return (
-        <></>
-    );
-}

@@ -1,6 +1,0 @@
-
-export const LPLSilverDivisionLeague = () => {
-    return (
-        <></>
-    );
-}
