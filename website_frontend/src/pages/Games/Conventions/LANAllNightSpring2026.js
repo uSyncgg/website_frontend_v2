@@ -1,5 +1,5 @@
 import { EventInfoCard, HeaderImage, ExternalButton } from "components";
-import '../../../EventInformation.css';
+import '../EventInformation.css';
 
 export const LANAllNightSpring2026 = () => {
     return (
