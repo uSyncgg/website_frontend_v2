@@ -25,44 +25,35 @@ export const CodLans = () => {
                         alt={"Charleston Crown Series LAN"}
                         verified={true}
                     />
+                    <HostBanner.Region>Charleston, SC</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/lans/charleston-crown-series"} />
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/lans/shintogc-major-iii-2026"}>ShintoGC Major III</HostBanner.Title>
+                    <HostBanner.Title path={"/lans/lowtier-major-iv"}>Lowtier Major IV</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/lans/shintogc-major-iii-2026"} 
+                        path={"/lans/lowtier-major-iv"} 
                         imgUrl={"https://i.imgur.com/t4k8Qi6.png"} 
-                        alt={"ShintoGC Major III LAN"}
+                        alt={"Lowtier Major IV"}
                         verified={false}
                     />
-                    <HostBanner.Button title={"More Info"} path={"/lans/shintogc-major-iii-2026"} />
+                    <HostBanner.Region>Knoxville, TN</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/lans/lowtier-major-iv"} />
                 </HostBanner>
 
                 <div className="hrEvents" />
 
                 <HostBanner>
-                    <HostBanner.Title path={"/lans/g-site-bo7"}>G-SITE BO7</HostBanner.Title>
+                    <HostBanner.Title path={"/lans/rva-esports-championship-2026"}>RVA Esports Championship 2026</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/lans/g-site-bo7"} 
-                        imgUrl={"https://i.imgur.com/ZAeuKjU.png"} 
-                        alt={"G-SITE BO7 LAN"}
+                        path={"/lans/rva-esports-championship-2026"} 
+                        imgUrl={"https://i.imgur.com/88QABxG.png"} 
+                        alt={"RVA Esports Championship 2026"}
                         verified={false}
                     />
-                    <HostBanner.Button title={"More Info"} path={"/lans/g-site-bo7"} />
+                    <HostBanner.Region>Richmond, VA</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/lans/rva-esports-championship-2026"} />
                 </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/tomorrowlan_2026"}>TomorrowLAN 2026</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/lans/tomorrowlan_2026"} 
-                        imgUrl={"https://i.imgur.com/clcdX48.png"} 
-                        alt={"TomorrowLAN 2026"}
-                        verified={false}
-                    />
-                    <HostBanner.Button title={"More Info"} path={"/lans/tomorrowlan_2026"} />
-                </HostBanner>
-
                 <div className="hrEvents" />
             </div>
         </div>

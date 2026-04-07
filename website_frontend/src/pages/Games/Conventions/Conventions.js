@@ -17,51 +17,28 @@ export const Conventions = () => {
                 <div className="hrEvents" />
 
                 <HostBanner>
-                    <HostBanner.Title path={"/lans/dreamhack-birmingham"}>DreamHack Birmingham</HostBanner.Title>
+                    <HostBanner.Title path={"/lans/immersecon-2026"}>ImmerseCon 2026</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/lans/dreamhack-birmingham"} 
-                        imgUrl={"https://i.imgur.com/6mNKaHp.png"} 
-                        alt={"DreamHack Birmingham LAN"}
+                        path={"/lans/immersecon-2026"} 
+                        imgUrl={"https://i.imgur.com/fwRdpTT.png"} 
+                        alt={"ImmerseCon 2026"}
                         verified={false}
                     />
-                    <HostBanner.Button title={"More Info"} path={"/lans/dreamhack-birmingham"} />
+                    <HostBanner.Region>Richmond, VA</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/lans/immersecon-2026"} />
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/lans/fortlan-spring-2026"}>FortLAN Spring 2026</HostBanner.Title>
+                    <HostBanner.Title path={"/lans/lan-all-night-spring-2026"}>LAN All Night</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/lans/fortlan-spring-2026"} 
-                        imgUrl={"https://i.imgur.com/W1iIUMc.png"} 
-                        alt={"FortLAN Spring 2026"}
+                        path={"/lans/lan-all-night-spring-2026"} 
+                        imgUrl={"https://i.imgur.com/JYplRtG.png"} 
+                        alt={"LAN All Night Spring 2026"}
                         verified={false}
                     />
-                    <HostBanner.Button title={"More Info"} path={"/lans/fortlan-spring-2026"} />
+                    <HostBanner.Region>Grapevine, TX</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/lans/lan-all-night-spring-2026"} />
                 </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/low-ping-lan-2026"}>Low Ping LAN</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/lans/low-ping-lan-2026"} 
-                        imgUrl={"https://i.imgur.com/xzN1wAG.png"} 
-                        alt={"Low Ping LAN"}
-                        verified={false}
-                    />
-                    <HostBanner.Button title={"More Info"} path={"/lans/low-ping-lan-2026"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/tomorrownlan_2026"}>TomorrowLAN 2026</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/lans/tomorrowlan_2026"} 
-                        imgUrl={"https://i.imgur.com/clcdX48.png"} 
-                        alt={"TomorrowLAN 2026"}
-                        verified={false}
-                    />
-                    <HostBanner.Button title={"More Info"} path={"/lans/tomorrowlan_2026"} />
-                </HostBanner>
-
                 <div className="hrEvents" />
             </div>
         </div>
