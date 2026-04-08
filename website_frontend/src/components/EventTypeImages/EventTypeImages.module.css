@@ -3,7 +3,7 @@
     flex-wrap: wrap;
     gap: 40px;
     justify-content: center;
-    max-width: 80%;
+    max-width: 100%;
     margin: 0 auto;
     padding-bottom: 2rem;
 }
@@ -24,3 +24,11 @@
     padding-bottom: 3rem;
 }
 
+.articlePageImg {
+    width: 24rem !important;
+    margin: 0 auto !important;
+}
+
+.articlePageImg:hover {
+    box-shadow: 0 0 1.563rem .188rem rgba(0, 0, 0, 0.8) !important;
+}
