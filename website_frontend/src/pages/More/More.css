@@ -106,3 +106,82 @@
 }
 
 /* Articles Styling */
+.articleSectionOne { 
+    flex: 2.7;
+    justify-content: left;
+}
+
+.articleSectionTwo {
+    flex: 1.3;
+}
+
+.articleContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.articleHeaderText {
+    padding-top: 1rem;
+    color: black;
+    text-align: left;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.articleLink {
+    text-decoration: none;
+    color: blue;
+}
+
+.articleSectionOne p, .articleSectionOne h1, .articleSectionOne h3 {
+    color: black;
+    text-align: left;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.articleSectionOne h3 {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    font-size: xx-large;
+}
+
+.articleSectionOne p {
+    font-size: large;
+}
+
+.ital {
+    font-style: italic;
+}
+
+.articleTextContainer {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.articleLanMap {
+    background-image: linear-gradient(#00000080,#00000080),url(https://i.imgur.com/gvdIL9C.png);
+    background-position: 50%;
+    background-size: cover;
+    height: 15rem;
+    width: 100%;
+}
+
+.articleImageContainer {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.expandArticleImage {
+    width: 100%;
+}
+
+.otherArticles {
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
