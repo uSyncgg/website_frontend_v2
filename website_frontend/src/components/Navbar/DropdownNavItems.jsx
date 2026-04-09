@@ -8,8 +8,8 @@ var temp = {
 };
 
 export const LeaguesNavItem = ({ closeMenu, isOpen, onToggle }) => {
-  const leaguesMatch = useMatch("/leagues");
-  const childMatch = useMatch("/games/:game/leagues");
+  const leaguesMatch = useMatch("/leagues/*");
+  const childMatch = useMatch("/games/:game/leagues/*");
 
   const isActive = leaguesMatch || childMatch;
 
@@ -64,7 +64,7 @@ export const LeaguesNavItem = ({ closeMenu, isOpen, onToggle }) => {
 }
 
 export const LanNavItem = ({ closeMenu, isOpen, onToggle }) => {
-  const lansMatch = useMatch("/lans");
+  const lansMatch = useMatch("/lans/*");
   const childMatch = useMatch("/games/:game/lans");
   const otherMatch = useMatch("/other-lans");
 

@@ -4,8 +4,8 @@ import styles from './Navbar.module.css'
 export const GamesNavItem = () => {
   const gamesMatch = useMatch("/games");
   const specificGameMatch = useMatch("/games/:game/*");
-  const lansMatch = useMatch("/games/:game/lans");
-  const leaguesMatch = useMatch("/games/:game/leagues");
+  const lansMatch = useMatch("/games/:game/lans/*");
+  const leaguesMatch = useMatch("/games/:game/leagues/*");
 
   const isActive = (gamesMatch || specificGameMatch) && !lansMatch && !leaguesMatch;
 
