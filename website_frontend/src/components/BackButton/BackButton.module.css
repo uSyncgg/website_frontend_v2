@@ -1,0 +1,21 @@
+.button {
+    background-color: rgb(49, 49, 49);
+    color: rgb(141, 125, 181);
+    border: .125rem solid rgb(144, 125, 181);
+    transition-duration: 0.4s;
+    border-radius: .5rem;
+    font-weight: bold;
+    font-family: 'Helvetica';
+    width: 15%;
+    height: 2.5rem;
+    font-size: inherit;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+
+.button:hover {
+    background-color: rgb(141, 125, 181);
+    color: rgb(49, 49, 49);
+    cursor: pointer;
+}
+

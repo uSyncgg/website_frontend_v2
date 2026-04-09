@@ -29,6 +29,8 @@ import { TwitterEmbed } from "./TwitterEmbed/TwitterEmbed";
 
 import { NoEvents } from "./NoEvents/NoEvents";
 
+import { BackButton } from "./BackButton/BackButton";
+
 export {
     GameIcon,
     GameChildrenIcon,
@@ -52,5 +54,6 @@ export {
     EventInfoCard,
     ExternalButton,
     TwitterEmbed,
-    NoEvents
+    NoEvents,
+    BackButton
 };
