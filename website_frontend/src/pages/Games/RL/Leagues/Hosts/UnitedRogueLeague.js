@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const UnitedRogueLeague = () => {
@@ -22,6 +22,10 @@ export const UnitedRogueLeague = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://rl.unitedrogue.com/"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/RocketLeague/leagues"} />
             </div>
         </div>
     );

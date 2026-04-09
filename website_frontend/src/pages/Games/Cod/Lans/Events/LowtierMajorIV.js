@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const LowtierMajorIV = () => {
@@ -22,6 +22,10 @@ export const LowtierMajorIV = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://x.com/TPCircuit/status/2031850516507181452"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/call-of-duty/lans"} />
             </div>
         </div>
     );

@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const GamerSaloonWagers = () => {
@@ -22,6 +22,10 @@ export const GamerSaloonWagers = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://www.gamersaloon.com/tournaments/all"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/RocketLeague/wagers"} />
             </div>
         </div>
     );

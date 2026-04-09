@@ -1,4 +1,4 @@
-import { HeaderImage, HostBanner } from "components";
+import { HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
 
 export const RocketSoccarConfederationLeagues = () => {
@@ -28,7 +28,7 @@ export const RocketSoccarConfederationLeagues = () => {
                     <HostBanner.Title path={"/games/RocketLeague/leagues/rsc-leagues/3v3-eu"}>3v3 EU League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/RocketLeague/leagues/rsc-leagues/3v3-eu"} 
-                        imgUrl={"https://i.imgur.com/QiNSeyE.png"} 
+                        imgUrl={"https://i.imgur.com/uQgW3Kj.png"} 
                         alt={"Rocket Soccar Confederation"}
                         verified={false}
                     />
@@ -37,6 +37,10 @@ export const RocketSoccarConfederationLeagues = () => {
                 </HostBanner>
 
                 <div className="hrEvents" />
+
+                <div className="backButtonContainer">
+                    <BackButton path={"/games/RocketLeague/leagues"} />
+                </div>
             </div>
         </div>
     );

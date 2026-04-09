@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const TitanOlympusLeague = () => {
@@ -22,6 +22,10 @@ export const TitanOlympusLeague = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://lol.titanesports.org/"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/LoL/leagues/titan-leagues"} />
             </div>
         </div>
     );

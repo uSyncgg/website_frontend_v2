@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const FiReLeague = () => {
@@ -22,6 +22,10 @@ export const FiReLeague = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://x.com/FiReSPORTSgg"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/CS2/leagues"} />
             </div>
         </div>
     );

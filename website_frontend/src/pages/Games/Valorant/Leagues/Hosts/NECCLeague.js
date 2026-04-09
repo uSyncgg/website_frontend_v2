@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const NECCLeague = () => {
@@ -22,6 +22,10 @@ export const NECCLeague = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://necc.leagueos.gg/schedule/valorant/at1g09hj7fr0ft0zui0qd1p89/schedule/1"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/Valorant/leagues"} />
             </div>
         </div>
     );

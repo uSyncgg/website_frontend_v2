@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const AscendingBaselinePandemoniumGamesLeague = () => {
@@ -22,6 +22,10 @@ export const AscendingBaselinePandemoniumGamesLeague = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://www.ascendingbaseline.com/panda"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/halo/leagues/ascending-baseline"} />
             </div>
         </div>
     );

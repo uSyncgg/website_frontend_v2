@@ -1,4 +1,4 @@
-import { HeaderImage, HostBanner } from "components";
+import { HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
 
 export const RisenLeagues = () => {
@@ -80,6 +80,10 @@ export const RisenLeagues = () => {
                 </HostBanner>
 
                 <div className="hrEvents" />
+
+                <div className="backButtonContainer">
+                    <BackButton path={"/games/LoL/leagues"} />
+                </div>
             </div>
         </div>
     );

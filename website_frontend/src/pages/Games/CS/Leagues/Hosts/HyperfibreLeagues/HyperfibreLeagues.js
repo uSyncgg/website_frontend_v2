@@ -1,4 +1,4 @@
-import { HeaderImage, HostBanner } from "components";
+import { HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
 
 export const HyperfibreLeagues = () => {
@@ -37,6 +37,10 @@ export const HyperfibreLeagues = () => {
                 </HostBanner>
 
                 <div className="hrEvents" />
+
+                <div className="backButtonContainer">
+                    <BackButton path={"/games/CS2/leagues"} />
+                </div>
             </div>
         </div>
     );

@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const CollegiateValorantHubScrimsH2H = () => {
@@ -22,6 +22,10 @@ export const CollegiateValorantHubScrimsH2H = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://discord.com/invite/Vq5qu9szQU"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/Valorant/head-to-head"} />
             </div>
         </div>
     );

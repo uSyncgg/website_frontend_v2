@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const EsportsAgentH2H = () => {
@@ -22,6 +22,10 @@ export const EsportsAgentH2H = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://esportsagent.gg/wagers"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/call-of-duty/head-to-head"} />
             </div>
         </div>
     );

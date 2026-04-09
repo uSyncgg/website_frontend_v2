@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const TPCWomensCodLeague = () => {
@@ -22,6 +22,10 @@ export const TPCWomensCodLeague = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://x.com/TPCWomens"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/call-of-duty/leagues"} />
             </div>
         </div>
     );

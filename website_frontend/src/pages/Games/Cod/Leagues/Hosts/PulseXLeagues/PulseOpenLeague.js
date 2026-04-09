@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const PulseOpenLeague = () => {
@@ -26,6 +26,10 @@ export const PulseOpenLeague = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://discord.com/invite/pulsexleague"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/call-of-duty/leagues/pulse-x-leagues"} />
             </div>
         </div>
     );

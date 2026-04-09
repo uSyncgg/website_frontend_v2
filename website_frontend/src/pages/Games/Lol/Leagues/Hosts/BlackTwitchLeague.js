@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const BlackTwitchLeague = () => {
@@ -22,6 +22,10 @@ export const BlackTwitchLeague = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://discord.com/invite/gGY7st3yVY"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/LoL/leagues"} />
             </div>
         </div>
     );

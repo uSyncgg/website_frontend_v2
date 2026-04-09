@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const MetaShiftEmeraldLeague = () => {
@@ -22,6 +22,10 @@ export const MetaShiftEmeraldLeague = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://discord.com/invite/RtJa6kY"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/LoL/leagues/meta-shift-leagues"} />
             </div>
         </div>
     );

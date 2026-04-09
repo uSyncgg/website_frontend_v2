@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const CmgWagers = () => {
@@ -22,6 +22,10 @@ export const CmgWagers = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://www.checkmategaming.com/wager/cross-platform/halo-infinite#all"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/halo/wagers"} />
             </div>
         </div>
     );

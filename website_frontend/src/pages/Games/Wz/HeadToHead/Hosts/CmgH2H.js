@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const CmgH2H = () => {
@@ -22,6 +22,10 @@ export const CmgH2H = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://www.checkmategaming.com/ladders"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/warzone/head-to-head"} />
             </div>
         </div>
     );

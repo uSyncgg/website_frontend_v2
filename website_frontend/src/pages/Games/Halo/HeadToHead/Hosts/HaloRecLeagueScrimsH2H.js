@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const HaloRecLeagueScrimsH2H = () => {
@@ -22,6 +22,10 @@ export const HaloRecLeagueScrimsH2H = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://discord.com/invite/Ge4eCfFTdB"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/halo/head-to-head"} />
             </div>
         </div>
     );

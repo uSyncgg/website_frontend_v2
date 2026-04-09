@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const CWLRiseLeague = () => {
@@ -22,6 +22,10 @@ export const CWLRiseLeague = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://discord.gg/WTJJmgPgCU"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/LoL/leagues/cobalt-winds-leagues"} />
             </div>
         </div>
     );

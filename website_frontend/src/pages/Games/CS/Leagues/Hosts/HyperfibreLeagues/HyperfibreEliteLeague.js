@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const HyperfibreEliteLeague = () => {
@@ -22,6 +22,10 @@ export const HyperfibreEliteLeague = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://x.com/NZ_Esports_"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/CS2/leagues/hyperfibre-leagues"} />
             </div>
         </div>
     );

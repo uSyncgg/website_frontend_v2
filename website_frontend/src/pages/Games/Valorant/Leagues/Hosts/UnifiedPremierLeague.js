@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const UnifiedPremierLeague = () => {
@@ -22,6 +22,10 @@ export const UnifiedPremierLeague = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://uea.gg/e/UCL26S/tickets"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/Valorant/leagues"} />
             </div>
         </div>
     );

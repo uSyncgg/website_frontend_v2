@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const MACSSpring2026 = () => {
@@ -22,6 +22,10 @@ export const MACSSpring2026 = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://nerdstreet.com/events/mid-atlantic-collegiate-series-macs-collegiate-community-tournaments-2026-04-17?section=overview"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/LoL/lans"} />
             </div>
         </div>
     );

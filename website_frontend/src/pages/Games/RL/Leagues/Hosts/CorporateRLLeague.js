@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const CorporateRLLeague = () => {
@@ -22,6 +22,10 @@ export const CorporateRLLeague = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://cea.gg/"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/RocketLeague/leagues"} />
             </div>
         </div>
     );

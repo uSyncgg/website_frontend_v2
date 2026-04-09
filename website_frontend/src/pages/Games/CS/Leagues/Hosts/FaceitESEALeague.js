@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const FaceitESEALeague = () => {
@@ -22,6 +22,10 @@ export const FaceitESEALeague = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://www.faceit.com/en/cs2/league/ESEA%20League/a14b8616-45b9-4581-8637-4dfd0b5f6af8"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/CS2/leagues"} />
             </div>
         </div>
     );

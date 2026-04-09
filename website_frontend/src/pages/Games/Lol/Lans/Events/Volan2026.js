@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const Volan2026 = () => {
@@ -22,6 +22,10 @@ export const Volan2026 = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://www.start.gg/tournament/volan-2026/details"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/LoL/lans"} />
             </div>
         </div>
     );

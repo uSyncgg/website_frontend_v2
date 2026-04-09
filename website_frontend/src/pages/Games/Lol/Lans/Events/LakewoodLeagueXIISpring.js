@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const LakewoodLeagueXIISpring = () => {
@@ -22,6 +22,10 @@ export const LakewoodLeagueXIISpring = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://nerdstreet.com/events/lakewood-league-xii-2026-04-26?section=overview"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/LoL/lans"} />
             </div>
         </div>
     );

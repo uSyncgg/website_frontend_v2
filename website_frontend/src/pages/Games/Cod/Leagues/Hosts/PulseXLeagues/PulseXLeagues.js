@@ -1,4 +1,4 @@
-import { HeaderImage, HostBanner } from "components";
+import { HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
 
 export const PulseXLeagues = () => {
@@ -50,6 +50,10 @@ export const PulseXLeagues = () => {
                 </HostBanner>
 
                 <div className="hrEvents" />
+
+                <div className="backButtonContainer">
+                    <BackButton path={"/games/call-of-duty/leagues"} />
+                </div>
             </div>
         </div>
     );

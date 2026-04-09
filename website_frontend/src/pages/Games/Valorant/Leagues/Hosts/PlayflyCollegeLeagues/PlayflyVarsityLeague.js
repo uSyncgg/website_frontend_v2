@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const PlayflyVarsityLeague = () => {
@@ -22,6 +22,10 @@ export const PlayflyVarsityLeague = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://playflycollege.gg/pages/playfly-college-esports"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/Valorant/leagues/playfly-leagues"} />
             </div>
         </div>
     );

@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const PlayVSLeague = () => {
@@ -22,6 +22,10 @@ export const PlayVSLeague = () => {
 
             <div className="eventButtonContainer">
                 <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://www.playvs.com/league-of-legends"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/games/LoL/leagues"} />
             </div>
         </div>
     );

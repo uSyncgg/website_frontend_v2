@@ -1,4 +1,4 @@
-import { HeaderImage, HostBanner } from "components";
+import { HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
 
 export const MinorLeagueEsportsLeagues = () => {
@@ -80,6 +80,10 @@ export const MinorLeagueEsportsLeagues = () => {
                 </HostBanner>
 
                 <div className="hrEvents" />
+
+                <div className="backButtonContainer">
+                    <BackButton path={"/games/RocketLeague/leagues"} />
+                </div>
             </div>
         </div>
     );

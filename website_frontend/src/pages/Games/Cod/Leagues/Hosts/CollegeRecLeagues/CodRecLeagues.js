@@ -1,4 +1,4 @@
-import { HeaderImage, HostBanner } from "components";
+import { HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
 
 export const CodRecLeagues = () => {
@@ -16,7 +16,7 @@ export const CodRecLeagues = () => {
                     <HostBanner.Title path={"/games/call-of-duty/leagues/cod-rec-leagues/cod-rec-premade-league"}>Premade League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/call-of-duty/leagues/cod-rec-leagues/cod-rec-premade-league"} 
-                        imgUrl={"https://i.imgur.com/jGdqqOZ.png"} 
+                        imgUrl={"https://i.imgur.com/qbmhh4T.png"} 
                         alt={"Cod Rec Premade League"}
                         verified={false}
                     />
@@ -28,7 +28,7 @@ export const CodRecLeagues = () => {
                     <HostBanner.Title path={"/games/call-of-duty/leagues/cod-rec-leagues/cod-rec-open-league"}>Open League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/call-of-duty/leagues/cod-rec-leagues/cod-rec-open-league"} 
-                        imgUrl={"https://i.imgur.com/jGdqqOZ.png"} 
+                        imgUrl={"https://i.imgur.com/qbmhh4T.png"} 
                         alt={"CXP League"}
                         verified={false}
                     />
@@ -37,6 +37,10 @@ export const CodRecLeagues = () => {
                 </HostBanner>
 
                 <div className="hrEvents" />
+
+                <div className="backButtonContainer">
+                    <BackButton path={"/games/call-of-duty/leagues"} />
+                </div>
             </div>
         </div>
     );

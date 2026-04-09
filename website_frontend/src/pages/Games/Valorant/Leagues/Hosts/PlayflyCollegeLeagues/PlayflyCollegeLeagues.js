@@ -1,4 +1,4 @@
-import { HeaderImage, HostBanner } from "components";
+import { HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
 
 export const PlayflyCollegeLeagues = () => {
@@ -37,6 +37,10 @@ export const PlayflyCollegeLeagues = () => {
                 </HostBanner>
 
                 <div className="hrEvents" />
+
+                <div className="backButtonContainer">
+                    <BackButton path={"/games/Valorant/leagues"} />
+                </div>
             </div>
         </div>
     );
