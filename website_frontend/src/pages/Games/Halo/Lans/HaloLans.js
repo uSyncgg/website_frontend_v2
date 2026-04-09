@@ -1,4 +1,4 @@
-import { HostBanner, MapCoverGame } from "components";
+import { HostBanner, MapCoverGame, NoEvents } from "components";
 
 export const HaloLans = () => {
     return (
@@ -17,7 +17,7 @@ export const HaloLans = () => {
             <div className="eventBannerContainer">
                 <div className="hrEvents" />
 
-                <HostBanner />
+                <NoEvents pageType={"LANs"} />
                 
                 <div className="hrEvents" />
             </div>

@@ -1,4 +1,4 @@
-import { HeaderImage, HostBanner } from "components";
+import { HeaderImage, HostBanner, NoEvents } from "components";
 
 export const WzLeagues = () => {
     return (
@@ -6,7 +6,9 @@ export const WzLeagues = () => {
             <HeaderImage title={"Warzone Leagues"} imageClass={"wzLeaguePage"} />
 
             <div className="eventBannerContainer">
-                ADD THING JAKE AND I SPOKE ABOUT
+                <div className="hrEvents" />
+
+                <NoEvents pageType={"Leagues"} />
 
                 <div className="hrEvents" />
             </div>

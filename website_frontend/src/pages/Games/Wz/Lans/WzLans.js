@@ -1,4 +1,4 @@
-import { HostBanner, MapCoverGame } from "components";
+import { HostBanner, MapCoverGame, NoEvents } from "components";
 
 export const WzLans = () => {
     return (
@@ -17,7 +17,9 @@ export const WzLans = () => {
             <div className="eventBannerContainer">
                 <div className="hrEvents" />
 
-                <HostBanner />
+                {/* <HostBanner /> */}
+
+                <NoEvents pageType={"LANs"} />
 
                 <div className="hrEvents" />
             </div>
