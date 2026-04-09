@@ -241,6 +241,9 @@ import { RLPCLeagues } from 'pages/Games/RL/Leagues/Hosts/RLPCLeagues/RLPCLeague
 import { RLPCDoubleALeague } from 'pages/Games/RL/Leagues/Hosts/RLPCLeagues/RLPCDoubleALeague';
 import { RLPCSingleALeague } from 'pages/Games/RL/Leagues/Hosts/RLPCLeagues/RLPCSingleALeague';
 import { RLPCTripleALeague } from 'pages/Games/RL/Leagues/Hosts/RLPCLeagues/RLPCTripleALeague';
+import { RocketSoccarConfederationLeagues } from 'pages/Games/RL/Leagues/Hosts/RocketSoccarConfederationLeagues/RocketSoccarConfederationLeagues';
+import { RSC3v3EULeague } from 'pages/Games/RL/Leagues/Hosts/RocketSoccarConfederationLeagues/RSC3v3EULeague';
+import { RSC3v3NALeague } from 'pages/Games/RL/Leagues/Hosts/RocketSoccarConfederationLeagues/RSC3v3NALeague';
 import { AirforceGamingLeague as AirforceRLLeague } from 'pages/Games/RL/Leagues/Hosts/AirforceGamingLeague';
 import { AustralianEsportsHSLeague } from 'pages/Games/RL/Leagues/Hosts/AustralianEsportsHSLeague';
 import { AustralianEsportsLeague as AustralianRLEsportsLeague } from 'pages/Games/RL/Leagues/Hosts/AustralianEsportsLeague';
@@ -613,6 +616,9 @@ root.render(
           <Route path='/games/RocketLeague/leagues/tec' element={<TheEsportsCompanyLeague />} />
           <Route path='/games/RocketLeague/leagues/egfh' element={<EGFHRLLeague />} />
           <Route path='/games/RocketLeague/leagues/aelhs' element={<AustralianEsportsHSLeague />} />
+          <Route path='/games/RocketLeague/leagues/rsc-leagues' element={<RocketSoccarConfederationLeagues />} />
+          <Route path='/games/RocketLeague/leagues/3v3-na' element={<RSC3v3NALeague />} />
+          <Route path='/games/RocketLeague/leagues/3v3-eu' element={<RSC3v3EULeague />} />
           {/* Wagers */}
           <Route path='/games/RocketLeague/wagers' element={<RLWagers />} />
           <Route path='/games/RocketLeague/wagers/cmg' element={<CmgRLWagers />} />

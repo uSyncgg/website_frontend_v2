@@ -4,14 +4,6 @@ import React from 'react';
 
 export const EventTypeImages = ({ page, articleName='' }) => {
 
-    // articleNames = [
-    //     "The Problem With Esports",
-    //     "How We Fix It",
-    //     "What We Provide",
-    //     "Joining An Esports League",
-    //     "How Esports Can Be Better"
-    // ]
-
     return (
         <div>
             {page === "Call of Duty" &&
@@ -216,31 +208,31 @@ export const EventTypeImages = ({ page, articleName='' }) => {
 
             {page === "Article" &&
                 <div className={styles.imageEventContainer}>
-                    {articleName != "The Problem With Esports" && 
+                    {articleName !== "The Problem With Esports" && 
                         <Link to={"/more/FAQ/The-Problem-With-Esports"}>
                             <img src='https://i.imgur.com/vBqSUhI.png' alt='The Problem With Esports' className={styles.articlePageImg} />
                         </Link>
                     }
                     
-                    {articleName != "How We Fix It" && 
+                    {articleName !== "How We Fix It" && 
                         <Link to={"/more/FAQ/How-We-Fix-It"}>
                             <img src='https://i.imgur.com/Q6NQGsD.png' alt='How We Fix It' className={styles.articlePageImg} />
                         </Link>
                     }
                     
-                    {articleName != "What We Provide" && 
+                    {articleName !== "What We Provide" && 
                         <Link to={"/more/FAQ/What-We-Provide"}>
                             <img src='https://i.imgur.com/Fr7yPnN.png' alt='What We Provide' className={styles.articlePageImg} />
                         </Link>
                     }
                     
-                    {articleName != "How to Join an Esports League" &&
+                    {articleName !== "How to Join an Esports League" &&
                         <Link to={"/more/FAQ/How-to-Join-an-Esports-League"}>
                             <img src='https://i.imgur.com/zS2wj8d.png' alt='How to Join an Esports League' className={styles.articlePageImg} />
                         </Link>
                     }
 
-                    {articleName != "How Esports Can Be Better" && 
+                    {articleName !== "How Esports Can Be Better" && 
                         <Link to={"/more/FAQ/How-Esports-Can-Be-Better"}>
                             <img src='https://i.imgur.com/DEB6G8p.png' alt='How Esports Can Be Better' className={styles.articlePageImg} />
                         </Link>

@@ -6,12 +6,7 @@ import React from "react";
 
 import styles from './HostBanner.module.css';
 
-const parts = [BannerImage, BannerRegion, BannerTitle, MoreInfoButton];
-
 export const HostBanner = ({ children }) => {
-    const hasContent = React.Children.toArray(children).some(
-        (child) => React.isValidElement(child) && parts.includes(child.type)
-    );
 
     return (
         <div className={styles.banner}>

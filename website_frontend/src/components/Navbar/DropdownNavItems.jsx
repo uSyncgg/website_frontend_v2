@@ -1,5 +1,4 @@
 import { NavLink, useMatch } from "react-router";
-import { useState } from "react";
 import styles from '../Navbar/Navbar.module.css';
 
 var temp = {
@@ -14,7 +13,7 @@ export const LeaguesNavItem = ({ closeMenu, isOpen, onToggle }) => {
   const isActive = leaguesMatch || childMatch;
 
   const handleClick = (e) => {
-    if (window.innerWidth <= 768 && temp['Leagues'] == 0) {
+    if (window.innerWidth <= 768 && temp['Leagues'] === 0) {
       e.preventDefault();
       onToggle();
       temp['Leagues'] += 1;
@@ -71,7 +70,7 @@ export const LanNavItem = ({ closeMenu, isOpen, onToggle }) => {
   const isActive = lansMatch || childMatch || otherMatch;
 
   const handleClick = (e) => {
-    if (window.innerWidth <= 768 && temp['LANs'] == 0) {
+    if (window.innerWidth <= 768 && temp['LANs'] === 0) {
       e.preventDefault();
       onToggle();
       temp['LANs'] += 1;
