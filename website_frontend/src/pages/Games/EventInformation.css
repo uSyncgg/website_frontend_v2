@@ -14,3 +14,10 @@
     padding-bottom: 2rem;
     margin-top: 2rem;
 } 
+
+.backButtonContainer {
+    justify-content: left;
+    display: flex;
+    margin: 0 auto;
+    width: 78%;
+}
