@@ -13,10 +13,6 @@ export const HostBanner = ({ children }) => {
         (child) => React.isValidElement(child) && parts.includes(child.type)
     );
 
-    if (!hasContent) {
-        return <h2 className={styles.noneUpcoming}>None Upcoming - Please Check Back Tomorrow</h2>;
-    }
-
     return (
         <div className={styles.banner}>
             {children}
