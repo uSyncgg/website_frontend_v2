@@ -27,6 +27,8 @@ import { ExternalButton } from "./ExternalButton/ExternalButton";
 
 import { TwitterEmbed } from "./TwitterEmbed/TwitterEmbed";
 
+import { NoEvents } from "./NoEvents/NoEvents";
+
 export {
     GameIcon,
     GameChildrenIcon,
@@ -49,5 +51,6 @@ export {
     TeamPhoto,
     EventInfoCard,
     ExternalButton,
-    TwitterEmbed
+    TwitterEmbed,
+    NoEvents
 };

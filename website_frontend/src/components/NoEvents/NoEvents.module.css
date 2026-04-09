@@ -1,0 +1,26 @@
+.eventContainer {
+    text-align: center;
+    justify-content: center;
+    padding-bottom: 2rem;
+}
+
+.eventContainer h1 {
+    font-size: 3rem;
+}
+
+.eventContainer h3, .eventContainer p {
+    font-size: 2rem;
+}
+
+.eventContainer h1, .eventContainer h3 {
+    color: #fff;
+}
+
+.link {
+    color: #8e6ace;
+    text-decoration: none;
+}
+
+.link:hover {
+    filter: brightness(120%);
+}
