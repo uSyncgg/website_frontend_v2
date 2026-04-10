@@ -24,7 +24,7 @@ export const PostYourEvent = () => {
             <div className={styles.subscriptionContainer}>
                 <p className={`${styles.learn} ${styles.post}`}>
                     Already Featured? Become {" "}
-                    <Link to={"/more/eventhost/verification"}>Verified</Link>
+                    <Link to={"/more/verification"}>Verified</Link>
                 </p>
             </div>
         </div>

@@ -32,7 +32,7 @@ export const TeamPhoto = ({member}) => {
 
     return (
         <div className={styles.photoContainer}>
-            <Link to={teamMembers[member]["socials"]}>
+            <Link to={teamMembers[member]["socials"]} target='_blank'>
                 <img className={styles.photo} src={teamMembers[member]["picture"]} alt={`${teamMembers[member]["name"]}`} />
             </Link>
             <h1 className={styles.title}>{teamMembers[member]["name"]}</h1>

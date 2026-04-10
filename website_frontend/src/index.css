@@ -27,6 +27,10 @@ code {
   min-height: 100vh;
 }
 
+.standardBlankContainer {
+  min-height: 100vh;
+}
+
 .hr {
   border-top: .1rem solid white;
   margin: 0 10rem;

@@ -3,7 +3,7 @@ import { EventTypeImages } from "components";
 
 export const JoiningEsportsLeague = () => {
     return (
-        <div>
+        <div className="standardBlankContainer">
             <div className="articleContainer">
                 <div className="articleSectionOne">
                     <div className="articleTextContainer">

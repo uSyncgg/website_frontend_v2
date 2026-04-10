@@ -17,7 +17,7 @@ export const Verification = () => {
                     </Link>
 
                     <div className={styles.subscription}>
-                        <MoreInfoButton title={"Subscribe"} path={"https://buy.stripe.com/eVadRz4PY0s31mEcMV"} />
+                        <MoreInfoButton title={"Subscribe"} path={"https://buy.stripe.com/eVadRz4PY0s31mEcMV"} external={true} />
                     </div>
                 </div>
 

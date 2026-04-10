@@ -17,7 +17,7 @@ export const Faqs = () => {
                              <Link to={"/games/halo"}>
                                 <img src="https://i.imgur.com/wqKJfEu.png" alt="Halo" className="faqGameImage" /> 
                             </Link>
-                            <Link to={"/gams/LoL"}>
+                            <Link to={"/games/LoL"}>
                                 <img src="https://i.imgur.com/5riYNow.png" alt="League of Legends" className="faqGameImage" />
                             </Link>
                             <Link to={"/games/RocketLeague"}>
@@ -31,7 +31,7 @@ export const Faqs = () => {
 
                     <div>
                         <div className="faqLinkTitle">
-                        <Link to={"/articles"} className="faqLink">FAQ Articles</Link>
+                        <Link to={"/more/articles"} className="faqLink">FAQ Articles</Link>
                         </div>
                         <div>
                             <Link to={"/more/FAQ/The-Problem-With-Esports"}>

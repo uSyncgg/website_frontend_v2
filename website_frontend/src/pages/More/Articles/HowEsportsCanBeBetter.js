@@ -3,7 +3,7 @@ import { EventTypeImages } from "components";
 
 export const HowEsportsCanBeBetter = () => {
     return (
-        <div>
+        <div className="standardBlankContainer">
             <div className="articleContainer">
                 <div className="articleSectionOne">
                     <div className="articleTextContainer">
