@@ -16,7 +16,13 @@ const MapCoverGame = ({game}) => {
         <div className={styles.cover} onClick={handleClick}>
             <p className={styles.coverText}>Click to interact with the map <br /> or scroll below</p>
 
-            <Link to="/lans" className={`${styles.mapButtonLans} ${styles.mapButton}`}>Back to LANs</Link>
+            {game === undefined && 
+                <Link to="/lans" className={`${styles.mapButtonLansSolo} ${styles.mapButton}`}>Back to LANs</Link>
+            }
+
+            {game !== undefined && 
+                <Link to="/lans" className={`${styles.mapButtonLans} ${styles.mapButton}`}>Back to LANs</Link>
+            }
 
             {game === "CoD" && 
                 <Link to="/games/call-of-duty" className={`${styles.mapButtonGame} ${styles.mapButton}`}>Back to Call of Duty</Link>            
