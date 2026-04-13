@@ -9,6 +9,7 @@ export const ExternalButton = ({ path, title, inverted=false, blank=false }) => 
                 to={path} 
                 target={blank ? '_blank' : ""} 
                 className={styles.aWrapper}
+                rel='nofollow'
             >
                 <button className={`${styles.button} ${!inverted ? styles.buttonStandard : styles.buttonInverted}`}>{title}</button>
             </Link>
