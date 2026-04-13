@@ -13,6 +13,7 @@
     font-size: inherit;
     margin-bottom: 2rem;
     margin-top: 1rem;
+    cursor: pointer;
 }
 
 .buttonInverted {
