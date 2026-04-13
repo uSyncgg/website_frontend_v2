@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../EventInformation.css';
 
 export const LANAllNightSpring2026 = () => {
@@ -21,7 +21,11 @@ export const LANAllNightSpring2026 = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://lanallnight.com/"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://lanallnight.com/"} />
+            </div>
+
+            <div className="backButtonContainer">
+                <BackButton path={"/other-lans"} />
             </div>
         </div>
     );
