@@ -65,7 +65,8 @@ import { EliteWarfareGamingLeague } from 'pages/Games/Cod/Leagues/Hosts/EliteWar
 import { FemaleCodLeague } from 'pages/Games/Cod/Leagues/Hosts/FemaleCodLeague';
 import { IXIEsportsLeague } from 'pages/Games/Cod/Leagues/Hosts/IXIEsportsLeague';
 import { NJCAAELeague as NJCAAECodLeague } from 'pages/Games/Cod/Leagues/Hosts/NJCAAELeague';
-import { OldHeadsCircuitLeague } from 'pages/Games/Cod/Leagues/Hosts/OldHeadsCircuitLeague';
+// TEMP REMOVED, THEY MAY RESTART
+// import { OldHeadsCircuitLeague } from 'pages/Games/Cod/Leagues/Hosts/OldHeadsCircuitLeague';
 import { PlayflyCollegeLeague as PlayflyCodLeague } from 'pages/Games/Cod/Leagues/Hosts/PlayflyCollegeLeague';
 import { PremierCircuitLeague } from 'pages/Games/Cod/Leagues/Hosts/PremierCircuitLeague';
 import { TPCWomensCodLeague } from 'pages/Games/Cod/Leagues/Hosts/TPCWomensCodLeague';
@@ -79,12 +80,9 @@ import { CodTournaments } from 'pages/Games/Cod/Tournaments/CodTournaments';
 import { CodWagers } from 'pages/Games/Cod/Wagers/CodWagers';
 import { OneVOneMeWagers as OneVOneCodWagers } from 'pages/Games/Cod/Wagers/Hosts/1v1MeWagers';
 import { CmgWagers as CmgCodWagers } from 'pages/Games/Cod/Wagers/Hosts/CmgWagers';
-import { DropInWagers as DropInCodWagers } from 'pages/Games/Cod/Wagers/Hosts/DropInWagers';
-import { DubbzWagers as DubbzCodWagers } from 'pages/Games/Cod/Wagers/Hosts/DubbzWagers';
 import { EsportsAgentWagers } from 'pages/Games/Cod/Wagers/Hosts/EsportsAgentWagers';
 import { EsportsHubWagers } from 'pages/Games/Cod/Wagers/Hosts/EsportsHubWagers';
 import { Ewagers as CodEwagers } from 'pages/Games/Cod/Wagers/Hosts/Ewagers';
-import { OneUpWagers as OneUpCodWagers } from 'pages/Games/Cod/Wagers/Hosts/OneUpWagers';
 
 // CS Specific Pages minus LANs
 import { CS } from 'pages/Games/CS/CS';
@@ -111,7 +109,6 @@ import { PlayflyCollegeLeague as PlayflyCSLeague } from 'pages/Games/CS/Leagues/
 import { UnitedTwentyOneLeague } from 'pages/Games/CS/Leagues/Hosts/UnitedTwentyOneLeague';
 // Wagers
 import { CSWagers } from 'pages/Games/CS/Wagers/CSWagers';
-import { DubbzWagers as DubbzCSWagers } from 'pages/Games/CS/Wagers/Hosts/DubbzWagers';
 import { GamerSaloonWagers as GamerSaloonCSWagers } from 'pages/Games/CS/Wagers/Hosts/GamerSaloonWagers';
 import { ShowdownGamingWagers } from 'pages/Games/CS/Wagers/Hosts/ShowdownGamingWagers';
 
@@ -129,14 +126,13 @@ import { HaloLeagues } from 'pages/Games/Halo/Leagues/HaloLeagues';
 import { AscendingBaselineLeagues } from 'pages/Games/Halo/Leagues/Hosts/AscendingBaselineLeagues/AscendingBaselineLeagues';
 import { AscendingBaselineABLeague } from 'pages/Games/Halo/Leagues/Hosts/AscendingBaselineLeagues/AscendingBaselineABLeague';
 import { AscendingBaselinePandemoniumGamesLeague } from 'pages/Games/Halo/Leagues/Hosts/AscendingBaselineLeagues/AscendingBaselinePandemoniumGamesLeague';
-import { CollegeHaloLeague } from 'pages/Games/Halo/Leagues/Hosts/CollegeHaloLeague';
 import { HaloAgentLeague } from 'pages/Games/Halo/Leagues/Hosts/HaloAgentLeague';
 import { HaloRecLeague } from 'pages/Games/Halo/Leagues/Hosts/HaloRecLeague';
+import { CollegeHaloLeague } from 'pages/Games/Halo/Leagues/Hosts/CollegeHaloLeague';
 // Wagers
 import { HaloWagers } from 'pages/Games/Halo/Wagers/HaloWagers';
 import { CmgWagers as CmgHaloWagers } from 'pages/Games/Halo/Wagers/Hosts/CmgWagers';
 import { Ewagers as HaloEwagers } from 'pages/Games/Halo/Wagers/Hosts/Ewagers';
-import { OneUpWagers as OneUpHaloWagers } from 'pages/Games/Halo/Wagers/Hosts/OneUpWagers';
 
 // LoL Specific Pages minus LANs
 import { Lol } from 'pages/Games/Lol/Lol';
@@ -204,8 +200,6 @@ import { SDCLeague } from 'pages/Games/Lol/Leagues/Hosts/SDCLeague';
 import { NECCLeague as NECCLoLLeague } from 'pages/Games/Lol/Leagues/Hosts/NECCLeague';
 // Wagers
 import { LolWagers } from 'pages/Games/Lol/Wagers/LolWagers';
-import { DropInGamingWagers as DropInLoLWagers } from 'pages/Games/Lol/Wagers/Hosts/DropInGamingWagers';
-import { DubbzWagers as DubbzLoLWagers } from 'pages/Games/Lol/Wagers/Hosts/DubbzWagers';
 import { Ewagers as LoLEWagers } from 'pages/Games/Lol/Wagers/Hosts/Ewagers';
 
 // RL Specific Pages minus LANs
@@ -262,8 +256,6 @@ import { UnitedRogueLeague as UnitedRogueRLLeague } from 'pages/Games/RL/Leagues
 // Wagers
 import { RLWagers } from 'pages/Games/RL/Wagers/RLWagers';
 import { CmgWagers as CmgRLWagers } from 'pages/Games/RL/Wagers/Hosts/CmgWagers';
-import { DropInGamingWagers as DropInRLWagers } from 'pages/Games/RL/Wagers/Hosts/DropInGamingWagers';
-import { DubbzWagers as DubbzRLWagers } from 'pages/Games/RL/Wagers/Hosts/DubbzWagers';
 import { Ewagers as RLEWagers } from 'pages/Games/RL/Wagers/Hosts/Ewagers';
 import { GamerSaloonWagers as GamerSaloonRLWagers } from 'pages/Games/RL/Wagers/Hosts/GamerSaloonWagers';
 import { RLPCMajorLeague } from 'pages/Games/RL/Leagues/Hosts/RLPCLeagues/RLPCMajorLeague';
@@ -273,7 +265,6 @@ import { Valorant } from 'pages/Games/Valorant/Valorant';
 // H2H
 import { ValorantHeadToHead } from 'pages/Games/Valorant/HeadToHead/ValorantHeadToHead';
 import { CollegiateValorantHubScrimsH2H } from 'pages/Games/Valorant/HeadToHead/Hosts/CollegiateValorantHubScrimsH2H';
-import { DropInGamingH2H } from 'pages/Games/Valorant/HeadToHead/Hosts/DropInGamingH2H';
 import { EsportsScrimH2H } from 'pages/Games/Valorant/HeadToHead/Hosts/EsportsScrimH2H';
 import { GanksterGGH2H as GanksterValH2H } from 'pages/Games/Valorant/HeadToHead/Hosts/GanksterGGH2H';
 import { PraccH2H as PraccValH2H } from 'pages/Games/Valorant/HeadToHead/Hosts/PraccH2H';
@@ -295,7 +286,6 @@ import { NJCAAELeague as NJCAAEVALLeague } from 'pages/Games/Valorant/Leagues/Ho
 import { UnifiedPremierLeague } from 'pages/Games/Valorant/Leagues/Hosts/UnifiedPremierLeague';
 // Wagers
 import { ValorantWagers } from 'pages/Games/Valorant/Wagers/ValorantWagers';
-import { DropInGamingWagers as DropInValWagers } from 'pages/Games/Valorant/Wagers/Hosts/DropInGamingWagers';
 import { Ewagers as ValEwagers } from 'pages/Games/Valorant/Wagers/Hosts/Ewagers';
 
 // Warzone Specific Pages minus LANs
@@ -310,11 +300,8 @@ import { WzLeagues } from 'pages/Games/Wz/Leagues/WzLeagues';
 import { WzWagers } from 'pages/Games/Wz/Wagers/WzWagers';
 import { OneVOneMeWagers as OneVOneWzWagers } from 'pages/Games/Wz/Wagers/Hosts/1v1MeWagers';
 import { CmgWagers as CmgWzWagers } from 'pages/Games/Wz/Wagers/Hosts/CmgWagers';
-import { DropInGamingWagers as DropInWzWagers } from 'pages/Games/Wz/Wagers/Hosts/DropInGamingWagers';
-import { DubbzWagers as DubbzWzWagers } from 'pages/Games/Wz/Wagers/Hosts/DubbzWagers';
 import { Ewagers as WzEwagers } from 'pages/Games/Wz/Wagers/Hosts/Ewagers';
 import { GamerSaloonWagers as GamerSaloonWzWagers } from 'pages/Games/Wz/Wagers/Hosts/GamerSaloonWagers';
-import { OneUpWagers as OneUpWzWagers } from 'pages/Games/Wz/Wagers/Hosts/OneUpWagers';
 
 // Payment Imports
 import GeneralPaymentForm from 'pages/Payment/GeneralPaymentForm/GeneralPaymentForm';
@@ -324,6 +311,8 @@ import GeneralPaymentReceipt from 'pages/Payment/Receipts/GeneralPaymentReceipt'
 import Payment from 'pages/Payment/PaymentCheckouts/Payment';
 
 // LAN Pages
+// All LANs
+import { AllLans } from 'pages/Games/Conventions/AllLans';
 // CoD
 import { CharlestonCrownSeries } from 'pages/Games/Cod/Lans/Events/CharlestonCrownSeries';
 import { LowtierMajorIV } from 'pages/Games/Cod/Lans/Events/LowtierMajorIV';
@@ -333,7 +322,6 @@ import { RVAEsportsChampionship2026 } from 'pages/Games/Cod/Lans/Events/RVAEspor
 // LoL
 import { LakewoodLeagueXIISpring } from 'pages/Games/Lol/Lans/Events/LakewoodLeagueXIISpring';
 import { Volan2026 } from 'pages/Games/Lol/Lans/Events/Volan2026';
-import { MACSSpring2026 } from 'pages/Games/Lol/Lans/Events/MACSSpring2026';
 import { RMCSSpring2026 } from 'pages/Games/Lol/Lans/Events/RMCSSpring2026';
 // Conventions
 import { Conventions } from 'pages/Games/Conventions/Conventions';
@@ -354,6 +342,7 @@ import { DreamHackBirmingham } from 'pages/Games/Conventions/Archived/DreamHackB
 import { FortLANSpring2026 } from 'pages/Games/Conventions/Archived/FortLANSpring2026';
 import { LowPingLAN } from 'pages/Games/Conventions/Archived/LowPingLAN';
 import { TomorrowLAN2026 } from 'pages/Games/Conventions/Archived/TomorrowLAN2026';
+import { MACSSpring2026 } from 'pages/Games/Conventions/Archived/MACSSpring2026';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -424,7 +413,8 @@ root.render(
           <Route path='/games/call-of-duty/leagues/cod-rec-leagues/cod-rec-open-league' element={<CodRecOpenLeague />} />
           <Route path='/games/call-of-duty/leagues/elite-gaming-warfare-league' element={<EliteWarfareGamingLeague />} />
           <Route path='/games/call-of-duty/leagues/casual-xp-league' element={<CasualXPLeague />} />
-          <Route path='/games/call-of-duty/leagues/old-heads-circuit' element={<OldHeadsCircuitLeague />} />
+          {/* TEMP REMOVED, THEY MAY RESTART */}
+          {/* <Route path='/games/call-of-duty/leagues/old-heads-circuit' element={<OldHeadsCircuitLeague />} /> */}
           <Route path='/games/call-of-duty/leagues/cxp-leagues' element={<CollegeXPLeagues />} />
           <Route path='/games/call-of-duty/leagues/cxp-leagues/cxp-varsity' element={<CollegeXPVarsityLeague />} />
           <Route path='/games/call-of-duty/leagues/cxp-leagues/cxp-club' element={<CollegeXPClubLeague />} />
@@ -438,10 +428,7 @@ root.render(
           <Route path='/games/call-of-duty/wagers' element={<CodWagers />} />
           <Route path='/games/call-of-duty/wagers/cmg' element={<CmgCodWagers />} />
           <Route path='/games/call-of-duty/wagers/eagent' element={<EsportsAgentWagers />} />
-          <Route path='/games/call-of-duty/wagers/oneup' element={<OneUpCodWagers />} />
-          <Route path='/games/call-of-duty/wagers/dropin' element={<DropInCodWagers />} />
           <Route path='/games/call-of-duty/wagers/1v1me' element={<OneVOneCodWagers />} />
-          <Route path='/games/call-of-duty/wagers/dubbz' element={<DubbzCodWagers />} />
           <Route path='/games/call-of-duty/wagers/the-esports-hub' element={<EsportsHubWagers />} />
           <Route path='/games/call-of-duty/wagers/ewagers' element={<CodEwagers />} />
 
@@ -470,7 +457,6 @@ root.render(
           <Route path='/games/CS2/leagues/ael' element={<AustralianCSEsportsLeague />} />
           {/* Wagers */}
           <Route path='/games/CS2/wagers' element={<CSWagers />} />
-          <Route path='/games/CS2/wagers/dubbzcs2' element={<DubbzCSWagers />} />
           <Route path='/games/CS2/wagers/showdowngaming_cs2' element={<ShowdownGamingWagers />} />
           <Route path='/games/CS2/wagers/gamersaloon_cs2' element={<GamerSaloonCSWagers />} />
 
@@ -494,7 +480,6 @@ root.render(
           {/* Wagers */}
           <Route path='/games/halo/wagers' element={<HaloWagers />} />
           <Route path='/games/halo/wagers/cmg' element={<CmgHaloWagers />} />
-          <Route path='/games/halo/wagers/oneup' element={<OneUpHaloWagers />} />
           <Route path='/games/halo/wagers/ewagers' element={<HaloEwagers />} />
           
           {/* LoL Pages Minus LANs */}
@@ -530,7 +515,7 @@ root.render(
           <Route path='/games/LoL/leagues/blue-otter-leagues' element={<BlueOtterLeagues />} />
           <Route path='/games/LoL/leagues/blue-otter-leagues/masters' element={<BlueOtterMastersLeague />} />
           <Route path='/games/LoL/leagues/blue-otter-leagues/diamond' element={<BlueOtterDiamondLeague />} />
-          <Route path='/games/LoL/leagues/blue-otter-league/emerald' element={<BlueOtterEmeraldLeague />} />
+          <Route path='/games/LoL/leagues/blue-otter-leagues/emerald' element={<BlueOtterEmeraldLeague />} />
           <Route path='/games/LoL/leagues/blue-otter-leagues/plat' element={<BlueOtterPlatinumLeague />} />
           <Route path='/games/LoL/leagues/blue-otter-leagues/gold' element={<BlueOtterGoldLeague />} />
           <Route path='/games/LoL/leagues/blue-otter-leagues/draft' element={<BlueOtterDraftLeague />} />
@@ -544,7 +529,7 @@ root.render(
           <Route path='/games/LoL/leagues/low-budget-leagues/lta' element={<LowBudgetLTALeague />} />
           <Route path='/games/LoL/leagues/meta-shift-leagues' element={<MetaShiftLeagues />} />
           <Route path='/games/LoL/leagues/meta-shift-leagues/noble' element={<MetaShiftNobleLeague />} />
-          <Route path='/games/LoL/leagues/meta-shifts-leagues/diamond' element={<MetaShiftDiamondLeague />} />
+          <Route path='/games/LoL/leagues/meta-shift-leagues/diamond' element={<MetaShiftDiamondLeague />} />
           <Route path='/games/LoL/leagues/meta-shift-leagues/emerald' element={<MetaShiftEmeraldLeague />} />
           <Route path='/games/LoL/leagues/meta-shift-leagues/cyanide' element={<MetaShiftCyanideLeague />} />
           <Route path='/games/LoL/leagues/meta-shift-leagues/platinum' element={<MetaShiftPlatinumLeague />} />
@@ -563,8 +548,6 @@ root.render(
           <Route path='/games/LoL/leagues/playvs' element={<PlayVSLoLLeague />} />
           {/* Wagers */}
           <Route path='/games/LoL/wagers' element={<LolWagers />} />
-          <Route path='/games/LoL/wagers/dropingaming' element={<DropInLoLWagers />} />
-          <Route path='/games/LoL/wagers/dubbz' element={<DubbzLoLWagers />} />
           <Route path='/games/LoL/wagers/ewagers' element={<LoLEWagers />} />
 
           {/* RL Pages Minus LANs */}
@@ -586,14 +569,14 @@ root.render(
           <Route path='/games/RocketLeague/leagues/mle-leagues/champ' element={<MinorLeagueChampionLeague />} />
           <Route path='/games/RocketLeague/leagues/mle-leagues/academy' element={<MinorLeagueAcademyLeague />} />
           <Route path='/games/RocketLeague/leagues/mle-leagues/foundation' element={<MinorLeagueFoundationLeague />} />
-          <Route path='/games/RoketLeague/leagues/united-rogue' element={<UnitedRogueRLLeague />} />
+          <Route path='/games/RocketLeague/leagues/united-rogue' element={<UnitedRogueRLLeague />} />
           <Route path='/games/RocketLeague/leagues/italian-leagues' element={<ItalianRocketChampLeagues />} />
           <Route path='/games/RocketLeague/leagues/italian-leagues/serie-a' element={<ItalianSerieALeague />} />
           <Route path='/games/RocketLeague/leagues/italian-leagues/serie-b' element={<ItalianSerieBLeague />} />
           <Route path='/games/RocketLeague/leagues/nemesis-leagues' element={<NemesisLeagues />} />
           <Route path='/games/RocketLeague/leagues/nemesis-leagues/titan' element={<NemesisTitanLeague />} />
           <Route path='/games/RocketLeague/leagues/nemesis-leagues/rival' element={<NemesisRivalLeague />} />
-          <Route path='/games/RocketLeague/leagues/nemesis-leagues/challanger' element={<NemesisChallengerLeague />} />
+          <Route path='/games/RocketLeague/leagues/nemesis-leagues/challenger' element={<NemesisChallengerLeague />} />
           <Route path='/games/RocketLeague/leagues/nemesis-leagues/prospect' element={<NemesisProspectLeague />} />
           <Route path='/games/RocketLeague/leagues/nemesis-leagues/novice' element={<NemesisNoviceLeague />} />
           <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues' element={<FrontierDoublesLeagues />} />
@@ -608,7 +591,7 @@ root.render(
           <Route path='/games/RocketLeague/leagues/playfly' element={<PlayflyRLLeague />} />
           <Route path='/games/RocketLeague/leagues/ecac' element={<ECACRLLeague />} />
           <Route path='/games/RocketLeague/leagues/necc' element={<NECCRLLeague />} />
-          <Route path='/games/RocketLeague/leagues/cecc' elemente={<CECCRLLeague />} />
+          <Route path='/games/RocketLeague/leagues/cecc' element={<CECCRLLeague />} />
           <Route path='/games/RocketLeague/leagues/njcaae' element={<NJCAAERLLeague />} />
           <Route path='/games/RocketLeague/leagues/egfc' element={<EGFCRLLeague />} />
           <Route path='/games/RocketLeague/leagues/ael' element={<AustralianRLEsportsLeague />} />
@@ -617,14 +600,12 @@ root.render(
           <Route path='/games/RocketLeague/leagues/egfh' element={<EGFHRLLeague />} />
           <Route path='/games/RocketLeague/leagues/aelhs' element={<AustralianEsportsHSLeague />} />
           <Route path='/games/RocketLeague/leagues/rsc-leagues' element={<RocketSoccarConfederationLeagues />} />
-          <Route path='/games/RocketLeague/leagues/3v3-na' element={<RSC3v3NALeague />} />
-          <Route path='/games/RocketLeague/leagues/3v3-eu' element={<RSC3v3EULeague />} />
+          <Route path='/games/RocketLeague/leagues/rsc-leagues/3v3-na' element={<RSC3v3NALeague />} />
+          <Route path='/games/RocketLeague/leagues/rsc-leagues/3v3-eu' element={<RSC3v3EULeague />} />
           {/* Wagers */}
           <Route path='/games/RocketLeague/wagers' element={<RLWagers />} />
           <Route path='/games/RocketLeague/wagers/cmg' element={<CmgRLWagers />} />
-          <Route path='/games/RocketLeague/wagers/dropingaming' element={<DropInRLWagers />} />
           <Route path='/games/RocketLeague/wagers/gamersaloon' element={<GamerSaloonRLWagers />} />
-          <Route path='/games/RocketLeague/wagers/dubbz' element={<DubbzRLWagers />} />
           <Route path='/games/RocketLeague/wagers/ewagers' element={<RLEWagers />} />
 
           {/* Valorant Pages Minus LANs */}
@@ -633,7 +614,6 @@ root.render(
           <Route path='/games/Valorant/head-to-head' element={<ValorantHeadToHead />} />
           <Route path='/games/Valorant/head-to-head/gankster' element={<GanksterValH2H />} />
           <Route path='/games/Valorant/head-to-head/esport-scrim' element={<EsportsScrimH2H />} />
-          <Route path='/games/Valorant/head-to-head/dropingaming' element={<DropInGamingH2H />} />
           <Route path='/games/Valorant/head-to-head/college-hub' element={<CollegiateValorantHubScrimsH2H />} />
           <Route path='/games/Valorant/head-to-head/pracc' element={<PraccValH2H />} />
           {/* Leagues */}
@@ -654,7 +634,6 @@ root.render(
           <Route path='/games/Valorant/leagues/egfh' element={<EGFHVALLeague />} />
           {/* Wagers */}
           <Route path='/games/Valorant/wagers' element={<ValorantWagers />} />
-          <Route path='/games/Valorant/wagers/dropingaming' element={<DropInValWagers />} />
           <Route path='/games/Valorant/wagers/ewagers' element={<ValEwagers />} />
 
           {/* Warzone Pages Mins LANs */}
@@ -668,11 +647,8 @@ root.render(
           {/* Wagers */}
           <Route path='/games/warzone/wagers' element={<WzWagers />} />
           <Route path='/games/warzone/wagers/cmg' element={<CmgWzWagers />} />
-          <Route path='/games/warzone/wagers/oneup' element={<OneUpWzWagers />} />
           <Route path='/games/warzone/wagers/1v1me' element={<OneVOneWzWagers />} />
           <Route path='/games/warzone/wagers/gamersaloon' element={<GamerSaloonWzWagers />} />
-          <Route path='/games/warzone/wagers/dropingaming' element={<DropInWzWagers />} />
-          <Route path='/games/warzone/wagers/dubbz' element={<DubbzWzWagers />} />
           <Route path='/games/warzone/wagers/ewagers' element={<WzEwagers />} />
 
           {/* Payment Routes */}
@@ -684,6 +660,8 @@ root.render(
           <Route path='/payment' element={<Payment />} />
 
           {/* LANs */}
+          {/* All LANs */}
+          <Route path='/LanMap' element={<AllLans />} />
           {/* CoD */}
           <Route path='/lans/charleston-crown-series' element={<CharlestonCrownSeries />} />
           <Route path='/lans/lowtier-major-iv' element={<LowtierMajorIV />} />
@@ -693,7 +671,6 @@ root.render(
           {/* LoL */}
           <Route path='/lans/lakewood-league-xii-spring' element={<LakewoodLeagueXIISpring />} />
           <Route path='/lans/volan-2026' element={<Volan2026 />} />
-          <Route path='/lans/macs-spring-2026' element={<MACSSpring2026 />} />
           <Route path='/lans/rmcs-spring-2026' element={<RMCSSpring2026 />} />
           {/* Conventions */}
           <Route path='/other-lans' element={<Conventions />} />
@@ -714,6 +691,7 @@ root.render(
           <Route path='/lans/forlan-spring-2026' element={<FortLANSpring2026 />} />
           <Route path='/lans/low-ping-lan-2026' element={<LowPingLAN />} />
           <Route path='/lans/tomorrowlan_2026' element={<TomorrowLAN2026 />} />
+          <Route path='/lans/macs-spring-2026' element={<MACSSpring2026 />} />
 
         </Routes>
       </main>

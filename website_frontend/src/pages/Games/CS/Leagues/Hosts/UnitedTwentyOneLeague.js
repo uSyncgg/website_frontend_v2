@@ -12,7 +12,7 @@ export const UnitedTwentyOneLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Main and Second Divisions", "$10,000 Prize Pool (Main Division)", "$2,000 Prize Pool (Second Division)", "Winners of Second Division Move to Main", "Live Streamed Matches", "Highly Competitive"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - Worldwide"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Main and Second Divisions", "$10,000 Prize Pool (Main Division)", "$2,000 Prize Pool (Second Division)", "Winners of Second Division Move to Main", "Live Streamed Matches", "Highly Competitive"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - Available Worldwide"]}/>
                 </div>
 
                 <div>
@@ -21,7 +21,7 @@ export const UnitedTwentyOneLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://x.com/OfUnited21"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://x.com/OfUnited21"} />
             </div>
 
             <div className="backButtonContainer">

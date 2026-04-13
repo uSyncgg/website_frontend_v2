@@ -21,7 +21,7 @@ export const Ewagers = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://ewagers.co/games?page=1"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://ewagers.co/games?page=1"} />
             </div>
 
             <div className="backButtonContainer">

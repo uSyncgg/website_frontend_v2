@@ -21,7 +21,7 @@ export const LowtierMajorIV = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://x.com/TPCircuit/status/2031850516507181452"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://x.com/TPCircuit/status/2031850516507181452"} />
             </div>
 
             <div className="backButtonContainer">

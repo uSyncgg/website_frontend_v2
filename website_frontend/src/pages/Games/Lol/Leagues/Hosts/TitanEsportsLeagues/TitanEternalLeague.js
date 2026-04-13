@@ -21,7 +21,7 @@ export const TitanEternalLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://lol.titanesports.org/"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://lol.titanesports.org/"} />
             </div>
 
             <div className="backButtonContainer">

@@ -7,17 +7,6 @@ export const CSWagers = () => {
 
             <div className="eventBannerContainer">
                 <HostBanner>
-                    <HostBanner.Title path={"/games/CS2/wagers/dubbzcs2"}>Dubbz</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/CS2/wagers/dubbzcs2"} 
-                        imgUrl={"https://i.imgur.com/cgPHyyf.png"} 
-                        alt={"Dubbz Wagers"}
-                        verified={false}
-                    />
-                    <HostBanner.Button title={"More Info"} path={"/games/CS2/wagers/dubbzcs2"} />
-                </HostBanner>
-
-                <HostBanner>
                     <HostBanner.Title path={"/games/CS2/wagers/showdowngaming_cs2"}>Showdown Gaming</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/CS2/wagers/showdowngaming_cs2"} 
@@ -27,8 +16,6 @@ export const CSWagers = () => {
                     />
                     <HostBanner.Button title={"More Info"} path={"/games/CS2/wagers/showdowngaming_cs2"} />
                 </HostBanner>
-
-                <div className="hrEvents" />
 
                 <HostBanner>
                     <HostBanner.Title path={"/games/CS2/wagers/gamersaloon_cs2"}>Gamer Saloon</HostBanner.Title>

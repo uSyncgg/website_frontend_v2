@@ -21,7 +21,7 @@ export const CharlestonCrownSeries = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://x.com/TeamBasai/status/2015205573680107861"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://x.com/TeamBasai/status/2015205573680107861"} />
             </div>
 
             <div className="backButtonContainer">

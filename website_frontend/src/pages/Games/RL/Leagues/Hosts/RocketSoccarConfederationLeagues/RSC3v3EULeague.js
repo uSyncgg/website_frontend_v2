@@ -21,7 +21,7 @@ export const RSC3v3EULeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://discord.com/invite/Bw4rvpG"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/Bw4rvpG"} />
             </div>
 
             <div className="backButtonContainer">

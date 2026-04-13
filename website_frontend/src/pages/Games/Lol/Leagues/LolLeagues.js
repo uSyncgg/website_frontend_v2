@@ -128,7 +128,7 @@ export const LolLeagues = () => {
                         path={"/games/LoL/leagues/corporate-league"} 
                         imgUrl={"https://i.imgur.com/k63mdno.png"} 
                         alt={"Corporate LoL League"}
-                        verified={true}
+                        verified={false}
                     />
                     <HostBanner.Region>NA</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/corporate-league"} />

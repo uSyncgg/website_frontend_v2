@@ -21,7 +21,7 @@ export const LakewoodLeagueXIISpring = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://nerdstreet.com/events/lakewood-league-xii-2026-04-26?section=overview"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/lakewood-league-xii-2026-04-26?section=overview"} />
             </div>
 
             <div className="backButtonContainer">

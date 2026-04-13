@@ -18,19 +18,6 @@ export const WzWagers = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/warzone/wagers/oneup"}>One Up (App)</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/warzone/wagers/oneup"} 
-                        imgUrl={"https://i.imgur.com/wkSz5Le.png"} 
-                        alt={"One Up"}
-                        verified={false}
-                    />
-                    <HostBanner.Button title={"More Info"} path={"/games/warzone/wagers/oneup"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
                     <HostBanner.Title path={"/games/warzone/wagers/1v1me"}>1v1 Me (App)</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/warzone/wagers/1v1me"} 
@@ -40,6 +27,8 @@ export const WzWagers = () => {
                     />
                     <HostBanner.Button title={"More Info"} path={"/games/warzone/wagers/1v1me"} />
                 </HostBanner>
+
+                <div className="hrEvents" />
 
                 <HostBanner>
                     <HostBanner.Title path={"/games/warzone/wagers/gamersaloon"}>GamerSaloon</HostBanner.Title>
@@ -51,32 +40,6 @@ export const WzWagers = () => {
                     />
                     <HostBanner.Button title={"More Info"} path={"/games/warzone/wagers/gamersaloon"} />
                 </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/warzone/wagers/dropingaming"}>Drop-In Gaming</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/warzone/wagers/dropingaming"} 
-                        imgUrl={"https://i.imgur.com/Onot7tG.png"} 
-                        alt={"Drop-In Gaming"}
-                        verified={false}
-                    />
-                    <HostBanner.Button title={"More Info"} path={"/games/warzone/wagers/dropingaming"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/warzone/wagers/dubbz"}>Dubbz</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/warzone/wagers/dubbz"} 
-                        imgUrl={"https://i.imgur.com/cgPHyyf.png"} 
-                        alt={"Dubbz"}
-                        verified={false}
-                    />
-                    <HostBanner.Button title={"More Info"} path={"/games/warzone/wagers/dubbz"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
 
                 <HostBanner>
                     <HostBanner.Title path={"/games/warzone/wagers/ewagers"}>Ewagers</HostBanner.Title>

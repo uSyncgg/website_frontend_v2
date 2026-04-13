@@ -21,7 +21,7 @@ export const EGFHLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://www.egf.gg/"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://www.egf.gg/"} />
             </div>
 
             <div className="backButtonContainer">

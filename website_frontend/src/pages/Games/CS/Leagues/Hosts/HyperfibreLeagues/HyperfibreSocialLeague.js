@@ -21,7 +21,7 @@ export const HyperfibreSocialLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://x.com/NZ_Esports_"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://x.com/NZ_Esports_"} />
             </div>
 
             <div className="backButtonContainer">

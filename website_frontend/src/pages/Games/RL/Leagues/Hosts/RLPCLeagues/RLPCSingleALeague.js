@@ -21,7 +21,7 @@ export const RLPCSingleALeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://linktr.ee/officialrlpc"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://linktr.ee/officialrlpc"} />
             </div>
 
             <div className="backButtonContainer">

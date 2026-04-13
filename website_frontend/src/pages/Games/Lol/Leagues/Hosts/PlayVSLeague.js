@@ -21,7 +21,7 @@ export const PlayVSLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://www.playvs.com/league-of-legends"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://www.playvs.com/league-of-legends"} />
             </div>
 
             <div className="backButtonContainer">

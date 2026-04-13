@@ -7,17 +7,6 @@ export const ValorantWagers = () => {
 
             <div className="eventBannerContainer">
                 <HostBanner>
-                    <HostBanner.Title path={"/games/Valorant/wagers/dropingaming"}>Drop-In Gaming</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/Valorant/wagers/dropingaming"} 
-                        imgUrl={"https://i.imgur.com/Onot7tG.png"} 
-                        alt={"Drop-In Gaming"}
-                        verified={false}
-                    />
-                    <HostBanner.Button title={"More Info"} path={"/games/Valorant/wagers/dropingaming"} />
-                </HostBanner>
-
-                <HostBanner>
                     <HostBanner.Title path={"/games/Valorant/wagers/ewagers"}>Ewagers</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/Valorant/wagers/ewagers"} 

@@ -21,7 +21,7 @@ export const FemaleCodLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://x.com/FemaleC0DLeague"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://x.com/FemaleC0DLeague"} />
             </div>
 
             <div className="backButtonContainer">

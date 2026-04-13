@@ -21,7 +21,7 @@ export const UnifiedPremierLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://uea.gg/e/UCL26S/tickets"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://uea.gg/e/UCL26S/tickets"} />
             </div>
 
             <div className="backButtonContainer">

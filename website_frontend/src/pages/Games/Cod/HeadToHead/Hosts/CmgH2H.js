@@ -21,7 +21,7 @@ export const CmgH2H = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://www.checkmategaming.com/ladders"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://www.checkmategaming.com/ladders"} />
             </div>
 
             <div className="backButtonContainer">

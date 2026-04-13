@@ -185,7 +185,7 @@ export const RLLeagues = () => {
                     <HostBanner.Title path={"/games/RocketLeague/leagues/cecc"}>CECC League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/RocketLeague/leagues/cecc"} 
-                        imgUrl={"https://i.imgur.com/2EsJOXo.png"} 
+                        imgUrl={"https://i.imgur.com/WFbWb2d.png"} 
                         alt={"CECC League"}
                         verified={false}
                     />

@@ -42,15 +42,15 @@ export const MinorLeagueEsportsLeagues = () => {
                 <div className="hrEvents" />
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/mle-leagues/champion"}>Champion League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/RocketLeague/leagues/mle-leagues/champ"}>Champion League</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/mle-leagues/champion"} 
+                        path={"/games/RocketLeague/leagues/mle-leagues/champ"} 
                         imgUrl={"https://i.imgur.com/1ouD021.png"} 
                         alt={"Minor League Esports"}
                         verified={false}
                     />
                     <HostBanner.Region>{champion}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/mle-leagues/champion"} />
+                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/mle-leagues/champ"} />
                 </HostBanner>
 
                 <HostBanner>

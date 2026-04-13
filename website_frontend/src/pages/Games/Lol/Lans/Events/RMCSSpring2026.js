@@ -21,7 +21,7 @@ export const RMCSSpring2026 = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://nerdstreet.com/events/rmcs-spring-26-tournament-2026-04-11?section=overview"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/rmcs-spring-26-tournament-2026-04-11?section=overview"} />
             </div>
 
             <div className="backButtonContainer">

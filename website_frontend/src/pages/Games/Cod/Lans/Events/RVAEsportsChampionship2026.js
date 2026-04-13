@@ -21,7 +21,7 @@ export const RVAEsportsChampionship2026 = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://www.start.gg/tournament/rva-esports-championship-2026-1/details"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/rva-esports-championship-2026-1/details"} />
             </div>
 
             <div className="backButtonContainer">

@@ -18,27 +18,14 @@ export const HaloWagers = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/halo/wagers/oneup"}>One Up (App)</HostBanner.Title>
+                    <HostBanner.Title path={"/games/halo/wagers/ewagers"}>Ewagers</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/games/halo/wagers/oneup"} 
-                        imgUrl={"https://i.imgur.com/wkSz5Le.png"} 
-                        alt={"One Up Wagers"}
-                        verified={false}
-                    />
-                    <HostBanner.Button title={"More Info"} path={"/games/halo/wagers/oneup"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/halo/wagers/esport-wagers"}>Ewagers</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/halo/wagers/esport-wagers"} 
+                        path={"/games/halo/wagers/ewagers"} 
                         imgUrl={"https://i.imgur.com/FAg32lR.png"} 
                         alt={"Ewagers"}
                         verified={false}
                     />
-                    <HostBanner.Button title={"More Info"} path={"/games/halo/wagers/esport-wagers"} />
+                    <HostBanner.Button title={"More Info"} path={"/games/halo/wagers/ewagers"} />
                 </HostBanner>
 
                 <div className="hrEvents" />

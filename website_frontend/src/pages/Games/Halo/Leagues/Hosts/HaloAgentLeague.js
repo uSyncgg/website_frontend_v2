@@ -21,7 +21,7 @@ export const HaloAgentLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://twitter.com/TheHaloAgent"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://twitter.com/TheHaloAgent"} />
             </div>
 
             <div className="backButtonContainer">

@@ -37,6 +37,8 @@ export const PulseXLeagues = () => {
                     <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-lowers"} />
                 </HostBanner>
 
+                <div className="hrEvents" />
+
                 <HostBanner>
                     <HostBanner.Title path={"/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-open"}>Open Division</HostBanner.Title>
                     <HostBanner.Image 

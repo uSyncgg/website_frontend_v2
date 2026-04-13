@@ -21,7 +21,7 @@ export const EsportsAgentH2H = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://esportsagent.gg/wagers"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://esportsagent.gg/wagers"} />
             </div>
 
             <div className="backButtonContainer">

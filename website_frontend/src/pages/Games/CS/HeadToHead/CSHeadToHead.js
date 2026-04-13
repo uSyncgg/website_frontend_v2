@@ -3,7 +3,7 @@ import { HeaderImage, HostBanner } from "components";
 export const CSHeadToHead = () => {
     return (
         <div className="standardContainer">
-            <HeaderImage title={"Head-to-Head"} imageClass={"cs2h2hHeader"} />
+            <HeaderImage title={"Head-to-Head"} imageClass={"cs2h2hPage"} />
 
             <div className="eventBannerContainer">
                 <HostBanner>

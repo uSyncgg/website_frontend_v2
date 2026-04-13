@@ -21,7 +21,7 @@ export const EsportsHubWagers = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://theesportshub.com/"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://theesportshub.com/"} />
             </div>
 
             <div className="backButtonContainer">

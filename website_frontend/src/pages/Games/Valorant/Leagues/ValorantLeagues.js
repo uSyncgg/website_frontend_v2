@@ -102,15 +102,15 @@ export const ValorantLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/Valorant/leagues/csmg"}>CSMG League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/Valorant/leagues/cecc"}>CECC League</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/games/Valorant/leagues/csmg"} 
-                        imgUrl={"https://i.imgur.com/2EsJOXo.png"} 
-                        alt={"CSMG League"}
+                        path={"/games/Valorant/leagues/cecc"} 
+                        imgUrl={"https://i.imgur.com/WFbWb2d.png"} 
+                        alt={"CECC League"}
                         verified={false}
                     />
                     <HostBanner.Region>USA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/Valorant/leagues/csmg"} />
+                    <HostBanner.Button title={"More Info"} path={"/games/Valorant/leagues/cecc"} />
                 </HostBanner>
 
                 <div className="hrEvents" />

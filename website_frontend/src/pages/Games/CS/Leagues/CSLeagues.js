@@ -66,7 +66,7 @@ export const CSLeagues = () => {
                         alt={"United TwentyOne League"}
                         verified={false}
                     />
-                    <HostBanner.Region>Worldwide</HostBanner.Region>
+                    <HostBanner.Region>Available Worldwide</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/CS2/leagues/unitedtwentyone"} />
                 </HostBanner>
 

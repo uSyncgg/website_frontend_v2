@@ -21,7 +21,7 @@ export const TPCWomensCodLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://x.com/TPCWomens"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://x.com/TPCWomens"} />
             </div>
 
             <div className="backButtonContainer">

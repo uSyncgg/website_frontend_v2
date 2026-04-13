@@ -21,7 +21,7 @@ export const FiReLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://x.com/FiReSPORTSgg"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://x.com/FiReSPORTSgg"} />
             </div>
 
             <div className="backButtonContainer">

@@ -4,7 +4,7 @@ import '../../../../EventInformation.css';
 export const CollegeXPClubLeague = () => {
     return (
         <div className="standardContainer">
-            <HeaderImage title={"CXP Club"} imageClass={"eventsPage"} />
+            <HeaderImage title={"CXP Club"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">
                 <div>
@@ -21,7 +21,7 @@ export const CollegeXPClubLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://x.com/CXPCoD"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://x.com/CXPCoD"} />
             </div>
 
             <div className="backButtonContainer">

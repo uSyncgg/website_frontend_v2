@@ -21,7 +21,7 @@ export const CollegeCarballAssociationLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://discord.gg/cca"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.gg/cca"} />
             </div>
 
             <div className="backButtonContainer">

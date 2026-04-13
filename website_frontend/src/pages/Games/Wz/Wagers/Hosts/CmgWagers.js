@@ -21,7 +21,7 @@ export const CmgWagers = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://www.checkmategaming.com/challenges"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://www.checkmategaming.com/challenges"} />
             </div>
 
             <div className="backButtonContainer">

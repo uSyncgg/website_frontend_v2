@@ -21,7 +21,7 @@ export const LockdownWomensLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://discord.gg/SMZ4R8XzWZ"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.gg/SMZ4R8XzWZ"} />
             </div>
 
             <div className="backButtonContainer">

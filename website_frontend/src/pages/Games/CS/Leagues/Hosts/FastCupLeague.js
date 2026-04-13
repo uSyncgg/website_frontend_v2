@@ -21,7 +21,7 @@ export const FastCupLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://cs2.fastcup.net/leagues/68/210/202/771"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://cs2.fastcup.net/leagues/68/210/202/771"} />
             </div>
 
             <div className="backButtonContainer">

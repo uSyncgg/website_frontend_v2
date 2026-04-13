@@ -21,7 +21,7 @@ export const NECCLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://www.neccgames.com/landing/index"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://www.neccgames.com/landing/index"} />
             </div>
 
             <div className="backButtonContainer">

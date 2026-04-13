@@ -21,7 +21,7 @@ export const CLOLLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://discord.com/invite/clol"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/clol"} />
             </div>
 
             <div className="backButtonContainer">

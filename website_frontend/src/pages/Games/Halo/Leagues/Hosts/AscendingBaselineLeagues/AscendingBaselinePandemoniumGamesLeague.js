@@ -21,7 +21,7 @@ export const AscendingBaselinePandemoniumGamesLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://www.ascendingbaseline.com/panda"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://www.ascendingbaseline.com/panda"} />
             </div>
 
             <div className="backButtonContainer">

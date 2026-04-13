@@ -21,7 +21,7 @@ export const CollegiateValorantHubScrimsH2H = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://discord.com/invite/Vq5qu9szQU"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/Vq5qu9szQU"} />
             </div>
 
             <div className="backButtonContainer">

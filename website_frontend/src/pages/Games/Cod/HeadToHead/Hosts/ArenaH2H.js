@@ -21,7 +21,7 @@ export const ArenaH2H = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://discord.com/invite/thearena"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/the-arena-powered-by-dg-918527675642052658"} />
             </div>
 
             <div className="backButtonContainer">

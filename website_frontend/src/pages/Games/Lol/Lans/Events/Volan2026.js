@@ -21,7 +21,7 @@ export const Volan2026 = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://www.start.gg/tournament/volan-2026/details"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/volan-2026/details"} />
             </div>
 
             <div className="backButtonContainer">

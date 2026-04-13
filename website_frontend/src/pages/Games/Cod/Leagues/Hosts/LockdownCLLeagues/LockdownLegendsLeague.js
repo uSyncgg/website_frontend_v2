@@ -4,7 +4,7 @@ import '../../../../EventInformation.css';
 export const LockdownLegendsLeague = () => {
     return (
         <div className="standardContainer">
-            <HeaderImage imageClass={"lockdownCODLeagues"} verified={true} />
+            <HeaderImage title={"Lockdown Legends League"} imageClass={"lockdownCODLeagues"} verified={true} />
 
             <div className="eventInfoCardContainer">
                 <div>
@@ -21,7 +21,7 @@ export const LockdownLegendsLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://discord.gg/SMZ4R8XzWZ"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.gg/SMZ4R8XzWZ"} />
             </div>
 
             <div className="backButtonContainer">

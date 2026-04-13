@@ -21,7 +21,7 @@ export const FaceitH2H = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://www.faceit.com/en/game/cs2"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://www.faceit.com/en/game/cs2"} />
             </div>
 
             <div className="backButtonContainer">

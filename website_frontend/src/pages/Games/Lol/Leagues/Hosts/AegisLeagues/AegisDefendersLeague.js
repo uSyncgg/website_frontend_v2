@@ -21,7 +21,7 @@ export const AegisDefendersLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://discord.com/invite/dBtt7Fg9jv"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/dBtt7Fg9jv"} />
             </div>
 
             <div className="backButtonContainer">

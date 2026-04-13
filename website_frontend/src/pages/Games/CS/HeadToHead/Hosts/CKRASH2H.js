@@ -21,7 +21,7 @@ export const CKRASH2H = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://www.ckras.com/en"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://www.ckras.com/en"} />
             </div>
 
             <div className="backButtonContainer">

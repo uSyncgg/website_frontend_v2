@@ -21,7 +21,7 @@ export const ItalianSerieBLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://www.italianrocketchampionship.it/?lang=eng"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://www.italianrocketchampionship.it/?lang=eng"} />
             </div>
 
             <div className="backButtonContainer">

@@ -21,7 +21,7 @@ export const AirforceGamingLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://airforcegaming.com/dafgl"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://airforcegaming.com/dafgl"} />
             </div>
 
             <div className="backButtonContainer">

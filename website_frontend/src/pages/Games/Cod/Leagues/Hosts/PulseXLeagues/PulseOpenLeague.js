@@ -18,14 +18,10 @@ export const PulseOpenLeague = () => {
                 <div>
                     <EventInfoCard title={"Entry Fee"} infoList={["$25 per Team"]} />
                 </div>
-
-                <div>
-                    <EventInfoCard title={"Region/Type"} infoList={["4v4 - NA"]} />
-                </div>
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://discord.com/invite/pulsexleague"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/pulsexleague"} />
             </div>
 
             <div className="backButtonContainer">

@@ -21,7 +21,7 @@ export const ZonedOutGamingLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://zonedoutgaming.com/leagues/call-of-duty/"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://zonedoutgaming.com/leagues/call-of-duty/"} />
             </div>
 
             <div className="backButtonContainer">

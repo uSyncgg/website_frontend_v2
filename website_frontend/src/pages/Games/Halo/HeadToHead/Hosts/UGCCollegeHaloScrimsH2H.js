@@ -21,7 +21,7 @@ export const UGCCollegeHaloScrimsH2H = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://discord.com/invite/CapnyyzMkJ"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/CapnyyzMkJ"} />
             </div>
 
             <div className="backButtonContainer">

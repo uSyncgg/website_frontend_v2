@@ -21,7 +21,7 @@ export const GanksterGGH2H = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://valorant.gankster.gg/login?session=yes"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://valorant.gankster.gg/login?session=yes"} />
             </div>
 
             <div className="backButtonContainer">

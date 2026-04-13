@@ -31,17 +31,6 @@ export const ValorantHeadToHead = () => {
                 <div className="hrEvents" />
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/Valorant/head-to-head/dropingaming"}>Drop-In Gaming</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/Valorant/head-to-head/dropingaming"} 
-                        imgUrl={"https://i.imgur.com/Onot7tG.png"} 
-                        alt={"Drop-In Gaming"}
-                        verified={false}
-                    />
-                    <HostBanner.Button title={"More Info"} path={"/games/Valorant/head-to-head/dropingaming"} />
-                </HostBanner>
-
-                <HostBanner>
                     <HostBanner.Title path={"/games/Valorant/head-to-head/college-hub"}>Collegiate Valorant Esports Hub</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/Valorant/head-to-head/college-hub"} 
@@ -51,8 +40,6 @@ export const ValorantHeadToHead = () => {
                     />
                     <HostBanner.Button title={"More Info"} path={"/games/Valorant/head-to-head/college-hub"} />
                 </HostBanner>
-
-                <div className="hrEvents" />
 
                 <HostBanner>
                     <HostBanner.Title path={"/games/Valorant/head-to-head/pracc"}>Pracc</HostBanner.Title>

@@ -21,7 +21,7 @@ export const EsportsScrimH2H = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://esportscrim.com/"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://esportscrim.com/"} />
             </div>
 
             <div className="backButtonContainer">

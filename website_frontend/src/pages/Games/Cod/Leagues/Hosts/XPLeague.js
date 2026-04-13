@@ -21,7 +21,7 @@ export const XPLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://x.com/XP_Leagues?s=20"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://x.com/XP_Leagues?s=20"} />
             </div>
 
             <div className="backButtonContainer">

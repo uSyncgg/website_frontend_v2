@@ -21,7 +21,7 @@ export const CollegeValorantLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://rsaa.riotgames.com/"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://universityesportsna.riotgames.com/"} />
             </div>
 
             <div className="backButtonContainer">

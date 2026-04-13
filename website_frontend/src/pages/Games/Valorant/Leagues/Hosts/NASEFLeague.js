@@ -21,7 +21,7 @@ export const NASEFLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://www.nasef.org/"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://www.nasef.org/"} />
             </div>
 
             <div className="backButtonContainer">

@@ -21,7 +21,7 @@ export const GamerSaloonWagers = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://www.gamersaloon.com/tournaments/all"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://www.gamersaloon.com/tournaments/all"} />
             </div>
 
             <div className="backButtonContainer">

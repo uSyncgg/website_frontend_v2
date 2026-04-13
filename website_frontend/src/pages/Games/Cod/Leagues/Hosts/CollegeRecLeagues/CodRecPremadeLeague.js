@@ -4,7 +4,7 @@ import '../../../../EventInformation.css';
 export const CodRecPremadeLeague = () => {
     return (
         <div className="standardContainer">
-            <HeaderImage title={"Cod Rec Premade League"} imageClass={"eventsPage"} />
+            <HeaderImage title={"Cod Rec Premade League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">
                 <div>
@@ -21,7 +21,7 @@ export const CodRecPremadeLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://www.google.com/url?q=https%3A%2F%2Fcod.esrl.gg%2F&sa=D&sntz=1&usg=AOvVaw359r5MIeBPnIT5_Guhelh-"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://www.google.com/url?q=https%3A%2F%2Fcod.esrl.gg%2F&sa=D&sntz=1&usg=AOvVaw359r5MIeBPnIT5_Guhelh-"} />
             </div>
 
             <div className="backButtonContainer">

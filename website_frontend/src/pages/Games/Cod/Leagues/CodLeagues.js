@@ -98,7 +98,7 @@ export const CodLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/game/call-of-duty/leagues/fcl"}>Female COD League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/call-of-duty/leagues/fcl"}>Female COD League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/call-of-duty/leagues/fcl"} 
                         imgUrl={"https://i.imgur.com/SBSXD2X.png"} 
@@ -166,13 +166,13 @@ export const CodLeagues = () => {
                 <HostBanner>
                     <HostBanner.Title path={"/games/call-of-duty/leagues/tpc-league"}>The Premier Circuit League</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/games/call-of-duty/leagues/tpc-leagues"} 
+                        path={"/games/call-of-duty/leagues/tpc-league"} 
                         imgUrl={"https://i.imgur.com/t4k8Qi6.png"} 
                         alt={"Premier Circuit League"}
                         verified={false}
                     />
                     <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/tpc-leagues"} />
+                    <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/tpc-league"} />
                 </HostBanner>
 
                 <HostBanner>
@@ -215,7 +215,8 @@ export const CodLeagues = () => {
 
                 <div className="hrEvents" />
 
-                <HostBanner>
+                {/* TEMP REMOVED, THEY MAY RESTART */}
+                {/* <HostBanner>
                     <HostBanner.Title path={"/games/call-of-duty/leagues/old-heads-circuit"}>Old Heads Circuit</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/call-of-duty/leagues/old-heads-circuit"} 
@@ -225,7 +226,7 @@ export const CodLeagues = () => {
                     />
                     <HostBanner.Region>All Regions</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/old-heads-circuit"} />
-                </HostBanner>
+                </HostBanner> */}
 
                 <div className="hrEvents" />
 
@@ -269,7 +270,7 @@ export const CodLeagues = () => {
                         verified={false}
                     />
                     <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/ccl-leagues"} />
+                    <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/ccl-league"} />
                 </HostBanner>
 
                 <HostBanner>

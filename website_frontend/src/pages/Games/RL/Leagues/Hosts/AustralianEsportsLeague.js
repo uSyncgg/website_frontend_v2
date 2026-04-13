@@ -21,7 +21,7 @@ export const AustralianEsportsLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://ael.org.au/uni/"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://ael.org.au/uni/"} />
             </div>
 
             <div className="backButtonContainer">

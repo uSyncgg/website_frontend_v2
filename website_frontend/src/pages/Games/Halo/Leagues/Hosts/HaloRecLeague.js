@@ -21,7 +21,7 @@ export const HaloRecLeague = () => {
             </div>
 
             <div className="eventButtonContainer">
-                <ExternalButton inverted={true} blank={true} title={"JOIN NOW"} path={"https://halo.esrl.gg/"} />
+                <ExternalButton blank={true} title={"Join Now"} path={"https://halo.esrl.gg/"} />
             </div>
 
             <div className="backButtonContainer">

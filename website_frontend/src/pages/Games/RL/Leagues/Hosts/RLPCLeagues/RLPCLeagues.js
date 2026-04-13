@@ -11,7 +11,7 @@ export const RLPCLeagues = () => {
 
     return (
         <div className="standardContainer">
-            <HeaderImage imageClass={"rplcRLLeagues"} />
+            <HeaderImage imageClass={"rlpcRLLeagues"} />
 
             <div className="eventBannerContainer">
                 <HostBanner>
