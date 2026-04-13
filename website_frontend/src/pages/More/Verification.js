@@ -12,7 +12,7 @@ export const Verification = () => {
                 <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
 
                 <div className={styles.subscriptionContainer}>
-                    <Link to={"https://buy.stripe.com/eVadRz4PY0s31mEcMV"}>
+                    <Link to={"https://buy.stripe.com/eVadRz4PY0s31mEcMV"} target="_blank">
                         <img src="https://i.imgur.com/EC4OOoS.png" alt="Verified Features" />
                     </Link>
 
@@ -39,7 +39,7 @@ export const Verification = () => {
 
                 <p className={`${styles.learn} ${styles.post}`}>
                     Looking to post an event? Send {" "}
-                    <Link to={"/more/eventhost/eventhostrequest"}>Event Submission</Link>
+                    <Link to={"/more/eventhost"}>Event Submission</Link>
                 </p>
 
             </div>

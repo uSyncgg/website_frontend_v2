@@ -124,7 +124,8 @@
     display: block;
     margin: 0 auto;
     width: 80%;
-    height: 30rem;
+    min-height: 45rem;
+    max-height: 60rem;
     border: rgb(142, 106, 206) .25rem solid;
     border-radius: .5rem;
     position: relative;
