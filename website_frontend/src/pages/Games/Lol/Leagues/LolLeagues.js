@@ -59,18 +59,6 @@ export const LolLeagues = () => {
                 <div className="hrEvents" />
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/black-twitch-league"}>Black Twitch League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/LoL/leagues/black-twitch-league"} 
-                        imgUrl={"https://i.imgur.com/ZuJA3w1.png"} 
-                        alt={"Black Twitch League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Gold Cap</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/black-twitch-league"} />
-                </HostBanner>
-
-                <HostBanner>
                     <HostBanner.Title path={"/games/LoL/leagues/low-budget-leagues"}>Low Budget LCS Leagues</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/LoL/leagues/low-budget-leagues"} 
@@ -81,8 +69,6 @@ export const LolLeagues = () => {
                     <HostBanner.Region>NA</HostBanner.Region>
                     <HostBanner.Button title={"All Leagues"} path={"/games/LoL/leagues/low-budget-leagues"} />
                 </HostBanner>
-
-                <div className="hrEvents" />
 
                 <HostBanner>
                     <HostBanner.Title path={"/games/LoL/leagues/meta-shift-leagues"}>MetaShift Leagues</HostBanner.Title>
@@ -96,6 +82,8 @@ export const LolLeagues = () => {
                     <HostBanner.Button title={"All Leagues"} path={"/games/LoL/leagues/meta-shift-leagues"} />
                 </HostBanner>
 
+                <div className="hrEvents" />
+
                 <HostBanner>
                     <HostBanner.Title path={"/games/LoL/leagues/sdc"}>SDC League</HostBanner.Title>
                     <HostBanner.Image 
@@ -108,8 +96,6 @@ export const LolLeagues = () => {
                     <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/sdc"} />
                 </HostBanner>
 
-                <div className="hrEvents" />
-
                 <HostBanner>
                     <HostBanner.Title path={"/games/LoL/leagues/cobalt-winds-leagues"}>CWL Leagues</HostBanner.Title>
                     <HostBanner.Image 
@@ -121,6 +107,8 @@ export const LolLeagues = () => {
                     <HostBanner.Region>EUW</HostBanner.Region>
                     <HostBanner.Button title={"All Leagues"} path={"/games/LoL/leagues/cobalt-winds-leagues"} />
                 </HostBanner>
+
+                <div className="hrEvents" />
 
                 <HostBanner>
                     <HostBanner.Title path={"/games/LoL/leagues/corporate-league"}>Corporate LoL League</HostBanner.Title>

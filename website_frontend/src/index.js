@@ -189,7 +189,6 @@ import { TitanGladiatorLeague } from 'pages/Games/Lol/Leagues/Hosts/TitanEsports
 import { TitanImmortalLeague } from 'pages/Games/Lol/Leagues/Hosts/TitanEsportsLeagues/TitanImmortalLeague';
 import { TitanOlympusLeague } from 'pages/Games/Lol/Leagues/Hosts/TitanEsportsLeagues/TitanOlympusLeague';
 import { TitanVanquisherLeague } from 'pages/Games/Lol/Leagues/Hosts/TitanEsportsLeagues/TitanVanquisherLeague';
-import { BlackTwitchLeague } from 'pages/Games/Lol/Leagues/Hosts/BlackTwitchLeague';
 import { CLOLLeague } from 'pages/Games/Lol/Leagues/Hosts/CLOLLeague';
 import { CorporateLoLLeague } from 'pages/Games/Lol/Leagues/Hosts/CorporateLoLLeague';
 import { ECACEsportsLeague as ECACLoLLeague } from 'pages/Games/Lol/Leagues/Hosts/ECACEsportsLegaue';
@@ -519,7 +518,6 @@ root.render(
           <Route path='/games/LoL/leagues/blue-otter-leagues/plat' element={<BlueOtterPlatinumLeague />} />
           <Route path='/games/LoL/leagues/blue-otter-leagues/gold' element={<BlueOtterGoldLeague />} />
           <Route path='/games/LoL/leagues/blue-otter-leagues/draft' element={<BlueOtterDraftLeague />} />
-          <Route path='/games/LoL/leagues/black-twitch-league' element={<BlackTwitchLeague />} />
           <Route path='/games/LoL/leagues/low-budget-leagues' element={<LowBudgetLCSLeagues />} />
           <Route path='/games/LoL/leagues/low-budget-leagues/executive' element={<LowBudgetExecutiveLeague />} />
           <Route path='/games/LoL/leagues/low-budget-leagues/financial' element={<LowBudgetFinancialLeague />} />
