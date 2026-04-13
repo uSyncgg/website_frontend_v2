@@ -9,8 +9,11 @@
     padding-left: 1rem;
     padding-right: 1rem;
     margin: auto auto;
-    width: 450px;
-    height: 400px;
+    min-width: 450px;
+    /* min-height: 400px; */
+    max-width: 800px;
+    /* max-height: 750px; */
+    height: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -24,7 +27,7 @@
     padding: 0.5rem;
     font-weight: bold;
     font-size: larger;
-    margin: auto auto;
+    margin: 0 auto;
 }
 
 .title {
