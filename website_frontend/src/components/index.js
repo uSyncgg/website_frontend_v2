@@ -39,8 +39,19 @@ import { PaymentComponent } from "./PaymentComponent/PaymentComponent";
 import { TwitterEmbed } from "./TwitterEmbed/TwitterEmbed";
 import { EmailIcon } from "./EmailIcon/EmailIcon";
 import { TeamPhoto } from "./TeamPhoto/TeamPhoto";
+import { ArticleImages } from "./ArticleImages/ArticleImages";
+import { VerifiedImage } from "./VerifiedImage/VerifiedImage";
+import { VerifiedText } from "./VerifiedText/VerifiedText";
 
+// Tournaments
+import { TournamentFilter } from "./TournamentFilter/TournamentFilter";
+import { CodTournamentCard } from "./TournamentCard/CodTournamentCard";
+import { TournamentPagination } from "./TournamentPagination/TournamentPagination";
+import { filteredTournaments } from "./TournamentFilter/FilteredTournaments";
+import { TournamentList } from "./TournamentList/TournamentList";
 
+// SEO
+import { SeoData } from "./SeoData/SeoData";
 
 export {
     Navbar,
@@ -64,5 +75,14 @@ export {
     ExternalButton,
     TwitterEmbed,
     NoEvents,
-    BackButton
+    BackButton,
+    SeoData,
+    TournamentFilter,
+    CodTournamentCard,
+    TournamentPagination,
+    filteredTournaments,
+    TournamentList,
+    ArticleImages,
+    VerifiedText,
+    VerifiedImage
 };
