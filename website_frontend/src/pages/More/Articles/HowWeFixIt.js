@@ -1,9 +1,13 @@
 import { Link } from "react-router";
-import { EventTypeImages } from "components";
+import { SeoData, EventTypeImages, ArticleImages } from "components";
 
 export const HowWeFixIt = () => {
     return (
         <div className="standardBlankContainer">
+            <SeoData
+                description="uSync is unifying the entire esports landscape. Find out how you can be apart of this ever growing opportunity."
+                canonicalPath={"/more/FAQ/How-We-Fix-It"}
+            />
             <div className="articleContainer">
                 <div className="articleSectionOne">
                     <div className="articleTextContainer">
@@ -87,11 +91,7 @@ export const HowWeFixIt = () => {
                 </div>
 
                 <div className="articleSectionTwo">
-                    <div className="articleImageContainer">
-                    <div className="articleLanMap">
-                        <h1>ello there</h1>
-                    </div>
-                    </div>
+                    <ArticleImages />
                 </div>
             </div>
 

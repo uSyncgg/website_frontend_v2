@@ -1,9 +1,13 @@
 import { Link } from "react-router";
-import { EventTypeImages } from "components";
+import { SeoData, EventTypeImages, ArticleImages } from "components";
 
 export const JoiningEsportsLeague = () => {
     return (
         <div className="standardBlankContainer">
+            <SeoData
+                description="Learn how to join an esports league, where to find them, and what to do once you're in one. Find your next esports league today."
+                canonicalPath={"/more/FAQ/How-to-Join-an-Esports-League"}
+            />
             <div className="articleContainer">
                 <div className="articleSectionOne">
                     <div className="articleTextContainer">
@@ -314,11 +318,7 @@ export const JoiningEsportsLeague = () => {
                 </div>
 
                 <div className="articleSectionTwo">
-                    <div className="articleImageContainer">
-                    <div className="articleLanMap">
-                        <h1>ello there</h1>
-                    </div>
-                    </div>
+                    <ArticleImages />
                 </div>
             </div>
 

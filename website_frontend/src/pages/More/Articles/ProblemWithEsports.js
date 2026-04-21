@@ -1,9 +1,13 @@
 import { Link } from "react-router";
-import { EventTypeImages } from "components";
+import { SeoData, EventTypeImages, ArticleImages } from "components";
 
 export const ProblemWithEsports = () => {
     return (
         <div className="standardBlankContainer">
+            <SeoData
+                description="The current problem with esports today and what uSync.gg is doing to combat this major issue plaguing the industry."
+                canonicalPath={"/more/FAQ/The-Problem-With-Esports"}
+            />
             <div className="articleContainer">
                 <div className="articleSectionOne">
                     <div className="articleTextContainer">
@@ -59,11 +63,7 @@ export const ProblemWithEsports = () => {
                 </div>
 
                 <div className="articleSectionTwo">
-                    <div className="articleImageContainer">
-                    <div className="articleLanMap">
-                        <h1>ello there</h1>
-                    </div>
-                    </div>
+                    <ArticleImages />
                 </div>
             </div>
             
