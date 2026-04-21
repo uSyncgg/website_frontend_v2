@@ -266,6 +266,6 @@
 @media only screen and (max-width: 500px) {
     .sectionOne {
         background-position: 20% 20%;
-        background-attachment: fixed;
+        background-attachment: unset;
     }
 }
