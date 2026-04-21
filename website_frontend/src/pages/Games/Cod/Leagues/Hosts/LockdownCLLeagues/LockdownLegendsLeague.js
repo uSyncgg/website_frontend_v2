@@ -8,7 +8,7 @@ export const LockdownLegendsLeague = () => {
                 description="LCL Legends league is the Call of Duty league for those who are the best of the best and looking to make money."
                 canonicalPath={"/games/call-of-duty/leagues/lockdowncl-leagues/legends"}
             />
-            <HeaderImage title={"Lockdown Legends League"} imageClass={"lockdownCODLeagues"} verified={true} />
+            <HeaderImage imageClass={"lockdownCODLeagues"} verified={true} />
 
             <div className="verifiedContainer">
                 <VerifiedText />
