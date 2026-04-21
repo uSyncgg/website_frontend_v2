@@ -5,8 +5,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 export const HeaderImage = ({ title, imageClass, verification, verified=false, location="" }) => {
-    console.log(verified);
-    console.log(imageClass)
+
     return (
         <div className={`${styles.headerImage} ${imageClass} ${title === undefined ? styles.noTitle : ""}`}>
             {title !== undefined && verification === undefined && verified === false &&
