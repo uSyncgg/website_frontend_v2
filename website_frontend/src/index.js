@@ -71,7 +71,7 @@ import { PlayflyCollegeLeague as PlayflyCodLeague } from 'pages/Games/Cod/League
 import { PremierCircuitLeague } from 'pages/Games/Cod/Leagues/Hosts/PremierCircuitLeague';
 import { TPCWomensCodLeague } from 'pages/Games/Cod/Leagues/Hosts/TPCWomensCodLeague';
 import { U18CodLeague } from 'pages/Games/Cod/Leagues/Hosts/U18CodLeague';
-import { UnitedRogueLeague as UnitedRogueCodLeague } from 'pages/Games/Cod/Leagues/Hosts/UnitedRogureLeague';
+import { UnitedRogueLeague as UnitedRogueCodLeague } from 'pages/Games/Cod/Leagues/Hosts/UnitedRogueLeague';
 import { XPLeague } from 'pages/Games/Cod/Leagues/Hosts/XPLeague';
 import { ZonedOutGamingLeague } from 'pages/Games/Cod/Leagues/Hosts/ZonedOutGamingLeague';
 // Tournaments
@@ -313,15 +313,12 @@ import Payment from 'pages/Payment/PaymentCheckouts/Payment';
 // All LANs
 import { AllLans } from 'pages/Games/Conventions/AllLans';
 // CoD
-import { CharlestonCrownSeries } from 'pages/Games/Cod/Lans/Events/CharlestonCrownSeries';
 import { LowtierMajorIV } from 'pages/Games/Cod/Lans/Events/LowtierMajorIV';
 import { RVAEsportsChampionship2026 } from 'pages/Games/Cod/Lans/Events/RVAEsportsChampionship2026';
 // Wz
 // Halo
 // LoL
 import { LakewoodLeagueXIISpring } from 'pages/Games/Lol/Lans/Events/LakewoodLeagueXIISpring';
-import { Volan2026 } from 'pages/Games/Lol/Lans/Events/Volan2026';
-import { RMCSSpring2026 } from 'pages/Games/Lol/Lans/Events/RMCSSpring2026';
 // Conventions
 import { Conventions } from 'pages/Games/Conventions/Conventions';
 import { LANAllNightSpring2026 } from 'pages/Games/Conventions/LANAllNightSpring2026';
@@ -342,6 +339,9 @@ import { FortLANSpring2026 } from 'pages/Games/Conventions/Archived/FortLANSprin
 import { LowPingLAN } from 'pages/Games/Conventions/Archived/LowPingLAN';
 import { TomorrowLAN2026 } from 'pages/Games/Conventions/Archived/TomorrowLAN2026';
 import { MACSSpring2026 } from 'pages/Games/Conventions/Archived/MACSSpring2026';
+import { CharlestonCrownSeries } from 'pages/Games/Conventions/Archived/CharlestonCrownSeries';
+import { RMCSSpring2026 } from 'pages/Games/Conventions/Archived/RMCSSpring2026';
+import { Volan2026 } from 'pages/Games/Conventions/Archived/Volan2026';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -354,6 +354,7 @@ root.render(
         <Routes>
           {/* Home Page */}
           <Route path='/' element={<Home />} />
+          <Route path='/home' element={<Home />} />
 
           {/* Top Level Pages */}
           <Route path='/games' element={<Games />} />
@@ -661,15 +662,12 @@ root.render(
           {/* All LANs */}
           <Route path='/LanMap' element={<AllLans />} />
           {/* CoD */}
-          <Route path='/lans/charleston-crown-series' element={<CharlestonCrownSeries />} />
           <Route path='/lans/lowtier-major-iv' element={<LowtierMajorIV />} />
           <Route path='/lans/rva-esports-championship-2026' element={<RVAEsportsChampionship2026 />} />
           {/* Wz */}
           {/* Halo */}
           {/* LoL */}
           <Route path='/lans/lakewood-league-xii-spring' element={<LakewoodLeagueXIISpring />} />
-          <Route path='/lans/volan-2026' element={<Volan2026 />} />
-          <Route path='/lans/rmcs-spring-2026' element={<RMCSSpring2026 />} />
           {/* Conventions */}
           <Route path='/other-lans' element={<Conventions />} />
           <Route path='/lans/lan-all-night-spring-26' element={<LANAllNightSpring2026 />} />
@@ -690,6 +688,9 @@ root.render(
           <Route path='/lans/low-ping-lan-2026' element={<LowPingLAN />} />
           <Route path='/lans/tomorrowlan_2026' element={<TomorrowLAN2026 />} />
           <Route path='/lans/macs-spring-2026' element={<MACSSpring2026 />} />
+          <Route path='/lans/charleston-crown-series' element={<CharlestonCrownSeries />} />
+          <Route path='/lans/rmcs-spring-2026' element={<RMCSSpring2026 />} />
+          <Route path='/lans/volan-2026' element={<Volan2026 />} />
 
         </Routes>
       </main>

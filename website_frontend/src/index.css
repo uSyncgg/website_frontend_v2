@@ -49,3 +49,9 @@ main {
 .minorBottomSpace {
   padding-bottom: 2rem;
 }
+
+.disabled {
+    filter: brightness(80%);
+    color: grey;
+    cursor: default !important;
+}
