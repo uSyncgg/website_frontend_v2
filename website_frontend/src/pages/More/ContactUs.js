@@ -79,7 +79,7 @@ export const ContactUs = () => {
                     <TeamPhoto member={"Tone"} />
                 </div>
 
-                <div className="hr" />
+                <div className="hr minorBottomSpace" />
 
             </div>
         </div>
