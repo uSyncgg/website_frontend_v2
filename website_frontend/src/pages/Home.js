@@ -8,7 +8,6 @@ export const Home = () => {
     return (
         <div className="standardContainer">
             <SeoData 
-                title="uSync | Esports LANs, Tournaments, & Leagues Hub" 
                 description="uSync is the world's largest selection of esports LANs, Leagues, and Tournaments. Find your next event today."
                 canonicalPath={"/"}
             />
