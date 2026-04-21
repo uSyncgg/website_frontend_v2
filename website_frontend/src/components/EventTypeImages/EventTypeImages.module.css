@@ -13,12 +13,17 @@
     height: auto;
     margin: auto;
     transition: box-shadow .3s ease-in-out;
-    /* width: 28rem; */
     width: 100%;
 }
 
 .imageEventContainer a {
     width: 30%;
+}
+
+@media only screen and (max-width: 768px) {
+    .imageEventcontainer a {
+        width: 65%;
+    }
 }
 
 .imageEventContainer img:hover {
