@@ -207,7 +207,7 @@ export const EventTypeImages = ({ page, articleName='' }) => {
             }
 
             {page === "Article" &&
-                <div className={styles.imageEventContainer}>
+                <div className={styles.imageArticleContainer}>
                     {articleName !== "The Problem With Esports" && 
                         <Link to={"/more/FAQ/The-Problem-With-Esports"}>
                             <img src='https://i.imgur.com/vBqSUhI.png' alt='The Problem With Esports' className={styles.articlePageImg} />

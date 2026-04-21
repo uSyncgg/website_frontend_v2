@@ -20,8 +20,34 @@
     width: 30%;
 }
 
+.imageArticleContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+}
+
+.imageArticleContainer img {
+    border-radius: 1.563rem;
+    height: auto;
+    margin: auto;
+    transition: box-shadow .3s ease-in-out;
+    width: 100%;
+}
+
+.imageArticleContainer a {
+    width: 20%;
+}
+
 @media only screen and (max-width: 768px) {
     .imageEventContainer a {
+        width: 65%;
+    }
+
+    .imageArticleContainer a {
         width: 65%;
     }
 }
@@ -35,7 +61,9 @@
 }
 
 .articlePageImg {
-    width: 24rem !important;
+    /* width: 24rem !important; */
+    max-width: 24rem;
+    width: 100%;
     margin: 0 auto !important;
 }
 
