@@ -217,10 +217,6 @@
     margin-bottom: 2rem;
 }
 
-.eventSectionOne {
-    flex-shrink: 0;
-}
-
 .eventSectionTwo {
     flex: 1;
 }
