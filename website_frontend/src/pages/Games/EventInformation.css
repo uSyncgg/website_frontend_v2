@@ -1,10 +1,8 @@
 .eventInfoCardContainer {
     max-width: 100%;
-    /* display: flex; */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
     grid-auto-rows: minmax(400px, auto);
-    /* flex-wrap: wrap; */
     justify-content: center;
     gap: 40px;
     padding-inline: 40px;
@@ -16,7 +14,11 @@
     margin: auto auto;
     padding-bottom: 2rem;
     margin-top: 2rem;
-} 
+}
+
+.verifiedContainer {
+    padding-bottom: 2rem;
+}
 
 .backButtonContainer {
     justify-content: left;
@@ -32,4 +34,84 @@
     min-height: 90vh;
     max-height: 100vh;
     position: relative;
+}
+
+/* Tournaments */
+.filterSection {
+    flex: 1.5;
+}
+
+.tournamentSection {
+    flex: 2.7;
+}
+
+/* .totalTournamentContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 auto;
+    justify-content: space-evenly;
+    text-align: center;
+} */
+
+.tournamentContainer {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.filterContainer {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.totalTournamentContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+        "left right"
+        "bottom bottom";
+    gap: 1rem;
+}
+
+.totalTournamentContainer h1 {
+    text-align: center;
+    /* padding-top: 1.5rem; */
+    margin-bottom: .5rem;
+}
+
+.leftItem {
+    grid-area: left;
+    overflow: visible;
+    /* position: sticky; */
+}
+
+.rightItem {
+    grid-area: right;
+}
+
+.rightItem h1 {
+    padding-top: 1.5rem;
+}
+
+.bottomItem {
+    grid-area: bottom;
+}
+
+.rightItemTitle {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+@media only screen and (max-width: 1700px) {
+    .totalTournamentContainer {
+        grid-template-areas: 
+            "left left"
+            "right right"
+            "bottom bottom";
+        
+    }
 }
