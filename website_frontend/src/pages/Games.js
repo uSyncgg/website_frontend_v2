@@ -1,8 +1,13 @@
-import { GameImage, HeaderImage } from "components";
+import { GameImage, HeaderImage, SeoData } from "components";
 
 export const Games = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Find your next competition in one of our 7 different supported titles!"
+                canonicalPath={"/games"}
+            />
+
             <HeaderImage title={"uSync Titles"} imageClass={"gamesPage"} />
 
             <GameImage 

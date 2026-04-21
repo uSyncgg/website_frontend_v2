@@ -2,11 +2,17 @@ import React from "react";
 import styles from './Home.module.css';
 import '../index.css';
 import { Link } from "react-router";
-import { MapCoverHome, GameImage } from "components";
+import { MapCoverHome, GameImage, SeoData } from "components";
 
 export const Home = () => {
     return (
         <div className="standardContainer">
+            <SeoData 
+                title="uSync | Esports LANs, Tournaments, & Leagues Hub" 
+                description="uSync is the world's largest selection of esports LANs, Leagues, and Tournaments. Find your next event today."
+                canonicalPath={"/"}
+            />
+            
             <div className={styles.sectionOne}>
                 <div className={styles.sectionOneContainer}>
                     <Link to="#" className={styles.compete}>$ Compete in Esports Events</Link>

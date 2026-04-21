@@ -1,8 +1,12 @@
-import { GameImage, HeaderImage } from "components";
+import { SeoData, GameImage, HeaderImage } from "components";
 
 export const Leagues = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Find a league to join for competitive esports. With over 200+ leagues we have what you are looking for."
+                canonicalPath={"/leagues"}
+            />
             <HeaderImage title={"League Titles"} imageClass={"leaguesPage"} />
             
             <GameImage 

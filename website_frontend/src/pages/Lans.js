@@ -1,8 +1,12 @@
-import { GameImage, HeaderImage, EventTypeImages } from "components";
+import { SeoData, GameImage, HeaderImage, EventTypeImages } from "components";
 
 export const Lans = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Find esports LAN events for your favorite game titles near you. From Call of Duty to League of Legends we have every LAN going on."
+                canonicalPath={"/lans"}
+            />
             <HeaderImage title={"LAN Titles"} imageClass={"lansPage"} />
 
             <GameImage 
