@@ -1,10 +1,14 @@
-import { HeaderImage } from "components";
+import { SeoData, HeaderImage } from "components";
 import styles from '../Home.module.css';
 import { Link } from "react-router";
 
 export const ReportProblem = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Notice your League, LAN, Wager, or XP not featured or have the incorrect information on uSync - report a problem and we will fix it for you."
+                canonicalPath={"/reportproblem"}
+            />
             <HeaderImage title={"Report a Problem"} imageClass={"reportPage"} />
 
             <div className={`${styles.subscriptionContainer} ${styles.post}`}>

@@ -1,10 +1,14 @@
-import { HeaderImage } from "components";
+import { SeoData, HeaderImage } from "components";
 import { Link } from "react-router";
 import styles from '../Home.module.css';
 
 export const PostYourEvent = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Find out how you can promote your esports league, LAN, tournament, or wager site for free with uSync. Sign up today."
+                canonicalPath={"/more/eventhost"}
+            />
             <HeaderImage title={"Post Your Event"} imageClass={"gamesPage"} />
             
             <div className={`${styles.subscriptionContainer} ${styles.post}`}>

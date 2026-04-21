@@ -1,10 +1,14 @@
-import { HeaderImage, EmailIcon, TeamPhoto } from "components";
+import { SeoData, HeaderImage, EmailIcon, TeamPhoto } from "components";
 import { Link } from "react-router";
 import styles from '../Home.module.css';
 
 export const ContactUs = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Learn more about what uSync does and who the team is. Contact uSync today to work with us and become apart of the esports family."
+                canonicalPath={"/more/contactus"}
+            />
             <HeaderImage title={"Find Us"} imageClass={"lansPage"} />
 
             <div className={styles.socialsContainer}>

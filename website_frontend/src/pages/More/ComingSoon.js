@@ -1,9 +1,13 @@
-import { GameImage, HeaderImage, EventTypeImages, TwitterEmbed } from "components"
+import { SeoData, GameImage, HeaderImage, EventTypeImages, TwitterEmbed } from "components"
 import './More.css';
 
 export const ComingSoon = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Find out what game titles are coming soon to uSync. Request a game of your choice to be published on www.usync.gg"
+                canonicalPath={"Comingsoon"}
+            />
             <HeaderImage title={"Coming Soon"} imageClass={"comingSoonPage"} />
 
             <GameImage

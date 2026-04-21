@@ -1,10 +1,14 @@
-import { HeaderImage, MoreInfoButton } from "components";
+import { SeoData, HeaderImage, MoreInfoButton } from "components";
 import { Link } from "react-router";
 import styles from '../Home.module.css';
 
 export const Verification = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Own a league, LAN, or tournament website on uSync - become uSync Verified to promote your event and prove your reputability in the esports scene."
+                canonicalPath={"/more/verification"}
+            />
             <HeaderImage title={""} verification={true} imageClass={"verificationPage"} />
 
             <div className={styles.sectionTwo}>

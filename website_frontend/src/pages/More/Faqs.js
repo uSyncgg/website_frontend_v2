@@ -1,8 +1,13 @@
+import { SeoData } from "components";
 import { Link } from "react-router";
 
 export const Faqs = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Frequently asked questions about esports and how to begin. Find articles on the competitive esports landscape today."
+                canonicalPath={"/more/FAQ"}
+            />
             <div className="faqContainer">
                 <div className="faqSectionOne">
                     <div>
