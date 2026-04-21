@@ -1,0 +1,21 @@
+.pagination {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 30px;
+    justify-content: center;
+    color: white;
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.white {
+    color: white;
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.paginationButton {
+    cursor: pointer;
+}

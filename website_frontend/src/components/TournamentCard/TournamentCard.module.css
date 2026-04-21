@@ -1,0 +1,161 @@
+.tournamentCardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-right: 1rem;
+}
+
+.tournamentCard {
+    min-width: 80rem;
+    height: 9rem;
+    position: relative;
+    max-width: 100%;
+    border: none;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0 auto 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* SET THIS UP TO FUNCTION LIKE OUR HEADER IMAGES */
+.tournamentCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: var(--bg-image); 
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: -1;
+}
+
+.titleInfo {
+    text-align: left;
+    width: 28%;
+    text-align: center;
+    font-size: larger;
+    padding-left: 12%;
+}
+
+.bodyInfo {
+    width: 15%;
+    gap: 8px;
+    display: flex;          
+    flex-direction: column; 
+    text-align: center;
+    font-size: larger;
+}
+
+.white {
+    color: #fff;
+    font-weight: 700;
+}
+
+.purple {
+    color: #926ace;
+    font-weight: 700;
+}
+
+.buttonContainer {
+    justify-content: center;
+    margin: auto;
+    display: flex;
+    width: 15%;
+}
+
+.tournamentButton {
+    filter: brightness(100%);
+    transition: filter 0.3s ease;
+    cursor: pointer;
+    color: #fff;
+    font-weight: 700;
+    font-size: large;
+    background-color: rgb(142,106,206);
+    border-color: rgb(142,106,206);
+    width: 100%;
+    height: 2.75rem;
+    border-radius: .375rem;
+}
+
+.tournamentButton:hover {
+    filter: brightness(112%);
+    background-color: rgb(142,106,206);
+    border-color: rgb(142,106,206);
+}
+
+.tournamentButton:active {
+    background-color: rgb(142,106,206);
+    border-color: rgb(142,106,206);
+}
+
+.tournamentButton:after {
+    background-color: rgb(142,106,206);
+    border-color: rgb(142,106,206);
+}
+
+@media only screen and (max-width: 1320px) {
+    .tournamentCardContainer {
+        margin-right: 0;
+    }
+
+    .tournamentCard {
+        /* min-width: 40rem; */
+        min-width: 80%;
+        height: 9rem;
+        max-width: 100%;
+        margin: 0 auto 1.5rem;
+    }
+
+    .titleInfo {
+        /* font-size: clamp(60%, 100%, 100%); */
+        font-size: 12px;
+    }
+
+    .bodyInfo {
+        font-size: 16px;
+    }
+}
+
+@media only screen and (max-width: 870px) {
+    .titleInfo {
+        font-size: 10px;
+    }
+
+    .bodyInfo {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .titleInfo {
+        font-size: 8px;
+        width: 35%;
+    }
+
+    .bodyInfo {
+        font-size: 10px;
+        width: 20%;
+    }
+
+    .buttonContainer {
+        width: 80%;
+    }
+
+    .tournamentButton {
+        font-size: 12px;
+        height: 1.75rem;
+    }
+
+    .tournamentCard {
+        width: auto;
+        height: 10rem;
+    }
+}

@@ -1,0 +1,25 @@
+.filterSection {
+    position: sticky;
+    top: 5.9rem;
+}
+
+.filterContainer {
+    background-color: #272727;
+    border: 5px solid #8e6ace;
+    border-radius: 4px;
+    min-width: 25rem;
+    max-width: 30rem;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+
+@media only screen and (max-width: 570px) {
+    .filterContainer {
+        min-width: 5rem;
+        width: 20rem;
+    }
+}

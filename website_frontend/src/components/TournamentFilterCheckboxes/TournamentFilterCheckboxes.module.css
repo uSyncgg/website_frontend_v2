@@ -1,0 +1,44 @@
+.checkboxContainer {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    transition: margin-bottom 0.3s ease-out;
+}
+
+.mainContainer {
+    cursor: pointer;
+    padding: 0.75rem 1rem;
+    display: flex;
+    border-radius: 4px;
+    background-color: rgb(39,39,39);
+    color: white;
+    width: 100%;
+    gap: 10px;
+}
+
+.subContainer {
+    overflow: hidden;
+    height: var(--height);
+    transition: max-height 0.3s ease-out, opacity 0.2s ease-in-out;
+    background-color: rgb(39,39,39);
+    border: 1px solid rgba(3, 3, 3, 0.15);
+    border-radius: 4px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    opacity: var(--opacity);
+    color: white;
+}
+
+.dropdownItem {
+    padding: 0.25rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.dropdownItem :global(.form-check-label) {
+    padding-left: 0.5rem;
+}
