@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- Home Page -->
+  <url><loc>https://www.usync.gg/</loc></url>
+  <url><loc>https://www.usync.gg/home</loc></url>
+
+  <!-- Top Level Pages -->
+  <url><loc>https://www.usync.gg/games</loc></url>
+  <url><loc>https://www.usync.gg/leagues</loc></url>
+  <url><loc>https://www.usync.gg/lans</loc></url>
+  <url><loc>https://www.usync.gg/tournaments</loc></url>
+
+  <!-- More Pages -->
+  <url><loc>https://www.usync.gg/more/verification</loc></url>
+  <url><loc>https://www.usync.gg/more/eventhost</loc></url>
+  <url><loc>https://www.usync.gg/more/contactus</loc></url>
+  <url><loc>https://www.usync.gg/more/FAQ</loc></url>
+  <url><loc>https://www.usync.gg/more/articles</loc></url>
+  <url><loc>https://www.usync.gg/reportproblem</loc></url>
+  <url><loc>https://www.usync.gg/Comingsoon</loc></url>
+
+  <!-- Articles -->
+  <url><loc>https://www.usync.gg/more/FAQ/The-Problem-With-Esports</loc></url>
+  <url><loc>https://www.usync.gg/more/FAQ/How-Esports-Can-Be-Better</loc></url>
+  <url><loc>https://www.usync.gg/more/FAQ/How-We-Fix-It</loc></url>
+  <url><loc>https://www.usync.gg/more/FAQ/What-We-Provide</loc></url>
+  <url><loc>https://www.usync.gg/more/FAQ/How-to-Join-an-Esports-League</loc></url>
+
+  <!-- Call of Duty -->
+  <url><loc>https://www.usync.gg/games/call-of-duty</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/lans</loc></url>
+  <!-- CoD H2H -->
+  <url><loc>https://www.usync.gg/games/call-of-duty/head-to-head</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/head-to-head/cmg</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/head-to-head/eagent</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/head-to-head/arena</loc></url>
+  <!-- CoD Leagues -->
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/lockdowncl-leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/lockdowncl-leagues/legends</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/lockdowncl-leagues/uppers</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/lockdowncl-leagues/lowers</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/lockdowncl-leagues/womens</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/pulse-x-leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-uppers</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-lowers</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-open</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/xp-league-cod</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/cod-beer-league</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/u18-league</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/united-rogue-league</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/tpc-womens-cod</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/fcl</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/zoned-out</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/airforce-league</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/corporate-cod-league</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/ixi-esports</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/tpc-league</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/cod-rec-leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/cod-rec-leagues/cod-rec-premade-league</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/cod-rec-leagues/cod-rec-open-league</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/elite-gaming-warfare-league</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/casual-xp-league</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/cxp-leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/cxp-leagues/cxp-varsity</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/cxp-leagues/cxp-club</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/playfly-cod-league</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/ccl-league</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/ecac</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/njcaae</loc></url>
+  <!-- CoD Tournaments -->
+  <url><loc>https://www.usync.gg/tournaments/call-of-duty-tournaments</loc></url>
+  <!-- CoD Wagers -->
+  <url><loc>https://www.usync.gg/games/call-of-duty/wagers</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/wagers/cmg</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/wagers/eagent</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/wagers/1v1me</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/wagers/the-esports-hub</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/wagers/ewagers</loc></url>
+
+  <!-- CS2 -->
+  <url><loc>https://www.usync.gg/games/CS2</loc></url>
+  <!-- CS2 H2H -->
+  <url><loc>https://www.usync.gg/games/CS2/head-to-head</loc></url>
+  <url><loc>https://www.usync.gg/games/CS2/head-to-head/faceit</loc></url>
+  <url><loc>https://www.usync.gg/games/CS2/head-to-head/pracc</loc></url>
+  <url><loc>https://www.usync.gg/games/CS2/head-to-head/esport-scrim</loc></url>
+  <url><loc>https://www.usync.gg/games/CS2/head-to-head/ckras</loc></url>
+  <!-- CS2 Leagues -->
+  <url><loc>https://www.usync.gg/games/CS2/leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/CS2/leagues/faceitesea</loc></url>
+  <url><loc>https://www.usync.gg/games/CS2/leagues/fastcup</loc></url>
+  <url><loc>https://www.usync.gg/games/CS2/leagues/corporate</loc></url>
+  <url><loc>https://www.usync.gg/games/CS2/leagues/fireleague</loc></url>
+  <url><loc>https://www.usync.gg/games/CS2/leagues/unitedtwentyone</loc></url>
+  <url><loc>https://www.usync.gg/games/CS2/leagues/hyperfibre-leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/CS2/leagues/hyperfibre-leagues/elite</loc></url>
+  <url><loc>https://www.usync.gg/games/CS2/leagues/hyperfibre-leagues/social</loc></url>
+  <url><loc>https://www.usync.gg/games/CS2/leagues/njcaae</loc></url>
+  <url><loc>https://www.usync.gg/games/CS2/leagues/necc</loc></url>
+  <url><loc>https://www.usync.gg/games/CS2/leagues/egfc</loc></url>
+  <url><loc>https://www.usync.gg/games/CS2/leagues/playfly</loc></url>
+  <url><loc>https://www.usync.gg/games/CS2/leagues/ael</loc></url>
+  <!-- CS2 Wagers -->
+  <url><loc>https://www.usync.gg/games/CS2/wagers</loc></url>
+  <url><loc>https://www.usync.gg/games/CS2/wagers/showdowngaming_cs2</loc></url>
+  <url><loc>https://www.usync.gg/games/CS2/wagers/gamersaloon_cs2</loc></url>
+
+  <!-- Halo -->
+  <url><loc>https://www.usync.gg/games/halo</loc></url>
+  <url><loc>https://www.usync.gg/games/halo/lans</loc></url>
+  <!-- Halo H2H -->
+  <url><loc>https://www.usync.gg/games/halo/head-to-head</loc></url>
+  <url><loc>https://www.usync.gg/games/halo/head-to-head/ugc-scrim</loc></url>
+  <url><loc>https://www.usync.gg/games/halo/head-to-head/rec-xp</loc></url>
+  <url><loc>https://www.usync.gg/games/halo/head-to-head/arena</loc></url>
+  <url><loc>https://www.usync.gg/games/halo/head-to-head/sauna</loc></url>
+  <!-- Halo Leagues -->
+  <url><loc>https://www.usync.gg/games/halo/leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/halo/leagues/halo-rec-league</loc></url>
+  <url><loc>https://www.usync.gg/games/halo/leagues/ascending-baseline</loc></url>
+  <url><loc>https://www.usync.gg/games/halo/leagues/ascending-baseline/ab</loc></url>
+  <url><loc>https://www.usync.gg/games/halo/leagues/ascending-baseline/pandemonium-games</loc></url>
+  <url><loc>https://www.usync.gg/games/halo/leagues/halo-agent</loc></url>
+  <url><loc>https://www.usync.gg/games/halo/leagues/ugc-halo</loc></url>
+  <!-- Halo Wagers -->
+  <url><loc>https://www.usync.gg/games/halo/wagers</loc></url>
+  <url><loc>https://www.usync.gg/games/halo/wagers/cmg</loc></url>
+  <url><loc>https://www.usync.gg/games/halo/wagers/ewagers</loc></url>
+
+  <!-- League of Legends -->
+  <url><loc>https://www.usync.gg/games/LoL</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/lans</loc></url>
+  <!-- LoL H2H -->
+  <url><loc>https://www.usync.gg/games/LoL/head-to-head</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/head-to-head/gankster</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/head-to-head/esport-scrim</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/head-to-head/pracc</loc></url>
+  <!-- LoL Leagues -->
+  <url><loc>https://www.usync.gg/games/LoL/leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/titan-leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/titan-leagues/immortal</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/titan-leagues/vanquisher</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/titan-leagues/eternal</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/titan-leagues/conqueror</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/titan-leagues/olympus</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/titan-leagues/divinity</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/titan-leagues/gladiator</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/risen-leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/risen-leagues/champions</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/risen-leagues/dominate</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/risen-leagues/unstoppable</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/risen-leagues/rampage</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/risen-leagues/draft</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/aegis-leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/aegis-leagues/challenger</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/aegis-leagues/marauder</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/aegis-leagues/defenders</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/aegis-leagues/executioners</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/aegis-leagues/vanguard</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/blue-otter-leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/blue-otter-leagues/masters</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/blue-otter-leagues/diamond</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/blue-otter-leagues/emerald</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/blue-otter-leagues/plat</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/blue-otter-leagues/gold</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/blue-otter-leagues/draft</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/low-budget-leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/low-budget-leagues/executive</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/low-budget-leagues/financial</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/low-budget-leagues/commercial</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/low-budget-leagues/economy</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/low-budget-leagues/ceo</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/low-budget-leagues/lta</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/meta-shift-leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/meta-shift-leagues/noble</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/meta-shift-leagues/diamond</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/meta-shift-leagues/emerald</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/meta-shift-leagues/cyanide</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/meta-shift-leagues/platinum</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/meta-shift-leagues/draft</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/sdc</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/cobalt-winds-leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/cobalt-winds-leagues/cwl-ascend</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/cobalt-winds-leagues/cwl-defy</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/cobalt-winds-leagues/cwl-rise</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/corporate-league</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/clol</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/playfly</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/necc</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/ecac</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/nse</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/leagues/playvs</loc></url>
+  <!-- LoL Wagers -->
+  <url><loc>https://www.usync.gg/games/LoL/wagers</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/wagers/ewagers</loc></url>
+
+  <!-- Rocket League -->
+  <url><loc>https://www.usync.gg/games/RocketLeague</loc></url>
+  <!-- RL H2H -->
+  <url><loc>https://www.usync.gg/games/RocketLeague/head-to-head</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/head-to-head/gankster</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/head-to-head/pracc</loc></url>
+  <!-- RL Leagues -->
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/rlpc-leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/rlpc-leagues/major</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/rlpc-leagues/aaa</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/rlpc-leagues/aa</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/rlpc-leagues/a</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/mle-leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/mle-leagues/premier</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/mle-leagues/master</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/mle-leagues/champ</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/mle-leagues/academy</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/mle-leagues/foundation</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/united-rogue</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/italian-leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/italian-leagues/serie-a</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/italian-leagues/serie-b</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/nemesis-leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/nemesis-leagues/titan</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/nemesis-leagues/rival</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/nemesis-leagues/challenger</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/nemesis-leagues/prospect</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/nemesis-leagues/novice</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/frontier-doubles-leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/frontier-doubles-leagues/elite</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/frontier-doubles-leagues/star</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/frontier-doubles-leagues/expert</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/frontier-doubles-leagues/origin</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/frontier-doubles-leagues/adept</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/corporate</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/airforce</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/cca</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/playfly</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/ecac</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/necc</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/cecc</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/njcaae</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/egfc</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/ael</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/playvs</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/tec</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/egfh</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/aelhs</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/rsc-leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/rsc-leagues/3v3-na</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues/rsc-leagues/3v3-eu</loc></url>
+  <!-- RL Wagers -->
+  <url><loc>https://www.usync.gg/games/RocketLeague/wagers</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/wagers/cmg</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/wagers/gamersaloon</loc></url>
+  <url><loc>https://www.usync.gg/games/RocketLeague/wagers/ewagers</loc></url>
+
+  <!-- Valorant -->
+  <url><loc>https://www.usync.gg/games/Valorant</loc></url>
+  <!-- Valorant H2H -->
+  <url><loc>https://www.usync.gg/games/Valorant/head-to-head</loc></url>
+  <url><loc>https://www.usync.gg/games/Valorant/head-to-head/gankster</loc></url>
+  <url><loc>https://www.usync.gg/games/Valorant/head-to-head/esport-scrim</loc></url>
+  <url><loc>https://www.usync.gg/games/Valorant/head-to-head/college-hub</loc></url>
+  <url><loc>https://www.usync.gg/games/Valorant/head-to-head/pracc</loc></url>
+  <!-- Valorant Leagues -->
+  <url><loc>https://www.usync.gg/games/Valorant/leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/Valorant/leagues/corporate</loc></url>
+  <url><loc>https://www.usync.gg/games/Valorant/leagues/unified</loc></url>
+  <url><loc>https://www.usync.gg/games/Valorant/leagues/riot</loc></url>
+  <url><loc>https://www.usync.gg/games/Valorant/leagues/njcaae</loc></url>
+  <url><loc>https://www.usync.gg/games/Valorant/leagues/necc</loc></url>
+  <url><loc>https://www.usync.gg/games/Valorant/leagues/egfc</loc></url>
+  <url><loc>https://www.usync.gg/games/Valorant/leagues/playfly-leagues</loc></url>
+  <url><loc>https://www.usync.gg/games/Valorant/leagues/playfly-leagues/varsity</loc></url>
+  <url><loc>https://www.usync.gg/games/Valorant/leagues/playfly-leagues/open</loc></url>
+  <url><loc>https://www.usync.gg/games/Valorant/leagues/cecc</loc></url>
+  <url><loc>https://www.usync.gg/games/Valorant/leagues/nse</loc></url>
+  <url><loc>https://www.usync.gg/games/Valorant/leagues/tec</loc></url>
+  <url><loc>https://www.usync.gg/games/Valorant/leagues/nasef</loc></url>
+  <url><loc>https://www.usync.gg/games/Valorant/leagues/egfh</loc></url>
+  <!-- Valorant Wagers -->
+  <url><loc>https://www.usync.gg/games/Valorant/wagers</loc></url>
+  <url><loc>https://www.usync.gg/games/Valorant/wagers/ewagers</loc></url>
+
+  <!-- Warzone -->
+  <url><loc>https://www.usync.gg/games/warzone</loc></url>
+  <url><loc>https://www.usync.gg/games/warzone/lans</loc></url>
+  <!-- Warzone H2H -->
+  <url><loc>https://www.usync.gg/games/warzone/head-to-head</loc></url>
+  <url><loc>https://www.usync.gg/games/warzone/head-to-head/cmg</loc></url>
+  <!-- Warzone Leagues -->
+  <url><loc>https://www.usync.gg/games/warzone/leagues</loc></url>
+  <!-- Warzone Wagers -->
+  <url><loc>https://www.usync.gg/games/warzone/wagers</loc></url>
+  <url><loc>https://www.usync.gg/games/warzone/wagers/cmg</loc></url>
+  <url><loc>https://www.usync.gg/games/warzone/wagers/1v1me</loc></url>
+  <url><loc>https://www.usync.gg/games/warzone/wagers/gamersaloon</loc></url>
+  <url><loc>https://www.usync.gg/games/warzone/wagers/ewagers</loc></url>
+
+  <!-- Payment -->
+  <url><loc>https://www.usync.gg/paymentform</loc></url>
+  <url><loc>https://www.usync.gg/paymentform/review</loc></url>
+  <url><loc>https://www.usync.gg/checkout</loc></url>
+  <url><loc>https://www.usync.gg/paymentform/test/receipt</loc></url>
+  <url><loc>https://www.usync.gg/payment</loc></url>
+
+  <!-- LANs -->
+  <url><loc>https://www.usync.gg/LanMap</loc></url>
+  <url><loc>https://www.usync.gg/other-lans</loc></url>
+  <!-- CoD LANs -->
+  <url><loc>https://www.usync.gg/lans/lowtier-major-iv</loc></url>
+  <url><loc>https://www.usync.gg/lans/rva-esports-championship-2026</loc></url>
+  <!-- LoL LANs -->
+  <url><loc>https://www.usync.gg/lans/lakewood-league-xii-spring</loc></url>
+  <!-- Conventions -->
+  <url><loc>https://www.usync.gg/lans/lan-all-night-spring-26</loc></url>
+  <url><loc>https://www.usync.gg/lans/immersecon-2026</loc></url>
+  <!-- Archived LANs 2026 -->
+  <url><loc>https://www.usync.gg/lans/emerald-city-2026</loc></url>
+  <url><loc>https://www.usync.gg/lans/operation-cupid</loc></url>
+  <url><loc>https://www.usync.gg/lans/belowzerolan-winter-26</loc></url>
+  <url><loc>https://www.usync.gg/lans/shintogc-major-iii-2026</loc></url>
+  <url><loc>https://www.usync.gg/lans/g-site-bo7</loc></url>
+  <url><loc>https://www.usync.gg/lans/heartland-2026</loc></url>
+  <url><loc>https://www.usync.gg/lans/midwest-battleground-2026</loc></url>
+  <url><loc>https://www.usync.gg/lans/kamicon-17</loc></url>
+  <url><loc>https://www.usync.gg/lans/dreamhack-birmingham</loc></url>
+  <url><loc>https://www.usync.gg/lans/forlan-spring-2026</loc></url>
+  <url><loc>https://www.usync.gg/lans/low-ping-lan-2026</loc></url>
+  <url><loc>https://www.usync.gg/lans/tomorrowlan_2026</loc></url>
+  <url><loc>https://www.usync.gg/lans/macs-spring-2026</loc></url>
+  <url><loc>https://www.usync.gg/lans/charleston-crown-series</loc></url>
+  <url><loc>https://www.usync.gg/lans/rmcs-spring-2026</loc></url>
+  <url><loc>https://www.usync.gg/lans/volan-2026</loc></url>
+
+</urlset>
