@@ -7,6 +7,7 @@
   background-position: center;
   background-repeat: no-repeat;
   margin-bottom: 2rem;
+  /* filter: brightness(80%); */
 }
 
 .noTitle {
@@ -39,6 +40,44 @@
   height: auto;
   padding-top: 3rem;
   padding-bottom: 3rem;
+}
+
+.locationText {
+    color: white;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    background: transparent;
+    border: 2px solid rgb(142, 106, 206);
+    margin-bottom: .25rem;
+    cursor: auto;
+}
+
+.verifiedHost {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.verificationText {
+  width: 20%;
+  margin-left: .5rem;
+}
+
+.verificationCheck {
+  width: 3.5%;
+  margin-right: .5rem;
 }
 
 /* THIS IS A NOTE TO CHECK THE OLD SITE FOR SPECIFIC STYLINGS OF IMAGES USED FOR GAME PAGES */
