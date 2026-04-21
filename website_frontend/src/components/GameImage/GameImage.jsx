@@ -3,7 +3,6 @@ import { Link } from 'react-router';
 import React from 'react';
 
 export const GameImage = ({ games, title }) => {
-    console.log(title)
 
     return (
         <React.Fragment>
