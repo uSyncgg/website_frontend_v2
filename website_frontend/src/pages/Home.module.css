@@ -160,6 +160,10 @@
     align-items: center;
 }
 
+.subscriptionContainer img {
+    width: 100%;
+}
+
 .subscription {
     position: relative;
     width: 45%;
@@ -242,6 +246,14 @@
     .sectionOneContainer {
         /* text-align: center; */
         padding-left: 2rem;
+    }
+
+    .subscriptionContainer img {
+        width: 80%;
+    }
+
+    .usyncVerified {
+        width: 80%;
     }
 }
 

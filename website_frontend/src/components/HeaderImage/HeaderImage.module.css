@@ -91,4 +91,11 @@
     }
 }
 
+
+@media only screen and (max-width: 768px) {
+  .verification {
+    width: 22.5%;
+  }
+}
+
 /* THIS IS A NOTE TO CHECK THE OLD SITE FOR SPECIFIC STYLINGS OF IMAGES USED FOR GAME PAGES */
