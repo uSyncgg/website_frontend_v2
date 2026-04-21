@@ -18,7 +18,7 @@ export const CodTournamentCard = ({ tournament }) => {
     const combinedString = `${cleanedDate} ${currentYear} ${estTime}`; // "Apr 14 2025 10:00 AM"
 
     // Step 3: Create a Date object in EST
-    const estDateObj = new Date(`${combinedString} GMT-0500`); // EST is UTC-5
+    const estDateObj = new Date(`${combinedString} GMT-0400`); // EST is UTC-5
 
     // Step 4: Get the user's time zone
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
