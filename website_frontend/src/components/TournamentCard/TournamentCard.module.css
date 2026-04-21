@@ -169,11 +169,14 @@
     .titleInfo {
         font-size: 10px;
         width: 30%;
+        padding-top: .5rem;
     }
 
     .bodyInfo {
         font-size: 13px;
         width: 22%;
+        padding-top: .5rem;
+        gap: 4px
     }
 
     .buttonContainer {
@@ -182,7 +185,7 @@
 
     .tournamentButton {
         font-size: 12px;
-        height: 1.75rem;
+        height: 1.5rem;
     }
 
     .tournamentCard {
