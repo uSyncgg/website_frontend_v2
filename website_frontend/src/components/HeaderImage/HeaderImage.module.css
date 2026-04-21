@@ -14,13 +14,6 @@
   padding-bottom: 10%;
   padding-top: 6%;
 }
-@media only screen and (max-width: 1000px) {
-    .noTitle {
-        padding-bottom: 20%;
-        padding-top: 10%;
-    }
-}
-
 
 .headerImage h2 {
     color: white;
@@ -85,6 +78,17 @@
 .verificationCheck {
   width: 3.5%;
   margin-right: .5rem;
+}
+
+@media only screen and (max-width: 1000px) {
+    .noTitle {
+        padding-bottom: 20%;
+        padding-top: 10%;
+    }
+
+    .headerImage h2 {
+      font-size: 3.5rem;
+    }
 }
 
 /* THIS IS A NOTE TO CHECK THE OLD SITE FOR SPECIFIC STYLINGS OF IMAGES USED FOR GAME PAGES */
