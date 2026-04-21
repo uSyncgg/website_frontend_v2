@@ -244,3 +244,14 @@
         padding-left: 2rem;
     }
 }
+
+
+@media only screen and (max-width: 768px) {
+    .sectionOneContainer h2 {
+        font-size: 30px;
+    }
+
+    .sectionOneContainer h1 {
+        font-size: 40px;
+    }
+}

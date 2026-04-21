@@ -25,9 +25,11 @@ code {
 .standardContainer {
   background-color: #313131;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 .standardBlankContainer {
+  overflow: hidden;
   min-height: 100vh;
 }
 
