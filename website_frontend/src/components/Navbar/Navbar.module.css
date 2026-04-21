@@ -257,9 +257,9 @@
     }
 
     /* Show buttons when menu is open */
-    .headerRight.menuOpen {
+    /* .headerRight.menuOpen {
         display: flex;
-    }
+    } */
 
     .regButton,
     .logButton {
