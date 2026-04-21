@@ -60,3 +60,20 @@
     color: rgb(49, 49, 49);
     cursor: pointer;
 }
+
+@media only screen and (max-width: 768px) {
+    .mapButtonLans {
+        width: 40%;
+        height: 2rem;
+    }
+
+    .mapButtonLansSolo {
+        width: 60%;
+        height: 2rem;
+    }
+
+    .mapButtonGame {
+        width: 60%;
+        height: 2rem;
+    }
+}

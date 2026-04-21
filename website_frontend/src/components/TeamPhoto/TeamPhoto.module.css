@@ -20,3 +20,9 @@
 .photoContainer {
     width: 33%;
 }
+
+@media only screen and (max-width: 768px) {
+    .photoContainer {
+        width: 100%;
+    }
+}
