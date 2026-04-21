@@ -1,8 +1,12 @@
-import { HeaderImage, HostBanner } from "components";
+import { SeoData, HeaderImage, HostBanner } from "components";
 
 export const CodHeadToHead = () => {
-    return ( 
+    return (
         <div className="standardContainer">
+            <SeoData
+                description="Call of Duty XP and ladder matches. Free competitive cod esports matches to improve your skill."
+                canonicalPath={"/games/call-of-duty/head-to-head"}
+            />
             <HeaderImage title={"Head to Head"} imageClass={"codh2hPage"} />
 
             <div className="eventBannerContainer">

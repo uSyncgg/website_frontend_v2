@@ -1,9 +1,14 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData } from "components";
 import '../../../EventInformation.css';
 
 export const LakewoodLeagueXIISpring = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description={"Play League of Legends LAN tournament near you in Lakewood, CO. 5v5 format with nearly a THOUSAND dollars in prizing for grabs."}
+                canonicalPath={"/lans/lakewood-league-xii-spring"}
+            />
+
             <HeaderImage title={"Lakewood League XII - Spring"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

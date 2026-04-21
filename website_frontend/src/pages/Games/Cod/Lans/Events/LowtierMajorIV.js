@@ -1,9 +1,14 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData } from "components";
 import '../../../EventInformation.css';
 
 export const LowtierMajorIV = () => {
     return (
         <div className="standardContainer">
+            <SeoData 
+                description={"Every player planning to attend this event must receive a ranking before forming a roster. You must join our discord and put your name in the “player-rating” text channel under the general section. "}
+                canonicalPath={"/lans/lowtier-major-iv"}
+            />
+            
             <HeaderImage title={"Lowtier Major IV"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const Ewagers = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Wager head to head against other players in League of Legends. Prove yourself and make money while doing it."
+                canonicalPath={"/games/LoL/wagers/ewagers"}
+            />
             <HeaderImage title={"Ewagers"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

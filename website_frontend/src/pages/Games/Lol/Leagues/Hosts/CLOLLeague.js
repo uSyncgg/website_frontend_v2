@@ -1,10 +1,18 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../EventInformation.css';
 
 export const CLOLLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="College League of Legends league is the most reputable name in all of college league. Play for thousands of dollars in scholarships."
+                canonicalPath={"/games/LoL/leagues/clol"}
+            />
             <HeaderImage imageClass={"CLOLPage"} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>

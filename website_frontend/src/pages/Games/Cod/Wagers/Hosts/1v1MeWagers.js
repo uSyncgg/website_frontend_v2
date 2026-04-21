@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const OneVOneMeWagers = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="1v1 Call of Duty wager matches for real money. Win cash by playing video games."
+                canonicalPath={"/games/call-of-duty/wagers/1v1me"}
+            />
             <HeaderImage title={"1v1Me"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

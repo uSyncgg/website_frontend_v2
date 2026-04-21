@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const CmgWagers = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Checkmate Gaming Halo Infinite wagers. Play Halo for cash against other players and climb the ranked ladder."
+                canonicalPath={"/games/halo/wagers/cmg"}
+            />
             <HeaderImage title={"Checkmate Gaming"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

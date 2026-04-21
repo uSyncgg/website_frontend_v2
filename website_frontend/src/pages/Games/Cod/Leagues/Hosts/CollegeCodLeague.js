@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const CollegeCodLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="College Call of Duty League (CCL) with a $40k prize pool. The #1 Call of Duty college league with professional players."
+                canonicalPath={"/games/call-of-duty/leagues/ccl-league"}
+            />
             <HeaderImage title={"College COD League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

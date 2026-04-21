@@ -1,10 +1,18 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../EventInformation.css';
 
 export const GanksterGGH2H = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Gankster GG Valorant scrim finder. A verified platform for finding competitive Valorant scrims with a large number of users and daily matches worldwide."
+                canonicalPath={"/games/Valorant/head-to-head/gankster"}
+            />
             <HeaderImage imageClass={"ganksterPage"} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>

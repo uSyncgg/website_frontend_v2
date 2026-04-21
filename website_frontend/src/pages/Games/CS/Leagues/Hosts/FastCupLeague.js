@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const FastCupLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Fast Cup is an eastern hemisphere based Counter-Strike 2 league. With monthly leagues this event will have you always improving your game."
+                canonicalPath={"/games/CS2/leagues/fastcup"}
+            />
             <HeaderImage title={"Fast Cup"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

@@ -1,10 +1,18 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../../EventInformation.css';
 
 export const AegisDefendersLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Aegis Defenders League is for League of Legends players with less than 100LP. Join a league that fits you today."
+                canonicalPath={"/games/LoL/leagues/aegis-leagues/defender"}
+            />
             <HeaderImage imageClass={"aegisLOLLeagues"} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>

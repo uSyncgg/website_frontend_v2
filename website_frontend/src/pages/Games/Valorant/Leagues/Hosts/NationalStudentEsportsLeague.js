@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const NationalStudentEsportsLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="National Student Esports Valorant UK university league. £1,000 prize pool with 3 divisions. Women only and open leagues with LAN finals and live streamed matches."
+                canonicalPath={"/games/Valorant/leagues/nse"}
+            />
             <HeaderImage title={"NSE League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const CorporateValorantLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Corporate Valorant League. Sign up your company for 5v5 NA Valorant competition. $2,000 donated to charity with 8 week season and playoffs each Saturday."
+                canonicalPath={"/games/Valorant/leagues/corporate"}
+            />
             <HeaderImage title={"Corporate Valorant League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

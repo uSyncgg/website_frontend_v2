@@ -1,8 +1,12 @@
-import { HeaderImage, HostBanner } from "components";
+import { SeoData, HeaderImage, HostBanner } from "components";
 
 export const RLLeagues = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Every single Rocket League league from across the world. Find what league suits your playstyle whether you are an amateur player, high school student, or a college student."
+                canonicalPath={"/games/RocketLeague/leagues"}
+            />
             <HeaderImage title={"Rocket League Leagues"} imageClass={"rlLeaguePage"} />
 
             <div className="eventBannerContainer">

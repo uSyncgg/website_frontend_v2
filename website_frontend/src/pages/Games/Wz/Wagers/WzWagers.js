@@ -1,8 +1,12 @@
-import { HeaderImage, HostBanner } from "components";
+import { SeoData, HeaderImage, HostBanner } from "components";
 
 export const WzWagers = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Find the best Warzone wager platforms. Compare Checkmate Gaming, 1v1 Me, Gamer Saloon, and Ewagers to wager on your Call of Duty Warzone skills."
+                canonicalPath={"/games/warzone/wagers"}
+            />
             <HeaderImage title={"Wagers"} imageClass={"lolWagerPage"} />
 
             <div className="eventBannerContainer">

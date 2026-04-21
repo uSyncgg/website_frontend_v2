@@ -1,10 +1,18 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../../EventInformation.css';
 
 export const RisenChampionsLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Risen Champions League is the most prestigious league from Risen. Compete in this League of Legends league for thousands of dollars."
+                canonicalPath={"/games/LoL/leagues/risen-leagues/champions"}
+            />
             <HeaderImage imageClass={"risenLOLLeagues"} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>

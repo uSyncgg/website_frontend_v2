@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const NemesisRivalLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="North America's 1612 - 1779 MMR Rocket League league. Rival league is for players looking to be the best at their craft and improve in Rocket League."
+                canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues/rival"}
+            />
             <HeaderImage title={"Nemesis Rival"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const CWLAscendLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Cobalt Winds Ascend League of Legends league. 750 LP Individual cap with NO team cap. This league is for the best of the best."
+                canonicalPath={"/games/LoL/leagues/cobalt-winds-leagues/cwl-ascend"}
+            />
             <HeaderImage title={"CWL Ascend"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

@@ -1,16 +1,20 @@
-import { HeaderImage, HostBanner, BackButton } from "components";
+import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
 
 export const LockdownCLLeagues = () => {
     const isMobile = useCheckResize();
 
-    const legends = isMobile ? "Legends League - Crim 3 & Above" : "Crim 3 & Above"; 
+    const legends = isMobile ? "Legends League - Crim 3 & Above" : "Crim 3 & Above";
     const uppers = isMobile ? "Uppers League - Diamond 2 - Crim 2" : "Diamond 2 - Crim 2";
     const lowers = isMobile ? "Lowers League - Diamond 1 & Below" : "Diamond 1 & Below";
     const womens = isMobile ? "Womens League - All Skill Levels" : "All Skill Levels";
 
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Fun but competitive Call of Duty league for free agents that are looking for a draft based league with a cash prize and playoffs."
+                canonicalPath={"/games/call-of-duty/leagues/lockdowncl-leagues"}
+            />
             {/* NOTE VERIFIED BANNER FOR LOCKDOWN LOOKS LIKE SHIT IN HEADER IMAGE */}
             <HeaderImage imageClass={"lockdownCODLeagues"} />
 

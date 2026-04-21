@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const CollegeXPVarsityLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Scholarship Call of Duty players looking to make money. Pre season tournaments for seeding on a national scale."
+                canonicalPath={"/games/call-of-duty/leagues/cxp-leagues/cxp-varsity"}
+            />
             <HeaderImage title={"CXP Varsity"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

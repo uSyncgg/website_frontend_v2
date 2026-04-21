@@ -1,4 +1,4 @@
-import { HeaderImage, HostBanner, BackButton } from "components";
+import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
 
 export const PlayflyCollegeLeagues = () => {
@@ -9,6 +9,10 @@ export const PlayflyCollegeLeagues = () => {
 
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Playfly College Valorant leagues. Two divisions for college students - Varsity for Platinum and above and Open League for Gold and below. NA competition."
+                canonicalPath={"/games/Valorant/leagues/playfly-leagues"}
+            />
             <HeaderImage title={"Playfly Leagues"} imageClass={"nonVerifiedPage"} />
 
             <div className="eventBannerContainer">

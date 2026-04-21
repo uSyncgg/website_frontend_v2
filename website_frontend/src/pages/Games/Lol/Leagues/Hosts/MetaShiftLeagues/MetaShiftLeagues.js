@@ -1,4 +1,4 @@
-import { HeaderImage, HostBanner, BackButton } from "components";
+import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
 
 export const MetaShiftLeagues = () => {
@@ -13,6 +13,10 @@ export const MetaShiftLeagues = () => {
 
     return (
         <div className="standardContainer">
+            <SeoData
+                description="MetaShift Leagues are League of Legends leagues with a tier system based on your in-game rank. Experience competitive league today."
+                canonicalPath={"/games/LoL/leagues/meta-shift-leagues"}
+            />
             <HeaderImage title={"MetaShift Leagues"} imageClass={"nonVerifiedPage"} />
 
             <div className="eventBannerContainer">

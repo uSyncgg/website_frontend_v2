@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const PlayflyCollegeLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Massive $280k prize pool for college Call of Duty league Playfly. Full time college students playing to earn scholarships."
+                canonicalPath={"/games/call-of-duty/leagues/playfly-cod-league"}
+            />
             <HeaderImage title={"Playfly COD League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

@@ -1,10 +1,18 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../EventInformation.css';
 
 export const CmgWagers = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Checkmate Gaming Call of Duty wagers are ideal for making money playing cod. Join to start earning today."
+                canonicalPath={"/games/call-of-duty/wagers/cmg"}
+            />
             <HeaderImage imageClass={"cmgPage"} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>

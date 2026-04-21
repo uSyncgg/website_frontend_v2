@@ -1,4 +1,4 @@
-import { HeaderImage, HostBanner, BackButton } from "components";
+import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
 
 export const RocketSoccarConfederationLeagues = () => {
@@ -9,6 +9,10 @@ export const RocketSoccarConfederationLeagues = () => {
 
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Rocket Soccar Confederation - RSC. A free Rocket League league with NA and EU 3v3 divisions across multiple skill tiers. Sign up as a free agent."
+                canonicalPath={"/games/RocketLeague/leagues/rsc-leagues"}
+            />
             <HeaderImage title={"Rocket Soccar Confederation"} imageClass={"nonVerifiedPage"} />
 
             <div className="eventBannerContainer">

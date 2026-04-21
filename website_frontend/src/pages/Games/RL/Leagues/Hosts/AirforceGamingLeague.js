@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const AirforceGamingLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Airforce Gaming Rocket League league. For Air Force and Space Force associated players only. Pro and casual divisions available for NA, EU, and APAC."
+                canonicalPath={"/games/RocketLeague/leagues/airforce-gaming"}
+            />
             <HeaderImage title={"Airforce Gaming League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

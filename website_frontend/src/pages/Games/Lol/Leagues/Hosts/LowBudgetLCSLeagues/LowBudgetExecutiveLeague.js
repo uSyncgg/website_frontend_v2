@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const LowBudgetExecutiveLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="The LCS Executive league is the diamond average league. League of Legends leagues have never been so action packed - start today."
+                canonicalPath={"/games/LoL/leagues/low-budget-leagues/executive"}
+            />
             <HeaderImage title={"LCS Executive League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

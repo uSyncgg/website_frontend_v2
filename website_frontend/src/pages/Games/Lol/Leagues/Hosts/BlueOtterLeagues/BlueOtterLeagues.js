@@ -1,4 +1,4 @@
-import { HeaderImage, HostBanner, BackButton } from "components";
+import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
 
 export const BlueOtterLeagues = () => {
@@ -13,6 +13,10 @@ export const BlueOtterLeagues = () => {
 
     return (
         <div className="standardContainer">
+            <SeoData
+                description="League of Legends Blue Otter leagues. 6 different leagues to choose from based on your in game rank, try it today."
+                canonicalPath={"/games/LoL/leagues/blue-otter-leagues"}
+            />
             <HeaderImage title={"Blue Otter Leagues"} imageClass={"nonVerifiedPage"} />
 
             <div className="eventBannerContainer">

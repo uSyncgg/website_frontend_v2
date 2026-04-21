@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const EsportsAgentH2H = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Esports Agent head to head matches for cod players looking for competitive play. Join now to prove your skill."
+                canonicalPath={"/games/call-of-duty/head-to-head/eagent"}
+            />
             <HeaderImage title={"Esports Agent"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

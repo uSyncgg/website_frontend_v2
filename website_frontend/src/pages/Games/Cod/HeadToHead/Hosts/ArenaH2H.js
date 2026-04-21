@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const ArenaH2H = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Join The Arena 8s Lobbies. Play free competitive Call of Duty matches and scrims."
+                canonicalPath={"/games/call-of-duty/head-to-head/arena"}
+            />
             <HeaderImage title={"The Arena | 8 Mans"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

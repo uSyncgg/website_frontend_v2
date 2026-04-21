@@ -1,8 +1,13 @@
-import { HostBanner, MapCoverGame } from "components";
+import { SeoData, HostBanner, MapCoverGame } from "components";
 
 export const LolLans = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="League of Legends LANs near you. Find a LAN that is closest to you on our world renown LAN map."
+                canonicalPath={"/games/LoL/lans"}
+            />
+            
             <div className="lanMapContainer">
                 <iframe 
                     title="League of Legends LAN Map" 
@@ -29,31 +34,6 @@ export const LolLans = () => {
                     <HostBanner.Button title={"More Info"} path={"/lans/lakewood-league-xii-spring"} />
                 </HostBanner>
 
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/volan-2026"}>Volan 2026</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/lans/volan-2026"} 
-                        imgUrl={"https://i.imgur.com/SynVnAn.png"} 
-                        alt={"Volan 2026"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Knoxville, TN</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/volan-2026"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/rmcs-spring-2026"}>RMCS Spring 2026</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/lans/rmcs-spring-2026"}
-                        imgUrl={"https://i.imgur.com/WaNJjN7.png"} 
-                        alt={"RMCS Spring 2026"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Lakewood, CO</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/rmcs-spring-2026"} />
-                </HostBanner>
                 <div className="hrEvents" />
             </div> 
         </div>

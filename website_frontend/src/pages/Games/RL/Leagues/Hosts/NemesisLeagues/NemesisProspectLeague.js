@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const NemesisProspectLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Looking for a free to enter Rocket League league - look no further. Prospect league is a 1270 - 1452 MMR range based league that is entirely free."
+                canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues/prospect"}
+            />
             <HeaderImage title={"Nemesis Prospect"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

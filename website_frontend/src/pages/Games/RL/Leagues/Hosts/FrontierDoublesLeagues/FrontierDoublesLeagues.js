@@ -1,4 +1,4 @@
-import { HeaderImage, HostBanner, BackButton } from "components";
+import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
 
 export const FrontierDoublesLeagues = () => {
@@ -12,6 +12,10 @@ export const FrontierDoublesLeagues = () => {
 
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Frontier Double Rocket League leagues. 4 different leagues to choose from based on your MMR. Sign up with your duo today."
+                canonicalPath={"/games/RocketLeague/leagues/frontier-doubles-leagues"}
+            />
             <HeaderImage title={"Frontier Doubles Leagues"} imageClass={"nonVerifiedPage"} />
 
             <div className="eventBannerContainer">

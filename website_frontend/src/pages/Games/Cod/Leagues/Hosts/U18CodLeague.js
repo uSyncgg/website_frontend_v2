@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const U18CodLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Call of Duty league for players under the age of 18. Play like the Call of Duty pros even if you are not 18 years old."
+                canonicalPath={"/games/call-of-duty/leagues/u18-league"}
+            />
             <HeaderImage title={"U18 League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

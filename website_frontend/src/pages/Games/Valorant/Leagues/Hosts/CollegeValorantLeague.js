@@ -1,10 +1,18 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../EventInformation.css';
 
 export const CollegeValorantLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="College Valorant League presented by Riot Games. A verified collegiate league with scholarship prizes. Free to enter for full time college students in NA."
+                canonicalPath={"/games/Valorant/leagues/riot"}
+            />
             <HeaderImage imageClass={"cvalPage"} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>

@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const ZonedOutGamingLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Zoned Out Call of Duty league. Multiple different skill divisions hosted during nearly every season of the year."
+                canonicalPath={"/games/call-of-duty/leagues/zoned-out"}
+            />
             <HeaderImage title={"Zoned Out League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

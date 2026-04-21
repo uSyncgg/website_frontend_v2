@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const ItalianSerieALeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="3v3 Italian Rocket League league for those looking to play on their countries servers. Sign up today and compete for cash."
+                canonicalPath={"/games/RocketLeague/leagues/italian-leagues/serie-a"}
+            />
             <HeaderImage title={"Italian Series A"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

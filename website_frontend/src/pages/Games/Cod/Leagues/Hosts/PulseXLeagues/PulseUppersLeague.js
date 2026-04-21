@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const PulseUppersLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Pulse X Uppers Division is a Call of Duty league for those that are looking to play in a competitive environment with the best of the best to prove your name."
+                canonicalPath={"/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-uppers"}
+            />
             <HeaderImage title={"Pulse X Uppers Division"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

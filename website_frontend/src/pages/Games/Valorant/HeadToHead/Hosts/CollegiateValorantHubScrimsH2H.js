@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const CollegiateValorantHubScrimsH2H = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Collegiate Valorant Esports Hub scrim finder for USA college teams. Free scrim finder to manually schedule Valorant college matches and practice sessions."
+                canonicalPath={"/games/Valorant/head-to-head/college-hub"}
+            />
             <HeaderImage title={"Collegiate Valorant Hub Scrims"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

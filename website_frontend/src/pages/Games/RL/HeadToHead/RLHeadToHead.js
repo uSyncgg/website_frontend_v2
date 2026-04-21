@@ -1,8 +1,12 @@
-import { HeaderImage, HostBanner } from "components";
+import { SeoData, HeaderImage, HostBanner } from "components";
 
 export const RLHeadToHead = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Rocket League free to play scrim, XP, and head to head matches. Compete for free and climb the ladder to improve your Rocket League skills or simply to have fun."
+                canonicalPath={"/games/RocketLeague/head-to-head"}
+            />
             <HeaderImage title={"Head-to-Head"} imageClass={"rlh2hPage"} />
 
             <div className="eventBannerContainer">

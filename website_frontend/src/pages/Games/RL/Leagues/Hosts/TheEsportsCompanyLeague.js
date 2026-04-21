@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const TheEsportsCompanyLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="The Esports Company Rocket League high school league for Pennsylvania schools. 2 competitive divisions with a LAN championship. Live streamed matches."
+                canonicalPath={"/games/RocketLeague/leagues/the-esports-company"}
+            />
             <HeaderImage title={"The Esports Company"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

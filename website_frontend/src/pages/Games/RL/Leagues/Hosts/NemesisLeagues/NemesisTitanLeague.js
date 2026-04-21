@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const NemesisTitanLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Titan league is for Rocket League players with over 1780+ MMR. The top of the line league by Nemesis is for Rocket League players looking to go pro."
+                canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues/titan"}
+            />
             <HeaderImage title={"Nemesis Titan"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

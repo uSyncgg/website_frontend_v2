@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const FrontierOriginLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Origin Frontier Doubles league. This Rocket League league is for players with MMR from 0 - 1199. Sign up with your duo."
+                canonicalPath={"/games/RocketLeague/leagues/frontier-doubles-leagues/origin"}
+            />
             <HeaderImage title={"Origin League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

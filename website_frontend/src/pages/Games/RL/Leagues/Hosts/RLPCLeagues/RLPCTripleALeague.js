@@ -1,10 +1,18 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../../EventInformation.css';
 
 export const RLPCTripleALeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="RLPC Triple A League for Rocket League players with 1575 - 1799 MMR. Draft based 3v3 NA league. Sign up solo and get drafted to a team."
+                canonicalPath={"/games/RocketLeague/leagues/rlpc-leagues/aaa"}
+            />
             <HeaderImage imageClass={"rlpcRLLeagues"} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>

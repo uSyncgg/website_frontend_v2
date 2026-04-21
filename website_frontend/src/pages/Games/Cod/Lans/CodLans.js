@@ -1,8 +1,12 @@
-import { HostBanner, MapCoverGame } from "components";
+import { SeoData, HostBanner, MapCoverGame } from "components";
 
 export const CodLans = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Call of Duty LAN tournaments near you. Find the closest Call of Duty LANs to where you live and work. Every LAN going on near you."
+                canonicalPath={"/games/call-of-duty/lans"}
+            />
             <div className="lanMapContainer">
                 <iframe 
                     title="Call of Duty LAN Map" 
@@ -16,19 +20,6 @@ export const CodLans = () => {
 
             <div className="eventBannerContainer">
                 <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/charleston-crown-series"}>Charleston Crown Series</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/lans/charleston-crown-series"} 
-                        imgUrl={"https://i.imgur.com/xJuJq6u.png"} 
-                        alt={"Charleston Crown Series LAN"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>Charleston, SC</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/charleston-crown-series"} />
-                </HostBanner>
-
                 <HostBanner>
                     <HostBanner.Title path={"/lans/lowtier-major-iv"}>Lowtier Major IV</HostBanner.Title>
                     <HostBanner.Image 
@@ -40,8 +31,6 @@ export const CodLans = () => {
                     <HostBanner.Region>Knoxville, TN</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/lans/lowtier-major-iv"} />
                 </HostBanner>
-
-                <div className="hrEvents" />
 
                 <HostBanner>
                     <HostBanner.Title path={"/lans/rva-esports-championship-2026"}>RVA Esports Championship 2026</HostBanner.Title>

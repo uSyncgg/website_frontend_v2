@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const PlayflyCollegeLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Playfly Counter-Strike 2 collegiate league. Hundreds of thousands of dollars at stake in this action packed league."
+                canonicalPath={"/games/CS2/leagues/playfly"}
+            />
             <HeaderImage title={"Playfly League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

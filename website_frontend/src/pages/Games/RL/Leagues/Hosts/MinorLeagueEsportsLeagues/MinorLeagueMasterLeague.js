@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const MinorLeagueMasterLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Rocket League Master league presented by MLE. All regions invited in this 1451 - 1650 MMR rank based league. Compete in those with similar skills."
+                canonicalPath={"/games/RocketLeague/leagues/mle-leagues/master"}
+            />
             <HeaderImage title={"MLE Master"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

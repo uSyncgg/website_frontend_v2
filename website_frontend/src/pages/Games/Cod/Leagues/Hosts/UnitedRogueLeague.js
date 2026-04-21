@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const UnitedRogueLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="4v4 Call of Duty league variant draft league. United Rogue hosted event with franchised teams."
+                canonicalPath={"/games/call-of-duty/leagues/united-rogue-league"}
+            />
             <HeaderImage title={"United Rogue"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

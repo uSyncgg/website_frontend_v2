@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const CorporateRLLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Corporate Rocket League league. Sign up your company team for 3v3 North American competition. 4 skill divisions with $2,000 going to charity."
+                canonicalPath={"/games/RocketLeague/leagues/corporate-rl"}
+            />
             <HeaderImage title={"Corporate Rocket League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

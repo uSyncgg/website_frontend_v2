@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const CmgWagers = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Checkmate Gaming Rocket League wagers. Compare fees and restrictions. 24/7 live support with wager matches available worldwide for Rocket League players."
+                canonicalPath={"/games/RocketLeague/wagers/cmg"}
+            />
             <HeaderImage title={"Checkmate Gaming"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

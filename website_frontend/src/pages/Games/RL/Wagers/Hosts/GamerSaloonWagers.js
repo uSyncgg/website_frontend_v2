@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const GamerSaloonWagers = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Gamer Saloon Rocket League wagers. Console only 1v1 best of 3 matches with set buy-in amounts. 10% match fee for Rocket League wager matches."
+                canonicalPath={"/games/RocketLeague/wagers/gamersaloon"}
+            />
             <HeaderImage title={"GamerSaloon"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

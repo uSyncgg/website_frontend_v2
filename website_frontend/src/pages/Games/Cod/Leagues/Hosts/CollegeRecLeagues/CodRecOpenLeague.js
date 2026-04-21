@@ -1,9 +1,14 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData } from "components";
 import '../../../../EventInformation.css';
 
 export const CodRecOpenLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description={"Recreational Call of Duty league for players looking for a challenge. Play weekly matches with your new roster based on your skill level."}
+                canonicalPath={"/games/call-of-duty/leagues/cod-rec-leagues/cod-rec-open-league"}
+            />
+
             <HeaderImage title={"Cod Rec Open League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

@@ -1,8 +1,12 @@
-import { HostBanner, MapCoverGame, NoEvents } from "components";
+import { SeoData, HostBanner, MapCoverGame, NoEvents } from "components";
 
 export const HaloLans = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Halo LAN tournaments near you and across the world. Find the closest Halo LAN to you today."
+                canonicalPath={"/games/halo/lans"}
+            />
             <div className="lanMapContainer">
                 <iframe 
                     title="Halo LAN Map" 

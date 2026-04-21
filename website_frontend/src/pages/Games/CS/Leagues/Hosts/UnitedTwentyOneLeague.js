@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const UnitedTwentyOneLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="United TwentyOne's bi-monthly Counter-Strike 2 leagues. Compete in divisions based on your skill and climb the ranks."
+                canonicalPath={"/games/CS2/leagues/unitedtwentyone"}
+            />
             <HeaderImage title={"United TwentyOne League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

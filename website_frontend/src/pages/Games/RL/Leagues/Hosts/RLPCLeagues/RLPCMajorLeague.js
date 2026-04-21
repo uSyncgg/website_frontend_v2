@@ -1,10 +1,18 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../../EventInformation.css';
 
 export const RLPCMajorLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="RLPC Major League is for the best Rocket League players with 1800+ MMR. Three seasons per year with a prize pool based on donations."
+                canonicalPath={"/games/RocketLeague/leagues/rlpc-leagues/major"}
+            />
             <HeaderImage imageClass={"rlpcRLLeagues"} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>

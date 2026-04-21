@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const SDCLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="SDC league is a League of Legends league that is free to play and is community based. Join the community and play for prizes today."
+                canonicalPath={"/games/LoL/leagues/sdc"}
+            />
             <HeaderImage title={"SDC League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

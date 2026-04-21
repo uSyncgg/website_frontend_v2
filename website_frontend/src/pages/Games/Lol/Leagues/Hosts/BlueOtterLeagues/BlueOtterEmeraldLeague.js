@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const BlueOtterEmeraldLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Join a League of Legends - Blue Otter Emerald - an Emerald 1 99LP cap league that is year round."
+                canonicalPath={"/games/LoL/leagues/blue-otter-leagues/emerald"}
+            />
             <HeaderImage title={"Blue Otter Emerald League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

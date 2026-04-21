@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const MinorLeaguePremierLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Free entry Rocket League league with a 1651 - 1900 MMR range. Premier league by Minor League Esports is perfect for you."
+                canonicalPath={"/games/RocketLeague/leagues/mle-leagues/premier"}
+            />
             <HeaderImage title={"MLE Premier"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

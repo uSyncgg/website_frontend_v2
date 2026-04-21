@@ -1,8 +1,12 @@
-import { HeaderImage, HostBanner } from "components";
+import { SeoData, HeaderImage, HostBanner } from "components";
 
 export const LolWagers = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Wagers for League of Legends. Play cash matches against other players or other teams and make money playing league."
+                canonicalPath={"/games/LoL/wagers"}
+            />
             <HeaderImage title={"Wagers"} imageClass={"lolWagerPage"} />
 
             <div className="eventBannerContainer">

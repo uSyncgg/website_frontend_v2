@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const NECCLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="NECC Valorant college league. $7,000 prize pool with multiple skill divisions and 6 week regular season with playoffs. Must be a full time college student."
+                canonicalPath={"/games/Valorant/leagues/necc"}
+            />
             <HeaderImage title={"NECC League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

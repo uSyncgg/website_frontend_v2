@@ -1,10 +1,18 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../../EventInformation.css';
 
 export const TitanOlympusLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Titan Esports League Olympus league for League of Legends players with a ranking of Diamond 4. Play every Thursday each week during the season."
+                canonicalPath={"/games/LoL/leagues/titan-leagues/olympus"}
+            />
             <HeaderImage imageClass={"titanLOLLeagues"} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>

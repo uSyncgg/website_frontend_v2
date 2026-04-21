@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const PlayVSLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="PlayVS League of Legends league is for high school students in the United States looking to play competitive for their school. Sign up."
+                canonicalPath={"/games/LoL/leagues/playvs"}
+            />
             <HeaderImage title={"PlayVS League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

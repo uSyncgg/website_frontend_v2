@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const NJCAAELeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="NJCAAE Valorant league for 2 year college students. 3 skill tiers with 9 week round robin regular season, 2 qualifier tournaments, and single elimination playoffs."
+                canonicalPath={"/games/Valorant/leagues/njcaae"}
+            />
             <HeaderImage title={"NJCAAE League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

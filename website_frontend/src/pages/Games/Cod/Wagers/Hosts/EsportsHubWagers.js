@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const EsportsHubWagers = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Throwback Call of Duty wagers for old titles like MWR, Bo3, Bo4, Cold War, and more. Play classic cod for money."
+                canonicalPath={"/games/call-of-duty/wagers/the-esports-hub"}
+            />
             <HeaderImage title={"The Esports Hub"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

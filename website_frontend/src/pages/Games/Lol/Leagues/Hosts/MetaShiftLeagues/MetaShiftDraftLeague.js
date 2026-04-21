@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const MetaShiftDraftLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="MetaShift Draft league is a fast paced action packed League of Legends League. With a lower entry fee this is perfect for amateurs."
+                canonicalPath={"/games/LoL/leagues/meta-shift-leagues/draft"}
+            />
             <HeaderImage title={"MetaShift Draft League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

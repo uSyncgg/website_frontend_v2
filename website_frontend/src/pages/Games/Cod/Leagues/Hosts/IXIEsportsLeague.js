@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const IXIEsportsLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="IXI Esports free tournaments and leagues for COD players. Once a year season in the spring for $100 prize pool."
+                canonicalPath={"/games/call-of-duty/leagues/ixi-esports"}
+            />
             <HeaderImage title={"IXI Esports"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

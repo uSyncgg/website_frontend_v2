@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const FiReLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Counter-Strike 2 FiReLEAGUE is a year round 5v5 league. With invitational tournaments and qualifiers to win prizes."
+                canonicalPath={"/games/CS2/leagues/firecup"}
+            />
             <HeaderImage title={"FiRe League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

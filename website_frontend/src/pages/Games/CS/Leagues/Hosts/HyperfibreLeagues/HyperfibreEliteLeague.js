@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const HyperfibreEliteLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Elite hyperfibre league for New Zealand Counter-Strike 2 players. Compete against other NZ players and climb to the top."
+                canonicalPath={"/games/CS2/leagues/hyperfibre-leagues/elite"}
+            />
             <HeaderImage title={"Hyperfibre Elite Division"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

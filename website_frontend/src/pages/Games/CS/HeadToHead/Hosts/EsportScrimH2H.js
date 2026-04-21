@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const EsportScrimH2H = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Esports Scrims is a free Counter-Strike 2 scrim finder. Find your most competitive matches in minutes."
+                canonicalPath={"/games/CS2/head-to-head/esport-scrim"}
+            />
             <HeaderImage title={"Esport Scrim"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

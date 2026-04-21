@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const CasualXPLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Casual XP League (CXP) is a Call of Duty league for those that are looking to try out competitive. Divisions based on rankings and a very active community."
+                canonicalPath={"/games/call-of-duty/leagues/casual-xp-league"}
+            />
             <HeaderImage title={"Casual XP League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

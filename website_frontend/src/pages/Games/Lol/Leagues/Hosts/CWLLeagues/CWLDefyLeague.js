@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const CWLDefyLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="5v5 EUW League of Legends Cobalt Winds league (CWL). 1200 LP Team Cap. Enroll your team today."
+                canonicalPath={"/games/LoL/leagues/cobalt-winds-leagues/cwl-defy"}
+            />
             <HeaderImage title={"CWL Defy"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

@@ -1,8 +1,12 @@
-import { HeaderImage, HostBanner } from "components";
+import { SeoData, HeaderImage, HostBanner } from "components";
 
 export const RLWagers = () => {
     return (
-        <div className="standardContainer"> 
+        <div className="standardContainer">
+            <SeoData
+                description="Find the best Rocket League wager sites. Compare platforms like Checkmate Gaming, Gamer Saloon, and Ewagers to wager on your Rocket League skills."
+                canonicalPath={"/games/RocketLeague/wagers"}
+            />
             <HeaderImage title={"Wagers"} imageClass={"lansPage"} />
 
             <div className="eventBannerContainer">

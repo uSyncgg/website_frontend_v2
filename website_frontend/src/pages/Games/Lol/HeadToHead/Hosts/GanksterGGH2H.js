@@ -1,10 +1,18 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../EventInformation.css';
 
 export const GanksterGGH2H = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Scrim matches for League of Legends from the most integrated provider. Try it free today."
+                canonicalPath={"/games/LoL/head-to-head/gankster"}
+            />
             <HeaderImage imageClass={"ganksterPage"} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>

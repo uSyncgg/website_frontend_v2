@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const Ewagers = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Halo Esports Wager is the place for 1v1 - 6v6 matches. Choose your wager amount and grab your teammate and make money playing Halo."
+                canonicalPath={"/games/halo/wagers/ewagers"}
+            />
             <HeaderImage title={"Ewagers"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

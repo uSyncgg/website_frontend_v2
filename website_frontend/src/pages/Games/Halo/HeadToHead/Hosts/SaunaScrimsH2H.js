@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const SaunaScrimsH2H = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="The Sauana Halo scrims. Scrim finder for casual all the way to highly competitive players in the Halo scene."
+                canonicalPath={"/games/halo/head-to-head/sauna"}
+            />
             <HeaderImage title={"Sauna Scrims"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

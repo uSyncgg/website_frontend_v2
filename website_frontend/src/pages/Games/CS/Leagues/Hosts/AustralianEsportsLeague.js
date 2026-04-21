@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const AustralianEsportsLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Australian Esports League (AEL) is the #1 AUS Counter-Strike 2 university league. Compete for large prize pools, while having your matches broadcasted."
+                canonicalPath={"/games/CS2/leagues/ael"}
+            />
             <HeaderImage title={"Australian Esports League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

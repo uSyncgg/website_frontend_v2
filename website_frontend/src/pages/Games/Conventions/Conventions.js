@@ -1,11 +1,15 @@
-import { HostBanner, MapCoverGame } from "components";
+import { SeoData, HostBanner, MapCoverGame } from "components";
 export const Conventions = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Find esports LAN conventions and in-person gaming events. Browse gaming conventions and multi-game LAN events happening across the country."
+                canonicalPath={"/lans"}
+            />
             <div className="lanMapContainer">
-                <iframe 
-                    title="LAN Map" 
-                    id="map" 
+                <iframe
+                    title="LAN Map"
+                    id="map"
                     className="lanMap"
                     src="https://www.google.com/maps/d/u/2/embed?mid=14BPiOYVAOTLrIFgUNrLdViUMRoypuU4&ehbc=2E312F"
                 />

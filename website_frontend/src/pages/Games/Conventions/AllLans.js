@@ -1,8 +1,12 @@
-import { MapCoverGame } from "components"
+import { SeoData, MapCoverGame } from "components"
 
 export const AllLans = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Find all esports LAN events across every game title on an interactive map. Browse upcoming in-person gaming tournaments and LAN parties near you."
+                canonicalPath={"/lans/all"}
+            />
             <div className="lanMapContainer">
                 <iframe 
                     title="LAN Map"  

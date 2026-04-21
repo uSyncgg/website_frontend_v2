@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const RSC3v3NALeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Rocket Soccar Confederation North America 3v3 league. Free to enter with 9 competitive skill divisions. Three seasons annually in April, August, and December."
+                canonicalPath={"/games/RocketLeague/leagues/rsc-leagues/3v3-na"}
+            />
             <HeaderImage title={"RSC NA 3v3"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

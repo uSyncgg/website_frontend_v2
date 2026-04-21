@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const PulseLowersLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Pulse X Lowers Divisions is a Call of Duty league for those that are looking to play in a competitive environment for very cheap."
+                canonicalPath={"/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-lowers"}
+            />
             <HeaderImage title={"Pulse X Lowers Division"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

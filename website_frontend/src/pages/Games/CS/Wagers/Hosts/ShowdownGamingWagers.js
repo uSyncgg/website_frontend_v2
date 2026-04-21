@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const ShowdownGamingWagers = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Counter-Strike 2 duel wager matches. Compete one on one where winner takes all of the cash wagered."
+                canonicalPath={"/games/CS2/wagers/showdowngaming_cs2"}
+            />
             <HeaderImage title={"Showdown Gaming"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

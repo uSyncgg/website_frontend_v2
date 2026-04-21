@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const BeerLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Call of Duty Beer League. Enjoy beers and compete in a Call of Duty league while under the influence."
+                canonicalPath={"/games/call-of-duty/leagues/cod-beer-league"}
+            />
             <HeaderImage title={"Call of Duty Beer League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

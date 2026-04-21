@@ -1,9 +1,14 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData } from "components";
 import '../EventInformation.css';
 
 export const LANAllNightSpring2026 = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="LAN All Night is here for all your LAN needs this spring! Bring Your Own Computer (BYOC) and game with tons of similar people!"
+                canonicalPath={"/lans/lan-all-night-spring-26"}
+            />
+
             <HeaderImage title={"LAN All Night Spring 2026"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

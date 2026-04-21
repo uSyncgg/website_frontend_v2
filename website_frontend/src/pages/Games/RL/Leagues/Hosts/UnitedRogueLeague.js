@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const UnitedRogueLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="United Rogue Rocket League. Free to enter for ages 16+. 32 franchises across a 5 league system with enforced salary caps and live streamed matches."
+                canonicalPath={"/games/RocketLeague/leagues/united-rogue"}
+            />
             <HeaderImage title={"United Rogue League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const Ewagers = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Ewagers Warzone wager platform. All game modes from 1v1 to 6v6 with any wager amount. Set your own odds with 5% wager fee. Available worldwide for 18+ players."
+                canonicalPath={"/games/warzone/wagers/ewagers"}
+            />
             <HeaderImage title={"Ewagers"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

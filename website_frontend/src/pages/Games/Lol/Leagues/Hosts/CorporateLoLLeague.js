@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const CorporateLoLLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Corporate League of Legends league is the league that employed people have been searching for. Play with co-workers against other companies in League of Legends."
+                canonicalPath={"/games/LoL/leagues/corporate-league"}
+            />
             <HeaderImage title={"Corporate LOL League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

@@ -1,4 +1,4 @@
-import { HeaderImage, HostBanner, BackButton } from "components";
+import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
 
 export const TitanEsportsLeagues = () => {
@@ -14,8 +14,12 @@ export const TitanEsportsLeagues = () => {
 
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Titan League of Legends Leagues. Find a league from a reputable provider that suits not only your rank but your schedule."
+                canonicalPath={"/games/LoL/leagues/titan-leagues"}
+            />
             <HeaderImage imageClass={"titanLOLLeagues"} />
-            
+
             <div className="eventBannerContainer">
                 <HostBanner>
                     <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/immortal"}>Immortal League</HostBanner.Title>

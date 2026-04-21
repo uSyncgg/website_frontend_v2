@@ -1,10 +1,18 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../EventInformation.css';
 
 export const HaloRecLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Halo Recreational league is the only rec league for everything halo. Play weekly matches against other teams that are live streamed."
+                canonicalPath={"/games/halo/leagues/halo-rec-league"}
+            />
             <HeaderImage imageClass={"hrlPage"} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>

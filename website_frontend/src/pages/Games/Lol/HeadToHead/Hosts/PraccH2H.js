@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const PraccH2H = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Pracc is the place to play your LoL XP and scrim matches. Find a scrim for League today."
+                canonicalPath={"/games/LoL/head-to-head/pracc"}
+            />
             <HeaderImage title={"Pracc"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

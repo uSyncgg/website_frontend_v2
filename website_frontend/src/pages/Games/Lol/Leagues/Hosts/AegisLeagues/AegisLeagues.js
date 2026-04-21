@@ -1,4 +1,4 @@
-import { HeaderImage, HostBanner, BackButton } from "components";
+import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
 
 export const AegisLeagues = () => {
@@ -12,6 +12,10 @@ export const AegisLeagues = () => {
 
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Aegis League of Legends leagues. Enroll today and meet new friends while competing for large cash prizes."
+                canonicalPath={"/games/LoL/leagues/aegis-leagues"}
+            />
             <HeaderImage imageClass={"aegisLOLLeagues"} />
 
             <div className="eventBannerContainer">

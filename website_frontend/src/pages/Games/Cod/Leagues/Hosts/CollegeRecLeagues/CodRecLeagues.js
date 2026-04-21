@@ -1,4 +1,4 @@
-import { HeaderImage, HostBanner, BackButton } from "components";
+import { HeaderImage, HostBanner, BackButton, SeoData } from "components";
 import { useCheckResize } from "hooks";
 
 export const CodRecLeagues = () => {
@@ -9,6 +9,11 @@ export const CodRecLeagues = () => {
 
     return (
         <div className="standardContainer">
+            <SeoData
+                description={"Recreational Call of Duty league for players looking for a challenge. Play weekly matches based on your skill level."}
+                canonicalPath={"/games/call-of-duty/leagues/cod-rec-leagues"}
+            />
+
             <HeaderImage title={"College Rec Leagues"} imageClass={"nonVerifiedPage"} />
 
             <div className="eventBannerContainer">

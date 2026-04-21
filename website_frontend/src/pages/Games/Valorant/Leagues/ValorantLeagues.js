@@ -1,8 +1,12 @@
-import { HeaderImage, HostBanner } from "components";
+import { SeoData, HeaderImage, HostBanner } from "components";
 
 export const ValorantLeagues = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Find Valorant leagues for all skill levels. Browse corporate, collegiate, and high school Valorant leagues including NECC, CECC, College Valorant League, and more."
+                canonicalPath={"/games/Valorant/leagues"}
+            />
             <HeaderImage title={"Valorant Leagues"} imageClass={"valLeaguePage"} />
 
             <div className="eventBannerContainer">

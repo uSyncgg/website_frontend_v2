@@ -1,10 +1,18 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../EventInformation.css';
 
 export const FaceitESEALeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Counter-Strike 2 league FACEIT ESEA is the home of amateur CS2 esports. Play for hundreds of thousands and prove yourself to go pro."
+                canonicalPath={"/games/CS2/leagues/faceitesea"}
+            />
             <HeaderImage imageClass={"faceitEseaPage"} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>

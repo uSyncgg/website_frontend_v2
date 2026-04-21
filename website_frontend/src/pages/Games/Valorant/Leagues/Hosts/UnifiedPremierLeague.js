@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const UnifiedPremierLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Unified Premier League Valorant. $1,000 prize pool with no skill cap. Weekly regular season with playoffs for collegiate and high school players in NA."
+                canonicalPath={"/games/Valorant/leagues/unified"}
+            />
             <HeaderImage title={"Unified Premier League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

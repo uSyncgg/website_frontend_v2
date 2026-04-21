@@ -1,10 +1,18 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../EventInformation.css';
 
 export const CmgH2H = () => {
     return (
         <div className="standardContainer">
-            <HeaderImage imageClass={"cmgPage"} />
+            <SeoData
+                description="Play Call of Duty XP matches and get ranked. Free competitive SND esports ladder matches."
+                canonicalPath={"/games/call-of-duty/head-to-head/cmg"}
+            />
+            <HeaderImage title={"Checkmate Gaming"} imageClass={"cmgPage"} verified={true} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>

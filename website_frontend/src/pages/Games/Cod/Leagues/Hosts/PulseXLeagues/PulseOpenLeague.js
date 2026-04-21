@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const PulseOpenLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Pulse X Open Division is the competitive arm of the Pulse X CoD League. Build your squad or sign up solo and compete in BO7-ready series with playoffs and prize support."
+                canonicalPath={"/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-open"}
+            />
             <HeaderImage title={"Pulse X Open League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

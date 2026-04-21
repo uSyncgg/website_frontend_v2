@@ -1,8 +1,12 @@
-import { HeaderImage, HostBanner } from "components";
+import { SeoData, HeaderImage, HostBanner } from "components";
 
 export const CSLeagues = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Counter-Strike 2 leagues to prove your CS2 talent and compete like the pros. Join a league today and win huge cash prize pools."
+                canonicalPath={"/games/CS2/leagues"}
+            />
             <HeaderImage title={"Counter-Strike 2 Leagues"} imageClass={"cs2LeaguePage"} />
 
             <div className="eventBannerContainer">

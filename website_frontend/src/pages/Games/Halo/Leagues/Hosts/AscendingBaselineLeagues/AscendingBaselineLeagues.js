@@ -1,4 +1,4 @@
-import { HeaderImage, HostBanner, BackButton } from "components";
+import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
 
 export const AscendingBaselineLeagues = () => {
@@ -9,6 +9,10 @@ export const AscendingBaselineLeagues = () => {
 
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Ascending Baseline Leagues. Two different leagues for Halo players looking to play more than just ranked play - win cash today."
+                canonicalPath={"/games/halo/leagues/ascending-baseline"}
+            />
             <HeaderImage title={"Ascending Baseline Leagues"} imageClass={"nonVerifiedPage"} />
 
             <div className="eventBannerContainer">

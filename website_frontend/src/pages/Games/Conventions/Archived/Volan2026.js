@@ -1,9 +1,14 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
-import '../../../EventInformation.css';
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData } from "components";
+import '../../EventInformation.css';
 
 export const Volan2026 = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description={"The annual Esports Tournament hosted by the student run Esports Club at the University of Tennessee. The event is focused on providing an in-person LAN experience to college esports teams and clubs in the Southeast."}
+                canonicalPath={"/lans/volan-2026"}
+            />
+
             <HeaderImage title={"Volan 2026"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

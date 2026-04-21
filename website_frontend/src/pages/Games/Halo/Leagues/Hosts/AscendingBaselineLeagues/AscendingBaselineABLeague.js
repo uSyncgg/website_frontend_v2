@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const AscendingBaselineABLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="AB League is the premier league of Ascending Baseline for Halo and Halo Infinite. Sign up for cash prizes and a highly competitive environment."
+                canonicalPath={"/games/halo/leagues/ascending-baseline/ab"}
+            />
             <HeaderImage title={"AB League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

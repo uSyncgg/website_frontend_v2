@@ -1,10 +1,18 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../../EventInformation.css';
 
 export const LockdownWomensLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="LCL Womens League is made for the women competitive Call of Duty players that want to compete for cash prizes."
+                canonicalPath={"/games/call-of-duty/leagues/lockdowncl-leagues/womens"}
+            />
             <HeaderImage imageClass={"lockdownCODLeagues"} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>

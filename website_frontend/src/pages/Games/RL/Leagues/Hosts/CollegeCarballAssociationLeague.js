@@ -1,10 +1,18 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../EventInformation.css';
 
 export const CollegeCarballAssociationLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="College Carball Association Rocket League league. A verified 3v3 NA and EU college league with world championship. Must be a full time college student."
+                canonicalPath={"/games/RocketLeague/leagues/college-carball-association"}
+            />
             <HeaderImage imageClass={"ccaPage"} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>

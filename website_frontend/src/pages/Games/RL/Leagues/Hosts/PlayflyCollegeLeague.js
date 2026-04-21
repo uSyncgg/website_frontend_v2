@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const PlayflyCollegeLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Playfly College Rocket League. $280k prize pool split across all titles and divisions. Must be a full time college student. Free open division available."
+                canonicalPath={"/games/RocketLeague/leagues/playfly-college"}
+            />
             <HeaderImage title={"Playfly League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

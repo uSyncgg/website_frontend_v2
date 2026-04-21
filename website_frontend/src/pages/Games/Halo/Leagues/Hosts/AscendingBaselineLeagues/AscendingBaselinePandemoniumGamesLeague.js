@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const AscendingBaselinePandemoniumGamesLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Pandemonium Games League is a Halo Infinite draft based league hosted by Ascending Baseline. Sign up solo and get matched with teammates in a competitive Halo environment."
+                canonicalPath={"/games/halo/leagues/ascending-baseline/pandemonium-games"}
+            />
             <HeaderImage title={"Pandemonium Games League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

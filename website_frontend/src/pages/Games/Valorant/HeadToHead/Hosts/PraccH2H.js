@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const PraccH2H = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Pracc Valorant scrim finder. Free worldwide scrim platform with large daily user base. Find all levels of competition with live Discord support."
+                canonicalPath={"/games/Valorant/head-to-head/pracc"}
+            />
             <HeaderImage title={"Pracc"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

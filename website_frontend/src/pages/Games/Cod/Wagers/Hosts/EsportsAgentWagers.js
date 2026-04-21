@@ -1,10 +1,18 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../EventInformation.css';
 
 export const EsportsAgentWagers = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Live supported cod wagers from Esports Agent. Sign up today and experience the pro league for yourself."
+                canonicalPath={"/games/call-of-duty/wagers/eagent"}
+            />
             <HeaderImage imageClass={"eagentPage"} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>

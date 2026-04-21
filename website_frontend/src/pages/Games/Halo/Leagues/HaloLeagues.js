@@ -1,8 +1,12 @@
-import { HeaderImage, HostBanner } from "components";
+import { SeoData, HeaderImage, HostBanner } from "components";
 
 export const HaloLeagues = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Halo esports leagues. Find all of the Halo leagues happening in one place. Find your event today."
+                canonicalPath={"/games/halo/leagues"}
+            />
             <HeaderImage title={"Halo Leagues"} imageClass={"haloLeaguePage"} />
 
             <div className="eventBannerContainer">

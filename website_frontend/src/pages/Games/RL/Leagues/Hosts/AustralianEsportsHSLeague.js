@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const AustralianEsportsHSLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Australian Esports League high school Rocket League. Four terms per year for students enrolled at an Australian high school. 3v3 AUS competition."
+                canonicalPath={"/games/RocketLeague/leagues/australian-esports-league-hs"}
+            />
             <HeaderImage title={"Australian Esports League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

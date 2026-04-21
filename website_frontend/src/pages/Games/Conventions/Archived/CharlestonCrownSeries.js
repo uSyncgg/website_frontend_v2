@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
-import '../../../EventInformation.css';
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import '../../EventInformation.css';
 
 export const CharlestonCrownSeries = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="The most reputable LAN host is back hosting a Call of Duty LAN event - Charleston Crown Series. Compete against teams in-person for $3k in prizing."
+                canonicalPath={"/lans/charleston-crown-series"}
+            />
             <HeaderImage imageClass={"charlestonCrownPage"} />
 
             <div className="eventInfoCardContainer">

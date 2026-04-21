@@ -1,10 +1,18 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../EventInformation.css';
 
 export const CmgWagers = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Checkmate Gaming Warzone wagers. A verified platform with 24/7 live support. Large number of daily matches worldwide for Warzone wager players 18 and over."
+                canonicalPath={"/games/warzone/wagers/cmg"}
+            />
             <HeaderImage imageClass={"cmgPage"} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>

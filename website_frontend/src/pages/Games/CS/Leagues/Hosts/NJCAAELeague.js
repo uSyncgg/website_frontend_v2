@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const NJCAAELeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="NJCAAE league. The Counter-Strike 2 league that every college student has been looking to compete in"
+                canonicalPath={"/games/CS2/leagues/njcaae"}
+            />
             <HeaderImage title={"NJCAAE League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

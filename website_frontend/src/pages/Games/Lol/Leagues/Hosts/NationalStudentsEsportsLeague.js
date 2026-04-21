@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const NationalStudentEsportsLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="United Kingdom's university league - NSE. This league has an open division and a women's division, suiting whatever your League of Legends style is."
+                canonicalPath={"/games/LoL/leagues/nse"}
+            />
             <HeaderImage title={"NSE League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

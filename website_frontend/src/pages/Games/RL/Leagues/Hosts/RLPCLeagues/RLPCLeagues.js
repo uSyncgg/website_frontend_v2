@@ -1,4 +1,4 @@
-import { HeaderImage, HostBanner, BackButton } from "components";
+import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
 
 export const RLPCLeagues = () => {
@@ -11,6 +11,10 @@ export const RLPCLeagues = () => {
 
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Rocket League Pro Circuit - RLPC. A verified Rocket League league with four divisions for players across all skill levels. Sign up today."
+                canonicalPath={"/games/RocketLeague/leagues/rlpc-leagues"}
+            />
             <HeaderImage imageClass={"rlpcRLLeagues"} />
 
             <div className="eventBannerContainer">

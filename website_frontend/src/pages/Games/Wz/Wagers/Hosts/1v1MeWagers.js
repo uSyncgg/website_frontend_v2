@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const OneVOneMeWagers = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="1v1 Me Warzone wager app. 1v1 kill race matches with 0% match fee and staking on tournaments. Available in USA, CA, IE, UK, FR, MX, and DE for players 18+."
+                canonicalPath={"/games/warzone/wagers/1v1me"}
+            />
             <HeaderImage title={"1v1Me"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

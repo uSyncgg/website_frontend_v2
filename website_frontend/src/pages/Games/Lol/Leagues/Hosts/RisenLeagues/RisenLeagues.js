@@ -1,4 +1,4 @@
-import { HeaderImage, HostBanner, BackButton } from "components";
+import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
 
 export const RisenLeagues = () => {
@@ -12,6 +12,10 @@ export const RisenLeagues = () => {
 
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Risen leagues are League of Legends leagues with huge prize pools and a super competitive environment. Sign yourself or your team up today."
+                canonicalPath={"/games/LoL/leagues/risen-leagues"}
+            />
             <HeaderImage imageClass={"risenLOLLeagues"} />
 
             <div className="eventBannerContainer">

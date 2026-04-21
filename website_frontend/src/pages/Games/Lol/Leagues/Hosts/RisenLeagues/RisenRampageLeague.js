@@ -1,10 +1,18 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../../EventInformation.css';
 
 export const RisenRampageLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Rampage League - by Risen. Emerald 4 cap League of Legends league with live streamed matches in North America."
+                canonicalPath={"/games/LoL/leagues/risen-leagues/rampage"}
+            />
             <HeaderImage imageClass={"risenLOLLeagues"} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>

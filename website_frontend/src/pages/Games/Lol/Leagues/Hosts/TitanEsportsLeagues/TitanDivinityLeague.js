@@ -1,10 +1,18 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../../EventInformation.css';
 
 export const TitanDivinityLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Calling all League of Legends players that are lower rank than Emerald 4. Risen Divinity League is the perfect league for you."
+                canonicalPath={"/games/LoL/leagues/titan-leagues/divinity"}
+            />
             <HeaderImage imageClass={"titanLOLLeagues"} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>

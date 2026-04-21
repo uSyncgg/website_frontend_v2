@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const MetaShiftCyanideLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="MetaShift Cyanide league is a tier 4 league from the provider. This League of Legends league has a large prize pool for the winner."
+                canonicalPath={"/games/LoL/leagues/meta-shift-leagues/cyanide"}
+            />
             <HeaderImage title={"MetaShift Cyanide League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

@@ -1,4 +1,4 @@
-import { HeaderImage, HostBanner, BackButton } from "components";
+import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
 
 export const PulseXLeagues = () => {
@@ -10,6 +10,10 @@ export const PulseXLeagues = () => {
 
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Pulse X CoD League is THE Call of Duty league that you and your team has been looking for. Sign up solo or as a team and compete for thousands!"
+                canonicalPath={"/games/call-of-duty/leagues/pulse-x-leagues"}
+            />
             <HeaderImage title={"Pulse X Leagues"} imageClass={"nonVerifiedPage"} />
 
             <div className="eventBannerContainer">

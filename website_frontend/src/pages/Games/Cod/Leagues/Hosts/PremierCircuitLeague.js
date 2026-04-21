@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const PremierCircuitLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="The Premier Circuit (TPC) League is an invite-only top tier Call of Duty amateur league. Challengers players duke it out inm this high stakes league."
+                canonicalPath={"/games/call-of-duty/leagues/tpc-league"}
+            />
             <HeaderImage title={"The Premier Circuit League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

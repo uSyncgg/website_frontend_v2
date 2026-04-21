@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const EGFCLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="EGFC Rocket League college league. Free to enter for D1 varsity esports programs. In-person or online playoffs with live streamed matches."
+                canonicalPath={"/games/RocketLeague/leagues/egfc"}
+            />
             <HeaderImage title={"EGFC League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const CorporateCS2League = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Corporate CS2 league is THE corporate America league. Play with your co-workers against other companies in the United States."
+                canonicalPath={"/games/CS2/leagues/corporate"}
+            />
             <HeaderImage title={"Corporate CS2 League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

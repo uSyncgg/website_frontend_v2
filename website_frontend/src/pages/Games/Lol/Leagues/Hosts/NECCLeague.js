@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const NECCLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Calling all college students that are playing League of Legends. This league is built for the college team and has a major cash prize pool."
+                canonicalPath={"/games/LoL/leagues/necc"}
+            />
             <HeaderImage title={"NECC League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const CKRASH2H = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Counter-Strike 2 CKRAS server hosting for scrims. Host your server to start scrimming matches to practice for competitions."
+                canonicalPath={"/games/CS2/head-to-head/ckras"}
+            />
             <HeaderImage title={"CKRAS"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const ECACEsportsLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Call of Duty league for ECAC members. 8 week long regular season and playoffs to prove your skillset."
+                canonicalPath={"/games/call-of-duty/leagues/ecac"}
+            />
             <HeaderImage title={"ECAC League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

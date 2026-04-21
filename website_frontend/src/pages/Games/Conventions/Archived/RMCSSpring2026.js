@@ -1,9 +1,14 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
-import '../../../EventInformation.css';
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData } from "components";
+import '../../EventInformation.css';
 
 export const RMCSSpring2026 = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description={"Localhost Denver is putting on the Rocky Mountain Collegiate Showcase - Spring '26 Tournament."}
+                canonicalPath={"/lans/rmcs-spring-2026"}
+            />
+            
             <HeaderImage title={"RMCS Spring 2026"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

@@ -1,10 +1,18 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../../EventInformation.css';
 
 export const TitanConquerorLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Titan Conqueror League. The premier League of Legends league with a Diamond 4 cap. Compete in the msot reputable league today."
+                canonicalPath={"/games/LoL/leagues/titan-leagues/conqueror"}
+            />
             <HeaderImage imageClass={"titanLOLLeagues"} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>

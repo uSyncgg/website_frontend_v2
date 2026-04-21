@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const MetaShiftNobleLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Noble is the #1 and tier 1 league from MetaShift. This League of Legends league is no joke - and only the best players can compete for the cash prize."
+                canonicalPath={"/games/LoL/leagues/meta-shift-leagues/noble"}
+            />
             <HeaderImage title={"MetaShift Noble League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

@@ -1,8 +1,12 @@
-import { HeaderImage, HostBanner } from "components";
+import { SeoData, HeaderImage, HostBanner } from "components";
 
 export const LolHeadToHead = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="League of Legends XP matches and scrims. Find every scrim across the world to ensure you have the highest quality practice."
+                canonicalPath={"/games/LoL/head-to-head"}
+            />
             <HeaderImage title={"Head-to-Head"} imageClass={"codh2hPage"} />
 
             <div className="eventBannerContainer">

@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const PlayVSLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="PlayVS Rocket League high school league. 8 week regular season with 3 week playoffs and multiple regional divisions. For high school students in the USA."
+                canonicalPath={"/games/RocketLeague/leagues/playvs"}
+            />
             <HeaderImage title={"PlayVS League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

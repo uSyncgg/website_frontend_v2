@@ -1,4 +1,4 @@
-import { HeaderImage, HostBanner, BackButton } from "components";
+import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
 
 export const CollegeXPLeagues = () => {
@@ -9,6 +9,10 @@ export const CollegeXPLeagues = () => {
 
     return (
         <div className="standardContainer">
+            <SeoData
+                description="College XP league is for colleges in North America. Prove your college is the best in the country."
+                canonicalPath={"/games/call-of-duty/leagues/cxp-leagues"}
+            />
             <HeaderImage title={"College XP Leagues"} imageClass={"nonVerifiedPage"} />
 
             <div className="eventBannerContainer">

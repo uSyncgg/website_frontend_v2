@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const PraccH2H = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Pracc is the Counter-Strike 2 scrim finder for high level competitors. Available worldwide and is based on your skill level."
+                canonicalPath={"/games/CS2/head-to-head/pracc"}
+            />
             <HeaderImage title={"Pracc"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

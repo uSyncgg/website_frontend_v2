@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const TPCWomensCodLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="The Premier Circuit Womens cod league. Women only Call of Duty competitive league with massive $4.5k prize pool."
+                canonicalPath={"/games/call-of-duty/leagues/tpc-womens-cod"}
+            />
             <HeaderImage title={"TPC Womens League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

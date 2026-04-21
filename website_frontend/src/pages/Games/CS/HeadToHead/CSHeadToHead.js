@@ -1,8 +1,12 @@
-import { HeaderImage, HostBanner } from "components";
+import { SeoData, HeaderImage, HostBanner } from "components";
 
 export const CSHeadToHead = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Counter-Strike 2 XP matches. Find every provider across the globe to choose the best competition for your playstyle."
+                canonicalPath={"/games/CS2/head-to-head"}
+            />
             <HeaderImage title={"Head-to-Head"} imageClass={"cs2h2hPage"} />
 
             <div className="eventBannerContainer">

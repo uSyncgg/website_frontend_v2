@@ -1,8 +1,12 @@
-import { HeaderImage, HostBanner } from "components";
+import { SeoData, HeaderImage, HostBanner } from "components";
 
 export const HaloHeadToHead = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Halo XP Matches. Find free to play head-to-head matches to become better overall at competitive Halo."
+                canonicalPath={"/games/halo/head-to-head"}
+            />
             <HeaderImage title={"Head-to-Head"} imageClass={"codh2hPage"} />
 
             <div className="eventBannerContainer">

@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const FrontierExpertLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Rocket League league - Frontier Doubles Expert. 2v2 NA league where players must be from 1200 - 1399 MMR."
+                canonicalPath={"/games/RocketLeague/leagues/frontier-doubles-leagues/expert"}
+            />
             <HeaderImage title={"Expert League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

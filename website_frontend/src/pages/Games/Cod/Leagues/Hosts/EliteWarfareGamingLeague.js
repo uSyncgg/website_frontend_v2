@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const EliteWarfareGamingLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Elite Warfare Gaming League is a Call of Duty league for those looking to play against others in their same skill level. Sign up today!"
+                canonicalPath={"/games/call-of-duty/leagues/elite-gaming-warfare-league"}
+            />
             <HeaderImage title={"Elite Warfare Gaming League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

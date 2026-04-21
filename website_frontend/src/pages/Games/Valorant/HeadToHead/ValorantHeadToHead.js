@@ -1,8 +1,12 @@
-import { HeaderImage, HostBanner } from "components";
+import { SeoData, HeaderImage, HostBanner } from "components";
 
 export const ValorantHeadToHead = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Find the best Valorant scrim and head-to-head platforms. Compare Gankster GG, Esport Scrim, Collegiate Valorant Hub, and Pracc for practice matches."
+                canonicalPath={"/games/Valorant/head-to-head"}
+            />
             <HeaderImage title={"Head-to-Head"} imageClass={"rlh2hPage"} />
 
             <div className="eventBannerContainer">

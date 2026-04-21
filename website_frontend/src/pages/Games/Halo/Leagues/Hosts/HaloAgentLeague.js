@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const HaloAgentLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Halo Agent is the league for those who love to play ranked Halo and want something more. Compete today."
+                canonicalPath={"/games/halo/leagues/halo-agent"}
+            />
             <HeaderImage title={"Halo Agent"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

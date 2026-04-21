@@ -1,8 +1,12 @@
-import { HostBanner, MapCoverGame, NoEvents } from "components";
+import { SeoData, HostBanner, MapCoverGame, NoEvents } from "components";
 
 export const WzLans = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Find Warzone LAN events near you. Browse in-person Call of Duty Warzone LAN tournaments and events happening across North America and beyond."
+                canonicalPath={"/games/warzone/lans"}
+            />
             <div className="lanMapContainer">
                 <iframe 
                     title="Warzone LAN Map" 

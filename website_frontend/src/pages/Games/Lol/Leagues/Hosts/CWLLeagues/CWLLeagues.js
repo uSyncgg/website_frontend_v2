@@ -1,4 +1,4 @@
-import { HeaderImage, HostBanner, BackButton } from "components";
+import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
 
 export const CWLLeagues = () => {
@@ -10,6 +10,10 @@ export const CWLLeagues = () => {
 
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Cobalt Winds (CWL) League of Legends leagues. EUW leagues for your rank. Find your league to enter into."
+                canonicalPath={"/games/LoL/leagues/cobalt-winds-leagues"}
+            />
             <HeaderImage title={"CWL Divisions"} imageClass={"nonVerifiedPage"} />
 
             <div className="eventBannerContainer">

@@ -1,10 +1,18 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../EventInformation.css';
 
 export const CollegeHaloLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="UGC Halo is the #1 collegiate Halo league. Full time college students can compete at the highest level and win cash prizes."
+                canonicalPath={"/games/halo/leagues/ugc-halo"}
+            />
             <HeaderImage imageClass={"ugcPage"} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>

@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const EGFCLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="EGFC is a Counter-Strike 2 collegiate league for D1 varsity programs in the USA. Enroll your school today."
+                canonicalPath={"/games/CS2/leagues/egfc"}
+            />
             <HeaderImage title={"EGFC League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const NECCLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="NECC Rocket League college league. $6,000 prize pool with multiple skill divisions. 6 week regular season with playoffs. Must be a full time college student."
+                canonicalPath={"/games/RocketLeague/leagues/necc"}
+            />
             <HeaderImage title={"NECC League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

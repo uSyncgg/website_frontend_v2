@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const XPLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="XP League - the amateur Call of Duty league that feels like the professional league. Win the championship for a cash prize pool."
+                canonicalPath={"/games/call-of-duty/leagues/xp-league-cod"}
+            />
             <HeaderImage title={"XP League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

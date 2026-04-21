@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const PlayflyOpenLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Playfly College Valorant Open League. Free to enter for Gold and lower college students. Part of $280k prize pool across all titles. Spring and fall seasons."
+                canonicalPath={"/games/Valorant/leagues/playfly-leagues/open"}
+            />
             <HeaderImage title={"Playfly Open"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

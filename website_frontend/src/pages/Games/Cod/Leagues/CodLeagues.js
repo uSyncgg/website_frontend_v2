@@ -1,9 +1,13 @@
-import { HostBanner, HeaderImage } from "components";
+import { SeoData, HostBanner, HeaderImage } from "components";
 import '../../EventBanners.css';
 
 export const CodLeagues = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Call of Duty leagues for amateur players looking for high level competition. Every Call of Duty league in one place."
+                canonicalPath={"/games/call-of-duty/leagues"}
+            />
             <HeaderImage title={"Call of Duty Leagues"} imageClass={"lansPage"} />
             
             <div className="eventBannerContainer">

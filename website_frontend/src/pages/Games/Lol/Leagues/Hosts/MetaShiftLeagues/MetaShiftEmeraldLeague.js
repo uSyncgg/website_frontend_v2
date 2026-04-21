@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
 export const MetaShiftEmeraldLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Emerald league is a LoL league hosted by MetaShift. Grab your teammates and get read to compete for cash prizes."
+                canonicalPath={"/games/LoL/leagues/meta-shift-leagues/emerald"}
+            />
             <HeaderImage title={"MetaShift Emerald League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

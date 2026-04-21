@@ -1,4 +1,4 @@
-import { HeaderImage, HostBanner, BackButton } from "components";
+import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
 
 export const NemesisLeagues = () => {
@@ -12,6 +12,10 @@ export const NemesisLeagues = () => {
 
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Nemesis Rocket League Leagues. With range based MMR leagues this is the perfect opportunity for North American RL players wanted to compete at the next level."
+                canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues"}
+            />
             <HeaderImage title={"Nemesis Leagues"} imageClass={"nonVerifiedPage"} />
 
             <div className="eventBannerContainer">

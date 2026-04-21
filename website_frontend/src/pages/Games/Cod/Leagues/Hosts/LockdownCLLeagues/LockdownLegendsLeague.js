@@ -1,10 +1,18 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../../EventInformation.css';
 
 export const LockdownLegendsLeague = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="LCL Legends league is the Call of Duty league for those who are the best of the best and looking to make money."
+                canonicalPath={"/games/call-of-duty/leagues/lockdowncl-leagues/legends"}
+            />
             <HeaderImage title={"Lockdown Legends League"} imageClass={"lockdownCODLeagues"} verified={true} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>

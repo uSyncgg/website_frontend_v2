@@ -1,9 +1,13 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../EventInformation.css';
 
 export const HaloRecLeagueScrimsH2H = () => {
     return (
         <div className="standardContainer">
+            <SeoData
+                description="Halo Recreational XP matches. Free to play matches against other Halo rec teams to practice with your teammates."
+                canonicalPath={"/games/halo/head-to-head/rec-xp"}
+            />
             <HeaderImage title={"Halo Rec League Scrims"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">
