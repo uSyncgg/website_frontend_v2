@@ -14,11 +14,12 @@ export const ReportProblem = () => {
             <div className={`${styles.subscriptionContainer} ${styles.post}`}>
                 <iframe
                     src="https://docs.google.com/forms/d/e/1FAIpQLScQS0BmGcMtiv4WXLCJcfFJx_uF7Ks1K28-29o-upGAUhQAEA/viewform?embedded=true"
-                    width={"640"}
+                    // width={"640"}
                     height={"1000"}
                     frameBorder={"0"}
                     marginHeight={"0"}
                     marginWidth={"0"}
+                    className="googleForm"
                 />
             </div>
 

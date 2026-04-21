@@ -14,12 +14,13 @@ export const PostYourEvent = () => {
             <div className={`${styles.subscriptionContainer} ${styles.post}`}>
                 <iframe 
                     src="https://docs.google.com/forms/d/e/1FAIpQLSf8UhB2bn7wDN9mHTpEfFvlLN9ZkDA47uWfUaAInWujsuez2g/viewform?embedded=true"
-                    width={"640"}
+                    // width={"640"}
                     height={"1950"}
                     frameBorder="0"
                     marginheight="0"
                     marginwidth="0"
                     title="Event Post Form"
+                    className="googleForm"
                 />
             </div>
 
