@@ -160,10 +160,6 @@
     align-items: center;
 }
 
-.subscriptionContainer img {
-    width: 100%;
-}
-
 .subscription {
     position: relative;
     width: 45%;
@@ -255,10 +251,7 @@
     .usyncVerified {
         width: 80%;
     }
-}
 
-
-@media only screen and (max-width: 768px) {
     .sectionOneContainer h2 {
         font-size: 30px;
     }
