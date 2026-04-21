@@ -6,8 +6,10 @@
 }
 
 .tournamentCard {
-    min-width: 80rem;
-    height: 9rem;
+    /* min-width: 80rem;
+    height: 9rem; */
+    width: 90%;
+    height: auto;
     position: relative;
     max-width: 100%;
     border: none;
@@ -48,6 +50,8 @@
 .bodyInfo {
     width: 15%;
     gap: 8px;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
     display: flex;          
     flex-direction: column; 
     text-align: center;
@@ -101,7 +105,7 @@
     border-color: rgb(142,106,206);
 }
 
-@media only screen and (max-width: 1320px) {
+@media only screen and (max-width: 1500px) {
     .tournamentCardContainer {
         margin-right: 0;
     }
@@ -116,7 +120,8 @@
 
     .titleInfo {
         /* font-size: clamp(60%, 100%, 100%); */
-        font-size: 12px;
+        font-size: 15px;
+        /* font-size: 12px; */
     }
 
     .bodyInfo {
@@ -124,7 +129,7 @@
     }
 }
 
-@media only screen and (max-width: 870px) {
+/* @media only screen and (max-width: 970px) {
     .titleInfo {
         font-size: 10px;
     }
@@ -132,16 +137,16 @@
     .bodyInfo {
         font-size: 14px;
     }
-}
+} */
 
 @media only screen and (max-width: 750px) {
     .titleInfo {
-        font-size: 8px;
+        font-size: 12px;
         width: 35%;
     }
 
     .bodyInfo {
-        font-size: 10px;
+        font-size: 14px;
         width: 20%;
     }
 
@@ -157,5 +162,35 @@
     .tournamentCard {
         width: auto;
         height: 10rem;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .titleInfo {
+        font-size: 10px;
+        width: 30%;
+    }
+
+    .bodyInfo {
+        font-size: 13px;
+        width: 22%;
+    }
+
+    .buttonContainer {
+        width: 80%;
+    }
+
+    .tournamentButton {
+        font-size: 12px;
+        height: 1.75rem;
+    }
+
+    .tournamentCard {
+        width: 90%;
+        height: 10rem;
+    }
+
+    .buttonContainer {
+        padding-bottom: .5rem;
     }
 }

@@ -1,6 +1,9 @@
 .filterSection {
     position: sticky;
-    top: 5.9rem;
+    top: 15%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
 }
 
 .filterContainer {

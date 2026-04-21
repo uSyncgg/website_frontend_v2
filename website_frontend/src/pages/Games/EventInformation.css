@@ -67,7 +67,7 @@
 
 .totalTournamentContainer {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: fit-content(400px) 1fr;
     grid-template-rows: auto auto;
     grid-template-areas:
         "left right"
@@ -84,6 +84,7 @@
 .leftItem {
     grid-area: left;
     overflow: visible;
+    margin-left: 10%;
     /* position: sticky; */
 }
 
@@ -106,12 +107,16 @@
     gap: 8px;
 }
 
-@media only screen and (max-width: 1700px) {
+@media only screen and (max-width: 1000px) {
     .totalTournamentContainer {
         grid-template-areas: 
             "left left"
             "right right"
             "bottom bottom";
         
+    }
+
+    .leftItem {
+        margin-left: 0;
     }
 }

@@ -40,3 +40,8 @@
   margin: 0 auto;
 }
 
+@media only screen and (max-width: 768px) {
+  .lanMap {
+    height: 35rem;
+  }
+}
