@@ -19,7 +19,7 @@ export const ProblemWithEsports = () => {
                         </p>
                     </div>
                     <h1>What the Problem With Esports is</h1>
-                    <img src="https://i.imgur.com/zvYfTtx.jpg" alt="World Economic Forum" />
+                    <img src="https://i.imgur.com/zvYfTtx.jpg" alt="World Economic Forum" className="expandArticleImage"/>
                     <p className="ital">Image Credit: World Economic Forum</p>
 
                     <h3>The Problem With Esports Today</h3>

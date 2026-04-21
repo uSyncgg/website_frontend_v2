@@ -19,7 +19,7 @@ export const WhatWeProvide = () => {
                         </p>
                     </div>
                     <h1>What uSync Provides For Esports</h1>
-                    <img src="https://i.imgur.com/7MQUXKl.jpg" alt="ViewSonic" />
+                    <img src="https://i.imgur.com/7MQUXKl.jpg" alt="ViewSonic" className="expandArticleImage"/> 
                     <p className="ital">Image Credit: ViewSonic</p>
 
                     <h3>What We Provide</h3>

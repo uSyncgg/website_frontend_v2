@@ -219,9 +219,25 @@
     .articleContainer {
         flex-direction: column;
         gap: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin: 0 auto;
     }
+
     .articleTextContainer {
         width: 95%;
     }
+
+    .articleSectionOne, .articleSectionTwo {
+        flex: none;
+    }
+
+    /* .articleImage {
+        width: 100%;
+        height: auto;
+        vertical-align: middle;
+    } */
 }
 
