@@ -17,3 +17,9 @@
 .mailContainer img {
     width: 80%;
 }
+
+@media only screen and (max-width: 768px) {
+    .mailContainer a {
+        width: 100%;
+    }
+}

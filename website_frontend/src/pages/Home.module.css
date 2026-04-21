@@ -259,4 +259,9 @@
     .sectionOneContainer h1 {
         font-size: 40px;
     }
+
+    .eventContainer {
+        margin-bottom: 0;
+        flex-wrap: wrap;
+    }
 }
