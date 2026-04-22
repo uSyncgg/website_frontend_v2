@@ -38,3 +38,9 @@
 .eventItem {
     margin-bottom: 1rem;
 }
+
+@media only screen and (max-width: 768px) {
+    .eventCard {
+        padding: .5rem 2rem;
+    }
+}
