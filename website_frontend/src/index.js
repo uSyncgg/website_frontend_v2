@@ -309,16 +309,12 @@ import GeneralPaymentReceipt from 'pages/Payment/Receipts/GeneralPaymentReceipt'
 // PAYMENT IS A TESTING PAGE - NOT MEANT FOR PRODUCTION
 import Payment from 'pages/Payment/PaymentCheckouts/Payment';
 
-// LAN Pages
+// LAN Pages - CURRENT
 // All LANs
+import { BECSoloLaneShowdown } from 'pages/Games/Lol/Lans/Events/BECSoloLaneShowdown';
 import { AllLans } from 'pages/Games/Conventions/AllLans';
-// CoD
 import { LowtierMajorIV } from 'pages/Games/Cod/Lans/Events/LowtierMajorIV';
 import { RVAEsportsChampionship2026 } from 'pages/Games/Cod/Lans/Events/RVAEsportsChampionship2026';
-// Wz
-// Halo
-// LoL
-// Conventions
 import { Conventions } from 'pages/Games/Conventions/Conventions';
 import { ImmerseCon2026 } from 'pages/Games/Conventions/ImmerseCon2026';
 
@@ -658,7 +654,7 @@ root.render(
           {/* PAYMENT IS A TESTING PAGE NOT MEANT FOR PRODUCTION */}
           <Route path='/payment' element={<Payment />} />
 
-          {/* LANs */}
+          {/* LANs - CURRENT*/}
           {/* All LANs */}
           <Route path='/LanMap' element={<AllLans />} />
           {/* CoD */}
@@ -667,6 +663,7 @@ root.render(
           {/* Wz */}
           {/* Halo */}
           {/* LoL */}
+          <Route path='/lans/bec-sololane-showdown' element={<BECSoloLaneShowdown />} />
           {/* Conventions */}
           <Route path='/other-lans' element={<Conventions />} />
           <Route path='/lans/immersecon-2026' element={<ImmerseCon2026 />} />

@@ -19,6 +19,7 @@ export const CodLans = () => {
             </div>
 
             <div className="eventBannerContainer">
+
                 <div className="hrEvents" />
                 <HostBanner>
                     <HostBanner.Title path={"/lans/lowtier-major-iv"}>Lowtier Major IV</HostBanner.Title>
@@ -44,6 +45,9 @@ export const CodLans = () => {
                     <HostBanner.Button title={"More Info"} path={"/lans/rva-esports-championship-2026"} />
                 </HostBanner>
                 <div className="hrEvents" />
+
+
+
             </div>
         </div>
     );
