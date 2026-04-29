@@ -1,5 +1,5 @@
 import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData } from "components";
-import '../../EventInformation.css';
+import '../../../EventInformation.css';
 
 export const RMCSSpring2026 = () => {
     return (

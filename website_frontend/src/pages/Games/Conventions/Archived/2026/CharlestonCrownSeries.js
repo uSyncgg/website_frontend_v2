@@ -1,5 +1,5 @@
 import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
-import '../../EventInformation.css';
+import '../../../EventInformation.css';
 
 export const CharlestonCrownSeries = () => {
     return (

@@ -1,5 +1,5 @@
 import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
-import '../../EventInformation.css';
+import '../../../EventInformation.css';
 
 export const MACSSpring2026 = () => {
     return (

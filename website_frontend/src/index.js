@@ -316,28 +316,28 @@ import { AllLans } from 'pages/Games/Conventions/AllLans';
 import { LowtierMajorIV } from 'pages/Games/Cod/Lans/Events/LowtierMajorIV';
 import { RVAEsportsChampionship2026 } from 'pages/Games/Cod/Lans/Events/RVAEsportsChampionship2026';
 import { Conventions } from 'pages/Games/Conventions/Conventions';
-import { ImmerseCon2026 } from 'pages/Games/Conventions/ImmerseCon2026';
+import { ImmerseCon2026 } from 'pages/Games/Conventions/Events/ImmerseCon2026';
 
 // Archived LANs Below
 // 2026
-import { GACSOperationCupid } from 'pages/Games/Conventions/Archived/GACSOperationCupid';
-import { EmeraldCityLAN2026 } from 'pages/Games/Conventions/Archived/EmeraldCityLAN2026';
-import { BelowZeroLANWinter2026 } from 'pages/Games/Conventions/Archived/BelowZeroLANWinter2026';
-import { GSiteBO7 } from 'pages/Games/Conventions/Archived/G-SiteBO7';
-import { ShintoGCMajor3 } from 'pages/Games/Conventions/Archived/ShintoGCMajor3';
-import { Heartland2026 } from 'pages/Games/Conventions/Archived/Heartland2026';
-import { KamiCon17 } from 'pages/Games/Conventions/Archived/Kami-Con17';
-import { MidwestBattleground2026 } from 'pages/Games/Conventions/Archived/MidwestBattleground2026';
-import { DreamHackBirmingham } from 'pages/Games/Conventions/Archived/DreamHackBirmingham';
-import { FortLANSpring2026 } from 'pages/Games/Conventions/Archived/FortLANSpring2026';
-import { LowPingLAN } from 'pages/Games/Conventions/Archived/LowPingLAN';
-import { TomorrowLAN2026 } from 'pages/Games/Conventions/Archived/TomorrowLAN2026';
-import { MACSSpring2026 } from 'pages/Games/Conventions/Archived/MACSSpring2026';
-import { CharlestonCrownSeries } from 'pages/Games/Conventions/Archived/CharlestonCrownSeries';
-import { RMCSSpring2026 } from 'pages/Games/Conventions/Archived/RMCSSpring2026';
-import { Volan2026 } from 'pages/Games/Conventions/Archived/Volan2026';
-import { LakewoodLeagueXIISpring } from 'pages/Games/Conventions/Archived/LakewoodLeagueXIISpring';
-import { LANAllNightSpring2026 } from 'pages/Games/Conventions/Archived/LANAllNightSpring2026';
+import { GACSOperationCupid } from 'pages/Games/Conventions/Archived/2026/GACSOperationCupid';
+import { EmeraldCityLAN2026 } from 'pages/Games/Conventions/Archived/2026/EmeraldCityLAN2026';
+import { BelowZeroLANWinter2026 } from 'pages/Games/Conventions/Archived/2026/BelowZeroLANWinter2026';
+import { GSiteBO7 } from 'pages/Games/Conventions/Archived/2026/G-SiteBO7';
+import { ShintoGCMajor3 } from 'pages/Games/Conventions/Archived/2026/ShintoGCMajor3';
+import { Heartland2026 } from 'pages/Games/Conventions/Archived/2026/Heartland2026';
+import { KamiCon17 } from 'pages/Games/Conventions/Archived/2026/Kami-Con17';
+import { MidwestBattleground2026 } from 'pages/Games/Conventions/Archived/2026/MidwestBattleground2026';
+import { DreamHackBirmingham } from 'pages/Games/Conventions/Archived/2026/DreamHackBirmingham';
+import { FortLANSpring2026 } from 'pages/Games/Conventions/Archived/2026/FortLANSpring2026';
+import { LowPingLAN } from 'pages/Games/Conventions/Archived/2026/LowPingLAN';
+import { TomorrowLAN2026 } from 'pages/Games/Conventions/Archived/2026/TomorrowLAN2026';
+import { MACSSpring2026 } from 'pages/Games/Conventions/Archived/2026/MACSSpring2026';
+import { CharlestonCrownSeries } from 'pages/Games/Conventions/Archived/2026/CharlestonCrownSeries';
+import { RMCSSpring2026 } from 'pages/Games/Conventions/Archived/2026/RMCSSpring2026';
+import { Volan2026 } from 'pages/Games/Conventions/Archived/2026/Volan2026';
+import { LakewoodLeagueXIISpring } from 'pages/Games/Conventions/Archived/2026/LakewoodLeagueXIISpring';
+import { LANAllNightSpring2026 } from 'pages/Games/Conventions/Archived/2026/LANAllNightSpring2026';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

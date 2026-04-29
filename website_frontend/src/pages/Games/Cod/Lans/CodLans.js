@@ -1,4 +1,4 @@
-import { SeoData, HostBanner, MapCoverGame } from "components";
+import { SeoData, HostBanner, MapCoverGame, NoEvents } from "components";
 
 export const CodLans = () => {
     return (
