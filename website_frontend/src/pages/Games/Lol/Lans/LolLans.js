@@ -1,4 +1,4 @@
-import { SeoData, HostBanner, MapCoverGame } from "components";
+import { SeoData, HostBanner, MapCoverGame, NoEvents } from "components";
 
 export const LolLans = () => {
     return (
@@ -22,18 +22,8 @@ export const LolLans = () => {
             <div className="eventBannerContainer">
                 <div className="hrEvents" />
 
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/lakewood-league-xii-spring"}>Lakewood League XII Spring</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/lans/lakewood-league-xii-spring"} 
-                        imgUrl={"https://i.imgur.com/IbpZc52.png"} 
-                        alt={"Lakewood League XII Spring"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Lakewood, CO</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/lakewood-league-xii-spring"} />
-                </HostBanner>
-
+                <NoEvents pageType={"LANs"} />
+                    
                 <div className="hrEvents" />
             </div> 
         </div>

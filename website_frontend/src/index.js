@@ -318,10 +318,8 @@ import { RVAEsportsChampionship2026 } from 'pages/Games/Cod/Lans/Events/RVAEspor
 // Wz
 // Halo
 // LoL
-import { LakewoodLeagueXIISpring } from 'pages/Games/Lol/Lans/Events/LakewoodLeagueXIISpring';
 // Conventions
 import { Conventions } from 'pages/Games/Conventions/Conventions';
-import { LANAllNightSpring2026 } from 'pages/Games/Conventions/LANAllNightSpring2026';
 import { ImmerseCon2026 } from 'pages/Games/Conventions/ImmerseCon2026';
 
 // Archived LANs Below
@@ -342,6 +340,8 @@ import { MACSSpring2026 } from 'pages/Games/Conventions/Archived/MACSSpring2026'
 import { CharlestonCrownSeries } from 'pages/Games/Conventions/Archived/CharlestonCrownSeries';
 import { RMCSSpring2026 } from 'pages/Games/Conventions/Archived/RMCSSpring2026';
 import { Volan2026 } from 'pages/Games/Conventions/Archived/Volan2026';
+import { LakewoodLeagueXIISpring } from 'pages/Games/Conventions/Archived/LakewoodLeagueXIISpring';
+import { LANAllNightSpring2026 } from 'pages/Games/Conventions/Archived/LANAllNightSpring2026';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -667,10 +667,8 @@ root.render(
           {/* Wz */}
           {/* Halo */}
           {/* LoL */}
-          <Route path='/lans/lakewood-league-xii-spring' element={<LakewoodLeagueXIISpring />} />
           {/* Conventions */}
           <Route path='/other-lans' element={<Conventions />} />
-          <Route path='/lans/lan-all-night-spring-26' element={<LANAllNightSpring2026 />} />
           <Route path='/lans/immersecon-2026' element={<ImmerseCon2026 />} />
 
           {/* Archived LANs */}
@@ -691,6 +689,8 @@ root.render(
           <Route path='/lans/charleston-crown-series' element={<CharlestonCrownSeries />} />
           <Route path='/lans/rmcs-spring-2026' element={<RMCSSpring2026 />} />
           <Route path='/lans/volan-2026' element={<Volan2026 />} />
+          <Route path='/lans/lan-all-night-spring-26' element={<LANAllNightSpring2026 />} />
+          <Route path='/lans/lakewood-league-xii-spring' element={<LakewoodLeagueXIISpring />} />
 
         </Routes>
       </main>

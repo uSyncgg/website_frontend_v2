@@ -32,17 +32,6 @@ export const Conventions = () => {
                     <HostBanner.Button title={"More Info"} path={"/lans/immersecon-2026"} />
                 </HostBanner>
 
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/lan-all-night-spring-26"}>LAN All Night</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/lans/lan-all-night-spring-26"} 
-                        imgUrl={"https://i.imgur.com/JYplRtG.png"} 
-                        alt={"LAN All Night Spring 2026"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Grapevine, TX</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/lan-all-night-spring-26"} />
-                </HostBanner>
                 <div className="hrEvents" />
             </div>
         </div>
