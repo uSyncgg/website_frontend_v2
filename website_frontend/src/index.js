@@ -317,6 +317,9 @@ import { LowtierMajorIV } from 'pages/Games/Cod/Lans/Events/LowtierMajorIV';
 import { RVAEsportsChampionship2026 } from 'pages/Games/Cod/Lans/Events/RVAEsportsChampionship2026';
 import { Conventions } from 'pages/Games/Conventions/Conventions';
 import { ImmerseCon2026 } from 'pages/Games/Conventions/Events/ImmerseCon2026';
+import { EWGL2 } from 'pages/Games/Cod/Lans/Events/EWGL2';
+import { EWGL3 } from 'pages/Games/Cod/Lans/Events/EWGL3';
+import { DreamCon2026 } from 'pages/Games/Conventions/Events/DreamCon2026';
 
 // Archived LANs Below
 // 2026
@@ -660,6 +663,8 @@ root.render(
           {/* CoD */}
           <Route path='/lans/lowtier-major-iv' element={<LowtierMajorIV />} />
           <Route path='/lans/rva-esports-championship-2026' element={<RVAEsportsChampionship2026 />} />
+          <Route path='/lans/ewgl2' element={<EWGL2 />} />
+          <Route path='/lans/ewgl3' element={<EWGL3 />} />
           {/* Wz */}
           {/* Halo */}
           {/* LoL */}
@@ -667,6 +672,7 @@ root.render(
           {/* Conventions */}
           <Route path='/other-lans' element={<Conventions />} />
           <Route path='/lans/immersecon-2026' element={<ImmerseCon2026 />} />
+          <Route path='/lans/dreamcon2026' element={<DreamCon2026 />} />
 
           {/* Archived LANs */}
           {/* 2026 */}
