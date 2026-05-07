@@ -5,7 +5,7 @@ export const DreamCon2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
-                description="INPUT DESCRIPTION HERE"
+                description="Dream Con Championship Series 2026, $10 entry per title, Maximum of Four titles per attendee, All fighting games are Bo3 until otherwise noted in the rule sets, Sports titles are all Bo1."
                 canonicalPath={"/lans/dreamcon2026"}
             />
 
@@ -26,7 +26,7 @@ export const DreamCon2026 = () => {
                 <div>
                     <EventInfoCard title={"Entry Fee"} infoList={["$10 entry per title"]} /> 
                 </div>
-            </div>
+            </div>ports titles are all Bo1
 
             <div className="eventButtonContainer">
                 <ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/dream-con-championship-series-2026/details"} />

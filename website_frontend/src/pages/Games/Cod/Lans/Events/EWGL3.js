@@ -5,7 +5,7 @@ export const EWGL3 = () => {
     return (
         <div className="standardContainer">
             <SeoData
-                description="INPUT DESCRIPTION HERE"
+                description="EWGL 3, St Johns, Florida, September 12th & 13th, $5,000 +/- Prize Pool + Championship Rings + MVP Ring"
                 canonicalPath={"/lans/ewgl3"}
             />
 
