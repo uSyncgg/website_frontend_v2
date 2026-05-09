@@ -20,13 +20,14 @@ export const DreamCon2026 = () => {
                     <EventInfoCard title={"Details"} infoList={[
                         "Rocket League, Marvel Rivals, Madden, and more"
                         , "4 titles per person"
+                        ,"Sports Titles are BO1"
                     ]} /> 
                 </div>
 
                 <div>
                     <EventInfoCard title={"Entry Fee"} infoList={["$10 entry per title"]} /> 
                 </div>
-            </div>ports titles are all Bo1
+            </div>
 
             <div className="eventButtonContainer">
                 <ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/dream-con-championship-series-2026/details"} />
