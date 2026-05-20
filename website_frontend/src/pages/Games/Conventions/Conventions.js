@@ -45,6 +45,21 @@ export const Conventions = () => {
                 </HostBanner>
 
                 <div className="hrEvents" />
+
+                <HostBanner>
+                    <HostBanner.Title path={"/lans/gacs-operation-heatwave"}>GA:CS Operation Heatwave</HostBanner.Title>
+                    <HostBanner.Image 
+                        path={"/lans/gacs-operation-heatwave"} 
+                        imgUrl={"https://i.imgur.com/wgR4yga.png"} 
+                        alt={"GA:CS Operation Heatwave"}
+                        verified={false}
+                    />
+                    <HostBanner.Region>Columbus, OH</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/lans/gacs-operation-heatwave"} />
+                </HostBanner>
+
+
+                <div className="hrEvents" />
             </div>
         </div>
     );

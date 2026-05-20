@@ -320,6 +320,8 @@ import { ImmerseCon2026 } from 'pages/Games/Conventions/Events/ImmerseCon2026';
 import { EWGL2 } from 'pages/Games/Cod/Lans/Events/EWGL2';
 import { EWGL3 } from 'pages/Games/Cod/Lans/Events/EWGL3';
 import { DreamCon2026 } from 'pages/Games/Conventions/Events/DreamCon2026';
+import { GACSHeatwave } from 'pages/Games/Conventions/Events/GACSHeatwave';
+import { EgoChallTournament } from 'pages/Games/Cod/Lans/Events/EgoChallTournament';
 
 // Archived LANs Below
 // 2026
@@ -661,6 +663,7 @@ root.render(
           {/* All LANs */}
           <Route path='/LanMap' element={<AllLans />} />
           {/* CoD */}
+          <Route path='/lans/egochall-tournament' element={<EgoChallTournament />} />
           <Route path='/lans/lowtier-major-iv' element={<LowtierMajorIV />} />
           <Route path='/lans/rva-esports-championship-2026' element={<RVAEsportsChampionship2026 />} />
           <Route path='/lans/ewgl2' element={<EWGL2 />} />
@@ -672,6 +675,7 @@ root.render(
           {/* Conventions */}
           <Route path='/other-lans' element={<Conventions />} />
           <Route path='/lans/immersecon-2026' element={<ImmerseCon2026 />} />
+          <Route path='/lans/gacs-operation-heatwave' element={<GACSHeatwave />} />
           <Route path='/lans/dreamcon2026' element={<DreamCon2026 />} />
 
           {/* Archived LANs */}
