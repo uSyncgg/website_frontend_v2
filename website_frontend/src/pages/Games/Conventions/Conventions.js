@@ -58,6 +58,17 @@ export const Conventions = () => {
                     <HostBanner.Button title={"More Info"} path={"/lans/gacs-operation-heatwave"} />
                 </HostBanner>
 
+                <HostBanner>
+                    <HostBanner.Title path={"/lans/summercon-ws-2026"}>SummerCon 2026</HostBanner.Title>
+                    <HostBanner.Image 
+                        path={"/lans/summercon-ws-2026"} 
+                        imgUrl={"https://i.imgur.com/4Ax6lTq.png"} 
+                        alt={"SummerCon 2026"}
+                        verified={false}
+                    />
+                    <HostBanner.Region>Puyallup, WA</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/lans/summercon-ws-2026"} />
+                </HostBanner>
 
                 <div className="hrEvents" />
             </div>

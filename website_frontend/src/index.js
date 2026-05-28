@@ -320,6 +320,7 @@ import { ImmerseCon2026 } from 'pages/Games/Conventions/Events/ImmerseCon2026';
 import { EWGL2 } from 'pages/Games/Cod/Lans/Events/EWGL2';
 import { EWGL3 } from 'pages/Games/Cod/Lans/Events/EWGL3';
 import { DreamCon2026 } from 'pages/Games/Conventions/Events/DreamCon2026';
+import { SummerConWS2026 } from 'pages/Games/Conventions/Events/SummerConWS2026';
 import { GACSHeatwave } from 'pages/Games/Conventions/Events/GACSHeatwave';
 import { EgoChallTournament } from 'pages/Games/Cod/Lans/Events/EgoChallTournament';
 
@@ -675,6 +676,7 @@ root.render(
           {/* Conventions */}
           <Route path='/other-lans' element={<Conventions />} />
           <Route path='/lans/immersecon-2026' element={<ImmerseCon2026 />} />
+          <Route path='/lans/summercon-ws-2026' element={<SummerConWS2026 />} />
           <Route path='/lans/gacs-operation-heatwave' element={<GACSHeatwave />} />
           <Route path='/lans/dreamcon2026' element={<DreamCon2026 />} />
 
