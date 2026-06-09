@@ -68,7 +68,7 @@ function GeneralPaymentForm(
                     formType={formType} 
                     reviewEndpoint={reviewEndpoint} 
                     id={id} 
-                    price={100} 
+                    price={passPrice} 
                     title={formTitle}
                     eventName={eventName}
                 >

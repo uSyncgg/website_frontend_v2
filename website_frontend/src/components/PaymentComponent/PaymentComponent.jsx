@@ -26,7 +26,7 @@ export const PaymentComponent = ({ id, price }) => {
         // Create PaymentIntent as soon as the page loads
         // Test Link: "http://localhost:4242/usyncPayments/generalPayment"
         // Live Link: "https://website-backend-5m32.onrender.com/usyncPayments/generalPayment"
-        fetch("http://localhost:4242/usyncPayments/generalPayment", {
+        fetch("https://website-backend-5m32.onrender.com/usyncPayments/generalPayment", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ items: [{ id: id, amount: price, formData: formData, formType: formType, eventName: eventName }] }),

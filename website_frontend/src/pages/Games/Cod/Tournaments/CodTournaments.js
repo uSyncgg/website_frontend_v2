@@ -36,8 +36,8 @@ export const CodTournaments = () => {
 
     const handleFilterChange = (setter, currentValues) => (selectedOptions) => {
         // setCurrentPage(1); // NEED TO THINK ABOUT HOW TO DO THIS ONE
-        console.log(Array.isArray(selectedOptions))
-        console.log(selectedOptions)
+        // console.log(Array.isArray(selectedOptions))
+        // console.log(selectedOptions)
         // If selectedOptions is an array, ensure deselected options are removed
         if (Array.isArray(selectedOptions)) {
             setter(selectedOptions);

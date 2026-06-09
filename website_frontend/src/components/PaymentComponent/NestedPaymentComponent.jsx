@@ -19,14 +19,12 @@ export const NestedPaymentComponent = ({ price }) => {
 
         setLoading(true);
 
-        // Dont think i need
-        // Test URL: http://localhost:4242/usyncApp/lans
-        // Production URL: 
+        
         // Need to make dynamic
         const { error } = await stripe.confirmPayment({
             elements,
             confirmParams: {
-                return_url: "http://localhost:3000/paymentform/test/receipt",
+                return_url: "https://usync.gg/paymentform/test/receipt",
             },
         });
 
