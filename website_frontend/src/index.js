@@ -311,9 +311,7 @@ import Payment from 'pages/Payment/PaymentCheckouts/Payment';
 
 // LAN Pages - CURRENT
 // All LANs
-import { BECSoloLaneShowdown } from 'pages/Games/Lol/Lans/Events/BECSoloLaneShowdown';
 import { AllLans } from 'pages/Games/Conventions/AllLans';
-import { LowtierMajorIV } from 'pages/Games/Cod/Lans/Events/LowtierMajorIV';
 import { RVAEsportsChampionship2026 } from 'pages/Games/Cod/Lans/Events/RVAEsportsChampionship2026';
 import { Conventions } from 'pages/Games/Conventions/Conventions';
 import { ImmerseCon2026 } from 'pages/Games/Conventions/Events/ImmerseCon2026';
@@ -321,10 +319,12 @@ import { EWGL3 } from 'pages/Games/Cod/Lans/Events/EWGL3';
 import { DreamCon2026 } from 'pages/Games/Conventions/Events/DreamCon2026';
 import { SummerConWS2026 } from 'pages/Games/Conventions/Events/SummerConWS2026';
 import { GACSHeatwave } from 'pages/Games/Conventions/Events/GACSHeatwave';
-import { EgoChallTournament } from 'pages/Games/Cod/Lans/Events/EgoChallTournament';
 
 // Archived LANs Below
 // 2026
+import { BECSoloLaneShowdown } from 'pages/Games/Conventions/Archived/2026/BECSoloLaneShowdown';
+import { LowtierMajorIV } from 'pages/Games/Conventions/Archived/2026/LowtierMajorIV';
+import { EgoChallTournament } from 'pages/Games/Conventions/Archived/2026/EgoChallTournament';
 import { EWGL2 } from 'pages/Games/Conventions/Archived/2026/EWGL2';
 import { GACSOperationCupid } from 'pages/Games/Conventions/Archived/2026/GACSOperationCupid';
 import { EmeraldCityLAN2026 } from 'pages/Games/Conventions/Archived/2026/EmeraldCityLAN2026';
@@ -664,8 +664,6 @@ root.render(
           {/* All LANs */}
           <Route path='/LanMap' element={<AllLans />} />
           {/* CoD */}
-          <Route path='/lans/egochall-tournament' element={<EgoChallTournament />} />
-          <Route path='/lans/lowtier-major-iv' element={<LowtierMajorIV />} />
           <Route path='/lans/rva-esports-championship-2026' element={<RVAEsportsChampionship2026 />} />
           <Route path='/lans/ewgl3' element={<EWGL3 />} />
           {/* Wz */}
@@ -681,6 +679,8 @@ root.render(
 
           {/* Archived LANs */}
           {/* 2026 */}
+          <Route path='/lans/egochall-tournament' element={<EgoChallTournament />} />
+          <Route path='/lans/lowtier-major-iv' element={<LowtierMajorIV />} />
           <Route path='/lans/ewgl2' element={<EWGL2 />} />
           <Route path='/lans/emerald-city-2026' element={<EmeraldCityLAN2026 />} />
           <Route path='/lans/operation-cupid' element={<GACSOperationCupid />} />

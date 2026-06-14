@@ -21,17 +21,6 @@ export const CodLans = () => {
             <div className="eventBannerContainer">
 
                 <div className="hrEvents" />
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/lowtier-major-iv"}>Lowtier Major IV</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/lans/lowtier-major-iv"} 
-                        imgUrl={"https://i.imgur.com/t4k8Qi6.png"} 
-                        alt={"Lowtier Major IV"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Knoxville, TN</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/lowtier-major-iv"} />
-                </HostBanner>
 
                 <HostBanner>
                     <HostBanner.Title path={"/lans/rva-esports-championship-2026"}>RVA Esports Championship 2026</HostBanner.Title>
@@ -44,7 +33,6 @@ export const CodLans = () => {
                     <HostBanner.Region>Richmond, VA</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/lans/rva-esports-championship-2026"} />
                 </HostBanner>
-                <div className="hrEvents" />
 
                 <HostBanner>
                     <HostBanner.Title path={"/lans/ewgl3"}>EWGL 3</HostBanner.Title>
@@ -58,17 +46,6 @@ export const CodLans = () => {
                     <HostBanner.Button title={"More Info"} path={"/lans/ewgl3"} />
                 </HostBanner>
 
-                    <HostBanner>
-                    <HostBanner.Title path={"/lans/egochall-tournament"}>EgoChall Tournament</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/lans/egochall-tournament"} 
-                        imgUrl={"https://i.imgur.com/gpLl6VR.png"} 
-                        alt={"EgoChall Tournament"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Chapel Hill, NC</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/egochall-tournament"} />
-                </HostBanner>
                 <div className="hrEvents" />
                     
             </div>
