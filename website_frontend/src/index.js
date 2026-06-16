@@ -312,6 +312,7 @@ import Payment from 'pages/Payment/PaymentCheckouts/Payment';
 // LAN Pages - CURRENT
 // All LANs
 import { AllLans } from 'pages/Games/Conventions/AllLans';
+import { ShintoChamps2026 } from 'pages/Games/Cod/Lans/Events/ShintoChamps2026';
 import { RVAEsportsChampionship2026 } from 'pages/Games/Cod/Lans/Events/RVAEsportsChampionship2026';
 import { Conventions } from 'pages/Games/Conventions/Conventions';
 import { ImmerseCon2026 } from 'pages/Games/Conventions/Events/ImmerseCon2026';
@@ -664,6 +665,7 @@ root.render(
           {/* All LANs */}
           <Route path='/LanMap' element={<AllLans />} />
           {/* CoD */}
+          <Route path='/lans/shintochamps2026' element={<ShintoChamps2026 />} />
           <Route path='/lans/rva-esports-championship-2026' element={<RVAEsportsChampionship2026 />} />
           <Route path='/lans/ewgl3' element={<EWGL3 />} />
           {/* Wz */}
