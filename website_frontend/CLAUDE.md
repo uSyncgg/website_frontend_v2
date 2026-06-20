@@ -2,6 +2,18 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Contributor Workflow (read this first)
+
+Most changes here are made by non-technical contributors working through Claude Code. Always guide them through this loop in plain language:
+
+1. **Branch first — always.** Never make edits on `main`. At the start of any new feature, create a branch named `feature/<short-kebab-description>`. (A hook blocks edits on `main`, and GitHub blocks direct pushes to it — so this is required, not optional.)
+2. **Stay up to date.** A SessionStart hook checks whether the feature branch is behind `origin/main`. When it is, proactively merge `origin/main` in (resolving any conflicts in plain language) before doing other work. The `/new-pr` skill repeats this check right before opening the PR.
+3. **Build the feature** with the contributor, editing/adding components and routes as described elsewhere in this file.
+4. **Open a PR** with the `/new-pr` skill, which fills the uSync PR template (Summary + what changed, Affected routes/pages) and opens the pull request.
+5. **Review gate.** Matthew (contact@usync.gg) reviews every PR and either **Approves** (he merges to `main`) or **Requests changes**. Contributors must NOT merge their own PRs.
+6. **Address feedback** by reading the PR review comments (`gh pr view --comments`) and pushing fixes to the same branch; this re-triggers review.
+7. **After merge,** delete the feature branch and start the loop again from step 1.
+
 ## Commands
 
 ```bash
