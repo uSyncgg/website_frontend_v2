@@ -20,11 +20,11 @@ export const LolLans = () => {
             </div>
 
             <div className="eventBannerContainer">
-                
-                {/* <NoEvents pageType={"LANs"} /> */}
-                <div className="hrEvents" />
+                                <div className="hrEvents" />
 
-                <HostBanner>
+                <NoEvents pageType={"LANs"} />
+
+                {/* <HostBanner>
                     <HostBanner.Title path={"/lans/bec-sololane-showdown"}>BEC Solo Lane Showdown</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/lans/bec-sololane-showdown"} 
@@ -35,7 +35,7 @@ export const LolLans = () => {
                     <HostBanner.Region>Bakersfield, CA</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/lans/bec-sololane-showdown"} />
                 </HostBanner>
-                    
+                     */}
                 <div className="hrEvents" />
 
                 
