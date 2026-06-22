@@ -312,6 +312,7 @@ import Payment from 'pages/Payment/PaymentCheckouts/Payment';
 // LAN Pages - CURRENT
 // All LANs
 import { AllLans } from 'pages/Games/Conventions/AllLans';
+import { TheRetake2026 } from 'pages/Games/Conventions/Events/TheRetake2026';
 import { ShintoChamps2026 } from 'pages/Games/Cod/Lans/Events/ShintoChamps2026';
 import { RVAEsportsChampionship2026 } from 'pages/Games/Cod/Lans/Events/RVAEsportsChampionship2026';
 import { Conventions } from 'pages/Games/Conventions/Conventions';
@@ -674,6 +675,7 @@ root.render(
           <Route path='/lans/bec-sololane-showdown' element={<BECSoloLaneShowdown />} />
           {/* Conventions */}
           <Route path='/other-lans' element={<Conventions />} />
+          <Route path='/lans/the-retake' element={<TheRetake2026 />} />
           <Route path='/lans/immersecon-2026' element={<ImmerseCon2026 />} />
           <Route path='/lans/gacs-operation-heatwave' element={<GACSHeatwave />} />
           <Route path='/lans/dreamcon2026' element={<DreamCon2026 />} />
