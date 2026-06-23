@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router';
 
 // Navbar & Footer
-import { Navbar, Footer } from 'components';
+import { Navbar, Footer, ScrollToTop } from 'components';
 
 // Home + Top Level Pages
 import { Home } from 'pages/Home';
@@ -351,6 +351,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
   <BrowserRouter>
+    <ScrollToTop />
     <div className='app-container'>
       <Navbar />
 
@@ -376,11 +377,11 @@ root.render(
           <Route path='/Comingsoon' element={<ComingSoon />} />
 
           {/* Articles */}
-          <Route path='/more/FAQ/The-Problem-With-Esports' element={<ProblemWithEsports />} />
-          <Route path='/more/FAQ/How-Esports-Can-Be-Better' element={<HowEsportsCanBeBetter />} />
-          <Route path='/more/FAQ/How-We-Fix-It' element={<HowWeFixIt />} />
-          <Route path='/more/FAQ/What-We-Provide' element={<WhatWeProvide />} />
-          <Route path='/more/FAQ/How-to-Join-an-Esports-League' element={<JoiningEsportsLeague />} />
+          <Route path='/more/articles/The-Problem-With-Esports' element={<ProblemWithEsports />} />
+          <Route path='/more/articles/How-Esports-Can-Be-Better' element={<HowEsportsCanBeBetter />} />
+          <Route path='/more/articles/How-We-Fix-It' element={<HowWeFixIt />} />
+          <Route path='/more/articles/What-We-Provide' element={<WhatWeProvide />} />
+          <Route path='/more/articles/How-to-Join-an-Esports-League' element={<JoiningEsportsLeague />} />
 
           {/* CoD Pages Minus LANs */}
           <Route path='/games/call-of-duty' element={<Cod />} />

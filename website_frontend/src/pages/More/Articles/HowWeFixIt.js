@@ -6,7 +6,7 @@ export const HowWeFixIt = () => {
         <div className="standardBlankContainer">
             <SeoData
                 description="uSync is unifying the entire esports landscape. Find out how you can be apart of this ever growing opportunity."
-                canonicalPath={"/more/FAQ/How-We-Fix-It"}
+                canonicalPath={"/more/articles/How-We-Fix-It"}
             />
             <div className="articleContainer">
                 <div className="articleSectionOne">

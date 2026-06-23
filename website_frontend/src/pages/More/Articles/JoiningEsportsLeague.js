@@ -6,7 +6,7 @@ export const JoiningEsportsLeague = () => {
         <div className="standardBlankContainer">
             <SeoData
                 description="Learn how to join an esports league, where to find them, and what to do once you're in one. Find your next esports league today."
-                canonicalPath={"/more/FAQ/How-to-Join-an-Esports-League"}
+                canonicalPath={"/more/articles/How-to-Join-an-Esports-League"}
             />
             <div className="articleContainer">
                 <div className="articleSectionOne">

@@ -53,6 +53,9 @@ import { TournamentList } from "./TournamentList/TournamentList";
 // SEO
 import { SeoData } from "./SeoData/SeoData";
 
+// Scroll behaviour
+import { ScrollToTop } from "./ScrollToTop/ScrollToTop";
+
 export {
     Navbar,
     Footer,
@@ -77,6 +80,7 @@ export {
     NoEvents,
     BackButton,
     SeoData,
+    ScrollToTop,
     TournamentFilter,
     CodTournamentCard,
     TournamentPagination,
