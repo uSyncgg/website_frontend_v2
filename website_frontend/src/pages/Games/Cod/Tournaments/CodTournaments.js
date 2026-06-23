@@ -114,6 +114,8 @@ export const CodTournaments = () => {
                         <h1 className="purple">Tournaments</h1> 
                     </div>
                     <TournamentList tournaments={currentTournaments} game={'Cod'} />
+                    <h1 className="white">We are experiencing technical difficulties right now.</h1>
+                    <h1 className="white">Please check back later.</h1>
                 </div>
 
                 <div className="bottomItem">
