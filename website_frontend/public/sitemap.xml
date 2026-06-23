@@ -25,11 +25,11 @@
   <url><loc>https://www.usync.gg/Comingsoon</loc></url>
 
   <!-- Articles -->
-  <url><loc>https://www.usync.gg/more/FAQ/The-Problem-With-Esports</loc></url>
-  <url><loc>https://www.usync.gg/more/FAQ/How-Esports-Can-Be-Better</loc></url>
-  <url><loc>https://www.usync.gg/more/FAQ/How-We-Fix-It</loc></url>
-  <url><loc>https://www.usync.gg/more/FAQ/What-We-Provide</loc></url>
-  <url><loc>https://www.usync.gg/more/FAQ/How-to-Join-an-Esports-League</loc></url>
+  <url><loc>https://www.usync.gg/more/articles/The-Problem-With-Esports</loc></url>
+  <url><loc>https://www.usync.gg/more/articles/How-Esports-Can-Be-Better</loc></url>
+  <url><loc>https://www.usync.gg/more/articles/How-We-Fix-It</loc></url>
+  <url><loc>https://www.usync.gg/more/articles/What-We-Provide</loc></url>
+  <url><loc>https://www.usync.gg/more/articles/How-to-Join-an-Esports-League</loc></url>
 
   <!-- Call of Duty -->
   <url><loc>https://www.usync.gg/games/call-of-duty</loc></url>
@@ -312,14 +312,23 @@
   <url><loc>https://www.usync.gg/LanMap</loc></url>
   <url><loc>https://www.usync.gg/other-lans</loc></url>
   <!-- CoD LANs -->
+  <url><loc>https://www.usync.gg/lans/shintochamps2026</loc></url>
+  <url><loc>https://www.usync.gg/lans/ewgl3</loc></url>
   <url><loc>https://www.usync.gg/lans/lowtier-major-iv</loc></url>
   <url><loc>https://www.usync.gg/lans/rva-esports-championship-2026</loc></url>
   <!-- LoL LANs -->
+  <url><loc>https://www.usync.gg/lans/bec-sololane-showdown</loc></url>
   <url><loc>https://www.usync.gg/lans/lakewood-league-xii-spring</loc></url>
   <!-- Conventions -->
+  <url><loc>https://www.usync.gg/lans/the-retake</loc></url>
+  <url><loc>https://www.usync.gg/lans/gacs-operation-heatwave</loc></url>
+  <url><loc>https://www.usync.gg/lans/dreamcon2026</loc></url>
   <url><loc>https://www.usync.gg/lans/lan-all-night-spring-26</loc></url>
   <url><loc>https://www.usync.gg/lans/immersecon-2026</loc></url>
   <!-- Archived LANs 2026 -->
+  <url><loc>https://www.usync.gg/lans/summercon-ws-2026</loc></url>
+  <url><loc>https://www.usync.gg/lans/egochall-tournament</loc></url>
+  <url><loc>https://www.usync.gg/lans/ewgl2</loc></url>
   <url><loc>https://www.usync.gg/lans/emerald-city-2026</loc></url>
   <url><loc>https://www.usync.gg/lans/operation-cupid</loc></url>
   <url><loc>https://www.usync.gg/lans/belowzerolan-winter-26</loc></url>

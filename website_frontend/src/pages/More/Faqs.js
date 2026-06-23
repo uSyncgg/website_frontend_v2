@@ -39,13 +39,13 @@ export const Faqs = () => {
                         <Link to={"/more/articles"} className="faqLink">FAQ Articles</Link>
                         </div>
                         <div>
-                            <Link to={"/more/FAQ/The-Problem-With-Esports"}>
+                            <Link to={"/more/articles/The-Problem-With-Esports"}>
                                 <img src="https://i.imgur.com/NeuvzkG.png" alt="The Problem With Esports" className="faqArticleImage" />
                             </Link>
-                            <Link to={"/more/FAQ/What-We-Provide"}>
+                            <Link to={"/more/articles/What-We-Provide"}>
                                 <img src="https://i.imgur.com/ZX9jveL.png" alt="What We Provide" className="faqArticleImage" />
                             </Link>
-                            <Link to={"/more/FAQ/How-We-Fix-It"}>
+                            <Link to={"/more/articles/How-We-Fix-It"}>
                                 <img src="https://i.imgur.com/0KG2Yd4.png" alt="How We Fix It" className="faqArticleImage" />
                             </Link>
                         </div>
