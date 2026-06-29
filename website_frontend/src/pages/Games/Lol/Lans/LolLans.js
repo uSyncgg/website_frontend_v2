@@ -22,20 +22,21 @@ export const LolLans = () => {
             <div className="eventBannerContainer">
                                 <div className="hrEvents" />
 
-                <NoEvents pageType={"LANs"} />
+                {/* <NoEvents pageType={"LANs"} /> */}
 
-                {/* <HostBanner>
-                    <HostBanner.Title path={"/lans/bec-sololane-showdown"}>BEC Solo Lane Showdown</HostBanner.Title>
+                <HostBanner>
+                    <HostBanner.Title path={"/lans/the-summoning-2026"}>The Summoning 2026</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/lans/bec-sololane-showdown"} 
-                        imgUrl={"https://i.imgur.com/BhVKVln.png"} 
-                        alt={"BEC Solo Lane Showdown"}
+                        path={"/lans/the-summoning-2026"} 
+                        imgUrl={"https://i.imgur.com/NnHleWY.png"} 
+                        alt={"The Summoning 2026"}
                         verified={false}
                     />
-                    <HostBanner.Region>Bakersfield, CA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/bec-sololane-showdown"} />
+                    <HostBanner.Region>Windsor, ON</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/lans/the-summoning-2026"} />
                 </HostBanner>
-                     */}
+                    
+                    
                 <div className="hrEvents" />
 
                 
