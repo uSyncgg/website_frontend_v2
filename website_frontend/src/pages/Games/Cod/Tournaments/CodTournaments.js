@@ -1,6 +1,7 @@
 import { TournamentList, TournamentFilter, TournamentPagination, filteredTournaments, SeoData } from "components";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { React } from "react";
 
 export const CodTournaments = () => {
     const [selectedFormats, setSelectedFormats] = useState([]);
@@ -29,7 +30,7 @@ export const CodTournaments = () => {
     const cardsPerPage = 10;
 
     useEffect(() => {
-        axios.get("https://website-backend-5m32.onrender.com/usyncapp/tournaments")
+        axios.get("http://127.0.0.1:8000/tournaments/cod")
             .then(res => setTournaments(res.data))
             .catch(err => console.log(err));
     }, []);
@@ -41,7 +42,7 @@ export const CodTournaments = () => {
         // If selectedOptions is an array, ensure deselected options are removed
         if (Array.isArray(selectedOptions)) {
             setter(selectedOptions);
-        } else {
+        } else { 
             // If it's a single value toggle (boolean), remove if unchecked
             const updatedValues = currentValues.includes(selectedOptions)
                 ? currentValues.filter(item => item !== selectedOptions) // Remove if unchecked
@@ -113,9 +114,16 @@ export const CodTournaments = () => {
                         <h1 className="white">Featured</h1>
                         <h1 className="purple">Tournaments</h1> 
                     </div>
-                    <TournamentList tournaments={currentTournaments} game={'Cod'} />
-                    <h1 className="white">We are experiencing technical difficulties right now.</h1>
-                    <h1 className="white">Please check back later.</h1>
+
+                    {currentTournaments.length === 0 && 
+                        <React.Fragment>
+                            <h1 className="white">We are experiencing technical difficulties right now.</h1>
+                            <h1 className="white">Please check back later.</h1>
+                        </React.Fragment>
+                    }
+                    {currentTournaments.length > 0 && 
+                        <TournamentList tournaments={currentTournaments} game={'Cod'} />
+                    }
                 </div>
 
                 <div className="bottomItem">

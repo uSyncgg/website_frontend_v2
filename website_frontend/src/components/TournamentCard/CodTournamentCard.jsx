@@ -64,7 +64,7 @@ export const CodTournamentCard = ({ tournament }) => {
 
     return (
         <div className={styles.tournamentCardContainer}>
-            <div className={`${styles.tournamentCard}`} style={{ '--bg-image': `url(${banners[tournament.company]})` }}>
+            <div className={`${styles.tournamentCard}`} style={{ '--bg-image': `url(${banners[tournament.site]})` }}>
                 <div className={styles.titleInfo}>
                     <h2 className={styles.white}>{tournament.team_size} {" "} {tournament.series}</h2>
                     <h2 className={styles.white}>{tournament.gamemode.toUpperCase()}</h2>
