@@ -1,4 +1,8 @@
-import { SeoData, HostBanner, MapCoverGame, NoEvents } from "components";
+import { SeoData, HostBanner, MapCoverGame, NoEvents, LanMap } from "components";
+
+const LOL_LAN_MARKERS = [
+    { lat: 42.2469148, lng: -83.0210947, name: "The Summoning 2026", link: "/lans/the-summoning-2026", game: 'LoL' },
+];
 
 export const LolLans = () => {
     return (
@@ -9,12 +13,7 @@ export const LolLans = () => {
             />
             
             <div className="lanMapContainer">
-                <iframe 
-                    title="League of Legends LAN Map" 
-                    id="map" 
-                    className="lanMap"
-                    src="https://www.google.com/maps/d/u/2/embed?mid=1CFHyDVMbDSwBAX2_cz3KqiCm0UY9aQQ&ehbc=2E312F"
-                />
+                <LanMap markers={LOL_LAN_MARKERS} game="LoL" />
 
                 <MapCoverGame game={"LoL"} />
             </div>

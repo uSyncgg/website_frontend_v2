@@ -1,4 +1,10 @@
-import { SeoData, HostBanner, MapCoverGame, NoEvents } from "components";
+import { SeoData, HostBanner, MapCoverGame, NoEvents, LanMap } from "components";
+
+const COD_LAN_MARKERS = [
+    { lat: 37.545672,  lng: -77.4363207, name: "RVA Esports Championship", link: "/lans/rva-esports-championship-2026", game: 'CoD' },
+    { lat: 30.0990662, lng: -81.5229898, name: "EWGL 3",                   link: "/lans/ewgl3",                        game: 'CoD' },
+    { lat: 39.9940032, lng: -83.0060542, name: "Shinto Champs",            link: "/lans/shintochamps2026",             game: 'CoD' },
+];
 
 export const CodLans = () => {
     return (
@@ -8,12 +14,7 @@ export const CodLans = () => {
                 canonicalPath={"/games/call-of-duty/lans"}
             />
             <div className="lanMapContainer">
-                <iframe 
-                    title="Call of Duty LAN Map" 
-                    id="map" 
-                    className="lanMap"
-                    src="https://www.google.com/maps/d/u/2/embed?mid=1GEf0IzpwDFmiA-Snc7WsoH_nbqPvNhU&ehbc=2E312F"
-                />
+                <LanMap markers={COD_LAN_MARKERS} game="CoD" />
 
                 <MapCoverGame game={"CoD"} />
             </div>
@@ -61,7 +62,7 @@ export const CodLans = () => {
                 </HostBanner>
 
                 <div className="hrEvents" />
-                    
+
             </div>
         </div>
     );

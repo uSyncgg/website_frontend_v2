@@ -1,4 +1,10 @@
-import { SeoData, HostBanner, MapCoverGame, NoEvents } from "components";
+import { SeoData, HostBanner, MapCoverGame, NoEvents, LanMap } from "components";
+
+const HALO_LAN_MARKERS = [
+    { lat: 35.7735601, lng: -78.6408138,  name: "Game And Geek Expo 2026",         link: "/lans/game-and-geek-2026", game: 'Halo' },
+    { lat: 33.8847879, lng: -84.4649911,  name: "Southern-Fried Gaming Expo 2026", link: "/lans/sfge-2026",          game: 'Halo' },
+    { lat: 39.6829806, lng: -105.0793028, name: "Citadel I",                        link: "/lans/citadel-i",          game: 'Halo' },
+];
 
 export const HaloLans = () => {
     return (
@@ -8,12 +14,7 @@ export const HaloLans = () => {
                 canonicalPath={"/games/halo/lans"}
             />
             <div className="lanMapContainer">
-                <iframe 
-                    title="Halo LAN Map" 
-                    id="map" 
-                    className="lanMap"
-                    src="https://www.google.com/maps/d/u/2/embed?mid=1RWVPklwSmTd6iqaSgHP4LLh2WOd8Pt8&ehbc=2E312F"
-                />
+                <LanMap markers={HALO_LAN_MARKERS} game="Halo" />
 
                 <MapCoverGame game={"Halo"} />
             </div>

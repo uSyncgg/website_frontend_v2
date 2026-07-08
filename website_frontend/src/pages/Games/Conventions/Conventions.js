@@ -1,4 +1,12 @@
-import { SeoData, HostBanner, MapCoverGame } from "components";
+import { SeoData, HostBanner, MapCoverGame, LanMap } from "components";
+
+const CONVENTION_MARKERS = [
+    { lat: 37.5450707, lng: -77.4368334,  name: "ImmerseCon 2026",         link: "/lans/immersecon-2026",         game: 'Conventions' },
+    { lat: 29.7519972, lng: -95.3573069,  name: "Dream Con 2026",           link: "/lans/dreamcon2026",            game: 'Conventions' },
+    { lat: 39.9940217, lng: -83.0062971,  name: "GA:CS Operation Heatwave", link: "/lans/gacs-operation-heatwave", game: 'Conventions' },
+    { lat: 39.9597244, lng: -75.16156,    name: "The Retake",               link: "/lans/the-retake",              game: 'Conventions' },
+    { lat: 39.6829806, lng: -105.0793028, name: "Hellcase CS2 LAN 2026",    link: "/lans/hellcase-cs2-2026",       game: 'Conventions' },
+];
 export const Conventions = () => {
     return (
         <div className="standardContainer">
@@ -7,12 +15,7 @@ export const Conventions = () => {
                 canonicalPath={"/lans"}
             />
             <div className="lanMapContainer">
-                <iframe
-                    title="LAN Map"
-                    id="map"
-                    className="lanMap"
-                    src="https://www.google.com/maps/d/u/2/embed?mid=14BPiOYVAOTLrIFgUNrLdViUMRoypuU4&ehbc=2E312F"
-                />
+                <LanMap markers={CONVENTION_MARKERS} game="Conventions" />
 
                 <MapCoverGame />
             </div>
