@@ -321,6 +321,7 @@ import { EWGL3 } from 'pages/Games/Cod/Lans/Events/EWGL3';
 import { DreamCon2026 } from 'pages/Games/Conventions/Events/DreamCon2026';
 import { GACSHeatwave } from 'pages/Games/Conventions/Events/GACSHeatwave';
 import { TheSummoning2026 } from 'pages/Games/Lol/Lans/Events/TheSummoning2026';
+import { CitadelI } from 'pages/Games/Halo/Lans/Events/CitadelI';
 import { GameandGeek2026 } from 'pages/Games/Halo/Lans/Events/GameandGeek2026';
 import { SFGE2026 } from 'pages/Games/Halo/Lans/Events/SFGE2026';
 
@@ -677,6 +678,7 @@ root.render(
           <Route path='/lans/ewgl3' element={<EWGL3 />} />
           {/* Wz */}
           {/* Halo */}
+          <Route path='/lans/citadel-i' element={<CitadelI />} />
           <Route path='/lans/game-and-geek-2026' element={<GameandGeek2026 />} />
           <Route path='/lans/sfge-2026' element={<SFGE2026 />} />
           {/* LoL */}
