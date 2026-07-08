@@ -1,7 +1,6 @@
 import { TournamentList, TournamentFilter, TournamentPagination, filteredTournaments, SeoData } from "components";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { React } from "react";
 
 export const CodTournaments = () => {
     const [selectedFormats, setSelectedFormats] = useState([]);
@@ -30,7 +29,7 @@ export const CodTournaments = () => {
     const cardsPerPage = 10;
 
     useEffect(() => {
-        axios.get("http://127.0.0.1:8000/tournaments/cod")
+        axios.get("https://website-backend-v2.onrender.com/tournaments/cod")
             .then(res => setTournaments(res.data))
             .catch(err => console.log(err));
     }, []);
