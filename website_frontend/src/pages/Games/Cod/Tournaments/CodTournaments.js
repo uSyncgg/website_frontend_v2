@@ -34,7 +34,7 @@ export const CodTournaments = () => {
     const cardsPerPage = 10;
 
     useEffect(() => {
-        axios.get("https://website-backend-5m32.onrender.com/usyncapp/tournaments")
+        axios.get("https://website-backend-v2.onrender.com/tournaments/cod")
             .then(res => setTournaments(res.data))
             .catch(err => console.log(err))
             .finally(() => setIsLoaded(true));
@@ -68,6 +68,9 @@ export const CodTournaments = () => {
     const indexOfFirstTournament = indexOfLastTournament - cardsPerPage;
     const currentTournaments = filteredTourneys.slice(indexOfFirstTournament, indexOfLastTournament);
 
+    const freeEntryCount = tournaments.filter(tournament => tournament.is_free === true).length;
+    const hostCount = new Set(tournaments.map(tournament => tournament.site)).size;
+
     return (
         <div className={`standardContainer ${styles.page}`}>
             <SeoData
@@ -76,13 +79,29 @@ export const CodTournaments = () => {
             />
 
             <div className={styles.pageHeader}>
-                <div className={styles.titleRow}>
-                    <h1 className="white">Featured</h1>
-                    <h1 className="purple">Tournaments</h1>
-                </div>
-                <p className={styles.subtitle}>
-                    Page {currentPage} of {Math.max(1, totalFilteredPages)} · {filteredTourneys.length} tournaments available today
+                <p className={styles.eyebrow}>Live Every Day</p>
+                <h1 className={styles.white}>CALL OF DUTY</h1>
+                <h1 className={styles.gradientText}>TOURNAMENTS</h1>
+                <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
+                <p className={styles.subtext}>
+                    Verified tournaments from our partnered hosts, updated every day.
+                    Filter by team size, region, platform, skill, and entry fee.
                 </p>
+
+                <div className={styles.statsRow}>
+                    <div className={styles.statCard}>
+                        <p className={styles.statValue}>{tournaments.length}</p>
+                        <p className={styles.statLabel}>Tournaments Today</p>
+                    </div>
+                    <div className={styles.statCard}>
+                        <p className={styles.statValue}>{freeEntryCount}</p>
+                        <p className={styles.statLabel}>Free Entry</p>
+                    </div>
+                    <div className={styles.statCard}>
+                        <p className={styles.statValue}>{hostCount}</p>
+                        <p className={styles.statLabel}>Verified Hosts</p>
+                    </div>
+                </div>
             </div>
 
             <div className="totalTournamentContainer">
@@ -133,6 +152,10 @@ export const CodTournaments = () => {
                 </div>
 
                 <div className="rightItem">
+                    <p className={styles.resultCount}>
+                        Page {currentPage} of {Math.max(1, totalFilteredPages)} · {filteredTourneys.length} tournaments
+                    </p>
+
                     {!isLoaded ? (
                         <div className={styles.statusMessage}>
                             <h1 className="white">Loading tournaments...</h1>
