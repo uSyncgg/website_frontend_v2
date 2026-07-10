@@ -69,7 +69,6 @@ export const CodTournaments = () => {
     const currentTournaments = filteredTourneys.slice(indexOfFirstTournament, indexOfLastTournament);
 
     const freeEntryCount = tournaments.filter(tournament => tournament.is_free === true).length;
-    const hostCount = new Set(tournaments.map(tournament => tournament.site)).size;
 
     return (
         <div className={`standardContainer ${styles.page}`}>
@@ -96,10 +95,6 @@ export const CodTournaments = () => {
                     <div className={styles.statCard}>
                         <p className={styles.statValue}>{freeEntryCount}</p>
                         <p className={styles.statLabel}>Free Entry</p>
-                    </div>
-                    <div className={styles.statCard}>
-                        <p className={styles.statValue}>{hostCount}</p>
-                        <p className={styles.statLabel}>Verified {hostCount === 1 ? 'Host' : 'Hosts'}</p>
                     </div>
                 </div>
             </div>
