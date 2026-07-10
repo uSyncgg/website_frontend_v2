@@ -1,21 +1,42 @@
 .pagination {
     display: flex;
-    flex-wrap: nowrap;
-    gap: 30px;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
     justify-content: center;
-    color: white;
     margin-top: 1.5rem;
     margin-bottom: 3rem;
 }
 
-.white {
-    color: white;
-    background: none;
-    border: none;
-    font-size: 16px;
-    font-weight: bold;
+.pageButton {
+    min-width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: transparent;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
-.paginationButton {
-    cursor: pointer;
+.pageButton:hover:not(:disabled) {
+    border-color: #8e6ace;
+}
+
+.pageButton:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.activePage {
+    background-color: #8e6ace;
+    border-color: #8e6ace;
+}
+
+.ellipsis {
+    color: #8f87a6;
+    font-weight: 700;
+    padding: 0 0.2rem;
 }

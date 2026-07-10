@@ -7,22 +7,50 @@
 }
 
 .filterContainer {
-    background-color: #272727;
-    border: 5px solid #8e6ace;
-    border-radius: 4px;
-    min-width: 25rem;
-    max-width: 30rem;
-    height: auto;
+    background-color: #17141f;
+    border: 1px solid rgba(142, 106, 206, 0.4);
+    border-radius: 12px;
+    padding: 1.4rem 1.5rem;
+    min-width: 22rem;
+    max-width: 26rem;
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
+    gap: 1.25rem;
     margin: 0 auto;
 }
 
+.filterHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.filterLabel {
+    color: #8f87a6;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.clearButton {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #9d7ce0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.clearButton:hover {
+    text-decoration: underline;
+}
 
 @media only screen and (max-width: 570px) {
     .filterContainer {
-        min-width: 5rem;
+        min-width: 0;
         width: 20rem;
     }
 }

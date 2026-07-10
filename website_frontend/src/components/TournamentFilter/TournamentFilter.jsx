@@ -1,13 +1,21 @@
 import React from "react";
 import styles from './TournamentFilter.module.css';
 import TournamentFilterCheckboxes from "components/TournamentFilterCheckboxes/TournamentFilterCheckboxes";
+import TournamentFilterChips from "components/TournamentFilterChips/TournamentFilterChips";
 
-export const TournamentFilter = ({ children }) => {
+export const TournamentFilter = ({ children, onClear }) => {
     return (
         <div className={styles.filterSection}>
-            <h1 className="white">Filters</h1>
-
             <div className={styles.filterContainer}>
+                <div className={styles.filterHeader}>
+                    <p className={styles.filterLabel}>Filters</p>
+                    {onClear && (
+                        <button type="button" className={styles.clearButton} onClick={onClear}>
+                            Clear all
+                        </button>
+                    )}
+                </div>
+
                 {children}
             </div>
         </div>
@@ -15,3 +23,4 @@ export const TournamentFilter = ({ children }) => {
 }
 
 TournamentFilter.checkbox = TournamentFilterCheckboxes;
+TournamentFilter.chips = TournamentFilterChips;

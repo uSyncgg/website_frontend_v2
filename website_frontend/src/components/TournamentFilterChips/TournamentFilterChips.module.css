@@ -1,0 +1,43 @@
+.filterGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: left;
+}
+
+.groupTitle {
+    color: #e8e4f2;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.chipRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Squared corners so the chips sit parallel with the filter panel border */
+.chip {
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 6px;
+    color: #cfc9dd;
+    padding: 0.3rem 0.85rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.chip:hover {
+    border-color: #8e6ace;
+    color: #fff;
+}
+
+.chipActive {
+    background-color: #8e6ace;
+    border-color: #8e6ace;
+    color: #fff;
+}

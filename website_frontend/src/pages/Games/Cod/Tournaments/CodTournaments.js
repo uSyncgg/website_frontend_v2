@@ -1,6 +1,7 @@
 import { TournamentList, TournamentFilter, TournamentPagination, filteredTournaments, SeoData } from "components";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import styles from './CodTournaments.module.css';
 
 export const CodTournaments = () => {
     const [selectedFormats, setSelectedFormats] = useState([]);
@@ -8,6 +9,7 @@ export const CodTournaments = () => {
     const [selectedPlatforms, setSelectedPlatforms] = useState([]);
     const [selectedSkills, setSelectedSkills] = useState([]);
     const [selectedEntry, setSelectedEntry] = useState([]);
+    const [selectedHosts, setSelectedHosts] = useState([]);
 
     const clearFilters = () => {
         setSelectedFormats([]);
@@ -15,15 +17,18 @@ export const CodTournaments = () => {
         setSelectedPlatforms([]);
         setSelectedSkills([]);
         setSelectedEntry([]);
+        setSelectedHosts([]);
     }
 
-    const teamOptions = ['1v1', '2v2', '3v3', '4v4']; 
-    const regionOptions = ['NA', 'EU', 'LATAM', 'United States']; 
+    const teamOptions = ['1v1', '2v2', '3v3', '4v4'];
+    const regionOptions = ['NA', 'EU', 'LATAM', 'United States'];
     const consoleOptions = ['PC', 'Console'];
     const skillOptions = ['Novice', 'Amateur', 'Expert', 'Agent', 'Master', 'Challenger'];
     const entryOptions = ['Free Entry', 'Paid', 'ECO'];
+    const hostOptions = ['CMG', 'CoD Agent'];
 
     const [tournaments, setTournaments] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     const [currentPage, setCurrentPage] = useState(1);
     const cardsPerPage = 10;
@@ -31,13 +36,16 @@ export const CodTournaments = () => {
     useEffect(() => {
         axios.get("https://website-backend-5m32.onrender.com/usyncapp/tournaments")
             .then(res => setTournaments(res.data))
-            .catch(err => console.log(err));
+            .catch(err => console.log(err))
+            .finally(() => setIsLoaded(true));
     }, []);
 
+    // Jump back to the first page whenever a filter changes
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [selectedFormats, selectedRegions, selectedPlatforms, selectedSkills, selectedEntry, selectedHosts]);
+
     const handleFilterChange = (setter, currentValues) => (selectedOptions) => {
-        // setCurrentPage(1); // NEED TO THINK ABOUT HOW TO DO THIS ONE
-        // console.log(Array.isArray(selectedOptions))
-        // console.log(selectedOptions)
         // If selectedOptions is an array, ensure deselected options are removed
         if (Array.isArray(selectedOptions)) {
             setter(selectedOptions);
@@ -46,13 +54,13 @@ export const CodTournaments = () => {
             const updatedValues = currentValues.includes(selectedOptions)
                 ? currentValues.filter(item => item !== selectedOptions) // Remove if unchecked
                 : [...currentValues, selectedOptions]; // Add if checked
-    
+
             setter(updatedValues);
         }
-    }; 
+    };
 
-    const filters = {selectedFormats, selectedRegions, selectedSkills, selectedPlatforms, selectedEntry};
-    const filteredTourneys = filteredTournaments(tournaments, filters); 
+    const filters = {selectedFormats, selectedRegions, selectedSkills, selectedPlatforms, selectedEntry, selectedHosts};
+    const filteredTourneys = filteredTournaments(tournaments, filters);
 
     const totalFilteredPages = Math.ceil(filteredTourneys.length / cardsPerPage);
 
@@ -61,73 +69,96 @@ export const CodTournaments = () => {
     const currentTournaments = filteredTourneys.slice(indexOfFirstTournament, indexOfLastTournament);
 
     return (
-        <div className="standardContainer">
+        <div className={`standardContainer ${styles.page}`}>
             <SeoData
                 description="Find all the live Call of Duty Tournaments for the day posted at uSync.gg/tournaments/call-of-duty-tournaments"
                 canonicalPath={"/games/call-of-duty/tournaments/call-of-duty-tournaments"}
             />
 
+            <div className={styles.pageHeader}>
+                <div className={styles.titleRow}>
+                    <h1 className="white">Featured</h1>
+                    <h1 className="purple">Tournaments</h1>
+                </div>
+                <p className={styles.subtitle}>
+                    Page {currentPage} of {Math.max(1, totalFilteredPages)} · {filteredTourneys.length} tournaments available today
+                </p>
+            </div>
+
             <div className="totalTournamentContainer">
                 <div className="leftItem">
-                    <TournamentFilter>
-                        <TournamentFilter.checkbox 
-                            title={"Team Size"} 
-                            options={teamOptions} 
-                            onChange={handleFilterChange(setSelectedFormats, selectedFormats)} 
-                            selectedOptions={selectedFormats} 
+                    <TournamentFilter onClear={clearFilters}>
+                        <TournamentFilter.chips
+                            title={"Team Size"}
+                            options={teamOptions}
+                            onChange={handleFilterChange(setSelectedFormats, selectedFormats)}
+                            selectedOptions={selectedFormats}
                         />
 
-                        <TournamentFilter.checkbox 
-                            title={"Regions"} 
-                            options={regionOptions} 
-                            onChange={handleFilterChange(setSelectedRegions, selectedRegions)} 
-                            selectedOptions={selectedRegions} 
+                        <TournamentFilter.chips
+                            title={"Region"}
+                            options={regionOptions}
+                            onChange={handleFilterChange(setSelectedRegions, selectedRegions)}
+                            selectedOptions={selectedRegions}
                         />
 
-                        <TournamentFilter.checkbox 
-                            title={"Platforms"} 
-                            options={consoleOptions} 
-                            onChange={handleFilterChange(setSelectedPlatforms, selectedPlatforms)} 
-                            selectedOptions={selectedPlatforms} 
+                        <TournamentFilter.chips
+                            title={"Platform"}
+                            options={consoleOptions}
+                            onChange={handleFilterChange(setSelectedPlatforms, selectedPlatforms)}
+                            selectedOptions={selectedPlatforms}
                         />
 
-                        <TournamentFilter.checkbox 
-                            title={"Skill"} 
-                            options={skillOptions} 
-                            onChange={handleFilterChange(setSelectedSkills, selectedSkills)} 
-                            selectedOptions={selectedSkills} 
+                        <TournamentFilter.chips
+                            title={"Skill Level"}
+                            options={skillOptions}
+                            onChange={handleFilterChange(setSelectedSkills, selectedSkills)}
+                            selectedOptions={selectedSkills}
                         />
 
-                        <TournamentFilter.checkbox 
-                            title={"Entry Fee"} 
-                            options={entryOptions} 
-                            onChange={handleFilterChange(setSelectedEntry, selectedEntry)} 
-                            selectedOptions={selectedEntry} 
+                        <TournamentFilter.chips
+                            title={"Entry Fee"}
+                            options={entryOptions}
+                            onChange={handleFilterChange(setSelectedEntry, selectedEntry)}
+                            selectedOptions={selectedEntry}
                         />
 
+                        <TournamentFilter.chips
+                            title={"Host"}
+                            options={hostOptions}
+                            onChange={handleFilterChange(setSelectedHosts, selectedHosts)}
+                            selectedOptions={selectedHosts}
+                        />
                     </TournamentFilter>
                 </div>
 
                 <div className="rightItem">
-                    <div className="rightItemTitle">
-                        <h1 className="white">Featured</h1>
-                        <h1 className="purple">Tournaments</h1> 
-                    </div>
-                    <TournamentList tournaments={currentTournaments} game={'Cod'} />
-                    <h1 className="white">We are experiencing technical difficulties right now.</h1>
-                    <h1 className="white">Please check back later.</h1>
+                    {!isLoaded ? (
+                        <div className={styles.statusMessage}>
+                            <h1 className="white">Loading tournaments...</h1>
+                        </div>
+                    ) : tournaments.length === 0 ? (
+                        <div className={styles.statusMessage}>
+                            <h1 className="white">We are experiencing technical difficulties right now.</h1>
+                            <h1 className="white">Please check back later.</h1>
+                        </div>
+                    ) : filteredTourneys.length === 0 ? (
+                        <div className={styles.statusMessage}>
+                            <h1 className="white">No tournaments match your filters.</h1>
+                        </div>
+                    ) : (
+                        <TournamentList tournaments={currentTournaments} game={'Cod'} />
+                    )}
                 </div>
 
                 <div className="bottomItem">
-                    <TournamentPagination 
-                        filteredTourneys={filteredTourneys}
+                    <TournamentPagination
                         totalFilteredPages={totalFilteredPages}
-                        cardsPerPage={cardsPerPage} 
-                        currentPage={currentPage} 
+                        currentPage={currentPage}
                         onPageChange={setCurrentPage}
                     />
                 </div>
             </div>
         </div>
-    ); 
+    );
 }

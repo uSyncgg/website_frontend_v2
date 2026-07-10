@@ -1,0 +1,40 @@
+.page {
+    background-color: #100d16;
+}
+
+.pageHeader {
+    width: min(1400px, 92%);
+    margin: 0 auto;
+    padding: 2.5rem 0 1.5rem;
+    text-align: left;
+}
+
+.titleRow {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+}
+
+.titleRow h1 {
+    margin-bottom: 0.25rem;
+}
+
+.subtitle {
+    color: #8f87a6;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.statusMessage {
+    padding: 3rem 1rem;
+}
+
+@media only screen and (max-width: 1000px) {
+    .pageHeader {
+        text-align: center;
+    }
+
+    .titleRow {
+        justify-content: center;
+    }
+}

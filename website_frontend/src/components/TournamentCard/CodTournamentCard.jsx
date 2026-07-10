@@ -1,11 +1,10 @@
 import React from "react";
+import { FaRegClock, FaGamepad, FaGlobeAmericas, FaMedal } from "react-icons/fa";
 import styles from './TournamentCard.module.css';
+import { HOSTS } from './hosts';
 
 export const CodTournamentCard = ({ tournament }) => {
-    const banners = {
-        'cmg': window.innerWidth > 750 ? "https://i.imgur.com/M4FR1qC.png" : "https://i.imgur.com/X7jdhHR.png",
-        'codagent': window.innerWidth > 750 ? "https://i.imgur.com/R12yczc.png" : "https://i.imgur.com/N614MLb.png"
-    }
+    const host = HOSTS[tournament.company] || { label: tournament.company, logo: null };
 
     var estDate = tournament.date
     var estTime = tournament.time
@@ -31,7 +30,6 @@ export const CodTournamentCard = ({ tournament }) => {
     });
     // Removes leading 0 if present — already done by 'numeric' format
     const formattedTime = timeParts; // e.g., "5:00 AM" or "10:00 PM"
-    // console.log(`FORMATTED TIME: ${formattedTime}`)
     const timeZoneParts = new Intl.DateTimeFormat('en-US', {
         timeZone: userTimeZone,
         timeZoneName: 'short',
@@ -43,58 +41,56 @@ export const CodTournamentCard = ({ tournament }) => {
 
     // Step 7: Remove the + and the number (if any) after the abbreviation
     abbreviation = abbreviation.replace(/([A-Z]+)(\s?[+-]\d{1,2})?/, '$1');
-    // console.log(abbreviation)
-    // Step 5: Convert date
-    const dateObj = new Date(estDateObj.toLocaleString('en-US', { timeZone: userTimeZone }));
-    const month = dateObj.toLocaleString('en-US', { month: 'short' }); // e.g., "Apr"
-    const day = dateObj.getDate();
-    
-    // Add ordinal suffix to the day
-    function getOrdinalSuffix(n) {
-        if (n >= 11 && n <= 13) return `${n}th`;
-        switch (n % 10) {
-        case 1: return `${n}st`;
-        case 2: return `${n}nd`;
-        case 3: return `${n}rd`;
-        default: return `${n}th`;
-        }
-    }
-    
-    const formattedDate = `${month} ${getOrdinalSuffix(day)}`; // e.g., "Apr 21st"
+
+    // The restriction badge only shows when the scraper sends a real requirement
+    const requirements = (tournament.requirements || '').trim();
+    const restriction = ['', 'none', 'n/a', 'no requirements'].includes(requirements.toLowerCase())
+        ? null
+        : requirements;
+
+    const isFreeEntry = (tournament.entry || '').toLowerCase().includes('free');
 
     return (
-        <div className={styles.tournamentCardContainer}>
-            <div className={`${styles.tournamentCard}`} style={{ '--bg-image': `url(${banners[tournament.company]})` }}>
-                <div className={styles.titleInfo}>
-                    <h2 className={styles.white}>{tournament.team_size} {" "} {tournament.series}</h2>
-                    <h2 className={styles.white}>{tournament.gamemode.toUpperCase()}</h2>
-                    <h2 className={styles.purple}>{formattedTime} {" "} {abbreviation}</h2>
+        <div className={styles.tournamentCard}>
+            <div className={styles.hostTile}>
+                {host.logo
+                    ? <img src={host.logo} alt={`${host.label} logo`} />
+                    : <span>{host.label}</span>
+                }
+            </div>
+
+            <div className={styles.cardInfo}>
+                <h2 className={styles.cardTitle}>
+                    {tournament.team_size} {tournament.series} · {tournament.gamemode.toUpperCase()}
+                </h2>
+
+                <div className={styles.metaRow}>
+                    <span className={styles.metaTime}>
+                        <FaRegClock /> {formattedTime} {abbreviation}
+                    </span>
+                    <span className={styles.metaItem}>
+                        <FaGamepad /> {tournament.platforms}
+                    </span>
                 </div>
 
-                <div className={styles.bodyInfo}>
-                    <p className={styles.white}>Date</p>
-                    <p className={styles.purple}>{formattedDate}</p>
-                    <p className={styles.white}>Region</p>
-                    <p className={styles.purple}>{tournament.region}</p>
+                <div className={styles.metaRow}>
+                    <span className={styles.metaItem}>
+                        <FaGlobeAmericas /> {tournament.region}
+                    </span>
+                    <span className={styles.metaItem}>
+                        <FaMedal /> {tournament.skill}
+                    </span>
                 </div>
+            </div>
 
-                <div className={styles.bodyInfo}>
-                    <p className={styles.white}>Platform</p>
-                    <p className={styles.purple}>{tournament.platforms}</p>
-                    <p className={styles.white}>Skill</p>
-                    <p className={styles.purple}>{tournament.skill}</p>
-                </div>
-
-                <div className={styles.bodyInfo}>
-                    <p className={styles.white}>Entry Fee</p>
-                    <p className={styles.purple}>{tournament.entry}</p>
-                    <p className={styles.white}>Restrictions</p>
-                    <p className={styles.purple}>{tournament.requirements}</p>
-                </div>
-
-                <div className={styles.buttonContainer}>
-                    <button className={styles.tournamentButton} type="submit" onClick={() => window.open(tournament.url, '_blank')}>Join Now</button>
-                </div>
+            <div className={styles.cardActions}>
+                {restriction && <span className={styles.restriction}>{restriction}</span>}
+                <span className={`${styles.entry} ${isFreeEntry ? styles.entryFree : ''}`}>
+                    {tournament.entry}
+                </span>
+                <button className={styles.tournamentButton} type="button" onClick={() => window.open(tournament.url, '_blank')}>
+                    Join Now
+                </button>
             </div>
         </div>
     )
