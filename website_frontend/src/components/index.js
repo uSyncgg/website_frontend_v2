@@ -27,6 +27,9 @@ import MapCoverGame from "./MapCover/MapCoverGame";
 import { GameImage } from "./GameImage/GameImage";
 import { EventTypeImages } from "./EventTypeImages/EventTypeImages";
 
+// Homepage
+import { ChooseYourGame } from "./ChooseYourGame/ChooseYourGame";
+
 // Payment Form
 import { PaymentForm } from "./PaymentForm/PaymentForm";
 import { PaymentCart } from "./PaymentCart/PaymentCart";
@@ -88,5 +91,6 @@ export {
     TournamentList,
     ArticleImages,
     VerifiedText,
-    VerifiedImage
+    VerifiedImage,
+    ChooseYourGame
 };

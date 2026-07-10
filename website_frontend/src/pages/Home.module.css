@@ -3,6 +3,10 @@
     height: 100%;
 }
 
+:global(.standardContainer).homeDark {
+    background-color: #15131a;
+}
+
 .sectionOne {
     background-image: url("../assets/images/homeBackground.png");
     background-size: cover;
@@ -10,26 +14,44 @@
     width: 100%;
     background-position: center;
     background-attachment: fixed;
-    background-repeat: no-repeat; 
+    background-repeat: no-repeat;
 
+    position: relative;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-bottom: 6rem;
+}
+
+.heroOverlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        linear-gradient(105deg, rgba(10, 9, 13, .8) 0%, rgba(10, 9, 13, .5) 32%, rgba(10, 9, 13, .1) 60%),
+        linear-gradient(180deg, rgba(10, 9, 13, 0) 55%, #15131a 100%);
+    pointer-events: none;
 }
 
 .sectionOneContainer {
+    position: relative;
+    z-index: 2;
     text-align: left;
 }
 
 .sectionOneContainer h1 {
     font-size: 75px;
     line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -1px;
 }
 
 .sectionOneContainer h2 {
-    color: rgb(109, 106, 114);
+    color: rgb(170, 166, 178);
     margin-top: .25rem;
     font-size: 35px;
+    font-weight: 400;
 }
 
 .white {
@@ -40,22 +62,45 @@
     color: #8e6ace;
 }
 
+.gradientText {
+    margin: 0;
+    background: linear-gradient(90deg, #8e6ace 0%, #a97fe0 45%, #6a8fe0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
 .compete {
     color: white;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px 10px;
+    gap: 10px;
+    padding: 8px 16px;
     border-radius: 20px;
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.5px;
-    transition: all 0.2s ease;
-    background: transparent;
-    border: 2px solid rgb(142, 106, 206);
+    transition: background .3s cubic-bezier(.16,1,.3,1), border-color .3s cubic-bezier(.16,1,.3,1);
+    background: rgba(255, 255, 255, .06);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, .14);
     margin-bottom: .25rem;
     cursor: auto;
+}
+
+.pulseDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #b18af0;
+    animation: pulse 2.2s cubic-bezier(.4, 0, .6, 1) infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .35; }
 }
 
 .start {
@@ -68,15 +113,27 @@
     font-size: 20px;
     font-weight: 600;
     letter-spacing: 0.5px;
-    transition: all 0.2s ease;
-    background: rgb(142, 106, 206);
-    border: none;
+    transition: background .35s cubic-bezier(.16,1,.3,1), transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s cubic-bezier(.16,1,.3,1);
+    background: transparent;
+    border: 2px solid rgb(142, 106, 206);
     margin-top: 1rem;
 }
 
 .start:hover {
-    color:rgb(142, 106, 206);
-    background: rgb(33, 37, 31);
+    background: rgb(142, 106, 206);
+    box-shadow: 0 .75rem 1.75rem -.5rem rgba(0, 0, 0, .45);
+    transform: translateY(-2px) scale(1.015);
+}
+
+.start:active {
+    transform: scale(.97);
+    transition-duration: .15s;
+}
+
+.heroButtons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .sectionTwo {
@@ -88,6 +145,248 @@
     font-size: 3rem;
     padding-top: .9rem;
     margin-bottom: .5rem;
+}
+
+.eyebrow {
+    color: rgb(142, 106, 206);
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: .85rem;
+    padding-top: 2rem;
+}
+
+.subtext {
+    color: rgb(109, 106, 114);
+    font-size: 1.1rem;
+    max-width: 40rem;
+    margin: 0 auto 2.5rem;
+}
+
+.statsRow {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    max-width: 60rem;
+    margin: -4.5rem auto 3rem;
+    padding: 0 1rem;
+}
+
+.statCard {
+    flex: 1 1 14rem;
+    max-width: 16rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(28, 25, 33, .75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 1rem;
+    padding: 1.75rem 1rem;
+    box-shadow: 0 1.5rem 3rem -1.25rem rgba(0, 0, 0, .6);
+    transition: transform .35s cubic-bezier(.16,1,.3,1), border-color .35s cubic-bezier(.16,1,.3,1), box-shadow .35s cubic-bezier(.16,1,.3,1);
+}
+
+.statCard:hover {
+    transform: translateY(-.3rem);
+    border-color: rgba(255, 255, 255, .18);
+    box-shadow: 0 1.75rem 3rem -1.25rem rgba(0, 0, 0, .7);
+}
+
+.statValue {
+    background: linear-gradient(90deg, #b18af0, #8e6ace);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 0;
+}
+
+.statLabel {
+    color: rgb(170, 166, 178);
+    margin: .25rem 0 0;
+    font-size: .9rem;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+}
+
+.featureCards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    max-width: 70rem;
+    margin: 0 auto 3rem;
+}
+
+.featureCard {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, .01));
+    border: .0625rem solid rgba(255, 255, 255, .08);
+    border-radius: 1.25rem;
+    padding: 2rem;
+    width: 18rem;
+    text-align: left;
+    cursor: pointer;
+    transition: transform .35s cubic-bezier(.16,1,.3,1), border-color .35s cubic-bezier(.16,1,.3,1), box-shadow .35s cubic-bezier(.16,1,.3,1);
+}
+
+.featureCard:hover {
+    transform: translateY(-.4rem);
+    border-color: rgba(255, 255, 255, .2);
+    box-shadow: 0 1.75rem 2.5rem -1.25rem rgba(0, 0, 0, .55);
+}
+
+.featureCard:hover .featureIcon {
+    transform: scale(1.08);
+}
+
+.featureIcon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: .85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+    background: linear-gradient(135deg, #9b6fe0, #7a5ac9);
+    color: white;
+    font-size: 1.25rem;
+    transition: transform .35s cubic-bezier(.16,1,.3,1);
+}
+
+.featureCard h3 {
+    color: white;
+    margin: 0 0 .75rem;
+}
+
+.featureCard p {
+    color: rgb(109, 106, 114);
+    margin: 0 0 1rem;
+}
+
+.explorePill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(142, 106, 206);
+    background: transparent;
+    border: 1.5px solid rgb(142, 106, 206);
+    border-radius: 999px;
+    padding: .4rem 1.15rem;
+    font-size: .85rem;
+    font-weight: 600;
+    transition: background .3s cubic-bezier(.16,1,.3,1), color .3s cubic-bezier(.16,1,.3,1);
+}
+
+.featureCard:hover .explorePill {
+    background: rgb(142, 106, 206);
+    color: white;
+}
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.75rem;
+    margin: 1.5rem 0;
+}
+
+.legendItem {
+    display: inline-flex;
+    align-items: center;
+    color: rgb(109, 106, 114);
+    font-size: .95rem;
+}
+
+.dot {
+    width: .6rem;
+    height: .6rem;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: .5rem;
+}
+
+.dotCod {
+    background: rgb(74, 144, 226);
+}
+
+.dotLol {
+    background: rgb(139, 30, 47);
+}
+
+.dotHalo {
+    background: rgb(142, 106, 206);
+}
+
+.dotCon {
+    background: rgb(230, 150, 50);
+}
+
+.cta {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(142, 106, 206, .25), rgba(90, 70, 140, .15));
+    border: 1px solid rgba(142, 106, 206, .3);
+    border-radius: 1.5rem;
+    padding: 4rem 1rem;
+    margin: 3rem 2rem 4rem;
+}
+
+.ctaGlow {
+    position: absolute;
+    top: -8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30rem;
+    height: 20rem;
+    background: radial-gradient(closest-side, rgba(255, 255, 255, .08), transparent);
+    pointer-events: none;
+}
+
+.ctaSubtext {
+    color: rgb(190, 186, 198);
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.cta h2 {
+    position: relative;
+}
+
+.ctaButton {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    background: transparent;
+    border: 2px solid rgb(142, 106, 206);
+    font-weight: 700;
+    font-size: 20px;
+    padding: 10px 45px;
+    border-radius: 18px;
+    transition: background .35s cubic-bezier(.16,1,.3,1), transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s cubic-bezier(.16,1,.3,1);
+}
+
+.ctaButton:hover {
+    background: rgb(142, 106, 206);
+    transform: translateY(-2px) scale(1.015);
+    box-shadow: 0 .75rem 1.75rem -.5rem rgba(0, 0, 0, .4);
+}
+
+.ctaButton:active {
+    transform: scale(.97);
+    transition-duration: .15s;
 }
 
 .underline {
@@ -146,10 +445,6 @@
 
 .learn a:hover {
     filter: brightness(120%);
-}
-
-.bottomSpace {
-    padding-bottom: 7rem;
 }
 
 .subscriptionContainer {
@@ -256,9 +551,40 @@
         font-size: 40px;
     }
 
+    .sectionTwo h2 {
+        font-size: 2rem;
+        padding-top: .5rem;
+    }
+
+    .start,
+    .ctaButton {
+        font-size: 17px;
+        padding: 10px 36px;
+    }
+
     .eventContainer {
         margin-bottom: 0;
         flex-wrap: wrap;
+    }
+
+    .statsRow {
+        margin-top: -3rem;
+        gap: 1rem;
+    }
+
+    .statCard {
+        flex: 1 1 40%;
+        padding: 1.25rem .75rem;
+    }
+
+    .featureCard {
+        width: 100%;
+        max-width: 22rem;
+    }
+
+    .cta {
+        margin: 3rem 1rem 3rem;
+        padding: 3rem 1.25rem;
     }
 }
 
@@ -267,5 +593,29 @@
     .sectionOne {
         background-position: 20% 20%;
         background-attachment: unset;
+        padding-bottom: 4rem;
+    }
+
+    .statsRow {
+        margin-top: -2rem;
+    }
+
+    .statCard {
+        flex: 1 1 100%;
+        max-width: 20rem;
+    }
+
+    .statValue {
+        font-size: 1.75rem;
+    }
+
+    .sectionTwo h2 {
+        font-size: 1.75rem;
+    }
+
+    .start,
+    .ctaButton {
+        font-size: 16px;
+        padding: 9px 30px;
     }
 }
