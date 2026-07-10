@@ -6,9 +6,9 @@
     width: 90%;
     margin: 0 auto 0.75rem;
     text-align: left;
-    color: #8f87a6;
+    color: rgb(142, 106, 206);
     font-size: 0.85rem;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 1px;
     text-transform: uppercase;
 }

@@ -99,7 +99,7 @@ export const CodTournaments = () => {
                     </div>
                     <div className={styles.statCard}>
                         <p className={styles.statValue}>{hostCount}</p>
-                        <p className={styles.statLabel}>Verified Hosts</p>
+                        <p className={styles.statLabel}>Verified {hostCount === 1 ? 'Host' : 'Hosts'}</p>
                     </div>
                 </div>
             </div>
