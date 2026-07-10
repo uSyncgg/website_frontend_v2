@@ -4,15 +4,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Contributor Workflow (read this first)
 
-Most changes here are made by non-technical contributors working through Claude Code. Always guide them through this loop in plain language:
+Most changes here are made by non-technical contributors working through Claude Code. Always guide them through this loop in plain language.
 
-1. **Branch first — always.** Never make edits on `main`. At the start of any new feature, create a branch named `feature/<short-kebab-description>`. (A hook blocks edits on `main`, and GitHub blocks direct pushes to it — so this is required, not optional.)
-2. **Stay up to date.** A SessionStart hook checks whether the feature branch is behind `origin/main`. When it is, proactively merge `origin/main` in (resolving any conflicts in plain language) before doing other work. The `/new-pr` skill repeats this check right before opening the PR.
+**Deployment pipeline:** work flows `feature/* → testing_environment → main`. `testing_environment` is the **staging** branch (a preview/QA environment); `main` is **production** (the live site). Contributors only ever go as far as staging — their PRs merge into `testing_environment`. Promoting staging to production (`main`) is done separately by Matthew and is **not** part of this loop.
+
+1. **Branch first — always.** Never make edits on `main` or `testing_environment`. At the start of any new feature, create a branch named `feature/<short-kebab-description>`. (A hook blocks edits on protected branches, and GitHub blocks direct pushes — so this is required, not optional.)
+2. **Stay up to date.** A SessionStart hook checks whether the feature branch is behind `origin/testing_environment` (the staging branch it will merge into). When it is, proactively merge `origin/testing_environment` in (resolving any conflicts in plain language) before doing other work. The `/new-pr` skill repeats this check right before opening the PR.
 3. **Build the feature** with the contributor, editing/adding components and routes as described elsewhere in this file.
-4. **Open a PR** with the `/new-pr` skill, which fills the uSync PR template (Summary + what changed, Affected routes/pages) and opens the pull request.
-5. **Review gate.** Matthew (contact@usync.gg) reviews every PR and either **Approves** (he merges to `main`) or **Requests changes**. Contributors must NOT merge their own PRs.
+4. **Open a PR** with the `/new-pr` skill, which fills the uSync PR template (Summary + what changed, Affected routes/pages) and opens the pull request **into `testing_environment`** (staging).
+5. **Review gate.** Matthew (contact@usync.gg) reviews every PR and either **Approves** (he merges to `testing_environment`) or **Requests changes**. Contributors must NOT merge their own PRs.
 6. **Address feedback** by reading the PR review comments (`gh pr view --comments`) and pushing fixes to the same branch; this re-triggers review.
-7. **After merge,** delete the feature branch and start the loop again from step 1.
+7. **After merge,** delete the feature branch and start the loop again from step 1. Once changes are verified on staging, Matthew promotes `testing_environment` to `main` in a separate production PR.
 
 ## Commands
 

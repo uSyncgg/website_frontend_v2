@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash .claude/hooks/sync-main.sh"
+            "command": "bash .claude/hooks/sync-staging.sh"
           }
         ]
       }

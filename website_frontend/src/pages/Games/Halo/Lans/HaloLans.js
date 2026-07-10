@@ -21,8 +21,46 @@ export const HaloLans = () => {
             <div className="eventBannerContainer">
                 <div className="hrEvents" />
 
-                <NoEvents pageType={"LANs"} />
-                
+                {/* <NoEvents pageType={"LANs"} /> */}
+
+                <HostBanner>
+                    <HostBanner.Title path={"/lans/game-and-geek-2026"}>Game And Geek Expo 2026</HostBanner.Title>
+                    <HostBanner.Image 
+                        path={"/lans/game-and-geek-2026"} 
+                        imgUrl={"https://i.imgur.com/pR1izqw.png"} 
+                        alt={"Game And Geek Expo 2026"}
+                        verified={false}
+                    />
+                    <HostBanner.Region>Raleigh, NC</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/lans/game-and-geek-2026"} />
+                </HostBanner>
+
+                <HostBanner>
+                    <HostBanner.Title path={"/lans/sfge-2026"}>Southern-Fried Gaming Expo 2026</HostBanner.Title>
+                    <HostBanner.Image 
+                        path={"/lans/sfge-2026"} 
+                        imgUrl={"https://i.imgur.com/1UtSmN5.png"} 
+                        alt={"Southern-Fried Gaming Expo 2026"}
+                        verified={false}
+                    />
+                    <HostBanner.Region>Atlanta, GA</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/lans/sfge-2026"} />
+                </HostBanner>
+
+                <div className="hrEvents" />
+
+                <HostBanner>
+                    <HostBanner.Title path={"/lans/citadel-i"}>Citadel I</HostBanner.Title>
+                    <HostBanner.Image 
+                        path={"/lans/citadel-i"} 
+                        imgUrl={"https://i.imgur.com/NXXgHBk.png"} 
+                        alt={"Citadel I"}
+                        verified={false}
+                    />
+                    <HostBanner.Region>Lakewood, CO</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/lans/citadel-i"} />
+                </HostBanner>
+
                 <div className="hrEvents" />
             </div>
         </div>
