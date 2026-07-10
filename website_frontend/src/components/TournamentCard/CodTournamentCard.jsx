@@ -6,6 +6,17 @@ import { HOSTS } from './hosts';
 export const CodTournamentCard = ({ tournament }) => {
     const host = HOSTS[tournament.site] || { label: tournament.site, logo: null };
 
+    // Add ordinal suffix to the day (e.g. 21 -> "21st")
+    function getOrdinalSuffix(n) {
+        if (n >= 11 && n <= 13) return `${n}th`;
+        switch (n % 10) {
+        case 1: return `${n}st`;
+        case 2: return `${n}nd`;
+        case 3: return `${n}rd`;
+        default: return `${n}th`;
+        }
+    }
+
     // Build the tournament's start time as a real Date object WITHOUT relying on
     // `new Date("Apr 14 2025 10:00 AM GMT-0400")`. That string format parses on
     // Chrome but returns an Invalid Date on Safari/iOS, which then throws when
@@ -48,6 +59,7 @@ export const CodTournamentCard = ({ tournament }) => {
 
     let formattedTime = tournament.time || '';
     let abbreviation = '';
+    let formattedDate = tournament.date || '';
 
     if (estDateObj) {
         // Time in the viewer's local time zone, e.g. "5:00 AM"
@@ -69,6 +81,18 @@ export const CodTournamentCard = ({ tournament }) => {
         abbreviation = timeZoneParts.find(part => part.type === 'timeZoneName')?.value || '';
         // Drop any trailing offset like "GMT-4" -> "GMT"
         abbreviation = abbreviation.replace(/([A-Za-z]+)(\s?[+-]\d{1,2})?/, '$1');
+
+        // Date in the viewer's local time zone, e.g. "Apr 21st" — the timezone
+        // conversion can shift the calendar day, so it must be derived from the
+        // same Date object as the time.
+        const dateFieldParts = new Intl.DateTimeFormat('en-US', {
+            timeZone: userTimeZone,
+            month: 'short',
+            day: 'numeric'
+        }).formatToParts(estDateObj);
+        const month = dateFieldParts.find(part => part.type === 'month')?.value || '';
+        const dayNum = parseInt(dateFieldParts.find(part => part.type === 'day')?.value, 10);
+        formattedDate = Number.isNaN(dayNum) ? formattedDate : `${month} ${getOrdinalSuffix(dayNum)}`;
     }
 
     // "BEST OF 1" -> "Best of 1"
@@ -101,7 +125,7 @@ export const CodTournamentCard = ({ tournament }) => {
 
                 <div className={styles.metaRow}>
                     <span className={styles.metaTime}>
-                        <FaRegClock /> {formattedTime} {abbreviation}
+                        <FaRegClock /> {formattedDate} · {formattedTime} {abbreviation}
                     </span>
                     <span className={styles.metaItem}>
                         <FaGamepad /> {tournament.platforms}
