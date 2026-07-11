@@ -18,7 +18,7 @@ const GAME_LABELS = {
     'LoL':         'League of Legends',
     'Halo':        'Halo',
     'Warzone':     'Warzone',
-    'Conventions': 'Conventions',
+    'Conventions': 'Other',
 };
 
 const GAME_ORDER = ['CoD', 'LoL', 'Halo', 'Warzone', 'Conventions'];
