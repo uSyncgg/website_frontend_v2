@@ -90,6 +90,13 @@ export const Home = () => {
                     <LanMap markers={ALL_LAN_MARKERS} className={styles.map} showAllGames={true} />
                 </div>
 
+                <div className={styles.legend}>
+                    <span className={styles.legendItem}><span className={`${styles.dot} ${styles.dotCod}`} />Call of Duty</span>
+                    <span className={styles.legendItem}><span className={`${styles.dot} ${styles.dotLol}`} />League of Legends</span>
+                    <span className={styles.legendItem}><span className={`${styles.dot} ${styles.dotHalo}`} />Halo</span>
+                    <span className={styles.legendItem}><span className={`${styles.dot} ${styles.dotCon}`} />Conventions</span>
+                </div>
+
                 <h3 className={styles.learn}>
                     Learn how to post your LAN to the map {" "}
                     <Link to="/more/eventhost">here</Link>

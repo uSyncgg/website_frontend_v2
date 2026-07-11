@@ -8,7 +8,12 @@ export const Games = () => {
                 canonicalPath={"/games"}
             />
 
-            <HeaderImage title={"uSync Titles"} imageClass={"gamesPage"} />
+            <HeaderImage
+                title={"uSync Titles"}
+                imageClass={"gamesPage"}
+                eyebrow={"7 Supported Games"}
+                subtext={"Pick your title and find verified LANs, tournaments, leagues, and more."}
+            />
 
             <GameImage 
                 games={
