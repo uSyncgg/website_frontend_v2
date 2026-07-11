@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import { Link } from 'react-router';
 import L from 'leaflet';
@@ -36,6 +37,21 @@ function createMarkerIcon(game) {
         iconAnchor: [7, 7],
         popupAnchor: [0, -12],
     });
+}
+
+const isTouchDevice = () =>
+    typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+
+function MobileDraggingController({ enabled }) {
+    const map = useMap();
+    useEffect(() => {
+        if (enabled) {
+            map.dragging.enable();
+        } else {
+            map.dragging.disable();
+        }
+    }, [map, enabled]);
+    return null;
 }
 
 function CtrlScrollZoom() {
@@ -78,27 +94,111 @@ function CtrlScrollZoom() {
     return null;
 }
 
+function LegendControl({ legendGames, activeGames, toggleGame }) {
+    const map = useMap();
+    const [el] = useState(() => {
+        const div = document.createElement('div');
+        div.className = 'lanMapLegendPortal';
+        return div;
+    });
+
+    useEffect(() => {
+        const container = map.getContainer();
+        container.appendChild(el);
+        L.DomEvent.disableClickPropagation(el);
+        L.DomEvent.disableScrollPropagation(el);
+        return () => {
+            if (container.contains(el)) container.removeChild(el);
+        };
+    }, [map, el]);
+
+    const allActive = legendGames.every(g => activeGames.has(g));
+
+    return createPortal(
+        <div className="lanMapLegend">
+            <button
+                className={`lanMapLegendChip lanMapLegendAll ${allActive ? 'active' : 'inactive'}`}
+                onClick={() => toggleGame('__all__')}
+            >
+                {allActive ? 'Deselect All' : 'Select All'}
+            </button>
+            {legendGames.map(g => {
+                const isActive = activeGames.has(g);
+                const color = getColor(g);
+                return (
+                    <button
+                        key={g}
+                        className={`lanMapLegendChip ${isActive ? 'active' : 'inactive'}`}
+                        style={isActive ? { borderColor: color, boxShadow: `0 0 10px ${color}55` } : {}}
+                        onClick={() => toggleGame(g)}
+                    >
+                        <span
+                            className="lanMapLegendDot"
+                            style={{ backgroundColor: isActive ? color : '#555' }}
+                        />
+                        {GAME_LABELS[g]}
+                    </button>
+                );
+            })}
+        </div>,
+        el
+    );
+}
+
 export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAllGames = false }) => {
+    const [mobileActivated, setMobileActivated] = useState(false);
+    const touch = isTouchDevice();
+
     const legendGames = showAllGames
         ? GAME_ORDER
         : game
             ? [game]
             : GAME_ORDER.filter(g => markers.some(m => (m.game || 'Conventions') === g));
 
+    const [activeGames, setActiveGames] = useState(() => new Set(legendGames));
+
+    const toggleGame = (g) => {
+        if (g === '__all__') {
+            setActiveGames(prev => {
+                const allActive = legendGames.every(x => prev.has(x));
+                return allActive ? new Set() : new Set(legendGames);
+            });
+            return;
+        }
+        setActiveGames(prev => {
+            const next = new Set(prev);
+            if (next.has(g)) {
+                next.delete(g);
+            } else {
+                next.add(g);
+            }
+            return next;
+        });
+    };
+
+    const filteredMarkers = markers.filter(m => activeGames.has(m.game || 'Conventions'));
+
     return (
-        <div className="lanMapWithLegend">
+        <div className="lanMapWrapper">
             <MapContainer
                 center={[39.5, -98.35]}
                 zoom={4}
                 className={className}
                 scrollWheelZoom={false}
+                dragging={!touch}
             >
                 <CtrlScrollZoom />
+                {touch && <MobileDraggingController enabled={mobileActivated} />}
+                <LegendControl
+                    legendGames={legendGames}
+                    activeGames={activeGames}
+                    toggleGame={toggleGame}
+                />
                 <TileLayer
                     url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                 />
-                {markers.map((marker, i) => (
+                {filteredMarkers.map((marker, i) => (
                     <Marker key={i} position={[marker.lat, marker.lng]} icon={createMarkerIcon(marker.game)}>
                         <Popup>
                             <strong>{marker.name}</strong>
@@ -113,17 +213,11 @@ export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAl
                 ))}
             </MapContainer>
 
-            <div className="lanMapLegend">
-                {legendGames.map(g => (
-                    <span key={g} className="lanMapLegendItem">
-                        <span
-                            className="lanMapLegendDot"
-                            style={{ backgroundColor: getColor(g) }}
-                        />
-                        {GAME_LABELS[g]}
-                    </span>
-                ))}
-            </div>
+            {touch && !mobileActivated && (
+                <div className="lanMapTapOverlay" onClick={() => setMobileActivated(true)}>
+                    Tap to interact with the map
+                </div>
+            )}
         </div>
     );
 };
