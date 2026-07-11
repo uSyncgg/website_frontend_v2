@@ -198,7 +198,7 @@ export const EventTypeImages = ({ page, articleName='' }) => {
 
             {page === "All LANs" &&
                 <div className={`${styles.imageEventContainer} ${styles.soloImage}`}>
-                    <Link to="/LanMap">
+                    <Link to="/other-lans">
                         <img src="https://i.imgur.com/OPhy6nX.png" alt='All LANs'/>
                     </Link>
                 </div>

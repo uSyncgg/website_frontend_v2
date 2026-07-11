@@ -8,7 +8,7 @@ import './LanMap.css';
 const GAME_COLORS = {
     'CoD':         '#3a7bd5',
     'LoL':         '#962d2d',
-    'Halo':        '#8e6ace',
+    'Halo':        '#eee242',
     'Warzone':     '#2ea855',
     'Conventions': '#e07b27',
 };
@@ -18,7 +18,7 @@ const GAME_LABELS = {
     'LoL':         'League of Legends',
     'Halo':        'Halo',
     'Warzone':     'Warzone',
-    'Conventions': 'Other',
+    'Conventions': 'Conventions',
 };
 
 const GAME_ORDER = ['CoD', 'LoL', 'Halo', 'Warzone', 'Conventions'];
