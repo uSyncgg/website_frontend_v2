@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 120" role="img" aria-label="CMG logo">
+  <!-- C -->
+  <path fill="#f5f5f5" d="M14 12 H98 V42 H50 V78 H98 V108 H14 Z" />
+  <!-- M -->
+  <path fill="#f5f5f5" d="M112 108 V12 H138 L150 28 L162 12 H188 V108 H162 V54 L150 68 L138 54 V108 Z" />
+  <!-- G -->
+  <path fill="#f5f5f5" d="M202 12 H286 V42 H238 V78 H250 V64 H286 V108 H202 Z" />
+  <!-- green diamond -->
+  <path fill="#3ddc84" d="M150 76 L161 89 L150 102 L139 89 Z" />
+</svg>

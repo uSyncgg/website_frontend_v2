@@ -7,7 +7,12 @@ export const Lans = () => {
                 description="Find esports LAN events for your favorite game titles near you. From Call of Duty to League of Legends we have every LAN going on."
                 canonicalPath={"/lans"}
             />
-            <HeaderImage title={"LAN Titles"} imageClass={"lansPage"} />
+            <HeaderImage
+                title={"LAN Titles"}
+                imageClass={"lansPage"}
+                eyebrow={"Compete In Person"}
+                subtext={"Esports LAN events for your favorite titles, from local venues to majors."}
+            />
 
             <GameImage 
                 games={
