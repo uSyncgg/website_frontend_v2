@@ -12,9 +12,8 @@ export const ChooseYourGame = () => {
     return (
         <div className={styles.container}>
             <p className={styles.eyebrow}>Community</p>
-            <h2 className={styles.white}>Choose your game</h2>
+            <h2 className={styles.white}>Choose Your Game</h2>
             <img className="underlineImg" src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
-            <p className={styles.subtext}>Player search and squad matching are coming soon.</p>
 
             <div className={styles.grid}>
                 {GAMES.map(game => (
