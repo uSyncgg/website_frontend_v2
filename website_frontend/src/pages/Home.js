@@ -101,7 +101,7 @@ export const Home = () => {
 
                 <div className={styles.cta}>
                     <div className={styles.ctaGlow} />
-                    <h2 className={styles.white}>We Sync, so uSync.</h2>
+                    <h2 className={styles.white}>We Sync, So uSync.</h2>
                     <p className={styles.ctaSubtext}>Find Your Next Event Today.</p>
                     <Link to="/games" className={styles.ctaButton}>Browse Events</Link>
                 </div>
