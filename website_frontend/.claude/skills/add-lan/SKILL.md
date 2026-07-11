@@ -147,6 +147,21 @@ Insert it directly under the matching `{/* GameName */}` comment.
 
 ---
 
+<<<<<<< HEAD
+## Step 6 — Update the game LAN list file(s)
+
+For each game the LAN belongs to, read the game's LAN list file then make two changes:
+
+**A. Add map marker** — append to the game's markers array at the top of the file. Always include the `game` property using the value from this mapping:
+
+| Game | `game` value |
+|------|-------------|
+| CoD | `'CoD'` |
+| Halo | `'Halo'` |
+| LoL | `'LoL'` |
+| Warzone | `'Warzone'` |
+| Conventions | `'Conventions'` |
+=======
 ## Step 6 — Update src/data/lanMarkers.js
 
 This is the **single source of truth** for all map markers. `AllLans.js` and `Home.js` import `ALL_LAN_MARKERS` from here automatically — do **not** edit those files for markers.
@@ -160,11 +175,15 @@ Read `src/data/lanMarkers.js`, then append to the matching game's array. Always 
 | LoL | `LOL_LAN_MARKERS` | `'LoL'` |
 | Warzone | `WZ_LAN_MARKERS` | `'Warzone'` |
 | Conventions | `CONVENTION_MARKERS` | `'Conventions'` |
+>>>>>>> origin/main
 
 ```js
 { lat: {lat}, lng: {lon}, name: "{Title}", link: "/lans/{route-slug}", game: '{GameValue}' },
 ```
 
+<<<<<<< HEAD
+**B. Add HostBanner** — append inside the `<div className="eventBannerContainer">` block, before the closing `</div>`.
+=======
 For multi-game events, append to **each** relevant game's array.
 
 ---
@@ -174,6 +193,7 @@ For multi-game events, append to **each** relevant game's array.
 For each game the LAN belongs to, read the game's LAN list file and add the HostBanner only (markers are handled in Step 6).
 
 **Add HostBanner** — append inside the `<div className="eventBannerContainer">` block, before the closing `</div>`.
+>>>>>>> origin/main
 
 **hrEvents divider rule:** Read the end of the `eventBannerContainer` block first.
 - If the last element before `</div>` is already `<div className="hrEvents" />`, insert the new HostBanner directly after it — **do not** add another `<div className="hrEvents" />` before it.
@@ -202,6 +222,27 @@ Always add a `<div className="hrEvents" />` **after** the new HostBanner (before
 
 ---
 
+<<<<<<< HEAD
+## Step 7 — Update AllLans.js
+
+Read `src/pages/Games/Conventions/AllLans.js`, then append to `ALL_LAN_MARKERS` with the `game` property:
+```js
+{ lat: {lat}, lng: {lon}, name: "{Title}", link: "/lans/{route-slug}", game: '{GameValue}' },
+```
+
+---
+
+## Step 8 — Update Home.js
+
+Read `src/pages/Home.js`, then append to `ALL_LAN_MARKERS` with the `game` property:
+```js
+{ lat: {lat}, lng: {lon}, name: "{Title}", link: "/lans/{route-slug}", game: '{GameValue}' },
+```
+
+---
+
+=======
+>>>>>>> origin/main
 ## Step 9 — Update _redirects
 
 Read `public/_redirects`, find the `# LANs` section, and add the new route on a new line inside it:
@@ -227,8 +268,13 @@ If no matching comment block exists, add it under `<!-- Conventions -->`.
 Report exactly what was created and updated:
 - ✅ Detail page: `{file path}`
 - ✅ Route added to `src/index.js`
+<<<<<<< HEAD
+- ✅ HostBanner + marker added to `{game LAN file(s)}`
+- ✅ Marker added to `AllLans.js` and `Home.js`
+=======
 - ✅ Marker added to `src/data/lanMarkers.js` (game array: `{ArrayName}`)
 - ✅ HostBanner added to `{game LAN file(s)}`
+>>>>>>> origin/main
 - ✅ Redirect added to `public/_redirects`
 - ✅ Sitemap updated
 
