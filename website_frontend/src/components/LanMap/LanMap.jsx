@@ -117,7 +117,7 @@ function LegendControl({ legendGames, activeGames, toggleGame }) {
     return createPortal(
         <div className="lanMapLegend">
             <button
-                className={`lanMapLegendChip lanMapLegendAll ${allActive ? 'active' : 'inactive'}`}
+                className="lanMapLegendChip lanMapLegendAll active"
                 onClick={() => toggleGame('__all__')}
             >
                 {allActive ? 'Deselect All' : 'Select All'}
