@@ -1,4 +1,5 @@
-import { SeoData, HostBanner, MapCoverGame, NoEvents } from "components";
+import { SeoData, HostBanner, NoEvents, LanMap } from "components";
+import { COD_LAN_MARKERS } from 'data/lanMarkers';
 
 export const CodLans = () => {
     return (
@@ -8,14 +9,7 @@ export const CodLans = () => {
                 canonicalPath={"/games/call-of-duty/lans"}
             />
             <div className="lanMapContainer">
-                <iframe 
-                    title="Call of Duty LAN Map" 
-                    id="map" 
-                    className="lanMap"
-                    src="https://www.google.com/maps/d/u/2/embed?mid=1GEf0IzpwDFmiA-Snc7WsoH_nbqPvNhU&ehbc=2E312F"
-                />
-
-                <MapCoverGame game={"CoD"} />
+                <LanMap markers={COD_LAN_MARKERS} game="CoD" />
             </div>
 
             <div className="eventBannerContainer">
@@ -61,7 +55,7 @@ export const CodLans = () => {
                 </HostBanner>
 
                 <div className="hrEvents" />
-                    
+
             </div>
         </div>
     );

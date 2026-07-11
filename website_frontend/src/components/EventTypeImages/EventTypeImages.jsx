@@ -2,7 +2,29 @@ import styles from './EventTypeImages.module.css';
 import { Link } from 'react-router';
 import React from 'react';
 
+const ALL_ARTICLES = [
+    { path: "/more/articles/The-Problem-With-Esports",             img: "https://i.imgur.com/vBqSUhI.png", alt: "The Problem With Esports" },
+    { path: "/more/articles/How-We-Fix-It",                        img: "https://i.imgur.com/Q6NQGsD.png", alt: "How We Fix It" },
+    { path: "/more/articles/What-We-Provide",                      img: "https://i.imgur.com/Fr7yPnN.png", alt: "What We Provide" },
+    { path: "/more/articles/How-to-Join-an-Esports-League",        img: "https://i.imgur.com/zS2wj8d.png", alt: "How to Join an Esports League" },
+    { path: "/more/articles/How-Esports-Can-Be-Better",            img: "https://i.imgur.com/DEB6G8p.png", alt: "How Esports Can Be Better" },
+    { path: "/more/articles/why-usync-is-unique",                  img: "https://i.imgur.com/mLgjr7C.png", alt: "Why uSync Is Like No Other Esports Platform" },
+    { path: "/more/articles/black-ops-7-best-controller-settings", img: "https://i.imgur.com/YFBAgwb.png", alt: "Best Black Ops 7 Controller Settings" },
+    { path: "/more/articles/best-dpi-valorant-sensitivity",        img: "https://i.imgur.com/4uCWjJk.png", alt: "Best DPI for VALORANT" },
+    { path: "/more/articles/how-to-enable-120hz-ps5",              img: "https://i.imgur.com/4T0DiqI.png", alt: "How to Enable 120Hz on PS5" },
+    { path: "/more/articles/esports-tournaments-near-me",          img: "https://i.imgur.com/0iGhGOT.png", alt: "How to Find Esports Tournaments Near You" },
+    { path: "/more/articles/how-to-join-online-gaming-tournaments",img: "https://i.imgur.com/QPWSmtA.png", alt: "How to Join an Online Gaming Tournament" },
+];
+
 export const EventTypeImages = ({ page, articleName='' }) => {
+
+    const FEATURED_ARTICLE_ALTS = [
+        "The Problem With Esports",
+        "How We Fix It",
+        "What We Provide",
+        "How to Join an Esports League",
+    ];
+    const otherArticles = ALL_ARTICLES.filter(a => FEATURED_ARTICLE_ALTS.includes(a.alt) && a.alt !== articleName);
 
     return (
         <div>
@@ -176,67 +198,24 @@ export const EventTypeImages = ({ page, articleName='' }) => {
 
             {page === "All LANs" &&
                 <div className={`${styles.imageEventContainer} ${styles.soloImage}`}>
-                    <Link to="/LanMap">
+                    <Link to="/lans/all">
                         <img src="https://i.imgur.com/OPhy6nX.png" alt='All LANs'/>
                     </Link>
                 </div>
             }
 
-            {page === "Articles" &&
-                <div className={styles.imageEventContainer}>
-                    <Link to={"/more/articles/The-Problem-With-Esports"}>
-                        <img src='https://i.imgur.com/vBqSUhI.png' alt='The Problem With Esports' />
-                    </Link>
-
-                    <Link to={"/more/articles/How-We-Fix-It"}>
-                        <img src='https://i.imgur.com/Q6NQGsD.png' alt='How We Fix It' />
-                    </Link>
-
-                    <Link to={"/more/articles/What-We-Provide"}>
-                        <img src='https://i.imgur.com/Fr7yPnN.png' alt='What We Provide' />
-                    </Link>
-
-                    <Link to={"/more/articles/How-to-Join-an-Esports-League"}>
-                        <img src='https://i.imgur.com/zS2wj8d.png' alt='How to Join an Esports League' />
-                    </Link>
-
-                    <Link to={"/more/articles/How-Esports-Can-Be-Better"}>
-                        <img src='https://i.imgur.com/DEB6G8p.png' alt='How Esports Can Be Better' />
-                    </Link>
-                </div>
-            }
-
             {page === "Article" &&
-                <div className={styles.imageArticleContainer}>
-                    {articleName !== "The Problem With Esports" && 
-                        <Link to={"/more/articles/The-Problem-With-Esports"}>
-                            <img src='https://i.imgur.com/vBqSUhI.png' alt='The Problem With Esports' className={styles.articlePageImg} />
-                        </Link>
-                    }
-                    
-                    {articleName !== "How We Fix It" && 
-                        <Link to={"/more/articles/How-We-Fix-It"}>
-                            <img src='https://i.imgur.com/Q6NQGsD.png' alt='How We Fix It' className={styles.articlePageImg} />
-                        </Link>
-                    }
-                    
-                    {articleName !== "What We Provide" && 
-                        <Link to={"/more/articles/What-We-Provide"}>
-                            <img src='https://i.imgur.com/Fr7yPnN.png' alt='What We Provide' className={styles.articlePageImg} />
-                        </Link>
-                    }
-                    
-                    {articleName !== "How to Join an Esports League" &&
-                        <Link to={"/more/articles/How-to-Join-an-Esports-League"}>
-                            <img src='https://i.imgur.com/zS2wj8d.png' alt='How to Join an Esports League' className={styles.articlePageImg} />
-                        </Link>
-                    }
-
-                    {articleName !== "How Esports Can Be Better" && 
-                        <Link to={"/more/articles/How-Esports-Can-Be-Better"}>
-                            <img src='https://i.imgur.com/DEB6G8p.png' alt='How Esports Can Be Better' className={styles.articlePageImg} />
-                        </Link>
-                    }
+                <div>
+                    <div className={styles.imageArticleContainer}>
+                        {otherArticles.map(a => (
+                            <Link key={a.path} to={a.path}>
+                                <img src={a.img} alt={a.alt} className={styles.articlePageImg} />
+                            </Link>
+                        ))}
+                    </div>
+                    <div className={styles.moreArticlesWrap}>
+                        <Link to="/more/articles" className={styles.moreArticlesBtn}>More Articles</Link>
+                    </div>
                 </div>
             }
 

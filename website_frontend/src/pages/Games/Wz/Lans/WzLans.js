@@ -1,4 +1,5 @@
-import { SeoData, HostBanner, MapCoverGame, NoEvents } from "components";
+import { SeoData, HostBanner, NoEvents, LanMap } from "components";
+import { WZ_LAN_MARKERS } from 'data/lanMarkers';
 
 export const WzLans = () => {
     return (
@@ -8,14 +9,7 @@ export const WzLans = () => {
                 canonicalPath={"/games/warzone/lans"}
             />
             <div className="lanMapContainer">
-                <iframe 
-                    title="Warzone LAN Map" 
-                    id="map" 
-                    className="lanMap"
-                    src="https://www.google.com/maps/d/u/2/embed?mid=1a5JsmB31CsSiOh4SWPvXNfESQdpvrvA&ehbc=2E312F"
-                />
-
-                <MapCoverGame game={"Warzone"} />
+                <LanMap markers={WZ_LAN_MARKERS} game="Warzone" />
             </div>
 
             <div className="eventBannerContainer">
