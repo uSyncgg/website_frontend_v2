@@ -335,16 +335,11 @@
 .cta {
     position: relative;
     overflow: hidden;
-    width: 80%;
-    background:
-        linear-gradient(135deg, rgba(110, 75, 170, .55), rgba(14, 12, 20, .82)),
-        url("https://i.imgur.com/EKecSht.png");
-    background-size: cover;
-    background-position: center;
+    background: linear-gradient(135deg, rgba(142, 106, 206, .25), rgba(90, 70, 140, .15));
     border: 1px solid rgba(142, 106, 206, .3);
     border-radius: 1.5rem;
     padding: 4rem 1rem;
-    margin: 3rem auto 4rem;
+    margin: 3rem 2rem 4rem;
 }
 
 .ctaGlow {
@@ -589,7 +584,7 @@
     }
 
     .cta {
-        margin: 3rem auto 3rem;
+        margin: 3rem 1rem 3rem;
         padding: 3rem 1.25rem;
     }
 }
