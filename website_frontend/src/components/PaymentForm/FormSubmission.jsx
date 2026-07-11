@@ -14,10 +14,10 @@ export const FormSubmission = ({ review, disabled }) => {
     return (
         <React.Fragment>
             {review ? (
-                <React.Fragment>
+                <div className={styles.submissionRow}>
                     <button type="button" onClick={goBack} className={styles.formEditButton}>Edit</button>
                     <button type="submit" className={styles.formButton} disabled={disabled}>Go to Payment</button>
-                </React.Fragment>
+                </div>
             ) : (
                 <button type="submit" className={styles.formButton}>Go to Review</button>
             )}

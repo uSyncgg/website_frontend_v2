@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import styles from './GeneralPaymentForm.module.css';
-import { PaymentForm , PaymentCart, FormDataCheck, LoadingWheel } from "components";
-import { useLocation } from "react-router";
+import { PaymentForm , PaymentCart, FormDataCheck, LoadingWheel, CheckoutSteps } from "components";
+import { useLocation, useNavigate } from "react-router";
+import { FaLock, FaArrowLeft } from "react-icons/fa";
 
 function GeneralPaymentForm(
     { 
@@ -15,6 +16,7 @@ function GeneralPaymentForm(
     }
 ) {
     const location = useLocation();
+    const navigate = useNavigate();
     const formData = location.state?.formData;
     const takenRef = useRef([]);
 
@@ -44,7 +46,7 @@ function GeneralPaymentForm(
                     takenRef.current = [];
                     setError(false);
                 } else {
-                    takenRef.current = Object.keys(result.errorData);
+                    takenRef.current = Object.keys(result.errorData || {});
                     setError(true);
                 }
 
@@ -57,21 +59,32 @@ function GeneralPaymentForm(
     }, [review]);
     
     return (
-        <div className={`standardContainer ${styles.generalFormContainer}`}>
+        <div className="standardContainer">
             {/* {isLoading && (
                 <LoadingWheel />
             )} */}
 
-            <div className={styles.sectionOneForm}>
-                <PaymentForm 
-                    review={review} 
-                    formType={formType} 
-                    reviewEndpoint={reviewEndpoint} 
-                    id={id} 
-                    price={passPrice} 
-                    title={formTitle}
-                    eventName={eventName}
-                >
+            <div className={styles.checkoutHeader}>
+                <button type="button" className={styles.backButton} onClick={() => navigate(-1)}>
+                    <FaArrowLeft /> Back
+                </button>
+                <p className={styles.eyebrow}>Secure Checkout</p>
+                <h1 className={styles.eventTitle}>{review ? "Review" : eventName}</h1>
+                <CheckoutSteps active={review ? 2 : 1} />
+                <p className={styles.trustNote}><FaLock /> Payments are processed securely by Stripe. uSync never stores your card details.</p>
+            </div>
+
+            <div className={styles.generalFormContainer}>
+                <div className={styles.sectionOneForm}>
+                    <PaymentForm
+                        review={review}
+                        formType={formType}
+                        reviewEndpoint={reviewEndpoint}
+                        id={id}
+                        price={passPrice}
+                        title={formTitle}
+                        eventName={eventName}
+                    >
                     <div className={styles.formGrid}>
                         <PaymentForm.RequiredLabel htmlFor={"team_name"}>Team Name</PaymentForm.RequiredLabel>
                         <PaymentForm.RegularLabel htmlFor={"captain_activision"}>Captain's Activision</PaymentForm.RegularLabel>
@@ -179,11 +192,12 @@ function GeneralPaymentForm(
                         </div>
                         <PaymentForm.Submission review={review} disabled={error} />
                     </div>
-                </PaymentForm>
-            </div>
+                    </PaymentForm>
+                </div>
 
-            <div className={styles.sectionTwoForm}>
-                <PaymentCart pass={passPrice / 100} fee={fee} />
+                <div className={styles.sectionTwoForm}>
+                    <PaymentCart pass={passPrice / 100} fee={fee} eventName={eventName} />
+                </div>
             </div>
         </div>
     )
