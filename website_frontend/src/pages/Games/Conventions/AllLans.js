@@ -1,4 +1,5 @@
-import { SeoData, MapCoverGame } from "components"
+import { SeoData, LanMap } from "components";
+import { ALL_LAN_MARKERS } from 'data/lanMarkers';
 
 export const AllLans = () => {
     return (
@@ -8,14 +9,7 @@ export const AllLans = () => {
                 canonicalPath={"/lans/all"}
             />
             <div className="lanMapContainer">
-                <iframe 
-                    title="LAN Map"  
-                    id="map" 
-                    className={"allLansMap"}
-                    src="https://www.google.com/maps/d/u/2/embed?mid=1QrCfeXFSyZJMXLzUeAiIWy0hcWgaJVg&ehbc=2E312F"
-                />
-
-                <MapCoverGame />
+                <LanMap markers={ALL_LAN_MARKERS} showAllGames={true} />
             </div>
         </div>
     )

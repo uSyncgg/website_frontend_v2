@@ -29,6 +29,12 @@ import { HowWeFixIt } from 'pages/More/Articles/HowWeFixIt';
 import { JoiningEsportsLeague } from 'pages/More/Articles/JoiningEsportsLeague';
 import { ProblemWithEsports } from 'pages/More/Articles/ProblemWithEsports';
 import { WhatWeProvide } from 'pages/More/Articles/WhatWeProvide';
+import { WhyUsyncIsUnique } from 'pages/More/Articles/WhyUsyncIsUnique';
+import { BlackOps7Settings } from 'pages/More/Articles/BlackOps7Settings';
+import { ValorantDPI } from 'pages/More/Articles/ValorantDPI';
+import { PS5_120Hz } from 'pages/More/Articles/PS5_120Hz';
+import { EsportsTournamentsNearMe } from 'pages/More/Articles/EsportsTournamentsNearMe';
+import { JoinOnlineTournament } from 'pages/More/Articles/JoinOnlineTournament';
 
 // Cod Specific Pages
 import { Cod } from 'pages/Games/Cod/Cod';
@@ -324,11 +330,11 @@ import { TheSummoning2026 } from 'pages/Games/Lol/Lans/Events/TheSummoning2026';
 import { CitadelI } from 'pages/Games/Halo/Lans/Events/CitadelI';
 import { GameandGeek2026 } from 'pages/Games/Halo/Lans/Events/GameandGeek2026';
 import { SFGE2026 } from 'pages/Games/Halo/Lans/Events/SFGE2026';
-
 import { Conventions } from 'pages/Games/Conventions/Conventions';
 
 // Archived LANs Below
 // 2026
+import { ShintoTest } from 'pages/Games/Cod/Lans/Archived/2026/ShintoTest';
 import { SummerConWS2026 } from 'pages/Games/Conventions/Archived/2026/SummerConWS2026';
 import { BECSoloLaneShowdown } from 'pages/Games/Conventions/Archived/2026/BECSoloLaneShowdown';
 import { LowtierMajorIV } from 'pages/Games/Conventions/Archived/2026/LowtierMajorIV';
@@ -388,6 +394,12 @@ root.render(
           <Route path='/more/articles/How-We-Fix-It' element={<HowWeFixIt />} />
           <Route path='/more/articles/What-We-Provide' element={<WhatWeProvide />} />
           <Route path='/more/articles/How-to-Join-an-Esports-League' element={<JoiningEsportsLeague />} />
+          <Route path='/more/articles/why-usync-is-unique' element={<WhyUsyncIsUnique />} />
+          <Route path='/more/articles/black-ops-7-best-controller-settings' element={<BlackOps7Settings />} />
+          <Route path='/more/articles/best-dpi-valorant-sensitivity' element={<ValorantDPI />} />
+          <Route path='/more/articles/how-to-enable-120hz-ps5' element={<PS5_120Hz />} />
+          <Route path='/more/articles/esports-tournaments-near-me' element={<EsportsTournamentsNearMe />} />
+          <Route path='/more/articles/how-to-join-online-gaming-tournaments' element={<JoinOnlineTournament />} />
 
           {/* CoD Pages Minus LANs */}
           <Route path='/games/call-of-duty' element={<Cod />} />
@@ -671,7 +683,7 @@ root.render(
 
           {/* LANs - CURRENT*/}
           {/* All LANs */}
-          <Route path='/LanMap' element={<AllLans />} />
+          <Route path='/lans/all' element={<AllLans />} />
           {/* CoD */}
           <Route path='/lans/shintochamps2026' element={<ShintoChamps2026 />} />
           <Route path='/lans/rva-esports-championship-2026' element={<RVAEsportsChampionship2026 />} />
@@ -694,6 +706,7 @@ root.render(
 
           {/* Archived LANs */}
           {/* 2026 */}
+          <Route path='/lans/shinto-test' element={<ShintoTest />} />
           <Route path='/lans/summercon-ws-2026' element={<SummerConWS2026 />} />
           <Route path='/lans/egochall-tournament' element={<EgoChallTournament />} />
           <Route path='/lans/lowtier-major-iv' element={<LowtierMajorIV />} />
