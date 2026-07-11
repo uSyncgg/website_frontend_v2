@@ -38,7 +38,7 @@ export const Home = () => {
                 <div className={styles.statsRow}>
                     <div className={styles.statCard}>
                         <p className={styles.statValue}>100+</p>
-                        <p className={styles.statLabel}>LANs</p>
+                        <p className={styles.statLabel}>Yearly LANs</p>
                     </div>
                     <div className={styles.statCard}>
                         <p className={styles.statValue}>200+</p>
@@ -46,7 +46,7 @@ export const Home = () => {
                     </div>
                     <div className={styles.statCard}>
                         <p className={styles.statValue}>70+</p>
-                        <p className={styles.statLabel}>Leagues</p>
+                        <p className={styles.statLabel}>Seasonal Leagues</p>
                     </div>
                 </div>
 
