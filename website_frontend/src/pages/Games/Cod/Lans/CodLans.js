@@ -1,10 +1,5 @@
 import { SeoData, HostBanner, MapCoverGame, NoEvents, LanMap } from "components";
-
-const COD_LAN_MARKERS = [
-    { lat: 37.545672,  lng: -77.4363207, name: "RVA Esports Championship", link: "/lans/rva-esports-championship-2026", game: 'CoD' },
-    { lat: 30.0990662, lng: -81.5229898, name: "EWGL 3",                   link: "/lans/ewgl3",                        game: 'CoD' },
-    { lat: 39.9940032, lng: -83.0060542, name: "Shinto Champs",            link: "/lans/shintochamps2026",             game: 'CoD' },
-];
+import { COD_LAN_MARKERS } from 'data/lanMarkers';
 
 export const CodLans = () => {
     return (

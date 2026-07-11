@@ -1,4 +1,5 @@
 import { SeoData, HostBanner, MapCoverGame, NoEvents, LanMap } from "components";
+import { WZ_LAN_MARKERS } from 'data/lanMarkers';
 
 export const WzLans = () => {
     return (
@@ -8,7 +9,7 @@ export const WzLans = () => {
                 canonicalPath={"/games/warzone/lans"}
             />
             <div className="lanMapContainer">
-                <LanMap markers={[]} game="Warzone" />
+                <LanMap markers={WZ_LAN_MARKERS} game="Warzone" />
 
                 <MapCoverGame game={"Warzone"} />
             </div>

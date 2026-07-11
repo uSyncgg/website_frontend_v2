@@ -78,10 +78,12 @@ function CtrlScrollZoom() {
     return null;
 }
 
-export const LanMap = ({ markers = [], className = 'lanMap', game = null }) => {
-    const legendGames = game
-        ? [game]
-        : GAME_ORDER.filter(g => markers.some(m => (m.game || 'Conventions') === g));
+export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAllGames = false }) => {
+    const legendGames = showAllGames
+        ? GAME_ORDER
+        : game
+            ? [game]
+            : GAME_ORDER.filter(g => markers.some(m => (m.game || 'Conventions') === g));
 
     return (
         <div className="lanMapWithLegend">

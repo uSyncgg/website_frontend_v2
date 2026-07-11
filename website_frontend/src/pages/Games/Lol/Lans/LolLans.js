@@ -1,8 +1,5 @@
 import { SeoData, HostBanner, MapCoverGame, NoEvents, LanMap } from "components";
-
-const LOL_LAN_MARKERS = [
-    { lat: 42.2469148, lng: -83.0210947, name: "The Summoning 2026", link: "/lans/the-summoning-2026", game: 'LoL' },
-];
+import { LOL_LAN_MARKERS } from 'data/lanMarkers';
 
 export const LolLans = () => {
     return (

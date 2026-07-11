@@ -1,10 +1,5 @@
 import { SeoData, HostBanner, MapCoverGame, NoEvents, LanMap } from "components";
-
-const HALO_LAN_MARKERS = [
-    { lat: 35.7735601, lng: -78.6408138,  name: "Game And Geek Expo 2026",         link: "/lans/game-and-geek-2026", game: 'Halo' },
-    { lat: 33.8847879, lng: -84.4649911,  name: "Southern-Fried Gaming Expo 2026", link: "/lans/sfge-2026",          game: 'Halo' },
-    { lat: 39.6829806, lng: -105.0793028, name: "Citadel I",                        link: "/lans/citadel-i",          game: 'Halo' },
-];
+import { HALO_LAN_MARKERS } from 'data/lanMarkers';
 
 export const HaloLans = () => {
     return (
