@@ -2,7 +2,8 @@ import React from "react";
 import styles from './Home.module.css';
 import '../index.css';
 import { Link } from "react-router";
-import { MapCoverHome, GameImage, SeoData } from "components";
+import { GameImage, SeoData, LanMap } from "components";
+import { ALL_LAN_MARKERS } from 'data/lanMarkers';
 
 export const Home = () => {
     return (
@@ -50,14 +51,7 @@ export const Home = () => {
                 <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
 
                 <div className={styles.mapContainer}>
-                    <iframe 
-                        title="LAN Map" 
-                        id="map" 
-                        className={styles.map}
-                        src="https://www.google.com/maps/d/u/2/embed?mid=1QrCfeXFSyZJMXLzUeAiIWy0hcWgaJVg&ehbc=2E312F"
-                    />
-
-                    <MapCoverHome />
+                    <LanMap markers={ALL_LAN_MARKERS} className={styles.map} showAllGames={true} />
                 </div>
 
                 <h3 className={styles.learn}>

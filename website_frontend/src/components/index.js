@@ -22,6 +22,7 @@ import { ExternalButton } from "./ExternalButton/ExternalButton";
 // Maps
 import MapCoverHome from "./MapCover/MapCoverHome";
 import MapCoverGame from "./MapCover/MapCoverGame";
+import { LanMap } from "./LanMap/LanMap";
 
 // Game & Event Type Bubbles
 import { GameImage } from "./GameImage/GameImage";
@@ -88,5 +89,6 @@ export {
     TournamentList,
     ArticleImages,
     VerifiedText,
-    VerifiedImage
+    VerifiedImage,
+    LanMap
 };

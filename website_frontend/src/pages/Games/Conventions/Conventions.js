@@ -1,4 +1,5 @@
-import { SeoData, HostBanner, MapCoverGame } from "components";
+import { SeoData, HostBanner, LanMap } from "components";
+import { CONVENTION_MARKERS } from 'data/lanMarkers';
 export const Conventions = () => {
     return (
         <div className="standardContainer">
@@ -7,14 +8,7 @@ export const Conventions = () => {
                 canonicalPath={"/lans"}
             />
             <div className="lanMapContainer">
-                <iframe
-                    title="LAN Map"
-                    id="map"
-                    className="lanMap"
-                    src="https://www.google.com/maps/d/u/2/embed?mid=14BPiOYVAOTLrIFgUNrLdViUMRoypuU4&ehbc=2E312F"
-                />
-
-                <MapCoverGame />
+                <LanMap markers={CONVENTION_MARKERS} game="Conventions" />
             </div>
 
             <div className="eventBannerContainer">
