@@ -28,6 +28,9 @@ import { LanMap } from "./LanMap/LanMap";
 import { GameImage } from "./GameImage/GameImage";
 import { EventTypeImages } from "./EventTypeImages/EventTypeImages";
 
+// Homepage
+import { ChooseYourGame } from "./ChooseYourGame/ChooseYourGame";
+
 // Payment Form
 import { PaymentForm } from "./PaymentForm/PaymentForm";
 import { PaymentCart } from "./PaymentCart/PaymentCart";
@@ -90,5 +93,6 @@ export {
     ArticleImages,
     VerifiedText,
     VerifiedImage,
+    ChooseYourGame,
     LanMap
 };
