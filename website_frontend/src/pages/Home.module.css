@@ -137,6 +137,7 @@
 }
 
 .sectionTwo {
+    display: flow-root;
     text-align: center;
     justify-content: center;
 }

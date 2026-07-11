@@ -1,11 +1,10 @@
 import React from "react";
+import { FaRegClock, FaGamepad, FaGlobeAmericas, FaMedal } from "react-icons/fa";
 import styles from './TournamentCard.module.css';
+import { HOSTS } from './hosts';
 
 export const CodTournamentCard = ({ tournament }) => {
-    const banners = {
-        'cmg': window.innerWidth > 750 ? "https://i.imgur.com/M4FR1qC.png" : "https://i.imgur.com/X7jdhHR.png",
-        'codagent': window.innerWidth > 750 ? "https://i.imgur.com/R12yczc.png" : "https://i.imgur.com/N614MLb.png"
-    }
+    const host = HOSTS[tournament.site] || { label: tournament.site, logo: null };
 
     // Add ordinal suffix to the day (e.g. 21 -> "21st")
     function getOrdinalSuffix(n) {
@@ -33,7 +32,7 @@ export const CodTournamentCard = ({ tournament }) => {
 
         // "Apr 14th" / "April 14" -> month name + day number
         const dateMatch = String(dateStr).match(/([A-Za-z]+)\s+(\d{1,2})/);
-        // "10:00 AM" -> hour, minute, meridiem
+        // "10:00 AM" / "10:00 AM EDT" -> hour, minute, meridiem
         const timeMatch = String(timeStr).match(/(\d{1,2}):(\d{2})\s*([AaPp][Mm])/);
         if (!dateMatch || !timeMatch) return null;
 
@@ -83,7 +82,9 @@ export const CodTournamentCard = ({ tournament }) => {
         // Drop any trailing offset like "GMT-4" -> "GMT"
         abbreviation = abbreviation.replace(/([A-Za-z]+)(\s?[+-]\d{1,2})?/, '$1');
 
-        // Date in the viewer's local time zone, e.g. "Apr 21st"
+        // Date in the viewer's local time zone, e.g. "Apr 21st" — the timezone
+        // conversion can shift the calendar day, so it must be derived from the
+        // same Date object as the time.
         const dateFieldParts = new Intl.DateTimeFormat('en-US', {
             timeZone: userTimeZone,
             month: 'short',
@@ -94,40 +95,62 @@ export const CodTournamentCard = ({ tournament }) => {
         formattedDate = Number.isNaN(dayNum) ? formattedDate : `${month} ${getOrdinalSuffix(dayNum)}`;
     }
 
+    // "BEST OF 1" -> "Best of 1"
+    const series = tournament.series
+        ? tournament.series.charAt(0).toUpperCase() + tournament.series.slice(1).toLowerCase()
+        : '';
+
+    // The restriction badge only shows when the scraper sends a real requirement
+    const requirements = (tournament.requirements || '').trim();
+    const restriction = ['', 'none', 'n/a', 'no requirements'].includes(requirements.toLowerCase())
+        ? null
+        : requirements;
+
+    const isFreeEntry = tournament.is_free === true
+        || (tournament.entry || '').toLowerCase().includes('free');
+
     return (
-        <div className={styles.tournamentCardContainer}>
-            <div className={`${styles.tournamentCard}`} style={{ '--bg-image': `url(${banners[tournament.site]})` }}>
-                <div className={styles.titleInfo}>
-                    <h2 className={styles.white}>{tournament.team_size} {" "} {tournament.series}</h2>
-                    <h2 className={styles.white}>{tournament.gamemode.toUpperCase()}</h2>
-                    <h2 className={styles.purple}>{formattedTime} {" "} {abbreviation}</h2>
+        <a className={styles.tournamentCard} to={tournament.url} target="_blank">
+            <div className={styles.hostTile}>
+                {host.logo
+                    ? <img src={host.logo} alt={`${host.label} logo`} />
+                    : <span>{host.label}</span>
+                }
+            </div>
+
+            <div className={styles.cardInfo}>
+                <h2 className={styles.cardTitle}>
+                    {tournament.team_size} {series} · {(tournament.gamemode || '').toUpperCase()}
+                </h2>
+
+                <div className={styles.metaRow}>
+                    <span className={styles.metaTime}>
+                        <FaRegClock /> {formattedDate} · {formattedTime} {abbreviation}
+                    </span>
+                    <span className={styles.metaItem}>
+                        <FaGamepad /> {tournament.platforms}
+                    </span>
                 </div>
 
-                <div className={styles.bodyInfo}>
-                    <p className={styles.white}>Date</p>
-                    <p className={styles.purple}>{formattedDate}</p>
-                    <p className={styles.white}>Region</p>
-                    <p className={styles.purple}>{tournament.region}</p>
-                </div>
-
-                <div className={styles.bodyInfo}>
-                    <p className={styles.white}>Platform</p>
-                    <p className={styles.purple}>{tournament.platforms}</p>
-                    <p className={styles.white}>Skill</p>
-                    <p className={styles.purple}>{tournament.skill}</p>
-                </div>
-
-                <div className={styles.bodyInfo}>
-                    <p className={styles.white}>Entry Fee</p>
-                    <p className={styles.purple}>{tournament.entry}</p>
-                    <p className={styles.white}>Restrictions</p>
-                    <p className={styles.purple}>{tournament.requirements}</p>
-                </div>
-
-                <div className={styles.buttonContainer}>
-                    <button className={styles.tournamentButton} type="submit" onClick={() => window.open(tournament.url, '_blank')}>Join Now</button>
+                <div className={styles.metaRow}>
+                    <span className={styles.metaItem}>
+                        <FaGlobeAmericas /> {tournament.region}
+                    </span>
+                    <span className={styles.metaItem}>
+                        <FaMedal /> {tournament.skill}
+                    </span>
                 </div>
             </div>
-        </div>
+
+            <div className={styles.cardActions}>
+                {restriction && <span className={styles.restriction}>{restriction}</span>}
+                <span className={`${styles.entry} ${isFreeEntry ? styles.entryFree : ''}`}>
+                    {tournament.entry}
+                </span>
+                <button className={styles.tournamentButton}>
+                    Join Now
+                </button>
+            </div>
+        </a>
     )
 }
