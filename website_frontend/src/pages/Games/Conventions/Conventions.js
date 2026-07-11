@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { SeoData, HostBanner, MapCoverGame, LanMap } from "components";
 
 const CONVENTION_MARKERS = [
@@ -7,6 +8,10 @@ const CONVENTION_MARKERS = [
     { lat: 39.9597244, lng: -75.16156,    name: "The Retake",               link: "/lans/the-retake",              game: 'Conventions' },
     { lat: 39.6829806, lng: -105.0793028, name: "Hellcase CS2 LAN 2026",    link: "/lans/hellcase-cs2-2026",       game: 'Conventions' },
 ];
+=======
+import { SeoData, HostBanner, LanMap } from "components";
+import { CONVENTION_MARKERS } from 'data/lanMarkers';
+>>>>>>> origin/main
 export const Conventions = () => {
     return (
         <div className="standardContainer">
@@ -16,8 +21,11 @@ export const Conventions = () => {
             />
             <div className="lanMapContainer">
                 <LanMap markers={CONVENTION_MARKERS} game="Conventions" />
+<<<<<<< HEAD
 
                 <MapCoverGame />
+=======
+>>>>>>> origin/main
             </div>
 
             <div className="eventBannerContainer">

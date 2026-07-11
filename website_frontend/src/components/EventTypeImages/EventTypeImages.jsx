@@ -198,32 +198,8 @@ export const EventTypeImages = ({ page, articleName='' }) => {
 
             {page === "All LANs" &&
                 <div className={`${styles.imageEventContainer} ${styles.soloImage}`}>
-                    <Link to="/LanMap">
+                    <Link to="/other-lans">
                         <img src="https://i.imgur.com/OPhy6nX.png" alt='All LANs'/>
-                    </Link>
-                </div>
-            }
-
-            {page === "Articles" &&
-                <div className={styles.imageEventContainer}>
-                    <Link to={"/more/articles/The-Problem-With-Esports"}>
-                        <img src='https://i.imgur.com/vBqSUhI.png' alt='The Problem With Esports' />
-                    </Link>
-
-                    <Link to={"/more/articles/How-We-Fix-It"}>
-                        <img src='https://i.imgur.com/Q6NQGsD.png' alt='How We Fix It' />
-                    </Link>
-
-                    <Link to={"/more/articles/What-We-Provide"}>
-                        <img src='https://i.imgur.com/Fr7yPnN.png' alt='What We Provide' />
-                    </Link>
-
-                    <Link to={"/more/articles/How-to-Join-an-Esports-League"}>
-                        <img src='https://i.imgur.com/zS2wj8d.png' alt='How to Join an Esports League' />
-                    </Link>
-
-                    <Link to={"/more/articles/How-Esports-Can-Be-Better"}>
-                        <img src='https://i.imgur.com/DEB6G8p.png' alt='How Esports Can Be Better' />
                     </Link>
                 </div>
             }

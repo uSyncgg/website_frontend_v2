@@ -2,6 +2,7 @@ import React from "react";
 import styles from './Home.module.css';
 import '../index.css';
 import { Link } from "react-router";
+<<<<<<< HEAD
 import { MapCoverHome, GameImage, SeoData, LanMap } from "components";
 
 const ALL_LAN_MARKERS = [
@@ -18,6 +19,10 @@ const ALL_LAN_MARKERS = [
     { lat: 39.9597244, lng: -75.16156,    name: "The Retake",                       link: "/lans/the-retake",                    game: 'Conventions' },
     { lat: 39.6829806, lng: -105.0793028, name: "Hellcase CS2 LAN 2026",            link: "/lans/hellcase-cs2-2026",             game: 'Conventions' },
 ];
+=======
+import { GameImage, SeoData, LanMap } from "components";
+import { ALL_LAN_MARKERS } from 'data/lanMarkers';
+>>>>>>> origin/main
 
 export const Home = () => {
     return (
@@ -65,9 +70,13 @@ export const Home = () => {
                 <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
 
                 <div className={styles.mapContainer}>
+<<<<<<< HEAD
                     <LanMap markers={ALL_LAN_MARKERS} className={styles.map} />
 
                     <MapCoverHome />
+=======
+                    <LanMap markers={ALL_LAN_MARKERS} className={styles.map} showAllGames={true} />
+>>>>>>> origin/main
                 </div>
 
                 <h3 className={styles.learn}>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { SeoData, HostBanner, MapCoverGame, NoEvents, LanMap } from "components";
 
 const COD_LAN_MARKERS = [
@@ -5,6 +6,10 @@ const COD_LAN_MARKERS = [
     { lat: 30.0990662, lng: -81.5229898, name: "EWGL 3",                   link: "/lans/ewgl3",                        game: 'CoD' },
     { lat: 39.9940032, lng: -83.0060542, name: "Shinto Champs",            link: "/lans/shintochamps2026",             game: 'CoD' },
 ];
+=======
+import { SeoData, HostBanner, NoEvents, LanMap } from "components";
+import { COD_LAN_MARKERS } from 'data/lanMarkers';
+>>>>>>> origin/main
 
 export const CodLans = () => {
     return (
@@ -15,8 +20,11 @@ export const CodLans = () => {
             />
             <div className="lanMapContainer">
                 <LanMap markers={COD_LAN_MARKERS} game="CoD" />
+<<<<<<< HEAD
 
                 <MapCoverGame game={"CoD"} />
+=======
+>>>>>>> origin/main
             </div>
 
             <div className="eventBannerContainer">

@@ -8,7 +8,7 @@ import './LanMap.css';
 const GAME_COLORS = {
     'CoD':         '#3a7bd5',
     'LoL':         '#962d2d',
-    'Halo':        '#8e6ace',
+    'Halo':        '#eee242',
     'Warzone':     '#2ea855',
     'Conventions': '#e07b27',
 };
@@ -78,10 +78,12 @@ function CtrlScrollZoom() {
     return null;
 }
 
-export const LanMap = ({ markers = [], className = 'lanMap', game = null }) => {
-    const legendGames = game
-        ? [game]
-        : GAME_ORDER.filter(g => markers.some(m => (m.game || 'Conventions') === g));
+export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAllGames = false }) => {
+    const legendGames = showAllGames
+        ? GAME_ORDER
+        : game
+            ? [game]
+            : GAME_ORDER.filter(g => markers.some(m => (m.game || 'Conventions') === g));
 
     return (
         <div className="lanMapWithLegend">

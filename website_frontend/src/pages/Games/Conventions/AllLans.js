@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { SeoData, MapCoverGame, LanMap } from "components";
 
 const ALL_LAN_MARKERS = [
@@ -14,6 +15,10 @@ const ALL_LAN_MARKERS = [
     { lat: 39.9597244, lng: -75.16156,    name: "The Retake",                       link: "/lans/the-retake",                    game: 'Conventions' },
     { lat: 39.6829806, lng: -105.0793028, name: "Hellcase CS2 LAN 2026",            link: "/lans/hellcase-cs2-2026",             game: 'Conventions' },
 ];
+=======
+import { SeoData, LanMap } from "components";
+import { ALL_LAN_MARKERS } from 'data/lanMarkers';
+>>>>>>> origin/main
 
 export const AllLans = () => {
     return (
@@ -23,9 +28,13 @@ export const AllLans = () => {
                 canonicalPath={"/lans/all"}
             />
             <div className="lanMapContainer">
+<<<<<<< HEAD
                 <LanMap markers={ALL_LAN_MARKERS} />
 
                 <MapCoverGame />
+=======
+                <LanMap markers={ALL_LAN_MARKERS} showAllGames={true} />
+>>>>>>> origin/main
             </div>
         </div>
     )

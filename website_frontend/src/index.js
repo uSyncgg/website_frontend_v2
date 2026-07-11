@@ -683,7 +683,7 @@ root.render(
 
           {/* LANs - CURRENT*/}
           {/* All LANs */}
-          <Route path='/LanMap' element={<AllLans />} />
+          <Route path='/lans/all' element={<AllLans />} />
           {/* CoD */}
           <Route path='/lans/shintochamps2026' element={<ShintoChamps2026 />} />
           <Route path='/lans/rva-esports-championship-2026' element={<RVAEsportsChampionship2026 />} />
