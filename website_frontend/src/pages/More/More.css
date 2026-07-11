@@ -215,6 +215,46 @@
     padding-bottom: 2rem;
 }
 
+.articleSectionOne ul,
+.articleSectionOne ol {
+    color: black;
+    font-size: large;
+    line-height: 1.5;
+    padding-left: 1.75rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+.articleSectionOne li {
+    margin-bottom: 0.4rem;
+    font-weight: 400;
+}
+
+.articleTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 1.5rem;
+    font-size: large;
+    color: black;
+}
+
+.articleTable th,
+.articleTable td {
+    border: 1px solid #ccc;
+    padding: 0.5rem 0.85rem;
+    text-align: left;
+    font-weight: 400;
+}
+
+.articleTable th {
+    background-color: #f0eef8;
+    font-weight: 700;
+}
+
+.articleTable tr:nth-child(even) td {
+    background-color: #faf9fc;
+}
+
 @media only screen and (max-width: 768px) {
     .articleContainer {
         flex-direction: column;

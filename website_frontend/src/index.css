@@ -20,17 +20,21 @@ code {
 
 .main-content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .standardContainer {
   background-color: #313131;
   min-height: 100vh;
+  flex: 1;
   overflow-x: clip;
 }
 
 .standardBlankContainer {
   overflow-x: hidden;
   min-height: 100vh;
+  flex: 1;
 }
 
 .hr {

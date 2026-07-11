@@ -1,0 +1,218 @@
+/* ── Controls (search + filter) ── */
+.controlsBar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 2rem auto 0;
+    padding: 0 1.5rem;
+    flex-wrap: wrap;
+}
+
+.searchInput {
+    flex: 1;
+    min-width: 200px;
+    background-color: #1a1a2e;
+    border: 0.19rem solid #3a2f5a;
+    border-radius: 0.5rem;
+    color: #ffffff;
+    font-size: 0.95rem;
+    padding: 0.65rem 1rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.searchInput::placeholder {
+    color: #6a5a8a;
+}
+
+.searchInput:focus {
+    border-color: #8e6ace;
+}
+
+/* Remove browser default search cancel button styling */
+.searchInput::-webkit-search-cancel-button {
+    filter: invert(1) opacity(0.5);
+    cursor: pointer;
+}
+
+.filterButtons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.filterBtn {
+    background-color: #1a1a2e;
+    border: 0.19rem solid #3a2f5a;
+    border-radius: 999px;
+    color: #a89cc8;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 0.45rem 1rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.filterBtn:hover {
+    border-color: #8e6ace;
+    color: #ffffff;
+}
+
+.filterBtnActive {
+    background-color: rgba(142, 106, 206, 0.18);
+    border-color: #8e6ace;
+    color: #ffffff;
+}
+
+/* ── Results count ── */
+.resultsCount {
+    max-width: 1200px;
+    margin: 0.75rem auto 0;
+    padding: 0 1.5rem;
+    color: #a89cc8;
+    font-size: 0.88rem;
+}
+
+/* ── No-results state ── */
+.noResults {
+    max-width: 1200px;
+    margin: 3rem auto 4rem;
+    padding: 0 1.5rem;
+    text-align: center;
+    color: #a89cc8;
+    font-size: 1rem;
+}
+
+.clearBtn {
+    margin-top: 1rem;
+    background: none;
+    border: 0.19rem solid #8e6ace;
+    border-radius: 999px;
+    color: #8e6ace;
+    font-size: 0.88rem;
+    font-weight: 700;
+    padding: 0.45rem 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.clearBtn:hover {
+    background-color: #8e6ace;
+    color: #ffffff;
+}
+
+/* ── Card grid ── */
+.articlesGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 1.5rem auto 4rem;
+    padding: 0 1.5rem;
+}
+
+.card {
+    background-color: #1a1a2e;
+    border: 0.19rem solid #3a2f5a;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+    text-decoration: none;
+}
+
+.card:hover {
+    border-color: #8e6ace;
+    transform: translateY(-4px);
+}
+
+.thumbnail {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+}
+
+.cardBody {
+    padding: 1.25rem 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.categoryTag {
+    display: inline-block;
+    background-color: rgba(142, 106, 206, 0.18);
+    color: #8e6ace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    border: 1px solid rgba(142, 106, 206, 0.4);
+    margin-bottom: 0.85rem;
+    width: fit-content;
+}
+
+.cardTitle {
+    color: #ffffff;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0 0 0.65rem;
+}
+
+.cardExcerpt {
+    color: #a89cc8;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    flex: 1;
+    margin: 0 0 1.25rem;
+}
+
+.readMore {
+    color: #8e6ace;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: auto;
+}
+
+.readMore::after {
+    content: '→';
+    transition: transform 0.2s ease;
+}
+
+.card:hover .readMore::after {
+    transform: translateX(4px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+    .articlesGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .controlsBar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filterButtons {
+        justify-content: center;
+    }
+
+    .articlesGrid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+}
