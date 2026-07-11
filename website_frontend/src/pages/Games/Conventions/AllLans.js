@@ -1,4 +1,4 @@
-import { SeoData, MapCoverGame, LanMap } from "components";
+import { SeoData, LanMap } from "components";
 import { ALL_LAN_MARKERS } from 'data/lanMarkers';
 
 export const AllLans = () => {
@@ -10,8 +10,6 @@ export const AllLans = () => {
             />
             <div className="lanMapContainer">
                 <LanMap markers={ALL_LAN_MARKERS} showAllGames={true} />
-
-                <MapCoverGame />
             </div>
         </div>
     )

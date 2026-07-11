@@ -1,4 +1,4 @@
-import { SeoData, HostBanner, MapCoverGame, NoEvents, LanMap } from "components";
+import { SeoData, HostBanner, NoEvents, LanMap } from "components";
 import { LOL_LAN_MARKERS } from 'data/lanMarkers';
 
 export const LolLans = () => {
@@ -11,8 +11,6 @@ export const LolLans = () => {
             
             <div className="lanMapContainer">
                 <LanMap markers={LOL_LAN_MARKERS} game="LoL" />
-
-                <MapCoverGame game={"LoL"} />
             </div>
 
             <div className="eventBannerContainer">

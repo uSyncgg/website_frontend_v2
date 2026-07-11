@@ -2,7 +2,7 @@ import React from "react";
 import styles from './Home.module.css';
 import '../index.css';
 import { Link } from "react-router";
-import { MapCoverHome, GameImage, SeoData, LanMap } from "components";
+import { GameImage, SeoData, LanMap } from "components";
 import { ALL_LAN_MARKERS } from 'data/lanMarkers';
 
 export const Home = () => {
@@ -52,8 +52,6 @@ export const Home = () => {
 
                 <div className={styles.mapContainer}>
                     <LanMap markers={ALL_LAN_MARKERS} className={styles.map} showAllGames={true} />
-
-                    <MapCoverHome />
                 </div>
 
                 <h3 className={styles.learn}>
