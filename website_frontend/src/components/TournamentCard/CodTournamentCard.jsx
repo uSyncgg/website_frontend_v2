@@ -110,7 +110,7 @@ export const CodTournamentCard = ({ tournament }) => {
         || (tournament.entry || '').toLowerCase().includes('free');
 
     return (
-        <a className={styles.tournamentCard} to={tournament.url} target="_blank">
+        <a className={styles.tournamentCard} href={tournament.url} target="_blank">
             <div className={styles.hostTile}>
                 {host.logo
                     ? <img src={host.logo} alt={`${host.label} logo`} />
