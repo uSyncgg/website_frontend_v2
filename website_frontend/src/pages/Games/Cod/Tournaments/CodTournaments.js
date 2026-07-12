@@ -1,15 +1,18 @@
 import { TournamentList, TournamentFilter, TournamentPagination, filteredTournaments, SeoData } from "components";
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router";
 import axios from "axios";
 import styles from './CodTournaments.module.css';
 
 export const CodTournaments = () => {
-    const [selectedFormats, setSelectedFormats] = useState([]);
-    const [selectedRegions, setSelectedRegions] = useState([]);
-    const [selectedPlatforms, setSelectedPlatforms] = useState([]);
-    const [selectedSkills, setSelectedSkills] = useState([]);
-    const [selectedEntry, setSelectedEntry] = useState([]);
-    const [selectedHosts, setSelectedHosts] = useState([]);
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const [selectedFormats, setSelectedFormats] = useState(() => searchParams.getAll('format'));
+    const [selectedRegions, setSelectedRegions] = useState(() => searchParams.getAll('region'));
+    const [selectedPlatforms, setSelectedPlatforms] = useState(() => searchParams.getAll('platform'));
+    const [selectedSkills, setSelectedSkills] = useState(() => searchParams.getAll('skill'));
+    const [selectedEntry, setSelectedEntry] = useState(() => searchParams.getAll('entry'));
+    const [selectedHosts, setSelectedHosts] = useState(() => searchParams.getAll('host'));
 
     const clearFilters = () => {
         setSelectedFormats([]);
@@ -40,10 +43,18 @@ export const CodTournaments = () => {
             .finally(() => setIsLoaded(true));
     }, []);
 
-    // Jump back to the first page whenever a filter changes
+    // Sync filters to URL and reset page whenever a filter changes
     useEffect(() => {
         setCurrentPage(1);
-    }, [selectedFormats, selectedRegions, selectedPlatforms, selectedSkills, selectedEntry, selectedHosts]);
+        const params = new URLSearchParams();
+        selectedFormats.forEach(v => params.append('format', v));
+        selectedRegions.forEach(v => params.append('region', v));
+        selectedPlatforms.forEach(v => params.append('platform', v));
+        selectedSkills.forEach(v => params.append('skill', v));
+        selectedEntry.forEach(v => params.append('entry', v));
+        selectedHosts.forEach(v => params.append('host', v));
+        setSearchParams(params, { replace: true });
+    }, [selectedFormats, selectedRegions, selectedPlatforms, selectedSkills, selectedEntry, selectedHosts, setSearchParams]);
 
     const handleFilterChange = (setter, currentValues) => (selectedOptions) => {
         // If selectedOptions is an array, ensure deselected options are removed
