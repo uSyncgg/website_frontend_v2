@@ -1,0 +1,266 @@
+.faqPage {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 5rem;
+}
+
+.pageTitle {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+}
+
+.titleAccent {
+    display: block;
+    width: 3rem;
+    height: 0.22rem;
+    background: #8e6ace;
+    border-radius: 999px;
+    margin: 0 auto 3rem;
+}
+
+/* ── Two-column layout (games + FAQ) ── */
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2.5rem;
+    /* default align-items: stretch so left column fills FAQ height */
+}
+
+.sectionLabel {
+    color: #8e6ace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.85rem;
+}
+
+/* ── Left column: games card stretches to match FAQ height ── */
+.leftCol {
+    display: flex;
+    flex-direction: column;
+}
+
+.gamesCard {
+    background: rgba(28, 25, 33, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    padding: 1.1rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 0.7rem;
+    flex: 1;
+}
+
+.gameLink {
+    display: block;
+    height: 100%;
+    border-radius: 0.6rem;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gameLink:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 20px rgba(142, 106, 206, 0.35);
+}
+
+.gameImg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: 0.6rem;
+}
+
+/* ── Right column: FAQ accordion ── */
+.rightCol {}
+
+.faqHeading {
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.01em;
+}
+
+.accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.item {
+    background: rgba(28, 25, 33, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.875rem;
+    overflow: hidden;
+    transition: border-color 0.25s ease;
+}
+
+.item:hover {
+    border-color: rgba(142, 106, 206, 0.35);
+}
+
+.itemOpen {
+    border-color: rgba(142, 106, 206, 0.55);
+}
+
+.questionRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.4rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.questionText {
+    color: white;
+    font-size: 0.97rem;
+    font-weight: 700;
+    text-align: left;
+    flex: 1;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.chevron {
+    color: #8e6ace;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.chevronOpen {
+    transform: rotate(180deg);
+}
+
+.answerWrap {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 1rem 1.4rem 1.2rem;
+}
+
+.answerText {
+    color: #a89cc8;
+    font-size: 0.93rem;
+    line-height: 1.75;
+    margin: 0;
+}
+
+.answerLink {
+    color: white;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+.answerLink:hover {
+    color: #8e6ace;
+}
+
+/* ── Articles section: full-width below both columns ── */
+.articlesSection {
+    margin-top: 2.5rem;
+}
+
+.articlesSectionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.85rem;
+}
+
+.articlesViewAll {
+    color: #8e6ace;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s ease;
+}
+
+.articlesViewAll:hover {
+    color: white;
+}
+
+.articlesThumbs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(28, 25, 33, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.articleThumb {
+    display: block;
+    overflow: hidden;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.articleThumb:last-child {
+    border-right: none;
+}
+
+.articleThumbImg {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16 / 7;
+    object-fit: cover;
+    transition: transform 0.35s ease, filter 0.35s ease;
+    filter: brightness(0.82);
+}
+
+.articleThumb:hover .articleThumbImg {
+    transform: scale(1.04);
+    filter: brightness(1);
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .gamesCard {
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: 1fr;
+        flex: none;
+    }
+
+    .articlesThumbs {
+        grid-template-columns: 1fr;
+    }
+
+    .articleThumb {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .articleThumb:last-child {
+        border-bottom: none;
+    }
+}
+
+@media (max-width: 560px) {
+    .gamesCard {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+    }
+
+    .pageTitle {
+        font-size: 2rem;
+    }
+}

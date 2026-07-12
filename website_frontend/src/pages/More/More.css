@@ -223,11 +223,13 @@
     padding-left: 1.75rem;
     margin-bottom: 1rem;
     font-weight: 400;
+    text-align: left;
 }
 
 .articleSectionOne li {
     margin-bottom: 0.4rem;
     font-weight: 400;
+    text-align: left;
 }
 
 .articleTable {
