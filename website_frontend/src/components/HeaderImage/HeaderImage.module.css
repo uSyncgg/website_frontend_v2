@@ -1,6 +1,6 @@
 .headerImage {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
   background-image: var(--bg-image);
   background-size: cover;
@@ -15,17 +15,57 @@
   padding-top: 6%;
 }
 
+/* Darken the banner behind hero text and fade it into the page background */
+.withTitle {
+  background-image:
+    linear-gradient(180deg, rgba(21, 19, 26, .45) 0%, rgba(21, 19, 26, .65) 60%, rgba(21, 19, 26, .95) 100%),
+    var(--bg-image);
+}
+
 .headerImage h2 {
     color: white;
-    font-size: 5rem;
+    font-size: 4.5rem;
     text-align: center;
-    font-weight: 500;
-    line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin: 0;
 }
 
 .headerImageTitle {
   margin-top: 2.5rem;
   margin-bottom: 3.5rem;
+}
+
+.eyebrow {
+  color: rgb(142, 106, 206);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: .85rem;
+  margin-bottom: .75rem;
+  text-align: center;
+}
+
+.white {
+  color: white;
+}
+
+.gradientText {
+  background: linear-gradient(90deg, #8e6ace 0%, #a97fe0 45%, #6a8fe0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.subtext {
+  color: rgb(170, 166, 178);
+  font-size: 1.1rem;
+  max-width: 40rem;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .verificationContainer {
@@ -87,7 +127,12 @@
     }
 
     .headerImage h2 {
-      font-size: 3.5rem;
+      font-size: 3rem;
+    }
+
+    .subtext {
+      font-size: 1rem;
+      padding: 0 1.5rem;
     }
 }
 

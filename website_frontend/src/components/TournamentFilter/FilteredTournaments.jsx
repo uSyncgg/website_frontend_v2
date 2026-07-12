@@ -1,6 +1,7 @@
+import { hostKeyFromLabel } from "components/TournamentCard/hosts";
 
 export const filteredTournaments = ( tournaments, filters ) => {
-    const { selectedFormats, selectedRegions, selectedSkills, selectedPlatforms, selectedEntry } = filters;
+    const { selectedFormats, selectedRegions, selectedSkills, selectedPlatforms, selectedEntry, selectedHosts = [] } = filters;
 
     const checks = [
         [selectedFormats, {
@@ -14,7 +15,7 @@ export const filteredTournaments = ( tournaments, filters ) => {
             "EU": "is_eu",
             "LATAM": "is_latam",
             "United States": "is_usa"
-        }], 
+        }],
         [selectedSkills, {
             "Novice": "is_novice",
             "Amateur": "is_amateur",
@@ -36,7 +37,10 @@ export const filteredTournaments = ( tournaments, filters ) => {
     ]
 
     return tournaments.filter(tournament => {
-        return checks.every(([selected, fieldMap]) => 
+        const hostMatch = selectedHosts.length === 0 ||
+            selectedHosts.some(host => hostKeyFromLabel(host) === tournament.site);
+
+        return hostMatch && checks.every(([selected, fieldMap]) =>
             selected.length === 0 ||
             selected.some(value => tournament[fieldMap[value]] === true)
         )

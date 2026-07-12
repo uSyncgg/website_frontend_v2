@@ -7,16 +7,26 @@
     margin: 0 auto;
 }
 
-.imageContainer img {
-    border-radius: 1.563rem;
-    height: auto;
+.imageContainer a {
+    display: block;
     margin: 0 1% 2rem;
-    transition: box-shadow .3s ease-in-out;
-    width: 12rem;
+    border-radius: 1.563rem;
+    border: 1px solid rgba(255, 255, 255, .08);
+    box-shadow: 0 1.5rem 3rem -1.25rem rgba(0, 0, 0, .6);
+    transition: transform .35s cubic-bezier(.16,1,.3,1), border-color .35s cubic-bezier(.16,1,.3,1), box-shadow .35s cubic-bezier(.16,1,.3,1);
 }
 
-.imageContainer img:hover {
-    box-shadow: 0 0 1.563rem .188rem rgba(153, 102, 255, 0.8);
+.imageContainer a:hover {
+    transform: translateY(-.3rem);
+    border-color: rgba(255, 255, 255, .18);
+    box-shadow: 0 1.75rem 3rem -1.25rem rgba(0, 0, 0, .7), 0 0 1.5rem rgba(142, 106, 206, .35);
+}
+
+.imageContainer img {
+    border-radius: 1.563rem;
+    display: block;
+    height: auto;
+    width: 12rem;
 }
 
 /* Below conflicts with Home.module.css but it isn't the biggest deal  */
