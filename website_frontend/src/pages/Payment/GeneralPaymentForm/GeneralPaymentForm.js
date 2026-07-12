@@ -17,7 +17,14 @@ function GeneralPaymentForm(
 ) {
     const location = useLocation();
     const navigate = useNavigate();
-    const formData = location.state?.formData;
+    const savedFormData = (() => {
+        try {
+            return JSON.parse(sessionStorage.getItem("formData"));
+        } catch {
+            return null;
+        }
+    })();
+    const formData = location.state?.formData || savedFormData;
     const takenRef = useRef([]);
 
     const [isLoading, setIsLoading] = useState(false);
@@ -33,6 +40,11 @@ function GeneralPaymentForm(
 
     useEffect(() => {
         if (review) {
+            if (!formData) {
+                navigate('/paymentform', { replace: true });
+                return;
+            }
+
             setIsLoading(true);
 
             const formCheck = {
