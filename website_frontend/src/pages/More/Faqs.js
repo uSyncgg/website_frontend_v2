@@ -105,7 +105,7 @@ export const Faqs = () => {
                     </div>
 
                     {/* ── Right column ── */}
-                    <div>
+                    <div className={styles.rightCol}>
                         <p className={styles.faqHeading}>Frequently Asked Questions</p>
                         <div className={styles.accordion}>
                             {FAQS.map((faq, i) => {
