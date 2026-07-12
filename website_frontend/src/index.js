@@ -333,8 +333,8 @@ import { Conventions } from 'pages/Games/Conventions/Conventions';
 // 2026
 import { ShintoTest } from 'pages/Games/Cod/Lans/Archived/2026/ShintoTest';
 import { RVAEsportsChampionship2026 } from 'pages/Games/Cod/Lans/Archived/2026/RVAEsportsChampionship2026';
-import { ImmerseCon2026 } from 'pages/Games/Conventions/Events/Archived/2026/ImmerseCon2026';
-import { DreamCon2026 } from 'pages/Games/Conventions/Events/Archived/2026/DreamCon2026';
+import { ImmerseCon2026 } from 'pages/Games/Conventions/Archived/2026/ImmerseCon2026';
+import { DreamCon2026 } from 'pages/Games/Conventions/Archived/2026/DreamCon2026';
 import { SummerConWS2026 } from 'pages/Games/Conventions/Archived/2026/SummerConWS2026';
 import { BECSoloLaneShowdown } from 'pages/Games/Conventions/Archived/2026/BECSoloLaneShowdown';
 import { LowtierMajorIV } from 'pages/Games/Conventions/Archived/2026/LowtierMajorIV';
