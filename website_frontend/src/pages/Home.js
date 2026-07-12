@@ -2,8 +2,9 @@ import React from "react";
 import styles from './Home.module.css';
 import '../index.css';
 import { Link } from "react-router";
-import { MapCoverHome, ChooseYourGame, SeoData } from "components";
-import { FaMapMarkerAlt, FaLayerGroup, FaTrophy } from "react-icons/fa";
+import { ChooseYourGame, SeoData, LanMap } from "components";
+import { FaMapMarkerAlt, FaLayerGroup, FaSitemap, FaTrophy } from "react-icons/fa";
+import { ALL_LAN_MARKERS } from 'data/lanMarkers';
 
 export const Home = () => {
     return (
@@ -51,7 +52,7 @@ export const Home = () => {
                 </div>
 
                 <p className={styles.eyebrow}>Built for the Community</p>
-                <h2 className={styles.white}>Everything in one hub</h2>
+                <h2 className={styles.white}>Everything in One Hub</h2>
                 <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
                 <p className={styles.subtext}>
                     Whether you play, host, or just watch, uSync has a role for you.
@@ -61,11 +62,11 @@ export const Home = () => {
                     <Link to="/lans" className={styles.featureCard}>
                         <div className={styles.featureIcon}><FaMapMarkerAlt /></div>
                         <h3>LANs</h3>
-                        <p>Discover verified LAN events happening worldwide, from local meetups to major conventions.</p>
+                        <p>Discover LAN events happening worldwide, from local meetups to major conventions.</p>
                         <span className={styles.explorePill}>Explore</span>
                     </Link>
                     <Link to="/leagues" className={styles.featureCard}>
-                        <div className={styles.featureIcon}><FaLayerGroup /></div>
+                        <div className={styles.featureIcon}><FaSitemap /></div>
                         <h3>Leagues</h3>
                         <p>Join a league in your favorite game and compete across structured seasons and playoffs.</p>
                         <span className={styles.explorePill}>Explore</span>
@@ -81,19 +82,12 @@ export const Home = () => {
                 <div className="hr" />
 
                 <p className={styles.eyebrow}>LAN Map</p>
-                <h2 className={styles.white}>Find events near you</h2>
+                <h2 className={styles.white}>Find Events Near You</h2>
                 <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
-                <p className={styles.subtext}>Browse verified LAN events happening worldwide.</p>
+                <p className={styles.subtext}>Browse LAN events happening worldwide.</p>
 
                 <div className={styles.mapContainer}>
-                    <iframe
-                        title="LAN Map"
-                        id="map"
-                        className={styles.map}
-                        src="https://www.google.com/maps/d/u/2/embed?mid=1QrCfeXFSyZJMXLzUeAiIWy0hcWgaJVg&ehbc=2E312F"
-                    />
-
-                    <MapCoverHome />
+                    <LanMap markers={ALL_LAN_MARKERS} className={styles.map} showAllGames={true} />
                 </div>
 
                 <div className={styles.legend}>
@@ -114,7 +108,7 @@ export const Home = () => {
 
                 <div className={styles.cta}>
                     <div className={styles.ctaGlow} />
-                    <h2 className={styles.white}>We Sync, so uSync.</h2>
+                    <h2 className={styles.white}>We Sync, So uSync.</h2>
                     <p className={styles.ctaSubtext}>Find Your Next Event Today.</p>
                     <Link to="/games" className={styles.ctaButton}>Browse Events</Link>
                 </div>

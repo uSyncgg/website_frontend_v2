@@ -110,7 +110,7 @@ export const CodTournamentCard = ({ tournament }) => {
         || (tournament.entry || '').toLowerCase().includes('free');
 
     return (
-        <div className={styles.tournamentCard}>
+        <a className={styles.tournamentCard} href={tournament.url} target="_blank">
             <div className={styles.hostTile}>
                 {host.logo
                     ? <img src={host.logo} alt={`${host.label} logo`} />
@@ -147,10 +147,10 @@ export const CodTournamentCard = ({ tournament }) => {
                 <span className={`${styles.entry} ${isFreeEntry ? styles.entryFree : ''}`}>
                     {tournament.entry}
                 </span>
-                <button className={styles.tournamentButton} type="button" onClick={() => window.open(tournament.url, '_blank')}>
+                <button className={styles.tournamentButton}>
                     Join Now
                 </button>
             </div>
-        </div>
+        </a>
     )
 }

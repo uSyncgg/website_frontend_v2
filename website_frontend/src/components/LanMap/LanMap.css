@@ -1,0 +1,213 @@
+.lanMapWrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* ── Legend portal (anchors to the Leaflet container) ── */
+.lanMapLegendPortal {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.lanMapLegend {
+    position: absolute;
+    bottom: 28px;
+    left: 10px;
+    right: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    pointer-events: all;
+}
+
+.lanMapLegendChip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 11px 5px 8px;
+    border-radius: 999px;
+    background: rgba(8, 6, 20, 0.82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    color: #a090c0;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    cursor: pointer;
+    transition: opacity 0.18s ease, filter 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    white-space: nowrap;
+    user-select: none;
+    outline: none;
+    line-height: 1;
+}
+
+@media (max-width: 480px) {
+    .lanMapLegendChip {
+        font-size: 0.62rem;
+        padding: 4px 8px 4px 6px;
+        gap: 4px;
+    }
+
+    .lanMapLegendDot {
+        width: 7px;
+        height: 7px;
+    }
+
+    .lanMapLegend {
+        bottom: 22px;
+        gap: 4px;
+    }
+}
+
+.lanMapLegendChip.active {
+    color: #ffffff;
+}
+
+.lanMapLegendAll {
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    box-shadow: none !important;
+}
+
+.lanMapLegendAll.active {
+    color: #c0b0e0;
+}
+
+.lanMapLegendAll.inactive {
+    opacity: 0.7;
+    filter: none;
+    color: #a090c0;
+}
+
+.lanMapLegendChip.inactive {
+    opacity: 0.38;
+    filter: grayscale(0.7);
+}
+
+.lanMapLegendChip:hover {
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+.lanMapLegendDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: background-color 0.18s ease;
+}
+
+/* ── Marker dot ── */
+.lanMarkerDot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+}
+
+/* ── Ctrl+scroll hint ── */
+.lanMapScrollOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    z-index: 900;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    border-radius: 0.5rem;
+}
+
+/* ── Mobile tap overlay ── */
+.lanMapTapOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    z-index: 1100;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* ── Popup styling ── */
+.leaflet-popup-content-wrapper {
+    background-color: #1a1a2e !important;
+    border: 1px solid #3a2f5a !important;
+    border-radius: 0.5rem !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+    color: #ffffff !important;
+}
+
+.leaflet-popup-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin: 0.65rem 1rem !important;
+}
+
+.leaflet-popup-content strong {
+    color: #ffffff;
+    font-size: 0.95rem;
+}
+
+.leaflet-popup-content a {
+    color: #8e6ace;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.leaflet-popup-content a:hover {
+    color: #b09de0;
+}
+
+.leaflet-popup-tip {
+    background-color: #1a1a2e !important;
+}
+
+.leaflet-popup-close-button {
+    color: #a89cc8 !important;
+}
+
+.leaflet-popup-close-button:hover {
+    color: #ffffff !important;
+}
+
+.leaflet-control-attribution {
+    background-color: rgba(26, 26, 46, 0.85) !important;
+    color: #6a5a8a !important;
+}
+
+.leaflet-control-attribution a {
+    color: #8e6ace !important;
+}
+
+.leaflet-control-zoom a {
+    background-color: #1a1a2e !important;
+    color: #8e6ace !important;
+    border-color: #3a2f5a !important;
+}
+
+.leaflet-control-zoom a:hover {
+    background-color: #3a2f5a !important;
+    color: #ffffff !important;
+}

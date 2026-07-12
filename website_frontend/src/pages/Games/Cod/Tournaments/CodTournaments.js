@@ -78,12 +78,11 @@ export const CodTournaments = () => {
             />
 
             <div className={styles.pageHeader}>
-                <p className={styles.eyebrow}>Live Every Day</p>
                 <h1 className={styles.white}>CALL OF DUTY</h1>
                 <h1 className={styles.gradientText}>TOURNAMENTS</h1>
                 <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
                 <p className={styles.subtext}>
-                    Verified tournaments from our partnered hosts, updated every day.
+                    Updated every day.
                     Filter by team size, region, platform, skill, and entry fee.
                 </p>
 
