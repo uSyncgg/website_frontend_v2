@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import { Link } from 'react-router';
@@ -41,6 +41,18 @@ function createMarkerIcon(game) {
 
 const isTouchDevice = () =>
     typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+
+function ClickFlyController({ target }) {
+    const map = useMap();
+    const prevRef = useRef(null);
+    useEffect(() => {
+        if (!target) return;
+        if (prevRef.current === target) return;
+        prevRef.current = target;
+        map.flyTo([target.lat, target.lng], Math.max(map.getZoom(), 10), { duration: 0.6 });
+    }, [target]); // eslint-disable-line react-hooks/exhaustive-deps
+    return null;
+}
 
 function MobileDraggingController({ enabled }) {
     const map = useMap();
@@ -177,6 +189,7 @@ export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAl
     };
 
     const filteredMarkers = markers.filter(m => activeGames.has(m.game || 'Conventions'));
+    const [clickTarget, setClickTarget] = useState(null);
 
     return (
         <div className="lanMapWrapper">
@@ -188,6 +201,7 @@ export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAl
                 dragging={!touch}
             >
                 <CtrlScrollZoom />
+                <ClickFlyController target={clickTarget} />
                 {touch && <MobileDraggingController enabled={mobileActivated} />}
                 <LegendControl
                     legendGames={legendGames}
@@ -199,7 +213,12 @@ export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAl
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                 />
                 {filteredMarkers.map((marker, i) => (
-                    <Marker key={i} position={[marker.lat, marker.lng]} icon={createMarkerIcon(marker.game)}>
+                    <Marker
+                        key={i}
+                        position={[marker.lat, marker.lng]}
+                        icon={createMarkerIcon(marker.game)}
+                        eventHandlers={{ click: () => setClickTarget(marker) }}
+                    >
                         <Popup>
                             <strong>{marker.name}</strong>
                             {marker.link && <Link to={marker.link}>More Info →</Link>}
