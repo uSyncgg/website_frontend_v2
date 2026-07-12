@@ -54,6 +54,18 @@ export const CodLans = () => {
                     <HostBanner.Button title={"More Info"} path={"/lans/shintochamps2026"} />
                 </HostBanner>
 
+                <HostBanner>
+                    <HostBanner.Title path={"/lans/hnl-x-fandom-2026"}>HNL x FANDOM 2026</HostBanner.Title>
+                    <HostBanner.Image
+                        path={"/lans/hnl-x-fandom-2026"}
+                        imgUrl={"https://i.imgur.com/C3pPAGi.png"}
+                        alt={"HNL x FANDOM 2026"}
+                        verified={false}
+                    />
+                    <HostBanner.Region>Honolulu, HI</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/lans/hnl-x-fandom-2026"} />
+                </HostBanner>
+
                 <div className="hrEvents" />
 
             </div>
