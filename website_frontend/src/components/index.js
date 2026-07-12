@@ -60,6 +60,9 @@ import { SeoData } from "./SeoData/SeoData";
 // Scroll behaviour
 import { ScrollToTop } from "./ScrollToTop/ScrollToTop";
 
+// Error handling
+import { ErrorBoundary } from "./ErrorBoundary/ErrorBoundary";
+
 export {
     Navbar,
     Footer,
@@ -94,5 +97,6 @@ export {
     VerifiedText,
     VerifiedImage,
     ChooseYourGame,
-    LanMap
+    LanMap,
+    ErrorBoundary
 };

@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router';
 
 // Navbar & Footer
-import { Navbar, Footer, ScrollToTop } from 'components';
+import { Navbar, Footer, ScrollToTop, ErrorBoundary } from 'components';
 
 // Home + Top Level Pages
 import { Home } from 'pages/Home';
@@ -368,6 +368,7 @@ root.render(
       <Navbar />
 
       <main className='main-content'>
+        <ErrorBoundary>
         <Routes>
           {/* Home Page */}
           <Route path='/' element={<Home />} />
@@ -731,6 +732,7 @@ root.render(
           <Route path='/lans/lakewood-league-xii-spring' element={<LakewoodLeagueXIISpring />} />
 
         </Routes>
+        </ErrorBoundary>
       </main>
       
       <Footer />

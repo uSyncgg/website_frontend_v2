@@ -1,0 +1,13 @@
+# Netlify custom headers: https://docs.netlify.com/routing/headers/
+
+# Fingerprinted build assets (main.[hash].js / [hash].css / media).
+# The filename changes on every build, so these can be cached forever.
+/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# index.html must always be revalidated so a new deploy is picked up
+# immediately and mobile browsers never boot from a stale HTML shell.
+/
+  Cache-Control: public, max-age=0, must-revalidate
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
