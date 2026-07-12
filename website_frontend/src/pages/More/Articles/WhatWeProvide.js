@@ -5,7 +5,7 @@ import { articles } from "./articlesData";
 const takeaways = [
     "uSync is a one-stop hub for esports: leagues, LANs, online tournaments, wagers, and head-to-head competition.",
     "Verified hosts provide fair payouts, fair rules, unbiased admins, and a safe environment to compete in.",
-    "All major esports events are consolidated into one easy-to-navigate system — no more endless Google searches.",
+    "All major esports events are consolidated into one easy-to-navigate system, with no more endless Google searches.",
 ];
 
 const faqs = [
@@ -15,7 +15,7 @@ const faqs = [
     },
     {
         question: "What does it mean for a host to be verified on uSync?",
-        answer: "Verified hosts on uSync are organizers you can trust to deliver fair payouts, fair rules, and unbiased admins — creating a safe environment for competitive play.",
+        answer: "Verified hosts on uSync are organizers you can trust to deliver fair payouts, fair rules, and unbiased admins, creating a safe environment for competitive play.",
     },
     {
         question: "How do I find LAN tournaments near me?",
@@ -38,7 +38,7 @@ export const WhatWeProvide = () => {
                 uSync offers a fully integrated tournament hosting system, featuring <Link to="/leagues">leagues</Link>,{" "}
                 <Link to="/lans">LANs</Link>, <Link to="/tournaments">online tournaments</Link>, and wagers.
                 If you've ever searched for "how to find local LAN tournaments" or "where to compete in esports", uSync makes it easy
-                to discover and participate in these sought-after competitive events. Say goodbye to endless Google searches — uSync
+                to discover and participate in these sought-after competitive events. Say goodbye to endless Google searches. uSync
                 provides a smart, searchable platform for ongoing and upcoming events all in one space.
             </p>
 

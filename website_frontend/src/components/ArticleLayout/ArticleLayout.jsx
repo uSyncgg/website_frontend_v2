@@ -164,7 +164,7 @@ export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
             <section className={styles.cta}>
                 <div className={styles.ctaGlow} />
                 <h2>Find Your Next Event on uSync</h2>
-                <p>Leagues, LANs, tournaments, and wagers for every major title — all in one place.</p>
+                <p>Leagues, LANs, tournaments, and wagers for every major title, all in one place.</p>
                 <Link to="/games" className={styles.ctaButton}>Explore Events</Link>
             </section>
 

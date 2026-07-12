@@ -4,7 +4,7 @@ import { articles } from "./articlesData";
 
 const takeaways = [
     "Choose your game, region, and format first, then find a reputable event with written rules and a clear organizer contact.",
-    "Registration reserves your place; check-in confirms you're present — many brackets remove players who miss the check-in window.",
+    "Registration reserves your place; check-in confirms you're present, and many brackets remove players who miss the check-in window.",
     "Save score screenshots and replays after every match in case the organizer requires reporting or dispute evidence.",
 ];
 
@@ -75,7 +75,7 @@ export const JoinOnlineTournament = () => {
             <p>
                 Create the required tournament account and use the same in-game name the organizer expects. For team events, appoint one
                 captain to manage registration and communication. Add every required player before roster lock. Confirm spelling,
-                platform IDs, substitutes, and cross-platform identifiers — a small typo can prevent an organizer or opponent from
+                platform IDs, substitutes, and cross-platform identifiers, because a small typo can prevent an organizer or opponent from
                 finding the correct account.
             </p>
 

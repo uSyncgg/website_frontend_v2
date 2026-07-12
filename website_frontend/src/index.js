@@ -6,6 +6,10 @@ import { BrowserRouter, Routes, Route } from 'react-router';
 
 // Navbar & Footer
 import { Navbar, Footer, ScrollToTop } from 'components';
+import { ErrorBoundary } from 'components/ErrorBoundary/ErrorBoundary';
+
+// 404 fallback
+import { NotFound } from 'pages/NotFound';
 
 // Home + Top Level Pages
 import { Home } from 'pages/Home';
@@ -362,6 +366,7 @@ import { LANAllNightSpring2026 } from 'pages/Games/Conventions/Archived/2026/LAN
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
+  <ErrorBoundary>
   <BrowserRouter>
     <ScrollToTop />
     <div className='app-container'>
@@ -730,12 +735,16 @@ root.render(
           <Route path='/lans/lan-all-night-spring-26' element={<LANAllNightSpring2026 />} />
           <Route path='/lans/lakewood-league-xii-spring' element={<LakewoodLeagueXIISpring />} />
 
+          {/* Catch-all: styled 404 instead of a blank page */}
+          <Route path='*' element={<NotFound />} />
+
         </Routes>
       </main>
       
       <Footer />
     </div>
   </BrowserRouter>
+  </ErrorBoundary>
   // </React.StrictMode>
 );
 

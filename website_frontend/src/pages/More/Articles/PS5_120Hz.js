@@ -5,7 +5,7 @@ import { articles } from "./articlesData";
 const takeaways = [
     "Set Settings > Screen and Video > Video Output > 120 Hz Output to Automatic, then enable the game's own 120 FPS or performance mode.",
     "You need the full chain: a 120 fps-capable game, a display that accepts 120Hz over HDMI, the right port and cable, and the correct settings.",
-    "Verify the signal during gameplay via Current Video Output Signal — the PS5 home menu may still display at 60Hz.",
+    "Verify the signal during gameplay via Current Video Output Signal, since the PS5 home menu may still display at 60Hz.",
 ];
 
 const faqs = [
@@ -48,7 +48,7 @@ export const PS5_120Hz = () => {
             <h2>Step 1: Use the Correct HDMI Connection</h2>
             <p>
                 Connect the PS5 directly to the display while troubleshooting. Use the HDMI cable included with the console or a
-                certified Ultra High Speed HDMI cable when targeting 4K at 120Hz. Plug into the TV's 120Hz-capable HDMI port — some TVs
+                certified Ultra High Speed HDMI cable when targeting 4K at 120Hz. Plug into the TV's 120Hz-capable HDMI port. Some TVs
                 support their full gaming bandwidth on only one or two ports, and that port may need an "Enhanced," "Deep Color," or
                 similar setting enabled in the TV menu.
             </p>
@@ -64,7 +64,7 @@ export const PS5_120Hz = () => {
             <h2>Step 3: Choose Performance Mode</h2>
             <p>
                 Go to <strong>Settings &gt; Saved Data and Game/App Settings &gt; Game Presets &gt; Performance Mode or Resolution
-                Mode</strong>. Choose <strong>Performance Mode</strong>. This preference does not force every game to run at 120 fps —
+                Mode</strong>. Choose <strong>Performance Mode</strong>. This preference does not force every game to run at 120 fps;
                 it tells supported games to favor performance when they provide the option.
             </p>
 

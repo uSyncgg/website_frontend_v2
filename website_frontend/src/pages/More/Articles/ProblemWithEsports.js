@@ -4,7 +4,7 @@ import { articles } from "./articlesData";
 
 const takeaways = [
     "Esports is a billion-dollar industry, yet events, leagues, and tournaments remain scattered across dozens of disconnected websites.",
-    "Fragmentation makes it harder for players, teams, and coaches to find opportunities — and slows the industry's growth.",
+    "Fragmentation makes it harder for players, teams, and coaches to find opportunities and slows the industry's growth.",
     "uSync centralizes leagues, LANs, online tournaments, wagers, and head-to-head competition into one platform.",
 ];
 
@@ -15,7 +15,7 @@ const faqs = [
     },
     {
         question: "How do I find esports tournaments or LANs near me?",
-        answer: "Instead of searching individual organizer sites one by one, you can use uSync to browse leagues, LANs, online tournaments, and head-to-head events for major titles like Call of Duty, Valorant, Rocket League, and more — all in one place.",
+        answer: "Instead of searching individual organizer sites one by one, you can use uSync to browse leagues, LANs, online tournaments, and head-to-head events for major titles like Call of Duty, Valorant, Rocket League, and more, all in one place.",
     },
     {
         question: "What is uSync?",
@@ -36,7 +36,7 @@ export const ProblemWithEsports = () => {
             <p>
                 Often, you may find yourself searching things on Google such as "how do I join an esports tournament?" or "how do people
                 join esports teams?" or even "how do I sign up for esports?" This is because there is no single, accessible platform that
-                brings the competitive scene together — but with uSync, we're here to combine it all.
+                brings the competitive scene together, but with uSync, we're here to combine it all.
             </p>
             <p>
                 Typically, anyone interested in esports is forced to look through multiple websites to find tournaments, leagues, or

@@ -4,7 +4,7 @@ import { articles } from "./articlesData";
 
 const takeaways = [
     "Search an event hub like uSync by game and location, then check local venues, college clubs, convention calendars, and community Discords.",
-    "Combine four details in searches: [game] + tournament + [city or state] + [month or year] — and search nearby metro areas too.",
+    "Combine four details in searches: [game] + tournament + [city or state] + [month or year], and search nearby metro areas too.",
     "Before registering, verify the date, distance, platform, entry fee, age limit, format, equipment rules, and organizer contact information.",
 ];
 
@@ -41,7 +41,7 @@ export const EsportsTournamentsNearMe = () => {
             <p>
                 A search for "gaming tournaments near me" is often too broad. Use a query that combines four useful details:{" "}
                 <strong>[game] + tournament + [city or state] + [month or year]</strong>. Examples include "Warzone LAN Michigan" or
-                "VALORANT tournament Midwest." Search nearby cities too — regional events may be listed under the nearest metro area
+                "VALORANT tournament Midwest." Search nearby cities too, since regional events may be listed under the nearest metro area
                 instead of your suburb.
             </p>
 

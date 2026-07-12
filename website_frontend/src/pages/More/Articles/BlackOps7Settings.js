@@ -92,7 +92,7 @@ export const BlackOps7Settings = () => {
             <p>
                 Open <strong>Settings &gt; Controller &gt; Deadzone Inputs</strong>. Set the minimum deadzone to 5. Let go of the stick
                 completely and watch for movement or camera drift. If it drifts, raise the value one point at a time until it stops.
-                Repeat for both sticks — your left and right minimum deadzones do not need to match.
+                Repeat for both sticks; your left and right minimum deadzones do not need to match.
             </p>
 
             <h2>Step 4: Keep Aim Assist On, Then Learn Its Range</h2>
@@ -104,14 +104,14 @@ export const BlackOps7Settings = () => {
             <h2>Step 5: Remove Visual Clutter</h2>
             <p>
                 Turn World Motion Blur and Weapon Motion Blur off. Start with an FOV around 100–105 if you sit near a monitor. A wider
-                view shows more of the environment, but targets also appear smaller — max FOV is not automatically best.
+                view shows more of the environment, but targets also appear smaller, so max FOV is not automatically best.
             </p>
 
             <h2>How to Test the Settings Correctly</h2>
             <p>
                 Create a private Free-For-All match with recruit bots. Use the same weapon for the entire test. Track a moving bot
                 without firing, snap between two fixed objects, and fire at close, medium, and long range. Adjust only one value at a
-                time, then repeat the same test. Once the settings feel predictable, stop tuning and play — consistency builds aim
+                time, then repeat the same test. Once the settings feel predictable, stop tuning and play. Consistency builds aim
                 better than a permanently moving settings menu.
             </p>
 

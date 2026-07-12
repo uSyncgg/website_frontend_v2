@@ -11,7 +11,7 @@ const takeaways = [
 const faqs = [
     {
         question: "Do I need a full team to join an esports league?",
-        answer: "Not always. Many leagues offer free-agent pools that match solo players with teams, while others — especially 5v5 titles like CS2 — typically require full team registration. Check each league's sign-up options before registering.",
+        answer: "Not always. Many leagues offer free-agent pools that match solo players with teams, while others, especially 5v5 titles like CS2, typically require full team registration. Check each league's sign-up options before registering.",
     },
     {
         question: "Which games have esports leagues on uSync?",
@@ -41,18 +41,18 @@ export const JoiningEsportsLeague = () => {
             </p>
             <ol>
                 <li>
-                    <strong>Find active leagues</strong> — <Link to="/games/call-of-duty/leagues">Check out Call of Duty leagues on uSync</Link>.
+                    <strong>Find active leagues:</strong> <Link to="/games/call-of-duty/leagues">Check out Call of Duty leagues on uSync</Link>.
                 </li>
                 <li>
-                    <strong>Sign up for competitive play</strong> — Whether you're a solo player or part of a team, leagues offer
+                    <strong>Sign up for competitive play:</strong> Whether you're a solo player or part of a team, leagues offer
                     different registration options.
                 </li>
                 <li>
-                    <strong>Follow rules and join Discord channels</strong> — Most Call of Duty leagues use Discord for updates and
+                    <strong>Follow rules and join Discord channels:</strong> Most Call of Duty leagues use Discord for updates and
                     match reporting.
                 </li>
                 <li>
-                    <strong>Start competing and climb the ranks</strong> — Call of Duty leagues provide structured environments to
+                    <strong>Start competing and climb the ranks:</strong> Call of Duty leagues provide structured environments to
                     improve your skills.
                 </li>
             </ol>
@@ -67,17 +67,17 @@ export const JoiningEsportsLeague = () => {
             </p>
             <ol>
                 <li>
-                    <strong>Explore league options</strong> — <Link to="/games/RocketLeague/leagues">Find Rocket League leagues on uSync</Link>.
+                    <strong>Explore league options:</strong> <Link to="/games/RocketLeague/leagues">Find Rocket League leagues on uSync</Link>.
                 </li>
                 <li>
-                    <strong>Sign up for a team or free-agent pool</strong> — Some leagues allow solo players to be matched with teams.
+                    <strong>Sign up for a team or free-agent pool:</strong> Some leagues allow solo players to be matched with teams.
                 </li>
                 <li>
-                    <strong>Review match format and rules</strong> — Competitive Rocket League leagues have different formats, including
+                    <strong>Review match format and rules:</strong> Competitive Rocket League leagues have different formats, including
                     1v1, 2v2, and 3v3 setups.
                 </li>
                 <li>
-                    <strong>Join Discord for updates</strong> — Many leagues use Discord for scheduling, updates, and player communications.
+                    <strong>Join Discord for updates:</strong> Many leagues use Discord for scheduling, updates, and player communications.
                 </li>
             </ol>
             <p>
@@ -91,19 +91,19 @@ export const JoiningEsportsLeague = () => {
             </p>
             <ol>
                 <li>
-                    <strong>Find a league</strong> — Head over to <Link to="/games/Valorant/leagues">uSync's Valorant leagues</Link> to
+                    <strong>Find a league:</strong> Head over to <Link to="/games/Valorant/leagues">uSync's Valorant leagues</Link> to
                     explore available competitions.
                 </li>
                 <li>
-                    <strong>Register your team or as a free agent</strong> — Some leagues allow solo players to join existing teams,
+                    <strong>Register your team or as a free agent:</strong> Some leagues allow solo players to join existing teams,
                     while others require full team registration.
                 </li>
                 <li>
-                    <strong>Join the league Discord</strong> — Many Valorant leagues operate through Discord for scheduling, updates,
+                    <strong>Join the league Discord:</strong> Many Valorant leagues operate through Discord for scheduling, updates,
                     and rule discussions.
                 </li>
                 <li>
-                    <strong>Prepare for matches</strong> — Familiarize yourself with the rule set, match structure, and prize pool
+                    <strong>Prepare for matches:</strong> Familiarize yourself with the rule set, match structure, and prize pool
                     details before competing.
                 </li>
             </ol>
@@ -118,19 +118,19 @@ export const JoiningEsportsLeague = () => {
             </p>
             <ol>
                 <li>
-                    <strong>Browse available leagues</strong> — <Link to="/games/warzone/leagues">uSync's Warzone leagues</Link> list
+                    <strong>Browse available leagues:</strong> <Link to="/games/warzone/leagues">uSync's Warzone leagues</Link> list
                     competitive tournaments for players of all skill levels.
                 </li>
                 <li>
-                    <strong>Check league rules</strong> — Each Warzone league may have different formats, including kill-race and
+                    <strong>Check league rules:</strong> Each Warzone league may have different formats, including kill-race and
                     private lobby tournaments.
                 </li>
                 <li>
-                    <strong>Sign up and join the Discord</strong> — Many leagues require Discord registration to get updates on match
+                    <strong>Sign up and join the Discord:</strong> Many leagues require Discord registration to get updates on match
                     schedules and disputes.
                 </li>
                 <li>
-                    <strong>Get your squad ready</strong> — Whether playing in solos, duos, or squads, make sure you understand the
+                    <strong>Get your squad ready:</strong> Whether playing in solos, duos, or squads, make sure you understand the
                     loadout and settings rules.
                 </li>
             </ol>
@@ -145,18 +145,18 @@ export const JoiningEsportsLeague = () => {
             </p>
             <ol>
                 <li>
-                    <strong>Choose your league</strong> — Visit <Link to="/games/CS2/leagues">uSync's CS2 leagues</Link> to find
+                    <strong>Choose your league:</strong> Visit <Link to="/games/CS2/leagues">uSync's CS2 leagues</Link> to find
                     structured competitions.
                 </li>
                 <li>
-                    <strong>Create or join a team</strong> — CS2 leagues typically require full teams for 5v5 formats.
+                    <strong>Create or join a team:</strong> CS2 leagues typically require full teams for 5v5 formats.
                 </li>
                 <li>
-                    <strong>Join the league's Discord</strong> — Communication, match reporting, and rules enforcement are often handled
+                    <strong>Join the league's Discord:</strong> Communication, match reporting, and rules enforcement are often handled
                     through Discord servers.
                 </li>
                 <li>
-                    <strong>Play weekly matches</strong> — Most CS2 leagues have set schedules, so ensure availability before signing up.
+                    <strong>Play weekly matches:</strong> Most CS2 leagues have set schedules, so ensure availability before signing up.
                 </li>
             </ol>
             <p>
@@ -170,17 +170,17 @@ export const JoiningEsportsLeague = () => {
             </p>
             <ol>
                 <li>
-                    <strong>Choose a league on uSync</strong> — <Link to="/games/halo/leagues">Browse Halo Infinite leagues on uSync</Link>.
+                    <strong>Choose a league on uSync:</strong> <Link to="/games/halo/leagues">Browse Halo Infinite leagues on uSync</Link>.
                 </li>
                 <li>
-                    <strong>Register your team</strong> — Some leagues allow individual sign-ups, but most require full team registrations.
+                    <strong>Register your team:</strong> Some leagues allow individual sign-ups, but most require full team registrations.
                 </li>
                 <li>
-                    <strong>Join the league Discord</strong> — Many Halo Infinite leagues use Discord for organizing matches and dispute
+                    <strong>Join the league Discord:</strong> Many Halo Infinite leagues use Discord for organizing matches and dispute
                     resolutions.
                 </li>
                 <li>
-                    <strong>Follow match schedules and play</strong> — Be prepared for regular competition schedules.
+                    <strong>Follow match schedules and play:</strong> Be prepared for regular competition schedules.
                 </li>
             </ol>
             <p>
@@ -194,16 +194,16 @@ export const JoiningEsportsLeague = () => {
             </p>
             <ol>
                 <li>
-                    <strong>Pick a league on uSync</strong> — <Link to="/games/LoL/leagues">Check out League of Legends leagues here</Link>.
+                    <strong>Pick a league on uSync:</strong> <Link to="/games/LoL/leagues">Check out League of Legends leagues here</Link>.
                 </li>
                 <li>
-                    <strong>Join a team or sign up as a free agent</strong> — Many leagues offer ways for solo players to get drafted.
+                    <strong>Join a team or sign up as a free agent:</strong> Many leagues offer ways for solo players to get drafted.
                 </li>
                 <li>
-                    <strong>Join the Discord server</strong> — Most League of Legends leagues use Discord for match scheduling and updates.
+                    <strong>Join the Discord server:</strong> Most League of Legends leagues use Discord for match scheduling and updates.
                 </li>
                 <li>
-                    <strong>Compete in weekly games</strong> — Follow league schedules and work with your team to climb the ranks.
+                    <strong>Compete in weekly games:</strong> Follow league schedules and work with your team to climb the ranks.
                 </li>
             </ol>
             <p>

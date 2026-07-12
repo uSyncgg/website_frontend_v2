@@ -54,7 +54,7 @@ export const HowEsportsCanBeBetter = () => {
                     Find high-quality upcoming <Link to="/tournaments">tournaments</Link> in one place, alongside plenty of other features.
                 </li>
                 <li>
-                    Take an easier path into competitive play — uSync makes it simple for tournament hosts to attract new players,
+                    Take an easier path into competitive play. uSync makes it simple for tournament hosts to attract new players,
                     keeping competitions active, well-organized, and engaging for all skill types.
                 </li>
             </ul>
@@ -62,15 +62,15 @@ export const HowEsportsCanBeBetter = () => {
             <h2>How uSync Improves the Esports Industry</h2>
             <ul>
                 <li>
-                    <strong>Better event visibility</strong> — Many competitive platforms lack proper event discovery. uSync helps hosts
+                    <strong>Better event visibility:</strong> Many competitive platforms lack proper event discovery. uSync helps hosts
                     connect with a larger audience and attract committed players.
                 </li>
                 <li>
-                    <strong>Stronger competitive structure</strong> — uSync ensures that verified esports events are better organized
+                    <strong>Stronger competitive structure:</strong> uSync ensures that verified esports events are better organized
                     and more transparent.
                 </li>
                 <li>
-                    <strong>A home for esports events</strong> — Instead of searching through multiple platforms, players can find
+                    <strong>A home for esports events:</strong> Instead of searching through multiple platforms, players can find
                     verified and high-quality hosted events all in one place.
                 </li>
             </ul>
@@ -78,7 +78,7 @@ export const HowEsportsCanBeBetter = () => {
             <h2>The Future of Esports With uSync</h2>
             <p>
                 From helping players join leagues to providing better visibility for tournament hosts, uSync is the missing piece in the
-                esports puzzle. If esports is to reach its full potential, it must be more accessible, streamlined, and community-driven —
+                esports puzzle. If esports is to reach its full potential, it must be more accessible, streamlined, and community-driven,
                 and uSync is leading that change.
             </p>
             <p>

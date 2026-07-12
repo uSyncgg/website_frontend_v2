@@ -3,7 +3,7 @@ import { ArticleLayout } from "components";
 import { articles } from "./articlesData";
 
 const takeaways = [
-    "Most esports sites are either online tournament platforms or online league platforms — uSync combines both and more.",
+    "Most esports sites are either online tournament platforms or online league platforms. uSync combines both and more.",
     "uSync aggregates leagues, LANs, tournaments, and wagers from across the internet into one easy-to-understand format.",
     "Event hosts get free discoverability and higher-quality entrants, while players pay lower fees than on other platforms.",
 ];
@@ -28,9 +28,9 @@ export const WhyUsyncIsUnique = () => {
         <ArticleLayout article={articles.whyUsyncIsUnique} takeaways={takeaways} faqs={faqs}>
             <p>
                 uSync is not your standard esports website… it's much more. Typically, esports websites have fallen into one or two main
-                categories: OLTs (Online Tournaments) — where players pay money to enter into tournaments against one another for a cash
-                prize — or OLLs (Online Leagues) — in which players enter and play weekly matches and eventually playoffs to be crowned
-                champion. uSync isn't like those — it is those and more combined into one platform.
+                categories: OLTs (Online Tournaments), where players pay money to enter into tournaments against one another for a cash
+                prize, or OLLs (Online Leagues), in which players enter and play weekly matches and eventually playoffs to be crowned
+                champion. uSync isn't like those; it is those and more combined into one platform.
             </p>
 
             <h2>An Aggregator Built for Players</h2>
@@ -39,7 +39,7 @@ export const WhyUsyncIsUnique = () => {
                 <Link to="/lans">LANs</Link>, <Link to="/tournaments">tournaments</Link>, or wagers, uSync has them all on the website
                 and in an easy-to-understand format. uSync does not host events like other sites but rather finds all of the possible
                 events for players to enter and showcases them on the website so players can find exactly the right competition for
-                their tastes. No more searching across the internet or using AI to try and come up with ideas — uSync has what you are
+                their tastes. No more searching across the internet or using AI to try and come up with ideas. uSync has what you are
                 looking for and more.
             </p>
 
@@ -53,8 +53,8 @@ export const WhyUsyncIsUnique = () => {
 
             <h2>The Possibilities Are Endless</h2>
             <p>
-                uSync isn't like other esports platforms — it is much, much more. Explore <Link to="/games">esports events</Link> that
-                you may want to enter or <Link to="/more/eventhost">showcase your own</Link> — the possibilities are endless!
+                uSync isn't like other esports platforms; it is much, much more. Explore <Link to="/games">esports events</Link> that
+                you may want to enter or <Link to="/more/eventhost">showcase your own</Link>. The possibilities are endless!
             </p>
         </ArticleLayout>
     );

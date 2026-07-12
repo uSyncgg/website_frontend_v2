@@ -15,7 +15,7 @@ const faqs = [
     },
     {
         question: "Is uSync only for professional players?",
-        answer: "No. uSync supports all levels of competition — from beginner and amateur players looking to improve, to teams and organizations seeking professional-level structured leagues, casual head-to-heads, and secure wagers.",
+        answer: "No. uSync supports all levels of competition, from beginner and amateur players looking to improve, to teams and organizations seeking professional-level structured leagues, casual head-to-heads, and secure wagers.",
     },
     {
         question: "Can I find local LAN events on uSync?",
@@ -73,7 +73,7 @@ export const HowWeFixIt = () => {
             </p>
             <p>
                 By bringing everything under one roof, we make esports simpler, faster, and more accessible than ever before.
-                If you've been searching for LAN events, competitive tournaments, or reliable esports networking, look no further — join
+                If you've been searching for LAN events, competitive tournaments, or reliable esports networking, look no further. Join
                 uSync today and be part of the revolution in centralized esports competition.
             </p>
         </ArticleLayout>

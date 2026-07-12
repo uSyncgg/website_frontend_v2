@@ -4,7 +4,7 @@ import { articles } from "./articlesData";
 
 const takeaways = [
     "Start with 800 DPI and 0.25–0.40 in-game sensitivity, for an eDPI of 200–320.",
-    "eDPI = mouse DPI × in-game sensitivity — it lets you compare any two setups directly.",
+    "eDPI = mouse DPI × in-game sensitivity. It lets you compare any two setups directly.",
     "Tune in small 0.02 increments using a repeatable Practice Range test, then validate over several real matches.",
 ];
 
