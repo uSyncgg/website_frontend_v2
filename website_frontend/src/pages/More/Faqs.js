@@ -115,7 +115,7 @@ export const Faqs = () => {
                                         key={i}
                                         className={`${styles.item}${isOpen ? ` ${styles.itemOpen}` : ''}`}
                                     >
-                                        <div className={styles.questionRow} onClick={() => toggle(i)}>
+                                        <div className={styles.questionRow} onClick={() => toggle(i)} role='button'>
                                             <p className={styles.questionText}>{faq.question}</p>
                                             <FaChevronDown
                                                 className={`${styles.chevron}${isOpen ? ` ${styles.chevronOpen}` : ''}`}

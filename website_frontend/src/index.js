@@ -320,11 +320,8 @@ import Payment from 'pages/Payment/PaymentCheckouts/Payment';
 import { AllLans } from 'pages/Games/Conventions/AllLans';
 import { TheRetake2026 } from 'pages/Games/Conventions/Events/TheRetake2026';
 import { ShintoChamps2026 } from 'pages/Games/Cod/Lans/Events/ShintoChamps2026';
-import { RVAEsportsChampionship2026 } from 'pages/Games/Cod/Lans/Events/RVAEsportsChampionship2026';
-import { ImmerseCon2026 } from 'pages/Games/Conventions/Events/ImmerseCon2026';
 import { HellcaseCS2LAN2026 } from 'pages/Games/Conventions/Events/HellcaseCS2LAN2026';
 import { EWGL3 } from 'pages/Games/Cod/Lans/Events/EWGL3';
-import { DreamCon2026 } from 'pages/Games/Conventions/Events/DreamCon2026';
 import { GACSHeatwave } from 'pages/Games/Conventions/Events/GACSHeatwave';
 import { TheSummoning2026 } from 'pages/Games/Lol/Lans/Events/TheSummoning2026';
 import { CitadelI } from 'pages/Games/Halo/Lans/Events/CitadelI';
@@ -337,6 +334,9 @@ import { OhYoshiDiIntRehatched } from 'pages/Games/Halo/Lans/Events/OhYoshiDiInt
 // Archived LANs Below
 // 2026
 import { ShintoTest } from 'pages/Games/Cod/Lans/Archived/2026/ShintoTest';
+import { RVAEsportsChampionship2026 } from 'pages/Games/Cod/Lans/Archived/2026/RVAEsportsChampionship2026';
+import { ImmerseCon2026 } from 'pages/Games/Conventions/Archived/2026/ImmerseCon2026';
+import { DreamCon2026 } from 'pages/Games/Conventions/Archived/2026/DreamCon2026';
 import { SummerConWS2026 } from 'pages/Games/Conventions/Archived/2026/SummerConWS2026';
 import { BECSoloLaneShowdown } from 'pages/Games/Conventions/Archived/2026/BECSoloLaneShowdown';
 import { LowtierMajorIV } from 'pages/Games/Conventions/Archived/2026/LowtierMajorIV';
@@ -688,7 +688,6 @@ root.render(
           <Route path='/lans/all' element={<AllLans />} />
           {/* CoD */}
           <Route path='/lans/shintochamps2026' element={<ShintoChamps2026 />} />
-          <Route path='/lans/rva-esports-championship-2026' element={<RVAEsportsChampionship2026 />} />
           <Route path='/lans/ewgl3' element={<EWGL3 />} />
           <Route path='/lans/hnl-x-fandom-2026' element={<HNLxFANDOM2026 />} />
           {/* Wz */}
@@ -703,14 +702,15 @@ root.render(
           {/* Conventions */}
           <Route path='/other-lans' element={<Conventions />} />
           <Route path='/lans/the-retake' element={<TheRetake2026 />} />
-          <Route path='/lans/immersecon-2026' element={<ImmerseCon2026 />} />
           <Route path='/lans/gacs-operation-heatwave' element={<GACSHeatwave />} />
-          <Route path='/lans/dreamcon2026' element={<DreamCon2026 />} />
           <Route path='/lans/hellcase-cs2-2026' element={<HellcaseCS2LAN2026 />} />
 
           {/* Archived LANs */}
           {/* 2026 */}
           <Route path='/lans/shinto-test' element={<ShintoTest />} />
+          <Route path='/lans/rva-esports-championship-2026' element={<RVAEsportsChampionship2026 />} />
+          <Route path='/lans/immersecon-2026' element={<ImmerseCon2026 />} />
+          <Route path='/lans/dreamcon2026' element={<DreamCon2026 />} />
           <Route path='/lans/summercon-ws-2026' element={<SummerConWS2026 />} />
           <Route path='/lans/egochall-tournament' element={<EgoChallTournament />} />
           <Route path='/lans/lowtier-major-iv' element={<LowtierMajorIV />} />

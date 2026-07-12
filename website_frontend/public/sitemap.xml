@@ -321,7 +321,6 @@
   <url><loc>https://www.usync.gg/lans/shintochamps2026</loc></url>
   <url><loc>https://www.usync.gg/lans/ewgl3</loc></url>
   <url><loc>https://www.usync.gg/lans/lowtier-major-iv</loc></url>
-  <url><loc>https://www.usync.gg/lans/rva-esports-championship-2026</loc></url>
   <url><loc>https://www.usync.gg/lans/hnl-x-fandom-2026</loc></url>
   <!-- Halo LANs -->
   <url><loc>https://www.usync.gg/lans/oh-yoshi-di-int-rehatched</loc></url>
@@ -331,11 +330,12 @@
   <!-- Conventions -->
   <url><loc>https://www.usync.gg/lans/the-retake</loc></url>
   <url><loc>https://www.usync.gg/lans/gacs-operation-heatwave</loc></url>
-  <url><loc>https://www.usync.gg/lans/dreamcon2026</loc></url>
   <url><loc>https://www.usync.gg/lans/lan-all-night-spring-26</loc></url>
-  <url><loc>https://www.usync.gg/lans/immersecon-2026</loc></url>
   <!-- Archived LANs 2026 -->
   <url><loc>https://www.usync.gg/lans/shinto-test</loc></url>
+  <url><loc>https://www.usync.gg/lans/rva-esports-championship-2026</loc></url>
+  <url><loc>https://www.usync.gg/lans/immersecon-2026</loc></url>
+  <url><loc>https://www.usync.gg/lans/dreamcon2026</loc></url>
   <url><loc>https://www.usync.gg/lans/summercon-ws-2026</loc></url>
   <url><loc>https://www.usync.gg/lans/egochall-tournament</loc></url>
   <url><loc>https://www.usync.gg/lans/ewgl2</loc></url>

@@ -15,32 +15,6 @@ export const Conventions = () => {
                 <div className="hrEvents" />
 
                 <HostBanner>
-                    <HostBanner.Title path={"/lans/immersecon-2026"}>ImmerseCon 2026</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/lans/immersecon-2026"} 
-                        imgUrl={"https://i.imgur.com/fwRdpTT.png"} 
-                        alt={"ImmerseCon 2026"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Richmond, VA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/immersecon-2026"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/dreamcon2026"}>Dream Con 2026</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/lans/dreamcon2026"} 
-                        imgUrl={"https://i.imgur.com/RLe3gpp.png"} 
-                        alt={"Dream Con 2026"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Houston, TX</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/dreamcon2026"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
                     <HostBanner.Title path={"/lans/gacs-operation-heatwave"}>GA:CS Operation Heatwave</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/lans/gacs-operation-heatwave"} 
