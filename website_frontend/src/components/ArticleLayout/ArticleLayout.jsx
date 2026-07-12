@@ -21,7 +21,10 @@ const JsonLd = ({ data }) => (
 
 export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
     const url = `${BASE_URL}/more/articles/${article.slug}`;
-    const related = articleList.filter((a) => a.slug !== article.slug);
+    const related = articleList
+        .filter((a) => a.slug !== article.slug)
+        .sort((a, b) => (b.category === article.category) - (a.category === article.category))
+        .slice(0, 4);
 
     const articleLd = {
         "@context": "https://schema.org",
