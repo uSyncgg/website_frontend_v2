@@ -40,7 +40,7 @@ Confirm the component name and slug back to the contributor before making any ch
 | Halo | `src/pages/Games/Halo/Lans/HaloLans.js` | `src/pages/Games/Halo/Lans/Events/` | `src/pages/Games/Halo/Lans/Archived/2026/` | `'../../../EventInformation.css'` → `'../../../../EventInformation.css'` |
 | LoL | `src/pages/Games/Lol/Lans/LolLans.js` | `src/pages/Games/Lol/Lans/Events/` | `src/pages/Games/Lol/Lans/Archived/2026/` | `'../../../EventInformation.css'` → `'../../../../EventInformation.css'` |
 | Warzone | `src/pages/Games/Wz/Lans/WzLans.js` | `src/pages/Games/Wz/Lans/Events/` | `src/pages/Games/Wz/Lans/Archived/2026/` | `'../../../EventInformation.css'` → `'../../../../EventInformation.css'` |
-| Conventions | `src/pages/Games/Conventions/Conventions.js` | `src/pages/Games/Conventions/Events/` | `src/pages/Games/Conventions/Events/Archived/2026/` | `'../../EventInformation.css'` → `'../../../../EventInformation.css'` |
+| Conventions | `src/pages/Games/Conventions/Conventions.js` | `src/pages/Games/Conventions/Events/` | `src/pages/Games/Conventions/Archived/2026/` | `'../../EventInformation.css'` → `'../../../../EventInformation.css'` |
 
 ### Year folder detection
 Before archiving, use Glob to check what year subfolders exist in the game's `Archived/` directory (e.g. `src/pages/Games/Cod/Lans/Archived/*/`).
@@ -97,18 +97,6 @@ Remove it from the CURRENT block and add it inside `{/* Archived LANs */}`:
 
 ---
 
-<<<<<<< HEAD
-## Step 7 — Update the game LAN list file(s)
-
-For each game the LAN belongs to, read the file and make two changes:
-
-**A. Remove the map marker** — Delete the matching entry from the markers array:
-```js
-{ lat: ..., lng: ..., name: "{Title}", link: "/lans/{route-slug}" },
-```
-
-**B. Remove the HostBanner** — Delete the full `<HostBanner>...</HostBanner>` block AND the `<div className="hrEvents" />` that immediately precedes it.
-=======
 ## Step 7 — Update src/data/lanMarkers.js
 
 This is the **single source of truth** for all map markers. Removing the entry here automatically removes the pin from AllLans, Home, and the game-specific map — do **not** separately edit those files for markers.
@@ -127,7 +115,6 @@ For multi-game events, delete the entry from **each** game's array it appeared i
 For each game the LAN belongs to, read the file and remove the HostBanner only (markers are handled in Step 7).
 
 **Remove the HostBanner** — Delete the full `<HostBanner>...</HostBanner>` block AND the `<div className="hrEvents" />` that immediately precedes it.
->>>>>>> origin/main
 
 If there is no hrEvents immediately before the HostBanner (e.g. it's the first item after the opening container `<div className="hrEvents" />`), remove the hrEvents that follows it instead.
 
@@ -135,29 +122,7 @@ Do not remove any other hrEvents dividers — only the one directly adjacent to 
 
 ---
 
-<<<<<<< HEAD
-## Step 8 — Remove the marker from AllLans.js
-
-Read `src/pages/Games/Conventions/AllLans.js` and delete the matching marker entry:
-```js
-{ lat: ..., lng: ..., name: "{Title}", link: "/lans/{route-slug}" },
-```
-
----
-
-## Step 9 — Remove the marker from Home.js
-
-Read `src/pages/Home.js` and delete the matching marker entry:
-```js
-{ lat: ..., lng: ..., name: "{Title}", link: "/lans/{route-slug}" },
-```
-
----
-
-## Step 10 — Update the sitemap
-=======
 ## Step 9 — Update the sitemap
->>>>>>> origin/main
 
 Read `public/sitemap.xml`.
 
@@ -170,23 +135,14 @@ Add the same entry inside the `<!-- Archived LANs 2026 -->` section.
 
 ---
 
-<<<<<<< HEAD
-## Step 11 — Confirm completion
-=======
 ## Step 10 — Confirm completion
->>>>>>> origin/main
 
 Report what was done for each LAN:
 - ✅ File moved to `{archive path}`
 - ✅ CSS import updated in archived file
 - ✅ Import + route moved to archived section in `src/index.js`
-<<<<<<< HEAD
-- ✅ HostBanner + marker removed from `{game LAN file(s)}`
-- ✅ Marker removed from `AllLans.js` and `Home.js`
-=======
 - ✅ Marker removed from `src/data/lanMarkers.js`
 - ✅ HostBanner removed from `{game LAN file(s)}`
->>>>>>> origin/main
 - ✅ Sitemap entry moved to `<!-- Archived LANs 2026 -->`
 
 ⚠️ **Reminder:** Check the `<div className="hrEvents" />` dividers in the game LAN listing page(s) to make sure they look right. The skill removes the divider directly adjacent to the deleted banner, but visually verify the spacing between remaining banners is correct.
