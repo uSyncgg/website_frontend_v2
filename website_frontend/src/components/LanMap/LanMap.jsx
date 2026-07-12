@@ -28,6 +28,10 @@ function getColor(game) {
     return GAME_COLORS[game] || GAME_COLORS['Conventions'];
 }
 
+// Stable identity for a marker — used as the React key, the ref-map key, and
+// the selection id. Falls back to coordinates when a marker has no link.
+const markerId = (m) => m.link ?? `${m.lat},${m.lng}`;
+
 function createMarkerIcon(game) {
     const color = getColor(game);
     return L.divIcon({
@@ -41,6 +45,49 @@ function createMarkerIcon(game) {
 
 const isTouchDevice = () =>
     typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+
+const DEFAULT_CENTER = [39.5, -98.35];
+const DEFAULT_ZOOM = 4;
+
+function SelectionController({ selected, setSelected, markersById, markerRefs }) {
+    const map = useMap();
+
+    // Keep the latest selection readable inside the popup handler (subscribed
+    // once) without re-binding the listener on every selection change.
+    const selectedRef = useRef(selected);
+    useEffect(() => { selectedRef.current = selected; }, [selected]);
+
+    // Recenter to the default view only when the user closes the *currently
+    // selected* event's popup. A popup that closes because we're switching to a
+    // different event (its marker no longer matches the selection) is ignored,
+    // so it can't interrupt the new fly-in.
+    useEffect(() => {
+        const onClose = (e) => {
+            const sel = selectedRef.current;
+            const selMarker = sel ? markerRefs.current.get(sel.id) : null;
+            if (!selMarker || e.popup._source !== selMarker) return;
+            setSelected(null);
+            map.flyTo(DEFAULT_CENTER, DEFAULT_ZOOM, { duration: 0.6 });
+        };
+        map.on('popupclose', onClose);
+        return () => map.off('popupclose', onClose);
+    }, [map, setSelected, markerRefs]);
+
+    // On each selection, fly to the marker — Leaflet's flyTo naturally arcs
+    // out-and-in between distant points — then open its popup once movement
+    // settles. The nonce on `selected` means re-picking the same event re-fires.
+    useEffect(() => {
+        if (!selected) return;
+        const m = markersById.get(selected.id);
+        if (!m) return;
+        const openPopup = () => markerRefs.current.get(selected.id)?.openPopup();
+        map.once('moveend', openPopup);
+        map.flyTo([m.lat, m.lng], Math.max(map.getZoom(), 8), { duration: 0.8 });
+        return () => map.off('moveend', openPopup);
+    }, [selected]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return null;
+}
 
 function MobileDraggingController({ enabled }) {
     const map = useMap();
@@ -94,21 +141,6 @@ function CtrlScrollZoom() {
     return null;
 }
 
-function MapFlyController({ selectedMarker, markers, markerRefs }) {
-    const map = useMap();
-    useEffect(() => {
-        if (selectedMarker === null) return;
-        const m = markers[selectedMarker];
-        if (!m) return;
-        map.flyTo([m.lat, m.lng], Math.max(map.getZoom(), 8), { duration: 0.8 });
-        const timer = setTimeout(() => {
-            markerRefs.current[selectedMarker]?.openPopup();
-        }, 850);
-        return () => clearTimeout(timer);
-    }, [selectedMarker]); // eslint-disable-line react-hooks/exhaustive-deps
-    return null;
-}
-
 function ListPanelControl({ legendGames, filteredMarkers, listOpen, setListOpen, handleListSelect }) {
     const map = useMap();
     const [el] = useState(() => {
@@ -144,8 +176,7 @@ function ListPanelControl({ legendGames, filteredMarkers, listOpen, setListOpen,
                 <div className="lanMapListContent">
                     {legendGames.map(g => {
                         const gameMarkers = filteredMarkers
-                            .map((m, i) => ({ m, i }))
-                            .filter(({ m }) => (m.game || 'Conventions') === g);
+                            .filter(m => (m.game || 'Conventions') === g);
                         if (!gameMarkers.length) return null;
                         return (
                             <div key={g} className="lanMapListGroup">
@@ -156,11 +187,11 @@ function ListPanelControl({ legendGames, filteredMarkers, listOpen, setListOpen,
                                     />
                                     {GAME_LABELS[g]}
                                 </div>
-                                {gameMarkers.map(({ m, i }) => (
+                                {gameMarkers.map(m => (
                                     <button
-                                        key={i}
+                                        key={markerId(m)}
                                         className="lanMapListItem"
-                                        onClick={() => handleListSelect(i)}
+                                        onClick={() => handleListSelect(markerId(m))}
                                     >
                                         {m.name}
                                     </button>
@@ -229,8 +260,8 @@ function LegendControl({ legendGames, activeGames, toggleGame }) {
 export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAllGames = false }) => {
     const [mobileActivated, setMobileActivated] = useState(false);
     const [listOpen, setListOpen] = useState(false);
-    const [selectedMarker, setSelectedMarker] = useState(null);
-    const markerRefs = useRef([]);
+    const [selected, setSelected] = useState(null); // { id, nonce } | null
+    const markerRefs = useRef(new Map());
     const touch = isTouchDevice();
 
     const legendGames = showAllGames
@@ -240,11 +271,6 @@ export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAl
             : GAME_ORDER.filter(g => markers.some(m => (m.game || 'Conventions') === g));
 
     const [activeGames, setActiveGames] = useState(() => new Set(legendGames));
-
-    useEffect(() => {
-        setSelectedMarker(null);
-        markerRefs.current = [];
-    }, [activeGames]);
 
     const toggleGame = (g) => {
         if (g === '__all__') {
@@ -266,26 +292,28 @@ export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAl
     };
 
     const filteredMarkers = markers.filter(m => activeGames.has(m.game || 'Conventions'));
+    const markersById = new Map(filteredMarkers.map(m => [markerId(m), m]));
 
-    const handleListSelect = (idx) => {
-        setSelectedMarker(idx);
+    const handleListSelect = (id) => {
+        setSelected({ id, nonce: Date.now() });
         setListOpen(false);
     };
 
     return (
         <div className="lanMapWrapper">
             <MapContainer
-                center={[39.5, -98.35]}
-                zoom={4}
+                center={DEFAULT_CENTER}
+                zoom={DEFAULT_ZOOM}
                 className={className}
                 scrollWheelZoom={false}
                 dragging={!touch}
             >
                 <CtrlScrollZoom />
                 {touch && <MobileDraggingController enabled={mobileActivated} />}
-                <MapFlyController
-                    selectedMarker={selectedMarker}
-                    markers={filteredMarkers}
+                <SelectionController
+                    selected={selected}
+                    setSelected={setSelected}
+                    markersById={markersById}
                     markerRefs={markerRefs}
                 />
                 <ListPanelControl
@@ -304,12 +332,15 @@ export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAl
                     url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                 />
-                {filteredMarkers.map((marker, i) => (
+                {filteredMarkers.map((marker) => (
                     <Marker
-                        key={i}
+                        key={markerId(marker)}
                         position={[marker.lat, marker.lng]}
                         icon={createMarkerIcon(marker.game)}
-                        ref={el => { markerRefs.current[i] = el; }}
+                        ref={(el) => {
+                            if (el) markerRefs.current.set(markerId(marker), el);
+                            else markerRefs.current.delete(markerId(marker));
+                        }}
                     >
                         <Popup>
                             <strong>{marker.name}</strong>
