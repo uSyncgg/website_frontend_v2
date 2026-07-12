@@ -42,6 +42,19 @@ function createMarkerIcon(game) {
 const isTouchDevice = () =>
     typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
 
+const DEFAULT_CENTER = [39.5, -98.35];
+const DEFAULT_ZOOM = 4;
+
+function PopupCloseResetController() {
+    const map = useMap();
+    useEffect(() => {
+        const onClose = () => map.flyTo(DEFAULT_CENTER, DEFAULT_ZOOM, { duration: 0.6 });
+        map.on('popupclose', onClose);
+        return () => map.off('popupclose', onClose);
+    }, [map]);
+    return null;
+}
+
 function ClickFlyController({ target }) {
     const map = useMap();
     const prevRef = useRef(null);
@@ -194,14 +207,15 @@ export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAl
     return (
         <div className="lanMapWrapper">
             <MapContainer
-                center={[39.5, -98.35]}
-                zoom={4}
+                center={DEFAULT_CENTER}
+                zoom={DEFAULT_ZOOM}
                 className={className}
                 scrollWheelZoom={false}
                 dragging={!touch}
             >
                 <CtrlScrollZoom />
                 <ClickFlyController target={clickTarget} />
+                <PopupCloseResetController />
                 {touch && <MobileDraggingController enabled={mobileActivated} />}
                 <LegendControl
                     legendGames={legendGames}
