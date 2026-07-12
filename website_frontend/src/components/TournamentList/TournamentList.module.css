@@ -1,0 +1,14 @@
+.dateGroup {
+    margin-bottom: 1.75rem;
+}
+
+.dateHeading {
+    width: 90%;
+    margin: 0 auto 0.75rem;
+    text-align: left;
+    color: rgb(142, 106, 206);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
