@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import { Link } from 'react-router';
@@ -94,6 +94,87 @@ function CtrlScrollZoom() {
     return null;
 }
 
+function MapFlyController({ selectedMarker, markers, markerRefs }) {
+    const map = useMap();
+    useEffect(() => {
+        if (selectedMarker === null) return;
+        const m = markers[selectedMarker];
+        if (!m) return;
+        map.flyTo([m.lat, m.lng], Math.max(map.getZoom(), 8), { duration: 0.8 });
+        const timer = setTimeout(() => {
+            markerRefs.current[selectedMarker]?.openPopup();
+        }, 850);
+        return () => clearTimeout(timer);
+    }, [selectedMarker]); // eslint-disable-line react-hooks/exhaustive-deps
+    return null;
+}
+
+function ListPanelControl({ legendGames, filteredMarkers, listOpen, setListOpen, handleListSelect }) {
+    const map = useMap();
+    const [el] = useState(() => {
+        const div = document.createElement('div');
+        div.className = 'lanMapListPortal';
+        return div;
+    });
+
+    useEffect(() => {
+        const container = map.getContainer();
+        container.appendChild(el);
+        L.DomEvent.disableClickPropagation(el);
+        L.DomEvent.disableScrollPropagation(el);
+        return () => {
+            if (container.contains(el)) container.removeChild(el);
+        };
+    }, [map, el]);
+
+    return createPortal(
+        <div className={`lanMapListPanel${listOpen ? ' open' : ''}`}>
+            <button
+                className="lanMapListToggle"
+                onClick={() => setListOpen(o => !o)}
+                title={listOpen ? 'Close list' : 'Browse events'}
+            >
+                {listOpen
+                    ? <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="1" y1="1" x2="12" y2="12"/><line x1="12" y1="1" x2="1" y2="12"/></svg>
+                    : <svg width="15" height="13" viewBox="0 0 15 13" fill="currentColor"><rect y="0" width="15" height="2" rx="1"/><rect y="5.5" width="15" height="2" rx="1"/><rect y="11" width="15" height="2" rx="1"/></svg>
+                }
+            </button>
+
+            {listOpen && (
+                <div className="lanMapListContent">
+                    {legendGames.map(g => {
+                        const gameMarkers = filteredMarkers
+                            .map((m, i) => ({ m, i }))
+                            .filter(({ m }) => (m.game || 'Conventions') === g);
+                        if (!gameMarkers.length) return null;
+                        return (
+                            <div key={g} className="lanMapListGroup">
+                                <div className="lanMapListGameHeader">
+                                    <span
+                                        className="lanMapListDot"
+                                        style={{ backgroundColor: getColor(g) }}
+                                    />
+                                    {GAME_LABELS[g]}
+                                </div>
+                                {gameMarkers.map(({ m, i }) => (
+                                    <button
+                                        key={i}
+                                        className="lanMapListItem"
+                                        onClick={() => handleListSelect(i)}
+                                    >
+                                        {m.name}
+                                    </button>
+                                ))}
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
+        </div>,
+        el
+    );
+}
+
 function LegendControl({ legendGames, activeGames, toggleGame }) {
     const map = useMap();
     const [el] = useState(() => {
@@ -147,6 +228,9 @@ function LegendControl({ legendGames, activeGames, toggleGame }) {
 
 export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAllGames = false }) => {
     const [mobileActivated, setMobileActivated] = useState(false);
+    const [listOpen, setListOpen] = useState(false);
+    const [selectedMarker, setSelectedMarker] = useState(null);
+    const markerRefs = useRef([]);
     const touch = isTouchDevice();
 
     const legendGames = showAllGames
@@ -156,6 +240,11 @@ export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAl
             : GAME_ORDER.filter(g => markers.some(m => (m.game || 'Conventions') === g));
 
     const [activeGames, setActiveGames] = useState(() => new Set(legendGames));
+
+    useEffect(() => {
+        setSelectedMarker(null);
+        markerRefs.current = [];
+    }, [activeGames]);
 
     const toggleGame = (g) => {
         if (g === '__all__') {
@@ -178,6 +267,11 @@ export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAl
 
     const filteredMarkers = markers.filter(m => activeGames.has(m.game || 'Conventions'));
 
+    const handleListSelect = (idx) => {
+        setSelectedMarker(idx);
+        setListOpen(false);
+    };
+
     return (
         <div className="lanMapWrapper">
             <MapContainer
@@ -189,6 +283,18 @@ export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAl
             >
                 <CtrlScrollZoom />
                 {touch && <MobileDraggingController enabled={mobileActivated} />}
+                <MapFlyController
+                    selectedMarker={selectedMarker}
+                    markers={filteredMarkers}
+                    markerRefs={markerRefs}
+                />
+                <ListPanelControl
+                    legendGames={legendGames}
+                    filteredMarkers={filteredMarkers}
+                    listOpen={listOpen}
+                    setListOpen={setListOpen}
+                    handleListSelect={handleListSelect}
+                />
                 <LegendControl
                     legendGames={legendGames}
                     activeGames={activeGames}
@@ -199,9 +305,28 @@ export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAl
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                 />
                 {filteredMarkers.map((marker, i) => (
-                    <Marker key={i} position={[marker.lat, marker.lng]} icon={createMarkerIcon(marker.game)}>
+                    <Marker
+                        key={i}
+                        position={[marker.lat, marker.lng]}
+                        icon={createMarkerIcon(marker.game)}
+                        ref={el => { markerRefs.current[i] = el; }}
+                    >
                         <Popup>
                             <strong>{marker.name}</strong>
+                            <div
+                                className="lanMapPopupGame"
+                                style={{
+                                    color: getColor(marker.game || 'Conventions'),
+                                    borderColor: getColor(marker.game || 'Conventions'),
+                                    backgroundColor: getColor(marker.game || 'Conventions') + '22',
+                                }}
+                            >
+                                <span
+                                    className="lanMapPopupGameDot"
+                                    style={{ backgroundColor: getColor(marker.game || 'Conventions') }}
+                                />
+                                {GAME_LABELS[marker.game || 'Conventions']}
+                            </div>
                             {marker.link && <Link to={marker.link}>More Info →</Link>}
                             <a
                                 href={`https://www.google.com/maps/dir/?api=1&destination=${marker.lat},${marker.lng}`}
