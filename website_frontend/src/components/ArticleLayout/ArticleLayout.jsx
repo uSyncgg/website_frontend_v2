@@ -44,7 +44,7 @@ export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
             name: "uSync",
             logo: {
                 "@type": "ImageObject",
-                url: `${BASE_URL}/logo512.png`,
+                url: `${BASE_URL}/favicon_png.png`,
             },
         },
         mainEntityOfPage: {
@@ -107,9 +107,9 @@ export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
                     <p className={styles.dek}>{article.dek}</p>
 
                     <div className={styles.byline}>
-                        <span className={styles.avatar} aria-hidden="true">U</span>
+                        <img src="/favicon_png.png" alt="uSync logo" className={styles.avatar} />
                         <div className={styles.bylineText}>
-                            <span className={styles.author}>uSync Editorial Team</span>
+                            <span className={styles.author}>uSync Team</span>
                             <span className={styles.dates}>
                                 <time dateTime={article.datePublished}>
                                     {formatDate(article.datePublished)}
