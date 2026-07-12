@@ -1,3 +1,8 @@
 # https://www.robotstxt.org/robotstxt.html
+# All crawlers welcome, including AI/LLM crawlers (GEO):
+# GPTBot, OAI-SearchBot, ChatGPT-User (OpenAI), ClaudeBot (Anthropic),
+# PerplexityBot, Google-Extended, Applebot-Extended, cohere-ai, CCBot
 User-agent: *
 Disallow:
+
+Sitemap: https://www.usync.gg/sitemap.xml

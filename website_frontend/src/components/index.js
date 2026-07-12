@@ -53,6 +53,9 @@ import { TournamentPagination } from "./TournamentPagination/TournamentPaginatio
 import { filteredTournaments } from "./TournamentFilter/FilteredTournaments";
 import { TournamentList } from "./TournamentList/TournamentList";
 
+// Articles
+import { ArticleLayout } from "./ArticleLayout/ArticleLayout";
+
 // SEO
 import { SeoData } from "./SeoData/SeoData";
 
@@ -90,6 +93,7 @@ export {
     filteredTournaments,
     TournamentList,
     ArticleImages,
+    ArticleLayout,
     VerifiedText,
     VerifiedImage,
     ChooseYourGame

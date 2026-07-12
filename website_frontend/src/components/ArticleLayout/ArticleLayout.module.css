@@ -1,0 +1,466 @@
+.article {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 0;
+}
+
+/* ---- Header ---- */
+
+.breadcrumbs ol {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+    margin: 0 0 1.75rem;
+    padding: 0;
+    font-size: .85rem;
+    color: rgb(109, 106, 114);
+}
+
+.breadcrumbs li:not(:last-child)::after {
+    content: "/";
+    margin-left: .35rem;
+    color: rgb(109, 106, 114);
+}
+
+.breadcrumbs a {
+    color: rgb(170, 166, 178);
+    text-decoration: none;
+    transition: color .25s cubic-bezier(.16, 1, .3, 1);
+}
+
+.breadcrumbs a:hover {
+    color: #b18af0;
+}
+
+.eyebrow {
+    color: rgb(142, 106, 206);
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: .8rem;
+    margin: 0 0 .75rem;
+}
+
+.headline {
+    color: white;
+    font-size: 2.6rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    margin: 0 0 1rem;
+}
+
+.dek {
+    color: rgb(170, 166, 178);
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.55;
+    margin: 0 0 1.75rem;
+}
+
+.byline {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255, 255, 255, .08);
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+    margin-bottom: 2rem;
+}
+
+.avatar {
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #9b6fe0, #7a5ac9);
+    color: white;
+    font-weight: 800;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.bylineText {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.4;
+}
+
+.author {
+    color: white;
+    font-weight: 600;
+    font-size: .95rem;
+}
+
+.dates {
+    color: rgb(109, 106, 114);
+    font-size: .85rem;
+}
+
+/* ---- Hero image ---- */
+
+.hero {
+    margin: 0 0 2.25rem;
+}
+
+.hero img {
+    width: 100%;
+    border-radius: 1.25rem;
+    border: 1px solid rgba(255, 255, 255, .08);
+    display: block;
+}
+
+.hero figcaption {
+    color: rgb(109, 106, 114);
+    font-size: .82rem;
+    font-style: italic;
+    margin-top: .6rem;
+    text-align: right;
+}
+
+/* ---- Key takeaways ---- */
+
+.takeaways {
+    background: rgba(28, 25, 33, .75);
+    border: 1px solid rgba(142, 106, 206, .3);
+    border-radius: 1.25rem;
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 2.5rem;
+}
+
+.takeaways h2 {
+    color: rgb(142, 106, 206);
+    font-size: .9rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 0 0 .9rem;
+}
+
+.takeaways ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: .55rem;
+}
+
+.takeaways li {
+    color: rgb(214, 211, 222);
+    font-size: 1rem;
+    line-height: 1.55;
+}
+
+.takeaways li::marker {
+    color: #b18af0;
+}
+
+/* ---- Article body typography ---- */
+
+.body {
+    padding-bottom: 1rem;
+}
+
+.body p {
+    color: rgb(200, 197, 208);
+    font-size: 1.1rem;
+    line-height: 1.75;
+    margin: 0 0 1.4rem;
+}
+
+.body > p:first-child {
+    color: rgb(222, 220, 229);
+    font-size: 1.2rem;
+}
+
+.body h2 {
+    color: white;
+    font-size: 1.7rem;
+    font-weight: 800;
+    letter-spacing: -.3px;
+    line-height: 1.25;
+    margin: 2.5rem 0 1rem;
+    padding-top: 1rem;
+    position: relative;
+}
+
+.body h2::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2.5rem;
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #8e6ace, #6a8fe0);
+}
+
+.body h3 {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 2rem 0 .75rem;
+}
+
+.body ul,
+.body ol {
+    color: rgb(200, 197, 208);
+    font-size: 1.1rem;
+    line-height: 1.75;
+    margin: 0 0 1.4rem;
+    padding-left: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+}
+
+.body li::marker {
+    color: #b18af0;
+    font-weight: 700;
+}
+
+.body a {
+    color: #b18af0;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color .25s cubic-bezier(.16, 1, .3, 1);
+}
+
+.body a:hover {
+    color: #cfa9ff;
+}
+
+.body strong {
+    color: white;
+    font-weight: 700;
+}
+
+.body blockquote {
+    border-left: 3px solid rgb(142, 106, 206);
+    margin: 2rem 0;
+    padding: .25rem 0 .25rem 1.5rem;
+}
+
+.body blockquote p {
+    color: rgb(222, 220, 229);
+    font-size: 1.25rem;
+    font-style: italic;
+    margin: 0;
+}
+
+/* ---- FAQ ---- */
+
+.faq {
+    border-top: 1px solid rgba(255, 255, 255, .08);
+    padding-top: 2rem;
+    margin-top: 1.5rem;
+}
+
+.faq > h2 {
+    color: white;
+    font-size: 1.7rem;
+    font-weight: 800;
+    letter-spacing: -.3px;
+    margin: 0 0 1.5rem;
+}
+
+.faqItem {
+    background: linear-gradient(180deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, .01));
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 1rem;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.faqItem h3 {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 .6rem;
+}
+
+.faqItem p {
+    color: rgb(200, 197, 208);
+    font-size: 1rem;
+    line-height: 1.65;
+    margin: 0;
+}
+
+/* ---- CTA ---- */
+
+.cta {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(142, 106, 206, .25), rgba(90, 70, 140, .15));
+    border: 1px solid rgba(142, 106, 206, .3);
+    border-radius: 1.5rem;
+    padding: 3.5rem 1.5rem;
+    max-width: 46rem;
+    margin: 3.5rem auto 0;
+}
+
+.ctaGlow {
+    position: absolute;
+    top: -8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30rem;
+    height: 20rem;
+    background: radial-gradient(closest-side, rgba(255, 255, 255, .08), transparent);
+    pointer-events: none;
+}
+
+.cta h2 {
+    position: relative;
+    color: white;
+    font-size: 1.9rem;
+    font-weight: 800;
+    margin: 0 0 .75rem;
+}
+
+.cta p {
+    position: relative;
+    color: rgb(190, 186, 198);
+    font-size: 1.05rem;
+    margin: 0 0 1.5rem;
+}
+
+.ctaButton {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    background: transparent;
+    border: 2px solid rgb(142, 106, 206);
+    font-weight: 700;
+    font-size: 18px;
+    padding: 10px 40px;
+    border-radius: 18px;
+    transition: background .35s cubic-bezier(.16, 1, .3, 1), transform .35s cubic-bezier(.16, 1, .3, 1), box-shadow .35s cubic-bezier(.16, 1, .3, 1);
+}
+
+.ctaButton:hover {
+    background: rgb(142, 106, 206);
+    transform: translateY(-2px) scale(1.015);
+    box-shadow: 0 .75rem 1.75rem -.5rem rgba(0, 0, 0, .4);
+}
+
+.ctaButton:active {
+    transform: scale(.97);
+    transition-duration: .15s;
+}
+
+/* ---- Related articles ---- */
+
+.related {
+    max-width: 62rem;
+    margin: 0 auto;
+    padding: 3.5rem 1.25rem 4rem;
+}
+
+.related > h2 {
+    color: white;
+    font-size: 1.9rem;
+    font-weight: 800;
+    letter-spacing: -.3px;
+    text-align: center;
+    margin: 0 0 2rem;
+}
+
+.relatedGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1.25rem;
+}
+
+.relatedCard {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, .01));
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 1.25rem;
+    overflow: hidden;
+    transition: transform .35s cubic-bezier(.16, 1, .3, 1), border-color .35s cubic-bezier(.16, 1, .3, 1), box-shadow .35s cubic-bezier(.16, 1, .3, 1);
+}
+
+.relatedCard:hover {
+    transform: translateY(-.4rem);
+    border-color: rgba(255, 255, 255, .2);
+    box-shadow: 0 1.75rem 2.5rem -1.25rem rgba(0, 0, 0, .55);
+}
+
+.relatedCard img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+}
+
+.relatedInfo {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+    padding: 1.1rem 1.25rem 1.35rem;
+}
+
+.relatedCategory {
+    color: rgb(142, 106, 206);
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: .72rem;
+}
+
+.relatedTitle {
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.relatedMeta {
+    color: rgb(109, 106, 114);
+    font-size: .82rem;
+}
+
+/* ---- Responsive ---- */
+
+@media only screen and (max-width: 768px) {
+    .article {
+        padding-top: 1.75rem;
+    }
+
+    .headline {
+        font-size: 1.9rem;
+    }
+
+    .dek {
+        font-size: 1.1rem;
+    }
+
+    .body p,
+    .body ul,
+    .body ol {
+        font-size: 1.05rem;
+    }
+
+    .body > p:first-child {
+        font-size: 1.1rem;
+    }
+
+    .cta {
+        margin-left: 1rem;
+        margin-right: 1rem;
+        padding: 2.75rem 1.25rem;
+    }
+
+    .cta h2 {
+        font-size: 1.5rem;
+    }
+}
