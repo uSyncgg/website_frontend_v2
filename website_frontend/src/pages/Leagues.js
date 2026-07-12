@@ -7,7 +7,12 @@ export const Leagues = () => {
                 description="Find a league to join for competitive esports. With over 200+ leagues we have what you are looking for."
                 canonicalPath={"/leagues"}
             />
-            <HeaderImage title={"League Titles"} imageClass={"leaguesPage"} />
+            <HeaderImage
+                title={"League Titles"}
+                imageClass={"leaguesPage"}
+                eyebrow={"200+ Leagues"}
+                subtext={"Find a competitive league to join for your game, at every skill level."}
+            />
             
             <GameImage 
                 games={
