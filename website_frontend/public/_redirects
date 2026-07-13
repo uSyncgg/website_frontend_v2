@@ -322,6 +322,8 @@
 /lans/game-and-geek-2026 /index.html 200
 /lans/sfge-2026 /index.html 200
 /lans/citadel-i /index.html 200
+/lans/hnl-x-fandom-2026 /index.html 200
+/lans/oh-yoshi-di-int-rehatched /index.html 200
 /lans/shinto-test /index.html 200
 
 # Catch-all: serve the SPA for any route not listed above so a refresh on a

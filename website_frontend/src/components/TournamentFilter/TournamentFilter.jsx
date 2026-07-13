@@ -42,7 +42,7 @@ export const TournamentFilter = ({ children, onClear }) => {
                     </div>
                 </div>
 
-                {expanded && children}
+                {expanded && <div className={styles.filterBody}>{children}</div>}
             </div>
         </div>
     )

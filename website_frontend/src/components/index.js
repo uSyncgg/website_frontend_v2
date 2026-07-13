@@ -38,6 +38,7 @@ import { Receipt } from "./Receipt/Receipt";
 import { LoadingWheel } from "./LoadingWheel/LoadingWheel";
 import { FormDataCheck } from "./FormDataCheck/FormDataCheck";
 import { PaymentComponent } from "./PaymentComponent/PaymentComponent";
+import { CheckoutSteps } from "./CheckoutSteps/CheckoutSteps";
 
 // Misc
 import { TwitterEmbed } from "./TwitterEmbed/TwitterEmbed";
@@ -53,6 +54,7 @@ import { CodTournamentCard } from "./TournamentCard/CodTournamentCard";
 import { TournamentPagination } from "./TournamentPagination/TournamentPagination";
 import { filteredTournaments } from "./TournamentFilter/FilteredTournaments";
 import { TournamentList } from "./TournamentList/TournamentList";
+import { HomeTournaments } from "./HomeTournaments/HomeTournaments";
 
 // Articles
 import { ArticleLayout } from "./ArticleLayout/ArticleLayout";
@@ -71,6 +73,7 @@ export {
     PaymentForm,
     PaymentCart,
     PaymentComponent,
+    CheckoutSteps,
     LoadingWheel,
     FormDataCheck,
     Receipt,
@@ -93,6 +96,7 @@ export {
     TournamentPagination,
     filteredTournaments,
     TournamentList,
+    HomeTournaments,
     ArticleImages,
     ArticleLayout,
     VerifiedText,
