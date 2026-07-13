@@ -1,26 +1,81 @@
+.checkoutHeader {
+    text-align: center;
+    padding: 3rem 1.5rem 1rem;
+    max-width: 40rem;
+    margin: 0 auto;
+    position: relative;
+}
+
+.backButton {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    color: rgba(255, 255, 255, .7);
+    background: rgba(255, 255, 255, .04);
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: 999px;
+    padding: .5rem 1.1rem;
+    font-size: .8rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 1.75rem;
+    transition: border-color .2s ease-in-out, color .2s ease-in-out, background .2s ease-in-out;
+}
+
+.backButton:hover {
+    color: white;
+    border-color: rgba(255, 255, 255, .3);
+    background: rgba(255, 255, 255, .08);
+}
+
+.eyebrow {
+    color: rgb(142, 106, 206);
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: .8rem;
+    margin: 0 0 .5rem;
+}
+
+.eventTitle {
+    color: white;
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -.75px;
+    margin: 0 0 2rem;
+}
+
+.trustNote {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    color: rgb(170, 166, 178);
+    font-size: .85rem;
+    margin: 0;
+}
+
 .generalFormContainer {
-    display: flex;
-    justify-content: space-between;
-    /* gap: 2rem; */
-    padding: 2rem 2rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 22rem;
+    gap: 2.5rem;
+    align-items: start;
+    max-width: 68rem;
+    margin: 0 auto;
+    padding: 1rem 2rem 4rem;
 }
 
 .sectionOneForm {
-    flex: 1 1 auto;
-    margin-left: 4rem;
-    margin-right: -7rem;
-    max-width: 80%;
+    min-width: 0;
 }
 
 .sectionTwoForm {
-    max-width: 30%;
-    flex: 1 1 auto;
+    min-width: 0;
 }
 
 .formGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    gap: 1.1rem;
 }
 
 .fullWidth {
@@ -35,13 +90,27 @@
     grid-column: 1 / -1;
 }
 
-@media only screen and (max-width: 1300px) {
-    .container {
-        flex-direction: column;
+@media only screen and (max-width: 1024px) {
+    .generalFormContainer {
+        grid-template-columns: 1fr;
+        padding: 1rem 1.25rem 3rem;
     }
-    .sectionOneForm, .sectionTwoForm {
-        max-width: 100%;
-        margin-left: 0;
-        margin-right: 0;
+
+    .sectionTwoForm {
+        order: -1;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .formGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .eventTitle {
+        font-size: 1.75rem;
+    }
+
+    .checkoutHeader {
+        padding: 2rem 1rem .5rem;
     }
 }
