@@ -30,7 +30,6 @@ export const PaymentCart = ({ pass, fee, eventName }) => {
 
                 <div className={styles.trustRow}>
                     <span className={styles.trustItem}><FaLock /> Secure Stripe checkout</span>
-                    <span className={styles.trustItem}><FaShieldAlt /> Buyer protection</span>
                 </div>
             </div>
         </div>
