@@ -83,7 +83,7 @@ export const CodTournaments = () => {
     const indexOfFirstTournament = indexOfLastTournament - cardsPerPage;
     const currentTournaments = filteredTourneys.slice(indexOfFirstTournament, indexOfLastTournament);
 
-    const freeEntryCount = tournaments.filter(tournament => tournament.is_free === true).length;
+    const freeEntryCount = filteredTourneys.filter(tournament => tournament.is_free === true).length;
 
     return (
         <div className={`standardContainer ${styles.page}`}>
@@ -103,7 +103,7 @@ export const CodTournaments = () => {
 
                 <div className={styles.statsRow}>
                     <div className={styles.statCard}>
-                        <p className={styles.statValue}>{tournaments.length}</p>
+                        <p className={styles.statValue}>{filteredTourneys.length}</p>
                         <p className={styles.statLabel}>Tournaments Today</p>
                     </div>
                     <div className={styles.statCard}>
