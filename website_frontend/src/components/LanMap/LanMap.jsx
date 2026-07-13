@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import { Link } from 'react-router';
@@ -28,6 +28,10 @@ function getColor(game) {
     return GAME_COLORS[game] || GAME_COLORS['Conventions'];
 }
 
+// Stable identity for a marker — used as the React key, the ref-map key, and
+// the selection id. Falls back to coordinates when a marker has no link.
+const markerId = (m) => m.link ?? `${m.lat},${m.lng}`;
+
 function createMarkerIcon(game) {
     const color = getColor(game);
     return L.divIcon({
@@ -41,6 +45,49 @@ function createMarkerIcon(game) {
 
 const isTouchDevice = () =>
     typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+
+const DEFAULT_CENTER = [39.5, -98.35];
+const DEFAULT_ZOOM = 4;
+
+function SelectionController({ selected, setSelected, markersById, markerRefs }) {
+    const map = useMap();
+
+    // Keep the latest selection readable inside the popup handler (subscribed
+    // once) without re-binding the listener on every selection change.
+    const selectedRef = useRef(selected);
+    useEffect(() => { selectedRef.current = selected; }, [selected]);
+
+    // Recenter to the default view only when the user closes the *currently
+    // selected* event's popup. A popup that closes because we're switching to a
+    // different event (its marker no longer matches the selection) is ignored,
+    // so it can't interrupt the new fly-in.
+    useEffect(() => {
+        const onClose = (e) => {
+            const sel = selectedRef.current;
+            const selMarker = sel ? markerRefs.current.get(sel.id) : null;
+            if (!selMarker || e.popup._source !== selMarker) return;
+            setSelected(null);
+            map.flyTo(DEFAULT_CENTER, DEFAULT_ZOOM, { duration: 0.6 });
+        };
+        map.on('popupclose', onClose);
+        return () => map.off('popupclose', onClose);
+    }, [map, setSelected, markerRefs]);
+
+    // On each selection, fly to the marker — Leaflet's flyTo naturally arcs
+    // out-and-in between distant points — then open its popup once movement
+    // settles. The nonce on `selected` means re-picking the same event re-fires.
+    useEffect(() => {
+        if (!selected) return;
+        const m = markersById.get(selected.id);
+        if (!m) return;
+        const openPopup = () => markerRefs.current.get(selected.id)?.openPopup();
+        map.once('moveend', openPopup);
+        map.flyTo([m.lat, m.lng], Math.max(map.getZoom(), 8), { duration: 0.8 });
+        return () => map.off('moveend', openPopup);
+    }, [selected]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return null;
+}
 
 function MobileDraggingController({ enabled }) {
     const map = useMap();
@@ -92,6 +139,71 @@ function CtrlScrollZoom() {
         };
     }, [map]);
     return null;
+}
+
+function ListPanelControl({ legendGames, filteredMarkers, listOpen, setListOpen, handleListSelect }) {
+    const map = useMap();
+    const [el] = useState(() => {
+        const div = document.createElement('div');
+        div.className = 'lanMapListPortal';
+        return div;
+    });
+
+    useEffect(() => {
+        const container = map.getContainer();
+        container.appendChild(el);
+        L.DomEvent.disableClickPropagation(el);
+        L.DomEvent.disableScrollPropagation(el);
+        return () => {
+            if (container.contains(el)) container.removeChild(el);
+        };
+    }, [map, el]);
+
+    return createPortal(
+        <div className={`lanMapListPanel${listOpen ? ' open' : ''}`}>
+            <button
+                className="lanMapListToggle"
+                onClick={() => setListOpen(o => !o)}
+                title={listOpen ? 'Close list' : 'Browse events'}
+            >
+                {listOpen
+                    ? <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="1" y1="1" x2="12" y2="12"/><line x1="12" y1="1" x2="1" y2="12"/></svg>
+                    : <svg width="15" height="13" viewBox="0 0 15 13" fill="currentColor"><rect y="0" width="15" height="2" rx="1"/><rect y="5.5" width="15" height="2" rx="1"/><rect y="11" width="15" height="2" rx="1"/></svg>
+                }
+            </button>
+
+            {listOpen && (
+                <div className="lanMapListContent">
+                    {legendGames.map(g => {
+                        const gameMarkers = filteredMarkers
+                            .filter(m => (m.game || 'Conventions') === g);
+                        if (!gameMarkers.length) return null;
+                        return (
+                            <div key={g} className="lanMapListGroup">
+                                <div className="lanMapListGameHeader">
+                                    <span
+                                        className="lanMapListDot"
+                                        style={{ backgroundColor: getColor(g) }}
+                                    />
+                                    {GAME_LABELS[g]}
+                                </div>
+                                {gameMarkers.map(m => (
+                                    <button
+                                        key={markerId(m)}
+                                        className="lanMapListItem"
+                                        onClick={() => handleListSelect(markerId(m))}
+                                    >
+                                        {m.name}
+                                    </button>
+                                ))}
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
+        </div>,
+        el
+    );
 }
 
 function LegendControl({ legendGames, activeGames, toggleGame }) {
@@ -147,6 +259,9 @@ function LegendControl({ legendGames, activeGames, toggleGame }) {
 
 export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAllGames = false }) => {
     const [mobileActivated, setMobileActivated] = useState(false);
+    const [listOpen, setListOpen] = useState(false);
+    const [selected, setSelected] = useState(null); // { id, nonce } | null
+    const markerRefs = useRef(new Map());
     const touch = isTouchDevice();
 
     const legendGames = showAllGames
@@ -177,18 +292,37 @@ export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAl
     };
 
     const filteredMarkers = markers.filter(m => activeGames.has(m.game || 'Conventions'));
+    const markersById = new Map(filteredMarkers.map(m => [markerId(m), m]));
+
+    const handleListSelect = (id) => {
+        setSelected({ id, nonce: Date.now() });
+        setListOpen(false);
+    };
 
     return (
         <div className="lanMapWrapper">
             <MapContainer
-                center={[39.5, -98.35]}
-                zoom={4}
+                center={DEFAULT_CENTER}
+                zoom={DEFAULT_ZOOM}
                 className={className}
                 scrollWheelZoom={false}
                 dragging={!touch}
             >
                 <CtrlScrollZoom />
                 {touch && <MobileDraggingController enabled={mobileActivated} />}
+                <SelectionController
+                    selected={selected}
+                    setSelected={setSelected}
+                    markersById={markersById}
+                    markerRefs={markerRefs}
+                />
+                <ListPanelControl
+                    legendGames={legendGames}
+                    filteredMarkers={filteredMarkers}
+                    listOpen={listOpen}
+                    setListOpen={setListOpen}
+                    handleListSelect={handleListSelect}
+                />
                 <LegendControl
                     legendGames={legendGames}
                     activeGames={activeGames}
@@ -198,10 +332,32 @@ export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAl
                     url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                 />
-                {filteredMarkers.map((marker, i) => (
-                    <Marker key={i} position={[marker.lat, marker.lng]} icon={createMarkerIcon(marker.game)}>
+                {filteredMarkers.map((marker) => (
+                    <Marker
+                        key={markerId(marker)}
+                        position={[marker.lat, marker.lng]}
+                        icon={createMarkerIcon(marker.game)}
+                        ref={(el) => {
+                            if (el) markerRefs.current.set(markerId(marker), el);
+                            else markerRefs.current.delete(markerId(marker));
+                        }}
+                    >
                         <Popup>
                             <strong>{marker.name}</strong>
+                            <div
+                                className="lanMapPopupGame"
+                                style={{
+                                    color: getColor(marker.game || 'Conventions'),
+                                    borderColor: getColor(marker.game || 'Conventions'),
+                                    backgroundColor: getColor(marker.game || 'Conventions') + '22',
+                                }}
+                            >
+                                <span
+                                    className="lanMapPopupGameDot"
+                                    style={{ backgroundColor: getColor(marker.game || 'Conventions') }}
+                                />
+                                {GAME_LABELS[marker.game || 'Conventions']}
+                            </div>
                             {marker.link && <Link to={marker.link}>More Info →</Link>}
                             <a
                                 href={`https://www.google.com/maps/dir/?api=1&destination=${marker.lat},${marker.lng}`}

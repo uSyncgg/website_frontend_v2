@@ -13,6 +13,9 @@
 .noTitle {
   padding-bottom: 10%;
   padding-top: 6%;
+  background-image:
+    linear-gradient(180deg, rgba(21, 19, 26, .45) 0%, rgba(21, 19, 26, .65) 60%, rgba(21, 19, 26, .95) 100%),
+    var(--bg-image);
 }
 
 /* Darken the banner behind hero text and fade it into the page background */

@@ -53,6 +53,7 @@ import { CodTournamentCard } from "./TournamentCard/CodTournamentCard";
 import { TournamentPagination } from "./TournamentPagination/TournamentPagination";
 import { filteredTournaments } from "./TournamentFilter/FilteredTournaments";
 import { TournamentList } from "./TournamentList/TournamentList";
+import { HomeTournaments } from "./HomeTournaments/HomeTournaments";
 
 // SEO
 import { SeoData } from "./SeoData/SeoData";
@@ -90,6 +91,7 @@ export {
     TournamentPagination,
     filteredTournaments,
     TournamentList,
+    HomeTournaments,
     ArticleImages,
     VerifiedText,
     VerifiedImage,

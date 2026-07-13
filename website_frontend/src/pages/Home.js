@@ -2,7 +2,7 @@ import React from "react";
 import styles from './Home.module.css';
 import '../index.css';
 import { Link } from "react-router";
-import { ChooseYourGame, SeoData, LanMap } from "components";
+import { ChooseYourGame, SeoData, LanMap, HomeTournaments } from "components";
 import { FaMapMarkerAlt, FaLayerGroup, FaSitemap, FaTrophy } from "react-icons/fa";
 import { ALL_LAN_MARKERS } from 'data/lanMarkers';
 
@@ -81,6 +81,10 @@ export const Home = () => {
 
                 <div className="hr" />
 
+                <HomeTournaments />
+
+                <div className="hr" />
+
                 <p className={styles.eyebrow}>LAN Map</p>
                 <h2 className={styles.white}>Find Events Near You</h2>
                 <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
@@ -88,13 +92,6 @@ export const Home = () => {
 
                 <div className={styles.mapContainer}>
                     <LanMap markers={ALL_LAN_MARKERS} className={styles.map} showAllGames={true} />
-                </div>
-
-                <div className={styles.legend}>
-                    <span className={styles.legendItem}><span className={`${styles.dot} ${styles.dotCod}`} />Call of Duty</span>
-                    <span className={styles.legendItem}><span className={`${styles.dot} ${styles.dotLol}`} />League of Legends</span>
-                    <span className={styles.legendItem}><span className={`${styles.dot} ${styles.dotHalo}`} />Halo</span>
-                    <span className={styles.legendItem}><span className={`${styles.dot} ${styles.dotCon}`} />Conventions</span>
                 </div>
 
                 <h3 className={styles.learn}>

@@ -55,6 +55,18 @@ export const HaloLans = () => {
                     <HostBanner.Button title={"More Info"} path={"/lans/citadel-i"} />
                 </HostBanner>
 
+                <HostBanner>
+                    <HostBanner.Title path={"/lans/oh-yoshi-di-int-rehatched"}>Oh Yoshi Di-int Rehatched</HostBanner.Title>
+                    <HostBanner.Image
+                        path={"/lans/oh-yoshi-di-int-rehatched"}
+                        imgUrl={"https://i.imgur.com/hXqNfnx.png"}
+                        alt={"Oh Yoshi Di-int Rehatched"}
+                        verified={false}
+                    />
+                    <HostBanner.Region>Visalia, CA</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/lans/oh-yoshi-di-int-rehatched"} />
+                </HostBanner>
+
                 <div className="hrEvents" />
             </div>
         </div>
