@@ -1,5 +1,5 @@
 import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData } from "components";
-import '../../EventInformation.css';
+import '../../../EventInformation.css';
 
 export const DreamCon2026 = () => {
     return (
@@ -13,19 +13,19 @@ export const DreamCon2026 = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date/Place"} infoList={["July 10 - 12th, 2026", "Houston, TX"]} /> 
+                    <EventInfoCard title={"Date/Place"} infoList={["July 10 - 12th, 2026", "Houston, TX"]} />
                 </div>
 
                 <div>
                     <EventInfoCard title={"Details"} infoList={[
-                        "Rocket League, Marvel Rivals, Madden, and more"
-                        , "4 titles per person"
-                        ,"Sports Titles are BO1"
-                    ]} /> 
+                        "Rocket League, Marvel Rivals, Madden, and more",
+                        "4 titles per person",
+                        "Sports Titles are BO1"
+                    ]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$10 entry per title"]} /> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["$10 entry per title"]} />
                 </div>
             </div>
 
@@ -39,4 +39,3 @@ export const DreamCon2026 = () => {
         </div>
     );
 }
-
