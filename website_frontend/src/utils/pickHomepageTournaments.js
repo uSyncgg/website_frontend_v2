@@ -44,5 +44,10 @@ export function pickHomepageTournaments(tournaments) {
         take(tournament);
     }
 
+    // The steps above pick tournaments by priority (GTD/Elite, then free, then
+    // regulars), which leaves `picked` out of chronological order. Re-sort the
+    // final selection by start date + time so the cards display soonest-first.
+    picked.sort((a, b) => parseEstDate(a.date, a.time) - parseEstDate(b.date, b.time));
+
     return picked;
 }
