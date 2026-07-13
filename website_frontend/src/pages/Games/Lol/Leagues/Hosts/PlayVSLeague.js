@@ -12,11 +12,11 @@ export const PlayVSLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Fall Season"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Fall Season"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - USA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["No Prize Pool", "Highly Competitive", "No Live Streamed Matches", "No Skill Requirement"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - USA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["No Prize Pool", "Highly Competitive", "No Live Streamed Matches", "No Skill Requirement"]} />
                 </div>
 
                 <div>

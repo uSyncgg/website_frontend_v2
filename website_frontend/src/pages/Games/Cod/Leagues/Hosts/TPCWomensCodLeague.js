@@ -12,11 +12,11 @@ export const TPCWomensCodLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Multiple Seasons per Year"]} />
+                    <EventInfoCard title={"Date"} infoList={["Multiple Seasons per Year"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$4,500+ Prize Pools", "5 Majors and 1 LAN", "Main and Beginner's Leagues", "Female ONLY", "Pre Season Tournaments", "4v4 CDL Variant"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$4,500+ Prize Pools", "5 Majors and 1 LAN", "Main and Beginner's Leagues", "Female ONLY", "Pre Season Tournaments", "4v4 CDL Variant"]} />
                 </div>
 
                 <div>

@@ -12,11 +12,11 @@ export const RSC3v3NALeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual April, August, and December Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual April, August, and December Seasons"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["No Prize Pool", "Sign up as a Free Agent", "9 Competitive Skill Divisions", "Draft Based League", "Weekly Matches"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["No Prize Pool", "Sign up as a Free Agent", "9 Competitive Skill Divisions", "Draft Based League", "Weekly Matches"]} />
                 </div>
 
                 <div>

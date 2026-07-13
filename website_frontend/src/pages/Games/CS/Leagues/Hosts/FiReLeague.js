@@ -12,11 +12,11 @@ export const FiReLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Qualifiers / Leagues Year Round"]} />
+                    <EventInfoCard title={"Date"} infoList={["Qualifiers / Leagues Year Round"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA, SA, and EU"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Various Prize Pools", "Invitational Tournaments", "Qualifiers Pre Season", "Based in Buenos Aires", "Live Streamed Matches", "Highly Competitive"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA, SA, and EU"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Various Prize Pools", "Invitational Tournaments", "Qualifiers Pre Season", "Based in Buenos Aires", "Live Streamed Matches", "Highly Competitive"]} />
                 </div>
 
                 <div>

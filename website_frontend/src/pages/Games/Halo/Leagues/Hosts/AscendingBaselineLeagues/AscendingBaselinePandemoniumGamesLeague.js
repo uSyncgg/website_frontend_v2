@@ -12,11 +12,11 @@ export const AscendingBaselinePandemoniumGamesLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Multiple Annual Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Multiple Annual Seasons"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Prize Pool Based on Entrants & Spins", "Draft League with Upper and Lower Division", "No GA's"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Prize Pool Based on Entrants & Spins", "Draft League with Upper and Lower Division", "No GA's"]} />
                 </div>
 
                 <div>

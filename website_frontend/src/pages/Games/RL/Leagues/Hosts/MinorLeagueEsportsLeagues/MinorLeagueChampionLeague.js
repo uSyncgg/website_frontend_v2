@@ -12,11 +12,11 @@ export const MinorLeagueChampionLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Season"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Season"]} regionTitle={"Region/Type"} regionInfoList={["2v2 / 3v3 - All Regions"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Case of Bawls Guarana Prize", "Salary Based on MMR", "10 - 32 Teams", "Must Sign up Solo", "Draft Based League", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["2v2 / 3v3 - All Regions"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Case of Bawls Guarana Prize", "Salary Based on MMR", "10 - 32 Teams", "Must Sign up Solo", "Draft Based League", "Live Streamed Matches"]} />
                 </div>
 
                 <div>

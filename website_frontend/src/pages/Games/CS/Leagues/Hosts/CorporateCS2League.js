@@ -12,11 +12,11 @@ export const CorporateCS2League = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$2,000 in charity donations, no prize pool (Estimated)", "All matches are played each Saturday", "~8 week long regular season with playoffs", "Competitive"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$2,000 in charity donations, no prize pool (Estimated)", "All matches are played each Saturday", "~8 week long regular season with playoffs", "Competitive"]} />
                 </div>
 
                 <div>

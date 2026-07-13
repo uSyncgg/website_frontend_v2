@@ -12,11 +12,11 @@ export const XPLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA/EU"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["£/$4,500 Prize Pool with Immediate Payouts", "NA and EU Legaues", "Multiple Divisions - 100+ Teams", "No CDL or Top 50 NA Pro Point Players", "Quick Responses / Reliable Format", "Live Streamed Matches at a High Level"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA/EU"]}/>
+                    <EventInfoCard title={"Details"} infoList={["£/$4,500 Prize Pool with Immediate Payouts", "NA and EU Legaues", "Multiple Divisions - 100+ Teams", "No CDL or Top 50 NA Pro Point Players", "Quick Responses / Reliable Format", "Live Streamed Matches at a High Level"]} />
                 </div>
 
                 <div>

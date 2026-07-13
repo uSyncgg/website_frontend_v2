@@ -12,11 +12,11 @@ export const EliteWarfareGamingLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons (Estimated)"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons (Estimated)"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["70/30% Prize Pool Split", "4v4 CDL Ruleset Based on Divisions", "Group A: T150 Pro Point Players / NO T250 Ranked Players", "Group B: Crim 3 Ranked Peak / No Pro Point Players / No top U18 Players (Via S7 U18 League)", "Group C: Diamond 3 Ranked Peak / No Pro Point Players / No Challengers Cup Participants / $50 Earnings Limit on COD Agent/CMGs / No top U18 Players (Via S7 U18 League)"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["70/30% Prize Pool Split", "4v4 CDL Ruleset Based on Divisions", "Group A: T150 Pro Point Players / NO T250 Ranked Players", "Group B: Crim 3 Ranked Peak / No Pro Point Players / No top U18 Players (Via S7 U18 League)", "Group C: Diamond 3 Ranked Peak / No Pro Point Players / No Challengers Cup Participants / $50 Earnings Limit on COD Agent/CMGs / No top U18 Players (Via S7 U18 League)"]} />
                 </div>
 
                 <div>

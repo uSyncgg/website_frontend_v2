@@ -12,11 +12,11 @@ export const CorporateRLLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual spring and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$2,000 in Charity Donations, No Prize Pool (Estimated)", "Must Sign up with Company", "4 Different Divisions Based on Skill", "All matches are played each Saturday", "~8 Week Long Regular Season and Playoffs"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$2,000 in Charity Donations, No Prize Pool (Estimated)", "Must Sign up with Company", "4 Different Divisions Based on Skill", "All matches are played each Saturday", "~8 Week Long Regular Season and Playoffs"]} />
                 </div>
 
                 <div>

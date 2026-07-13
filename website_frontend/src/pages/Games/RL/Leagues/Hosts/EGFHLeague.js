@@ -12,11 +12,11 @@ export const EGFHLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - USA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Two 8 Week Seasonal Splits", "Regional and National Championships", "National Championship Held on LAN", "Live Streamed Matched"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - USA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Two 8 Week Seasonal Splits", "Regional and National Championships", "National Championship Held on LAN", "Live Streamed Matched"]} />
                 </div>
 
                 <div>

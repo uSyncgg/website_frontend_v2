@@ -12,11 +12,11 @@ export const FemaleCodLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Winter and Spring Season"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Winter and Spring Season"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$1,500 Prize Pool", "Regular Season and Playoffs", "Female ONLY", "Competitive", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$1,500 Prize Pool", "Regular Season and Playoffs", "Female ONLY", "Competitive", "Live Streamed Matches"]} />
                 </div>
 
                 <div>

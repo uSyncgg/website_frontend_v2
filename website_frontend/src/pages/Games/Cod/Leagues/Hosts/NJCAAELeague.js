@@ -12,11 +12,11 @@ export const NJCAAELeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Early Spring Season"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Early Spring Season"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - USA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["3 Skill Tiers", "7 Week Round Robin Regular Season", "Single Elimination Playoffs", "No Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - USA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["3 Skill Tiers", "7 Week Round Robin Regular Season", "Single Elimination Playoffs", "No Live Streamed Matches"]} />
                 </div>
 
                 <div>

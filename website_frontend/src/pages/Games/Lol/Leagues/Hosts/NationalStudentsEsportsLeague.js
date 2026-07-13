@@ -12,11 +12,11 @@ export const NationalStudentEsportsLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, Fall, and Winter Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, Fall, and Winter Seasons"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - UK"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["£1,000 Total Prize Pool", "Women Only League as well as Open League", "3 Divisions, Move Up Divisions Based on Placing", "3 Week Regular Season", "4 Week Playoffs and Swiss", "Live LAN Finals (Estimated)", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - UK"]}/>
+                    <EventInfoCard title={"Details"} infoList={["£1,000 Total Prize Pool", "Women Only League as well as Open League", "3 Divisions, Move Up Divisions Based on Placing", "3 Week Regular Season", "4 Week Playoffs and Swiss", "Live LAN Finals (Estimated)", "Live Streamed Matches"]} />
                 </div>
 
                 <div>

@@ -12,11 +12,11 @@ export const FrontierExpertLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Multiple Seasons Annually"]} />
+                    <EventInfoCard title={"Date"} infoList={["Multiple Seasons Annually"]} regionTitle={"Region/Type"} regionInfoList={["2v2 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Salary Determined by MMR", "10 Week Season", "Hosted on NA East, Open to Any Region", "Not a Draft League"]} regionTitle={"Region/Type"} regionInfoList={["2v2 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Salary Determined by MMR", "10 Week Season", "Hosted on NA East, Open to Any Region", "Not a Draft League"]} />
                 </div>
 
                 <div>

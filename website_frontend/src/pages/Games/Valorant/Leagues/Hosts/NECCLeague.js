@@ -12,11 +12,11 @@ export const NECCLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$7,000 Prize Pool (Estimated)", "Multiple Skill Divisions", "6 Week Regular Season and Playoffs After", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$7,000 Prize Pool (Estimated)", "Multiple Skill Divisions", "6 Week Regular Season and Playoffs After", "Live Streamed Matches"]} />
                 </div>
 
                 <div>

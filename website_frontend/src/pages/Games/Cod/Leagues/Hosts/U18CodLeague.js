@@ -12,11 +12,11 @@ export const U18CodLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["~$1,500 Prize Pools", "Highly Competitive", "Multiple Cups Throughout Season", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["~$1,500 Prize Pools", "Highly Competitive", "Multiple Cups Throughout Season", "Live Streamed Matches"]} />
                 </div>
 
                 <div>

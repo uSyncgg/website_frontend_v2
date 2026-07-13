@@ -12,11 +12,11 @@ export const CasualXPLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons (Estimated)"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons (Estimated)"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - All Regions"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Two Divisions: Premier and CXP", "4v4 CDL Ruleset, with 1 Sniper and Smoke Grenade per Team", "11-Game Regular Season, Followed by Playoffs", "Point Cap System: A unique competitive balance system created by CXP and now starting to be recognized across the scene", "Premier Division = Highest Competition Division", "Live Streamed Matches with Record Statistics"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - All Regions"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Two Divisions: Premier and CXP", "4v4 CDL Ruleset, with 1 Sniper and Smoke Grenade per Team", "11-Game Regular Season, Followed by Playoffs", "Point Cap System: A unique competitive balance system created by CXP and now starting to be recognized across the scene", "Premier Division = Highest Competition Division", "Live Streamed Matches with Record Statistics"]} />
                 </div>
 
                 <div>

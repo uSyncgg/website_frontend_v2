@@ -12,11 +12,11 @@ export const CollegeCodLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Early Spring Season"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Early Spring Season"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Prize Pool TBD", "Highly Competitive", "Live Streamed Matches", "Live Support Admins on Discord", "Scholarship Players Allowed"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Prize Pool TBD", "Highly Competitive", "Live Streamed Matches", "Live Support Admins on Discord", "Scholarship Players Allowed"]} />
                 </div>
 
                 <div>

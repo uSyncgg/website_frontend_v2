@@ -12,11 +12,11 @@ export const NASEFLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Fall Season (Estimated)"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Fall Season (Estimated)"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - USA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["5 Regional Divisions", "Weekly Group Stage Matches", "Top Regional Teams Make Playoffs"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - USA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["5 Regional Divisions", "Weekly Group Stage Matches", "Top Regional Teams Make Playoffs"]} />
                 </div>
 
                 <div>

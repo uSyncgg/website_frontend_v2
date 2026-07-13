@@ -12,11 +12,11 @@ export const ItalianSerieALeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Two Annual Seasons (Estimated)"]} />
+                    <EventInfoCard title={"Date"} infoList={["Two Annual Seasons (Estimated)"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - ITL"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Prize Based on Teams Performance", "2 Players Must Have Italian Citizenship", "Earn Points in Regular season to Determine Playoff Eligibility", "Playoffs on LAN", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - ITL"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Prize Based on Teams Performance", "2 Players Must Have Italian Citizenship", "Earn Points in Regular season to Determine Playoff Eligibility", "Playoffs on LAN", "Live Streamed Matches"]} />
                 </div>
 
                 <div>

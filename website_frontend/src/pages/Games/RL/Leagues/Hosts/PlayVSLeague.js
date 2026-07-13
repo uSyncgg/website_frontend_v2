@@ -12,11 +12,11 @@ export const PlayVSLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - USA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["8 Week Regular Season, 3 Week Playoffs", "7 Matches in Regular Season", "Multiple Regional Divisions", "No Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - USA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["8 Week Regular Season, 3 Week Playoffs", "7 Matches in Regular Season", "Multiple Regional Divisions", "No Live Streamed Matches"]} />
                 </div>
 
                 <div>

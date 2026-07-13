@@ -16,11 +16,11 @@ export const CLOLLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Fall Season"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Fall Season"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$22k Player Scholarship & $11k Sub/Staff Prize Pool", "Top 1-4 Depending on Conference Play for Prize Pool", "Live Streamed Matches", "Live Support on Discord"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$22k Player Scholarship & $11k Sub/Staff Prize Pool", "Top 1-4 Depending on Conference Play for Prize Pool", "Live Streamed Matches", "Live Support on Discord"]} />
                 </div>
 
                 <div>

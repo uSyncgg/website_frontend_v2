@@ -16,11 +16,11 @@ export const CollegeCarballAssociationLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Fall Season"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Fall Season"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - NA/EU"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["5 Week Regular Season with Playoffs", "World Championship includes NA and EU", "Live Streamed Matches", "24/7 Support and Admins on Discord"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - NA/EU"]}/>
+                    <EventInfoCard title={"Details"} infoList={["5 Week Regular Season with Playoffs", "World Championship includes NA and EU", "Live Streamed Matches", "24/7 Support and Admins on Discord"]} />
                 </div>
 
                 <div>

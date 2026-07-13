@@ -12,11 +12,11 @@ export const AustralianEsportsLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - AUS"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$3,500 Total Prize Pool (Estimated)", "Stage 1 (Regular Season): Best of 1 Matches", "Stage 2 (Playoffs): Best of 3 Matches", "Top Teams from Stage 1 Move to Stage 2", "Open Series = Any University Can Join", "Elite Series = Invitation Only"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - AUS"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$3,500 Total Prize Pool (Estimated)", "Stage 1 (Regular Season): Best of 1 Matches", "Stage 2 (Playoffs): Best of 3 Matches", "Top Teams from Stage 1 Move to Stage 2", "Open Series = Any University Can Join", "Elite Series = Invitation Only"]} />
                 </div>
 
                 <div>
