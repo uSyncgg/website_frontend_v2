@@ -1,0 +1,87 @@
+.steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    margin: 0 auto 2.5rem;
+    padding: 0;
+    max-width: 40rem;
+    flex-wrap: wrap;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+}
+
+.bubble {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    font-size: .85rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    transition: background .3s ease-in-out, color .3s ease-in-out, border-color .3s ease-in-out;
+}
+
+.bubble.upcoming {
+    background: rgba(255, 255, 255, .04);
+    border: 1.5px solid rgba(255, 255, 255, .16);
+    color: rgba(255, 255, 255, .45);
+}
+
+.bubble.active {
+    background: linear-gradient(135deg, #9b6fe0, #7a5ac9);
+    color: white;
+    box-shadow: 0 0 0 4px rgba(142, 106, 206, .18);
+}
+
+.bubble.done {
+    background: rgba(142, 106, 206, .16);
+    border: 1.5px solid #8e6ace;
+    color: #b18af0;
+}
+
+.label {
+    margin: 0 .6rem;
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: .2px;
+    white-space: nowrap;
+}
+
+.label.upcoming {
+    color: rgba(255, 255, 255, .4);
+}
+
+.label.active {
+    color: white;
+}
+
+.label.done {
+    color: rgba(255, 255, 255, .7);
+}
+
+.connector {
+    width: 2.25rem;
+    height: 1.5px;
+    background: rgba(255, 255, 255, .14);
+    margin-right: .6rem;
+}
+
+.connectorDone {
+    background: #8e6ace;
+}
+
+@media only screen and (max-width: 600px) {
+    .label {
+        display: none;
+    }
+
+    .connector {
+        width: 1.25rem;
+    }
+}

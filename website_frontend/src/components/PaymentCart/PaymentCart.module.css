@@ -1,45 +1,104 @@
 .secondContainer {
-    max-width: 70%;
-}
-
-.secondContainer h1 {
-    color: white;
-    text-align: center;
+    max-width: 100%;
+    position: sticky;
+    top: 6.5rem;
 }
 
 .cartContainer {
-    background-color: rgb(93, 66, 133);
-    border: 1px solid #333;
-    border-radius: 10px;
-    padding: 1.5rem;
-    margin-top: 2rem;
+    background: rgba(28, 25, 33, .75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 1.25rem;
+    padding: 1.75rem;
+    box-shadow: 0 1.5rem 3rem -1.25rem rgba(0, 0, 0, .6);
+}
+
+.eyebrow {
+    color: rgb(142, 106, 206);
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: .75rem;
+    margin: 0 0 .35rem;
+}
+
+.cartTitle {
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin: 0 0 1.5rem;
+    letter-spacing: -.25px;
 }
 
 .cartItem {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     flex-wrap: wrap;
-    margin-bottom: 0.75rem;
-    color: white;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, .85);
+    font-size: .95rem;
+}
+
+.feeLabel {
+    display: flex;
+    flex-direction: column;
+}
+
+.feeNote {
+    color: rgb(109, 106, 114);
+    font-size: .75rem;
+    margin-top: .15rem;
 }
 
 .cartTotal {
-    font-weight: bold;
-    font-size: 1.2rem;
+    font-weight: 700;
+    font-size: 1.15rem;
     color: white;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.totalValue {
+    background: linear-gradient(90deg, #b18af0, #8e6ace);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    font-size: 1.5rem;
+    font-weight: 800;
 }
 
 .cartDivider {
     height: 1px;
-    background: rgb(255, 255, 255);
-    margin: 1rem 0;
+    border: none;
+    background: rgba(255, 255, 255, .1);
+    margin: .25rem 0 1.1rem;
+}
+
+.trustRow {
+    display: flex;
+    flex-direction: column;
+    gap: .55rem;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, .08);
+}
+
+.trustItem {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    color: rgb(170, 166, 178);
+    font-size: .8rem;
 }
 
 @media only screen and (max-width: 1300px) {
     .secondContainer {
-        max-width: 80%;
-        margin: 1rem 20%;
+        max-width: 100%;
+        position: static;
+        margin: 0;
     }
 }

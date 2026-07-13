@@ -38,6 +38,7 @@ import { Receipt } from "./Receipt/Receipt";
 import { LoadingWheel } from "./LoadingWheel/LoadingWheel";
 import { FormDataCheck } from "./FormDataCheck/FormDataCheck";
 import { PaymentComponent } from "./PaymentComponent/PaymentComponent";
+import { CheckoutSteps } from "./CheckoutSteps/CheckoutSteps";
 
 // Misc
 import { TwitterEmbed } from "./TwitterEmbed/TwitterEmbed";
@@ -69,6 +70,7 @@ export {
     PaymentForm,
     PaymentCart,
     PaymentComponent,
+    CheckoutSteps,
     LoadingWheel,
     FormDataCheck,
     Receipt,
