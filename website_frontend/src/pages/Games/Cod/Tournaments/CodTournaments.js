@@ -1,15 +1,18 @@
 import { TournamentList, TournamentFilter, TournamentPagination, filteredTournaments, SeoData } from "components";
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router";
 import axios from "axios";
 import styles from './CodTournaments.module.css';
 
 export const CodTournaments = () => {
-    const [selectedFormats, setSelectedFormats] = useState([]);
-    const [selectedRegions, setSelectedRegions] = useState([]);
-    const [selectedPlatforms, setSelectedPlatforms] = useState([]);
-    const [selectedSkills, setSelectedSkills] = useState([]);
-    const [selectedEntry, setSelectedEntry] = useState([]);
-    const [selectedHosts, setSelectedHosts] = useState([]);
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const [selectedFormats, setSelectedFormats] = useState(() => searchParams.getAll('format'));
+    const [selectedRegions, setSelectedRegions] = useState(() => searchParams.getAll('region'));
+    const [selectedPlatforms, setSelectedPlatforms] = useState(() => searchParams.getAll('platform'));
+    const [selectedSkills, setSelectedSkills] = useState(() => searchParams.getAll('skill'));
+    const [selectedEntry, setSelectedEntry] = useState(() => searchParams.getAll('entry'));
+    const [selectedHosts, setSelectedHosts] = useState(() => searchParams.getAll('host'));
 
     const clearFilters = () => {
         setSelectedFormats([]);
@@ -40,10 +43,22 @@ export const CodTournaments = () => {
             .finally(() => setIsLoaded(true));
     }, []);
 
-    // Jump back to the first page whenever a filter changes
+    // Sync filters to URL and reset page whenever a filter changes
+    // NOTE: If we ever do in app routing to this page with specific filters applied they will NOT be applied with the current
+    // configuration as it wont be a cold load and thus it wont mount. If we ever do plan to have that on the site we need a new
+    // useEffect to manage the mounting. Not a big issue but an item potentially for the future.
     useEffect(() => {
         setCurrentPage(1);
-    }, [selectedFormats, selectedRegions, selectedPlatforms, selectedSkills, selectedEntry, selectedHosts]);
+        const params = new URLSearchParams(searchParams);
+        ['format', 'region', 'platform', 'skill', 'entry', 'host'].forEach(k => params.delete(k));
+        selectedFormats.forEach(v => params.append('format', v));
+        selectedRegions.forEach(v => params.append('region', v));
+        selectedPlatforms.forEach(v => params.append('platform', v));
+        selectedSkills.forEach(v => params.append('skill', v));
+        selectedEntry.forEach(v => params.append('entry', v));
+        selectedHosts.forEach(v => params.append('host', v));
+        setSearchParams(params, { replace: true });
+    }, [selectedFormats, selectedRegions, selectedPlatforms, selectedSkills, selectedEntry, selectedHosts, setSearchParams]);
 
     const handleFilterChange = (setter, currentValues) => (selectedOptions) => {
         // If selectedOptions is an array, ensure deselected options are removed
@@ -68,7 +83,7 @@ export const CodTournaments = () => {
     const indexOfFirstTournament = indexOfLastTournament - cardsPerPage;
     const currentTournaments = filteredTourneys.slice(indexOfFirstTournament, indexOfLastTournament);
 
-    const freeEntryCount = tournaments.filter(tournament => tournament.is_free === true).length;
+    const freeEntryCount = filteredTourneys.filter(tournament => tournament.is_free === true).length;
 
     return (
         <div className={`standardContainer ${styles.page}`}>
@@ -88,7 +103,7 @@ export const CodTournaments = () => {
 
                 <div className={styles.statsRow}>
                     <div className={styles.statCard}>
-                        <p className={styles.statValue}>{tournaments.length}</p>
+                        <p className={styles.statValue}>{filteredTourneys.length}</p>
                         <p className={styles.statLabel}>Tournaments Today</p>
                     </div>
                     <div className={styles.statCard}>
