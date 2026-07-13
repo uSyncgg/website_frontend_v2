@@ -2,7 +2,7 @@ import React from "react";
 import styles from './Home.module.css';
 import '../index.css';
 import { Link } from "react-router";
-import { ChooseYourGame, SeoData, LanMap } from "components";
+import { ChooseYourGame, SeoData, LanMap, HomeTournaments } from "components";
 import { FaMapMarkerAlt, FaLayerGroup, FaSitemap, FaTrophy } from "react-icons/fa";
 import { ALL_LAN_MARKERS } from 'data/lanMarkers';
 
@@ -78,6 +78,10 @@ export const Home = () => {
                         <span className={styles.explorePill}>Explore</span>
                     </Link>
                 </div>
+
+                <div className="hr" />
+
+                <HomeTournaments />
 
                 <div className="hr" />
 
