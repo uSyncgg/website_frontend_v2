@@ -44,7 +44,7 @@ export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
             name: "uSync",
             logo: {
                 "@type": "ImageObject",
-                url: `${BASE_URL}/favicon_png.png`,
+                url: `${BASE_URL}/logo512.png`,
             },
         },
         mainEntityOfPage: {
