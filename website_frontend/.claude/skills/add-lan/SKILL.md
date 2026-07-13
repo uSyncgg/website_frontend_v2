@@ -17,6 +17,7 @@ If the user didn't provide all fields inline, ask for them all at once. Required
 |-------|---------|
 | **Game(s)** | `CoD`, `Halo`, `LoL`, `Warzone`, `Conventions` (can be multiple) |
 | **Title** | "RVA Esports Championship 2026" |
+| **SEO hook** | 1–2 sentence description used in the `description=` prop on `SeoData` — e.g. "Enter to play VALORANT and COD at Hawaii's newest convention, featuring Anime, K-Pop, Gaming and More!" |
 | **Description bullets** | "$1,000 Prize Pool", "1v1 Championship", "CoD and SF6" |
 | **Date** | "July 11 - 12th, 2026" |
 | **Exact location** | "Richmond Convention Center, 403 N 3rd St, Richmond, VA 23219" |
@@ -89,7 +90,7 @@ export const {ComponentName} = () => {
     return (
         <div className="standardContainer">
             <SeoData
-                description={"{Brief 1-sentence event description for SEO}"}
+                description={"{SEO hook provided by user}"}
                 canonicalPath={"/lans/{route-slug}"}
             />
 
@@ -125,7 +126,7 @@ export const {ComponentName} = () => {
 }
 ```
 
-The SeoData description should be a concise one-sentence summary (inferred from the event details).
+The `description=` on `SeoData` must use the **SEO hook** provided by the user in Step 1 — not a generic summary.
 
 ---
 
@@ -147,21 +148,6 @@ Insert it directly under the matching `{/* GameName */}` comment.
 
 ---
 
-<<<<<<< HEAD
-## Step 6 — Update the game LAN list file(s)
-
-For each game the LAN belongs to, read the game's LAN list file then make two changes:
-
-**A. Add map marker** — append to the game's markers array at the top of the file. Always include the `game` property using the value from this mapping:
-
-| Game | `game` value |
-|------|-------------|
-| CoD | `'CoD'` |
-| Halo | `'Halo'` |
-| LoL | `'LoL'` |
-| Warzone | `'Warzone'` |
-| Conventions | `'Conventions'` |
-=======
 ## Step 6 — Update src/data/lanMarkers.js
 
 This is the **single source of truth** for all map markers. `AllLans.js` and `Home.js` import `ALL_LAN_MARKERS` from here automatically — do **not** edit those files for markers.
@@ -175,15 +161,11 @@ Read `src/data/lanMarkers.js`, then append to the matching game's array. Always 
 | LoL | `LOL_LAN_MARKERS` | `'LoL'` |
 | Warzone | `WZ_LAN_MARKERS` | `'Warzone'` |
 | Conventions | `CONVENTION_MARKERS` | `'Conventions'` |
->>>>>>> origin/main
 
 ```js
 { lat: {lat}, lng: {lon}, name: "{Title}", link: "/lans/{route-slug}", game: '{GameValue}' },
 ```
 
-<<<<<<< HEAD
-**B. Add HostBanner** — append inside the `<div className="eventBannerContainer">` block, before the closing `</div>`.
-=======
 For multi-game events, append to **each** relevant game's array.
 
 ---
@@ -193,7 +175,6 @@ For multi-game events, append to **each** relevant game's array.
 For each game the LAN belongs to, read the game's LAN list file and add the HostBanner only (markers are handled in Step 6).
 
 **Add HostBanner** — append inside the `<div className="eventBannerContainer">` block, before the closing `</div>`.
->>>>>>> origin/main
 
 **hrEvents divider rule:** Read the end of the `eventBannerContainer` block first.
 - If the last element before `</div>` is already `<div className="hrEvents" />`, insert the new HostBanner directly after it — **do not** add another `<div className="hrEvents" />` before it.
@@ -222,28 +203,7 @@ Always add a `<div className="hrEvents" />` **after** the new HostBanner (before
 
 ---
 
-<<<<<<< HEAD
-## Step 7 — Update AllLans.js
-
-Read `src/pages/Games/Conventions/AllLans.js`, then append to `ALL_LAN_MARKERS` with the `game` property:
-```js
-{ lat: {lat}, lng: {lon}, name: "{Title}", link: "/lans/{route-slug}", game: '{GameValue}' },
-```
-
----
-
-## Step 8 — Update Home.js
-
-Read `src/pages/Home.js`, then append to `ALL_LAN_MARKERS` with the `game` property:
-```js
-{ lat: {lat}, lng: {lon}, name: "{Title}", link: "/lans/{route-slug}", game: '{GameValue}' },
-```
-
----
-
-=======
->>>>>>> origin/main
-## Step 9 — Update _redirects
+## Step 8 — Update _redirects
 
 Read `public/_redirects`, find the `# LANs` section, and add the new route on a new line inside it:
 ```
@@ -252,29 +212,24 @@ Read `public/_redirects`, find the `# LANs` section, and add the new route on a 
 
 ---
 
-## Step 10 — Update the sitemap
+## Step 9 — Update the sitemap
 
-Read `public/sitemap.xml`, find the matching game comment block (`<!-- CoD LANs -->`, `<!-- Conventions -->`, etc.) and add a new URL entry inside it:
+Read `public/sitemap.xml`, find the matching game comment block (`<!-- CoD LANs -->`, `<!-- Halo LANs -->`, `<!-- Conventions -->`, etc.) and add a new URL entry inside it:
 ```xml
 <url><loc>https://www.usync.gg/lans/{route-slug}</loc></url>
 ```
 
-If no matching comment block exists, add it under `<!-- Conventions -->`.
+If no matching comment block exists for that game, create one above `<!-- LoL LANs -->` (or the nearest appropriate section).
 
 ---
 
-## Step 11 — Confirm completion
+## Step 10 — Confirm completion
 
 Report exactly what was created and updated:
 - ✅ Detail page: `{file path}`
 - ✅ Route added to `src/index.js`
-<<<<<<< HEAD
-- ✅ HostBanner + marker added to `{game LAN file(s)}`
-- ✅ Marker added to `AllLans.js` and `Home.js`
-=======
 - ✅ Marker added to `src/data/lanMarkers.js` (game array: `{ArrayName}`)
 - ✅ HostBanner added to `{game LAN file(s)}`
->>>>>>> origin/main
 - ✅ Redirect added to `public/_redirects`
 - ✅ Sitemap updated
 
