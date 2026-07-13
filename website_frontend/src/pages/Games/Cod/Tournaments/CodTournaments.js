@@ -104,7 +104,7 @@ export const CodTournaments = () => {
                 <div className={styles.statsRow}>
                     <div className={styles.statCard}>
                         <p className={styles.statValue}>{filteredTourneys.length}</p>
-                        <p className={styles.statLabel}>Tournaments Today</p>
+                        <p className={styles.statLabel}>Tournaments</p>
                     </div>
                     <div className={styles.statCard}>
                         <p className={styles.statValue}>{freeEntryCount}</p>
