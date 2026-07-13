@@ -29,9 +29,9 @@ export const TournamentList = ({ tournaments, game }) => {
         <React.Fragment>
             {groups.map(group => (
                 <div key={group.date} className={styles.dateGroup}>
-                    <p className={styles.dateHeading}>
+                    <h2 className={styles.dateHeading}>
                         {isToday(group.date) ? `Today · ${group.date}` : group.date}
-                    </p>
+                    </h2>
 
                     {group.items.map((tournament, index) => (
                         <CodTournamentCard key={`${group.date}-${index}`} tournament={tournament} />

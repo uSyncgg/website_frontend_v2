@@ -328,6 +328,8 @@ import { CitadelI } from 'pages/Games/Halo/Lans/Events/CitadelI';
 import { GameandGeek2026 } from 'pages/Games/Halo/Lans/Events/GameandGeek2026';
 import { SFGE2026 } from 'pages/Games/Halo/Lans/Events/SFGE2026';
 import { Conventions } from 'pages/Games/Conventions/Conventions';
+import { HNLxFANDOM2026 } from 'pages/Games/Cod/Lans/Events/HNLxFANDOM2026';
+import { OhYoshiDiIntRehatched } from 'pages/Games/Halo/Lans/Events/OhYoshiDiIntRehatched';
 
 // Archived LANs Below
 // 2026
@@ -687,11 +689,13 @@ root.render(
           {/* CoD */}
           <Route path='/lans/shintochamps2026' element={<ShintoChamps2026 />} />
           <Route path='/lans/ewgl3' element={<EWGL3 />} />
+          <Route path='/lans/hnl-x-fandom-2026' element={<HNLxFANDOM2026 />} />
           {/* Wz */}
           {/* Halo */}
           <Route path='/lans/citadel-i' element={<CitadelI />} />
           <Route path='/lans/game-and-geek-2026' element={<GameandGeek2026 />} />
           <Route path='/lans/sfge-2026' element={<SFGE2026 />} />
+          <Route path='/lans/oh-yoshi-di-int-rehatched' element={<OhYoshiDiIntRehatched />} />
           {/* LoL */}
           <Route path='/lans/the-summoning-2026' element={<TheSummoning2026 />} />
           <Route path='/lans/bec-sololane-showdown' element={<BECSoloLaneShowdown />} />
