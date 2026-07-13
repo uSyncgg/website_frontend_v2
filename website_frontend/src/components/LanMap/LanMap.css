@@ -99,6 +99,164 @@
     transition: background-color 0.18s ease;
 }
 
+/* ── Event list portal (anchors to the Leaflet container) ── */
+.lanMapListPortal {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1050;
+}
+
+/* ── Event list panel ── */
+.lanMapListPanel {
+    position: absolute;
+    top: 76px;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    pointer-events: all;
+}
+
+.lanMapListToggle {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: rgba(8, 6, 20, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1.5px solid rgba(255, 255, 255, 0.18);
+    color: #c0b0e0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    outline: none;
+    flex-shrink: 0;
+}
+
+.lanMapListToggle:hover {
+    background: rgba(50, 35, 85, 0.95);
+    border-color: rgba(142, 106, 206, 0.6);
+    color: #fff;
+}
+
+.lanMapListPanel.open .lanMapListToggle {
+    border-color: rgba(142, 106, 206, 0.5);
+    color: #fff;
+}
+
+.lanMapListContent {
+    margin-top: 6px;
+    background: rgba(8, 6, 20, 0.93);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1.5px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    width: 210px;
+    max-height: 340px;
+    overflow-y: auto;
+    padding: 6px 0 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+}
+
+.lanMapListContent::-webkit-scrollbar {
+    width: 4px;
+}
+
+.lanMapListContent::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.lanMapListContent::-webkit-scrollbar-thumb {
+    background: rgba(142, 106, 206, 0.35);
+    border-radius: 2px;
+}
+
+.lanMapListGroup {
+    padding-bottom: 4px;
+}
+
+.lanMapListGroup + .lanMapListGroup {
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    padding-top: 4px;
+}
+
+.lanMapListGameHeader {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 14px 5px;
+    color: rgba(200, 185, 230, 0.7);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+}
+
+.lanMapListDot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 5px currentColor;
+}
+
+.lanMapListItem {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 6px 14px 6px 30px;
+    background: none;
+    border: none;
+    color: #d8d0ea;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+    line-height: 1.35;
+    outline: none;
+}
+
+.lanMapListItem:hover {
+    background: rgba(142, 106, 206, 0.18);
+    color: #fff;
+}
+
+@media (max-width: 480px) {
+    .lanMapListContent {
+        width: 180px;
+        max-height: 260px;
+    }
+
+    .lanMapListItem {
+        font-size: 0.75rem;
+        padding: 5px 10px 5px 24px;
+    }
+}
+
+/* ── Popup game label ── */
+.lanMapPopupGame {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 0.52rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 2px 6px 2px 4px;
+    border-radius: 999px;
+    border: 1px solid;
+    align-self: flex-start;
+}
+
+.lanMapPopupGameDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
 /* ── Marker dot ── */
 .lanMarkerDot {
     width: 14px;
