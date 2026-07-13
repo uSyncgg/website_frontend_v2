@@ -44,9 +44,13 @@ export const CodTournaments = () => {
     }, []);
 
     // Sync filters to URL and reset page whenever a filter changes
+    // NOTE: If we ever do in app routing to this page with specific filters applied they will NOT be applied with the current
+    // configuration as it wont be a cold load and thus it wont mount. If we ever do plan to have that on the site we need a new
+    // useEffect to manage the mounting. Not a big issue but an item potentially for the future.
     useEffect(() => {
         setCurrentPage(1);
-        const params = new URLSearchParams();
+        const params = new URLSearchParams(searchParams);
+        ['format', 'region', 'platform', 'skill', 'entry', 'host'].forEach(k => params.delete(k));
         selectedFormats.forEach(v => params.append('format', v));
         selectedRegions.forEach(v => params.append('region', v));
         selectedPlatforms.forEach(v => params.append('platform', v));
