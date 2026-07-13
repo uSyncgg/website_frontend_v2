@@ -13,13 +13,13 @@
     border: 1px solid rgba(255, 255, 255, .08);
     border-radius: 1rem;
     box-shadow: 0 1.5rem 3rem -1.25rem rgba(0, 0, 0, .6);
-    padding: 1.1rem 1.5rem;
+    padding: 0;
     /* Keep in sync with .statsRow in CodTournaments.module.css */
     width: min(26rem, 92vw);
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
     margin: 0 auto;
+    overflow: hidden;
 }
 
 .filterHeader {
@@ -28,6 +28,14 @@
     justify-content: space-between;
     cursor: pointer;
     user-select: none;
+    padding: 1.1rem 1.5rem;
+}
+
+.filterBody {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 0 1.5rem 1.1rem;
 }
 
 .headerRight {
