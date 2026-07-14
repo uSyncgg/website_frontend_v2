@@ -171,6 +171,26 @@ export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
                     <p>Leagues, LANs, tournaments, and wagers for every major title, all in one place.</p>
                     <Link to="/games" className={styles.ctaButton}>Explore Events</Link>
                 </section>
+
+                <section className={styles.related} aria-label="More articles">
+                    <h2>More From uSync</h2>
+                    <div className={styles.relatedGrid}>
+                        {related.map((a) => (
+                            <Link
+                                to={`/more/articles/${a.slug}`}
+                                className={styles.relatedCard}
+                                key={a.slug}
+                            >
+                                <img src={a.thumb} alt="" loading="lazy" />
+                                <div className={styles.relatedInfo}>
+                                    <span className={styles.relatedCategory}>{a.category}</span>
+                                    <span className={styles.relatedTitle}>{a.headline}</span>
+                                    <span className={styles.relatedMeta}>{a.readTime} min read</span>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                </section>
             </article>
 
             <aside className={styles.sidebar} aria-label="Explore uSync">
@@ -203,26 +223,6 @@ export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
                 </Link>
             </aside>
             </div>
-
-            <section className={styles.related} aria-label="More articles">
-                <h2>More From uSync</h2>
-                <div className={styles.relatedGrid}>
-                    {related.map((a) => (
-                        <Link
-                            to={`/more/articles/${a.slug}`}
-                            className={styles.relatedCard}
-                            key={a.slug}
-                        >
-                            <img src={a.thumb} alt="" loading="lazy" />
-                            <div className={styles.relatedInfo}>
-                                <span className={styles.relatedCategory}>{a.category}</span>
-                                <span className={styles.relatedTitle}>{a.headline}</span>
-                                <span className={styles.relatedMeta}>{a.readTime} min read</span>
-                            </div>
-                        </Link>
-                    ))}
-                </div>
-            </section>
         </div>
     );
 };
