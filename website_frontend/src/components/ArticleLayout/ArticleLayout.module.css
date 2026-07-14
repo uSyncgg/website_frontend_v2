@@ -1,7 +1,161 @@
+.pageGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 19rem;
+    gap: 1rem;
+    align-items: start;
+    max-width: 76rem;
+    margin: 0 auto;
+}
+
 .article {
     max-width: 46rem;
     margin: 0 auto;
     padding: 2.5rem 1.25rem 0;
+    min-width: 0;
+}
+
+/* ---- Sidebar ---- */
+
+.sidebar {
+    position: sticky;
+    top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    padding: 0 1.25rem;
+}
+
+.sidebarLabel {
+    color: rgb(142, 106, 206);
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: .75rem;
+    margin: 0;
+}
+
+.mapCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: .2rem;
+    min-height: 8.5rem;
+    padding: 1rem 1.15rem;
+    border-radius: 1.25rem;
+    border: 1px solid rgba(255, 255, 255, .08);
+    text-decoration: none;
+    background-image: linear-gradient(180deg, rgba(21, 19, 26, .25), rgba(21, 19, 26, .85)), url("https://i.imgur.com/gvdIL9C.png");
+    background-size: cover;
+    background-position: 50%;
+    transition: transform .35s cubic-bezier(.16, 1, .3, 1), border-color .35s cubic-bezier(.16, 1, .3, 1), box-shadow .35s cubic-bezier(.16, 1, .3, 1);
+}
+
+.mapCard:hover {
+    transform: translateY(-.3rem);
+    border-color: rgba(255, 255, 255, .2);
+    box-shadow: 0 1.5rem 2.5rem -1.25rem rgba(0, 0, 0, .55);
+}
+
+.mapCardTitle {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    color: white;
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+.mapCardSub {
+    color: #b18af0;
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.sideArticle {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, .01));
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 1.25rem;
+    overflow: hidden;
+    transition: transform .35s cubic-bezier(.16, 1, .3, 1), border-color .35s cubic-bezier(.16, 1, .3, 1), box-shadow .35s cubic-bezier(.16, 1, .3, 1);
+}
+
+.sideArticle:hover {
+    transform: translateY(-.3rem);
+    border-color: rgba(255, 255, 255, .2);
+    box-shadow: 0 1.5rem 2.5rem -1.25rem rgba(0, 0, 0, .55);
+}
+
+.sideArticle img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+}
+
+.sideArticleInfo {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+    padding: .9rem 1.1rem 1.1rem;
+}
+
+.sideArticleTitle {
+    color: white;
+    font-weight: 700;
+    font-size: .95rem;
+    line-height: 1.4;
+}
+
+.sideLink {
+    display: flex;
+    align-items: center;
+    gap: .85rem;
+    padding: .9rem 1.1rem;
+    text-decoration: none;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, .01));
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 1.25rem;
+    transition: transform .35s cubic-bezier(.16, 1, .3, 1), border-color .35s cubic-bezier(.16, 1, .3, 1), box-shadow .35s cubic-bezier(.16, 1, .3, 1);
+}
+
+.sideLink:hover {
+    transform: translateY(-.3rem);
+    border-color: rgba(255, 255, 255, .2);
+    box-shadow: 0 1.5rem 2.5rem -1.25rem rgba(0, 0, 0, .55);
+}
+
+.sideLinkIcon {
+    width: 2.4rem;
+    height: 2.4rem;
+    flex-shrink: 0;
+    border-radius: .75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #9b6fe0, #7a5ac9);
+    color: white;
+    font-size: 1rem;
+}
+
+.sideLinkText {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.35;
+}
+
+.sideLinkTitle {
+    color: white;
+    font-weight: 700;
+    font-size: .95rem;
+}
+
+.sideLinkSub {
+    color: rgb(109, 106, 114);
+    font-size: .8rem;
 }
 
 /* ---- Header ---- */
@@ -461,6 +615,21 @@
 }
 
 /* ---- Responsive ---- */
+
+@media only screen and (max-width: 1100px) {
+    .pageGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: static;
+        margin-top: 1.5rem;
+        width: 100%;
+        max-width: 46rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
 
 @media only screen and (max-width: 768px) {
     .article {

@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { FaMapMarkedAlt, FaTrophy, FaQuestionCircle } from "react-icons/fa";
 import { SeoData } from "components/SeoData/SeoData";
 import { articleList } from "pages/More/Articles/articlesData";
 import styles from "./ArticleLayout.module.css";
@@ -92,6 +93,7 @@ export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
             <JsonLd data={breadcrumbLd} />
             {faqLd && <JsonLd data={faqLd} />}
 
+            <div className={styles.pageGrid}>
             <article className={styles.article}>
                 <header className={styles.header}>
                     <nav aria-label="Breadcrumb" className={styles.breadcrumbs}>
@@ -160,6 +162,45 @@ export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
                     </section>
                 )}
             </article>
+
+            <aside className={styles.sidebar} aria-label="Explore uSync">
+                <p className={styles.sidebarLabel}>Keep Exploring</p>
+
+                <Link to="/LanMap" className={styles.mapCard}>
+                    <span className={styles.mapCardTitle}>
+                        <FaMapMarkedAlt aria-hidden="true" /> Find LANs Near You
+                    </span>
+                    <span className={styles.mapCardSub}>Explore the LAN Map</span>
+                </Link>
+
+                {related[0] && (
+                    <Link to={`/more/articles/${related[0].slug}`} className={styles.sideArticle}>
+                        <img src={related[0].thumb} alt="" loading="lazy" />
+                        <span className={styles.sideArticleInfo}>
+                            <span className={styles.relatedCategory}>{related[0].category}</span>
+                            <span className={styles.sideArticleTitle}>{related[0].headline}</span>
+                            <span className={styles.relatedMeta}>{related[0].readTime} min read</span>
+                        </span>
+                    </Link>
+                )}
+
+                <Link to="/leagues" className={styles.sideLink}>
+                    <span className={styles.sideLinkIcon}><FaTrophy aria-hidden="true" /></span>
+                    <span className={styles.sideLinkText}>
+                        <span className={styles.sideLinkTitle}>Browse Leagues</span>
+                        <span className={styles.sideLinkSub}>Every game, every skill level</span>
+                    </span>
+                </Link>
+
+                <Link to="/more/FAQ" className={styles.sideLink}>
+                    <span className={styles.sideLinkIcon}><FaQuestionCircle aria-hidden="true" /></span>
+                    <span className={styles.sideLinkText}>
+                        <span className={styles.sideLinkTitle}>FAQs</span>
+                        <span className={styles.sideLinkSub}>Answers to common questions</span>
+                    </span>
+                </Link>
+            </aside>
+            </div>
 
             <section className={styles.cta}>
                 <div className={styles.ctaGlow} />
