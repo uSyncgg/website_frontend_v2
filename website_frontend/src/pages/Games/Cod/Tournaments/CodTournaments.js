@@ -28,7 +28,7 @@ export const CodTournaments = () => {
     const consoleOptions = ['PC', 'Console'];
     const skillOptions = ['Novice', 'Amateur', 'Expert', 'Agent', 'Master', 'Challenger'];
     const entryOptions = ['Free Entry', 'Paid', 'ECO'];
-    const hostOptions = ['CMG', 'CoD Agent'];
+    const hostOptions = ['CMG', 'CoD Agent', 'Console Kings'];
 
     const [tournaments, setTournaments] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);

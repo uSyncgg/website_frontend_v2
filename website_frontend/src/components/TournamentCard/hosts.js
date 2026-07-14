@@ -5,7 +5,7 @@ import consolekingsLogo from 'assets/images/console-kings-logo.svg';
 // To add a new host: add its entry here and (optionally) drop its logo in src/assets/images.
 export const HOSTS = {
     cmg: { label: 'CMG', logo: cmgLogo },
-    codagent: { label: 'Codagent', logo: null },
+    codagent: { label: 'CoD Agent', logo: null },
     consolekings: { label: "Console Kings", logo: consolekingsLogo }
 };
 
