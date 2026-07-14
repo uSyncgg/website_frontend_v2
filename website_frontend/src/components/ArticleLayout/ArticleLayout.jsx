@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { FaMapMarkedAlt, FaTrophy, FaQuestionCircle } from "react-icons/fa";
+import { FaMapMarkedAlt, FaTrophy } from "react-icons/fa";
 import { SeoData } from "components/SeoData/SeoData";
 import { articleList } from "pages/More/Articles/articlesData";
 import styles from "./ArticleLayout.module.css";
@@ -159,8 +159,18 @@ export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
                                 <p>{answer}</p>
                             </div>
                         ))}
+                        <Link to="/more/FAQ" className={styles.faqMore}>
+                            Visit our FAQs page for more common questions
+                        </Link>
                     </section>
                 )}
+
+                <section className={styles.cta}>
+                    <div className={styles.ctaGlow} />
+                    <h2>Find Your Next Event on uSync</h2>
+                    <p>Leagues, LANs, tournaments, and wagers for every major title, all in one place.</p>
+                    <Link to="/games" className={styles.ctaButton}>Explore Events</Link>
+                </section>
             </article>
 
             <aside className={styles.sidebar} aria-label="Explore uSync">
@@ -191,23 +201,8 @@ export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
                         <span className={styles.sideLinkSub}>Every game, every skill level</span>
                     </span>
                 </Link>
-
-                <Link to="/more/FAQ" className={styles.sideLink}>
-                    <span className={styles.sideLinkIcon}><FaQuestionCircle aria-hidden="true" /></span>
-                    <span className={styles.sideLinkText}>
-                        <span className={styles.sideLinkTitle}>FAQs</span>
-                        <span className={styles.sideLinkSub}>Answers to common questions</span>
-                    </span>
-                </Link>
             </aside>
             </div>
-
-            <section className={styles.cta}>
-                <div className={styles.ctaGlow} />
-                <h2>Find Your Next Event on uSync</h2>
-                <p>Leagues, LANs, tournaments, and wagers for every major title, all in one place.</p>
-                <Link to="/games" className={styles.ctaButton}>Explore Events</Link>
-            </section>
 
             <section className={styles.related} aria-label="More articles">
                 <h2>More From uSync</h2>
