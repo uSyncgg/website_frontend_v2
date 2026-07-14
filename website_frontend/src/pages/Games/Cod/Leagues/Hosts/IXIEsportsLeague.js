@@ -12,11 +12,11 @@ export const IXIEsportsLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Summer Season"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Summer Season"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$100 Prize Pool", "Highly Competitive", "Regular Season League Matches then Playoffs", "Free Monthly Tournaments", "8s Group", "Live Support and Admins"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$100 Prize Pool", "Highly Competitive", "Regular Season League Matches then Playoffs", "Free Monthly Tournaments", "8s Group", "Live Support and Admins"]} />
                 </div>
 
                 <div>

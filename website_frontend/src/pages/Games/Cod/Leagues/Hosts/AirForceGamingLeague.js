@@ -12,11 +12,11 @@ export const AirForceGamingLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA/EU/APAC"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Highly Competitive", "Pro & Casual Leagues (NA Only)", "Air Force & Space Force Associated Players ONLY", "Premade or Mixed Leagues", "Multiple Skill Divisions"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA/EU/APAC"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Highly Competitive", "Pro & Casual Leagues (NA Only)", "Air Force & Space Force Associated Players ONLY", "Premade or Mixed Leagues", "Multiple Skill Divisions"]} />
                 </div>
 
                 <div>

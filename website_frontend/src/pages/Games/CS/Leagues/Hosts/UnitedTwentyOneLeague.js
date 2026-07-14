@@ -12,11 +12,11 @@ export const UnitedTwentyOneLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Bi-Monthly Leagues"]} />
+                    <EventInfoCard title={"Date"} infoList={["Bi-Monthly Leagues"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - Available Worldwide"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Main and Second Divisions", "$10,000 Prize Pool (Main Division)", "$2,000 Prize Pool (Second Division)", "Winners of Second Division Move to Main", "Live Streamed Matches", "Highly Competitive"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - Available Worldwide"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Main and Second Divisions", "$10,000 Prize Pool (Main Division)", "$2,000 Prize Pool (Second Division)", "Winners of Second Division Move to Main", "Live Streamed Matches", "Highly Competitive"]} />
                 </div>
 
                 <div>

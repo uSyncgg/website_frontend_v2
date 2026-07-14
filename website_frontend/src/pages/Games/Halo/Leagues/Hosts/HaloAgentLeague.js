@@ -12,11 +12,11 @@ export const HaloAgentLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Randomly Hosted Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Randomly Hosted Seasons"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - All Regions"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$1,000 Prize Pool (Estimated)", "Highly Competitive", "Live Streamed Matches", "Live Support on Discord"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - All Regions"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$1,000 Prize Pool (Estimated)", "Highly Competitive", "Live Streamed Matches", "Live Support on Discord"]} />
                 </div>
 
                 <div>

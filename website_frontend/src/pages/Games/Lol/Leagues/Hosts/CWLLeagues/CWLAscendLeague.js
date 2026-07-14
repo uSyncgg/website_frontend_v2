@@ -12,11 +12,11 @@ export const CWLAscendLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["5v5 EUW"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["€350 Prize Pool for First Place, €100 for Second", "2 Consecutive 4-Week Tournaments", "Community Contests and Events During Season and Offseason", "Flexible Rules for EUNE Players", "Support on Discord", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["5v5 EUW"]}/>
+                    <EventInfoCard title={"Details"} infoList={["€350 Prize Pool for First Place, €100 for Second", "2 Consecutive 4-Week Tournaments", "Community Contests and Events During Season and Offseason", "Flexible Rules for EUNE Players", "Support on Discord", "Live Streamed Matches"]} />
                 </div>
 
                 <div>

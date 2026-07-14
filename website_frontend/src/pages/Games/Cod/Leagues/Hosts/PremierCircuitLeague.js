@@ -12,11 +12,11 @@ export const PremierCircuitLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$1,000 Prize Pool", "Stats for Every Game", "Live Streamed Matches", "Qualifier Tournament to Enter", "4v4 CDL Variant", "16 Teams MAX"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$1,000 Prize Pool", "Stats for Every Game", "Live Streamed Matches", "Qualifier Tournament to Enter", "4v4 CDL Variant", "16 Teams MAX"]} />
                 </div>
 
                 <div>

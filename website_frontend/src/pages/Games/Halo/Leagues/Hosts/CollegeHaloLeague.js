@@ -16,11 +16,11 @@ export const CollegeHaloLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Fall and Spring Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Fall and Spring Seasons"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$2,500 Prize Pool (Estimated)", "Highly Competitive", "No Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$2,500 Prize Pool (Estimated)", "Highly Competitive", "No Live Streamed Matches"]} />
                 </div>
 
                 <div>

@@ -12,11 +12,11 @@ export const BeerLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["No Prize Pool", "4v4 CDL Ruleset", "8 GMs draft teams", "GMs don't play, they just build and coach the team", "Drink Before / During / After Matches", "Playoffs for T48 Players", "Must be 21+ to Enter"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["No Prize Pool", "4v4 CDL Ruleset", "8 GMs draft teams", "GMs don't play, they just build and coach the team", "Drink Before / During / After Matches", "Playoffs for T48 Players", "Must be 21+ to Enter"]} />
                 </div>
 
                 <div>

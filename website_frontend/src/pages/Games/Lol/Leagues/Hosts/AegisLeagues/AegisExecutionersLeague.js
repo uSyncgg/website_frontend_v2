@@ -16,11 +16,11 @@ export const AegisExecutionersLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Winter Leagues"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Winter Leagues"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$840 - $1,680 Prize Pool (Estimate)", "Live Streamed Matches", "Support on Discord"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$840 - $1,680 Prize Pool (Estimate)", "Live Streamed Matches", "Support on Discord"]} />
                 </div>
 
                 <div>

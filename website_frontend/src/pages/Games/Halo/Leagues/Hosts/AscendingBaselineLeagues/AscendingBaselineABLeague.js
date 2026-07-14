@@ -12,11 +12,11 @@ export const AscendingBaselineABLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Multiple Annual Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Multiple Annual Seasons"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Division 1: $80 Prize Pool for first and second (60/20 split)", "Division 2: $60 Prize Pool for first and second (50/10 split)", "Division 3: $60 Prize Pool for first and second (50/10 split)", "Division 4: $50 Prize Pool for first and second (40/10 split)", "Divisions Based on CSR Caps", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Division 1: $80 Prize Pool for first and second (60/20 split)", "Division 2: $60 Prize Pool for first and second (50/10 split)", "Division 3: $60 Prize Pool for first and second (50/10 split)", "Division 4: $50 Prize Pool for first and second (40/10 split)", "Divisions Based on CSR Caps", "Live Streamed Matches"]} />
                 </div>
 
                 <div>

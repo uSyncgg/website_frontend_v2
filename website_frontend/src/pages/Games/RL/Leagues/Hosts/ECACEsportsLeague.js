@@ -12,11 +12,11 @@ export const ECACEsportsLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - USA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["No Prize Pool", "Multiple Divisions Based on Rank", "Two Matches Weekly", "8 Week Regular Season with Playoffs", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - USA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["No Prize Pool", "Multiple Divisions Based on Rank", "Two Matches Weekly", "8 Week Regular Season with Playoffs", "Live Streamed Matches"]} />
                 </div>
 
                 <div>

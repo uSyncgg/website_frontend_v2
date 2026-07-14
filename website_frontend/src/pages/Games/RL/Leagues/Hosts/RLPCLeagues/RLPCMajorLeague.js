@@ -16,11 +16,11 @@ export const RLPCMajorLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Winter Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Winter Seasons"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Prize Pool Based on Donations", "Must Sign 1 - 3 Season Contract", "Build Your Own Team", "Live Streamed Matches", "Live Support on Discord"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Prize Pool Based on Donations", "Must Sign 1 - 3 Season Contract", "Build Your Own Team", "Live Streamed Matches", "Live Support on Discord"]} />
                 </div>
 
                 <div>

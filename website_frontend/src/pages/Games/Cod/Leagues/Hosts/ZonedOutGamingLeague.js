@@ -12,11 +12,11 @@ export const ZonedOutGamingLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Multiple Seasons per Year"]} />
+                    <EventInfoCard title={"Date"} infoList={["Multiple Seasons per Year"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$3,750 Prize Pool Across All Divisions", "Multiple Skill Divisions", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$3,750 Prize Pool Across All Divisions", "Multiple Skill Divisions", "Live Streamed Matches"]} />
                 </div>
 
                 <div>

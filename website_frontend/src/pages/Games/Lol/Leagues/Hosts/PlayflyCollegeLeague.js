@@ -16,11 +16,11 @@ export const PlayflyCollegeLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$280k Prize Pool Split Across All Titles and Division", "Highly Competitive", "Multiple Tiers for Each Division", "Live Streamed Matches", "Live Support on Discord"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$280k Prize Pool Split Across All Titles and Division", "Highly Competitive", "Multiple Tiers for Each Division", "Live Streamed Matches", "Live Support on Discord"]} />
                 </div>
 
                 <div>

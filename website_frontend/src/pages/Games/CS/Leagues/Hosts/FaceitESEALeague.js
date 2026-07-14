@@ -16,11 +16,11 @@ export const FaceitESEALeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Year Round Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Year Round Seasons"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - Available Worldwide"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$76,600 Prize Pool", "4 Week Regular Season", "2-3 Week Playoffs", "Different Divisions Based on Placement", "Road to The Professional ESL Pro League", "Start in Open Division"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - Available Worldwide"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$76,600 Prize Pool", "4 Week Regular Season", "2-3 Week Playoffs", "Different Divisions Based on Placement", "Road to The Professional ESL Pro League", "Start in Open Division"]} />
                 </div>
 
                 <div>
