@@ -20,12 +20,8 @@ export const FrontierExpertLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Salary Cap of 42"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Salary Cap of 42"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://fdl.gg/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://fdl.gg/"} />
             </div>
 
             <div className="backButtonContainer">

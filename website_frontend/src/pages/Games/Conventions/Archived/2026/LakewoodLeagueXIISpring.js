@@ -21,12 +21,8 @@ export const LakewoodLeagueXIISpring = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $150"]} /> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $150"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/lakewood-league-xii-2026-04-26?section=overview"} />}/> 
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/lakewood-league-xii-2026-04-26?section=overview"} />
             </div>
 
             <div className="backButtonContainer">

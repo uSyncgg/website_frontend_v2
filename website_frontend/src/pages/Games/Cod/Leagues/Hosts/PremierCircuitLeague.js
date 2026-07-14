@@ -20,12 +20,8 @@ export const PremierCircuitLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - DM to Enter"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - DM to Enter"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://x.com/TPCircuit"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://x.com/TPCircuit"} />
             </div>
 
             <div className="backButtonContainer">

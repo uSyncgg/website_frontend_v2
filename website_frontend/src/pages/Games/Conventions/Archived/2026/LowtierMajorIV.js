@@ -21,12 +21,8 @@ export const LowtierMajorIV = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $325"]} /> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $325"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://x.com/TPCircuit/status/2031850516507181452"} />}/> 
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://x.com/TPCircuit/status/2031850516507181452"} />
             </div>
 
             <div className="backButtonContainer">

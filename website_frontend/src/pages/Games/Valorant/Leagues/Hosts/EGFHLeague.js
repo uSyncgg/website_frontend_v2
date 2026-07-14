@@ -20,12 +20,8 @@ export const EGFHLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry - Must be a High School Student"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry - Must be a High School Student"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.egf.gg/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.egf.gg/"} />
             </div>
 
             <div className="backButtonContainer">

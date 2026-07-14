@@ -21,12 +21,8 @@ export const RMCSSpring2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $125"]} /> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $125"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/rmcs-spring-26-tournament-2026-04-11?section=overview"} />}/> 
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/rmcs-spring-26-tournament-2026-04-11?section=overview"} />
             </div>
 
             <div className="backButtonContainer">

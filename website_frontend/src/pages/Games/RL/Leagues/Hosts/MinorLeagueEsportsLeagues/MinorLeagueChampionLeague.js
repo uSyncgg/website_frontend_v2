@@ -20,12 +20,8 @@ export const MinorLeagueChampionLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1251 - 1450 MMR"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1251 - 1450 MMR"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://mlesports.gg/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://mlesports.gg/"} />
             </div>
 
             <div className="backButtonContainer">

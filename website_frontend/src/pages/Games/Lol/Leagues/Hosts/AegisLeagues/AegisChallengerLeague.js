@@ -24,12 +24,8 @@ export const AegisChallengerLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$300 per Team"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$300 per Team"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/dBtt7Fg9jv"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/dBtt7Fg9jv"} />
             </div>
 
             <div className="backButtonContainer">

@@ -25,12 +25,8 @@ export const DreamCon2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$10 entry per title"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$10 entry per title"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/dream-con-championship-series-2026/details"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/dream-con-championship-series-2026/details"} />
             </div>
 
             <div className="backButtonContainer">

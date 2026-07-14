@@ -20,12 +20,8 @@ export const CWLAscendLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["€40 per Team", "750 LP Individual Cap | No Team Cap"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["€40 per Team", "750 LP Individual Cap | No Team Cap"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.gg/WTJJmgPgCU"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.gg/WTJJmgPgCU"} />
             </div>
 
             <div className="backButtonContainer">

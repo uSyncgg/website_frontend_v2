@@ -27,12 +27,8 @@ export const TheRetake2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $225"]} /> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $225"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/the-retake-or-cs2-tournament-powered-by-hellcase-2026-07-18?section=overview"} />}/> 
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/the-retake-or-cs2-tournament-powered-by-hellcase-2026-07-18?section=overview"} />
             </div>
 
             <div className="backButtonContainer">

@@ -26,12 +26,8 @@ export const BECSoloLaneShowdown = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Online Registration: $20","At Door Registration: $30"]} /> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["Online Registration: $20","At Door Registration: $30"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/bec-solo-lane-showdown-league-of-legends-1v1/details"} />}/> 
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/bec-solo-lane-showdown-league-of-legends-1v1/details"} />
             </div>
 
             <div className="backButtonContainer">

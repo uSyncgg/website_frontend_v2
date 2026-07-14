@@ -20,12 +20,8 @@ export const BlueOtterEmeraldLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$100 per Team (Estimated)", "$15 Forfeit Deposit", "Emerald 1 99 LP Cap, 1 Diamond 4 per Team"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$100 per Team (Estimated)", "$15 Forfeit Deposit", "Emerald 1 99 LP Cap, 1 Diamond 4 per Team"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/gVGSxRT"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/gVGSxRT"} />
             </div>
 
             <div className="backButtonContainer">

@@ -21,12 +21,8 @@ export const CorporateCodLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$200 per Team"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$200 per Team"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.google.com/url?q=https%3A%2F%2Fcea.gg&sa=D&sntz=1&usg=AOvVaw3Su3Sn39NBgq_faxrk2Xy3"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.google.com/url?q=https%3A%2F%2Fcea.gg&sa=D&sntz=1&usg=AOvVaw3Su3Sn39NBgq_faxrk2Xy3"} />
             </div>
 
             <div className="backButtonContainer">

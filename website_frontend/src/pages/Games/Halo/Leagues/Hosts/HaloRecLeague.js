@@ -24,12 +24,8 @@ export const HaloRecLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$30 - Premade Teams", "Free Entry - Mixed"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$30 - Premade Teams", "Free Entry - Mixed"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://halo.esrl.gg/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://halo.esrl.gg/"} />
             </div>
 
             <div className="backButtonContainer">

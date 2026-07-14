@@ -24,12 +24,8 @@ export const RisenUnstoppableLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$55 per Team", "Diamond 4 Cap"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$55 per Team", "Diamond 4 Cap"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/risenesports"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/risenesports"} />
             </div>
 
             <div className="backButtonContainer">

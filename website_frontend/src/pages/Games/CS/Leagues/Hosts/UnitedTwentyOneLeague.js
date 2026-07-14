@@ -20,12 +20,8 @@ export const UnitedTwentyOneLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://x.com/OfUnited21"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://x.com/OfUnited21"} />
             </div>
 
             <div className="backButtonContainer">

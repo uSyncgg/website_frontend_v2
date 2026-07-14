@@ -20,12 +20,8 @@ export const AscendingBaselineABLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["AB Subscribers: Free ($7.99/m)", "Non Subscribers: $40/team", "Solo/Duo/Trio or Team Sign Ups"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["AB Subscribers: Free ($7.99/m)", "Non Subscribers: $40/team", "Solo/Duo/Trio or Team Sign Ups"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.ascendingbaseline.com/abl-halo"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.ascendingbaseline.com/abl-halo"} />
             </div>
 
             <div className="backButtonContainer">

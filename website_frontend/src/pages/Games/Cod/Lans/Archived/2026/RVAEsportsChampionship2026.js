@@ -21,12 +21,8 @@ export const RVAEsportsChampionship2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Venue Fee: $55", "Spectator Pass: $35"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Venue Fee: $55", "Spectator Pass: $35"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/rva-esports-championship-2026-1/details"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/rva-esports-championship-2026-1/details"} />
             </div>
 
             <div className="backButtonContainer">

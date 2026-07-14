@@ -20,12 +20,8 @@ export const UnitedRogueLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Ages 16+"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Ages 16+"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://rl.unitedrogue.com/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://rl.unitedrogue.com/"} />
             </div>
 
             <div className="backButtonContainer">
