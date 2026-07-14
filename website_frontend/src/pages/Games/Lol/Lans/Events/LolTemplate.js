@@ -27,12 +27,8 @@ export const INSERTFILENAME = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["INSERT ENTRY FEE HERE"]} /> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["INSERT ENTRY FEE HERE"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"INSERT LINK TO EVENT"} />}/> 
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"INSERT LINK TO EVENT"} />
             </div>
 
             <div className="backButtonContainer">

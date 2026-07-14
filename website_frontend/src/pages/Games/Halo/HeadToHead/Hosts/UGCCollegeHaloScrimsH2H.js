@@ -16,7 +16,7 @@ export const UGCCollegeHaloScrimsH2H = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Free Collegiate Scrim Finder / 8s Lobbies"]} />
+                    <EventInfoCard title={"Fees"} infoList={["Free Collegiate Scrim Finder / 8s Lobbies"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/CapnyyzMkJ"} />}/>
                 </div>
 
                 <div>
@@ -26,10 +26,6 @@ export const UGCCollegeHaloScrimsH2H = () => {
                 <div>
                     <EventInfoCard title={"Restrictions"} infoList={["Available Worldwide", "Collegiate Teams / Students ONLY"]} />
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/CapnyyzMkJ"} />
             </div>
 
             <div className="backButtonContainer">

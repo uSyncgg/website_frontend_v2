@@ -24,12 +24,8 @@ export const CollegeValorantLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry - Must be a FULL TIME College Student"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry - Must be a FULL TIME College Student"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://universityesportsna.riotgames.com/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://universityesportsna.riotgames.com/"} />
             </div>
 
             <div className="backButtonContainer">

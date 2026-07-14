@@ -20,12 +20,8 @@ export const CorporateRLLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$150 per Team"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$150 per Team"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://cea.gg/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://cea.gg/"} />
             </div>
 
             <div className="backButtonContainer">

@@ -20,12 +20,8 @@ export const CollegeXPClubLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$80 per Team", "$100 Late Entry per Team"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$80 per Team", "$100 Late Entry per Team"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://x.com/CXPCoD"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://x.com/CXPCoD"} />
             </div>
 
             <div className="backButtonContainer">

@@ -12,7 +12,7 @@ export const Ewagers = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["3% Deposit AND Withdrawal Fee", "5% Wager Fee"]} />
+                    <EventInfoCard title={"Fees"} infoList={["3% Deposit AND Withdrawal Fee", "5% Wager Fee"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://ewagers.co/games?page=2"} />}/>
                 </div>
 
                 <div>
@@ -22,10 +22,6 @@ export const Ewagers = () => {
                 <div>
                     <EventInfoCard title={"Restrictions"} infoList={["18+", "Available Worldwide", "Certain State / Global Restrictions"]} />
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://ewagers.co/games?page=2"} />
             </div>
 
             <div className="backButtonContainer">

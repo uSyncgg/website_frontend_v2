@@ -13,7 +13,7 @@ const BUBBLE_CONFIG = {
 
 const FEE_TITLES = new Set(["Entry Fee", "Fees"]);
 
-export const EventInfoCard = ({ title, infoList, regionTitle, regionInfoList }) => {
+export const EventInfoCard = ({ title, infoList, regionTitle, regionInfoList, footer }) => {
     const bubbleDef = BUBBLE_CONFIG[title];
 
     if (bubbleDef) {
@@ -55,6 +55,7 @@ export const EventInfoCard = ({ title, infoList, regionTitle, regionInfoList }) 
                         </div>
                     ))}
                 </div>
+                {footer && <div className={styles.feeFooter}> {footer} </div>}
             </div>
         );
     }
@@ -72,6 +73,7 @@ export const EventInfoCard = ({ title, infoList, regionTitle, regionInfoList }) 
                         <span className={styles.dRowText}>{item}</span>
                     </div>
                 ))}
+                {footer && <div className={styles.feeFooter}> {footer} </div>}
             </div>
         </React.Fragment>
     );

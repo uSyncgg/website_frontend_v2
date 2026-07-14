@@ -12,7 +12,7 @@ export const PraccH2H = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Free Scrim Matches"]} />
+                    <EventInfoCard title={"Fees"} infoList={["Free Scrim Matches"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://pracc.com/"} />}/>
                 </div>
 
                 <div>
@@ -22,10 +22,6 @@ export const PraccH2H = () => {
                 <div>
                     <EventInfoCard title={"Restrictions"} infoList={["Available Worldwide"]} />
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://pracc.com/"} />
             </div>
 
             <div className="backButtonContainer">

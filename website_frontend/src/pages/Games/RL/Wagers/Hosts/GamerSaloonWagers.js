@@ -12,7 +12,7 @@ export const GamerSaloonWagers = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Match Fee: 10%", "Varying Deposit/Withdrawal Fee"]} />
+                    <EventInfoCard title={"Fees"} infoList={["Match Fee: 10%", "Varying Deposit/Withdrawal Fee"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.gamersaloon.com/tournaments/all"} />}/>
                 </div>
 
                 <div>
@@ -22,10 +22,6 @@ export const GamerSaloonWagers = () => {
                 <div>
                     <EventInfoCard title={"Restrictions"} infoList={["18+", "Available Worldwide", "US State Restrictions: AZ, IA, MI, MT, NV, and SD", "NA Server Only"]} />
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.gamersaloon.com/tournaments/all"} />
             </div>
 
             <div className="backButtonContainer">

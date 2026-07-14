@@ -20,12 +20,8 @@ export const NationalStudentEsportsLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - Must be Attending University"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - Must be Attending University"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.nse.gg/events/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.nse.gg/events/"} />
             </div>
 
             <div className="backButtonContainer">

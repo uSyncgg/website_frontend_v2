@@ -12,7 +12,7 @@ export const OneVOneMeWagers = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Match Fee: 0%", "Varying Fee with Deposits/Withdrawals"]} />
+                    <EventInfoCard title={"Fees"} infoList={["Match Fee: 0%", "Varying Fee with Deposits/Withdrawals"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.1v1me.com/"} />}/>
                 </div>
 
                 <div>
@@ -22,10 +22,6 @@ export const OneVOneMeWagers = () => {
                 <div>
                     <EventInfoCard title={"Restrictions"} infoList={["18+", "Available Regions: USA, CA, IE, UK, FR, MX, and DE"]} />
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.1v1me.com/"} />
             </div>
 
             <div className="backButtonContainer">

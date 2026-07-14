@@ -24,12 +24,8 @@ export const CollegeHaloLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Must be a Full Time College Student", "Entry Fee TBD"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Must be a Full Time College Student", "Entry Fee TBD"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/CapnyyzMkJ"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/CapnyyzMkJ"} />
             </div>
 
             <div className="backButtonContainer">

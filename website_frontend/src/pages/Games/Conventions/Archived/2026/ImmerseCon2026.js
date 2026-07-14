@@ -21,12 +21,8 @@ export const ImmerseCon2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Single Day Pass: $30 - $40", "2 Day Pass: $50"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Single Day Pass: $30 - $40", "2 Day Pass: $50"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.immersecon.com/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.immersecon.com/"} />
             </div>
 
             <div className="backButtonContainer">

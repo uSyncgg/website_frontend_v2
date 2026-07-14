@@ -20,12 +20,8 @@ export const ZonedOutGamingLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Elite Division - $100 per Team", "Master Division - $60 per Team", "Open Division - $40 per Team"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Elite Division - $100 per Team", "Master Division - $60 per Team", "Open Division - $40 per Team"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://zonedoutgaming.com/leagues/call-of-duty/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://zonedoutgaming.com/leagues/call-of-duty/"} />
             </div>
 
             <div className="backButtonContainer">

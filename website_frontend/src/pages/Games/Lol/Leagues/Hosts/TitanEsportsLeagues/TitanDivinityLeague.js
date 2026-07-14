@@ -24,12 +24,8 @@ export const TitanDivinityLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$50 per Team", "$25 Forfeit Deposit", "Emerald 4 Cap"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$50 per Team", "$25 Forfeit Deposit", "Emerald 4 Cap"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://lol.titanesports.org/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://lol.titanesports.org/"} />
             </div>
 
             <div className="backButtonContainer">

@@ -20,12 +20,8 @@ export const NECCLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$1,500/yr - Unlimited Game Title Participation", "$800/yr - One Game Title Participation", "Must be a FULL TIME College Student and ACADEMICALLY ELIGIBLE"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$1,500/yr - Unlimited Game Title Participation", "$800/yr - One Game Title Participation", "Must be a FULL TIME College Student and ACADEMICALLY ELIGIBLE"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://necc.leagueos.gg/schedule/valorant/at1g09hj7fr0ft0zui0qd1p89/schedule/1"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://necc.leagueos.gg/schedule/valorant/at1g09hj7fr0ft0zui0qd1p89/schedule/1"} />
             </div>
 
             <div className="backButtonContainer">

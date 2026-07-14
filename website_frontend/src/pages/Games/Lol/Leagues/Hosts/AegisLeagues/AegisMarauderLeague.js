@@ -24,12 +24,8 @@ export const AegisMarauderLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$150 per Team", "$50 Forfeit Deposit", "Master 600 LP Peak from Y2025, Y2024 - S3, Y2024 - S2", "700 LP Peak from Y2024 - S1, Y2023 - S2"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$150 per Team", "$50 Forfeit Deposit", "Master 600 LP Peak from Y2025, Y2024 - S3, Y2024 - S2", "700 LP Peak from Y2024 - S1, Y2023 - S2"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/dBtt7Fg9jv"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/dBtt7Fg9jv"} />
             </div>
 
             <div className="backButtonContainer">

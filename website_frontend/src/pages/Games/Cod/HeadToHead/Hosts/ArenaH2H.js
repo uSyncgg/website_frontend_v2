@@ -12,7 +12,7 @@ export const ArenaH2H = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Free Scrim Finder / 8s Lobbies"]} /> 
+                    <EventInfoCard title={"Fees"} infoList={["Free Scrim Finder / 8s Lobbies"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/the-arena-powered-by-dg-918527675642052658"} />}/> 
                 </div>
 
                 <div>
@@ -22,10 +22,6 @@ export const ArenaH2H = () => {
                 <div>
                     <EventInfoCard title={"Restrictions"} infoList={["Available Worldwide"]} /> 
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/the-arena-powered-by-dg-918527675642052658"} />
             </div>
 
             <div className="backButtonContainer">

@@ -21,12 +21,8 @@ export const Volan2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["League of Legends: $20"]} /> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["League of Legends: $20"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/volan-2026/details"} />}/> 
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/volan-2026/details"} />
             </div>
 
             <div className="backButtonContainer">

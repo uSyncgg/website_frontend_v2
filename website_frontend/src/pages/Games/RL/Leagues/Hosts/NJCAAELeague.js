@@ -20,12 +20,8 @@ export const NJCAAELeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$2,000/yr - Must be Attending a 2 Year School"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$2,000/yr - Must be Attending a 2 Year School"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.njcaaesports.org/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.njcaaesports.org/"} />
             </div>
 
             <div className="backButtonContainer">

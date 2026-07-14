@@ -24,12 +24,8 @@ export const RLPCSingleALeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1021 - 1349 MMR"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1021 - 1349 MMR"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://linktr.ee/officialrlpc"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://linktr.ee/officialrlpc"} />
             </div>
 
             <div className="backButtonContainer">

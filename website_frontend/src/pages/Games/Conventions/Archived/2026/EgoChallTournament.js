@@ -27,12 +27,8 @@ export const EgoChallTournament = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $20"]} /> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $20"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/egochall-cod-tournament/details"} />}/> 
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/egochall-cod-tournament/details"} />
             </div>
 
             <div className="backButtonContainer">

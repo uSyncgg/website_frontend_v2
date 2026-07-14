@@ -20,12 +20,8 @@ export const BlueOtterDraftLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$10 per Person", "Platinum 4 - Diamond 1"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$10 per Person", "Platinum 4 - Diamond 1"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/gVGSxRT"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/gVGSxRT"} />
             </div>
 
             <div className="backButtonContainer">

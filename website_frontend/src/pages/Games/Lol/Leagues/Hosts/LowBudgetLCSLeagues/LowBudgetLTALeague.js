@@ -21,12 +21,8 @@ export const LowBudgetLTALeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "No Rank or Point Cap"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "No Rank or Point Cap"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/w4WVB4Z"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/w4WVB4Z"} />
             </div>
 
             <div className="backButtonContainer">

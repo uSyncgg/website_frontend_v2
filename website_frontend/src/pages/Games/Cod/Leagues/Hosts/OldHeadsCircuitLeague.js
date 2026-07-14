@@ -16,12 +16,8 @@ export const OldHeadsCircuitLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Solo Entry Fee: $20", "Membership Fee: $3.99 per month"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Solo Entry Fee: $20", "Membership Fee: $3.99 per month"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.gg/xPsJpNrAfd"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.gg/xPsJpNrAfd"} />
             </div>
 
             <div className="backButtonContainer">
