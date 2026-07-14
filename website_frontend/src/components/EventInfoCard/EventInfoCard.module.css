@@ -91,8 +91,9 @@
     background: rgba(142, 106, 206, 0.06);
     border: 1px solid rgba(142, 106, 206, 0.25);
     border-radius: 8px;
-    padding: 20px 24px 5rem;
+    padding: 20px 24px;
     box-sizing: border-box;
+    height: 100%;
 }
 
 .feeHeader {
