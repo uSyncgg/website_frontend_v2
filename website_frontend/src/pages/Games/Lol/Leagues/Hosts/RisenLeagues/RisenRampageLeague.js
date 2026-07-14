@@ -24,12 +24,8 @@ export const RisenRampageLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$10 per Team", "Emerald 4 Cap", "1 Emerald 3 - Emerald 1 99 LP Allowed per Team"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$10 per Team", "Emerald 4 Cap", "1 Emerald 3 - Emerald 1 99 LP Allowed per Team"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/risenesports"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/risenesports"} />
             </div>
 
             <div className="backButtonContainer">

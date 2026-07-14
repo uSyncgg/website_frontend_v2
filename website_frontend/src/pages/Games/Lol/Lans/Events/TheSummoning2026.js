@@ -26,12 +26,8 @@ export const TheSummoning2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} /> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/the-summoning-esports-tournaments/details"} />}/> 
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/the-summoning-esports-tournaments/details"} />
             </div>
 
             <div className="backButtonContainer">

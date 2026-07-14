@@ -12,7 +12,7 @@ export const EsportsAgentH2H = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Free XP Matches"]} />
+                    <EventInfoCard title={"Fees"} infoList={["Free XP Matches"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://esportsagent.gg/wagers"} />}/>
                 </div>
 
                 <div>
@@ -22,10 +22,6 @@ export const EsportsAgentH2H = () => {
                 <div>
                     <EventInfoCard title={"Restrictions"} infoList={["Available Worldwide"]} />
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://esportsagent.gg/wagers"} />
             </div>
 
             <div className="backButtonContainer">

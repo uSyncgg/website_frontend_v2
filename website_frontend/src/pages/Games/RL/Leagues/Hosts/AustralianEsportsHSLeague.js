@@ -20,12 +20,8 @@ export const AustralianEsportsHSLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$75 AUS per Term", "Must Be Enrolled at an Australian High School"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$75 AUS per Term", "Must Be Enrolled at an Australian High School"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://ael.org.au/hs/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://ael.org.au/hs/"} />
             </div>
 
             <div className="backButtonContainer">

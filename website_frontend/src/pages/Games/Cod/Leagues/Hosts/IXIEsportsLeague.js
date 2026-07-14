@@ -20,12 +20,8 @@ export const IXIEsportsLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Free Agents Recruited by Teams or Create Team With 4+"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Free Agents Recruited by Teams or Create Team With 4+"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/qUQzHmQ3dZ"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/qUQzHmQ3dZ"} />
             </div>
 
             <div className="backButtonContainer">

@@ -12,7 +12,7 @@ export const ShowdownGamingWagers = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Crypto Fees", "Various Site Fees"]} />
+                    <EventInfoCard title={"Fees"} infoList={["Crypto Fees", "Various Site Fees"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://showdown.win/duels"} />}/>
                 </div>
 
                 <div>
@@ -22,10 +22,6 @@ export const ShowdownGamingWagers = () => {
                 <div>
                     <EventInfoCard title={"Restrictions"} infoList={["Available Worldwide"]} />
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://showdown.win/duels"} />
             </div>
 
             <div className="backButtonContainer">

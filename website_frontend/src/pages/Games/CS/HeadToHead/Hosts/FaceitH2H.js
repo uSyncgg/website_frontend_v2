@@ -16,7 +16,7 @@ export const FaceitH2H = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Free Match Finder"]} />
+                    <EventInfoCard title={"Fees"} infoList={["Free Match Finder"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.faceit.com/en/game/cs2"} />}/>
                 </div>
 
                 <div>
@@ -26,10 +26,6 @@ export const FaceitH2H = () => {
                 <div>
                     <EventInfoCard title={"Restrictions"} infoList={["Available Worldwide"]} />
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.faceit.com/en/game/cs2"} />
             </div>
 
             <div className="backButtonContainer">

@@ -20,12 +20,8 @@ export const SDCLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "No Rank Requirements"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "No Rank Requirements"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://sdcleague.com"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://sdcleague.com"} />
             </div>
 
             <div className="backButtonContainer">

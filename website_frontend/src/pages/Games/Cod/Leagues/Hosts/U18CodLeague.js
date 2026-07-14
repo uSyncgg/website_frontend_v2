@@ -20,12 +20,8 @@ export const U18CodLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Must be Younger than 18", "$100 per Team", "$25 One Time Qualifier Entry", "$8 for Solo Players"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Must be Younger than 18", "$100 per Team", "$25 One Time Qualifier Entry", "$8 for Solo Players"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://twitter.com/U18CODLeague?s=20&t=KF_TfGh6U3dk7gMSosJncQ"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://twitter.com/U18CODLeague?s=20&t=KF_TfGh6U3dk7gMSosJncQ"} />
             </div>
 
             <div className="backButtonContainer">

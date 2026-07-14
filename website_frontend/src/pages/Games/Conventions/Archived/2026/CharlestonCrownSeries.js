@@ -20,12 +20,8 @@ export const CharlestonCrownSeries = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $300", "VIP Team Pass: $400"]} /> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $300", "VIP Team Pass: $400"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://x.com/TeamBasai/status/2015205573680107861"} />}/> 
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://x.com/TeamBasai/status/2015205573680107861"} />
             </div>
 
             <div className="backButtonContainer">

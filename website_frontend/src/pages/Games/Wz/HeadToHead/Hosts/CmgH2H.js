@@ -16,7 +16,7 @@ export const CmgH2H = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Free XP Matches"]} />
+                    <EventInfoCard title={"Fees"} infoList={["Free XP Matches"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.checkmategaming.com/ladders"} />}/>
                 </div>
 
                 <div>
@@ -26,10 +26,6 @@ export const CmgH2H = () => {
                 <div>
                     <EventInfoCard title={"Restrictions"} infoList={["Available Worldwide", "US State Restrictions: AZ, IA, MS, MT, NV, and SD"]} />
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.checkmategaming.com/ladders"} />
             </div>
 
             <div className="backButtonContainer">

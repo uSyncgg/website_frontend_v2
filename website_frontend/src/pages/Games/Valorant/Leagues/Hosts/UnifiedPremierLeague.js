@@ -20,12 +20,8 @@ export const UnifiedPremierLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://uea.gg/e/UCL26S/tickets"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://uea.gg/e/UCL26S/tickets"} />
             </div>
 
             <div className="backButtonContainer">

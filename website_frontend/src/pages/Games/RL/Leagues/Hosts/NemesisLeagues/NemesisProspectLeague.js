@@ -20,12 +20,8 @@ export const NemesisProspectLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1320 - 1498 MMR"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1320 - 1498 MMR"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/nemesisrl"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/nemesisrl"} />
             </div>
 
             <div className="backButtonContainer">

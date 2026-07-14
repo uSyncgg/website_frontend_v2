@@ -24,12 +24,8 @@ export const RisenChampionsLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$200 per Team", "Must be Highly Competitive or Qualify"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$200 per Team", "Must be Highly Competitive or Qualify"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/risenesports"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/risenesports"} />
             </div>
 
             <div className="backButtonContainer">

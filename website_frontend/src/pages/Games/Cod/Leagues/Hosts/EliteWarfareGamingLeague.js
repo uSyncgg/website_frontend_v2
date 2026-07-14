@@ -20,12 +20,8 @@ export const EliteWarfareGamingLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Group A: $50 Team Pass", "Group B: $40 Team Pass", "Group C: $30 Team Pass"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Group A: $50 Team Pass", "Group B: $40 Team Pass", "Group C: $30 Team Pass"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/Mq3wBGFnNY"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/Mq3wBGFnNY"} />
             </div>
 
             <div className="backButtonContainer">
