@@ -24,7 +24,7 @@
     flex-direction: column;
     gap: 1rem;
     margin-top: 2.5rem;
-    padding: 0 1.25rem;
+    padding: 0 1.25rem 3rem;
 }
 
 .sidebarLabel {
@@ -258,10 +258,28 @@
     margin: 0 0 2.25rem;
 }
 
-.hero img {
-    width: 100%;
+/* Uniform cinematic crop + scrim so every article cover reads as one set,
+   regardless of the source photo's size or style */
+.heroImageWrap {
+    position: relative;
     border-radius: 1.25rem;
+    overflow: hidden;
     border: 1px solid rgba(255, 255, 255, .08);
+    box-shadow: 0 1.5rem 3rem -1.5rem rgba(0, 0, 0, .6);
+}
+
+.heroImageWrap::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(21, 19, 26, .15) 0%, rgba(21, 19, 26, 0) 30%, rgba(21, 19, 26, .45) 100%);
+    pointer-events: none;
+}
+
+.heroImageWrap img {
+    width: 100%;
+    aspect-ratio: 2 / 1;
+    object-fit: cover;
     display: block;
 }
 
@@ -648,6 +666,7 @@
         max-width: 46rem;
         margin-left: auto;
         margin-right: auto;
+        padding-bottom: 3.5rem;
     }
 }
 

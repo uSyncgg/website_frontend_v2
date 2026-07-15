@@ -131,7 +131,9 @@ export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
                 </header>
 
                 <figure className={styles.hero}>
-                    <img src={article.image} alt={article.imageAlt} />
+                    <div className={styles.heroImageWrap}>
+                        <img src={article.image} alt={article.imageAlt} />
+                    </div>
                     {article.imageCredit && (
                         <figcaption>Image Credit: {article.imageCredit}</figcaption>
                     )}
