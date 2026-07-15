@@ -90,11 +90,43 @@
     box-shadow: 0 1.5rem 2.5rem -1.25rem rgba(0, 0, 0, .55);
 }
 
-.sideArticle img {
+/* ---- Uniform card covers ---- */
+
+.cardCover {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     aspect-ratio: 16 / 9;
-    object-fit: cover;
-    display: block;
+    overflow: hidden;
+    color: white;
+    font-size: 2.1rem;
+}
+
+.cardCover::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(120% 90% at 15% 0%, rgba(255, 255, 255, .18), transparent 55%);
+}
+
+.cardCover svg {
+    position: relative;
+    opacity: .95;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .25));
+}
+
+.coverGuide {
+    background: linear-gradient(135deg, #9b6fe0, #7a5ac9);
+}
+
+.coverIndustry {
+    background: linear-gradient(135deg, #6a8fe0, #4f66c4);
+}
+
+.coverPlatform {
+    background: linear-gradient(135deg, #b18af0, #8e6ace);
 }
 
 .sideArticleInfo {
@@ -258,28 +290,10 @@
     margin: 0 0 2.25rem;
 }
 
-/* Uniform cinematic crop + scrim so every article cover reads as one set,
-   regardless of the source photo's size or style */
-.heroImageWrap {
-    position: relative;
-    border-radius: 1.25rem;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, .08);
-    box-shadow: 0 1.5rem 3rem -1.5rem rgba(0, 0, 0, .6);
-}
-
-.heroImageWrap::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(21, 19, 26, .15) 0%, rgba(21, 19, 26, 0) 30%, rgba(21, 19, 26, .45) 100%);
-    pointer-events: none;
-}
-
-.heroImageWrap img {
+.hero img {
     width: 100%;
-    aspect-ratio: 2 / 1;
-    object-fit: cover;
+    border-radius: 1.25rem;
+    border: 1px solid rgba(255, 255, 255, .08);
     display: block;
 }
 
@@ -617,12 +631,6 @@
     box-shadow: 0 1.75rem 2.5rem -1.25rem rgba(0, 0, 0, .55);
 }
 
-.relatedCard img {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    display: block;
-}
 
 .relatedInfo {
     display: flex;
@@ -721,12 +729,13 @@
         align-items: center;
     }
 
-    .relatedCard img {
+    .relatedCard .cardCover {
         width: 6.5rem;
-        aspect-ratio: 16 / 11;
+        aspect-ratio: auto;
         flex-shrink: 0;
         align-self: stretch;
         height: auto;
+        font-size: 1.4rem;
     }
 
     .relatedInfo {

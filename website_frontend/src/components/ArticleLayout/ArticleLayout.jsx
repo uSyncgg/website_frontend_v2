@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { FaMapMarkedAlt, FaTrophy } from "react-icons/fa";
+import { FaMapMarkedAlt, FaTrophy, FaBookOpen, FaChartLine, FaLayerGroup } from "react-icons/fa";
 import { SeoData } from "components/SeoData/SeoData";
 import { articleList } from "pages/More/Articles/articlesData";
 import styles from "./ArticleLayout.module.css";
@@ -19,6 +19,27 @@ const JsonLd = ({ data }) => (
         dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
     />
 );
+
+// Uniform CSS-drawn cover for article cards: category-tinted gradient + icon,
+// so every click box matches regardless of source imagery.
+const CardCover = ({ category }) => {
+    const icons = {
+        Guide: FaBookOpen,
+        Industry: FaChartLine,
+        Platform: FaLayerGroup,
+    };
+    const tints = {
+        Guide: styles.coverGuide,
+        Industry: styles.coverIndustry,
+        Platform: styles.coverPlatform,
+    };
+    const Icon = icons[category] || FaBookOpen;
+    return (
+        <span className={`${styles.cardCover} ${tints[category] || styles.coverGuide}`} aria-hidden="true">
+            <Icon />
+        </span>
+    );
+};
 
 export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
     const url = `${BASE_URL}/more/articles/${article.slug}`;
@@ -131,9 +152,7 @@ export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
                 </header>
 
                 <figure className={styles.hero}>
-                    <div className={styles.heroImageWrap}>
-                        <img src={article.image} alt={article.imageAlt} />
-                    </div>
+                    <img src={article.image} alt={article.imageAlt} />
                     {article.imageCredit && (
                         <figcaption>Image Credit: {article.imageCredit}</figcaption>
                     )}
@@ -183,7 +202,7 @@ export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
                                 className={styles.relatedCard}
                                 key={a.slug}
                             >
-                                <img src={a.thumb} alt="" loading="lazy" />
+                                <CardCover category={a.category} />
                                 <div className={styles.relatedInfo}>
                                     <span className={styles.relatedCategory}>{a.category}</span>
                                     <span className={styles.relatedTitle}>{a.headline}</span>
@@ -207,7 +226,7 @@ export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
 
                 {related[0] && (
                     <Link to={`/more/articles/${related[0].slug}`} className={styles.sideArticle}>
-                        <img src={related[0].thumb} alt="" loading="lazy" />
+                        <CardCover category={related[0].category} />
                         <span className={styles.sideArticleInfo}>
                             <span className={styles.relatedCategory}>{related[0].category}</span>
                             <span className={styles.sideArticleTitle}>{related[0].headline}</span>
