@@ -681,4 +681,55 @@
     .cta h2 {
         font-size: 1.5rem;
     }
+
+    /* Compact suggested-article list so the CTA banner stays the focal point */
+    .related {
+        padding: 2.5rem 0 3rem;
+    }
+
+    .related > h2 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .relatedGrid {
+        grid-template-columns: 1fr;
+        gap: .75rem;
+    }
+
+    .relatedCard {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .relatedCard img {
+        width: 6.5rem;
+        aspect-ratio: 16 / 11;
+        flex-shrink: 0;
+        align-self: stretch;
+        height: auto;
+    }
+
+    .relatedInfo {
+        padding: .6rem .9rem;
+        gap: .2rem;
+        min-width: 0;
+    }
+
+    .relatedCategory {
+        font-size: .65rem;
+    }
+
+    .relatedTitle {
+        font-size: .85rem;
+        line-height: 1.35;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .relatedMeta {
+        font-size: .72rem;
+    }
 }
