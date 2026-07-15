@@ -20,22 +20,17 @@ const JsonLd = ({ data }) => (
     />
 );
 
-// Uniform CSS-drawn cover for article cards: category-tinted gradient + icon,
-// so every click box matches regardless of source imagery.
+// Uniform CSS-drawn cover for article cards: uSync purple gradient with a
+// category icon, so every click box matches regardless of source imagery.
 const CardCover = ({ category }) => {
     const icons = {
         Guide: FaBookOpen,
         Industry: FaChartLine,
         Platform: FaLayerGroup,
     };
-    const tints = {
-        Guide: styles.coverGuide,
-        Industry: styles.coverIndustry,
-        Platform: styles.coverPlatform,
-    };
     const Icon = icons[category] || FaBookOpen;
     return (
-        <span className={`${styles.cardCover} ${tints[category] || styles.coverGuide}`} aria-hidden="true">
+        <span className={styles.cardCover} aria-hidden="true">
             <Icon />
         </span>
     );
@@ -223,17 +218,6 @@ export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
                     </span>
                     <span className={styles.mapCardSub}>Explore the LAN Map</span>
                 </Link>
-
-                {related[0] && (
-                    <Link to={`/more/articles/${related[0].slug}`} className={styles.sideArticle}>
-                        <CardCover category={related[0].category} />
-                        <span className={styles.sideArticleInfo}>
-                            <span className={styles.relatedCategory}>{related[0].category}</span>
-                            <span className={styles.sideArticleTitle}>{related[0].headline}</span>
-                            <span className={styles.relatedMeta}>{related[0].readTime} min read</span>
-                        </span>
-                    </Link>
-                )}
 
                 <Link to="/leagues" className={styles.sideLink}>
                     <span className={styles.sideLinkIcon}><FaTrophy aria-hidden="true" /></span>

@@ -46,7 +46,7 @@
     border-radius: 1.25rem;
     border: 1px solid rgba(255, 255, 255, .08);
     text-decoration: none;
-    background-image: linear-gradient(180deg, rgba(21, 19, 26, .25), rgba(21, 19, 26, .85)), url("https://i.imgur.com/gvdIL9C.png");
+    background-image: linear-gradient(180deg, rgba(21, 19, 26, .25), rgba(21, 19, 26, .85)), url("../../assets/images/lan-map-preview.png");
     background-size: cover;
     background-position: 50%;
     transition: transform .35s cubic-bezier(.16, 1, .3, 1), border-color .35s cubic-bezier(.16, 1, .3, 1), box-shadow .35s cubic-bezier(.16, 1, .3, 1);
@@ -73,23 +73,6 @@
     font-weight: 600;
 }
 
-.sideArticle {
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    background: linear-gradient(180deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, .01));
-    border: 1px solid rgba(255, 255, 255, .08);
-    border-radius: 1.25rem;
-    overflow: hidden;
-    transition: transform .35s cubic-bezier(.16, 1, .3, 1), border-color .35s cubic-bezier(.16, 1, .3, 1), box-shadow .35s cubic-bezier(.16, 1, .3, 1);
-}
-
-.sideArticle:hover {
-    transform: translateY(-.3rem);
-    border-color: rgba(255, 255, 255, .2);
-    box-shadow: 0 1.5rem 2.5rem -1.25rem rgba(0, 0, 0, .55);
-}
-
 /* ---- Uniform card covers ---- */
 
 .cardCover {
@@ -102,6 +85,7 @@
     overflow: hidden;
     color: white;
     font-size: 2.1rem;
+    background: linear-gradient(135deg, #9b6fe0, #7a5ac9);
 }
 
 .cardCover::before {
@@ -117,31 +101,6 @@
     filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .25));
 }
 
-.coverGuide {
-    background: linear-gradient(135deg, #9b6fe0, #7a5ac9);
-}
-
-.coverIndustry {
-    background: linear-gradient(135deg, #6a8fe0, #4f66c4);
-}
-
-.coverPlatform {
-    background: linear-gradient(135deg, #b18af0, #8e6ace);
-}
-
-.sideArticleInfo {
-    display: flex;
-    flex-direction: column;
-    gap: .35rem;
-    padding: .9rem 1.1rem 1.1rem;
-}
-
-.sideArticleTitle {
-    color: white;
-    font-weight: 700;
-    font-size: .95rem;
-    line-height: 1.4;
-}
 
 .sideLink {
     display: flex;
