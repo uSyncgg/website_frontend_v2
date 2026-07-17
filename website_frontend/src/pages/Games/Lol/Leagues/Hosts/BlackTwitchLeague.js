@@ -20,7 +20,7 @@ export const BlackTwitchLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "$25 Forfeit Deposit", "Grandmaster Cap"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.gg/bjExwdcrpt"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "$25 Forfeit Deposit", "400 LP Grandmaster Cap"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.gg/bjExwdcrpt"} />}/>
                 </div>
             </div>
 
