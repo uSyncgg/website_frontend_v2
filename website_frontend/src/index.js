@@ -203,6 +203,7 @@ import { PlayflyCollegeLeague as PlayflyLoLLeague } from 'pages/Games/Lol/League
 import { PlayVSLeague as PlayVSLoLLeague } from 'pages/Games/Lol/Leagues/Hosts/PlayVSLeague';
 import { SDCLeague } from 'pages/Games/Lol/Leagues/Hosts/SDCLeague';
 import { NECCLeague as NECCLoLLeague } from 'pages/Games/Lol/Leagues/Hosts/NECCLeague';
+import { BlackTwitchLeague } from 'pages/Games/Lol/Leagues/Hosts/BlackTwitchLeague';
 // Wagers
 import { LolWagers } from 'pages/Games/Lol/Wagers/LolWagers';
 import { Ewagers as LoLEWagers } from 'pages/Games/Lol/Wagers/Hosts/Ewagers';
@@ -570,6 +571,7 @@ root.render(
           <Route path='/games/LoL/leagues/ecac' element={<ECACLoLLeague />} />
           <Route path='/games/LoL/leagues/nse' element={<NationalStudentLoLLeague />} />
           <Route path='/games/LoL/leagues/playvs' element={<PlayVSLoLLeague />} />
+          <Route path='/games/LoL/leagues/black-twitch-league' element={<BlackTwitchLeague />} />
           {/* Wagers */}
           <Route path='/games/LoL/wagers' element={<LolWagers />} />
           <Route path='/games/LoL/wagers/ewagers' element={<LoLEWagers />} />
