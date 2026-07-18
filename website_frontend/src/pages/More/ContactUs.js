@@ -53,7 +53,7 @@ export const ContactUs = () => {
                         <p className={`${styles.learn} ${styles.post}`}>
                             We support plenty of different events/websites but may miss a few from time to time in our search to support all games. 
                             If you are interested in working with us, click   {" "}
-                            <Link to={"/more/eventhost/eventhost"}>HERE</Link>
+                            <Link to={"/more/eventhost"}>HERE</Link>
                         </p>
                     </div>
                 </div>
