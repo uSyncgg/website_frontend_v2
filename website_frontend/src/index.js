@@ -362,8 +362,9 @@ import { Volan2026 } from 'pages/Games/Conventions/Archived/2026/Volan2026';
 import { LakewoodLeagueXIISpring } from 'pages/Games/Conventions/Archived/2026/LakewoodLeagueXIISpring';
 import { LANAllNightSpring2026 } from 'pages/Games/Conventions/Archived/2026/LANAllNightSpring2026';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+const root = document.getElementById('root');
+
+const app = (
   // <React.StrictMode>
   <BrowserRouter>
     <ScrollToTop />
@@ -744,6 +745,12 @@ root.render(
   </BrowserRouter>
   // </React.StrictMode>
 );
+
+if (root.hasChildNodes()) {
+  ReactDOM.hydrateRoot(root, app);
+} else {
+  ReactDOM.createRoot(root).render(app);
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

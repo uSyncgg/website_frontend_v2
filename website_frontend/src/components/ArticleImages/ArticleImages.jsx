@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 export const ArticleImages = () => {
     return (
         <div className={styles.articleImages}>
-            <Link to={"/LanMap"}>
+            <Link to={"/lans/all"}>
                 <img src="https://i.imgur.com/B7UyPAZ.jpg" alt="Lan Map" />
             </Link>
 
