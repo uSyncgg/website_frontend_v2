@@ -25,7 +25,7 @@ export const NestedPaymentComponent = ({ price }) => {
         const { error } = await stripe.confirmPayment({
             elements,
             confirmParams: {
-                return_url: "https://usync.gg/paymentform/test/receipt",
+                return_url: "https://www.usync.gg/paymentform/test/receipt",
             },
         });
 
