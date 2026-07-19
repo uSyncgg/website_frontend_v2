@@ -5,7 +5,6 @@ export const COD_LAN_MARKERS = [
 ];
 
 export const LOL_LAN_MARKERS = [
-    { lat: 42.2469148, lng: -83.0210947, name: "The Summoning 2026", link: "/lans/the-summoning-2026", game: 'LoL' },
 ];
 
 export const HALO_LAN_MARKERS = [
@@ -19,7 +18,6 @@ export const WZ_LAN_MARKERS = [];
 
 export const CONVENTION_MARKERS = [
     { lat: 39.9940217, lng: -83.0062971,  name: "GA:CS Operation Heatwave", link: "/lans/gacs-operation-heatwave", game: 'Conventions' },
-    { lat: 39.9597244, lng: -75.16156,    name: "The Retake",               link: "/lans/the-retake",              game: 'Conventions' },
     // Offset slightly south from Citadel I (39.6829806) to avoid overlap on AllLans/Home maps
     { lat: 39.6479806, lng: -105.0793028, name: "Hellcase CS2 LAN 2026",    link: "/lans/hellcase-cs2-2026",       game: 'Conventions' },
 ];

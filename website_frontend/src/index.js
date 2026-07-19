@@ -319,12 +319,10 @@ import Payment from 'pages/Payment/PaymentCheckouts/Payment';
 // LAN Pages - CURRENT
 // All LANs
 import { AllLans } from 'pages/Games/Conventions/AllLans';
-import { TheRetake2026 } from 'pages/Games/Conventions/Events/TheRetake2026';
 import { ShintoChamps2026 } from 'pages/Games/Cod/Lans/Events/ShintoChamps2026';
 import { HellcaseCS2LAN2026 } from 'pages/Games/Conventions/Events/HellcaseCS2LAN2026';
 import { EWGL3 } from 'pages/Games/Cod/Lans/Events/EWGL3';
 import { GACSHeatwave } from 'pages/Games/Conventions/Events/GACSHeatwave';
-import { TheSummoning2026 } from 'pages/Games/Lol/Lans/Events/TheSummoning2026';
 import { CitadelI } from 'pages/Games/Halo/Lans/Events/CitadelI';
 import { GameandGeek2026 } from 'pages/Games/Halo/Lans/Events/GameandGeek2026';
 import { SFGE2026 } from 'pages/Games/Halo/Lans/Events/SFGE2026';
@@ -334,6 +332,8 @@ import { OhYoshiDiIntRehatched } from 'pages/Games/Halo/Lans/Events/OhYoshiDiInt
 
 // Archived LANs Below
 // 2026
+import { TheSummoning2026 } from 'pages/Games/Lol/Lans/Archived/2026/TheSummoning2026';
+import { TheRetake2026 } from 'pages/Games/Conventions/Archived/2026/TheRetake2026';
 import { ShintoTest } from 'pages/Games/Cod/Lans/Archived/2026/ShintoTest';
 import { RVAEsportsChampionship2026 } from 'pages/Games/Cod/Lans/Archived/2026/RVAEsportsChampionship2026';
 import { ImmerseCon2026 } from 'pages/Games/Conventions/Archived/2026/ImmerseCon2026';
@@ -700,16 +700,16 @@ const app = (
           <Route path='/lans/sfge-2026' element={<SFGE2026 />} />
           <Route path='/lans/oh-yoshi-di-int-rehatched' element={<OhYoshiDiIntRehatched />} />
           {/* LoL */}
-          <Route path='/lans/the-summoning-2026' element={<TheSummoning2026 />} />
           <Route path='/lans/bec-sololane-showdown' element={<BECSoloLaneShowdown />} />
           {/* Conventions */}
           <Route path='/other-lans' element={<Conventions />} />
-          <Route path='/lans/the-retake' element={<TheRetake2026 />} />
           <Route path='/lans/gacs-operation-heatwave' element={<GACSHeatwave />} />
           <Route path='/lans/hellcase-cs2-2026' element={<HellcaseCS2LAN2026 />} />
 
           {/* Archived LANs */}
           {/* 2026 */}
+          <Route path='/lans/the-summoning-2026' element={<TheSummoning2026 />} />
+          <Route path='/lans/the-retake' element={<TheRetake2026 />} />
           <Route path='/lans/shinto-test' element={<ShintoTest />} />
           <Route path='/lans/rva-esports-championship-2026' element={<RVAEsportsChampionship2026 />} />
           <Route path='/lans/immersecon-2026' element={<ImmerseCon2026 />} />
