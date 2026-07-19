@@ -1,5 +1,5 @@
 import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData } from "components";
-import '../../../EventInformation.css';
+import '../../../../EventInformation.css';
 
 export const TheSummoning2026 = () => {
     return (
@@ -13,7 +13,7 @@ export const TheSummoning2026 = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date/Place"} infoList={["July 18th, 2026", "Windsor, ON"]} /> 
+                    <EventInfoCard title={"Date/Place"} infoList={["July 18th, 2026", "Windsor, ON"]} />
                 </div>
 
                 <div>
@@ -22,11 +22,11 @@ export const TheSummoning2026 = () => {
                         , "1v1 Mundo Dodgeball Tournament"
                         , "SSBU, Pokemon VGC, Melee, and More Tournaments"
                         , "9AM Doors Open"
-                    ]} /> 
+                    ]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/the-summoning-esports-tournaments/details"} />}/> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/the-summoning-esports-tournaments/details"} />}/>
                 </div>
             </div>
 
