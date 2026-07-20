@@ -329,7 +329,11 @@ import { GameandGeek2026 } from 'pages/Games/Halo/Lans/Events/GameandGeek2026';
 import { SFGE2026 } from 'pages/Games/Halo/Lans/Events/SFGE2026';
 import { Conventions } from 'pages/Games/Conventions/Conventions';
 import { HNLxFANDOM2026 } from 'pages/Games/Cod/Lans/Events/HNLxFANDOM2026';
+import { EgoCODLAN4v4 } from 'pages/Games/Cod/Lans/Events/EgoCODLAN4v4';
 import { OhYoshiDiIntRehatched } from 'pages/Games/Halo/Lans/Events/OhYoshiDiIntRehatched';
+import { LANATHONUnderTheSun2026 } from 'pages/Games/Conventions/Events/LANATHONUnderTheSun2026';
+import { FortLAN2026 } from 'pages/Games/Conventions/Events/FortLAN2026';
+import { LANAllNight2026 } from 'pages/Games/Conventions/Events/LANAllNight2026';
 
 // Archived LANs Below
 // 2026
@@ -695,6 +699,7 @@ const app = (
           <Route path='/lans/shintochamps2026' element={<ShintoChamps2026 />} />
           <Route path='/lans/ewgl3' element={<EWGL3 />} />
           <Route path='/lans/hnl-x-fandom-2026' element={<HNLxFANDOM2026 />} />
+          <Route path='/lans/ego-cod-lan-4v4' element={<EgoCODLAN4v4 />} />
           {/* Wz */}
           {/* Halo */}
           <Route path='/lans/citadel-i' element={<CitadelI />} />
@@ -707,6 +712,9 @@ const app = (
           <Route path='/other-lans' element={<Conventions />} />
           <Route path='/lans/gacs-operation-heatwave' element={<GACSHeatwave />} />
           <Route path='/lans/hellcase-cs2-2026' element={<HellcaseCS2LAN2026 />} />
+          <Route path='/lans/lan-a-thon-under-the-sun-2026' element={<LANATHONUnderTheSun2026 />} />
+          <Route path='/lans/fortlan-2026' element={<FortLAN2026 />} />
+          <Route path='/lans/lan-all-night-2026' element={<LANAllNight2026 />} />
 
           {/* Archived LANs */}
           {/* 2026 */}
