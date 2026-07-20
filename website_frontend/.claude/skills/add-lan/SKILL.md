@@ -72,7 +72,7 @@ If no results, retry with just the venue name + city + state. If still failing, 
 | Halo | `src/pages/Games/Halo/Lans/HaloLans.js` | `src/pages/Games/Halo/Lans/Events/` | `'../../../EventInformation.css'` | `/games/halo/lans` | `{/* Halo */}` |
 | LoL | `src/pages/Games/Lol/Lans/LolLans.js` | `src/pages/Games/Lol/Lans/Events/` | `'../../../EventInformation.css'` | `/games/LoL/lans` | `{/* LoL */}` |
 | Warzone | `src/pages/Games/Wz/Lans/WzLans.js` | `src/pages/Games/Wz/Lans/Events/` | `'../../../EventInformation.css'` | `/games/warzone/lans` | `{/* Wz */}` |
-| Conventions | `src/pages/Games/Conventions/Conventions.js` | `src/pages/Games/Conventions/Events/` | `'../../EventInformation.css'` | `/lans` | `{/* Conventions */}` |
+| Conventions | `src/pages/Games/Conventions/Conventions.js` | `src/pages/Games/Conventions/Events/` | `'../../EventInformation.css'` | `/other-lans` | `{/* Conventions */}` |
 
 For multi-game events: the detail page lives in the **first game's** Events folder and uses that game's CSS import and back button. HostBanner entries and map markers are added to **each** listed game's LAN list file.
 
@@ -110,12 +110,8 @@ export const {ComponentName} = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["{fee line 1}", "{fee line 2}"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["{fee line 1}", "{fee line 2}"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"{EventLink}"} /> }/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"{EventLink}"} />
             </div>
 
             <div className="backButtonContainer">

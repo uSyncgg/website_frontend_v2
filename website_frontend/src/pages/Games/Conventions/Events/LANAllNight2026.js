@@ -27,16 +27,12 @@ export const LANAllNight2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["BYOC: $95", "Friday General Admission: $12", "Saturday General Admission: $18"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["BYOC: $95", "Friday General Admission: $12", "Saturday General Admission: $18"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.tixr.com/groups/lanfest/events/lan-all-night-gaming-festival-2026-195402"} />} />
                 </div>
             </div>
 
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.tixr.com/groups/lanfest/events/lan-all-night-gaming-festival-2026-195402"} />
-            </div>
-
             <div className="backButtonContainer">
-                <BackButton path={"/lans"} />
+                <BackButton path={"/other-lans"} />
             </div>
         </div>
     );

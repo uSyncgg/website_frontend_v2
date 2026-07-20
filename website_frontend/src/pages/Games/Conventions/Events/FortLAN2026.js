@@ -26,16 +26,12 @@ export const FortLAN2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["BYOC: $50"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["BYOC: $50"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.tixr.com/groups/lanfest/events/fortlan-fall-2026-189274"} />} />
                 </div>
             </div>
 
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.tixr.com/groups/lanfest/events/fortlan-fall-2026-189274"} />
-            </div>
-
             <div className="backButtonContainer">
-                <BackButton path={"/lans"} />
+                <BackButton path={"/other-lans"} />
             </div>
         </div>
     );
