@@ -237,6 +237,7 @@ import { NemesisNoviceLeague } from 'pages/Games/RL/Leagues/Hosts/NemesisLeagues
 import { NemesisProspectLeague } from 'pages/Games/RL/Leagues/Hosts/NemesisLeagues/NemesisProspectLeague';
 import { NemesisRivalLeague } from 'pages/Games/RL/Leagues/Hosts/NemesisLeagues/NemesisRivalLeague';
 import { NemesisTitanLeague } from 'pages/Games/RL/Leagues/Hosts/NemesisLeagues/NemesisTitanLeague';
+import { NemesisProvisionalLeague } from 'pages/Games/RL/Leagues/Hosts/NemesisLeagues/NemesisProvisionalLeague';
 import { RLPCLeagues } from 'pages/Games/RL/Leagues/Hosts/RLPCLeagues/RLPCLeagues';
 import { RLPCDoubleALeague } from 'pages/Games/RL/Leagues/Hosts/RLPCLeagues/RLPCDoubleALeague';
 import { RLPCSingleALeague } from 'pages/Games/RL/Leagues/Hosts/RLPCLeagues/RLPCSingleALeague';
@@ -606,6 +607,7 @@ const app = (
           <Route path='/games/RocketLeague/leagues/nemesis-leagues/challenger' element={<NemesisChallengerLeague />} />
           <Route path='/games/RocketLeague/leagues/nemesis-leagues/prospect' element={<NemesisProspectLeague />} />
           <Route path='/games/RocketLeague/leagues/nemesis-leagues/novice' element={<NemesisNoviceLeague />} />
+          <Route path='/games/RocketLeague/leagues/nemesis-leagues/provisional' element={<NemesisProvisionalLeague />} />
           <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues' element={<FrontierDoublesLeagues />} />
           <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues/elite' element={<FrontierEliteLeague />} />
           <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues/star' element={<FrontierStarLeague />} />
