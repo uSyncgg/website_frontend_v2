@@ -25,7 +25,7 @@ export const FaceitESEALeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["ESEA League Pass: $81.59/yr"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.faceit.com/en/cs2/league/ESEA%20League/a14b8616-45b9-4581-8637-4dfd0b5f6af8"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["ESEA League Pass: $81.59/yr"]} footer={<ExternalButton host={"Faceit ESEA League"} blank={true} title={"Join Now"} path={"https://www.faceit.com/en/cs2/league/ESEA%20League/a14b8616-45b9-4581-8637-4dfd0b5f6af8"} />}/>
                 </div>
             </div>
 

@@ -13,7 +13,7 @@ export const OneVOneMeWagers = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Match Fee: 0%", "Varying Fee with Deposits/Withdrawals"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.1v1me.com/"} />}/>
+                    <EventInfoCard title={"Fees"} infoList={["Match Fee: 0%", "Varying Fee with Deposits/Withdrawals"]} footer={<ExternalButton host={"1v1Me"} blank={true} title={"Join Now"} path={"https://www.1v1me.com/"} />}/>
                 </div>
 
                 <div>

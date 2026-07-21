@@ -21,7 +21,7 @@ export const RSC3v3NALeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/rsc"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"RSC NA 3v3"} blank={true} title={"Join Now"} path={"https://discord.com/invite/rsc"} />}/>
                 </div>
             </div>
 

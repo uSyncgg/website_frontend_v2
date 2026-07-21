@@ -21,7 +21,7 @@ export const LowBudgetCommercialLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Platinum Average, 1 Emerald 3 Max", "See Rank Points for Team Eligibility"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/w4WVB4Z"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Platinum Average, 1 Emerald 3 Max", "See Rank Points for Team Eligibility"]} footer={<ExternalButton host={"LCS Commercial League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/w4WVB4Z"} />}/>
                 </div>
             </div>
 

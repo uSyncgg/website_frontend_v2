@@ -21,7 +21,7 @@ export const PremierCircuitLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - DM to Enter"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://x.com/TPCircuit"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - DM to Enter"]} footer={<ExternalButton host={"The Premier Circuit League"} blank={true} title={"Join Now"} path={"https://x.com/TPCircuit"} />}/>
                 </div>
             </div>
 

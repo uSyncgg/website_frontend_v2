@@ -21,7 +21,7 @@ export const AirforceGamingLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://airforcegaming.com/dafgl"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"Airforce Gaming League"} blank={true} title={"Join Now"} path={"https://airforcegaming.com/dafgl"} />}/>
                 </div>
             </div>
 

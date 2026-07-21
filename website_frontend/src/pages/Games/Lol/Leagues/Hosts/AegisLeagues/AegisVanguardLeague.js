@@ -25,7 +25,7 @@ export const AegisVanguardLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$200 per Team", "1000 LP Peak from Y2025 and Y2024 - S3"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/dBtt7Fg9jv"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$200 per Team", "1000 LP Peak from Y2025 and Y2024 - S3"]} footer={<ExternalButton host={"Aegis Vanguard League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/dBtt7Fg9jv"} />}/>
                 </div>
             </div>
 

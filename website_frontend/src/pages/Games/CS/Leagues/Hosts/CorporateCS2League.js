@@ -21,7 +21,7 @@ export const CorporateCS2League = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$250 per Team"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://cea.gg/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$250 per Team"]} footer={<ExternalButton host={"Corporate CS2 League"} blank={true} title={"Join Now"} path={"https://cea.gg/"} />}/>
                 </div>
             </div>
 

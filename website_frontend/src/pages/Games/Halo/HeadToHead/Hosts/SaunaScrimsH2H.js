@@ -13,7 +13,7 @@ export const SaunaScrimsH2H = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Free Scrim Finder / 8s Lobbies"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/cCVjpAvUdz"} />}/>
+                    <EventInfoCard title={"Fees"} infoList={["Free Scrim Finder / 8s Lobbies"]} footer={<ExternalButton host={"Sauna Scrims"} blank={true} title={"Join Now"} path={"https://discord.com/invite/cCVjpAvUdz"} />}/>
                 </div>
 
                 <div>

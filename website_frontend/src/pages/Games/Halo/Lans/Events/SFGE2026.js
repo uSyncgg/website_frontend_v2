@@ -27,7 +27,7 @@ export const SFGE2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["3-Day Weekend Pass (Adult): $85","3-Day Weekend Pass (Child): $50"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/southern-fried-gaming-expo-2026/details"} />}/> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["3-Day Weekend Pass (Adult): $85","3-Day Weekend Pass (Child): $50"]} footer={<ExternalButton host={"Southern-Fried Gaming Expo 2026"} blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/southern-fried-gaming-expo-2026/details"} />}/> 
                 </div>
             </div>
 

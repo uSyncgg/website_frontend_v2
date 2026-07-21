@@ -13,7 +13,7 @@ export const CmgWagers = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Regular Member: 7.5%", "Elite Member: 3.75%", "Live Support Fee: 2.5% - 5%", "Deposit/Withdraw Fees though Paypal"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.checkmategaming.com/wager/cross-platform/halo-infinite#all"} />}/>
+                    <EventInfoCard title={"Fees"} infoList={["Regular Member: 7.5%", "Elite Member: 3.75%", "Live Support Fee: 2.5% - 5%", "Deposit/Withdraw Fees though Paypal"]} footer={<ExternalButton host={"Checkmate Gaming"} blank={true} title={"Join Now"} path={"https://www.checkmategaming.com/wager/cross-platform/halo-infinite#all"} />}/>
                 </div>
 
                 <div>

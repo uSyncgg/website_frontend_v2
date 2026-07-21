@@ -21,7 +21,7 @@ export const PlayVSLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry - Must be a High School Student"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.playvs.com/league-of-legends"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry - Must be a High School Student"]} footer={<ExternalButton host={"PlayVS League"} blank={true} title={"Join Now"} path={"https://www.playvs.com/league-of-legends"} />}/>
                 </div>
             </div>
 

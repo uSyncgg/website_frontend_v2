@@ -21,7 +21,7 @@ export const AustralianEsportsLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - Must be Enrolled at an Australian University"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://ael.org.au/uni/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - Must be Enrolled at an Australian University"]} footer={<ExternalButton host={"Australian Esports League University"} blank={true} title={"Join Now"} path={"https://ael.org.au/uni/"} />}/>
                 </div>
             </div>
 

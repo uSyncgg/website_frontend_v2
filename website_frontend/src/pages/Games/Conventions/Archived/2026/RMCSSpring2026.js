@@ -22,7 +22,7 @@ export const RMCSSpring2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $125"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/rmcs-spring-26-tournament-2026-04-11?section=overview"} />}/> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $125"]} footer={<ExternalButton host={"RMCS Spring 2026"} blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/rmcs-spring-26-tournament-2026-04-11?section=overview"} />}/> 
                 </div>
             </div>
 

@@ -28,7 +28,7 @@ export const HellcaseCS2LAN2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $225","Spectator Pass: $10 ($15 for 2-Days)"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/counter-strike-2-tournament-2026-08-22?section=overview"} />}/> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $225","Spectator Pass: $10 ($15 for 2-Days)"]} footer={<ExternalButton host={"Hellcase CS2 LAN 2026"} blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/counter-strike-2-tournament-2026-08-22?section=overview"} />}/> 
                 </div>
             </div>
 

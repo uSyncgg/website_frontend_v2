@@ -21,7 +21,7 @@ export const PlayflyOpenLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry - Must be a FULL TIME College Student", "Gold & Lower"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://playflycollege.gg/pages/playfly-college-esports"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry - Must be a FULL TIME College Student", "Gold & Lower"]} footer={<ExternalButton host={"Playfly Open"} blank={true} title={"Join Now"} path={"https://playflycollege.gg/pages/playfly-college-esports"} />}/>
                 </div>
             </div>
 

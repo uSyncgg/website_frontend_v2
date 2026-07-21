@@ -21,7 +21,7 @@ export const FiReLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Variable Cost Based on Event"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://x.com/FiReSPORTSgg"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Variable Cost Based on Event"]} footer={<ExternalButton host={"FiRe League"} blank={true} title={"Join Now"} path={"https://x.com/FiReSPORTSgg"} />}/>
                 </div>
             </div>
 

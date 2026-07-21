@@ -21,7 +21,7 @@ export const CasualXPLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.gg/AEgVZM9FY2"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"Casual XP League"} blank={true} title={"Join Now"} path={"https://discord.gg/AEgVZM9FY2"} />}/>
                 </div>
             </div>
 

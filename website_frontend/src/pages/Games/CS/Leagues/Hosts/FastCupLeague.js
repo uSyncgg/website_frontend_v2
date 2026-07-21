@@ -21,7 +21,7 @@ export const FastCupLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://cs2.fastcup.net/leagues/68/210/202/771"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"Fast Cup"} blank={true} title={"Join Now"} path={"https://cs2.fastcup.net/leagues/68/210/202/771"} />}/>
                 </div>
             </div>
 

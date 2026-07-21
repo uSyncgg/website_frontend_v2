@@ -27,7 +27,7 @@ export const ShintoTest = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $325"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://tpc.misfitsarena.gg/lan/shinto-champs-presented-by-misfits-arena-mqfrnrkx"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $325"]} footer={<ExternalButton host={"Shinto Champs"} blank={true} title={"Join Now"} path={"https://tpc.misfitsarena.gg/lan/shinto-champs-presented-by-misfits-arena-mqfrnrkx"} />}/>
                 </div>
             </div>
 

@@ -21,7 +21,7 @@ export const ItalianSerieBLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.italianrocketchampionship.it/?lang=eng"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"Italian Series B"} blank={true} title={"Join Now"} path={"https://www.italianrocketchampionship.it/?lang=eng"} />}/>
                 </div>
             </div>
 

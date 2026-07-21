@@ -27,7 +27,7 @@ export const HNLxFANDOM2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Ages 18 and Up: $22.00", "Child Ages 13-17 / Military / Seniors 60+: $14.60"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.ticketmaster.com/event/0A0064D801D80C85"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Ages 18 and Up: $22.00", "Child Ages 13-17 / Military / Seniors 60+: $14.60"]} footer={<ExternalButton host={"HNL x FANDOM 2026"} blank={true} title={"Join Now"} path={"https://www.ticketmaster.com/event/0A0064D801D80C85"} />}/>
                 </div>
             </div>
 
