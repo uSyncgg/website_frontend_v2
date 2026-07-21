@@ -5,6 +5,7 @@ export const LowBudgetFinancialLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"LCS Financial League - League of Legends"}
                 description="LCS Financial league is a free to play League of Legends league for those with an Emerald average rank. Join the action for yourself."
                 canonicalPath={"/games/LoL/leagues/low-budget-leagues/financial"}
             />

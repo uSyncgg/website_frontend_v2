@@ -5,6 +5,7 @@ export const TheSummoning2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"The Summoning 2026 - League of Legends"}
                 description="The Summoning aims to create an unparalleled experience for collectors, competitors and families. This convention style event features tabletop, TCG, comics, sports cards, esports tournaments and more all under one roof. Every attendee is guaranteed to leave with unforgettable memories"
                 canonicalPath={"/lans/the-summoning-2026"}
             />

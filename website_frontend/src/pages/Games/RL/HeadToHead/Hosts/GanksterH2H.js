@@ -5,6 +5,7 @@ export const GanksterH2H = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"GanksterGG - Rocket League"}
                 description="GanksterGG Rocket League scrimmage matches. Play your most competitive scrims from top level teams in Rocket League."
                 canonicalPath={"/games/RocketLeague/head-to-head/gankster"}
             />

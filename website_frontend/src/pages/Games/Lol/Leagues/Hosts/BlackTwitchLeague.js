@@ -5,6 +5,7 @@ export const BlackTwitchLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Black Twitch League - League of Legends"}
                 description="Black Twitch League. League of Legends league with a grandmaster cap that is free to play and has a cash prize."
                 canonicalPath={"/games/LoL/leagues/black-twitch-league"}
             />

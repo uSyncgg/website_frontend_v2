@@ -5,6 +5,7 @@ export const WhatWeProvide = () => {
     return (
         <div className="standardBlankContainer">
             <SeoData
+                title={"What uSync Provides For Esports"}
                 description="uSync is a one-stop hub for all esports events across the globe. Find tournaments, LANs, leagues, and much more all in one place."
                 canonicalPath={"/more/articles/What-We-Provide"}
             />

@@ -5,6 +5,7 @@ export const AegisDefendersLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Aegis Defenders League - League of Legends"}
                 description="Aegis Defenders League is for League of Legends players with less than 100LP. Join a league that fits you today."
                 canonicalPath={"/games/LoL/leagues/aegis-leagues/defender"}
             />

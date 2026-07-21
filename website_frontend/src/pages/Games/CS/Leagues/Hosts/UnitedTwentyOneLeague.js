@@ -5,6 +5,7 @@ export const UnitedTwentyOneLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"United TwentyOne League - Counter-Strike"}
                 description="United TwentyOne's bi-monthly Counter-Strike 2 leagues. Compete in divisions based on your skill and climb the ranks."
                 canonicalPath={"/games/CS2/leagues/unitedtwentyone"}
             />

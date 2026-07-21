@@ -5,6 +5,7 @@ export const HellcaseCS2LAN2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Hellcase CS2 LAN 2026 - Convention"}
                 description="Localhost Denver is putting on another Counter Strike 2 Tournament and is raising the stakes!"
                 canonicalPath={"/lans/hellcase-cs2-2026"}
             />

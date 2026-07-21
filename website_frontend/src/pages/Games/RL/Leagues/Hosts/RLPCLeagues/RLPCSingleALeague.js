@@ -5,6 +5,7 @@ export const RLPCSingleALeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"RLPC A League - Rocket League"}
                 description="RLPC Single A League for Rocket League players with 1021 - 1349 MMR. A verified free to enter draft based 3v3 league with three seasons per year."
                 canonicalPath={"/games/RocketLeague/leagues/rlpc-leagues/a"}
             />

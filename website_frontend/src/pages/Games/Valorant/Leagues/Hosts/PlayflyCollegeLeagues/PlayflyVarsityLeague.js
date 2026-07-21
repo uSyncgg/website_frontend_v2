@@ -5,6 +5,7 @@ export const PlayflyVarsityLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Playfly Varsity - Valorant"}
                 description="Playfly College Valorant Varsity League for Platinum and above college students. $280k prize pool shared across all titles. Spring and fall seasons."
                 canonicalPath={"/games/Valorant/leagues/playfly-leagues/varsity"}
             />

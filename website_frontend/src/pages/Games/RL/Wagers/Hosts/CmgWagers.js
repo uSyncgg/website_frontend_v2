@@ -5,6 +5,7 @@ export const CmgWagers = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Checkmate Gaming - Rocket League"}
                 description="Checkmate Gaming Rocket League wagers. Compare fees and restrictions. 24/7 live support with wager matches available worldwide for Rocket League players."
                 canonicalPath={"/games/RocketLeague/wagers/cmg"}
             />

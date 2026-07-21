@@ -5,6 +5,7 @@ export const EGFCLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"EGFC League - Valorant"}
                 description="EGFC Valorant college league. Free to enter for D1 varsity esports programs. Two 8 week seasonal splits with in-person or online playoffs and live streamed matches."
                 canonicalPath={"/games/Valorant/leagues/egfc"}
             />

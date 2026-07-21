@@ -5,6 +5,7 @@ export const CLOLLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"CLOL - League of Legends"}
                 description="College League of Legends league is the most reputable name in all of college league. Play for thousands of dollars in scholarships."
                 canonicalPath={"/games/LoL/leagues/clol"}
             />

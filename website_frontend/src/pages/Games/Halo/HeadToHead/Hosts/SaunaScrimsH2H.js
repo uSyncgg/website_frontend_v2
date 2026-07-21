@@ -5,6 +5,7 @@ export const SaunaScrimsH2H = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Sauna Scrims - Halo"}
                 description="The Sauana Halo scrims. Scrim finder for casual all the way to highly competitive players in the Halo scene."
                 canonicalPath={"/games/halo/head-to-head/sauna"}
             />

@@ -6,6 +6,7 @@ export const ReportProblem = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Report a Problem"}
                 description="Notice your League, LAN, Wager, or XP not featured or have the incorrect information on uSync - report a problem and we will fix it for you."
                 canonicalPath={"/reportproblem"}
             />

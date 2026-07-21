@@ -14,6 +14,7 @@ export const NemesisLeagues = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Nemesis Leagues - Rocket League"}
                 description="Nemesis Rocket League Leagues. With range based MMR leagues this is the perfect opportunity for North American RL players wanted to compete at the next level."
                 canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues"}
             />

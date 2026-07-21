@@ -5,6 +5,7 @@ export const CECCLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"CECC League - Rocket League"}
                 description="Collegiate Esports Collegiate Conference Rocket League. 4 regional divisions with regional qualifiers and LAN finals. Must be a full time college student."
                 canonicalPath={"/games/RocketLeague/leagues/cecc"}
             />

@@ -5,6 +5,7 @@ export const EGFCLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"EGFC League - Rocket League"}
                 description="EGFC Rocket League college league. Free to enter for D1 varsity esports programs. In-person or online playoffs with live streamed matches."
                 canonicalPath={"/games/RocketLeague/leagues/egfc"}
             />

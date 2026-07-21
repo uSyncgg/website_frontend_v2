@@ -5,6 +5,7 @@ export const EsportsAgentH2H = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Esports Agent - Call of Duty"}
                 description="Esports Agent head to head matches for cod players looking for competitive play. Join now to prove your skill."
                 canonicalPath={"/games/call-of-duty/head-to-head/eagent"}
             />

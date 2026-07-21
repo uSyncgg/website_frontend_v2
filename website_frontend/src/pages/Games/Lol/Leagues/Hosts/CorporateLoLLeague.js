@@ -5,6 +5,7 @@ export const CorporateLoLLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Corporate League - League of Legends"}
                 description="Corporate League of Legends league is the league that employed people have been searching for. Play with co-workers against other companies in League of Legends."
                 canonicalPath={"/games/LoL/leagues/corporate-league"}
             />

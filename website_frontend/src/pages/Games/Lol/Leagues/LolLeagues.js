@@ -4,6 +4,7 @@ export const LolLeagues = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"League of Legends Leagues"}
                 description="League of Legends leagues. Compete for cash prizes. Sign up based on your in-game rank and elevate your league status forever."
                 canonicalPath={"/games/LoL/leagues"}
             />

@@ -6,6 +6,7 @@ export const PostYourEvent = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Post Your Event"}
                 description="Find out how you can promote your esports league, LAN, tournament, or wager site for free with uSync. Sign up today."
                 canonicalPath={"/more/eventhost"}
             />

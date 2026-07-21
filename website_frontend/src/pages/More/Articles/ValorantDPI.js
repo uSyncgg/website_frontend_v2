@@ -5,6 +5,7 @@ export const ValorantDPI = () => {
     return (
         <div className="standardBlankContainer">
             <SeoData
+                title={"Best DPI for VALORANT"}
                 description="Learn the best starting DPI for VALORANT, calculate eDPI, and tune your sensitivity with a simple repeatable test."
                 canonicalPath={"/more/articles/best-dpi-valorant-sensitivity"}
             />

@@ -5,6 +5,7 @@ export const LANATHONUnderTheSun2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"LAN-A-THON Under The Sun 2026 - Convention"}
                 description={"This will be a LAN like no other. Focused on a summer party feel. Play whatever you like, no tournaments just BYOC fun."}
                 canonicalPath={"/lans/lan-a-thon-under-the-sun-2026"}
             />

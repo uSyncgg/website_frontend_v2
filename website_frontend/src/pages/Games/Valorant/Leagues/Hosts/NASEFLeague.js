@@ -5,6 +5,7 @@ export const NASEFLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"NASEF League - Valorant"}
                 description="NASEF Valorant high school league. Free to enter with 5 regional divisions and weekly group stage matches. Annual fall season for USA high school students."
                 canonicalPath={"/games/Valorant/leagues/nasef"}
             />

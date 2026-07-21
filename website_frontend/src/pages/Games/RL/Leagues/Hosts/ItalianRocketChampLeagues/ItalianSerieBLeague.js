@@ -5,6 +5,7 @@ export const ItalianSerieBLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Italian Series B - Rocket League"}
                 description="Italian Rocket League serie B league. Enroll in this free to play RL league and play weekly matches to get into the playoffs."
                 canonicalPath={"/games/RocketLeague/leagues/italian-leagues/serie-b"}
             />

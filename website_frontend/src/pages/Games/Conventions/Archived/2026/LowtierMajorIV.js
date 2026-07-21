@@ -5,6 +5,7 @@ export const LowtierMajorIV = () => {
     return (
         <div className="standardContainer">
             <SeoData 
+                title={"Lowtier Major IV - Convention"}
                 description={"Every player planning to attend this event must receive a ranking before forming a roster. You must join our discord and put your name in the “player-rating” text channel under the general section. "}
                 canonicalPath={"/lans/lowtier-major-iv"}
             />

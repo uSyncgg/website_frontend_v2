@@ -5,6 +5,7 @@ export const TheEsportsCompanyLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"The Esports Company - Rocket League"}
                 description="The Esports Company Rocket League high school league for Pennsylvania schools. 2 competitive divisions with a LAN championship. Live streamed matches."
                 canonicalPath={"/games/RocketLeague/leagues/the-esports-company"}
             />

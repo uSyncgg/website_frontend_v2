@@ -5,6 +5,7 @@ export const ECACEsportsLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"ECAC League - League of Legends"}
                 description="The college league you have been looking for. ECAC League of Legends league for your college team or to find the right college for you."
                 canonicalPath={"/games/LoL/leagues/ecac"}
             />

@@ -5,6 +5,7 @@ export const HaloRecLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Rec League - Halo"}
                 description="Halo Recreational league is the only rec league for everything halo. Play weekly matches against other teams that are live streamed."
                 canonicalPath={"/games/halo/leagues/halo-rec-league"}
             />

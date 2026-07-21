@@ -6,6 +6,7 @@ export const LolLans = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"League of Legends LANs"}
                 description="League of Legends LANs near you. Find a LAN that is closest to you on our world renown LAN map."
                 canonicalPath={"/games/LoL/lans"}
             />

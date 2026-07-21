@@ -5,6 +5,7 @@ export const HowEsportsCanBeBetter = () => {
     return (
         <div className="standardBlankContainer">
             <SeoData
+                title={"How Esports Can Be Better"}
                 description="How can esports be better? Centralizing a hub for all of esports to unify the community one step at a time."
                 canonicalPath={"/more/articles/How-Esports-Can-Be-Better"}
             />

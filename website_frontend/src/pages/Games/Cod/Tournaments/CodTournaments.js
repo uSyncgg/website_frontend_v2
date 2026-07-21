@@ -88,6 +88,7 @@ export const CodTournaments = () => {
     return (
         <div className={`standardContainer ${styles.page}`}>
             <SeoData
+                title={"Call of Duty Tournaments"}
                 description="Find all the live Call of Duty Tournaments for the day posted at uSync.gg/tournaments/call-of-duty-tournaments"
                 canonicalPath={"/games/call-of-duty/tournaments/call-of-duty-tournaments"}
             />

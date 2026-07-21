@@ -5,6 +5,7 @@ export const FiReLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"FiRe League - Counter-Strike"}
                 description="Counter-Strike 2 FiReLEAGUE is a year round 5v5 league. With invitational tournaments and qualifiers to win prizes."
                 canonicalPath={"/games/CS2/leagues/firecup"}
             />

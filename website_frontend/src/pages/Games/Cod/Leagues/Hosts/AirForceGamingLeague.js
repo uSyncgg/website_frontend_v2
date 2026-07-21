@@ -5,6 +5,7 @@ export const AirForceGamingLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Air Force Gaming League - Call of Duty"}
                 description="Air Force Gaming League for Call of Duty players in the military. United States space force and air force players only."
                 canonicalPath={"/games/call-of-duty/leagues/airforce-league"}
             />

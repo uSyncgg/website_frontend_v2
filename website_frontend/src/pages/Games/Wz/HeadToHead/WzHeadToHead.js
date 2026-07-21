@@ -4,6 +4,7 @@ export const WzHeadToHead = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Warzone Head-to-Head"}
                 description="Find Warzone head-to-head match platforms. Compare Checkmate Gaming for competitive Warzone matches and ladders with prizes based on your record."
                 canonicalPath={"/games/warzone/head-to-head"}
             />

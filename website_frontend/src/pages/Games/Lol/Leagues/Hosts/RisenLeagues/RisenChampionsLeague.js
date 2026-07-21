@@ -5,6 +5,7 @@ export const RisenChampionsLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Risen Champions League - League of Legends"}
                 description="Risen Champions League is the most prestigious league from Risen. Compete in this League of Legends league for thousands of dollars."
                 canonicalPath={"/games/LoL/leagues/risen-leagues/champions"}
             />

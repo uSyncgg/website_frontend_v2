@@ -5,6 +5,7 @@ export const EsportsAgentWagers = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Esports Agent - Call of Duty"}
                 description="Live supported cod wagers from Esports Agent. Sign up today and experience the pro league for yourself."
                 canonicalPath={"/games/call-of-duty/wagers/eagent"}
             />

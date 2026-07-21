@@ -5,6 +5,7 @@ export const AscendingBaselinePandemoniumGamesLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Pandemonium Games League - Halo"}
                 description="Pandemonium Games League is a Halo Infinite draft based league hosted by Ascending Baseline. Sign up solo and get matched with teammates in a competitive Halo environment."
                 canonicalPath={"/games/halo/leagues/ascending-baseline/pandemonium-games"}
             />

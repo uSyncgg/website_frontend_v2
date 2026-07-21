@@ -10,6 +10,7 @@ export const RocketSoccarConfederationLeagues = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Rocket Soccar Confederation - Rocket League"}
                 description="Rocket Soccar Confederation - RSC. A free Rocket League league with NA and EU 3v3 divisions across multiple skill tiers. Sign up as a free agent."
                 canonicalPath={"/games/RocketLeague/leagues/rsc-leagues"}
             />

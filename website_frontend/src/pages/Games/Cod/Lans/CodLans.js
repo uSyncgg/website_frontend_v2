@@ -5,6 +5,7 @@ export const CodLans = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Call of Duty LANs"}
                 description="Call of Duty LAN tournaments near you. Find the closest Call of Duty LANs to where you live and work. Every LAN going on near you."
                 canonicalPath={"/games/call-of-duty/lans"}
             />

@@ -5,6 +5,7 @@ export const CmgWagers = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Checkmate Gaming - Warzone"}
                 description="Checkmate Gaming Warzone wagers. A verified platform with 24/7 live support. Large number of daily matches worldwide for Warzone wager players 18 and over."
                 canonicalPath={"/games/warzone/wagers/cmg"}
             />

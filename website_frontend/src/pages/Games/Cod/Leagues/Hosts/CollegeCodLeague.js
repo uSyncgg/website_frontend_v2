@@ -5,6 +5,7 @@ export const CollegeCodLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"CCL - Call of Duty"}
                 description="College Call of Duty League (CCL) with a $40k prize pool. The #1 Call of Duty college league with professional players."
                 canonicalPath={"/games/call-of-duty/leagues/ccl-league"}
             />

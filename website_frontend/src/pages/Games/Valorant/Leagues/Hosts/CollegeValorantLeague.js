@@ -5,6 +5,7 @@ export const CollegeValorantLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"College League - Valorant"}
                 description="College Valorant League presented by Riot Games. A verified collegiate league with scholarship prizes. Free to enter for full time college students in NA."
                 canonicalPath={"/games/Valorant/leagues/riot"}
             />

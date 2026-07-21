@@ -10,6 +10,7 @@ export const CodRecLeagues = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Rec Leagues - Call of Duty"}
                 description={"Recreational Call of Duty league for players looking for a challenge. Play weekly matches based on your skill level."}
                 canonicalPath={"/games/call-of-duty/leagues/cod-rec-leagues"}
             />

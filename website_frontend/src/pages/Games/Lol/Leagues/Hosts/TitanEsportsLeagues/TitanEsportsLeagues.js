@@ -15,6 +15,7 @@ export const TitanEsportsLeagues = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Titan Leagues - League of Legends"}
                 description="Titan League of Legends Leagues. Find a league from a reputable provider that suits not only your rank but your schedule."
                 canonicalPath={"/games/LoL/leagues/titan-leagues"}
             />
