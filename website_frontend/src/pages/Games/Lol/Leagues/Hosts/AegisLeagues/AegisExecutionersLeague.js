@@ -5,6 +5,7 @@ export const AegisExecutionersLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Aegis Executioners League - League of Legends"}
                 description="Aegis Executioners League is for League players who are lower than diamond 4. Can you win the entire league?"
                 canonicalPath={"/games/LoL/leagues/aegis-leagues/executioners"}
             />

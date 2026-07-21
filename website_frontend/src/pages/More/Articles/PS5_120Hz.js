@@ -5,6 +5,7 @@ export const PS5_120Hz = () => {
     return (
         <div className="standardBlankContainer">
             <SeoData
+                title={"How to Enable 120Hz on PS5"}
                 description="Enable 120Hz on PS5 in minutes. Follow the exact console, display, cable, and in-game steps, plus fixes when PS5 stays at 60Hz."
                 canonicalPath={"/more/articles/how-to-enable-120hz-ps5"}
             />

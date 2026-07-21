@@ -5,6 +5,7 @@ export const HaloAgentLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Halo Agent - Halo"}
                 description="Halo Agent is the league for those who love to play ranked Halo and want something more. Compete today."
                 canonicalPath={"/games/halo/leagues/halo-agent"}
             />

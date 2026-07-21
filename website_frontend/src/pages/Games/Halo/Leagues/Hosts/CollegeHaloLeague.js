@@ -5,6 +5,7 @@ export const CollegeHaloLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"College League - Halo"}
                 description="UGC Halo is the #1 collegiate Halo league. Full time college students can compete at the highest level and win cash prizes."
                 canonicalPath={"/games/halo/leagues/ugc-halo"}
             />

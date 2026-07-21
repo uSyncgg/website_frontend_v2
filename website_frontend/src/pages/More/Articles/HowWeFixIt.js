@@ -5,6 +5,7 @@ export const HowWeFixIt = () => {
     return (
         <div className="standardBlankContainer">
             <SeoData
+                title={"How We Fix It"}
                 description="uSync is unifying the entire esports landscape. Find out how you can be apart of this ever growing opportunity."
                 canonicalPath={"/more/articles/How-We-Fix-It"}
             />

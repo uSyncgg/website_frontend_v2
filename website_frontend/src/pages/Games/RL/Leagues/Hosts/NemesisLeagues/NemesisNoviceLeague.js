@@ -5,6 +5,7 @@ export const NemesisNoviceLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Nemesis Novice - Rocket League"}
                 description="Rocket League Novice league is being held every spring by Nemesis. Enroll your teammates today in this action packed 3v3 Rocket League league."
                 canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues/novice"}
             />

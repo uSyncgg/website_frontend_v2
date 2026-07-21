@@ -5,6 +5,7 @@ export const RisenUnstoppableLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Risen Unstoppable League - League of Legends"}
                 description="This Emerald 1 cap League of Legends league is perfect for those looking for competition with a prize pool. Sign up today."
                 canonicalPath={"/games/LoL/leagues/risen-leagues/unstoppable"}
             />

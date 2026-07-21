@@ -4,8 +4,9 @@ export const Conventions = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Conventions"}
                 description="Find esports LAN conventions and in-person gaming events. Browse gaming conventions and multi-game LAN events happening across the country."
-                canonicalPath={"/lans"}
+                canonicalPath={"/other-lans"}
             />
             <div className="lanMapContainer">
                 <LanMap markers={CONVENTION_MARKERS} game="Conventions" />

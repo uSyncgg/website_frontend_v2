@@ -5,6 +5,7 @@ export const UnifiedPremierLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Unified Premier League - Valorant"}
                 description="Unified Premier League Valorant. $1,000 prize pool with no skill cap. Weekly regular season with playoffs for collegiate and high school players in NA."
                 canonicalPath={"/games/Valorant/leagues/unified"}
             />

@@ -5,6 +5,7 @@ export const TitanOlympusLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Titan Olympus League - League of Legends"}
                 description="Titan Esports League Olympus league for League of Legends players with a ranking of Diamond 4. Play every Thursday each week during the season."
                 canonicalPath={"/games/LoL/leagues/titan-leagues/olympus"}
             />

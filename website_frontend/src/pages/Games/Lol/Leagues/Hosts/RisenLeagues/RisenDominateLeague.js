@@ -5,6 +5,7 @@ export const RisenDominateLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Risen Dominate League - League of Legends"}
                 description="Risen Dominate is a League of Legends Diamond 1 cap league. Does your team have what it takes to take the winning trophy?"
                 canonicalPath={"/games/LoL/leagues/risen-leagues/dominate"}
             />

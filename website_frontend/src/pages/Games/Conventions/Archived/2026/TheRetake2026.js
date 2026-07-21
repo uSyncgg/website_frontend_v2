@@ -5,6 +5,7 @@ export const TheRetake2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"The Retake - Convention"}
                 description="Localhost Philly is putting on a Counter Strike 2 Tournament with a $1,000 Prize Pool!"
                 canonicalPath={"/lans/the-retake"}
             />

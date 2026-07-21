@@ -4,6 +4,7 @@ export const LolHeadToHead = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"League of Legends Head-to-Head"}
                 description="League of Legends XP matches and scrims. Find every scrim across the world to ensure you have the highest quality practice."
                 canonicalPath={"/games/LoL/head-to-head"}
             />

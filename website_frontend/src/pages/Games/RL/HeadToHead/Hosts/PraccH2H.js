@@ -5,6 +5,7 @@ export const PraccH2H = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Pracc - Rocket League"}
                 description="Rocket League Pracc is the home of your next Rocket League scrim or XP match. Play head-to-head against other players to improve your team."
                 canonicalPath={"/games/RocketLeague/head-to-head/pracc"}
             />

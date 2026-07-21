@@ -5,6 +5,7 @@ export const EsportsCompanyLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"The Esports Company - Valorant"}
                 description="The Esports Company Valorant high school league for Pennsylvania schools. LAN championship with live streamed matches. School manager must sign up team."
                 canonicalPath={"/games/Valorant/leagues/tec"}
             />

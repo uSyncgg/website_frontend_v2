@@ -5,6 +5,7 @@ export const RVAEsportsChampionship2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"RVA Esports Championship 2026 - Call of Duty"}
                 description={"Welcome to the RVA Esports Championship 2026! The premier competitive gaming experience taking place inside ImmerseCon 2026 at the Richmond Convention Center on July 11th-12th, 2026."}
                 canonicalPath={"/lans/rva-esports-championship-2026"}
             />

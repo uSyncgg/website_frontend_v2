@@ -5,6 +5,7 @@ export const ECACEsportsLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"ECAC League - Call of Duty"}
                 description="Call of Duty league for ECAC members. 8 week long regular season and playoffs to prove your skillset."
                 canonicalPath={"/games/call-of-duty/leagues/ecac"}
             />

@@ -61,9 +61,9 @@ import { PulseUppersLeague } from 'pages/Games/Cod/Leagues/Hosts/PulseXLeagues/P
 import { AirForceGamingLeague as AirForceCodLeague } from 'pages/Games/Cod/Leagues/Hosts/AirForceGamingLeague';
 import { BeerLeague } from 'pages/Games/Cod/Leagues/Hosts/BeerLeague';
 import { CasualXPLeague } from 'pages/Games/Cod/Leagues/Hosts/CasualXPLeague';
-import { CodRecLeagues } from 'pages/Games/Cod/Leagues/Hosts/CollegeRecLeagues/CodRecLeagues';
-import { CodRecPremadeLeague } from 'pages/Games/Cod/Leagues/Hosts/CollegeRecLeagues/CodRecPremadeLeague';
-import { CodRecOpenLeague } from 'pages/Games/Cod/Leagues/Hosts/CollegeRecLeagues/CodRecOpenLeague';
+import { CodRecLeagues } from 'pages/Games/Cod/Leagues/Hosts/CodRecLeagues/CodRecLeagues';
+import { CodRecPremadeLeague } from 'pages/Games/Cod/Leagues/Hosts/CodRecLeagues/CodRecPremadeLeague';
+import { CodRecOpenLeague } from 'pages/Games/Cod/Leagues/Hosts/CodRecLeagues/CodRecOpenLeague';
 import { CollegeCodLeague } from 'pages/Games/Cod/Leagues/Hosts/CollegeCodLeague';
 import { CorporateCodLeague } from 'pages/Games/Cod/Leagues/Hosts/CorporateCodLeague';
 import { ECACEsportsLeague as ECACCodLeague } from 'pages/Games/Cod/Leagues/Hosts/ECACEsportsLeague';

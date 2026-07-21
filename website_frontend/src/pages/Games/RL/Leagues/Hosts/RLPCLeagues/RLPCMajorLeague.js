@@ -5,6 +5,7 @@ export const RLPCMajorLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"RLPC Major League - Rocket League"}
                 description="RLPC Major League is for the best Rocket League players with 1800+ MMR. Three seasons per year with a prize pool based on donations."
                 canonicalPath={"/games/RocketLeague/leagues/rlpc-leagues/major"}
             />

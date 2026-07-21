@@ -5,6 +5,7 @@ export const ShintoChamps2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Shinto Champs - Call of Duty"}
                 description="The Premier Circuit's 2nd annual Champs event hosted at the prestigious Game Arena in downtown Columbus, Ohio. This is the Premier Circuit's biggest event of the year, you don't want to miss it!"
                 canonicalPath={"/lans/shintochamps2026"}
             />

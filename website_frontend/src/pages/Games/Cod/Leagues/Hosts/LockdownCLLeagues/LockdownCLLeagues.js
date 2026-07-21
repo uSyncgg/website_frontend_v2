@@ -12,6 +12,7 @@ export const LockdownCLLeagues = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"LockdownCL - Call of Duty"}
                 description="Fun but competitive Call of Duty league for free agents that are looking for a draft based league with a cash prize and playoffs."
                 canonicalPath={"/games/call-of-duty/leagues/lockdowncl-leagues"}
             />

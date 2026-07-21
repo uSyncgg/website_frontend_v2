@@ -5,6 +5,7 @@ export const AustralianEsportsLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Australian Esports League - Counter-Strike"}
                 description="Australian Esports League (AEL) is the #1 AUS Counter-Strike 2 university league. Compete for large prize pools, while having your matches broadcasted."
                 canonicalPath={"/games/CS2/leagues/ael"}
             />

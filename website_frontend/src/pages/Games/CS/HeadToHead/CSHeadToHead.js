@@ -4,6 +4,7 @@ export const CSHeadToHead = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Counter-Strike Head-to-Head"}
                 description="Counter-Strike 2 XP matches. Find every provider across the globe to choose the best competition for your playstyle."
                 canonicalPath={"/games/CS2/head-to-head"}
             />

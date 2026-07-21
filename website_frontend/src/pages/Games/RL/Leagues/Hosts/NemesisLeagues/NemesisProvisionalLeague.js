@@ -5,6 +5,7 @@ export const NemesisProvisionalLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Nemesis Provisional - Rocket League"}
                 description="Nemesis Provisional League is a Rocket League league with a 835 - 1202 MMR range. Join this spring and showcase your skills."
                 canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues/provisional"}
             />

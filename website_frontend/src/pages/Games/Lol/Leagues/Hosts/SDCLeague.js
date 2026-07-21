@@ -5,6 +5,7 @@ export const SDCLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"SDC League - League of Legends"}
                 description="SDC league is a League of Legends league that is free to play and is community based. Join the community and play for prizes today."
                 canonicalPath={"/games/LoL/leagues/sdc"}
             />

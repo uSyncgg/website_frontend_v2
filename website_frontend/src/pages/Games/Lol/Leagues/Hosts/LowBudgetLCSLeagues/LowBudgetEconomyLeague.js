@@ -5,6 +5,7 @@ export const LowBudgetEconomyLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"LCS Economy League - League of Legends"}
                 description="LCS Economy league is a Gold average League of Legends league. Join with your friends or meet new ones in this action packed league."
                 canonicalPath={"/games/LoL/leagues/low-budget-leagues/economy"}
             />

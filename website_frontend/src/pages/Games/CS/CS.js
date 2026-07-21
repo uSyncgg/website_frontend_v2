@@ -4,6 +4,7 @@ export const CS = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Counter-Strike"}
                 description="Counter-Strike 2 Leagues, LANs, Wagers, Head-To-Head, and Tournaments all in one place. Try the true competitive experience today."
                 canonicalPath={"/games/CS2"}
             />

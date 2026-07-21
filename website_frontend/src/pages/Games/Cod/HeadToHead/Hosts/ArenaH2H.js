@@ -5,6 +5,7 @@ export const ArenaH2H = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"The Arena | 8 Mans - Call of Duty"}
                 description="Join The Arena 8s Lobbies. Play free competitive Call of Duty matches and scrims."
                 canonicalPath={"/games/call-of-duty/head-to-head/arena"}
             />

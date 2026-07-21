@@ -5,6 +5,7 @@ export const PlayflyCollegeLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Playfly League - League of Legends"}
                 description="Playfly League of Legends. The collegiate league with massive prize pools. Compete for thousands of dollars for yourself and your school."
                 canonicalPath={"/games/LoL/leagues/playfly"}
             />

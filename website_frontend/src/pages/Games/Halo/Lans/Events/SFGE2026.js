@@ -5,6 +5,7 @@ export const SFGE2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Southern-Fried Gaming Expo 2026 - Halo"}
                 description="The 13th Annual Southern-Fried Gaming Expo attracts over 8,500 attendees and for 2026 is expanding from 137,000 square feet to over 173,000! The event takes place in both the Renaissance Atlanta Waverly Hotel and the Cobb Convention Center Atlanta."
                 canonicalPath={"/lans/sfge-2026"}
             />

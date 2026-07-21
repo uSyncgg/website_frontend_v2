@@ -5,6 +5,7 @@ export const PlayVSLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"PlayVS League - League of Legends"}
                 description="PlayVS League of Legends league is for high school students in the United States looking to play competitive for their school. Sign up."
                 canonicalPath={"/games/LoL/leagues/playvs"}
             />

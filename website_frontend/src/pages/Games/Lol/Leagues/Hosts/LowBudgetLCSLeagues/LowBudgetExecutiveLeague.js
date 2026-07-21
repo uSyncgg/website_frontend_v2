@@ -5,6 +5,7 @@ export const LowBudgetExecutiveLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"LCS Executive League - League of Legends"}
                 description="The LCS Executive league is the diamond average league. League of Legends leagues have never been so action packed - start today."
                 canonicalPath={"/games/LoL/leagues/low-budget-leagues/executive"}
             />

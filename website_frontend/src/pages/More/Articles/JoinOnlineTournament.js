@@ -5,6 +5,7 @@ export const JoinOnlineTournament = () => {
     return (
         <div className="standardBlankContainer">
             <SeoData
+                title={"How to Join an Online Gaming Tournament"}
                 description="Join your first online gaming tournament with confidence. Find an event, check eligibility, register, prepare, and complete match reporting."
                 canonicalPath={"/more/articles/how-to-join-online-gaming-tournaments"}
             />

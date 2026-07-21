@@ -5,6 +5,7 @@ export const OneVOneMeWagers = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"1v1Me - Warzone"}
                 description="1v1 Me Warzone wager app. 1v1 kill race matches with 0% match fee and staking on tournaments. Available in USA, CA, IE, UK, FR, MX, and DE for players 18+."
                 canonicalPath={"/games/warzone/wagers/1v1me"}
             />

@@ -5,6 +5,7 @@ export const DreamCon2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Dream Con 2026 - Convention"}
                 description="Dream Con Championship Series 2026, $10 entry per title, Maximum of Four titles per attendee, All fighting games are Bo3 until otherwise noted in the rule sets, Sports titles are all Bo1."
                 canonicalPath={"/lans/dreamcon2026"}
             />

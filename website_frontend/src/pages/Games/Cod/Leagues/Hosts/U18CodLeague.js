@@ -5,6 +5,7 @@ export const U18CodLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"U18 League - Call of Duty"}
                 description="Call of Duty league for players under the age of 18. Play like the Call of Duty pros even if you are not 18 years old."
                 canonicalPath={"/games/call-of-duty/leagues/u18-league"}
             />

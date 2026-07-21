@@ -5,6 +5,7 @@ export const UnitedRogueLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"United Rogue - Call of Duty"}
                 description="4v4 Call of Duty league variant draft league. United Rogue hosted event with franchised teams."
                 canonicalPath={"/games/call-of-duty/leagues/united-rogue-league"}
             />

@@ -5,6 +5,7 @@ export const EsportScrimH2H = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Esport Scrim - Counter-Strike"}
                 description="Esports Scrims is a free Counter-Strike 2 scrim finder. Find your most competitive matches in minutes."
                 canonicalPath={"/games/CS2/head-to-head/esport-scrim"}
             />

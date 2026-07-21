@@ -5,6 +5,7 @@ export const CasualXPLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Casual XP League - Call of Duty"}
                 description="Casual XP League (CXP) is a Call of Duty league for those that are looking to try out competitive. Divisions based on rankings and a very active community."
                 canonicalPath={"/games/call-of-duty/leagues/casual-xp-league"}
             />

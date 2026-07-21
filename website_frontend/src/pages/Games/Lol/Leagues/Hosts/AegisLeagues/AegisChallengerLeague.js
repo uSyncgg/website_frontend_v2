@@ -5,6 +5,7 @@ export const AegisChallengerLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Aegis Challenger League - League of Legends"}
                 description="Aegis Challengers League - year round League of Legends league with huge prize pool."
                 canonicalPath={"/games/LoL/leagues/aegis-leagues/challenger"}
             />

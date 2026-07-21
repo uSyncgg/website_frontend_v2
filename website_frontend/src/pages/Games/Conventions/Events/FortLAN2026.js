@@ -5,6 +5,7 @@ export const FortLAN2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"FortLAN 2026 - Convention"}
                 description={"FortLAN returns this Fall for a full weekend of gaming, community, and fun. Join us October 16th-18th at the Grand Wayne Center for a three-day LAN celebration featuring 280 BYOC seats and activities for gamers of all ages."}
                 canonicalPath={"/lans/fortlan-2026"}
             />

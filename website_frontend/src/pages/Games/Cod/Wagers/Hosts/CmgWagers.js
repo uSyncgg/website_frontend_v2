@@ -5,6 +5,7 @@ export const CmgWagers = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Checkmate Gaming - Call of Duty"}
                 description="Checkmate Gaming Call of Duty wagers are ideal for making money playing cod. Join to start earning today."
                 canonicalPath={"/games/call-of-duty/wagers/cmg"}
             />

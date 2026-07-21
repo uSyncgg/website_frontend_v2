@@ -5,6 +5,7 @@ export const GanksterGGH2H = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"GanksterGG - Valorant"}
                 description="Gankster GG Valorant scrim finder. A verified platform for finding competitive Valorant scrims with a large number of users and daily matches worldwide."
                 canonicalPath={"/games/Valorant/head-to-head/gankster"}
             />

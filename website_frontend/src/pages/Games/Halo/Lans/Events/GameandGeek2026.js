@@ -5,6 +5,7 @@ export const GameandGeek2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Game and Geek Expo 2026 - Halo"}
                 description="Game and Geek Expo is a high energy celebration of gaming, nostalgia, cosplay, and fandoms, uniting immersive experiences, a curated marketplace, and iconic pop culture all under one roof."
                 canonicalPath={"/lans/game-and-geek-2026"}
             />

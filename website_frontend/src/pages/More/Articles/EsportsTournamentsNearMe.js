@@ -5,6 +5,7 @@ export const EsportsTournamentsNearMe = () => {
     return (
         <div className="standardBlankContainer">
             <SeoData
+                title={"How to Find Esports Tournaments Near You"}
                 description="Find local esports tournaments, gaming LANs, and amateur competitions near you. Learn where to search and what to check before registering."
                 canonicalPath={"/more/articles/esports-tournaments-near-me"}
             />
