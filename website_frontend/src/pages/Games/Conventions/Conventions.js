@@ -27,20 +27,6 @@ export const Conventions = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/lans/the-retake"}>The Retake</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/lans/the-retake"} 
-                        imgUrl={"https://i.imgur.com/sCivztU.png"} 
-                        alt={"The Retake"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Philadelphia, PA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/the-retake"} />
-                </HostBanner>
-                
-                <div className="hrEvents" />
-
-                <HostBanner>
                     <HostBanner.Title path={"/lans/hellcase-cs2-2026"}>Hellcase CS2 LAN 2026</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/lans/hellcase-cs2-2026"} 
@@ -50,6 +36,46 @@ export const Conventions = () => {
                     />
                     <HostBanner.Region>Lakewood, CO</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/lans/hellcase-cs2-2026"} />
+                </HostBanner>
+
+                <div className="hrEvents" />
+
+                <HostBanner>
+                    <HostBanner.Title path={"/lans/lan-a-thon-under-the-sun-2026"}>LAN-A-THON Under The Sun 2026</HostBanner.Title>
+                    <HostBanner.Image
+                        path={"/lans/lan-a-thon-under-the-sun-2026"}
+                        imgUrl={"https://i.imgur.com/WJxYRyN.png"}
+                        alt={"LAN-A-THON Under The Sun 2026"}
+                        verified={false}
+                    />
+                    <HostBanner.Region>Bonita, CA</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/lans/lan-a-thon-under-the-sun-2026"} />
+                </HostBanner>
+
+                <HostBanner>
+                    <HostBanner.Title path={"/lans/fortlan-2026"}>FortLAN 2026</HostBanner.Title>
+                    <HostBanner.Image
+                        path={"/lans/fortlan-2026"}
+                        imgUrl={"https://i.imgur.com/W1iIUMc.png"}
+                        alt={"FortLAN 2026"}
+                        verified={false}
+                    />
+                    <HostBanner.Region>Fort Wayne, IN</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/lans/fortlan-2026"} />
+                </HostBanner>
+
+                <div className="hrEvents" />
+
+                <HostBanner>
+                    <HostBanner.Title path={"/lans/lan-all-night-2026"}>LAN All Night 2026</HostBanner.Title>
+                    <HostBanner.Image
+                        path={"/lans/lan-all-night-2026"}
+                        imgUrl={"https://i.imgur.com/lKQp2gM.png"}
+                        alt={"LAN All Night 2026"}
+                        verified={false}
+                    />
+                    <HostBanner.Region>Grapevine, TX</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/lans/lan-all-night-2026"} />
                 </HostBanner>
 
                 <div className="hrEvents" />

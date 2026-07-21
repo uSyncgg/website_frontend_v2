@@ -1,5 +1,5 @@
 import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData } from "components";
-import '../../EventInformation.css';
+import '../../../EventInformation.css';
 
 export const TheRetake2026 = () => {
     return (
@@ -13,7 +13,7 @@ export const TheRetake2026 = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date/Place"} infoList={["July 18th, 2026", "Philadelphia, PA"]} /> 
+                    <EventInfoCard title={"Date/Place"} infoList={["July 18th, 2026", "Philadelphia, PA"]} />
                 </div>
 
                 <div>
@@ -23,11 +23,11 @@ export const TheRetake2026 = () => {
                         , "Swiss Stage - All Teams will play a minimum of 3 games"
                         , "All matches are Best of 1 except for the Grand Final which will be a Best of 3"
                         , "The tournament will only feature active duty competitive maps"
-                    ]} /> 
+                    ]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $225"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/the-retake-or-cs2-tournament-powered-by-hellcase-2026-07-18?section=overview"} />}/> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $225"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/the-retake-or-cs2-tournament-powered-by-hellcase-2026-07-18?section=overview"} />}/>
                 </div>
             </div>
 

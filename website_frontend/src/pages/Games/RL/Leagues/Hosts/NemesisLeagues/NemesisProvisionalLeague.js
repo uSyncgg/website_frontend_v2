@@ -1,14 +1,14 @@
 import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
 import '../../../../EventInformation.css';
 
-export const NemesisChallengerLeague = () => {
+export const NemesisProvisionalLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
-                description="Nemesis Challenger League is a Rocket League league with a 1453 - 1609 MMR range. Join this spring and showcase your skills at the highest level."
-                canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues/challenger"}
+                description="Nemesis Provisional League is a Rocket League league with a 835 - 1202 MMR range. Join this spring and showcase your skills."
+                canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues/provisional"}
             />
-            <HeaderImage title={"Nemesis Challenger"} imageClass={"eventPage"} />
+            <HeaderImage title={"Nemesis Provisional"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">
                 <div>
@@ -20,7 +20,7 @@ export const NemesisChallengerLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1535 - 1625 MMR"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/nemesisrl"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "835 - 1202 MMR"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/nemesisrl"} />}/>
                 </div>
             </div>
 
