@@ -21,7 +21,7 @@ export const CWLDefyLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["€30 per Team", "500 LP Individual Cap | 1200 LP Team Cap"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.gg/WTJJmgPgCU"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["€30 per Team", "500 LP Individual Cap | 1200 LP Team Cap"]} footer={<ExternalButton host={"CWL Defy"} blank={true} title={"Join Now"} path={"https://discord.gg/WTJJmgPgCU"} />}/>
                 </div>
             </div>
 

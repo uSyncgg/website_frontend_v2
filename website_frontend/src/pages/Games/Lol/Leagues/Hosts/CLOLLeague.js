@@ -25,7 +25,7 @@ export const CLOLLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry - Must be a FULL TIME College Student"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/clol"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry - Must be a FULL TIME College Student"]} footer={<ExternalButton host={"CLOL"} blank={true} title={"Join Now"} path={"https://discord.com/invite/clol"} />}/>
                 </div>
             </div>
 

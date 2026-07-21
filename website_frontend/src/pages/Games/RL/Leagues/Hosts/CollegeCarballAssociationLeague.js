@@ -25,7 +25,7 @@ export const CollegeCarballAssociationLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - Must be a FULL TIME College Student"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.gg/cca"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - Must be a FULL TIME College Student"]} footer={<ExternalButton host={"College Carball Association"} blank={true} title={"Join Now"} path={"https://discord.gg/cca"} />}/>
                 </div>
             </div>
 

@@ -28,7 +28,7 @@ export const GACSHeatwave = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $250"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/ga-cs-operation-heatwave/details"} />}/> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $250"]} footer={<ExternalButton host={"GA:CS Operation Heatwave"} blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/ga-cs-operation-heatwave/details"} />}/> 
                 </div>
             </div>
 

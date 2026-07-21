@@ -21,7 +21,7 @@ export const UnitedRogueLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Ages 16+"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://rl.unitedrogue.com/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Ages 16+"]} footer={<ExternalButton host={"United Rogue League"} blank={true} title={"Join Now"} path={"https://rl.unitedrogue.com/"} />}/>
                 </div>
             </div>
 

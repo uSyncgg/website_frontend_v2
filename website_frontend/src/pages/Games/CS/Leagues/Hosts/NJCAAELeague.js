@@ -21,7 +21,7 @@ export const NJCAAELeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$2,000/yr per School", "Must be Attending a 2 year College Program"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.njcaaesports.org/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$2,000/yr per School", "Must be Attending a 2 year College Program"]} footer={<ExternalButton host={"NJCAAE League"} blank={true} title={"Join Now"} path={"https://www.njcaaesports.org/"} />}/>
                 </div>
             </div>
 

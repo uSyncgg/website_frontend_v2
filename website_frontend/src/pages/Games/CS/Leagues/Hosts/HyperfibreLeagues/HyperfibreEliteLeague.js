@@ -21,7 +21,7 @@ export const HyperfibreEliteLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://x.com/NZ_Esports_"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"Hyperfibre Elite Division"} blank={true} title={"Join Now"} path={"https://x.com/NZ_Esports_"} />}/>
                 </div>
             </div>
 

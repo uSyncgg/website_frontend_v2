@@ -21,7 +21,7 @@ export const CECCLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry - Must be a FULL TIME College Student"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://collegiatesmg.com/esportsu/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry - Must be a FULL TIME College Student"]} footer={<ExternalButton host={"CECC League"} blank={true} title={"Join Now"} path={"https://collegiatesmg.com/esportsu/"} />}/>
                 </div>
             </div>
 

@@ -21,7 +21,7 @@ export const BlueOtterDraftLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$10 per Person", "Platinum 4 - Diamond 1"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/gVGSxRT"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$10 per Person", "Platinum 4 - Diamond 1"]} footer={<ExternalButton host={"Blue Otter Draft League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/gVGSxRT"} />}/>
                 </div>
             </div>
 

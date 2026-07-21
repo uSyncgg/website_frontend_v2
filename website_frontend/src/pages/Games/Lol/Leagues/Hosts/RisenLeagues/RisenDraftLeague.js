@@ -25,7 +25,7 @@ export const RisenDraftLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Must be Level 100", "Solo Only Sign Ups"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/risenesports"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Must be Level 100", "Solo Only Sign Ups"]} footer={<ExternalButton host={"Risen Draft League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/risenesports"} />}/>
                 </div>
             </div>
 

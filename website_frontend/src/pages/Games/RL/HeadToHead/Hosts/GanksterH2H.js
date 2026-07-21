@@ -17,7 +17,7 @@ export const GanksterH2H = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Free Scrim Matches"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://rocketleague.gankster.gg/login?session=yes"} />}/>
+                    <EventInfoCard title={"Fees"} infoList={["Free Scrim Matches"]} footer={<ExternalButton host={"GanksterGG"} blank={true} title={"Join Now"} path={"https://rocketleague.gankster.gg/login?session=yes"} />}/>
                 </div>
 
                 <div>

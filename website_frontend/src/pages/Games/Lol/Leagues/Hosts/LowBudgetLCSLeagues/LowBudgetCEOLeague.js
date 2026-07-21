@@ -22,7 +22,7 @@ export const LowBudgetCEOLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Masters 375 LP Cap", "15 Points Maximum (Estimate)"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/w4WVB4Z"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Masters 375 LP Cap", "15 Points Maximum (Estimate)"]} footer={<ExternalButton host={"LCS CEO League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/w4WVB4Z"} />}/>
                 </div>
             </div>
 

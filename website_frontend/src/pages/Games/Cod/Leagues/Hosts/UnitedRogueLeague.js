@@ -21,7 +21,7 @@ export const UnitedRogueLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry - Free Agent", "Must Fill out Intent Form"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/zenX8TcSdT"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry - Free Agent", "Must Fill out Intent Form"]} footer={<ExternalButton host={"United Rogue"} blank={true} title={"Join Now"} path={"https://discord.com/invite/zenX8TcSdT"} />}/>
                 </div>
             </div>
 

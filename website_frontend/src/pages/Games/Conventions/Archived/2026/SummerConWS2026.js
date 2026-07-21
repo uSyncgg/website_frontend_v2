@@ -27,7 +27,7 @@ export const SummerConWS2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Friday: $40","Saturday: $70","Sunday: $55","3-Day: $130"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.wasummercon.com/"} />}/> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["Friday: $40","Saturday: $70","Sunday: $55","3-Day: $130"]} footer={<ExternalButton host={"SummerCon 2026"} blank={true} title={"Join Now"} path={"https://www.wasummercon.com/"} />}/> 
                 </div>
             </div>
 

@@ -21,7 +21,7 @@ export const PulseLowersLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$25 per Team"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/pulsexleague"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$25 per Team"]} footer={<ExternalButton host={"Pulse X Lowers Division"} blank={true} title={"Join Now"} path={"https://discord.com/invite/pulsexleague"} />}/>
                 </div>
             </div>
 

@@ -21,7 +21,7 @@ export const CorporateRLLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$150 per Team"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://cea.gg/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$150 per Team"]} footer={<ExternalButton host={"Corporate Rocket League"} blank={true} title={"Join Now"} path={"https://cea.gg/"} />}/>
                 </div>
             </div>
 

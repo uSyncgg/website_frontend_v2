@@ -25,7 +25,7 @@ export const RisenDominateLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$70 per Team", "Masters 100 LP Cap", "1 Masters 200 LP Allowed"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/risenesports"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$70 per Team", "Masters 100 LP Cap", "1 Masters 200 LP Allowed"]} footer={<ExternalButton host={"Risen Dominate League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/risenesports"} />}/>
                 </div>
             </div>
 

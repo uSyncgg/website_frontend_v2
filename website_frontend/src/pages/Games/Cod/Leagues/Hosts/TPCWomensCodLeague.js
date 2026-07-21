@@ -21,7 +21,7 @@ export const TPCWomensCodLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$375 per Team"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://x.com/TPCWomens"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$375 per Team"]} footer={<ExternalButton host={"TPC Womens League"} blank={true} title={"Join Now"} path={"https://x.com/TPCWomens"} />}/>
                 </div>
             </div>
 

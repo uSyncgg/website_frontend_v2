@@ -13,7 +13,7 @@ export const EsportsHubWagers = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["10% Match Fee", "Varying Deposit / Withdrawal Fee"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://theesportshub.com/"} />}/>
+                    <EventInfoCard title={"Fees"} infoList={["10% Match Fee", "Varying Deposit / Withdrawal Fee"]} footer={<ExternalButton host={"The Esports Hub"} blank={true} title={"Join Now"} path={"https://theesportshub.com/"} />}/>
                 </div>
 
                 <div>

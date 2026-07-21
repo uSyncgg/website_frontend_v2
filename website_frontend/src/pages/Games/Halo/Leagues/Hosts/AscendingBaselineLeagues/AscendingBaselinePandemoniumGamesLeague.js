@@ -21,7 +21,7 @@ export const AscendingBaselinePandemoniumGamesLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["AB Subscribers: Free ($7.99/m)", "Non Subscribers: $15", "Solo Sign Ups"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.ascendingbaseline.com/panda"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["AB Subscribers: Free ($7.99/m)", "Non Subscribers: $15", "Solo Sign Ups"]} footer={<ExternalButton host={"Pandemonium Games League"} blank={true} title={"Join Now"} path={"https://www.ascendingbaseline.com/panda"} />}/>
                 </div>
             </div>
 

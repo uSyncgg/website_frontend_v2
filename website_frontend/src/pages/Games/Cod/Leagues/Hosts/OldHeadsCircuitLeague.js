@@ -16,7 +16,7 @@ export const OldHeadsCircuitLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Solo Entry Fee: $20", "Membership Fee: $3.99 per month"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.gg/xPsJpNrAfd"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Solo Entry Fee: $20", "Membership Fee: $3.99 per month"]} footer={<ExternalButton host={"Old Heads Circuit"} blank={true} title={"Join Now"} path={"https://discord.gg/xPsJpNrAfd"} />}/>
                 </div>
             </div>
 

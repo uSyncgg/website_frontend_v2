@@ -13,7 +13,7 @@ export const GamerSaloonWagers = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Match Fee: 10%", "Varying Deposit/Withdrawal Fee"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.gamersaloon.com/tournaments/all"} />}/>
+                    <EventInfoCard title={"Fees"} infoList={["Match Fee: 10%", "Varying Deposit/Withdrawal Fee"]} footer={<ExternalButton host={"GamerSaloon"} blank={true} title={"Join Now"} path={"https://www.gamersaloon.com/tournaments/all"} />}/>
                 </div>
 
                 <div>
