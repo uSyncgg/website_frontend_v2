@@ -5,6 +5,7 @@ export const PlayVSLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"PlayVS League - Rocket League"}
                 description="PlayVS Rocket League high school league. 8 week regular season with 3 week playoffs and multiple regional divisions. For high school students in the USA."
                 canonicalPath={"/games/RocketLeague/leagues/playvs"}
             />

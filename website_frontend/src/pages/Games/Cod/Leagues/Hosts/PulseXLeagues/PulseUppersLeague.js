@@ -5,6 +5,7 @@ export const PulseUppersLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Pulse X Uppers Division - Call of Duty"}
                 description="Pulse X Uppers Division is a Call of Duty league for those that are looking to play in a competitive environment with the best of the best to prove your name."
                 canonicalPath={"/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-uppers"}
             />

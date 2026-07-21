@@ -5,6 +5,7 @@ export const HNLxFANDOM2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"HNL x FANDOM 2026 - Call of Duty"}
                 description={"Enter to play VALORANT, COD, and OW2 at Hawaii's Newest convention 'For the Culture!' Featuring Anime, Collectibles, Cosplay, K-Pop, Gaming and More!"}
                 canonicalPath={"/lans/hnl-x-fandom-2026"}
             />

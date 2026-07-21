@@ -5,6 +5,7 @@ export const GamerSaloonWagers = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"GamerSaloon - Counter-Strike"}
                 description="Counter-Strike 2 1v1 deathmatch wager matches provided by GamerSaloon. Various matches posted daily to compete head to head for cash."
                 canonicalPath={"/games/CS2/wagers/gamersaloon_cs2"}
             />

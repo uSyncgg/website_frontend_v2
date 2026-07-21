@@ -5,6 +5,7 @@ export const NECCLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"NECC League - Rocket League"}
                 description="NECC Rocket League college league. $6,000 prize pool with multiple skill divisions. 6 week regular season with playoffs. Must be a full time college student."
                 canonicalPath={"/games/RocketLeague/leagues/necc"}
             />

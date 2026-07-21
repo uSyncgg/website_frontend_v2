@@ -5,6 +5,7 @@ export const NationalStudentEsportsLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"NSE League - Valorant"}
                 description="National Student Esports Valorant UK university league. £1,000 prize pool with 3 divisions. Women only and open leagues with LAN finals and live streamed matches."
                 canonicalPath={"/games/Valorant/leagues/nse"}
             />

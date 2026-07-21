@@ -4,6 +4,7 @@ export const RLLeagues = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Rocket League Leagues"}
                 description="Every single Rocket League league from across the world. Find what league suits your playstyle whether you are an amateur player, high school student, or a college student."
                 canonicalPath={"/games/RocketLeague/leagues"}
             />

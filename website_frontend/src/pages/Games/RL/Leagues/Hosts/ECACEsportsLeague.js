@@ -5,6 +5,7 @@ export const ECACEsportsLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"ECAC League - Rocket League"}
                 description="ECAC Esports Rocket League. 8 week regular season with playoffs and multiple rank based divisions. Must be a full time college student in the USA."
                 canonicalPath={"/games/RocketLeague/leagues/ecac-esports"}
             />

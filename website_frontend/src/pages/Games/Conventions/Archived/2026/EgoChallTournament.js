@@ -5,6 +5,7 @@ export const EgoChallTournament = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"EgoChall Tournament - Convention"}
                 description="Join us on June 13th for a high-stakes Call of Duty competition! We are hosting a competitive 2v2 LAN S&D tournament with a guaranteed prize pool of $300. If more than 15 teams enter, the higher the prize pool climbs!"
                 canonicalPath={"/lans/egochall-tournament"}
             />

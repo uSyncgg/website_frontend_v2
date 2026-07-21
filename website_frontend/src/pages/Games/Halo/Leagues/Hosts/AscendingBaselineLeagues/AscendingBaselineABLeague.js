@@ -5,6 +5,7 @@ export const AscendingBaselineABLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"AB League - Halo"}
                 description="AB League is the premier league of Ascending Baseline for Halo and Halo Infinite. Sign up for cash prizes and a highly competitive environment."
                 canonicalPath={"/games/halo/leagues/ascending-baseline/ab"}
             />

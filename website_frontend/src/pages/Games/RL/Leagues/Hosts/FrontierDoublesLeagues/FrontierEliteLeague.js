@@ -5,6 +5,7 @@ export const FrontierEliteLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Frontier Elite League - Rocket League"}
                 description="Frontier Double Rocket League league. 1600 - 1799 MMR. Sign up for this 2v2 North American league today on uSync."
                 canonicalPath={"/games/RocketLeague/leagues/frontier-doubles-leagues/elite"}
             />

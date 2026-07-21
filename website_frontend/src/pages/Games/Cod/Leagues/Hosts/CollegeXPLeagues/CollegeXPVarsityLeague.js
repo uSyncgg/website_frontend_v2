@@ -5,6 +5,7 @@ export const CollegeXPVarsityLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"CXP Varsity - Call of Duty"}
                 description="Scholarship Call of Duty players looking to make money. Pre season tournaments for seeding on a national scale."
                 canonicalPath={"/games/call-of-duty/leagues/cxp-leagues/cxp-varsity"}
             />

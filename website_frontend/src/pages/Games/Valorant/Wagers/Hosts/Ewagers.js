@@ -5,6 +5,7 @@ export const Ewagers = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Ewagers - Valorant"}
                 description="Ewagers Valorant wager platform. Set your own wager odds and amounts with 5% wager fee. Available worldwide for Valorant players 18 and over."
                 canonicalPath={"/games/Valorant/wagers/ewagers"}
             />

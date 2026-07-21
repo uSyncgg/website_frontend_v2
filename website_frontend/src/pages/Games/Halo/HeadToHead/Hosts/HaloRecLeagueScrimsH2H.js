@@ -5,6 +5,7 @@ export const HaloRecLeagueScrimsH2H = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Rec League Scrims - Halo"}
                 description="Halo Recreational XP matches. Free to play matches against other Halo rec teams to practice with your teammates."
                 canonicalPath={"/games/halo/head-to-head/rec-xp"}
             />

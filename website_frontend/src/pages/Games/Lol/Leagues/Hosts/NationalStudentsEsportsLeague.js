@@ -5,6 +5,7 @@ export const NationalStudentEsportsLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"NSE League - League of Legends"}
                 description="United Kingdom's university league - NSE. This league has an open division and a women's division, suiting whatever your League of Legends style is."
                 canonicalPath={"/games/LoL/leagues/nse"}
             />

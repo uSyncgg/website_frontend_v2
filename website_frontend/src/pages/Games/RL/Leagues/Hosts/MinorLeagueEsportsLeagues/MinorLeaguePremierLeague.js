@@ -5,6 +5,7 @@ export const MinorLeaguePremierLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"MLE Premier - Rocket League"}
                 description="Free entry Rocket League league with a 1651 - 1900 MMR range. Premier league by Minor League Esports is perfect for you."
                 canonicalPath={"/games/RocketLeague/leagues/mle-leagues/premier"}
             />

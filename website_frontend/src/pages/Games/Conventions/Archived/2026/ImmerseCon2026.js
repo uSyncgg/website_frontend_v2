@@ -5,6 +5,7 @@ export const ImmerseCon2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"ImmerseCon 2026 - Convention"}
                 description="The ImmerseCon Team presents an exciting 2-day STEM and gaming extravaganza with educators, gamers, artists, indie game devs, dungeon masters and more. The event will feature a STEM section, TableTop gaming, Arcade, The RVA Esports Championship, and much more for ALL to Enjoy!!! Don't miss this immersive experience!"
                 canonicalPath={"/lans/immersecon-2026"}
             />

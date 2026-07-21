@@ -5,6 +5,7 @@ export const CmgWagers = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Checkmate Gaming - Halo"}
                 description="Checkmate Gaming Halo Infinite wagers. Play Halo for cash against other players and climb the ranked ladder."
                 canonicalPath={"/games/halo/wagers/cmg"}
             />

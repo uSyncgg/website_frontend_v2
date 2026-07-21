@@ -5,6 +5,7 @@ export const MetaShiftDraftLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"MetaShift Draft League - League of Legends"}
                 description="MetaShift Draft league is a fast paced action packed League of Legends League. With a lower entry fee this is perfect for amateurs."
                 canonicalPath={"/games/LoL/leagues/meta-shift-leagues/draft"}
             />

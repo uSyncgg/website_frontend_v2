@@ -5,6 +5,7 @@ export const EGFHLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"EGFH League - Rocket League"}
                 description="EGFH high school Rocket League. Two 8 week seasonal splits with regional and national championships. National championship held on LAN for high school students."
                 canonicalPath={"/games/RocketLeague/leagues/egfh"}
             />

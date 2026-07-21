@@ -5,6 +5,7 @@ export const CorporateCS2League = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Corporate League - Counter-Strike"}
                 description="Corporate CS2 league is THE corporate America league. Play with your co-workers against other companies in the United States."
                 canonicalPath={"/games/CS2/leagues/corporate"}
             />

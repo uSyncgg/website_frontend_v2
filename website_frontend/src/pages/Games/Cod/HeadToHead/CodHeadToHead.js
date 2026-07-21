@@ -4,6 +4,7 @@ export const CodHeadToHead = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Call of Duty Head-to-Head"}
                 description="Call of Duty XP and ladder matches. Free competitive cod esports matches to improve your skill."
                 canonicalPath={"/games/call-of-duty/head-to-head"}
             />

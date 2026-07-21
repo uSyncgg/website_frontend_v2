@@ -5,6 +5,7 @@ export const BlueOtterPlatinumLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Blue Otter Platinum League - League of Legends"}
                 description="Blue Otter Platinum is for LoL platinum players that plat 1 99LP or lower. Do you have what it takes?"
                 canonicalPath={"/games/LoL/leagues/blue-otter-leagues/plat"}
             />

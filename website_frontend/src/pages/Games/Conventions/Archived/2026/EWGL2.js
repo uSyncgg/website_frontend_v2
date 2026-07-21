@@ -5,6 +5,7 @@ export const EWGL2 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"EWGL 2 - Convention"}
                 description="EWGL 2, Cary, North Carolina, June 6th & 7th, $5,000 +/- Prize Pool + Championship Rings + MVP Ring."
                 canonicalPath={"/lans/ewgl2"}
             />

@@ -5,6 +5,7 @@ export const ZonedOutGamingLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Zoned Out League - Call of Duty"}
                 description="Zoned Out Call of Duty league. Multiple different skill divisions hosted during nearly every season of the year."
                 canonicalPath={"/games/call-of-duty/leagues/zoned-out"}
             />

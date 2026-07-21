@@ -5,6 +5,7 @@ export const LANAllNight2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"LAN All Night 2026 - Convention"}
                 description={"The LAN All Night Gaming Festival is transforming into a fantastical realm where modern technology and ancient magic collide. Whether you are a spellcasting streamer, a rogue speedrunner, or a paladin of the keyboard and mouse, there is loot and glory waiting for you."}
                 canonicalPath={"/lans/lan-all-night-2026"}
             />

@@ -5,6 +5,7 @@ export const NECCLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"NECC League - Counter-Strike"}
                 description="NECC is the Counter-Strike 2 league for academically eligible college students. Play live streamed matches to viewers and prove yourself."
                 canonicalPath={"/games/CS2/leagues/necc"}
             />

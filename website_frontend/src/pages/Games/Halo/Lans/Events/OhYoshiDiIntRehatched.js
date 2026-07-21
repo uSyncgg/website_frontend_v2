@@ -5,6 +5,7 @@ export const OhYoshiDiIntRehatched = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Oh Yoshi Di-int Rehatched - Halo"}
                 description={"A CENTRAL VALLEY REGIONAL EVENT FOR SMASH, FIGHTING GAMES, AND FOR THE FIRST TIME, HALO 3"}
                 canonicalPath={"/lans/oh-yoshi-di-int-rehatched"}
             />

@@ -5,6 +5,7 @@ export const NJCAAELeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"NJCAAE League - Valorant"}
                 description="NJCAAE Valorant league for 2 year college students. 3 skill tiers with 9 week round robin regular season, 2 qualifier tournaments, and single elimination playoffs."
                 canonicalPath={"/games/Valorant/leagues/njcaae"}
             />

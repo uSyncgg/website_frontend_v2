@@ -10,6 +10,7 @@ export const PlayflyCollegeLeagues = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Playfly Leagues - Valorant"}
                 description="Playfly College Valorant leagues. Two divisions for college students - Varsity for Platinum and above and Open League for Gold and below. NA competition."
                 canonicalPath={"/games/Valorant/leagues/playfly-leagues"}
             />

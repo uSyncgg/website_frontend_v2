@@ -5,6 +5,7 @@ export const MetaShiftCyanideLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"MetaShift Cyanide League - League of Legends"}
                 description="MetaShift Cyanide league is a tier 4 league from the provider. This League of Legends league has a large prize pool for the winner."
                 canonicalPath={"/games/LoL/leagues/meta-shift-leagues/cyanide"}
             />

@@ -7,6 +7,7 @@ export const INSERTFILENAME = () => {
             <SeoData
                 description="INPUT DESCRIPTION HERE"
                 canonicalPath={"/lans/INSERT PATH HERE"}
+                title={"EVENT NAME HERE - Convention"}
             />
 
             <HeaderImage title={"INSERT TITLE HERE"} imageClass={"eventPage"} />

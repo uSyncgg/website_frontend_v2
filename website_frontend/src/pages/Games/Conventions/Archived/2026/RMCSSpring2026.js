@@ -5,6 +5,7 @@ export const RMCSSpring2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"RMCS Spring 2026 - Convention"}
                 description={"Localhost Denver is putting on the Rocky Mountain Collegiate Showcase - Spring '26 Tournament."}
                 canonicalPath={"/lans/rmcs-spring-2026"}
             />

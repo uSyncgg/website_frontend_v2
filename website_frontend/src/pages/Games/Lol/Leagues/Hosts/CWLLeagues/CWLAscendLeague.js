@@ -5,6 +5,7 @@ export const CWLAscendLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"CWL Ascend - League of Legends"}
                 description="Cobalt Winds Ascend League of Legends league. 750 LP Individual cap with NO team cap. This league is for the best of the best."
                 canonicalPath={"/games/LoL/leagues/cobalt-winds-leagues/cwl-ascend"}
             />

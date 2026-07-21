@@ -5,6 +5,7 @@ export const EsportScrimH2H = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Esport Scrim - League of Legends"}
                 description="Play scrim matches for League of Legends through Esport Scrim. NA, EUW, EUNE XP matches."
                 canonicalPath={"/games/LoL/head-to-head/esport-scrim"}
             />

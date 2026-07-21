@@ -5,6 +5,7 @@ export const NemesisProspectLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Nemesis Prospect - Rocket League"}
                 description="Looking for a free to enter Rocket League league - look no further. Prospect league is a 1270 - 1452 MMR range based league that is entirely free."
                 canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues/prospect"}
             />

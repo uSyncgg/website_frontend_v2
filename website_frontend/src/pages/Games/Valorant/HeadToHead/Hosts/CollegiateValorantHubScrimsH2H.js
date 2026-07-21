@@ -5,6 +5,7 @@ export const CollegiateValorantHubScrimsH2H = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Collegiate Hub Scrims - Valorant"}
                 description="Collegiate Valorant Esports Hub scrim finder for USA college teams. Free scrim finder to manually schedule Valorant college matches and practice sessions."
                 canonicalPath={"/games/Valorant/head-to-head/college-hub"}
             />

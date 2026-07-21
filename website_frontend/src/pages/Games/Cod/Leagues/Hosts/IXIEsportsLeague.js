@@ -5,6 +5,7 @@ export const IXIEsportsLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"IXI Esports - Call of Duty"}
                 description="IXI Esports free tournaments and leagues for COD players. Once a year season in the spring for $100 prize pool."
                 canonicalPath={"/games/call-of-duty/leagues/ixi-esports"}
             />

@@ -5,6 +5,7 @@ export const Ewagers = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Ewagers - Rocket League"}
                 description="Ewagers Rocket League wager platform. Set your own wager odds and amounts with 5% wager fee. Available worldwide for Rocket League players 18 and over."
                 canonicalPath={"/games/RocketLeague/wagers/ewagers"}
             />

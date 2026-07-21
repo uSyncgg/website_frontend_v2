@@ -5,6 +5,7 @@ export const TitanVanquisherLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Titan Vanquisher League - League of Legends"}
                 description="Titan Vanquisher League is a League of Legends league with a M100 cap. Do you have what it takes to win the entire league?"
                 canonicalPath={"/games/LoL/leagues/titan-leagues/vanquisher"}
             />

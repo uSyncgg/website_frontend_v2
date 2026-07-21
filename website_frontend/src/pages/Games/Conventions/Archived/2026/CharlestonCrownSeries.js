@@ -5,6 +5,7 @@ export const CharlestonCrownSeries = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Charleston Crown Series - Convention"}
                 description="The most reputable LAN host is back hosting a Call of Duty LAN event - Charleston Crown Series. Compete against teams in-person for $3k in prizing."
                 canonicalPath={"/lans/charleston-crown-series"}
             />

@@ -5,6 +5,7 @@ export const Volan2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Volan 2026 - Convention"}
                 description={"The annual Esports Tournament hosted by the student run Esports Club at the University of Tennessee. The event is focused on providing an in-person LAN experience to college esports teams and clubs in the Southeast."}
                 canonicalPath={"/lans/volan-2026"}
             />

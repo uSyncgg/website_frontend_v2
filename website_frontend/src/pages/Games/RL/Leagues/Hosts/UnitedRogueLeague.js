@@ -5,6 +5,7 @@ export const UnitedRogueLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"United Rogue League - Rocket League"}
                 description="United Rogue Rocket League. Free to enter for ages 16+. 32 franchises across a 5 league system with enforced salary caps and live streamed matches."
                 canonicalPath={"/games/RocketLeague/leagues/united-rogue"}
             />

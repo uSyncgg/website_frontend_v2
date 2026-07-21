@@ -5,6 +5,7 @@ export const PraccH2H = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Pracc - Counter-Strike"}
                 description="Pracc is the Counter-Strike 2 scrim finder for high level competitors. Available worldwide and is based on your skill level."
                 canonicalPath={"/games/CS2/head-to-head/pracc"}
             />

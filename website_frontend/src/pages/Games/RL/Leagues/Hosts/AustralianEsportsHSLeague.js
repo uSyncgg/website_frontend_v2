@@ -5,6 +5,7 @@ export const AustralianEsportsHSLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Australian Esports League High School - Rocket League"}
                 description="Australian Esports League high school Rocket League. Four terms per year for students enrolled at an Australian high school. 3v3 AUS competition."
                 canonicalPath={"/games/RocketLeague/leagues/australian-esports-league-hs"}
             />

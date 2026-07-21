@@ -5,6 +5,7 @@ export const CmgH2H = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Checkmate Gaming - Call of Duty"}
                 description="Play Call of Duty XP matches and get ranked. Free competitive SND esports ladder matches."
                 canonicalPath={"/games/call-of-duty/head-to-head/cmg"}
             />

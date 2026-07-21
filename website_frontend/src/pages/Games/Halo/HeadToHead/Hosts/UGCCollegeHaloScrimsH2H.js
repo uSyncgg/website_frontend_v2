@@ -5,6 +5,7 @@ export const UGCCollegeHaloScrimsH2H = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"UGC College Scrims - Halo"}
                 description="UGC Halo scrim finder for collegiate teams looking to play against other colleges. Join today and play."
                 canonicalPath={"/games/halo/head-to-head/ugc-scrim"}
             />

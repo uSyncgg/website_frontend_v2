@@ -5,6 +5,7 @@ export const MetaShiftEmeraldLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"MetaShift Emerald League - League of Legends"}
                 description="Emerald league is a LoL league hosted by MetaShift. Grab your teammates and get read to compete for cash prizes."
                 canonicalPath={"/games/LoL/leagues/meta-shift-leagues/emerald"}
             />

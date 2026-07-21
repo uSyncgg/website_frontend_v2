@@ -5,6 +5,7 @@ export const AustralianEsportsLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Australian Esports League University - Rocket League"}
                 description="Australian Esports League university Rocket League. $3,500 prize pool with open and elite series divisions. Must be enrolled at an Australian university."
                 canonicalPath={"/games/RocketLeague/leagues/australian-esports-league"}
             />

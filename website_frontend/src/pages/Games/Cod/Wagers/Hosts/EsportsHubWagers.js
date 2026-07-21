@@ -5,6 +5,7 @@ export const EsportsHubWagers = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"The Esports Hub - Call of Duty"}
                 description="Throwback Call of Duty wagers for old titles like MWR, Bo3, Bo4, Cold War, and more. Play classic cod for money."
                 canonicalPath={"/games/call-of-duty/wagers/the-esports-hub"}
             />

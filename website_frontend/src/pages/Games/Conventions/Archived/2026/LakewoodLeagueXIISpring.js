@@ -5,6 +5,7 @@ export const LakewoodLeagueXIISpring = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Lakewood League XII - Spring - Convention"}
                 description={"Play League of Legends LAN tournament near you in Lakewood, CO. 5v5 format with nearly a THOUSAND dollars in prizing for grabs."}
                 canonicalPath={"/lans/lakewood-league-xii-spring"}
             />

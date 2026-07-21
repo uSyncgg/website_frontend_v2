@@ -5,6 +5,7 @@ export const NemesisTitanLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Nemesis Titan - Rocket League"}
                 description="Titan league is for Rocket League players with over 1780+ MMR. The top of the line league by Nemesis is for Rocket League players looking to go pro."
                 canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues/titan"}
             />

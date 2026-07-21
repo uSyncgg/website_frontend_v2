@@ -5,6 +5,7 @@ export const EgoCODLAN4v4 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Ego LAN 4v4 - Call of Duty"}
                 description={"$1,000 prize pool call of duty LAN tournament and event near chapel hill, NC. Grab your challengers team and compete for a chance at a cash prize!"}
                 canonicalPath={"/lans/ego-cod-lan-4v4"}
             />

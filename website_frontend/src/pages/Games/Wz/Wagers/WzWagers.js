@@ -4,6 +4,7 @@ export const WzWagers = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Warzone Wagers"}
                 description="Find the best Warzone wager platforms. Compare Checkmate Gaming, 1v1 Me, Gamer Saloon, and Ewagers to wager on your Call of Duty Warzone skills."
                 canonicalPath={"/games/warzone/wagers"}
             />

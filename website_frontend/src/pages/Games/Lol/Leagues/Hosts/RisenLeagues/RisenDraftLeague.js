@@ -5,6 +5,7 @@ export const RisenDraftLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Risen Draft League - League of Legends"}
                 description="Risen Draft League is a free entry League of Legends league for new players who have hit level 100. This is your chance to improve your game early on."
                 canonicalPath={"/games/LoL/leagues/risen-leagues/draft"}
             />

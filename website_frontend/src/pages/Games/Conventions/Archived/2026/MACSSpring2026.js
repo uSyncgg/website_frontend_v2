@@ -1,9 +1,14 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData } from "components";
 import '../../../EventInformation.css';
 
 export const MACSSpring2026 = () => {
     return (
         <div className="standardContainer">
+            <SeoData 
+                title={"MACS Spring 2026 Convention"}
+                description={"Every player planning to attend this event must receive a ranking before forming a roster. You must join our discord and put your name in the “player-rating” text channel under the general section. "}
+                canonicalPath={"/lans/macs-spring-2026"}
+            />
             <HeaderImage title={"MACS Spring 2026"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">

@@ -5,6 +5,7 @@ export const CorporateValorantLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Corporate League - Valorant"}
                 description="Corporate Valorant League. Sign up your company for 5v5 NA Valorant competition. $2,000 donated to charity with 8 week season and playoffs each Saturday."
                 canonicalPath={"/games/Valorant/leagues/corporate"}
             />

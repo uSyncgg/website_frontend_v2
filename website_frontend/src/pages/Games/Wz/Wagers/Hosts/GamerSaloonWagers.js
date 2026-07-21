@@ -5,6 +5,7 @@ export const GamerSaloonWagers = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"GamerSaloon - Warzone"}
                 description="Gamer Saloon Warzone wagers. Console only 1v1 kill race matches with set buy-in amounts. 10% match fee for Warzone wager matches worldwide for 18+ players."
                 canonicalPath={"/games/warzone/wagers/gamersaloon"}
             />

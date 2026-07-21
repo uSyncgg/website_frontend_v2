@@ -13,6 +13,7 @@ export const FrontierDoublesLeagues = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Frontier Doubles Leagues - Rocket League"}
                 description="Frontier Double Rocket League leagues. 4 different leagues to choose from based on your MMR. Sign up with your duo today."
                 canonicalPath={"/games/RocketLeague/leagues/frontier-doubles-leagues"}
             />
