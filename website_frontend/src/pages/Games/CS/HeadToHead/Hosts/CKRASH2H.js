@@ -5,6 +5,7 @@ export const CKRASH2H = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"CKRAS - Counter-Strike"}
                 description="Counter-Strike 2 CKRAS server hosting for scrims. Host your server to start scrimming matches to practice for competitions."
                 canonicalPath={"/games/CS2/head-to-head/ckras"}
             />
@@ -12,7 +13,7 @@ export const CKRASH2H = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Voice Server: 1.50€/month", "EPS Entry: 14.99€/month", "EPS Extreme Server: 20.99€/month", "EPS Extreme Plus: 59.99€/month"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.ckras.com/en"} />}/>
+                    <EventInfoCard title={"Fees"} infoList={["Voice Server: 1.50€/month", "EPS Entry: 14.99€/month", "EPS Extreme Server: 20.99€/month", "EPS Extreme Plus: 59.99€/month"]} footer={<ExternalButton host={"CKRAS"} blank={true} title={"Join Now"} path={"https://www.ckras.com/en"} />}/>
                 </div>
 
                 <div>

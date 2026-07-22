@@ -5,6 +5,7 @@ export const RisenRampageLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Risen Rampage League - League of Legends"}
                 description="Rampage League - by Risen. Emerald 4 cap League of Legends league with live streamed matches in North America."
                 canonicalPath={"/games/LoL/leagues/risen-leagues/rampage"}
             />
@@ -24,7 +25,7 @@ export const RisenRampageLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$10 per Team", "Emerald 4 Cap", "1 Emerald 3 - Emerald 1 99 LP Allowed per Team"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/risenesports"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$10 per Team", "Emerald 4 Cap", "1 Emerald 3 - Emerald 1 99 LP Allowed per Team"]} footer={<ExternalButton host={"Risen Rampage League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/risenesports"} />}/>
                 </div>
             </div>
 

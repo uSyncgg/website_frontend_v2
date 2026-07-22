@@ -4,6 +4,7 @@ export const WzLeagues = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Warzone Leagues"}
                 description="Find Warzone leagues. Browse competitive Call of Duty Warzone league opportunities for players looking to compete in organized team play."
                 canonicalPath={"/games/warzone/leagues"}
             />

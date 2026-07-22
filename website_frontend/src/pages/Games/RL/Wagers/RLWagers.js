@@ -4,6 +4,7 @@ export const RLWagers = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Rocket League Wagers"}
                 description="Find the best Rocket League wager sites. Compare platforms like Checkmate Gaming, Gamer Saloon, and Ewagers to wager on your Rocket League skills."
                 canonicalPath={"/games/RocketLeague/wagers"}
             />

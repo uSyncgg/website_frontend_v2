@@ -5,6 +5,7 @@ export const MinorLeagueMasterLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"MLE Master - Rocket League"}
                 description="Rocket League Master league presented by MLE. All regions invited in this 1451 - 1650 MMR rank based league. Compete in those with similar skills."
                 canonicalPath={"/games/RocketLeague/leagues/mle-leagues/master"}
             />
@@ -20,7 +21,7 @@ export const MinorLeagueMasterLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1451 - 1650 MMR"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://mlesports.gg/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1451 - 1650 MMR"]} footer={<ExternalButton host={"MLE Master"} blank={true} title={"Join Now"} path={"https://mlesports.gg/"} />}/>
                 </div>
             </div>
 

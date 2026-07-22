@@ -5,6 +5,7 @@ export const CorporateRLLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Corporate League - Rocket League"}
                 description="Corporate Rocket League league. Sign up your company team for 3v3 North American competition. 4 skill divisions with $2,000 going to charity."
                 canonicalPath={"/games/RocketLeague/leagues/corporate-rl"}
             />
@@ -20,7 +21,7 @@ export const CorporateRLLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$150 per Team"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://cea.gg/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$150 per Team"]} footer={<ExternalButton host={"Corporate Rocket League"} blank={true} title={"Join Now"} path={"https://cea.gg/"} />}/>
                 </div>
             </div>
 

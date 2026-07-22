@@ -5,6 +5,7 @@ export const TitanVanquisherLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Titan Vanquisher League - League of Legends"}
                 description="Titan Vanquisher League is a League of Legends league with a M100 cap. Do you have what it takes to win the entire league?"
                 canonicalPath={"/games/LoL/leagues/titan-leagues/vanquisher"}
             />
@@ -24,7 +25,7 @@ export const TitanVanquisherLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$100 per Team", "$50 Forfeit Deposit", "Masters 100 LP Cap"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://lol.titanesports.org/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$100 per Team", "$50 Forfeit Deposit", "Masters 100 LP Cap"]} footer={<ExternalButton host={"Titan Vanquisher League"} blank={true} title={"Join Now"} path={"https://lol.titanesports.org/"} />}/>
                 </div>
             </div>
 

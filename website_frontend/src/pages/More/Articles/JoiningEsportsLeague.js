@@ -5,6 +5,7 @@ export const JoiningEsportsLeague = () => {
     return (
         <div className="standardBlankContainer">
             <SeoData
+                title={"How To Join An Esports League"}
                 description="Learn how to join an esports league, where to find them, and what to do once you're in one. Find your next esports league today."
                 canonicalPath={"/more/articles/How-to-Join-an-Esports-League"}
             />

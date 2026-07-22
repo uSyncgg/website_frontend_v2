@@ -5,6 +5,7 @@ export const PlayVSLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"PlayVS League - Rocket League"}
                 description="PlayVS Rocket League high school league. 8 week regular season with 3 week playoffs and multiple regional divisions. For high school students in the USA."
                 canonicalPath={"/games/RocketLeague/leagues/playvs"}
             />
@@ -20,7 +21,7 @@ export const PlayVSLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Contact for a Quote - Must be a High School Student"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.playvs.com/rocket-league"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Contact for a Quote - Must be a High School Student"]} footer={<ExternalButton host={"PlayVS League"} blank={true} title={"Join Now"} path={"https://www.playvs.com/rocket-league"} />}/>
                 </div>
             </div>
 

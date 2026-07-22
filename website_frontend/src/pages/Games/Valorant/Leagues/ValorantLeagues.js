@@ -4,6 +4,7 @@ export const ValorantLeagues = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Valorant Leagues"}
                 description="Find Valorant leagues for all skill levels. Browse corporate, collegiate, and high school Valorant leagues including NECC, CECC, College Valorant League, and more."
                 canonicalPath={"/games/Valorant/leagues"}
             />

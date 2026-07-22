@@ -5,6 +5,7 @@ export const FaceitH2H = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Faceit - Counter-Strike"}
                 description="Compete in the #1 place for free Counter-Strike 2 match ladders - FACEIT. CLimb the ladder and earn rewards / prizes."
                 canonicalPath={"/games/CS2/head-to-head/faceit"}
             />
@@ -16,7 +17,7 @@ export const FaceitH2H = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Free Match Finder"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.faceit.com/en/game/cs2"} />}/>
+                    <EventInfoCard title={"Fees"} infoList={["Free Match Finder"]} footer={<ExternalButton host={"Faceit"} blank={true} title={"Join Now"} path={"https://www.faceit.com/en/game/cs2"} />}/>
                 </div>
 
                 <div>

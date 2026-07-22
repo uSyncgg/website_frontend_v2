@@ -5,6 +5,7 @@ export const CWLRiseLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"CWL Rise - League of Legends"}
                 description="Cobalt Winds (CWL) 100 LP player cap | 200 LP team cap | Up to 2 Master players per team League of Legends league. Do you have what it takes to win the cash prize?"
                 canonicalPath={"/games/LoL/leagues/cobalt-winds-leagues/cwl-rise"}
             />
@@ -20,7 +21,7 @@ export const CWLRiseLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["€25 per Team", "100 LP Individual Cap | 200 LP Team Cap | Up to 2 Masters players per Team"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.gg/WTJJmgPgCU"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["€25 per Team", "100 LP Individual Cap | 200 LP Team Cap | Up to 2 Masters players per Team"]} footer={<ExternalButton host={"CWL Rise"} blank={true} title={"Join Now"} path={"https://discord.gg/WTJJmgPgCU"} />}/>
                 </div>
             </div>
 

@@ -5,6 +5,7 @@ export const Volan2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Volan 2026 - Convention"}
                 description={"The annual Esports Tournament hosted by the student run Esports Club at the University of Tennessee. The event is focused on providing an in-person LAN experience to college esports teams and clubs in the Southeast."}
                 canonicalPath={"/lans/volan-2026"}
             />
@@ -21,7 +22,7 @@ export const Volan2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["League of Legends: $20"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/volan-2026/details"} />}/> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["League of Legends: $20"]} footer={<ExternalButton host={"Volan 2026"} blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/volan-2026/details"} />}/> 
                 </div>
             </div>
 

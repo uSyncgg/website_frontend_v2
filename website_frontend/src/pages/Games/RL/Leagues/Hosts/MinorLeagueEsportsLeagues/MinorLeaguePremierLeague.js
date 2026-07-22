@@ -5,6 +5,7 @@ export const MinorLeaguePremierLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"MLE Premier - Rocket League"}
                 description="Free entry Rocket League league with a 1651 - 1900 MMR range. Premier league by Minor League Esports is perfect for you."
                 canonicalPath={"/games/RocketLeague/leagues/mle-leagues/premier"}
             />
@@ -20,7 +21,7 @@ export const MinorLeaguePremierLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1651 - 1900 MMR"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://mlesports.gg/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1651 - 1900 MMR"]} footer={<ExternalButton host={"MLE Premier"} blank={true} title={"Join Now"} path={"https://mlesports.gg/"} />}/>
                 </div>
             </div>
 

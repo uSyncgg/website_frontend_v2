@@ -5,6 +5,7 @@ export const AegisVanguardLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Aegis Vanguard League - League of Legends"}
                 description="Aegis Protectors league is an entry level League of Legends league that has a cash prize for the winning team. Try it today."
                 canonicalPath={"/games/LoL/leagues/aegis-leagues/vanguard"}
             />
@@ -24,7 +25,7 @@ export const AegisVanguardLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$200 per Team", "1000 LP Peak from Y2025 and Y2024 - S3"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/dBtt7Fg9jv"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$200 per Team", "1000 LP Peak from Y2025 and Y2024 - S3"]} footer={<ExternalButton host={"Aegis Vanguard League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/dBtt7Fg9jv"} />}/>
                 </div>
             </div>
 

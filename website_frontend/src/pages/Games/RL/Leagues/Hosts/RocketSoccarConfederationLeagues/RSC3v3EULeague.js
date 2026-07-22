@@ -5,6 +5,7 @@ export const RSC3v3EULeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"RSC EU 3v3 - Rocket League"}
                 description="Rocket Soccar Confederation Europe 3v3 league. $600 prize pool across all 6 divisions. Free to enter with spring and fall seasons annually."
                 canonicalPath={"/games/RocketLeague/leagues/rsc-leagues/3v3-eu"}
             />
@@ -20,7 +21,7 @@ export const RSC3v3EULeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/Bw4rvpG"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"RSC EU 3v3"} blank={true} title={"Join Now"} path={"https://discord.com/invite/Bw4rvpG"} />}/>
                 </div>
             </div>
 

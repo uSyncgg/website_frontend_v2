@@ -5,6 +5,7 @@ export const PulseOpenLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Pulse X Open League - Call of Duty"}
                 description="Pulse X Open Division is the competitive arm of the Pulse X CoD League. Build your squad or sign up solo and compete in BO7-ready series with playoffs and prize support."
                 canonicalPath={"/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-open"}
             />
@@ -20,7 +21,7 @@ export const PulseOpenLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$25 per Team"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/pulsexleague"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$25 per Team"]} footer={<ExternalButton host={"Pulse X Open League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/pulsexleague"} />}/>
                 </div>
             </div>
 

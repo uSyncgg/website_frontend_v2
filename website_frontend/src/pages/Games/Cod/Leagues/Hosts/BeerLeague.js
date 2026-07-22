@@ -5,6 +5,7 @@ export const BeerLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Beer League - Call of Duty"}
                 description="Call of Duty Beer League. Enjoy beers and compete in a Call of Duty league while under the influence."
                 canonicalPath={"/games/call-of-duty/leagues/cod-beer-league"}
             />
@@ -20,7 +21,7 @@ export const BeerLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.google.com/url?q=https%3A%2F%2Ftwitter.com%2FCoDBeerLeague&sa=D&sntz=1&usg=AOvVaw3LK3JovZ7B1-JO42DXymZJ"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"Call of Duty Beer League"} blank={true} title={"Join Now"} path={"https://www.google.com/url?q=https%3A%2F%2Ftwitter.com%2FCoDBeerLeague&sa=D&sntz=1&usg=AOvVaw3LK3JovZ7B1-JO42DXymZJ"} />}/>
                 </div>
             </div>
 

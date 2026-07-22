@@ -5,6 +5,7 @@ export const CmgWagers = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Checkmate Gaming - Rocket League"}
                 description="Checkmate Gaming Rocket League wagers. Compare fees and restrictions. 24/7 live support with wager matches available worldwide for Rocket League players."
                 canonicalPath={"/games/RocketLeague/wagers/cmg"}
             />
@@ -12,7 +13,7 @@ export const CmgWagers = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Regular Member: 7.5%", "Elite Member: 3.75%", "Live Support Fee: 2.5% - 5%", "Deposit/Withdraw Fees through Paypal"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.checkmategaming.com/wager/cross-platform/rocket-league"} />}/>
+                    <EventInfoCard title={"Fees"} infoList={["Regular Member: 7.5%", "Elite Member: 3.75%", "Live Support Fee: 2.5% - 5%", "Deposit/Withdraw Fees through Paypal"]} footer={<ExternalButton host={"Checkmate Gaming"} blank={true} title={"Join Now"} path={"https://www.checkmategaming.com/wager/cross-platform/rocket-league"} />}/>
                 </div>
 
                 <div>

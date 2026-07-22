@@ -5,6 +5,7 @@ export const LowBudgetCommercialLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"LCS Commercial League - League of Legends"}
                 description="LCS Commercial League is a League of Legends Platinum average ranked league. Sign up and have your matches live streamed."
                 canonicalPath={"/games/LoL/leagues/low-budget-leagues/commercial"}
             />
@@ -20,7 +21,7 @@ export const LowBudgetCommercialLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Platinum Average, 1 Emerald 3 Max", "See Rank Points for Team Eligibility"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/w4WVB4Z"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Platinum Average, 1 Emerald 3 Max", "See Rank Points for Team Eligibility"]} footer={<ExternalButton host={"LCS Commercial League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/w4WVB4Z"} />}/>
                 </div>
             </div>
 

@@ -5,6 +5,7 @@ export const CorporateCS2League = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Corporate League - Counter-Strike"}
                 description="Corporate CS2 league is THE corporate America league. Play with your co-workers against other companies in the United States."
                 canonicalPath={"/games/CS2/leagues/corporate"}
             />
@@ -20,7 +21,7 @@ export const CorporateCS2League = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$250 per Team"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://cea.gg/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$250 per Team"]} footer={<ExternalButton host={"Corporate CS2 League"} blank={true} title={"Join Now"} path={"https://cea.gg/"} />}/>
                 </div>
             </div>
 

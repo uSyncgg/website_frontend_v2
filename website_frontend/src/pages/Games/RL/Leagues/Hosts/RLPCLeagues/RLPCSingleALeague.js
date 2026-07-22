@@ -5,6 +5,7 @@ export const RLPCSingleALeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"RLPC A League - Rocket League"}
                 description="RLPC Single A League for Rocket League players with 1021 - 1349 MMR. A verified free to enter draft based 3v3 league with three seasons per year."
                 canonicalPath={"/games/RocketLeague/leagues/rlpc-leagues/a"}
             />
@@ -24,7 +25,7 @@ export const RLPCSingleALeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1021 - 1349 MMR"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://linktr.ee/officialrlpc"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1021 - 1349 MMR"]} footer={<ExternalButton host={"RLPC A League"} blank={true} title={"Join Now"} path={"https://linktr.ee/officialrlpc"} />}/>
                 </div>
             </div>
 

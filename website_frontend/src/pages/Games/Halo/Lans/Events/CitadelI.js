@@ -5,6 +5,7 @@ export const CitadelI = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Citadel I - Halo"}
                 description="Hosted by Halo Growth Guild (HGG), Citadel I is a community-driven Halo LAN weekend bringing players together from across the country to celebrate a shared love for Halo. Experience both classic and modern Halo through competition."
                 canonicalPath={"/lans/citadel-i"}
             />
@@ -27,7 +28,7 @@ export const CitadelI = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$25 per day"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/citadel-i-halo-lan-2026-08-15?section=overview"} />}/> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["$25 per day"]} footer={<ExternalButton host={"Citadel I"} blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/citadel-i-halo-lan-2026-08-15?section=overview"} />}/> 
                 </div>
             </div>
 

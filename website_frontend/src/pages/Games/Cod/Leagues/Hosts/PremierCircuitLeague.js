@@ -5,6 +5,7 @@ export const PremierCircuitLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"The Premier Circuit League - Call of Duty"}
                 description="The Premier Circuit (TPC) League is an invite-only top tier Call of Duty amateur league. Challengers players duke it out inm this high stakes league."
                 canonicalPath={"/games/call-of-duty/leagues/tpc-league"}
             />
@@ -20,7 +21,7 @@ export const PremierCircuitLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - DM to Enter"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://x.com/TPCircuit"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - DM to Enter"]} footer={<ExternalButton host={"The Premier Circuit League"} blank={true} title={"Join Now"} path={"https://x.com/TPCircuit"} />}/>
                 </div>
             </div>
 

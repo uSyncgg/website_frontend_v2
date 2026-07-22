@@ -5,6 +5,7 @@ export const AegisChallengerLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Aegis Challenger League - League of Legends"}
                 description="Aegis Challengers League - year round League of Legends league with huge prize pool."
                 canonicalPath={"/games/LoL/leagues/aegis-leagues/challenger"}
             />
@@ -24,7 +25,7 @@ export const AegisChallengerLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$300 per Team"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/dBtt7Fg9jv"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$300 per Team"]} footer={<ExternalButton host={"Aegis Challenger League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/dBtt7Fg9jv"} />}/>
                 </div>
             </div>
 

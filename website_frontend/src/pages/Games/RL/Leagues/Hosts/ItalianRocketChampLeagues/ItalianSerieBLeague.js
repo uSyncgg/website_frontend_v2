@@ -5,6 +5,7 @@ export const ItalianSerieBLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Italian Series B - Rocket League"}
                 description="Italian Rocket League serie B league. Enroll in this free to play RL league and play weekly matches to get into the playoffs."
                 canonicalPath={"/games/RocketLeague/leagues/italian-leagues/serie-b"}
             />
@@ -20,7 +21,7 @@ export const ItalianSerieBLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.italianrocketchampionship.it/?lang=eng"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"Italian Series B"} blank={true} title={"Join Now"} path={"https://www.italianrocketchampionship.it/?lang=eng"} />}/>
                 </div>
             </div>
 

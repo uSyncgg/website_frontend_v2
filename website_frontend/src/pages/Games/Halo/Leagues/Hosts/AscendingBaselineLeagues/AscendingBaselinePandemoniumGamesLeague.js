@@ -5,6 +5,7 @@ export const AscendingBaselinePandemoniumGamesLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Pandemonium Games League - Halo"}
                 description="Pandemonium Games League is a Halo Infinite draft based league hosted by Ascending Baseline. Sign up solo and get matched with teammates in a competitive Halo environment."
                 canonicalPath={"/games/halo/leagues/ascending-baseline/pandemonium-games"}
             />
@@ -20,7 +21,7 @@ export const AscendingBaselinePandemoniumGamesLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["AB Subscribers: Free ($7.99/m)", "Non Subscribers: $15", "Solo Sign Ups"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.ascendingbaseline.com/panda"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["AB Subscribers: Free ($7.99/m)", "Non Subscribers: $15", "Solo Sign Ups"]} footer={<ExternalButton host={"Pandemonium Games League"} blank={true} title={"Join Now"} path={"https://www.ascendingbaseline.com/panda"} />}/>
                 </div>
             </div>
 

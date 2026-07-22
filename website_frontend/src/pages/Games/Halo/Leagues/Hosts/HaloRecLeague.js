@@ -5,6 +5,7 @@ export const HaloRecLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Rec League - Halo"}
                 description="Halo Recreational league is the only rec league for everything halo. Play weekly matches against other teams that are live streamed."
                 canonicalPath={"/games/halo/leagues/halo-rec-league"}
             />
@@ -24,7 +25,7 @@ export const HaloRecLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$30 - Premade Teams", "Free Entry - Mixed"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://halo.esrl.gg/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$30 - Premade Teams", "Free Entry - Mixed"]} footer={<ExternalButton host={"Halo Rec League"} blank={true} title={"Join Now"} path={"https://halo.esrl.gg/"} />}/>
                 </div>
             </div>
 

@@ -5,6 +5,7 @@ export const PraccH2H = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Pracc - Rocket League"}
                 description="Rocket League Pracc is the home of your next Rocket League scrim or XP match. Play head-to-head against other players to improve your team."
                 canonicalPath={"/games/RocketLeague/head-to-head/pracc"}
             />
@@ -12,7 +13,7 @@ export const PraccH2H = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Free Scrim Matches"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://pracc.com/"} />}/>
+                    <EventInfoCard title={"Fees"} infoList={["Free Scrim Matches"]} footer={<ExternalButton host={"Pracc"} blank={true} title={"Join Now"} path={"https://pracc.com/"} />}/>
                 </div>
 
                 <div>

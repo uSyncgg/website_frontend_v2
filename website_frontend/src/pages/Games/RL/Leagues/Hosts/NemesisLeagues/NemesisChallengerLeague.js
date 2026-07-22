@@ -5,6 +5,7 @@ export const NemesisChallengerLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Nemesis Challenger - Rocket League"}
                 description="Nemesis Challenger League is a Rocket League league with a 1453 - 1609 MMR range. Join this spring and showcase your skills at the highest level."
                 canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues/challenger"}
             />
@@ -20,7 +21,7 @@ export const NemesisChallengerLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1535 - 1625 MMR"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/nemesisrl"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1535 - 1625 MMR"]} footer={<ExternalButton host={"Nemesis Challenger"} blank={true} title={"Join Now"} path={"https://discord.com/invite/nemesisrl"} />}/>
                 </div>
             </div>
 

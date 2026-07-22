@@ -5,6 +5,7 @@ export const AscendingBaselineABLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"AB League - Halo"}
                 description="AB League is the premier league of Ascending Baseline for Halo and Halo Infinite. Sign up for cash prizes and a highly competitive environment."
                 canonicalPath={"/games/halo/leagues/ascending-baseline/ab"}
             />
@@ -20,7 +21,7 @@ export const AscendingBaselineABLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["AB Subscribers: Free ($7.99/m)", "Non Subscribers: $40/team", "Solo/Duo/Trio or Team Sign Ups"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.ascendingbaseline.com/abl-halo"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["AB Subscribers: Free ($7.99/m)", "Non Subscribers: $40/team", "Solo/Duo/Trio or Team Sign Ups"]} footer={<ExternalButton host={"AB League"} blank={true} title={"Join Now"} path={"https://www.ascendingbaseline.com/abl-halo"} />}/>
                 </div>
             </div>
 

@@ -6,6 +6,7 @@ export const ContactUs = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Contact Us"}
                 description="Learn more about what uSync does and who the team is. Contact uSync today to work with us and become apart of the esports family."
                 canonicalPath={"/more/contactus"}
             />

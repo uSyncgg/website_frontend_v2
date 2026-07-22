@@ -5,6 +5,7 @@ export const CECCLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"CECC League - Rocket League"}
                 description="Collegiate Esports Collegiate Conference Rocket League. 4 regional divisions with regional qualifiers and LAN finals. Must be a full time college student."
                 canonicalPath={"/games/RocketLeague/leagues/cecc"}
             />
@@ -20,7 +21,7 @@ export const CECCLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - Must be a FULL TIME College Student"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.collegiatesmg.com/cecc"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - Must be a FULL TIME College Student"]} footer={<ExternalButton host={"CECC League"} blank={true} title={"Join Now"} path={"https://www.collegiatesmg.com/cecc"} />}/>
                 </div>
             </div>
 

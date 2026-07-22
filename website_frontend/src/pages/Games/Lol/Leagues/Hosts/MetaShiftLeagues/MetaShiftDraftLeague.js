@@ -5,6 +5,7 @@ export const MetaShiftDraftLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"MetaShift Draft League - League of Legends"}
                 description="MetaShift Draft league is a fast paced action packed League of Legends League. With a lower entry fee this is perfect for amateurs."
                 canonicalPath={"/games/LoL/leagues/meta-shift-leagues/draft"}
             />
@@ -20,7 +21,7 @@ export const MetaShiftDraftLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$30 per Captain", "$15 per Person"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/RtJa6kY"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$30 per Captain", "$15 per Person"]} footer={<ExternalButton host={"MetaShift Draft League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/RtJa6kY"} />}/>
                 </div>
             </div>
 

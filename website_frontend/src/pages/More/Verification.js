@@ -6,6 +6,7 @@ export const Verification = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Verification"}
                 description="Own a league, LAN, or tournament website on uSync - become uSync Verified to promote your event and prove your reputability in the esports scene."
                 canonicalPath={"/more/verification"}
             />

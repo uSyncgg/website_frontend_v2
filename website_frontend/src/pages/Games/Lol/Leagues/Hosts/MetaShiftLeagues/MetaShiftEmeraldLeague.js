@@ -5,6 +5,7 @@ export const MetaShiftEmeraldLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"MetaShift Emerald League - League of Legends"}
                 description="Emerald league is a LoL league hosted by MetaShift. Grab your teammates and get read to compete for cash prizes."
                 canonicalPath={"/games/LoL/leagues/meta-shift-leagues/emerald"}
             />
@@ -20,7 +21,7 @@ export const MetaShiftEmeraldLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$100 per Team (Estimated)", "Tier 3", "See Website for Tier Check"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/RtJa6kY"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$100 per Team (Estimated)", "Tier 3", "See Website for Tier Check"]} footer={<ExternalButton host={"MetaShift Emerald League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/RtJa6kY"} />}/>
                 </div>
             </div>
 

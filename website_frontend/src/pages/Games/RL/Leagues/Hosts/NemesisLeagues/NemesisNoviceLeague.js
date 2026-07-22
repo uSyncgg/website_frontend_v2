@@ -5,6 +5,7 @@ export const NemesisNoviceLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Nemesis Novice - Rocket League"}
                 description="Rocket League Novice league is being held every spring by Nemesis. Enroll your teammates today in this action packed 3v3 Rocket League league."
                 canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues/novice"}
             />
@@ -20,7 +21,7 @@ export const NemesisNoviceLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1203 - 1414 MMR"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/nemesisrl"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1203 - 1414 MMR"]} footer={<ExternalButton host={"Nemesis Novice"} blank={true} title={"Join Now"} path={"https://discord.com/invite/nemesisrl"} />}/>
                 </div>
             </div>
 

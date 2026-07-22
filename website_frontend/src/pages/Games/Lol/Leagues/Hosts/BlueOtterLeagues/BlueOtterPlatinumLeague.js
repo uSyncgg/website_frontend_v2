@@ -5,6 +5,7 @@ export const BlueOtterPlatinumLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Blue Otter Platinum League - League of Legends"}
                 description="Blue Otter Platinum is for LoL platinum players that plat 1 99LP or lower. Do you have what it takes?"
                 canonicalPath={"/games/LoL/leagues/blue-otter-leagues/plat"}
             />
@@ -20,7 +21,7 @@ export const BlueOtterPlatinumLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$60 per Team (Estimated)", "$15 Forfeit Deposit", "Platinum 1 99 LP Cap, 1 Emerald 4 per Team"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/gVGSxRT"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$60 per Team (Estimated)", "$15 Forfeit Deposit", "Platinum 1 99 LP Cap, 1 Emerald 4 per Team"]} footer={<ExternalButton host={"Blue Otter Platinum League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/gVGSxRT"} />}/>
                 </div>
             </div>
 

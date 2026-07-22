@@ -5,6 +5,7 @@ export const MetaShiftCyanideLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"MetaShift Cyanide League - League of Legends"}
                 description="MetaShift Cyanide league is a tier 4 league from the provider. This League of Legends league has a large prize pool for the winner."
                 canonicalPath={"/games/LoL/leagues/meta-shift-leagues/cyanide"}
             />
@@ -20,7 +21,7 @@ export const MetaShiftCyanideLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$100 per Team", "Tier 4", "See Website for Tier Check"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/RtJa6kY"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$100 per Team", "Tier 4", "See Website for Tier Check"]} footer={<ExternalButton host={"MetaShift Cyanide League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/RtJa6kY"} />}/>
                 </div>
             </div>
 

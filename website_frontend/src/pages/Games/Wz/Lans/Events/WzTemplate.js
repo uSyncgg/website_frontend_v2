@@ -7,6 +7,7 @@ export const INSERTFILENAME = () => {
             <SeoData
                 description="INPUT DESCRIPTION HERE"
                 canonicalPath={"/lans/INSERT PATH HERE"}
+                title={"EVENT NAME HERE - Warzone"}
             />
 
             <HeaderImage title={"INSERT TITLE HERE"} imageClass={"eventPage"} />
@@ -27,7 +28,7 @@ export const INSERTFILENAME = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["INSERT ENTRY FEE HERE"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"INSERT LINK TO EVENT"} />}/> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["INSERT ENTRY FEE HERE"]} footer={<ExternalButton host={"INSERT TITLE HERE"} blank={true} title={"Join Now"} path={"INSERT LINK TO EVENT"} />}/> 
                 </div>
             </div>
 

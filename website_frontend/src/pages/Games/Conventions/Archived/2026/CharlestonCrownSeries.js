@@ -5,6 +5,7 @@ export const CharlestonCrownSeries = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Charleston Crown Series - Convention"}
                 description="The most reputable LAN host is back hosting a Call of Duty LAN event - Charleston Crown Series. Compete against teams in-person for $3k in prizing."
                 canonicalPath={"/lans/charleston-crown-series"}
             />
@@ -20,7 +21,7 @@ export const CharlestonCrownSeries = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $300", "VIP Team Pass: $400"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://x.com/TeamBasai/status/2015205573680107861"} />}/> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $300", "VIP Team Pass: $400"]} footer={<ExternalButton host={"Charleston Crown Series"} blank={true} title={"Join Now"} path={"https://x.com/TeamBasai/status/2015205573680107861"} />}/> 
                 </div>
             </div>
 

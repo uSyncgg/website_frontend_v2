@@ -5,6 +5,7 @@ export const CodRecOpenLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Rec Open League - Call of Duty"}
                 description={"Recreational Call of Duty league for players looking for a challenge. Play weekly matches with your new roster based on your skill level."}
                 canonicalPath={"/games/call-of-duty/leagues/cod-rec-leagues/cod-rec-open-league"}
             />
@@ -21,7 +22,7 @@ export const CodRecOpenLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Sign up as Solo or Duo"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.google.com/url?q=https%3A%2F%2Fcod.esrl.gg%2F&sa=D&sntz=1&usg=AOvVaw359r5MIeBPnIT5_Guhelh-"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Sign up as Solo or Duo"]} footer={<ExternalButton host={"Cod Rec Open League"} blank={true} title={"Join Now"} path={"https://www.google.com/url?q=https%3A%2F%2Fcod.esrl.gg%2F&sa=D&sntz=1&usg=AOvVaw359r5MIeBPnIT5_Guhelh-"} />}/>
                 </div>
             </div>
 

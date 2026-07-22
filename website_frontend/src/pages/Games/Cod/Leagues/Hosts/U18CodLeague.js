@@ -5,6 +5,7 @@ export const U18CodLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"U18 League - Call of Duty"}
                 description="Call of Duty league for players under the age of 18. Play like the Call of Duty pros even if you are not 18 years old."
                 canonicalPath={"/games/call-of-duty/leagues/u18-league"}
             />
@@ -20,7 +21,7 @@ export const U18CodLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Must be Younger than 18", "$100 per Team", "$25 One Time Qualifier Entry", "$8 for Solo Players"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://twitter.com/U18CODLeague?s=20&t=KF_TfGh6U3dk7gMSosJncQ"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Must be Younger than 18", "$100 per Team", "$25 One Time Qualifier Entry", "$8 for Solo Players"]} footer={<ExternalButton host={"U18 League"} blank={true} title={"Join Now"} path={"https://twitter.com/U18CODLeague?s=20&t=KF_TfGh6U3dk7gMSosJncQ"} />}/>
                 </div>
             </div>
 

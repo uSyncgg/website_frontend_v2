@@ -5,6 +5,7 @@ export const TitanOlympusLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Titan Olympus League - League of Legends"}
                 description="Titan Esports League Olympus league for League of Legends players with a ranking of Diamond 4. Play every Thursday each week during the season."
                 canonicalPath={"/games/LoL/leagues/titan-leagues/olympus"}
             />
@@ -24,7 +25,7 @@ export const TitanOlympusLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$75 per Team", "$25 Forfeit Deposit", "Diamond 4 Cap"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://lol.titanesports.org/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$75 per Team", "$25 Forfeit Deposit", "Diamond 4 Cap"]} footer={<ExternalButton host={"Titan Olympus League"} blank={true} title={"Join Now"} path={"https://lol.titanesports.org/"} />}/>
                 </div>
             </div>
 

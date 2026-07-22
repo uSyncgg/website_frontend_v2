@@ -5,6 +5,7 @@ export const OneVOneMeWagers = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"1v1Me - Warzone"}
                 description="1v1 Me Warzone wager app. 1v1 kill race matches with 0% match fee and staking on tournaments. Available in USA, CA, IE, UK, FR, MX, and DE for players 18+."
                 canonicalPath={"/games/warzone/wagers/1v1me"}
             />
@@ -12,7 +13,7 @@ export const OneVOneMeWagers = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Match Fee: 0%", "Varying Fee with Deposits/Withdrawals"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.1v1me.com/"} />}/>
+                    <EventInfoCard title={"Fees"} infoList={["Match Fee: 0%", "Varying Fee with Deposits/Withdrawals"]} footer={<ExternalButton host={"1v1Me"} blank={true} title={"Join Now"} path={"https://www.1v1me.com/"} />}/>
                 </div>
 
                 <div>

@@ -5,6 +5,7 @@ export const FrontierAdeptLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Frontier Adept League - Rocket League"}
                 description={"Frontier Double Rocket League league. Salary cap of 36. Sign up for this 2v2 North American league today on uSync."}
                 canonicalPath={"/games/RocketLeague/leagues/frontier-doubles-leagues/adept"}
             />
@@ -21,7 +22,7 @@ export const FrontierAdeptLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Salary Cap of 36"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://fdl.gg/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Salary Cap of 36"]} footer={<ExternalButton host={"Adept League"} blank={true} title={"Join Now"} path={"https://fdl.gg/"} />}/>
                 </div>
             </div>
 

@@ -5,6 +5,7 @@ export const LockdownUppersLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"LockdownCL Uppers League - Call of Duty"}
                 description="LockDown Call of Duty League is hosting LCL Uppers - the perfect league for those looking for good competition and a prize pool."
                 canonicalPath={"/games/call-of-duty/leagues/lockdowncl-leagues/uppers"}
             />
@@ -24,7 +25,7 @@ export const LockdownUppersLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.gg/SMZ4R8XzWZ"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"LockdownCL Uppers League"} blank={true} title={"Join Now"} path={"https://discord.gg/SMZ4R8XzWZ"} />}/>
                 </div>
             </div>
 

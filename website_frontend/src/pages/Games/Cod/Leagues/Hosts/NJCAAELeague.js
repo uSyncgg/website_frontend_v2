@@ -5,6 +5,7 @@ export const NJCAAELeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"NJCAAE League - Call of Duty"}
                 description="NJCAAE esports league for Call of Duty college players attending 2 year college programs. 4v4 CDL variant."
                 canonicalPath={"/games/call-of-duty/leagues/njcaae"}
             />
@@ -20,7 +21,7 @@ export const NJCAAELeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$2,000/yr per school", "Must be Attending a 2 Year College Program"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.njcaaesports.org/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$2,000/yr per school", "Must be Attending a 2 Year College Program"]} footer={<ExternalButton host={"NJCAAE League"} blank={true} title={"Join Now"} path={"https://www.njcaaesports.org/"} />}/>
                 </div>
             </div>
 

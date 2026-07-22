@@ -10,6 +10,7 @@ export const HyperfibreLeagues = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Hyperfibre Leagues - Counter-Strike"}
                 description="Hyperfibre leagues based in New Zealand. Compete at a casual or highly competitive level to showcase your Counter-Strike 2 skills."
                 canonicalPath={"/games/CS2/leagues/hyperfibre-leagues"}
             />

@@ -5,6 +5,7 @@ export const LowBudgetEconomyLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"LCS Economy League - League of Legends"}
                 description="LCS Economy league is a Gold average League of Legends league. Join with your friends or meet new ones in this action packed league."
                 canonicalPath={"/games/LoL/leagues/low-budget-leagues/economy"}
             />
@@ -20,7 +21,7 @@ export const LowBudgetEconomyLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Gold Average, 1 Platinum 3 Max", "See Rank Points for Team Eligibility"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/w4WVB4Z"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Gold Average, 1 Platinum 3 Max", "See Rank Points for Team Eligibility"]} footer={<ExternalButton host={"LCS Economy League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/w4WVB4Z"} />}/>
                 </div>
             </div>
 

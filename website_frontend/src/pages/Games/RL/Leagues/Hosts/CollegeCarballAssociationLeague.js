@@ -5,6 +5,7 @@ export const CollegeCarballAssociationLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"College Carball Association - Rocket League"}
                 description="College Carball Association Rocket League league. A verified 3v3 NA and EU college league with world championship. Must be a full time college student."
                 canonicalPath={"/games/RocketLeague/leagues/college-carball-association"}
             />
@@ -24,7 +25,7 @@ export const CollegeCarballAssociationLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - Must be a FULL TIME College Student"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.gg/cca"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - Must be a FULL TIME College Student"]} footer={<ExternalButton host={"College Carball Association"} blank={true} title={"Join Now"} path={"https://discord.gg/cca"} />}/>
                 </div>
             </div>
 

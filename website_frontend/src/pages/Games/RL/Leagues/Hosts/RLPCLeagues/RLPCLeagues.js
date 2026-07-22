@@ -12,6 +12,7 @@ export const RLPCLeagues = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"RLPC Leagues - Rocket League"}
                 description="Rocket League Pro Circuit - RLPC. A verified Rocket League league with four divisions for players across all skill levels. Sign up today."
                 canonicalPath={"/games/RocketLeague/leagues/rlpc-leagues"}
             />

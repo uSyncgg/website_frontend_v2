@@ -4,6 +4,7 @@ export const Tournaments = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Tournaments"}
                 description="The one-stop shop for every single tournament ongoing for your esports game. Save time searching spend time playing."
                 canonicalPath={"/tournaments"}
             />

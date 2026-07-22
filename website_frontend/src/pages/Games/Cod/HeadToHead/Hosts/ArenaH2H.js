@@ -5,6 +5,7 @@ export const ArenaH2H = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"The Arena | 8 Mans - Call of Duty"}
                 description="Join The Arena 8s Lobbies. Play free competitive Call of Duty matches and scrims."
                 canonicalPath={"/games/call-of-duty/head-to-head/arena"}
             />
@@ -12,7 +13,7 @@ export const ArenaH2H = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Free Scrim Finder / 8s Lobbies"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/the-arena-powered-by-dg-918527675642052658"} />}/> 
+                    <EventInfoCard title={"Fees"} infoList={["Free Scrim Finder / 8s Lobbies"]} footer={<ExternalButton host={"The Arena | 8 Mans"} blank={true} title={"Join Now"} path={"https://discord.com/invite/the-arena-powered-by-dg-918527675642052658"} />}/> 
                 </div>
 
                 <div>

@@ -14,6 +14,7 @@ export const MetaShiftLeagues = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"MetaShift Leagues - League of Legends"}
                 description="MetaShift Leagues are League of Legends leagues with a tier system based on your in-game rank. Experience competitive league today."
                 canonicalPath={"/games/LoL/leagues/meta-shift-leagues"}
             />

@@ -5,6 +5,7 @@ export const NationalStudentEsportsLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"NSE League - League of Legends"}
                 description="United Kingdom's university league - NSE. This league has an open division and a women's division, suiting whatever your League of Legends style is."
                 canonicalPath={"/games/LoL/leagues/nse"}
             />
@@ -20,7 +21,7 @@ export const NationalStudentEsportsLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD", "Must be Attending University"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.nse.gg/tournaments/buec-spring-2026/league-of-legends-nse-spring/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD", "Must be Attending University"]} footer={<ExternalButton host={"NSE League"} blank={true} title={"Join Now"} path={"https://www.nse.gg/tournaments/buec-spring-2026/league-of-legends-nse-spring/"} />}/>
                 </div>
             </div>
 

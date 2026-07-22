@@ -5,6 +5,7 @@ export const AirforceGamingLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Airforce Gaming League - Rocket League"}
                 description="Airforce Gaming Rocket League league. For Air Force and Space Force associated players only. Pro and casual divisions available for NA, EU, and APAC."
                 canonicalPath={"/games/RocketLeague/leagues/airforce-gaming"}
             />
@@ -20,7 +21,7 @@ export const AirforceGamingLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://airforcegaming.com/dafgl"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"Airforce Gaming League"} blank={true} title={"Join Now"} path={"https://airforcegaming.com/dafgl"} />}/>
                 </div>
             </div>
 

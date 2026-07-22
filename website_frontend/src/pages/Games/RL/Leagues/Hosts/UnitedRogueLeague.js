@@ -5,6 +5,7 @@ export const UnitedRogueLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"United Rogue League - Rocket League"}
                 description="United Rogue Rocket League. Free to enter for ages 16+. 32 franchises across a 5 league system with enforced salary caps and live streamed matches."
                 canonicalPath={"/games/RocketLeague/leagues/united-rogue"}
             />
@@ -20,7 +21,7 @@ export const UnitedRogueLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Ages 16+"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://rl.unitedrogue.com/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Ages 16+"]} footer={<ExternalButton host={"United Rogue League"} blank={true} title={"Join Now"} path={"https://rl.unitedrogue.com/"} />}/>
                 </div>
             </div>
 

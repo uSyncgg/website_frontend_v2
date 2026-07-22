@@ -5,6 +5,7 @@ export const FortLAN2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"FortLAN 2026 - Convention"}
                 description={"FortLAN returns this Fall for a full weekend of gaming, community, and fun. Join us October 16th-18th at the Grand Wayne Center for a three-day LAN celebration featuring 280 BYOC seats and activities for gamers of all ages."}
                 canonicalPath={"/lans/fortlan-2026"}
             />
@@ -26,7 +27,7 @@ export const FortLAN2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["BYOC: $50"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.tixr.com/groups/lanfest/events/fortlan-fall-2026-189274"} />} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["BYOC: $50"]} footer={<ExternalButton host={"FortLAN 2026"} blank={true} title={"Join Now"} path={"https://www.tixr.com/groups/lanfest/events/fortlan-fall-2026-189274"} />} />
                 </div>
             </div>
 

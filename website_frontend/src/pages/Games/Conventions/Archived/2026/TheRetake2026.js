@@ -5,6 +5,7 @@ export const TheRetake2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"The Retake - Convention"}
                 description="Localhost Philly is putting on a Counter Strike 2 Tournament with a $1,000 Prize Pool!"
                 canonicalPath={"/lans/the-retake"}
             />
@@ -27,7 +28,7 @@ export const TheRetake2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $225"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/the-retake-or-cs2-tournament-powered-by-hellcase-2026-07-18?section=overview"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $225"]} footer={<ExternalButton host={"The Retake"} blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/the-retake-or-cs2-tournament-powered-by-hellcase-2026-07-18?section=overview"} />}/>
                 </div>
             </div>
 

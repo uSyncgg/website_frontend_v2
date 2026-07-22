@@ -5,6 +5,7 @@ export const CmgWagers = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Checkmate Gaming - Call of Duty"}
                 description="Checkmate Gaming Call of Duty wagers are ideal for making money playing cod. Join to start earning today."
                 canonicalPath={"/games/call-of-duty/wagers/cmg"}
             />
@@ -16,7 +17,7 @@ export const CmgWagers = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Regular Member: 7.5%", "Elite Member: 3.75%", "Live Support Fee: 2.5%", "Deposit/Withdraw Fees through Paypal"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.checkmategaming.com/challenges"} />}/>
+                    <EventInfoCard title={"Fees"} infoList={["Regular Member: 7.5%", "Elite Member: 3.75%", "Live Support Fee: 2.5%", "Deposit/Withdraw Fees through Paypal"]} footer={<ExternalButton host={"Checkmate Gaming"} blank={true} title={"Join Now"} path={"https://www.checkmategaming.com/challenges"} />}/>
                 </div>
 
                 <div>

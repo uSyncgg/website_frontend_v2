@@ -5,6 +5,7 @@ export const TPCWomensCodLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"TPC Womens League - Call of Duty"}
                 description="The Premier Circuit Womens cod league. Women only Call of Duty competitive league with massive $4.5k prize pool."
                 canonicalPath={"/games/call-of-duty/leagues/tpc-womens-cod"}
             />
@@ -20,7 +21,7 @@ export const TPCWomensCodLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$375 per Team"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://x.com/TPCWomens"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$375 per Team"]} footer={<ExternalButton host={"TPC Womens League"} blank={true} title={"Join Now"} path={"https://x.com/TPCWomens"} />}/>
                 </div>
             </div>
 

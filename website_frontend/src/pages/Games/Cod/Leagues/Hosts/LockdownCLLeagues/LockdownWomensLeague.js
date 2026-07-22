@@ -5,6 +5,7 @@ export const LockdownWomensLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"LockdownCL Womens League - Call of Duty"}
                 description="LCL Womens League is made for the women competitive Call of Duty players that want to compete for cash prizes."
                 canonicalPath={"/games/call-of-duty/leagues/lockdowncl-leagues/womens"}
             />
@@ -24,7 +25,7 @@ export const LockdownWomensLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.gg/SMZ4R8XzWZ"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"LockdownCL Womens League"} blank={true} title={"Join Now"} path={"https://discord.gg/SMZ4R8XzWZ"} />}/>
                 </div>
             </div>
 

@@ -5,6 +5,7 @@ export const BlackTwitchLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Black Twitch League - League of Legends"}
                 description="Black Twitch League. League of Legends league with a grandmaster cap that is free to play and has a cash prize."
                 canonicalPath={"/games/LoL/leagues/black-twitch-league"}
             />
@@ -20,7 +21,7 @@ export const BlackTwitchLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "$25 Forfeit Deposit", "400 LP Grandmaster Cap"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.gg/bjExwdcrpt"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "$25 Forfeit Deposit", "400 LP Grandmaster Cap"]} footer={<ExternalButton host={"Black Twitch League"} blank={true} title={"Join Now"} path={"https://discord.gg/bjExwdcrpt"} />}/>
                 </div>
             </div>
 

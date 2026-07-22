@@ -5,6 +5,7 @@ export const PlayflyCollegeLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Playfly League - Rocket League"}
                 description="Playfly College Rocket League. $280k prize pool split across all titles and divisions. Must be a full time college student. Free open division available."
                 canonicalPath={"/games/RocketLeague/leagues/playfly-college"}
             />
@@ -20,7 +21,7 @@ export const PlayflyCollegeLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Must be a FULL TIME College Student", "$1,000 for Full Year", "$625 for Half Year", "Free Entry - Open Division"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://playflycollege.gg/pages/playfly-college-esports"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Must be a FULL TIME College Student", "$1,000 for Full Year", "$625 for Half Year", "Free Entry - Open Division"]} footer={<ExternalButton host={"Playfly League"} blank={true} title={"Join Now"} path={"https://playflycollege.gg/pages/playfly-college-esports"} />}/>
                 </div>
             </div>
 

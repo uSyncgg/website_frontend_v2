@@ -5,6 +5,7 @@ export const ProblemWithEsports = () => {
     return (
         <div className="standardBlankContainer">
             <SeoData
+                title={"The Problem With Esports"}
                 description="The current problem with esports today and what uSync.gg is doing to combat this major issue plaguing the industry."
                 canonicalPath={"/more/articles/The-Problem-With-Esports"}
             />

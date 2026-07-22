@@ -5,6 +5,7 @@ export const EGFCLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"EGFC League - Counter-Strike"}
                 description="EGFC is a Counter-Strike 2 collegiate league for D1 varsity programs in the USA. Enroll your school today."
                 canonicalPath={"/games/CS2/leagues/egfc"}
             />
@@ -20,7 +21,7 @@ export const EGFCLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD", "Must be in a D1 Varisty Esports Program"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.egf.gg/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD", "Must be in a D1 Varisty Esports Program"]} footer={<ExternalButton host={"EGFC League"} blank={true} title={"Join Now"} path={"https://www.egf.gg/"} />}/>
                 </div>
             </div>
 

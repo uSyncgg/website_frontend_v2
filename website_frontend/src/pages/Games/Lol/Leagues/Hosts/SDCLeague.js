@@ -5,6 +5,7 @@ export const SDCLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"SDC League - League of Legends"}
                 description="SDC league is a League of Legends league that is free to play and is community based. Join the community and play for prizes today."
                 canonicalPath={"/games/LoL/leagues/sdc"}
             />
@@ -20,7 +21,7 @@ export const SDCLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "No Rank Requirements"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://sdcleague.com"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "No Rank Requirements"]} footer={<ExternalButton host={"SDC League"} blank={true} title={"Join Now"} path={"https://sdcleague.com"} />}/>
                 </div>
             </div>
 

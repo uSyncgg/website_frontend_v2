@@ -5,6 +5,7 @@ export const FemaleCodLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Female League - Call of Duty"}
                 description="Female Call of Duty league. Female league for aspiring Call of Duty professional players."
                 canonicalPath={"/games/call-of-duty/leagues/fcl"}
             />
@@ -20,7 +21,7 @@ export const FemaleCodLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$100 per Team"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://x.com/FemaleC0DLeague"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$100 per Team"]} footer={<ExternalButton host={"Female Call of Duty League"} blank={true} title={"Join Now"} path={"https://x.com/FemaleC0DLeague"} />}/>
                 </div>
             </div>
 

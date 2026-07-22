@@ -5,6 +5,7 @@ export const LakewoodLeagueXIISpring = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Lakewood League XII - Spring - Convention"}
                 description={"Play League of Legends LAN tournament near you in Lakewood, CO. 5v5 format with nearly a THOUSAND dollars in prizing for grabs."}
                 canonicalPath={"/lans/lakewood-league-xii-spring"}
             />
@@ -21,7 +22,7 @@ export const LakewoodLeagueXIISpring = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $150"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/lakewood-league-xii-2026-04-26?section=overview"} />}/> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $150"]} footer={<ExternalButton host={"Lakewood League XII - Spring"} blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/lakewood-league-xii-2026-04-26?section=overview"} />}/> 
                 </div>
             </div>
 

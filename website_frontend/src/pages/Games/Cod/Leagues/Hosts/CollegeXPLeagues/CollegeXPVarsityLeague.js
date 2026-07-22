@@ -5,6 +5,7 @@ export const CollegeXPVarsityLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"CXP Varsity - Call of Duty"}
                 description="Scholarship Call of Duty players looking to make money. Pre season tournaments for seeding on a national scale."
                 canonicalPath={"/games/call-of-duty/leagues/cxp-leagues/cxp-varsity"}
             />
@@ -20,7 +21,7 @@ export const CollegeXPVarsityLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$240 per Team", "$275 Late Entry per Team"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://x.com/CXPCoD"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$240 per Team", "$275 Late Entry per Team"]} footer={<ExternalButton host={"CXP Varsity"} blank={true} title={"Join Now"} path={"https://x.com/CXPCoD"} />}/>
                 </div>
             </div>
 

@@ -5,6 +5,7 @@ export const EGFHLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"EGFH League - Rocket League"}
                 description="EGFH high school Rocket League. Two 8 week seasonal splits with regional and national championships. National championship held on LAN for high school students."
                 canonicalPath={"/games/RocketLeague/leagues/egfh"}
             />
@@ -20,7 +21,7 @@ export const EGFHLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - Must be a High School Student"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.egf.gg/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - Must be a High School Student"]} footer={<ExternalButton host={"EGFH League"} blank={true} title={"Join Now"} path={"https://www.egf.gg/"} />}/>
                 </div>
             </div>
 

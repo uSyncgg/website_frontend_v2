@@ -5,6 +5,7 @@ export const RVAEsportsChampionship2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"RVA Esports Championship 2026 - Call of Duty"}
                 description={"Welcome to the RVA Esports Championship 2026! The premier competitive gaming experience taking place inside ImmerseCon 2026 at the Richmond Convention Center on July 11th-12th, 2026."}
                 canonicalPath={"/lans/rva-esports-championship-2026"}
             />
@@ -21,7 +22,7 @@ export const RVAEsportsChampionship2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Venue Fee: $55", "Spectator Pass: $35"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/rva-esports-championship-2026-1/details"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Venue Fee: $55", "Spectator Pass: $35"]} footer={<ExternalButton host={"RVA Esports Championship 2026"} blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/rva-esports-championship-2026-1/details"} />}/>
                 </div>
             </div>
 

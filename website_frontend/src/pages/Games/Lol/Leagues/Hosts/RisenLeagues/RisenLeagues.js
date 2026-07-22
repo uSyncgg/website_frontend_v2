@@ -13,6 +13,7 @@ export const RisenLeagues = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Risen Leagues - League of Legends"}
                 description="Risen leagues are League of Legends leagues with huge prize pools and a super competitive environment. Sign yourself or your team up today."
                 canonicalPath={"/games/LoL/leagues/risen-leagues"}
             />

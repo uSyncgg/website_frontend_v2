@@ -5,6 +5,7 @@ export const GamerSaloonWagers = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"GamerSaloon - Counter-Strike"}
                 description="Counter-Strike 2 1v1 deathmatch wager matches provided by GamerSaloon. Various matches posted daily to compete head to head for cash."
                 canonicalPath={"/games/CS2/wagers/gamersaloon_cs2"}
             />
@@ -12,7 +13,7 @@ export const GamerSaloonWagers = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Match Fee: 10%", "Varying Fee with Deposits/Withdrawals"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.gamersaloon.com/tournaments/all"} />}/>
+                    <EventInfoCard title={"Fees"} infoList={["Match Fee: 10%", "Varying Fee with Deposits/Withdrawals"]} footer={<ExternalButton host={"GamerSaloon"} blank={true} title={"Join Now"} path={"https://www.gamersaloon.com/tournaments/all"} />}/>
                 </div>
 
                 <div>

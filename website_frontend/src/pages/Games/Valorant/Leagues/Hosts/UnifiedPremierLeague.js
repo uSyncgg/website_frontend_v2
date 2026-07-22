@@ -5,6 +5,7 @@ export const UnifiedPremierLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Unified Premier League - Valorant"}
                 description="Unified Premier League Valorant. $1,000 prize pool with no skill cap. Weekly regular season with playoffs for collegiate and high school players in NA."
                 canonicalPath={"/games/Valorant/leagues/unified"}
             />
@@ -20,7 +21,7 @@ export const UnifiedPremierLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://uea.gg/e/UCL26S/tickets"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD"]} footer={<ExternalButton host={"Unified Premier League"} blank={true} title={"Join Now"} path={"https://uea.gg/e/UCL26S/tickets"} />}/>
                 </div>
             </div>
 

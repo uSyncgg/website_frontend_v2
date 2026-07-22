@@ -5,6 +5,7 @@ export const FiReLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"FiRe League - Counter-Strike"}
                 description="Counter-Strike 2 FiReLEAGUE is a year round 5v5 league. With invitational tournaments and qualifiers to win prizes."
                 canonicalPath={"/games/CS2/leagues/firecup"}
             />
@@ -20,7 +21,7 @@ export const FiReLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Variable Cost Based on Event"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://x.com/FiReSPORTSgg"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Variable Cost Based on Event"]} footer={<ExternalButton host={"FiRe League"} blank={true} title={"Join Now"} path={"https://x.com/FiReSPORTSgg"} />}/>
                 </div>
             </div>
 

@@ -5,6 +5,7 @@ export const AustralianEsportsLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Australian Esports League University - Rocket League"}
                 description="Australian Esports League university Rocket League. $3,500 prize pool with open and elite series divisions. Must be enrolled at an Australian university."
                 canonicalPath={"/games/RocketLeague/leagues/australian-esports-league"}
             />
@@ -20,7 +21,7 @@ export const AustralianEsportsLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - Must be Enrolled at an Australian University"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://ael.org.au/uni/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - Must be Enrolled at an Australian University"]} footer={<ExternalButton host={"Australian Esports League University"} blank={true} title={"Join Now"} path={"https://ael.org.au/uni/"} />}/>
                 </div>
             </div>
 

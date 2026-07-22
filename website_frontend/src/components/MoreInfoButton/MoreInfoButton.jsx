@@ -1,13 +1,13 @@
 import styles from './MoreInfoButton.module.css';
 import React from 'react';
-import { Link } from 'react-router';
-
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import { trackEventCardClick } from 'utils/analytics';
 
 function MoreInfoButton({title, path, external=false}) {
     const navigator = useNavigate();
 
     const handleSubmitNative = () => {
+        trackEventCardClick(path, title);
         return(
             navigator(path)
         );
@@ -21,7 +21,7 @@ function MoreInfoButton({title, path, external=false}) {
         }
 
         {external === true &&
-            <Link to={path} target='_blank'>
+            <Link to={path} target='_blank' onClick={() => trackEventCardClick(path, title)}>
                 <button className={styles.button}>{title}</button>
             </Link>
         }

@@ -5,6 +5,7 @@ export const FastCupLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Fast Cup - Counter-Strike"}
                 description="Fast Cup is an eastern hemisphere based Counter-Strike 2 league. With monthly leagues this event will have you always improving your game."
                 canonicalPath={"/games/CS2/leagues/fastcup"}
             />
@@ -20,7 +21,7 @@ export const FastCupLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://cs2.fastcup.net/leagues/68/210/202/771"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"Fast Cup"} blank={true} title={"Join Now"} path={"https://cs2.fastcup.net/leagues/68/210/202/771"} />}/>
                 </div>
             </div>
 

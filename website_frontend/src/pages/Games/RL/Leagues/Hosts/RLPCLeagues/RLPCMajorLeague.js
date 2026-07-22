@@ -5,6 +5,7 @@ export const RLPCMajorLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"RLPC Major League - Rocket League"}
                 description="RLPC Major League is for the best Rocket League players with 1800+ MMR. Three seasons per year with a prize pool based on donations."
                 canonicalPath={"/games/RocketLeague/leagues/rlpc-leagues/major"}
             />
@@ -24,7 +25,7 @@ export const RLPCMajorLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1800+ MMR"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://linktr.ee/officialrlpc"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1800+ MMR"]} footer={<ExternalButton host={"RLPC Major League"} blank={true} title={"Join Now"} path={"https://linktr.ee/officialrlpc"} />}/>
                 </div>
             </div>
 

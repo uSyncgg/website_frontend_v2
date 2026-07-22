@@ -5,6 +5,7 @@ export const RisenChampionsLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Risen Champions League - League of Legends"}
                 description="Risen Champions League is the most prestigious league from Risen. Compete in this League of Legends league for thousands of dollars."
                 canonicalPath={"/games/LoL/leagues/risen-leagues/champions"}
             />
@@ -24,7 +25,7 @@ export const RisenChampionsLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$200 per Team", "Must be Highly Competitive or Qualify"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/risenesports"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$200 per Team", "Must be Highly Competitive or Qualify"]} footer={<ExternalButton host={"Risen Champions League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/risenesports"} />}/>
                 </div>
             </div>
 

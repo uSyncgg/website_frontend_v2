@@ -5,6 +5,7 @@ export const GACSHeatwave = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"GA:CS Operation Heatwave - Convention"}
                 description="GA:CS Presents | 🔥Operation Heatwave 🔥 🗓️ August 8th-9th, 2026 💰 Up to $2000 Prize Pool 🤝 16 Teams 📍 Game Arena - Columbus, OH"
                 canonicalPath={"/lans/gacs-operation-heatwave"}
             />
@@ -27,7 +28,7 @@ export const GACSHeatwave = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $250"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/ga-cs-operation-heatwave/details"} />}/> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $250"]} footer={<ExternalButton host={"GA:CS Operation Heatwave"} blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/ga-cs-operation-heatwave/details"} />}/> 
                 </div>
             </div>
 

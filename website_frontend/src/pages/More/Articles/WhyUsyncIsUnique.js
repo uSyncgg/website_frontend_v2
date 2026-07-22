@@ -5,6 +5,7 @@ export const WhyUsyncIsUnique = () => {
     return (
         <div className="standardBlankContainer">
             <SeoData
+                title={"Why uSync Is Like No Other Esports Platform"}
                 description="uSync isn't your standard esports website — it's an aggregator that brings leagues, LANs, tournaments, wagers, and more into one easy-to-use hub."
                 canonicalPath={"/more/articles/why-usync-is-unique"}
             />

@@ -5,6 +5,7 @@ export const ZonedOutGamingLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Zoned Out League - Call of Duty"}
                 description="Zoned Out Call of Duty league. Multiple different skill divisions hosted during nearly every season of the year."
                 canonicalPath={"/games/call-of-duty/leagues/zoned-out"}
             />
@@ -20,7 +21,7 @@ export const ZonedOutGamingLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Elite Division - $100 per Team", "Master Division - $60 per Team", "Open Division - $40 per Team"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://zonedoutgaming.com/leagues/call-of-duty/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Elite Division - $100 per Team", "Master Division - $60 per Team", "Open Division - $40 per Team"]} footer={<ExternalButton host={"Zoned Out League"} blank={true} title={"Join Now"} path={"https://zonedoutgaming.com/leagues/call-of-duty/"} />}/>
                 </div>
             </div>
 

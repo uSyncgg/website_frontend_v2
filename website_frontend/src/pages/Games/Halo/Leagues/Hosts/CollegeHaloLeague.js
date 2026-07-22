@@ -5,6 +5,7 @@ export const CollegeHaloLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"College League - Halo"}
                 description="UGC Halo is the #1 collegiate Halo league. Full time college students can compete at the highest level and win cash prizes."
                 canonicalPath={"/games/halo/leagues/ugc-halo"}
             />
@@ -24,7 +25,7 @@ export const CollegeHaloLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Must be a Full Time College Student", "Entry Fee TBD"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/CapnyyzMkJ"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Must be a Full Time College Student", "Entry Fee TBD"]} footer={<ExternalButton host={"College Halo League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/CapnyyzMkJ"} />}/>
                 </div>
             </div>
 

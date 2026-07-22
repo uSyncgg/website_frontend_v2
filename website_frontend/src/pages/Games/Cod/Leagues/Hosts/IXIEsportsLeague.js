@@ -5,6 +5,7 @@ export const IXIEsportsLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"IXI Esports - Call of Duty"}
                 description="IXI Esports free tournaments and leagues for COD players. Once a year season in the spring for $100 prize pool."
                 canonicalPath={"/games/call-of-duty/leagues/ixi-esports"}
             />
@@ -20,7 +21,7 @@ export const IXIEsportsLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Free Agents Recruited by Teams or Create Team With 4+"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/qUQzHmQ3dZ"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Free Agents Recruited by Teams or Create Team With 4+"]} footer={<ExternalButton host={"IXI Esports"} blank={true} title={"Join Now"} path={"https://discord.com/invite/qUQzHmQ3dZ"} />}/>
                 </div>
             </div>
 

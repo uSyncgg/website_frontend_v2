@@ -5,6 +5,7 @@ export const EsportsAgentH2H = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Esports Agent - Call of Duty"}
                 description="Esports Agent head to head matches for cod players looking for competitive play. Join now to prove your skill."
                 canonicalPath={"/games/call-of-duty/head-to-head/eagent"}
             />
@@ -12,7 +13,7 @@ export const EsportsAgentH2H = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Free XP Matches"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://esportsagent.gg/wagers"} />}/>
+                    <EventInfoCard title={"Fees"} infoList={["Free XP Matches"]} footer={<ExternalButton host={"Esports Agent"} blank={true} title={"Join Now"} path={"https://esportsagent.gg/wagers"} />}/>
                 </div>
 
                 <div>

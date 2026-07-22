@@ -5,6 +5,7 @@ export const HaloAgentLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Halo Agent - Halo"}
                 description="Halo Agent is the league for those who love to play ranked Halo and want something more. Compete today."
                 canonicalPath={"/games/halo/leagues/halo-agent"}
             />
@@ -20,7 +21,7 @@ export const HaloAgentLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["TBD"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://twitter.com/TheHaloAgent"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["TBD"]} footer={<ExternalButton host={"Halo Agent"} blank={true} title={"Join Now"} path={"https://twitter.com/TheHaloAgent"} />}/>
                 </div>
             </div>
 

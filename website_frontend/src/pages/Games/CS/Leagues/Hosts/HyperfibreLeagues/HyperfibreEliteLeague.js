@@ -5,6 +5,7 @@ export const HyperfibreEliteLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Hyperfibre Elite Division - Counter-Strike"}
                 description="Elite hyperfibre league for New Zealand Counter-Strike 2 players. Compete against other NZ players and climb to the top."
                 canonicalPath={"/games/CS2/leagues/hyperfibre-leagues/elite"}
             />
@@ -20,7 +21,7 @@ export const HyperfibreEliteLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://x.com/NZ_Esports_"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"Hyperfibre Elite Division"} blank={true} title={"Join Now"} path={"https://x.com/NZ_Esports_"} />}/>
                 </div>
             </div>
 

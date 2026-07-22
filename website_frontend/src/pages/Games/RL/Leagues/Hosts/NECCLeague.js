@@ -5,6 +5,7 @@ export const NECCLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"NECC League - Rocket League"}
                 description="NECC Rocket League college league. $6,000 prize pool with multiple skill divisions. 6 week regular season with playoffs. Must be a full time college student."
                 canonicalPath={"/games/RocketLeague/leagues/necc"}
             />
@@ -20,7 +21,7 @@ export const NECCLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$1,500/yr - Unlimited Game Title Participation", "$800/yr - One Game Title Participation", "Must be a FULL TIME College Student and ACADEMICALLY ELIGIBLE"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.neccgames.com/landing/index"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$1,500/yr - Unlimited Game Title Participation", "$800/yr - One Game Title Participation", "Must be a FULL TIME College Student and ACADEMICALLY ELIGIBLE"]} footer={<ExternalButton host={"NECC League"} blank={true} title={"Join Now"} path={"https://www.neccgames.com/landing/index"} />}/>
                 </div>
             </div>
 

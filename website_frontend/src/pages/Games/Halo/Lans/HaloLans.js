@@ -5,6 +5,7 @@ export const HaloLans = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Halo LANs"}
                 description="Halo LAN tournaments near you and across the world. Find the closest Halo LAN to you today."
                 canonicalPath={"/games/halo/lans"}
             />

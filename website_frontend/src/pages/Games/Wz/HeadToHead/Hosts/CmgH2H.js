@@ -5,6 +5,7 @@ export const CmgH2H = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Checkmate Gaming - Warzone"}
                 description="Checkmate Gaming Warzone head-to-head. A verified platform with free XP matches, ranked ladder by wins, and prizes based on record. 24/7 live support."
                 canonicalPath={"/games/warzone/head-to-head/cmg"}
             />
@@ -16,7 +17,7 @@ export const CmgH2H = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Free XP Matches"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.checkmategaming.com/ladders"} />}/>
+                    <EventInfoCard title={"Fees"} infoList={["Free XP Matches"]} footer={<ExternalButton host={"Checkmate Gaming"} blank={true} title={"Join Now"} path={"https://www.checkmategaming.com/ladders"} />}/>
                 </div>
 
                 <div>
