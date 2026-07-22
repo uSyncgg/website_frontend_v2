@@ -21,7 +21,7 @@ export const RSC3v3EULeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/Bw4rvpG"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"RSC EU 3v3"} blank={true} title={"Join Now"} path={"https://discord.com/invite/Bw4rvpG"} />}/>
                 </div>
             </div>
 

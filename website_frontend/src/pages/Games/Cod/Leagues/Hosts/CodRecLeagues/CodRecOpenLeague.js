@@ -22,7 +22,7 @@ export const CodRecOpenLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Sign up as Solo or Duo"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.google.com/url?q=https%3A%2F%2Fcod.esrl.gg%2F&sa=D&sntz=1&usg=AOvVaw359r5MIeBPnIT5_Guhelh-"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Sign up as Solo or Duo"]} footer={<ExternalButton host={"Cod Rec Open League"} blank={true} title={"Join Now"} path={"https://www.google.com/url?q=https%3A%2F%2Fcod.esrl.gg%2F&sa=D&sntz=1&usg=AOvVaw359r5MIeBPnIT5_Guhelh-"} />}/>
                 </div>
             </div>
 

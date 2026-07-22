@@ -13,7 +13,7 @@ export const CollegiateValorantHubScrimsH2H = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Free Scrim Finder"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/Vq5qu9szQU"} />}/>
+                    <EventInfoCard title={"Fees"} infoList={["Free Scrim Finder"]} footer={<ExternalButton host={"Collegiate Valorant Hub Scrims"} blank={true} title={"Join Now"} path={"https://discord.com/invite/Vq5qu9szQU"} />}/>
                 </div>
 
                 <div>

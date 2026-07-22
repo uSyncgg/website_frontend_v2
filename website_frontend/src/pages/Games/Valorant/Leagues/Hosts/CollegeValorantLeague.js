@@ -5,7 +5,7 @@ export const CollegeValorantLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
-                title={"College League - Valorant"}
+                title={"CVAL - Valorant"}
                 description="College Valorant League presented by Riot Games. A verified collegiate league with scholarship prizes. Free to enter for full time college students in NA."
                 canonicalPath={"/games/Valorant/leagues/riot"}
             />
@@ -25,7 +25,7 @@ export const CollegeValorantLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry - Must be a FULL TIME College Student"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://universityesportsna.riotgames.com/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry - Must be a FULL TIME College Student"]} footer={<ExternalButton host={"CVAL League"} blank={true} title={"Join Now"} path={"https://universityesportsna.riotgames.com/"} />}/>
                 </div>
             </div>
 

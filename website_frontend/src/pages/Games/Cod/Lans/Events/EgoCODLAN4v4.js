@@ -27,7 +27,7 @@ export const EgoCODLAN4v4 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $100", "Solo Entry: $25"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/ego-cod-lan-4v4-tournament/details"} /> }/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $100", "Solo Entry: $25"]} footer={<ExternalButton host={"Ego COD LAN 4v4"} blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/ego-cod-lan-4v4-tournament/details"} /> }/>
                 </div>
             </div>
 

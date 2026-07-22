@@ -21,7 +21,7 @@ export const CollegeCodLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$200 - $350 per Team (Estimated)", "Must be a FULL TIME College Student"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://collegecod.com/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$200 - $350 per Team (Estimated)", "Must be a FULL TIME College Student"]} footer={<ExternalButton host={"College COD League"} blank={true} title={"Join Now"} path={"https://collegecod.com/"} />}/>
                 </div>
             </div>
 

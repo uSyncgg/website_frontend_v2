@@ -21,7 +21,7 @@ export const MetaShiftPlatinumLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$60 per Team (Estimated)", "Tier 5", "See Website for Tier Check"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/RtJa6kY"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$60 per Team (Estimated)", "Tier 5", "See Website for Tier Check"]} footer={<ExternalButton host={"MetaShift Platinum League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/RtJa6kY"} />}/>
                 </div>
             </div>
 

@@ -21,7 +21,7 @@ export const EGFCLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD", "Must be in a D1 Varisty Esports Program"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://www.egf.gg/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD", "Must be in a D1 Varisty Esports Program"]} footer={<ExternalButton host={"EGFC League"} blank={true} title={"Join Now"} path={"https://www.egf.gg/"} />}/>
                 </div>
             </div>
 

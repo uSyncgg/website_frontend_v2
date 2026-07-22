@@ -22,7 +22,7 @@ export const LANAllNightSpring2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["BYOC: $90", "General Admission: $10 - $25"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://lanallnight.com/"} />}/> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["BYOC: $90", "General Admission: $10 - $25"]} footer={<ExternalButton host={"LAN All Night Spring 2026"} blank={true} title={"Join Now"} path={"https://lanallnight.com/"} />}/> 
                 </div>
             </div>
 

@@ -25,7 +25,7 @@ export const RLPCDoubleALeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1350 - 1574 MMR"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://linktr.ee/officialrlpc"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1350 - 1574 MMR"]} footer={<ExternalButton host={"RLPC AA League"} blank={true} title={"Join Now"} path={"https://linktr.ee/officialrlpc"} />}/>
                 </div>
             </div>
 

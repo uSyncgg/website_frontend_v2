@@ -21,7 +21,7 @@ export const HaloAgentLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["TBD"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://twitter.com/TheHaloAgent"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["TBD"]} footer={<ExternalButton host={"Halo Agent"} blank={true} title={"Join Now"} path={"https://twitter.com/TheHaloAgent"} />}/>
                 </div>
             </div>
 

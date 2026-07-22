@@ -13,7 +13,7 @@ export const EsportsScrimH2H = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Free Scrim Finder"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://esportscrim.com/"} />}/>
+                    <EventInfoCard title={"Fees"} infoList={["Free Scrim Finder"]} footer={<ExternalButton host={"Esports Scrim"} blank={true} title={"Join Now"} path={"https://esportscrim.com/"} />}/>
                 </div>
 
                 <div>

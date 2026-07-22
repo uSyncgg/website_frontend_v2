@@ -17,7 +17,7 @@ export const EsportsAgentWagers = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Regular Member: 5%", "Prestige Member: 0%", "No Fee & Instant Deposits/Withdrawals"]} footer={<ExternalButton blank={true} title={"Join Now"} path={"https://esportsagent.gg/wagers"} />}/>
+                    <EventInfoCard title={"Fees"} infoList={["Regular Member: 5%", "Prestige Member: 0%", "No Fee & Instant Deposits/Withdrawals"]} footer={<ExternalButton host={"Esports Agent"} blank={true} title={"Join Now"} path={"https://esportsagent.gg/wagers"} />}/>
                 </div>
 
                 <div>
