@@ -49,8 +49,8 @@ export const MinorLeagueEsportsLeagues = () => {
                 <HostBanner>
                     <HostBanner.Title path={"/games/RocketLeague/leagues/mle-leagues/champ"}>Champion League</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/mle-leagues/champ"} 
-                        imgUrl={"https://i.imgur.com/1ouD021.png"} 
+                        path={"/games/RocketLeague/leagues/mle-leagues/champ"}
+                        imgUrl={"https://i.imgur.com/U3PRmzs.png"}
                         alt={"Minor League Esports"}
                         verified={false}
                     />
@@ -61,8 +61,8 @@ export const MinorLeagueEsportsLeagues = () => {
                 <HostBanner>
                     <HostBanner.Title path={"/games/RocketLeague/leagues/mle-leagues/academy"}>Academy League</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/mle-leagues/academy"} 
-                        imgUrl={"https://i.imgur.com/1ouD021.png"} 
+                        path={"/games/RocketLeague/leagues/mle-leagues/academy"}
+                        imgUrl={"https://i.imgur.com/6Fzq2oe.png"}
                         alt={"Minor League Esports"}
                         verified={false}
                     />
@@ -75,8 +75,8 @@ export const MinorLeagueEsportsLeagues = () => {
                 <HostBanner>
                     <HostBanner.Title path={"/games/RocketLeague/leagues/mle-leagues/foundation"}>Foundation League</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/mle-leagues/foundation"} 
-                        imgUrl={"https://i.imgur.com/1ouD021.png"} 
+                        path={"/games/RocketLeague/leagues/mle-leagues/foundation"}
+                        imgUrl={"https://i.imgur.com/acXiAPL.png"}
                         alt={"Minor League Esports"}
                         verified={false}
                     />
