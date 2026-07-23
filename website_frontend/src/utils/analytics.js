@@ -22,6 +22,10 @@ export function trackJoinNowClick(game, host, url) {
     trackEvent('join_now_click', { game, host, destination_url: url });
 }
 
+export function trackTournamentJoinClick(host, title, url) {
+    trackEvent('tournament_join_now_click', { host, title, destination_url: url });
+}
+
 export function trackEventCardClick(destinationPath, title) {
     trackEvent('event_card_click', { destination_path: destinationPath, title });
 }
