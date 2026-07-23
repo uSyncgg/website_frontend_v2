@@ -4,15 +4,17 @@ import { useCheckResize } from "hooks";
 export const NemesisLeagues = () => {
     const isMobile = useCheckResize();
 
-    const titan = isMobile ? "Titan League - 1746+ MMR" : "1746+ MMR";
-    const rival = isMobile ? "Rival League - 1608 - 1745 MMR" : "1608 - 1745 MMR";
-    const challenger = isMobile ? "Challenger League - 1499 - 1607 MMR" : "1499 - 1607 MMR";
-    const prospect = isMobile ? "Prospect League - 1320 - 1498 MMR" : "1320 - 1498 MMR";
-    const novice = isMobile ? "Novice League - 1100 - 1319 MMR" : "1100 - 1319 MMR";
+    const titan = isMobile ? "Titan League - 1741+ MMR" : "1741+ MMR";
+    const rival = isMobile ? "Rival League - 1627 - 1740 MMR" : "1626 - 1740 MMR";
+    const challenger = isMobile ? "Challenger League - 1535 - 1625 MMR" : "1535 - 1625 MMR";
+    const prospect = isMobile ? "Prospect League - 1415 - 1534 MMR" : "1415 - 1534 MMR";
+    const novice = isMobile ? "Novice League - 1203 - 1414 MMR" : "1203 - 1414 MMR";
+    const provisional = isMobile ? "Provisional League - 835 - 1202 MMR" : "835 - 1202 MMR";
 
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Nemesis Leagues - Rocket League"}
                 description="Nemesis Rocket League Leagues. With range based MMR leagues this is the perfect opportunity for North American RL players wanted to compete at the next level."
                 canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues"}
             />
@@ -81,6 +83,18 @@ export const NemesisLeagues = () => {
                     />
                     <HostBanner.Region>{novice}</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/nemesis-leagues/novice"} />
+                </HostBanner>
+
+                <HostBanner>
+                    <HostBanner.Title path={"/games/RocketLeague/leagues/nemesis-leagues/provisional"}>Provisional League</HostBanner.Title>
+                    <HostBanner.Image 
+                        path={"/games/RocketLeague/leagues/nemesis-leagues/provisional"} 
+                        imgUrl={"https://i.imgur.com/PcmcLLk.png"} 
+                        alt={"Nemesis Leagues"}
+                        verified={false}
+                    />
+                    <HostBanner.Region>{provisional}</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/nemesis-leagues/provisional"} />
                 </HostBanner>
 
                 <div className="hrEvents" />

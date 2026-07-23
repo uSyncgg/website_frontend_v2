@@ -5,6 +5,7 @@ export const Ewagers = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Ewagers - Valorant"}
                 description="Ewagers Valorant wager platform. Set your own wager odds and amounts with 5% wager fee. Available worldwide for Valorant players 18 and over."
                 canonicalPath={"/games/Valorant/wagers/ewagers"}
             />
@@ -12,7 +13,7 @@ export const Ewagers = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["3% Deposit And Withdrawal Fee", "5% Wager Fee"]} />
+                    <EventInfoCard title={"Fees"} infoList={["3% Deposit And Withdrawal Fee", "5% Wager Fee"]} footer={<ExternalButton host={"Ewagers"} blank={true} title={"Join Now"} path={"https://ewagers.co/games?page=1"} />}/>
                 </div>
 
                 <div>
@@ -22,10 +23,6 @@ export const Ewagers = () => {
                 <div>
                     <EventInfoCard title={"Restrictions"} infoList={["18+", "Available Worldwide", "Certain State / Global Restrictions"]} />
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://ewagers.co/games?page=1"} />
             </div>
 
             <div className="backButtonContainer">

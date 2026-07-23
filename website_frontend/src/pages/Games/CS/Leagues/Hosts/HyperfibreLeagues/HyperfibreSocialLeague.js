@@ -5,6 +5,7 @@ export const HyperfibreSocialLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Hyperfibre Social Division - Counter-Strike"}
                 description="Hyperfibre social league is a free to play New Zealand league. Compete in a casual setting to have fun while still being competitive."
                 canonicalPath={"/games/CS2/leagues/hyperfibre-leagues/social"}
             />
@@ -12,20 +13,16 @@ export const HyperfibreSocialLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring Season"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring Season"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NZ"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Casual for Fun Division", "Ages 16+", "4 Week Long Regular Season", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NZ"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Casual for Fun Division", "Ages 16+", "4 Week Long Regular Season", "Live Streamed Matches"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"Hyperfibre Social Division"} blank={true} title={"Join Now"} path={"https://x.com/NZ_Esports_"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://x.com/NZ_Esports_"} />
             </div>
 
             <div className="backButtonContainer">

@@ -5,6 +5,7 @@ export const AegisChallengerLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Aegis Challenger League - League of Legends"}
                 description="Aegis Challengers League - year round League of Legends league with huge prize pool."
                 canonicalPath={"/games/LoL/leagues/aegis-leagues/challenger"}
             />
@@ -16,20 +17,16 @@ export const AegisChallengerLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Winter Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Winter Seasons"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Prize Pool TBD", "16 - 32 Teams", "Live Streamed Matches", "Support on Discord"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Prize Pool TBD", "16 - 32 Teams", "Live Streamed Matches", "Support on Discord"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$300 per Team"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$300 per Team"]} footer={<ExternalButton host={"Aegis Challenger League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/dBtt7Fg9jv"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/dBtt7Fg9jv"} />
             </div>
 
             <div className="backButtonContainer">

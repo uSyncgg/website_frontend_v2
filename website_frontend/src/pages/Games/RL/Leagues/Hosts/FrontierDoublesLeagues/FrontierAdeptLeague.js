@@ -5,6 +5,7 @@ export const FrontierAdeptLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Frontier Adept League - Rocket League"}
                 description={"Frontier Double Rocket League league. Salary cap of 36. Sign up for this 2v2 North American league today on uSync."}
                 canonicalPath={"/games/RocketLeague/leagues/frontier-doubles-leagues/adept"}
             />
@@ -13,20 +14,16 @@ export const FrontierAdeptLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Multiple Seasons Annually"]} />
+                    <EventInfoCard title={"Date"} infoList={["Multiple Seasons Annually"]} regionTitle={"Region/Type"} regionInfoList={["2v2 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Salary Determined by MMR", "10 Week Season", "Hosted on NA East, Open to Any Region", "Not a Draft League"]} regionTitle={"Region/Type"} regionInfoList={["2v2 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Salary Determined by MMR", "10 Week Season", "Hosted on NA East, Open to Any Region", "Not a Draft League"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Salary Cap of 36"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Salary Cap of 36"]} footer={<ExternalButton host={"Adept League"} blank={true} title={"Join Now"} path={"https://fdl.gg/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://fdl.gg/"} />
             </div>
 
             <div className="backButtonContainer">

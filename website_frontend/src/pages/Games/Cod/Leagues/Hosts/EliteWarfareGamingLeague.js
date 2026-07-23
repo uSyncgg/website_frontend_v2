@@ -5,6 +5,7 @@ export const EliteWarfareGamingLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Elite Warfare Gaming League - Call of Duty"}
                 description="Elite Warfare Gaming League is a Call of Duty league for those looking to play against others in their same skill level. Sign up today!"
                 canonicalPath={"/games/call-of-duty/leagues/elite-gaming-warfare-league"}
             />
@@ -12,20 +13,16 @@ export const EliteWarfareGamingLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons (Estimated)"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons (Estimated)"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["70/30% Prize Pool Split", "4v4 CDL Ruleset Based on Divisions", "Group A: T150 Pro Point Players / NO T250 Ranked Players", "Group B: Crim 3 Ranked Peak / No Pro Point Players / No top U18 Players (Via S7 U18 League)", "Group C: Diamond 3 Ranked Peak / No Pro Point Players / No Challengers Cup Participants / $50 Earnings Limit on COD Agent/CMGs / No top U18 Players (Via S7 U18 League)"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["70/30% Prize Pool Split", "4v4 CDL Ruleset Based on Divisions", "Group A: T150 Pro Point Players / NO T250 Ranked Players", "Group B: Crim 3 Ranked Peak / No Pro Point Players / No top U18 Players (Via S7 U18 League)", "Group C: Diamond 3 Ranked Peak / No Pro Point Players / No Challengers Cup Participants / $50 Earnings Limit on COD Agent/CMGs / No top U18 Players (Via S7 U18 League)"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Group A: $50 Team Pass", "Group B: $40 Team Pass", "Group C: $30 Team Pass"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Group A: $50 Team Pass", "Group B: $40 Team Pass", "Group C: $30 Team Pass"]} footer={<ExternalButton host={"Elite Warfare Gaming League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/Mq3wBGFnNY"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/Mq3wBGFnNY"} />
             </div>
 
             <div className="backButtonContainer">

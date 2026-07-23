@@ -5,6 +5,7 @@ export const SummerConWS2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"SummerCon 2026 - Convention"}
                 description="Summer Con is a collection of over 250 vendors, artists, exhibitors, prop builders, crafters, streamers, podcasters, gamers, and experts who set up at the convention to sell their products, teach, and meet the thousands of people who enter the Convention."
                 canonicalPath={"/lans/summercon-ws-2026"}
             />
@@ -26,12 +27,8 @@ export const SummerConWS2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Friday: $40","Saturday: $70","Sunday: $55","3-Day: $130"]} /> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["Friday: $40","Saturday: $70","Sunday: $55","3-Day: $130"]} footer={<ExternalButton host={"SummerCon 2026"} blank={true} title={"Join Now"} path={"https://www.wasummercon.com/"} />}/> 
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.wasummercon.com/"} />
             </div>
 
             <div className="backButtonContainer">

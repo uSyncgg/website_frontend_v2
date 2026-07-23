@@ -5,6 +5,7 @@ export const FemaleCodLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Female League - Call of Duty"}
                 description="Female Call of Duty league. Female league for aspiring Call of Duty professional players."
                 canonicalPath={"/games/call-of-duty/leagues/fcl"}
             />
@@ -12,20 +13,16 @@ export const FemaleCodLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Winter and Spring Season"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Winter and Spring Season"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$1,500 Prize Pool", "Regular Season and Playoffs", "Female ONLY", "Competitive", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$1,500 Prize Pool", "Regular Season and Playoffs", "Female ONLY", "Competitive", "Live Streamed Matches"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$100 per Team"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$100 per Team"]} footer={<ExternalButton host={"Female Call of Duty League"} blank={true} title={"Join Now"} path={"https://x.com/FemaleC0DLeague"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://x.com/FemaleC0DLeague"} />
             </div>
 
             <div className="backButtonContainer">

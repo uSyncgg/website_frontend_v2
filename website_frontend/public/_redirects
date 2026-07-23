@@ -212,6 +212,7 @@
 /games/RocketLeague/leagues/nemesis-leagues/challenger /index.html 200
 /games/RocketLeague/leagues/nemesis-leagues/prospect /index.html 200
 /games/RocketLeague/leagues/nemesis-leagues/novice /index.html 200
+/games/RocketLeague/leagues/nemesis-leagues/provisional /index.html 200
 /games/RocketLeague/leagues/frontier-doubles-leagues /index.html 200
 /games/RocketLeague/leagues/frontier-doubles-leagues/elite /index.html 200
 /games/RocketLeague/leagues/frontier-doubles-leagues/star /index.html 200
@@ -324,6 +325,10 @@
 /lans/citadel-i /index.html 200
 /lans/hnl-x-fandom-2026 /index.html 200
 /lans/oh-yoshi-di-int-rehatched /index.html 200
+/lans/ego-cod-lan-4v4 /index.html 200
+/lans/lan-a-thon-under-the-sun-2026 /index.html 200
+/lans/fortlan-2026 /index.html 200
+/lans/lan-all-night-2026 /index.html 200
 /lans/shinto-test /index.html 200
 
 /404.html 404

@@ -5,6 +5,7 @@ export const OhYoshiDiIntRehatched = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Oh Yoshi Di-int Rehatched - Halo"}
                 description={"A CENTRAL VALLEY REGIONAL EVENT FOR SMASH, FIGHTING GAMES, AND FOR THE FIRST TIME, HALO 3"}
                 canonicalPath={"/lans/oh-yoshi-di-int-rehatched"}
             />
@@ -26,12 +27,8 @@ export const OhYoshiDiIntRehatched = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Venue Fee: $10", "Bracket Fee: $5 (per bracket)"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Venue Fee: $10", "Bracket Fee: $5 (per bracket)"]} footer={<ExternalButton host={"Oh Yoshi Di-int Rehatched"} blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/oh-yoshi-di-int-rehatched/details"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/oh-yoshi-di-int-rehatched/details"} />
             </div>
 
             <div className="backButtonContainer">

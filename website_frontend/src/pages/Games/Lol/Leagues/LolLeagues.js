@@ -4,6 +4,7 @@ export const LolLeagues = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"League of Legends Leagues"}
                 description="League of Legends leagues. Compete for cash prizes. Sign up based on your in-game rank and elevate your league status forever."
                 canonicalPath={"/games/LoL/leagues"}
             />
@@ -124,6 +125,18 @@ export const LolLeagues = () => {
                     />
                     <HostBanner.Region>NA</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/corporate-league"} />
+                </HostBanner>
+
+                <HostBanner>
+                    <HostBanner.Title path={"/games/LoL/leagues/black-twitch-league"}>Black Twitch League</HostBanner.Title>
+                    <HostBanner.Image 
+                        path={"/games/LoL/leagues/black-twitch-league"} 
+                        imgUrl={"https://i.imgur.com/ZuJA3w1.png"} 
+                        alt={"Black Twitch League"}
+                        verified={false}
+                    />
+                    <HostBanner.Region>NA</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/black-twitch-league"} />
                 </HostBanner>
 
                 <div className="hrEvents" />

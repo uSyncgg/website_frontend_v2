@@ -10,9 +10,19 @@ const PaymentComponent = lazy(() => import('components/PaymentComponent/PaymentC
 
 function Payment() {
     const location = useLocation();
+    const navigate = useNavigate();
 
     return (
         <div className="standardContainer">
+            <div className={styles.checkoutHeader}>
+                <button type="button" className={styles.backButton} onClick={() => navigate(-1)}>
+                    <FaArrowLeft /> Back
+                </button>
+                <p className={styles.eyebrow}>Secure Checkout</p>
+                <h1 className={styles.eventTitle}>{location.state?.eventName || 'Complete Your Payment'}</h1>
+                <CheckoutSteps active={3} />
+            </div>
+
             <PaymentComponent id={location.state?.id} price={location.state?.price} />
         </div>
     );

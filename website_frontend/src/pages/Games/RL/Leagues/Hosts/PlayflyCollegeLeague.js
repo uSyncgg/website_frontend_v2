@@ -5,6 +5,7 @@ export const PlayflyCollegeLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Playfly League - Rocket League"}
                 description="Playfly College Rocket League. $280k prize pool split across all titles and divisions. Must be a full time college student. Free open division available."
                 canonicalPath={"/games/RocketLeague/leagues/playfly-college"}
             />
@@ -12,20 +13,16 @@ export const PlayflyCollegeLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$280k Prize Pool Split Across All titles and Divisions", "Scholarship Players Allowed", "Live Streamed Matches", "Live Support on Discord", "Multiple Tiers for Each Division"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$280k Prize Pool Split Across All titles and Divisions", "Scholarship Players Allowed", "Live Streamed Matches", "Live Support on Discord", "Multiple Tiers for Each Division"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Must be a FULL TIME College Student", "$1,000 for Full Year", "$625 for Half Year", "Free Entry - Open Division"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Must be a FULL TIME College Student", "$1,000 for Full Year", "$625 for Half Year", "Free Entry - Open Division"]} footer={<ExternalButton host={"Playfly League"} blank={true} title={"Join Now"} path={"https://playflycollege.gg/pages/playfly-college-esports"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://playflycollege.gg/pages/playfly-college-esports"} />
             </div>
 
             <div className="backButtonContainer">

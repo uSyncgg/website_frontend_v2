@@ -5,6 +5,7 @@ export const TitanVanquisherLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Titan Vanquisher League - League of Legends"}
                 description="Titan Vanquisher League is a League of Legends league with a M100 cap. Do you have what it takes to win the entire league?"
                 canonicalPath={"/games/LoL/leagues/titan-leagues/vanquisher"}
             />
@@ -16,20 +17,16 @@ export const TitanVanquisherLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Summer, Fall, and Winter Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Summer, Fall, and Winter Seasons"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["1st Place = 35% - 2nd Place = 15% - 3rd/4th Place = 5% - Operators = 40%", "9 Week Round Robin Group Stage", "Fearless Draft", "Support on Discord", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["1st Place = 35% - 2nd Place = 15% - 3rd/4th Place = 5% - Operators = 40%", "9 Week Round Robin Group Stage", "Fearless Draft", "Support on Discord", "Live Streamed Matches"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$100 per Team", "$50 Forfeit Deposit", "Masters 100 LP Cap"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$100 per Team", "$50 Forfeit Deposit", "Masters 100 LP Cap"]} footer={<ExternalButton host={"Titan Vanquisher League"} blank={true} title={"Join Now"} path={"https://lol.titanesports.org/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://lol.titanesports.org/"} />
             </div>
 
             <div className="backButtonContainer">

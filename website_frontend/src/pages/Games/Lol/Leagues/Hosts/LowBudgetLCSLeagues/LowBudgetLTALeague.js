@@ -5,6 +5,7 @@ export const LowBudgetLTALeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"LCS LTA League - League of Legends"}
                 description={"LCS LTA League is a League of Legends uncapped ranked league. Sign up and have your matches live streamed."}
                 canonicalPath={"/games/LoL/leagues/low-budget-leagues/lta"}
             />
@@ -13,20 +14,16 @@ export const LowBudgetLTALeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Fall, and Winter Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Fall, and Winter Seasons"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["16 Teams Max", "Support on Discord", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["16 Teams Max", "Support on Discord", "Live Streamed Matches"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "No Rank or Point Cap"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "No Rank or Point Cap"]} footer={<ExternalButton host={"LCS LTA League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/w4WVB4Z"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/w4WVB4Z"} />
             </div>
 
             <div className="backButtonContainer">

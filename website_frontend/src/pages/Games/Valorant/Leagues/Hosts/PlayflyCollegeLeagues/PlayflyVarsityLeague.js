@@ -5,6 +5,7 @@ export const PlayflyVarsityLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Playfly Varsity - Valorant"}
                 description="Playfly College Valorant Varsity League for Platinum and above college students. $280k prize pool shared across all titles. Spring and fall seasons."
                 canonicalPath={"/games/Valorant/leagues/playfly-leagues/varsity"}
             />
@@ -12,20 +13,16 @@ export const PlayflyVarsityLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$280k Prize Pool Split Across All Titles and Divisions", "Live Streamed Matches", "Live Support on Discord"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$280k Prize Pool Split Across All Titles and Divisions", "Live Streamed Matches", "Live Support on Discord"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Must be a FULL TIME College Student", "$1,000 for Full Year", "$625 for Half Year", "Platinum & Above"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Must be a FULL TIME College Student", "$1,000 for Full Year", "$625 for Half Year", "Platinum & Above"]} footer={<ExternalButton host={"Playfly Varsity"} blank={true} title={"Join Now"} path={"https://playflycollege.gg/pages/playfly-college-esports"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://playflycollege.gg/pages/playfly-college-esports"} />
             </div>
 
             <div className="backButtonContainer">

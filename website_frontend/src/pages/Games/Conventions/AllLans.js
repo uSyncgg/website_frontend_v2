@@ -8,6 +8,7 @@ export const AllLans = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"All LANs"}
                 description="Find all esports LAN events across every game title on an interactive map. Browse upcoming in-person gaming tournaments and LAN parties near you."
                 canonicalPath={"/lans/all"}
             />

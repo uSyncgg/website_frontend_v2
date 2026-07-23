@@ -5,6 +5,7 @@ export const ComingSoon = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Coming Soon"}
                 description="Find out what game titles are coming soon to uSync. Request a game of your choice to be published on www.usync.gg"
                 canonicalPath={"Comingsoon"}
             />

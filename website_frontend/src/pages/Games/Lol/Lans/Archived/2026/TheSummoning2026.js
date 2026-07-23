@@ -1,10 +1,11 @@
 import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData } from "components";
-import '../../../EventInformation.css';
+import '../../../../EventInformation.css';
 
 export const TheSummoning2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"The Summoning 2026 - League of Legends"}
                 description="The Summoning aims to create an unparalleled experience for collectors, competitors and families. This convention style event features tabletop, TCG, comics, sports cards, esports tournaments and more all under one roof. Every attendee is guaranteed to leave with unforgettable memories"
                 canonicalPath={"/lans/the-summoning-2026"}
             />
@@ -13,7 +14,7 @@ export const TheSummoning2026 = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date/Place"} infoList={["July 18th, 2026", "Windsor, ON"]} /> 
+                    <EventInfoCard title={"Date/Place"} infoList={["July 18th, 2026", "Windsor, ON"]} />
                 </div>
 
                 <div>
@@ -22,16 +23,12 @@ export const TheSummoning2026 = () => {
                         , "1v1 Mundo Dodgeball Tournament"
                         , "SSBU, Pokemon VGC, Melee, and More Tournaments"
                         , "9AM Doors Open"
-                    ]} /> 
+                    ]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} /> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"The Summoning 2026"} blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/the-summoning-esports-tournaments/details"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/the-summoning-esports-tournaments/details"} />
             </div>
 
             <div className="backButtonContainer">

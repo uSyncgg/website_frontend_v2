@@ -5,6 +5,7 @@ export const PulseLowersLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Pulse X Lowers Division - Call of Duty"}
                 description="Pulse X Lowers Divisions is a Call of Duty league for those that are looking to play in a competitive environment for very cheap."
                 canonicalPath={"/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-lowers"}
             />
@@ -12,20 +13,16 @@ export const PulseLowersLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["December Start - Runs Twice per Title Year"]} />
+                    <EventInfoCard title={"Date"} infoList={["December Start - Runs Twice per Title Year"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["TBD Prize Pool", "6 Different Ranks", "Crossplay (Xbox, Playstation 4 & 5, and PC)", "Live Streamed Matches with Casters and Media Coverage"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["TBD Prize Pool", "6 Different Ranks", "Crossplay (Xbox, Playstation 4 & 5, and PC)", "Live Streamed Matches with Casters and Media Coverage"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$25 per Team"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$25 per Team"]} footer={<ExternalButton host={"Pulse X Lowers Division"} blank={true} title={"Join Now"} path={"https://discord.com/invite/pulsexleague"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/pulsexleague"} />
             </div>
 
             <div className="backButtonContainer">

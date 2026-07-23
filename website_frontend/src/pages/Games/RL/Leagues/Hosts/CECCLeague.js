@@ -5,6 +5,7 @@ export const CECCLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"CECC League - Rocket League"}
                 description="Collegiate Esports Collegiate Conference Rocket League. 4 regional divisions with regional qualifiers and LAN finals. Must be a full time college student."
                 canonicalPath={"/games/RocketLeague/leagues/cecc"}
             />
@@ -12,20 +13,16 @@ export const CECCLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Qualifiers and Grand Championship"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Qualifiers and Grand Championship"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - USA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["4 Regional Divisions", "Regional Qualifiers & Regional Tournaments", "LAN Finals", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - USA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["4 Regional Divisions", "Regional Qualifiers & Regional Tournaments", "LAN Finals", "Live Streamed Matches"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - Must be a FULL TIME College Student"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - Must be a FULL TIME College Student"]} footer={<ExternalButton host={"CECC League"} blank={true} title={"Join Now"} path={"https://www.collegiatesmg.com/cecc"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.collegiatesmg.com/cecc"} />
             </div>
 
             <div className="backButtonContainer">

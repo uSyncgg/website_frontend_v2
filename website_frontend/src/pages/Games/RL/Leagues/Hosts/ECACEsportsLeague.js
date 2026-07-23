@@ -5,6 +5,7 @@ export const ECACEsportsLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"ECAC League - Rocket League"}
                 description="ECAC Esports Rocket League. 8 week regular season with playoffs and multiple rank based divisions. Must be a full time college student in the USA."
                 canonicalPath={"/games/RocketLeague/leagues/ecac-esports"}
             />
@@ -12,20 +13,16 @@ export const ECACEsportsLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - USA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["No Prize Pool", "Multiple Divisions Based on Rank", "Two Matches Weekly", "8 Week Regular Season with Playoffs", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - USA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["No Prize Pool", "Multiple Divisions Based on Rank", "Two Matches Weekly", "8 Week Regular Season with Playoffs", "Live Streamed Matches"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$1,600/yr - Must be a FULL TIME College Student"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$1,600/yr - Must be a FULL TIME College Student"]} footer={<ExternalButton host={"ECAC League"} blank={true} title={"Join Now"} path={"https://discord.gg/ecacesports"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.gg/ecacesports"} />
             </div>
 
             <div className="backButtonContainer">

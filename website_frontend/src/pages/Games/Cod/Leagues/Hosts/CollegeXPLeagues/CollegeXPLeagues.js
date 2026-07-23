@@ -10,6 +10,7 @@ export const CollegeXPLeagues = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"College XP Leagues - Call of Duty"}
                 description="College XP league is for colleges in North America. Prove your college is the best in the country."
                 canonicalPath={"/games/call-of-duty/leagues/cxp-leagues"}
             />

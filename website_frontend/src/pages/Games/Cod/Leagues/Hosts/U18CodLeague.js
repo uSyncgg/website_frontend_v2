@@ -5,6 +5,7 @@ export const U18CodLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"U18 League - Call of Duty"}
                 description="Call of Duty league for players under the age of 18. Play like the Call of Duty pros even if you are not 18 years old."
                 canonicalPath={"/games/call-of-duty/leagues/u18-league"}
             />
@@ -12,20 +13,16 @@ export const U18CodLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["~$1,500 Prize Pools", "Highly Competitive", "Multiple Cups Throughout Season", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["~$1,500 Prize Pools", "Highly Competitive", "Multiple Cups Throughout Season", "Live Streamed Matches"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Must be Younger than 18", "$100 per Team", "$25 One Time Qualifier Entry", "$8 for Solo Players"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Must be Younger than 18", "$100 per Team", "$25 One Time Qualifier Entry", "$8 for Solo Players"]} footer={<ExternalButton host={"U18 League"} blank={true} title={"Join Now"} path={"https://twitter.com/U18CODLeague?s=20&t=KF_TfGh6U3dk7gMSosJncQ"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://twitter.com/U18CODLeague?s=20&t=KF_TfGh6U3dk7gMSosJncQ"} />
             </div>
 
             <div className="backButtonContainer">

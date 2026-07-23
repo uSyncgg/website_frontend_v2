@@ -5,6 +5,7 @@ export const NECCLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"NECC League - Valorant"}
                 description="NECC Valorant college league. $7,000 prize pool with multiple skill divisions and 6 week regular season with playoffs. Must be a full time college student."
                 canonicalPath={"/games/Valorant/leagues/necc"}
             />
@@ -12,20 +13,16 @@ export const NECCLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$7,000 Prize Pool (Estimated)", "Multiple Skill Divisions", "6 Week Regular Season and Playoffs After", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$7,000 Prize Pool (Estimated)", "Multiple Skill Divisions", "6 Week Regular Season and Playoffs After", "Live Streamed Matches"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$1,500/yr - Unlimited Game Title Participation", "$800/yr - One Game Title Participation", "Must be a FULL TIME College Student and ACADEMICALLY ELIGIBLE"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$1,500/yr - Unlimited Game Title Participation", "$800/yr - One Game Title Participation", "Must be a FULL TIME College Student and ACADEMICALLY ELIGIBLE"]} footer={<ExternalButton host={"NECC League"} blank={true} title={"Join Now"} path={"https://necc.leagueos.gg/schedule/valorant/at1g09hj7fr0ft0zui0qd1p89/schedule/1"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://necc.leagueos.gg/schedule/valorant/at1g09hj7fr0ft0zui0qd1p89/schedule/1"} />
             </div>
 
             <div className="backButtonContainer">

@@ -5,6 +5,7 @@ export const CollegeHaloLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"College League - Halo"}
                 description="UGC Halo is the #1 collegiate Halo league. Full time college students can compete at the highest level and win cash prizes."
                 canonicalPath={"/games/halo/leagues/ugc-halo"}
             />
@@ -16,20 +17,16 @@ export const CollegeHaloLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Fall and Spring Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Fall and Spring Seasons"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$2,500 Prize Pool (Estimated)", "Highly Competitive", "No Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$2,500 Prize Pool (Estimated)", "Highly Competitive", "No Live Streamed Matches"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Must be a Full Time College Student", "Entry Fee TBD"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Must be a Full Time College Student", "Entry Fee TBD"]} footer={<ExternalButton host={"College Halo League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/CapnyyzMkJ"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/CapnyyzMkJ"} />
             </div>
 
             <div className="backButtonContainer">

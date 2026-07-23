@@ -3,7 +3,7 @@ import axios from "axios";
 // formData should be JSON, endpoint str
 export const FormDataCheck = async({ endpoint, formData, collectionName }) => {
     // let url = 'http://localhost:4242/' + endpoint; // For Testing purposes only
-    let url = 'https://usync.gg/' + endpoint;
+    let url = 'https://www.usync.gg/' + endpoint;
 
     try {
         const response = await axios.post(url, 

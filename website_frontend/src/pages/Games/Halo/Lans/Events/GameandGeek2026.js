@@ -5,6 +5,7 @@ export const GameandGeek2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Game and Geek Expo 2026 - Halo"}
                 description="Game and Geek Expo is a high energy celebration of gaming, nostalgia, cosplay, and fandoms, uniting immersive experiences, a curated marketplace, and iconic pop culture all under one roof."
                 canonicalPath={"/lans/game-and-geek-2026"}
             />
@@ -26,12 +27,8 @@ export const GameandGeek2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Day Pass: ~$40","VIP Weekend Pass: $51"]} /> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["Day Pass: ~$40","VIP Weekend Pass: $51"]} footer={<ExternalButton host={"Game and Geek Expo 2026"} blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/game-and-geek-expo-2026/details"} />}/> 
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/game-and-geek-expo-2026/details"} />
             </div>
 
             <div className="backButtonContainer">

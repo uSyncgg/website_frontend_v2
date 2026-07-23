@@ -1,46 +1,172 @@
-.eventCard {
-    background: linear-gradient(135deg,rgba(27, 27, 27, 1) 50%, rgba(142, 106, 206, 0.5) 90%);
-    /* background: radial-gradient(circle at bottom, rgba(27, 27, 27, 1) 1%, rgba(142, 106, 206, 0.88) 100%); */
-    /* background: radial-gradient(circle at bottom, rgba(142, 106, 206, 0.5) 10%, rgba(27, 27, 27, 1) 100%); */
-    border-bottom: 3px solid #8e6ace;
-    border-radius: 8px;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    margin: auto auto;
-    /* min-width: 450px; */
-    /* min-height: 400px; */
-    /* max-width: 800px; */
-    /* max-height: 750px; */
-    height: 100%;
-    text-align: center;
+.statBar {
     display: flex;
-    flex-direction: column;
-    gap: clamp(0.25rem, 0.5rem, 1rem);
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 0.5rem 0;
+    justify-content: center;
 }
 
-.ul {
-    display: inline-block;
-    text-align: left;
+.statChip {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(142, 106, 206, 0.1);
+    border: 1px solid rgba(142, 106, 206, 0.3);
+    border-radius: 28px;
+    padding: 10px 22px;
+}
+
+.statIcon {
+    color: #8e6ace;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+}
+
+.statValue {
     color: white;
-    padding: 0.5rem;
-    font-weight: bold;
-    font-size: larger;
-    /* margin: 0 auto; */
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.eventCard {
+    background: #1e1e1e;
+    border-radius: 8px;
+    border: 0.5px solid #2a2a2a;
+    overflow: hidden;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.cardHeader {
+    background: rgba(142, 106, 206, 0.14);
+    padding: 13px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cardIcon {
+    color: #8e6ace;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
 }
 
 .title {
-    color: #8e6ace;
-    text-decoration: underline;
+    color: #c4aeed;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0;
 }
 
-.eventItem {
-    margin-bottom: 1rem;
+.dRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-bottom: 0.5px solid #222;
+}
+
+.dRow:last-child {
+    border-bottom: none;
+}
+
+.dDot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #8e6ace;
+    flex-shrink: 0;
+}
+
+.dRowText {
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.feeCallout {
+    background: rgba(142, 106, 206, 0.06);
+    border: 1px solid rgba(142, 106, 206, 0.25);
+    border-radius: 8px;
+    padding: 20px 24px;
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.feeHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 0.5px solid rgba(142, 106, 206, 0.2);
+}
+
+.feeIcon {
+    color: #8e6ace;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+}
+
+.feeLabel {
+    color: #8e6ace;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.feeItems {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.feeItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.feeDot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(142, 106, 206, 0.6);
+    flex-shrink: 0;
+}
+
+.feeItemText {
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.feeFooter {
+    margin: auto auto 0;
+    padding-top: 1.5rem;
+    width: 80%;
 }
 
 @media only screen and (max-width: 768px) {
-    .eventCard {
-        padding: .5rem 2rem;
+    .statBar {
+        padding: 0.25rem 0;
+    }
+
+    .dRowText {
+        font-size: 12px;
+    }
+
+    .feeItemText {
+        font-size: 12px;
     }
 }

@@ -5,6 +5,7 @@ export const PraccH2H = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Pracc - Valorant"}
                 description="Pracc Valorant scrim finder. Free worldwide scrim platform with large daily user base. Find all levels of competition with live Discord support."
                 canonicalPath={"/games/Valorant/head-to-head/pracc"}
             />
@@ -12,7 +13,7 @@ export const PraccH2H = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Free Scrim Finder"]} />
+                    <EventInfoCard title={"Fees"} infoList={["Free Scrim Finder"]} footer={<ExternalButton host={"Pracc"} blank={true} title={"Join Now"} path={"https://pracc.com/"} />}/>
                 </div>
 
                 <div>
@@ -22,10 +23,6 @@ export const PraccH2H = () => {
                 <div>
                     <EventInfoCard title={"Restrictions"} infoList={["Available Worldwide"]} />
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://pracc.com/"} />
             </div>
 
             <div className="backButtonContainer">

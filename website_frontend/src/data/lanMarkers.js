@@ -1,11 +1,11 @@
 export const COD_LAN_MARKERS = [
-    { lat: 30.0990662, lng: -81.5229898, name: "EWGL 3",                   link: "/lans/ewgl3",                        game: 'CoD' },
-    { lat: 39.9940032, lng: -83.0060542, name: "Shinto Champs",            link: "/lans/shintochamps2026",             game: 'CoD' },
-    { lat: 21.3010921, lng: -157.8498150, name: "HNL x FANDOM 2026",       link: "/lans/hnl-x-fandom-2026",            game: 'CoD' },
+    { lat: 30.0990662, lng: -81.5229898,  name: "EWGL 3",              link: "/lans/ewgl3",              game: 'CoD' },
+    { lat: 39.9940032, lng: -83.0060542,  name: "Shinto Champs",       link: "/lans/shintochamps2026",   game: 'CoD' },
+    { lat: 21.3010921, lng: -157.8498150, name: "HNL x FANDOM 2026",   link: "/lans/hnl-x-fandom-2026", game: 'CoD' },
+    { lat: 35.8813501, lng: -79.0653555,  name: "Ego COD LAN 4v4",     link: "/lans/ego-cod-lan-4v4",   game: 'CoD' },
 ];
 
 export const LOL_LAN_MARKERS = [
-    { lat: 42.2469148, lng: -83.0210947, name: "The Summoning 2026", link: "/lans/the-summoning-2026", game: 'LoL' },
 ];
 
 export const HALO_LAN_MARKERS = [
@@ -18,10 +18,12 @@ export const HALO_LAN_MARKERS = [
 export const WZ_LAN_MARKERS = [];
 
 export const CONVENTION_MARKERS = [
-    { lat: 39.9940217, lng: -83.0062971,  name: "GA:CS Operation Heatwave", link: "/lans/gacs-operation-heatwave", game: 'Conventions' },
-    { lat: 39.9597244, lng: -75.16156,    name: "The Retake",               link: "/lans/the-retake",              game: 'Conventions' },
+    { lat: 39.9940217, lng: -83.0062971,  name: "GA:CS Operation Heatwave",       link: "/lans/gacs-operation-heatwave",         game: 'Conventions' },
     // Offset slightly south from Citadel I (39.6829806) to avoid overlap on AllLans/Home maps
-    { lat: 39.6479806, lng: -105.0793028, name: "Hellcase CS2 LAN 2026",    link: "/lans/hellcase-cs2-2026",       game: 'Conventions' },
+    { lat: 39.6479806, lng: -105.0793028, name: "Hellcase CS2 LAN 2026",          link: "/lans/hellcase-cs2-2026",               game: 'Conventions' },
+    { lat: 32.6613598, lng: -116.9995153, name: "LAN-A-THON Under The Sun 2026",  link: "/lans/lan-a-thon-under-the-sun-2026",   game: 'Conventions' },
+    { lat: 41.0764636, lng: -85.1404836,  name: "FortLAN 2026",                   link: "/lans/fortlan-2026",                    game: 'Conventions' },
+    { lat: 32.9414733, lng: -97.0592118,  name: "LAN All Night 2026",             link: "/lans/lan-all-night-2026",              game: 'Conventions' },
 ];
 
 export const ALL_LAN_MARKERS = [

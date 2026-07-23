@@ -5,6 +5,7 @@ export const CWLRiseLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"CWL Rise - League of Legends"}
                 description="Cobalt Winds (CWL) 100 LP player cap | 200 LP team cap | Up to 2 Master players per team League of Legends league. Do you have what it takes to win the cash prize?"
                 canonicalPath={"/games/LoL/leagues/cobalt-winds-leagues/cwl-rise"}
             />
@@ -12,20 +13,16 @@ export const CWLRiseLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - EUW"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["€200 Prize Pool for First, €80 for Second", "2 Consecutive 4-Week Tournaments", "Community Contests and Events During Season and Offseason", "Flexible Rules for EUNE Players", "Support on Discord", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - EUW"]}/>
+                    <EventInfoCard title={"Details"} infoList={["€200 Prize Pool for First, €80 for Second", "2 Consecutive 4-Week Tournaments", "Community Contests and Events During Season and Offseason", "Flexible Rules for EUNE Players", "Support on Discord", "Live Streamed Matches"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["€25 per Team", "100 LP Individual Cap | 200 LP Team Cap | Up to 2 Masters players per Team"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["€25 per Team", "100 LP Individual Cap | 200 LP Team Cap | Up to 2 Masters players per Team"]} footer={<ExternalButton host={"CWL Rise"} blank={true} title={"Join Now"} path={"https://discord.gg/WTJJmgPgCU"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.gg/WTJJmgPgCU"} />
             </div>
 
             <div className="backButtonContainer">

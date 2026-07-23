@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from "react";
 import styles from '../GeneralPaymentForm/GeneralPaymentForm.module.css';
-import { PaymentForm , Receipt } from "components";
+import { PaymentForm , Receipt, CheckoutSteps } from "components";
 
 function GeneralPaymentReceipt(
     {
         formTitle = "Test Event",
-        passPrice = 2500 
+        passPrice = 2500
     }
 ) {
     const totalPrice = ((passPrice / 100) * 0.05) + (passPrice / 100);
-    
+
     return (
-        <div className={`standardContainer ${styles.generalFormContainer}`}>
+        <div className="standardContainer">
+            <div className={styles.checkoutHeader}>
+                <p className={styles.eyebrow}>Secure Checkout</p>
+                <h1 className={styles.eventTitle}>You're All Set</h1>
+                <CheckoutSteps active={4} />
+            </div>
+
+            <div className={styles.generalFormContainer}>
             <div className={styles.sectionOneForm}>
                 <PaymentForm
                     price={totalPrice} 
@@ -127,6 +134,7 @@ function GeneralPaymentReceipt(
 
             <div className={styles.sectionTwoForm}>
                 <Receipt totalPrice={totalPrice} eventTitle={formTitle} />
+            </div>
             </div>
         </div>
     )

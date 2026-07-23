@@ -5,6 +5,7 @@ export const MinorLeagueMasterLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"MLE Master - Rocket League"}
                 description="Rocket League Master league presented by MLE. All regions invited in this 1451 - 1650 MMR rank based league. Compete in those with similar skills."
                 canonicalPath={"/games/RocketLeague/leagues/mle-leagues/master"}
             />
@@ -12,20 +13,16 @@ export const MinorLeagueMasterLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Season"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Season"]} regionTitle={"Region/Type"} regionInfoList={["2v2 / 3v3 - All Regions"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Case of Bawls Guarana Prize", "Salary Based on MMR", "10 - 32 Teams", "Must Sign up Solo", "Draft Based League", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["2v2 / 3v3 - All Regions"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Case of Bawls Guarana Prize", "Salary Based on MMR", "10 - 32 Teams", "Must Sign up Solo", "Draft Based League", "Live Streamed Matches"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1451 - 1650 MMR"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1451 - 1650 MMR"]} footer={<ExternalButton host={"MLE Master"} blank={true} title={"Join Now"} path={"https://mlesports.gg/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://mlesports.gg/"} />
             </div>
 
             <div className="backButtonContainer">

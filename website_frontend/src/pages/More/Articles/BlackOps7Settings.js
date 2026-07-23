@@ -5,6 +5,7 @@ export const BlackOps7Settings = () => {
     return (
         <div className="standardBlankContainer">
             <SeoData
+                title={"Best Black Ops 7 Controller Settings"}
                 description="Start with these Black Ops 7 controller settings for faster movement, cleaner aim, and less stick drift on PS5, Xbox, or PC."
                 canonicalPath={"/more/articles/black-ops-7-best-controller-settings"}
             />

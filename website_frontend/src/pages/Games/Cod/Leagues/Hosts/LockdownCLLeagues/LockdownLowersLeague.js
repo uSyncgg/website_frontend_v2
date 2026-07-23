@@ -5,6 +5,7 @@ export const LockdownLowersLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"LockdownCL Lowers League - Call of Duty"}
                 description="Want to play competitive call of duty like the pros? Sign up for the COD league today."
                 canonicalPath={"/games/call-of-duty/leagues/lockdowncl-leagues/lowers"}
             />
@@ -16,20 +17,16 @@ export const LockdownLowersLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - All Regions (NA Based)"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$284 Prize Pool", "Diamond 1 & below", "4v4 CDL Variant Ruleset", "Playoffs after Regular Season", "Solo Registration - Draft Format", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - All Regions (NA Based)"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$284 Prize Pool", "Diamond 1 & below", "4v4 CDL Variant Ruleset", "Playoffs after Regular Season", "Solo Registration - Draft Format", "Live Streamed Matches"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"LockdownCL Lowers League"} blank={true} title={"Join Now"} path={"https://discord.gg/SMZ4R8XzWZ"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.gg/SMZ4R8XzWZ"} />
             </div>
 
             <div className="backButtonContainer">

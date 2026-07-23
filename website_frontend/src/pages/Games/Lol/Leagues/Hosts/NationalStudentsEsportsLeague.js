@@ -5,6 +5,7 @@ export const NationalStudentEsportsLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"NSE League - League of Legends"}
                 description="United Kingdom's university league - NSE. This league has an open division and a women's division, suiting whatever your League of Legends style is."
                 canonicalPath={"/games/LoL/leagues/nse"}
             />
@@ -12,20 +13,16 @@ export const NationalStudentEsportsLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, Fall, and Winter Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, Fall, and Winter Seasons"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - UK"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["£1,000 Total Prize Pool", "Women Only League as well as Open League", "3 Divisions, Move Up Divisions Based on Placing", "3 Week Regular Season", "4 Week Playoffs and Swiss", "Live LAN Finals (Estimated)", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - UK"]}/>
+                    <EventInfoCard title={"Details"} infoList={["£1,000 Total Prize Pool", "Women Only League as well as Open League", "3 Divisions, Move Up Divisions Based on Placing", "3 Week Regular Season", "4 Week Playoffs and Swiss", "Live LAN Finals (Estimated)", "Live Streamed Matches"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD", "Must be Attending University"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD", "Must be Attending University"]} footer={<ExternalButton host={"NSE League"} blank={true} title={"Join Now"} path={"https://www.nse.gg/tournaments/buec-spring-2026/league-of-legends-nse-spring/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.nse.gg/tournaments/buec-spring-2026/league-of-legends-nse-spring/"} />
             </div>
 
             <div className="backButtonContainer">

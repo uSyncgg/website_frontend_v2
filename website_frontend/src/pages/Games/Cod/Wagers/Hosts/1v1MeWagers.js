@@ -5,6 +5,7 @@ export const OneVOneMeWagers = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"1v1Me - Call of Duty"}
                 description="1v1 Call of Duty wager matches for real money. Win cash by playing video games."
                 canonicalPath={"/games/call-of-duty/wagers/1v1me"}
             />
@@ -12,7 +13,7 @@ export const OneVOneMeWagers = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Match Fee: 0%", "Consistent Fee with Deposits/Withdrawals"]} />
+                    <EventInfoCard title={"Fees"} infoList={["Match Fee: 0%", "Consistent Fee with Deposits/Withdrawals"]} footer={<ExternalButton host={"1v1Me"} blank={true} title={"Join Now"} path={"https://www.1v1me.com/"} />}/>
                 </div>
 
                 <div>
@@ -22,10 +23,6 @@ export const OneVOneMeWagers = () => {
                 <div>
                     <EventInfoCard title={"Restrictions"} infoList={["18+", "Available Regions: USA, CA, IE, UK, FR, MX, DE"]} />
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.1v1me.com/"} />
             </div>
 
             <div className="backButtonContainer">

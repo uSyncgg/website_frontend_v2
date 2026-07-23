@@ -5,6 +5,7 @@ export const EGFCLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"EGFC League - Valorant"}
                 description="EGFC Valorant college league. Free to enter for D1 varsity esports programs. Two 8 week seasonal splits with in-person or online playoffs and live streamed matches."
                 canonicalPath={"/games/Valorant/leagues/egfc"}
             />
@@ -12,20 +13,16 @@ export const EGFCLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - USA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Two 8 Week Seasonal Splits", "In-Person or Online Playoffs", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - USA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Two 8 Week Seasonal Splits", "In-Person or Online Playoffs", "Live Streamed Matches"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry - Must attend a D1 Varsity Esports Program"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry - Must attend a D1 Varsity Esports Program"]} footer={<ExternalButton host={"EGFC League"} blank={true} title={"Join Now"} path={"https://www.egf.gg/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.egf.gg/"} />
             </div>
 
             <div className="backButtonContainer">
