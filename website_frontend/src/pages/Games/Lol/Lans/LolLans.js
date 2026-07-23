@@ -1,4 +1,4 @@
-import { SeoData, HostBanner, NoEvents, LanMap } from "components";
+import { SeoData, HostBanner, NoEvents } from "components";
 
 import { LOL_LAN_MARKERS } from 'data/lanMarkers';
 import { lazy, Suspense } from 'react';
