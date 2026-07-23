@@ -35,8 +35,8 @@ export const MinorLeagueEsportsLeagues = () => {
                 <HostBanner>
                     <HostBanner.Title path={"/games/RocketLeague/leagues/mle-leagues/master"}>Master League</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/mle-leagues/master"} 
-                        imgUrl={"https://i.imgur.com/1ouD021.png"} 
+                        path={"/games/RocketLeague/leagues/mle-leagues/master"}
+                        imgUrl={"https://i.imgur.com/44UEg5N.png"}
                         alt={"Minor League Esports"}
                         verified={false}
                     />
