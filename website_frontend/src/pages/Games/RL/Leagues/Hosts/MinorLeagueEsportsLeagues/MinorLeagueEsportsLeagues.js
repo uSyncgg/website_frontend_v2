@@ -13,11 +13,11 @@ export const MinorLeagueEsportsLeagues = () => {
     return (
         <div className="standardContainer">
             <SeoData
-                title={"Minoir League Esports - Rocket League"}
+                title={"Minor League Esports - Rocket League"}
                 description="Rocket League Minor League Esports (MLE) leagues. Compete in a Rocket League league of your choice based on your MMR and skills."
                 canonicalPath={"/games/RocketLeague/leagues/mle-leagues"}
             />
-            <HeaderImage title={"Minoir League Esports"} imageClass={"nonVerifiedPage"} />
+            <HeaderImage title={"Minor League Esports"} imageClass={"nonVerifiedPage"} />
 
             <div className="eventBannerContainer">
                 <HostBanner>
