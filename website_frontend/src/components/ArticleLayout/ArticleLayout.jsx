@@ -212,7 +212,7 @@ export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
             <aside className={styles.sidebar} aria-label="Explore uSync">
                 <p className={styles.sidebarLabel}>Keep Exploring</p>
 
-                <Link to="/LanMap" className={styles.mapCard}>
+                <Link to="/lans/all" className={styles.mapCard}>
                     <span className={styles.mapCardTitle}>
                         <FaMapMarkedAlt aria-hidden="true" /> Find LANs Near You
                     </span>
