@@ -19,7 +19,7 @@
 
 .sidebar {
     position: sticky;
-    top: 1.5rem;
+    top: calc(66px + 1.5rem);
     display: flex;
     flex-direction: column;
     gap: 1rem;

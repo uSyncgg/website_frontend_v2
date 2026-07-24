@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route } from 'react-router';
 
 // Navbar & Footer
 import { Navbar, Footer, ScrollToTop } from 'components';
-import { ErrorBoundary } from 'components/ErrorBoundary/ErrorBoundary';
 
 // 404 fallback
 import { NotFound } from 'pages/NotFound';
@@ -375,7 +374,6 @@ const root = document.getElementById('root');
 
 const app = (
   // <React.StrictMode>
-  <ErrorBoundary>
   <BrowserRouter>
     <ScrollToTop />
     <div className='app-container'>
@@ -761,7 +759,6 @@ const app = (
       <Footer />
     </div>
   </BrowserRouter>
-  </ErrorBoundary>
   // </React.StrictMode>
 );
 

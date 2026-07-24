@@ -331,7 +331,4 @@
 /lans/lan-all-night-2026 /index.html 200
 /lans/shinto-test /index.html 200
 
-# Catch-all: serve the SPA for any route not listed above so a refresh on a
-# new or missing route never 404s or white-screens. Unknown paths render the
-# app's styled 404 page.
-/* /index.html 200
+/404.html 404
