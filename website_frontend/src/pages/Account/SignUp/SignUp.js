@@ -15,7 +15,7 @@ const initialForm = {
     firstName: "", lastName: "", phone: "", gender: "", birthday: "",
     country: "", state: "", zip: "",
     timezone: "", timezoneMode: "auto", timezoneManual: "",
-    persona: "", genre: "",
+    persona: "", genre: "", otherGenre: "",
     games: [], otherGame: "", bracketHosting: null, avatar: "", bio: "",
     // host
     accountName: "", contactName: "", contactEmail: "", contactDiscord: "",

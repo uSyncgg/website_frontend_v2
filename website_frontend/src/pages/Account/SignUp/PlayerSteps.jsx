@@ -32,9 +32,9 @@ export const CredentialsStep = ({ form, setField, errors, onNext, onBack }) => {
                 error={errors.username}
                 autoComplete="username"
             />
-            {usernameStatus === 'available' && <p className={shared.helperText} style={{ color: '#6bcf8f', marginTop: '-.85rem' }}>✓ Available</p>}
+            {usernameStatus === 'available' && <p className={shared.helperText} style={{ color: '#6bcf8f', marginTop: '.5rem', marginBottom: 0 }}>✓ Available</p>}
 
-            <div style={{ height: '1.25rem' }} />
+            <div style={{ height: usernameStatus === 'available' ? '.75rem' : '1.25rem' }} />
 
             <AccountField
                 label="Email"
@@ -206,32 +206,49 @@ export const AboutYouStep = ({ form, setField, errors, onNext, onBack }) => {
     );
 };
 
-export const RoleStep = ({ form, setField, onNext, onBack }) => (
-    <>
-        <p className={shared.eyebrow}>Step 4 · Your role</p>
-        <h1 className={shared.stepTitle}>What best describes you?</h1>
-        <p className={shared.stepSubtitle}>This shapes what shows up on your profile and what you can be tagged as.</p>
+export const RoleStep = ({ form, setField, onNext, onBack }) => {
+    const showOtherGenre = form.persona === 'player' && form.genre === 'other';
 
-        <TileSelect options={PERSONA_OPTIONS} value={form.persona} onChange={(v) => setField('persona', v)} />
+    return (
+        <>
+            <p className={shared.eyebrow}>Step 4 · Your role</p>
+            <h1 className={shared.stepTitle}>What best describes you?</h1>
+            <p className={shared.stepSubtitle}>This shapes what shows up on your profile and what you can be tagged as.</p>
 
-        {form.persona === 'player' && (
-            <>
-                <p className={shared.label} style={{ marginBottom: '.85rem' }}>Which kind of player?</p>
-                <TileSelect
-                    options={PLAYER_GENRES.map(g => ({ ...g, icon: GENRE_ICONS[g.value] }))}
-                    value={form.genre}
-                    onChange={(v) => setField('genre', v)}
-                    compact
-                />
-            </>
-        )}
+            <TileSelect options={PERSONA_OPTIONS} value={form.persona} onChange={(v) => setField('persona', v)} />
 
-        <div className={shared.stepFooter}>
-            <button type="button" className={shared.secondaryButton} onClick={onBack}>Back</button>
-            <button type="button" className={shared.primaryButton} disabled={!form.persona || (form.persona === 'player' && !form.genre)} onClick={onNext}>Continue</button>
-        </div>
-    </>
-);
+            {form.persona === 'player' && (
+                <>
+                    <p className={shared.label} style={{ marginBottom: '.85rem' }}>Which kind of player?</p>
+                    <TileSelect
+                        options={PLAYER_GENRES.map(g => ({ ...g, icon: GENRE_ICONS[g.value] }))}
+                        value={form.genre}
+                        onChange={(v) => setField('genre', v)}
+                        compact
+                    />
+
+                    {showOtherGenre && (
+                        <div style={{ marginBottom: '1.5rem' }}>
+                            <AccountField
+                                label="Other: What do you play?"
+                                name="otherGenre"
+                                value={form.otherGenre}
+                                onChange={(e) => setField('otherGenre', e.target.value)}
+                                placeholder="e.g. Racing sims"
+                                required={false}
+                            />
+                        </div>
+                    )}
+                </>
+            )}
+
+            <div className={shared.stepFooter}>
+                <button type="button" className={shared.secondaryButton} onClick={onBack}>Back</button>
+                <button type="button" className={shared.primaryButton} disabled={!form.persona || (form.persona === 'player' && !form.genre)} onClick={onNext}>Continue</button>
+            </div>
+        </>
+    );
+};
 
 export const GamesStep = ({ form, setField, onNext, onBack }) => {
     const isPlayer = form.persona === 'player';
