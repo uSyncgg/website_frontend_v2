@@ -14,6 +14,10 @@ import { Leagues } from 'pages/Leagues';
 import { Lans } from 'pages/Lans';
 import { Tournaments } from 'pages/Tournaments';
 
+// Account Pages
+import { Login } from 'pages/Account/Login/Login';
+import { SignUp } from 'pages/Account/SignUp/SignUp';
+
 // More Pages
 import { Articles } from 'pages/More/Articles';
 import { ContactUs } from 'pages/More/ContactUs';
@@ -387,6 +391,10 @@ const app = (
           <Route path='/leagues' element={<Leagues />} />
           <Route path='/lans' element={<Lans />} />
           <Route path='/tournaments' element={<Tournaments />} />
+
+          {/* Account */}
+          <Route path='/account/login' element={<Login />} />
+          <Route path='/account/signup' element={<SignUp />} />
 
           {/* More Pages */}
           <Route path='/more/verification' element={<Verification />} />

@@ -41,7 +41,8 @@
     flex-shrink: 1;
     flex-basis: auto;
     margin-right: 1.5rem;
-    visibility: hidden;
+    display: flex;
+    align-items: center;
 }
 
 .hamburger {
@@ -152,8 +153,15 @@
     transition: all 0.2s ease;
     background: rgb(142, 106, 206);
     border: none;
-    margin-top: 16px;
     margin-right: 1rem;
+}
+
+.regButton:hover {
+    background: rgb(122, 90, 201);
+}
+
+.logButton:hover {
+    background: rgb(105, 104, 107);
 }
 
 .logButton {
@@ -188,9 +196,10 @@
         gap: 0;
     }
 
-    /* Hide navigation menu by default on mobile */
+    /* Hide navigation menu by default on mobile; always wraps below the top bar */
     .headerMiddle {
         display: none;
+        order: 3;
         left: 0;
         width: 100%;
         max-width: 100%;
@@ -243,29 +252,31 @@
         width: 100%;
     }
 
-    /* Hide register/login buttons by default on mobile */
-    .headerRight {
-        display: none;
-        left: 0;
-        width: 100%;
-        background: rgb(33, 37, 31);
-        flex-direction: column;
-        align-items: center;
-        padding: 1rem 1.5rem;
-        margin: 0;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    /* Always visible in the top bar, independent of the hamburger menu */
+    .headerLeft {
+        width: 7.5rem;
+        margin-left: 1rem;
     }
 
-    /* Show buttons when menu is open */
-    /* .headerRight.menuOpen {
+    .hamburger {
+        margin-left: 1rem;
+    }
+
+    .headerRight {
+        order: 2;
         display: flex;
-    } */
+        align-items: center;
+        gap: 0.5rem;
+        margin-left: auto;
+        margin-right: 1rem;
+    }
 
     .regButton,
     .logButton {
-        width: 100%;
-        justify-content: center;
-        margin: 0.5rem 0;
+        margin: 0;
+        padding: 6px 10px;
+        font-size: 12px;
+        white-space: nowrap;
     }
 
     .disabledDropdown {

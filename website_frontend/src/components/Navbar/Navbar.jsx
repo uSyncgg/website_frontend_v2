@@ -60,9 +60,9 @@ function Navbar() {
                 </div>
             </nav>
 
-            <div className={`${styles.headerRight} ${menuOpen ? styles.menuOpen : ''}`}>
-                <Link to="/games" className={styles.regButton} onClick={closeMenu}>Register</Link>
-                <Link to="/tournaments" className={styles.logButton} onClick={closeMenu}>Login</Link>
+            <div className={styles.headerRight}>
+                <Link to="/account/signup" className={styles.regButton} onClick={closeMenu}>Sign up</Link>
+                <Link to="/account/login" className={styles.logButton} onClick={closeMenu}>Log in</Link>
             </div>
         </header>
     )

@@ -1,0 +1,808 @@
+/* ===== Layout shell ===== */
+.shell {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2.5rem;
+    max-width: 68rem;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+}
+
+.shellSidebarCol {
+    flex: 0 0 15rem;
+    position: sticky;
+    top: 6.5rem;
+}
+
+.shellMainCol {
+    flex: 1 1 32rem;
+    min-width: 0;
+    max-width: 40rem;
+}
+
+.card {
+    background: rgba(28, 25, 33, .75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, .08);
+    padding: 2.5rem;
+    border-radius: 1.25rem;
+    box-shadow: 0 1.5rem 3rem -1.25rem rgba(0, 0, 0, .6);
+    text-align: left;
+}
+
+.backButton {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, .55);
+    font-size: .85rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0 0 1.5rem;
+}
+
+.backButton:hover {
+    color: white;
+}
+
+@media only screen and (max-width: 850px) {
+    .shell {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1.75rem 1.25rem 3rem;
+        gap: 1.5rem;
+    }
+
+    .shellSidebarCol {
+        position: static;
+        flex: none;
+    }
+
+    .shellMainCol {
+        max-width: none;
+    }
+
+    .card {
+        padding: 1.75rem 1.25rem;
+    }
+}
+
+/* ===== Sidebar / step list ===== */
+.sidebar {
+    background: rgba(28, 25, 33, .55);
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 1.25rem;
+    padding: 1.5rem 1.25rem;
+}
+
+.sidebarTitle {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin: 0 0 1.25rem;
+}
+
+.sidebarList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sidebarStep {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+}
+
+.sidebarStepButton {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+}
+
+.sidebarStepButton:hover .sidebarLabel {
+    color: white;
+}
+
+.sidebarStepButton:hover .sidebarBubble {
+    border-color: #8e6ace;
+}
+
+.sidebarBubble {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    font-size: .75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.sidebarStep_upcoming .sidebarBubble {
+    background: rgba(255, 255, 255, .04);
+    border: 1.5px solid rgba(255, 255, 255, .16);
+    color: rgba(255, 255, 255, .45);
+}
+
+.sidebarStep_upcoming .sidebarLabel {
+    color: rgba(255, 255, 255, .4);
+}
+
+.sidebarStep_active .sidebarBubble {
+    background: linear-gradient(135deg, #9b6fe0, #7a5ac9);
+    color: white;
+    box-shadow: 0 0 0 4px rgba(142, 106, 206, .18);
+}
+
+.sidebarStep_active .sidebarLabel {
+    color: white;
+    font-weight: 700;
+}
+
+.sidebarStep_done .sidebarBubble {
+    background: rgba(142, 106, 206, .16);
+    border: 1.5px solid #8e6ace;
+    color: #b18af0;
+}
+
+.sidebarStep_done .sidebarLabel {
+    color: rgba(255, 255, 255, .7);
+}
+
+.sidebarLabel {
+    font-size: .85rem;
+    font-weight: 600;
+    letter-spacing: .2px;
+}
+
+@media only screen and (max-width: 850px) {
+    .sidebarList {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: .75rem 1.25rem;
+    }
+
+    .sidebarLabel {
+        display: none;
+    }
+}
+
+/* ===== Step headings ===== */
+.eyebrow {
+    color: #b18af0;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    margin: 0 0 .4rem;
+}
+
+.stepTitle {
+    color: white;
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: -.5px;
+    margin: 0 0 .5rem;
+}
+
+.stepSubtitle {
+    color: rgba(255, 255, 255, .55);
+    font-size: .9rem;
+    line-height: 1.5;
+    margin: 0 0 1.75rem;
+}
+
+/* ===== Form fields ===== */
+.formGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+@media only screen and (max-width: 560px) {
+    .formGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.labelRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+    margin-bottom: .45rem;
+}
+
+.label {
+    color: rgba(255, 255, 255, .85);
+    font-weight: 600;
+    font-size: .85rem;
+    letter-spacing: .2px;
+}
+
+.required {
+    color: #e0698a;
+}
+
+.hideToggle {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, .4);
+    font-size: .7rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: .15rem .4rem;
+    border-radius: .4rem;
+    white-space: nowrap;
+}
+
+.hideToggle:hover {
+    color: rgba(255, 255, 255, .75);
+    background: rgba(255, 255, 255, .06);
+}
+
+.input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: .8rem 1rem;
+    font-size: 1rem;
+    border-radius: .65rem;
+    border: 1px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .04);
+    color: rgb(255, 255, 255);
+    outline: none;
+    transition: border-color .2s ease-in-out, box-shadow .2s ease-in-out, background .2s ease-in-out;
+    text-align: left;
+    font-family: inherit;
+}
+
+.input::placeholder {
+    color: rgba(255, 255, 255, .32);
+}
+
+.input:hover {
+    border-color: rgba(255, 255, 255, .22);
+}
+
+.input:focus {
+    border-color: #8e6ace;
+    background: rgba(142, 106, 206, .08);
+    box-shadow: 0 0 0 3px rgba(142, 106, 206, .18);
+}
+
+.inputError {
+    border-color: #e0698a;
+}
+
+.errorText {
+    color: #f28ba8;
+    font-size: .78rem;
+    margin-top: .4rem;
+    font-weight: 600;
+}
+
+.helperText {
+    color: rgba(255, 255, 255, .45);
+    font-size: .78rem;
+    margin: -.75rem 0 1.5rem;
+}
+
+/* ===== Password field ===== */
+.passwordWrap {
+    position: relative;
+}
+
+.passwordToggle {
+    position: absolute;
+    right: .75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, .4);
+    cursor: pointer;
+    display: flex;
+    padding: .25rem;
+}
+
+.passwordToggle:hover {
+    color: rgba(255, 255, 255, .8);
+}
+
+.strengthWrap {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    margin-top: .55rem;
+}
+
+.strengthTrack {
+    flex: 1;
+    height: .35rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, .08);
+    overflow: hidden;
+}
+
+.strengthFill {
+    height: 100%;
+    border-radius: 1rem;
+    transition: width .25s ease-in-out, background .25s ease-in-out;
+}
+
+.strengthFill.weak0 { background: #e0698a; }
+.strengthFill.weak1 { background: #e0a068; }
+.strengthFill.weak2 { background: #d9c34f; }
+.strengthFill.strong { background: linear-gradient(90deg, #6bcf8f, #4fae7a); }
+
+.strengthLabel {
+    font-size: .75rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, .55);
+    white-space: nowrap;
+}
+
+.passwordRequirements {
+    list-style: none;
+    margin: .65rem 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .35rem .75rem;
+}
+
+.passwordRequirements li {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: .76rem;
+    color: rgba(255, 255, 255, .4);
+}
+
+.requirementIcon {
+    font-size: .6rem;
+    color: rgba(255, 255, 255, .25);
+    flex-shrink: 0;
+}
+
+.requirementMet {
+    color: #6bcf8f !important;
+}
+
+.requirementMet .requirementIcon {
+    color: #6bcf8f;
+}
+
+/* ===== OAuth buttons ===== */
+.oauthSection {
+    margin: 1.75rem 0;
+}
+
+.dividerRow {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    margin-bottom: 1.25rem;
+}
+
+.dividerLine {
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, .1);
+}
+
+.dividerLabel {
+    color: rgba(255, 255, 255, .4);
+    font-size: .78rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.oauthGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: .75rem;
+}
+
+@media only screen and (max-width: 560px) {
+    .oauthGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.oauthButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .4rem;
+    padding: .85rem .5rem;
+    border-radius: .75rem;
+    border: 1px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .04);
+    color: rgba(255, 255, 255, .8);
+    font-size: .78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color .2s ease-in-out, background .2s ease-in-out, transform .2s ease-in-out;
+}
+
+.oauthButton svg {
+    font-size: 1.15rem;
+}
+
+.oauthButton:hover {
+    border-color: rgba(255, 255, 255, .3);
+    background: rgba(255, 255, 255, .08);
+    transform: translateY(-1px);
+}
+
+.oauthGoogle:hover { border-color: #de6a5e; color: #f0a89f; }
+.oauthTwitch:hover { border-color: #9b6fe0; color: #c7abf0; }
+.oauthApple:hover { border-color: rgba(255,255,255,.6); color: white; }
+.oauthTwitter:hover { border-color: rgba(255,255,255,.6); color: white; }
+
+/* ===== Tile select (role / games / event types) ===== */
+.tileGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+    gap: .85rem;
+    margin-bottom: 1.75rem;
+}
+
+.tileGridCompact {
+    grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+}
+
+.tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .35rem;
+    padding: 1rem;
+    border-radius: .85rem;
+    border: 1.5px solid rgba(255, 255, 255, .1);
+    background: rgba(255, 255, 255, .03);
+    color: rgba(255, 255, 255, .8);
+    cursor: pointer;
+    text-align: left;
+    transition: border-color .2s ease-in-out, background .2s ease-in-out, transform .15s ease-in-out;
+}
+
+.tile:hover {
+    border-color: rgba(255, 255, 255, .3);
+    transform: translateY(-1px);
+}
+
+.tileSelected {
+    border-color: #8e6ace;
+    background: rgba(142, 106, 206, .14);
+    color: white;
+}
+
+.tileCheck {
+    position: absolute;
+    top: .65rem;
+    right: .65rem;
+    color: #b18af0;
+    font-size: .8rem;
+}
+
+.tileIcon {
+    font-size: 1.4rem;
+    color: #b18af0;
+}
+
+.tileLabel {
+    font-weight: 700;
+    font-size: .88rem;
+}
+
+.tileDescription {
+    font-size: .74rem;
+    color: rgba(255, 255, 255, .5);
+    line-height: 1.35;
+}
+
+/* ===== Buttons / footer ===== */
+.stepFooter {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.primaryButton {
+    flex: 1;
+    padding: 1rem;
+    background: linear-gradient(135deg, #9b6fe0, #7a5ac9);
+    border: none;
+    color: white;
+    font-size: 1.02rem;
+    border-radius: .85rem;
+    cursor: pointer;
+    font-weight: 700;
+    letter-spacing: .3px;
+    transition: transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s cubic-bezier(.16,1,.3,1), filter .2s ease-in-out;
+}
+
+.primaryButton:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 1rem 2rem -.75rem rgba(122, 90, 201, .7);
+}
+
+.primaryButton:disabled {
+    filter: brightness(60%);
+    cursor: default;
+}
+
+.secondaryButton {
+    padding: 1rem 1.5rem;
+    background: transparent;
+    border: 1.5px solid rgba(255, 255, 255, .16);
+    color: rgba(255, 255, 255, .85);
+    font-size: .95rem;
+    border-radius: .85rem;
+    cursor: pointer;
+    font-weight: 700;
+    transition: border-color .2s ease-in-out, color .2s ease-in-out, background .2s ease-in-out;
+}
+
+.secondaryButton:hover {
+    border-color: rgba(255, 255, 255, .35);
+    color: white;
+    background: rgba(255, 255, 255, .04);
+}
+
+.skipButton {
+    display: block;
+    margin: 1rem auto 0;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, .45);
+    font-size: .82rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: .2rem;
+}
+
+.skipButton:hover {
+    color: rgba(255, 255, 255, .8);
+}
+
+.footNote {
+    text-align: center;
+    color: rgba(255, 255, 255, .45);
+    font-size: .82rem;
+    margin-top: 1.5rem;
+}
+
+.footNote a {
+    color: #b18af0;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.footNote a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Radio card (host vs person, account type choice) ===== */
+.radioCardRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+}
+
+@media only screen and (max-width: 560px) {
+    .radioCardRow {
+        grid-template-columns: 1fr;
+    }
+}
+
+.radioCard {
+    display: flex;
+    align-items: flex-start;
+    gap: .85rem;
+    padding: 1.25rem;
+    border-radius: 1rem;
+    border: 1.5px solid rgba(255, 255, 255, .1);
+    background: rgba(255, 255, 255, .03);
+    color: white;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color .2s ease-in-out, background .2s ease-in-out;
+}
+
+.radioCard:hover {
+    border-color: rgba(255, 255, 255, .3);
+}
+
+.radioCardSelected {
+    border-color: #8e6ace;
+    background: rgba(142, 106, 206, .14);
+    box-shadow: 0 0 0 3px rgba(142, 106, 206, .18);
+}
+
+.radioCardIcon {
+    font-size: 1.6rem;
+    color: #b18af0;
+    flex-shrink: 0;
+    margin-top: .1rem;
+}
+
+.radioCardTitle {
+    font-weight: 800;
+    font-size: 1rem;
+    margin-bottom: .25rem;
+}
+
+.radioCardDescription {
+    font-size: .8rem;
+    color: rgba(255, 255, 255, .55);
+    line-height: 1.4;
+}
+
+/* ===== Checkbox row ===== */
+.checkboxRow {
+    display: flex;
+    align-items: flex-start;
+    gap: .65rem;
+    padding: .9rem 1rem;
+    border-radius: .75rem;
+    border: 1px solid rgba(255, 255, 255, .1);
+    background: rgba(255, 255, 255, .03);
+    margin-bottom: 1.25rem;
+    cursor: pointer;
+}
+
+.checkboxRow input {
+    margin-top: .2rem;
+    accent-color: #8e6ace;
+}
+
+.checkboxRow span {
+    font-size: .85rem;
+    color: rgba(255, 255, 255, .75);
+    line-height: 1.4;
+}
+
+/* ===== Benefits list (verified upsell) ===== */
+.benefitList {
+    list-style: none;
+    margin: 0 0 1.75rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+}
+
+.benefitItem {
+    display: flex;
+    align-items: flex-start;
+    gap: .65rem;
+    font-size: .87rem;
+    color: rgba(255, 255, 255, .8);
+    line-height: 1.4;
+}
+
+.benefitCheck {
+    color: #b18af0;
+    margin-top: .2rem;
+    flex-shrink: 0;
+}
+
+/* ===== 2FA code input ===== */
+.codeRow {
+    display: flex;
+    gap: .6rem;
+    margin-bottom: 1.5rem;
+}
+
+.codeDigit {
+    width: 100%;
+    aspect-ratio: 1;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 700;
+    border-radius: .65rem;
+    border: 1px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .04);
+    color: white;
+    outline: none;
+}
+
+.codeDigit:focus {
+    border-color: #8e6ace;
+    background: rgba(142, 106, 206, .08);
+    box-shadow: 0 0 0 3px rgba(142, 106, 206, .18);
+}
+
+/* ===== Link accounts grid ===== */
+.linkAccountsGrid {
+    display: flex;
+    flex-direction: column;
+    gap: .65rem;
+    margin-bottom: 1.5rem;
+}
+
+.linkAccountRow {
+    display: flex;
+    align-items: center;
+    gap: .85rem;
+    padding: .75rem .9rem;
+    border-radius: .75rem;
+    border: 1px solid rgba(255, 255, 255, .1);
+    background: rgba(255, 255, 255, .03);
+}
+
+.linkAccountIcon {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, .7);
+    flex-shrink: 0;
+    width: 1.5rem;
+}
+
+.linkAccountLabel {
+    flex: 1;
+    font-size: .85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, .85);
+}
+
+.linkAccountInput {
+    flex: 1.4;
+    padding: .5rem .75rem;
+    font-size: .85rem;
+    border-radius: .5rem;
+    border: 1px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .04);
+    color: white;
+    outline: none;
+}
+
+.linkAccountInput:focus {
+    border-color: #8e6ace;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    padding: .2rem .55rem;
+    border-radius: 1rem;
+    font-size: .7rem;
+    font-weight: 700;
+    background: rgba(142, 106, 206, .18);
+    color: #b18af0;
+    border: 1px solid rgba(142, 106, 206, .4);
+}
