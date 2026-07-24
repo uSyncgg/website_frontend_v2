@@ -5,6 +5,7 @@ export const NemesisNoviceLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Nemesis Novice - Rocket League"}
                 description="Rocket League Novice league is being held every spring by Nemesis. Enroll your teammates today in this action packed 3v3 Rocket League league."
                 canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues/novice"}
             />
@@ -12,20 +13,16 @@ export const NemesisNoviceLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring Season"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring Season"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$1,000+ Prize Pool (Estimated)", "4 Different Divisions", "18 Match Regular Season", "Draft Based League"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$1,000+ Prize Pool (Estimated)", "4 Different Divisions", "18 Match Regular Season", "Draft Based League"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1100 - 1319 MMR"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1203 - 1414 MMR"]} footer={<ExternalButton host={"Nemesis Novice"} blank={true} title={"Join Now"} path={"https://discord.com/invite/nemesisrl"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/nemesisrl"} />
             </div>
 
             <div className="backButtonContainer">

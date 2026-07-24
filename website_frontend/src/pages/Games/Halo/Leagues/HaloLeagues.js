@@ -4,6 +4,7 @@ export const HaloLeagues = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Halo Leagues"}
                 description="Halo esports leagues. Find all of the Halo leagues happening in one place. Find your event today."
                 canonicalPath={"/games/halo/leagues"}
             />

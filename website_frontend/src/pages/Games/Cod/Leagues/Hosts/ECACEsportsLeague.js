@@ -5,6 +5,7 @@ export const ECACEsportsLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"ECAC League - Call of Duty"}
                 description="Call of Duty league for ECAC members. 8 week long regular season and playoffs to prove your skillset."
                 canonicalPath={"/games/call-of-duty/leagues/ecac"}
             />
@@ -12,20 +13,16 @@ export const ECACEsportsLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - USA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Compete for Team Trophies", "8 Week Regular Season then Playoffs", "Multiple Skill Divisions", "No Prize Pool", "Live Streamed Matches", "Live Support on Discord"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - USA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Compete for Team Trophies", "8 Week Regular Season then Playoffs", "Multiple Skill Divisions", "No Prize Pool", "Live Streamed Matches", "Live Support on Discord"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$1,600/Year for ECAC Membership", "Free Entry - Must be a FULL TIME College Student"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$1,600/Year for ECAC Membership", "Free Entry - Must be a FULL TIME College Student"]} footer={<ExternalButton host={"ECAC League"} blank={true} title={"Join Now"} path={"https://discord.gg/ecacesports"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.gg/ecacesports"} />
             </div>
 
             <div className="backButtonContainer">

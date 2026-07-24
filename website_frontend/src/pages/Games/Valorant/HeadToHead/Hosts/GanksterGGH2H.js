@@ -5,6 +5,7 @@ export const GanksterGGH2H = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"GanksterGG - Valorant"}
                 description="Gankster GG Valorant scrim finder. A verified platform for finding competitive Valorant scrims with a large number of users and daily matches worldwide."
                 canonicalPath={"/games/Valorant/head-to-head/gankster"}
             />
@@ -16,7 +17,7 @@ export const GanksterGGH2H = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Free Scrim Matches"]} />
+                    <EventInfoCard title={"Fees"} infoList={["Free Scrim Matches"]} footer={<ExternalButton host={"GanksterGG"} blank={true} title={"Join Now"} path={"https://valorant.gankster.gg/login?session=yes"} />}/>
                 </div>
 
                 <div>
@@ -26,10 +27,6 @@ export const GanksterGGH2H = () => {
                 <div>
                     <EventInfoCard title={"Restrictions"} infoList={["Available Worldwide"]} />
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://valorant.gankster.gg/login?session=yes"} />
             </div>
 
             <div className="backButtonContainer">

@@ -5,6 +5,7 @@ export const EsportsCompanyLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"The Esports Company - Valorant"}
                 description="The Esports Company Valorant high school league for Pennsylvania schools. LAN championship with live streamed matches. School manager must sign up team."
                 canonicalPath={"/games/Valorant/leagues/tec"}
             />
@@ -12,20 +13,16 @@ export const EsportsCompanyLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - USA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Pennsylvania High Schools Only", "Championship on LAN", "School Manager Must Sign Team Up", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - USA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Pennsylvania High Schools Only", "Championship on LAN", "School Manager Must Sign Team Up", "Live Streamed Matches"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Contact for Quote - Must be a High School Student"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Contact for Quote - Must be a High School Student"]} footer={<ExternalButton host={"The Esports Company"} blank={true} title={"Join Now"} path={"https://theesportcompany.com/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://theesportcompany.com/"} />
             </div>
 
             <div className="backButtonContainer">

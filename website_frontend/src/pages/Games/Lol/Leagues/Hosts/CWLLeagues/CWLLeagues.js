@@ -11,6 +11,7 @@ export const CWLLeagues = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"CWL Divisions - League of Legends"}
                 description="Cobalt Winds (CWL) League of Legends leagues. EUW leagues for your rank. Find your league to enter into."
                 canonicalPath={"/games/LoL/leagues/cobalt-winds-leagues"}
             />

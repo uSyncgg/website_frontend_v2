@@ -5,6 +5,7 @@ export const RMCSSpring2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"RMCS Spring 2026 - Convention"}
                 description={"Localhost Denver is putting on the Rocky Mountain Collegiate Showcase - Spring '26 Tournament."}
                 canonicalPath={"/lans/rmcs-spring-2026"}
             />
@@ -21,12 +22,8 @@ export const RMCSSpring2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $125"]} /> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $125"]} footer={<ExternalButton host={"RMCS Spring 2026"} blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/rmcs-spring-26-tournament-2026-04-11?section=overview"} />}/> 
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/rmcs-spring-26-tournament-2026-04-11?section=overview"} />
             </div>
 
             <div className="backButtonContainer">

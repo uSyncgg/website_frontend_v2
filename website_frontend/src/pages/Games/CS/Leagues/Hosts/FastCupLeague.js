@@ -5,6 +5,7 @@ export const FastCupLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Fast Cup - Counter-Strike"}
                 description="Fast Cup is an eastern hemisphere based Counter-Strike 2 league. With monthly leagues this event will have you always improving your game."
                 canonicalPath={"/games/CS2/leagues/fastcup"}
             />
@@ -12,20 +13,16 @@ export const FastCupLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Monthly Leagues"]} />
+                    <EventInfoCard title={"Date"} infoList={["Monthly Leagues"]} regionTitle={"Region/Type"} regionInfoList={["1v1 - 5v5 - EU, CIS, ME, and SA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Large Prize Pools", "Head-To-Head Match Format", "Various Skill Groups Based on Elo", "Anti-Cheat Software to Ensure Legitimacy", "Post Game Statistical Analysis", "Servers Provided", "Various Daily Tournaments"]} regionTitle={"Region/Type"} regionInfoList={["1v1 - 5v5 - EU, CIS, ME, and SA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Large Prize Pools", "Head-To-Head Match Format", "Various Skill Groups Based on Elo", "Anti-Cheat Software to Ensure Legitimacy", "Post Game Statistical Analysis", "Servers Provided", "Various Daily Tournaments"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"Fast Cup"} blank={true} title={"Join Now"} path={"https://cs2.fastcup.net/leagues/68/210/202/771"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://cs2.fastcup.net/leagues/68/210/202/771"} />
             </div>
 
             <div className="backButtonContainer">

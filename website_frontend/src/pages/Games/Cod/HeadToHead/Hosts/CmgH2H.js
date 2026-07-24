@@ -5,6 +5,7 @@ export const CmgH2H = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Checkmate Gaming - Call of Duty"}
                 description="Play Call of Duty XP matches and get ranked. Free competitive SND esports ladder matches."
                 canonicalPath={"/games/call-of-duty/head-to-head/cmg"}
             />
@@ -16,7 +17,7 @@ export const CmgH2H = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Free XP Matches"]} />
+                    <EventInfoCard title={"Fees"} infoList={["Free XP Matches"]} footer={<ExternalButton host={"Checkmate Gaming"} blank={true} title={"Join Now"} path={"https://www.checkmategaming.com/ladders"} />}/>
                 </div>
 
                 <div>
@@ -26,10 +27,6 @@ export const CmgH2H = () => {
                 <div>
                     <EventInfoCard title={"Restrictions"} infoList={["Available Worldwide", "US State Restrictions: AZ, IA, MS, MT, NV, and SD"]} />
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://www.checkmategaming.com/ladders"} />
             </div>
 
             <div className="backButtonContainer">

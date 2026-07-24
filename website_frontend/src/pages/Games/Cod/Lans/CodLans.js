@@ -5,6 +5,7 @@ export const CodLans = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Call of Duty LANs"}
                 description="Call of Duty LAN tournaments near you. Find the closest Call of Duty LANs to where you live and work. Every LAN going on near you."
                 canonicalPath={"/games/call-of-duty/lans"}
             />
@@ -52,6 +53,18 @@ export const CodLans = () => {
                     />
                     <HostBanner.Region>Honolulu, HI</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/lans/hnl-x-fandom-2026"} />
+                </HostBanner>
+
+                <HostBanner>
+                    <HostBanner.Title path={"/lans/ego-cod-lan-4v4"}>Ego COD LAN 4v4</HostBanner.Title>
+                    <HostBanner.Image
+                        path={"/lans/ego-cod-lan-4v4"}
+                        imgUrl={"https://i.imgur.com/gpLl6VR.png"}
+                        alt={"Ego COD LAN 4v4"}
+                        verified={false}
+                    />
+                    <HostBanner.Region>Chapel Hill, NC</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/lans/ego-cod-lan-4v4"} />
                 </HostBanner>
 
                 <div className="hrEvents" />

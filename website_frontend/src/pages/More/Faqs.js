@@ -70,6 +70,7 @@ export const Faqs = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"FAQ"}
                 description="Frequently asked questions about esports and how to begin. Find articles on the competitive esports landscape today."
                 canonicalPath={"/more/FAQ"}
             />

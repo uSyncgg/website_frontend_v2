@@ -5,6 +5,7 @@ export const EsportsHubWagers = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"The Esports Hub - Call of Duty"}
                 description="Throwback Call of Duty wagers for old titles like MWR, Bo3, Bo4, Cold War, and more. Play classic cod for money."
                 canonicalPath={"/games/call-of-duty/wagers/the-esports-hub"}
             />
@@ -12,7 +13,7 @@ export const EsportsHubWagers = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["10% Match Fee", "Varying Deposit / Withdrawal Fee"]} />
+                    <EventInfoCard title={"Fees"} infoList={["10% Match Fee", "Varying Deposit / Withdrawal Fee"]} footer={<ExternalButton host={"The Esports Hub"} blank={true} title={"Join Now"} path={"https://theesportshub.com/"} />}/>
                 </div>
 
                 <div>
@@ -22,10 +23,6 @@ export const EsportsHubWagers = () => {
                 <div>
                     <EventInfoCard title={"Restrictions"} infoList={["13+", "Must Be Legal Resident From: BE, BG, CZ, DK, DE, EE, IE, EL, ES, FR, IT, LV, LT, LU, HU, MT, NL, HE, PL, PT, RO, SI, SK, FI, SE, UK, IS, LI, NO, CH, GB, AT, TR, HR, RU, or GR"]} />
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://theesportshub.com/"} />
             </div>
 
             <div className="backButtonContainer">

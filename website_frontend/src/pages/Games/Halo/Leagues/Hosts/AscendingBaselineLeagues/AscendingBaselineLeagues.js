@@ -10,6 +10,7 @@ export const AscendingBaselineLeagues = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Ascending Baseline Leagues - Halo"}
                 description="Ascending Baseline Leagues. Two different leagues for Halo players looking to play more than just ranked play - win cash today."
                 canonicalPath={"/games/halo/leagues/ascending-baseline"}
             />

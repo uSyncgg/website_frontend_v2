@@ -5,6 +5,7 @@ export const CollegeCodLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"CCL - Call of Duty"}
                 description="College Call of Duty League (CCL) with a $40k prize pool. The #1 Call of Duty college league with professional players."
                 canonicalPath={"/games/call-of-duty/leagues/ccl-league"}
             />
@@ -12,20 +13,16 @@ export const CollegeCodLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Early Spring Season"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Early Spring Season"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Prize Pool TBD", "Highly Competitive", "Live Streamed Matches", "Live Support Admins on Discord", "Scholarship Players Allowed"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Prize Pool TBD", "Highly Competitive", "Live Streamed Matches", "Live Support Admins on Discord", "Scholarship Players Allowed"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$200 - $350 per Team (Estimated)", "Must be a FULL TIME College Student"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$200 - $350 per Team (Estimated)", "Must be a FULL TIME College Student"]} footer={<ExternalButton host={"College COD League"} blank={true} title={"Join Now"} path={"https://collegecod.com/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://collegecod.com/"} />
             </div>
 
             <div className="backButtonContainer">

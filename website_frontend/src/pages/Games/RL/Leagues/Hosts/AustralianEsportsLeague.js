@@ -5,6 +5,7 @@ export const AustralianEsportsLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Australian Esports League University - Rocket League"}
                 description="Australian Esports League university Rocket League. $3,500 prize pool with open and elite series divisions. Must be enrolled at an Australian university."
                 canonicalPath={"/games/RocketLeague/leagues/australian-esports-league"}
             />
@@ -12,20 +13,16 @@ export const AustralianEsportsLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - AUS"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$3,500 Total Prize Pool (Estimated)", "Stage 1 (Regular Season): Best of 1 Matches", "Stage 2 (Playoffs): Best of 3 Matches", "Top Teams from Stage 1 Move to Stage 2", "Open Series = Any University Can Join", "Elite Series = Invitation Only"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - AUS"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$3,500 Total Prize Pool (Estimated)", "Stage 1 (Regular Season): Best of 1 Matches", "Stage 2 (Playoffs): Best of 3 Matches", "Top Teams from Stage 1 Move to Stage 2", "Open Series = Any University Can Join", "Elite Series = Invitation Only"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - Must be Enrolled at an Australian University"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - Must be Enrolled at an Australian University"]} footer={<ExternalButton host={"Australian Esports League University"} blank={true} title={"Join Now"} path={"https://ael.org.au/uni/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://ael.org.au/uni/"} />
             </div>
 
             <div className="backButtonContainer">

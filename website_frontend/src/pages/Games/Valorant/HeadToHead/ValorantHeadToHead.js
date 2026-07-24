@@ -4,6 +4,7 @@ export const ValorantHeadToHead = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Valorant Head-to-Head"}
                 description="Find the best Valorant scrim and head-to-head platforms. Compare Gankster GG, Esport Scrim, Collegiate Valorant Hub, and Pracc for practice matches."
                 canonicalPath={"/games/Valorant/head-to-head"}
             />

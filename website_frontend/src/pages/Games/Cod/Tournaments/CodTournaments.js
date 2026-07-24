@@ -28,7 +28,7 @@ export const CodTournaments = () => {
     const consoleOptions = ['PC', 'Console'];
     const skillOptions = ['Novice', 'Amateur', 'Expert', 'Agent', 'Master', 'Challenger'];
     const entryOptions = ['Free Entry', 'Paid', 'ECO'];
-    const hostOptions = ['CMG', 'CoD Agent'];
+    const hostOptions = ['CMG', 'CoD Agent', 'Console Kings'];
 
     const [tournaments, setTournaments] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -88,6 +88,7 @@ export const CodTournaments = () => {
     return (
         <div className={`standardContainer ${styles.page}`}>
             <SeoData
+                title={"Call of Duty Tournaments"}
                 description="Find all the live Call of Duty Tournaments for the day posted at uSync.gg/tournaments/call-of-duty-tournaments"
                 canonicalPath={"/games/call-of-duty/tournaments/call-of-duty-tournaments"}
             />

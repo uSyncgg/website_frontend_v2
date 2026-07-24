@@ -5,6 +5,7 @@ export const BlueOtterDiamondLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Blue Otter Diamond League - League of Legends"}
                 description="Blue Otter Diamond league is a diamond 1 99LP cap League of Legends league for competitive players in NA."
                 canonicalPath={"/games/LoL/leagues/blue-otter-leagues/diamond"}
             />
@@ -12,20 +13,16 @@ export const BlueOtterDiamondLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Winter Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Winter Seasons"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["1st Place - 50% Entry Fees (Estimated)", "Support on Discord", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["1st Place - 50% Entry Fees (Estimated)", "Support on Discord", "Live Streamed Matches"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$100 per Team (Estimated)", "$15 Forfeit Deposit", "Diamond 1 99 LP Cap, 1 Master per Team (100 LP Max)"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$100 per Team (Estimated)", "$15 Forfeit Deposit", "Diamond 1 99 LP Cap, 1 Master per Team (100 LP Max)"]} footer={<ExternalButton host={"Blue Otter Diamond League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/gVGSxRT"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/gVGSxRT"} />
             </div>
 
             <div className="backButtonContainer">

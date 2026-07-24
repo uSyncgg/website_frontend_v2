@@ -5,6 +5,7 @@ export const UnitedRogueLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"United Rogue League - Rocket League"}
                 description="United Rogue Rocket League. Free to enter for ages 16+. 32 franchises across a 5 league system with enforced salary caps and live streamed matches."
                 canonicalPath={"/games/RocketLeague/leagues/united-rogue"}
             />
@@ -12,20 +13,16 @@ export const UnitedRogueLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["2 Seasons Annually"]} />
+                    <EventInfoCard title={"Date"} infoList={["2 Seasons Annually"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["32 Franchises over 5 League System", "8 Week Regular Season, 4 Week Playoffs", "Group Stage Playoffs into Single Elimination Bracket", "2 Conferences with 4 Divisions in Each League", "Enforced Salary Caps for Competitiveness", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["32 Franchises over 5 League System", "8 Week Regular Season, 4 Week Playoffs", "Group Stage Playoffs into Single Elimination Bracket", "2 Conferences with 4 Divisions in Each League", "Enforced Salary Caps for Competitiveness", "Live Streamed Matches"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Ages 16+"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Ages 16+"]} footer={<ExternalButton host={"United Rogue League"} blank={true} title={"Join Now"} path={"https://rl.unitedrogue.com/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://rl.unitedrogue.com/"} />
             </div>
 
             <div className="backButtonContainer">

@@ -5,6 +5,7 @@ export const CollegeCarballAssociationLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"College Carball Association - Rocket League"}
                 description="College Carball Association Rocket League league. A verified 3v3 NA and EU college league with world championship. Must be a full time college student."
                 canonicalPath={"/games/RocketLeague/leagues/college-carball-association"}
             />
@@ -16,20 +17,16 @@ export const CollegeCarballAssociationLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Fall Season"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Fall Season"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - NA/EU"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["5 Week Regular Season with Playoffs", "World Championship includes NA and EU", "Live Streamed Matches", "24/7 Support and Admins on Discord"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - NA/EU"]}/>
+                    <EventInfoCard title={"Details"} infoList={["5 Week Regular Season with Playoffs", "World Championship includes NA and EU", "Live Streamed Matches", "24/7 Support and Admins on Discord"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - Must be a FULL TIME College Student"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - Must be a FULL TIME College Student"]} footer={<ExternalButton host={"College Carball Association"} blank={true} title={"Join Now"} path={"https://discord.gg/cca"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.gg/cca"} />
             </div>
 
             <div className="backButtonContainer">

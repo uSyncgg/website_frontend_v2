@@ -5,6 +5,7 @@ export const BlueOtterDraftLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Blue Otter Draft League - League of Legends"}
                 description="Join a League of Legends draft league - Blue Otter Draft. Compete in two skill divisions for prizes."
                 canonicalPath={"/games/LoL/leagues/blue-otter-leagues/draft"}
             />
@@ -12,20 +13,16 @@ export const BlueOtterDraftLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Winter Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Winter Seasons"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Prize Pool TBD", "2 Skill Divisions", "Support on Discord", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Prize Pool TBD", "2 Skill Divisions", "Support on Discord", "Live Streamed Matches"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$10 per Person", "Platinum 4 - Diamond 1"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$10 per Person", "Platinum 4 - Diamond 1"]} footer={<ExternalButton host={"Blue Otter Draft League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/gVGSxRT"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/gVGSxRT"} />
             </div>
 
             <div className="backButtonContainer">

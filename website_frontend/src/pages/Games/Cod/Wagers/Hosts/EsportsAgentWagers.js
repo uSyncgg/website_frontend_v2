@@ -5,6 +5,7 @@ export const EsportsAgentWagers = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Esports Agent - Call of Duty"}
                 description="Live supported cod wagers from Esports Agent. Sign up today and experience the pro league for yourself."
                 canonicalPath={"/games/call-of-duty/wagers/eagent"}
             />
@@ -16,7 +17,7 @@ export const EsportsAgentWagers = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Regular Member: 5%", "Prestige Member: 0%", "No Fee & Instant Deposits/Withdrawals"]} />
+                    <EventInfoCard title={"Fees"} infoList={["Regular Member: 5%", "Prestige Member: 0%", "No Fee & Instant Deposits/Withdrawals"]} footer={<ExternalButton host={"Esports Agent"} blank={true} title={"Join Now"} path={"https://esportsagent.gg/wagers"} />}/>
                 </div>
 
                 <div>
@@ -26,10 +27,6 @@ export const EsportsAgentWagers = () => {
                 <div>
                     <EventInfoCard title={"Restrictions"} infoList={["18+", "Available Worldwide", "US State Restrictions: AZ, MT, and SD"]} />
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://esportsagent.gg/wagers"} />
             </div>
 
             <div className="backButtonContainer">

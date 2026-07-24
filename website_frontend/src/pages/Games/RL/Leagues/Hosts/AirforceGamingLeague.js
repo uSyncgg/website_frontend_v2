@@ -5,6 +5,7 @@ export const AirforceGamingLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Airforce Gaming League - Rocket League"}
                 description="Airforce Gaming Rocket League league. For Air Force and Space Force associated players only. Pro and casual divisions available for NA, EU, and APAC."
                 canonicalPath={"/games/RocketLeague/leagues/airforce-gaming"}
             />
@@ -12,20 +13,16 @@ export const AirforceGamingLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual spring, Summer, and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual spring, Summer, and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - NA/EU/APAC"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Pro & Casual Leagues (NA Only)", "Air Force & Space Force Associated Players ONLY", "Highly Competitive"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - NA/EU/APAC"]}/>
+                    <EventInfoCard title={"Details"} infoList={["Pro & Casual Leagues (NA Only)", "Air Force & Space Force Associated Players ONLY", "Highly Competitive"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"Airforce Gaming League"} blank={true} title={"Join Now"} path={"https://airforcegaming.com/dafgl"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://airforcegaming.com/dafgl"} />
             </div>
 
             <div className="backButtonContainer">

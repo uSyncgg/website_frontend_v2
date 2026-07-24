@@ -5,6 +5,7 @@ export const SaunaScrimsH2H = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Sauna Scrims - Halo"}
                 description="The Sauana Halo scrims. Scrim finder for casual all the way to highly competitive players in the Halo scene."
                 canonicalPath={"/games/halo/head-to-head/sauna"}
             />
@@ -12,7 +13,7 @@ export const SaunaScrimsH2H = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Fees"} infoList={["Free Scrim Finder / 8s Lobbies"]} />
+                    <EventInfoCard title={"Fees"} infoList={["Free Scrim Finder / 8s Lobbies"]} footer={<ExternalButton host={"Sauna Scrims"} blank={true} title={"Join Now"} path={"https://discord.com/invite/cCVjpAvUdz"} />}/>
                 </div>
 
                 <div>
@@ -22,10 +23,6 @@ export const SaunaScrimsH2H = () => {
                 <div>
                     <EventInfoCard title={"Restrictions"} infoList={["Available Worldwide"]} />
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/cCVjpAvUdz"} />
             </div>
 
             <div className="backButtonContainer">

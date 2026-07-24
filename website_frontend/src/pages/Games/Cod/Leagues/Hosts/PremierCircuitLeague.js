@@ -5,6 +5,7 @@ export const PremierCircuitLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"The Premier Circuit League - Call of Duty"}
                 description="The Premier Circuit (TPC) League is an invite-only top tier Call of Duty amateur league. Challengers players duke it out inm this high stakes league."
                 canonicalPath={"/games/call-of-duty/leagues/tpc-league"}
             />
@@ -12,20 +13,16 @@ export const PremierCircuitLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$1,000 Prize Pool", "Stats for Every Game", "Live Streamed Matches", "Qualifier Tournament to Enter", "4v4 CDL Variant", "16 Teams MAX"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$1,000 Prize Pool", "Stats for Every Game", "Live Streamed Matches", "Qualifier Tournament to Enter", "4v4 CDL Variant", "16 Teams MAX"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - DM to Enter"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - DM to Enter"]} footer={<ExternalButton host={"The Premier Circuit League"} blank={true} title={"Join Now"} path={"https://x.com/TPCircuit"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://x.com/TPCircuit"} />
             </div>
 
             <div className="backButtonContainer">

@@ -4,6 +4,7 @@ export const CodWagers = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Call of Duty Wagers"}
                 description="Wagers for Call of Duty from every website out there. Find the best website to play Call of Duty wagers."
                 canonicalPath={"/games/call-of-duty/wagers"}
             />

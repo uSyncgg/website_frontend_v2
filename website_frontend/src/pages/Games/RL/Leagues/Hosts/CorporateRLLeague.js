@@ -5,6 +5,7 @@ export const CorporateRLLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Corporate League - Rocket League"}
                 description="Corporate Rocket League league. Sign up your company team for 3v3 North American competition. 4 skill divisions with $2,000 going to charity."
                 canonicalPath={"/games/RocketLeague/leagues/corporate-rl"}
             />
@@ -12,20 +13,16 @@ export const CorporateRLLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual spring and Fall Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$2,000 in Charity Donations, No Prize Pool (Estimated)", "Must Sign up with Company", "4 Different Divisions Based on Skill", "All matches are played each Saturday", "~8 Week Long Regular Season and Playoffs"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$2,000 in Charity Donations, No Prize Pool (Estimated)", "Must Sign up with Company", "4 Different Divisions Based on Skill", "All matches are played each Saturday", "~8 Week Long Regular Season and Playoffs"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$150 per Team"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$150 per Team"]} footer={<ExternalButton host={"Corporate Rocket League"} blank={true} title={"Join Now"} path={"https://cea.gg/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://cea.gg/"} />
             </div>
 
             <div className="backButtonContainer">

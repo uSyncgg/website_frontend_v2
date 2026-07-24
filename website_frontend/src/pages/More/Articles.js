@@ -101,6 +101,7 @@ export const Articles = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Articles"}
                 description="uSync articles showcase the disorganization in esports and how uSync brings the community together. Check out uSync's articles to learn more!"
                 canonicalPath={"/more/articles"}
             />

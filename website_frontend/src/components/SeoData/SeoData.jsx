@@ -3,7 +3,7 @@ import React from "react";
 export const SeoData = ({ title, description, canonicalPath, image, type, publishedTime, modifiedTime, author }) => {
     const siteName = "uSync";
     const fullTitle = title ? `${siteName} | ${title}` : `${siteName} | Esports LANs, Tournaments, & Leagues Hub`;
-    const baseUrl = "https://usync.gg";
+    const baseUrl = "https://www.usync.gg";
     const fullUrl = `${baseUrl}${canonicalPath}`;
     const imgUrl = image ? `${image}` : "https://i.imgur.com/A0AhUZp.jpeg";
 

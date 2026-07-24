@@ -5,6 +5,7 @@ export const LANAllNightSpring2026 = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"LAN All Night Spring 2026 - Convention"}
                 description="LAN All Night is here for all your LAN needs this spring! Bring Your Own Computer (BYOC) and game with tons of similar people!"
                 canonicalPath={"/lans/lan-all-night-spring-26"}
             />
@@ -21,12 +22,8 @@ export const LANAllNightSpring2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["BYOC: $90", "General Admission: $10 - $25"]} /> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["BYOC: $90", "General Admission: $10 - $25"]} footer={<ExternalButton host={"LAN All Night Spring 2026"} blank={true} title={"Join Now"} path={"https://lanallnight.com/"} />}/> 
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://lanallnight.com/"} />
             </div>
 
             <div className="backButtonContainer">

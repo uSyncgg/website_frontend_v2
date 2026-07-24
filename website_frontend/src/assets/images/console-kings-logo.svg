@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 166" role="img" aria-labelledby="title desc">
+  <title id="title">Console Kings logo</title>
+  <desc id="desc">Red controller crown surrounding a cat-shaped area of negative space.</desc>
+
+  <!-- Main controller/crown. The black cat in the reference is transparent negative space. -->
+  <path fill="#ff334f" d="
+    M128 0
+    C174 0 214 1 231 16
+    C244 29 251 63 256 94
+    L256 128
+    C255 147 246 160 231 165
+    C217 169 211 158 206 147
+    L193 116
+    C191 111 187 109 180 109
+    L221 54
+    L178 63
+    L192 73
+    L151 84
+    L128 23
+    L105 84
+    L64 73
+    L78 63
+    L35 54
+    L76 109
+    C69 109 65 112 63 118
+    L51 149
+    C47 161 42 168 29 165
+    C10 162 1 149 0 130
+    L0 94
+    C5 63 12 29 25 16
+    C42 1 82 0 128 0
+    Z"/>
+
+  <!-- Lower center point. -->
+  <path fill="#ff334f" d="M106 110H150L128 137Z"/>
+</svg>

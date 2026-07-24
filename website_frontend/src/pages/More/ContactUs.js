@@ -6,6 +6,7 @@ export const ContactUs = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Contact Us"}
                 description="Learn more about what uSync does and who the team is. Contact uSync today to work with us and become apart of the esports family."
                 canonicalPath={"/more/contactus"}
             />
@@ -53,7 +54,7 @@ export const ContactUs = () => {
                         <p className={`${styles.learn} ${styles.post}`}>
                             We support plenty of different events/websites but may miss a few from time to time in our search to support all games. 
                             If you are interested in working with us, click   {" "}
-                            <Link to={"/more/eventhost/eventhost"}>HERE</Link>
+                            <Link to={"/more/eventhost"}>HERE</Link>
                         </p>
                     </div>
                 </div>

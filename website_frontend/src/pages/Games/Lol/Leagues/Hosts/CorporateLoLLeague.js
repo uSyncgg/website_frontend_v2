@@ -5,6 +5,7 @@ export const CorporateLoLLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Corporate League - League of Legends"}
                 description="Corporate League of Legends league is the league that employed people have been searching for. Play with co-workers against other companies in League of Legends."
                 canonicalPath={"/games/LoL/leagues/corporate-league"}
             />
@@ -12,20 +13,16 @@ export const CorporateLoLLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Season"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Season"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["No Prize Pool", "Entry Fees Donated to Charity", "Non-Swiss Elimination Format", "Same Organization Co-Workers Only"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["No Prize Pool", "Entry Fees Donated to Charity", "Non-Swiss Elimination Format", "Same Organization Co-Workers Only"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$250 per Team"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["$250 per Team"]} footer={<ExternalButton host={"Corporate LOL League"} blank={true} title={"Join Now"} path={"https://cea.gg/"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://cea.gg/"} />
             </div>
 
             <div className="backButtonContainer">

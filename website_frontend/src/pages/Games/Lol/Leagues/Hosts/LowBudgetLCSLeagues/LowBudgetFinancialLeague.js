@@ -5,6 +5,7 @@ export const LowBudgetFinancialLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"LCS Financial League - League of Legends"}
                 description="LCS Financial league is a free to play League of Legends league for those with an Emerald average rank. Join the action for yourself."
                 canonicalPath={"/games/LoL/leagues/low-budget-leagues/financial"}
             />
@@ -12,20 +13,16 @@ export const LowBudgetFinancialLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Fall, and Winter Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Fall, and Winter Seasons"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["16 Teams Max", "Support on Discord", "Live Streamed Matches"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]}/>
+                    <EventInfoCard title={"Details"} infoList={["16 Teams Max", "Support on Discord", "Live Streamed Matches"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Emerald Average, 2 Diamond 3 Max", "See Rank Points for Team Eligibility"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Emerald Average, 2 Diamond 3 Max", "See Rank Points for Team Eligibility"]} footer={<ExternalButton host={"LCS Financial League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/w4WVB4Z"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://discord.com/invite/w4WVB4Z"} />
             </div>
 
             <div className="backButtonContainer">

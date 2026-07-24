@@ -5,6 +5,7 @@ export const HaloAgentLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Halo Agent - Halo"}
                 description="Halo Agent is the league for those who love to play ranked Halo and want something more. Compete today."
                 canonicalPath={"/games/halo/leagues/halo-agent"}
             />
@@ -12,20 +13,16 @@ export const HaloAgentLeague = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date"} infoList={["Randomly Hosted Seasons"]} />
+                    <EventInfoCard title={"Date"} infoList={["Randomly Hosted Seasons"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - All Regions"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["$1,000 Prize Pool (Estimated)", "Highly Competitive", "Live Streamed Matches", "Live Support on Discord"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - All Regions"]}/>
+                    <EventInfoCard title={"Details"} infoList={["$1,000 Prize Pool (Estimated)", "Highly Competitive", "Live Streamed Matches", "Live Support on Discord"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["TBD"]} />
+                    <EventInfoCard title={"Entry Fee"} infoList={["TBD"]} footer={<ExternalButton host={"Halo Agent"} blank={true} title={"Join Now"} path={"https://twitter.com/TheHaloAgent"} />}/>
                 </div>
-            </div>
-
-            <div className="eventButtonContainer">
-                <ExternalButton blank={true} title={"Join Now"} path={"https://twitter.com/TheHaloAgent"} />
             </div>
 
             <div className="backButtonContainer">

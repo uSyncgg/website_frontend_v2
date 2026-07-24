@@ -13,6 +13,7 @@ export const AegisLeagues = () => {
     return (
         <div className="standardContainer">
             <SeoData
+                title={"Aegis Leagues - League of Legends"}
                 description="Aegis League of Legends leagues. Enroll today and meet new friends while competing for large cash prizes."
                 canonicalPath={"/games/LoL/leagues/aegis-leagues"}
             />

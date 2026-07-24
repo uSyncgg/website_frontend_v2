@@ -65,9 +65,9 @@ import { PulseUppersLeague } from 'pages/Games/Cod/Leagues/Hosts/PulseXLeagues/P
 import { AirForceGamingLeague as AirForceCodLeague } from 'pages/Games/Cod/Leagues/Hosts/AirForceGamingLeague';
 import { BeerLeague } from 'pages/Games/Cod/Leagues/Hosts/BeerLeague';
 import { CasualXPLeague } from 'pages/Games/Cod/Leagues/Hosts/CasualXPLeague';
-import { CodRecLeagues } from 'pages/Games/Cod/Leagues/Hosts/CollegeRecLeagues/CodRecLeagues';
-import { CodRecPremadeLeague } from 'pages/Games/Cod/Leagues/Hosts/CollegeRecLeagues/CodRecPremadeLeague';
-import { CodRecOpenLeague } from 'pages/Games/Cod/Leagues/Hosts/CollegeRecLeagues/CodRecOpenLeague';
+import { CodRecLeagues } from 'pages/Games/Cod/Leagues/Hosts/CodRecLeagues/CodRecLeagues';
+import { CodRecPremadeLeague } from 'pages/Games/Cod/Leagues/Hosts/CodRecLeagues/CodRecPremadeLeague';
+import { CodRecOpenLeague } from 'pages/Games/Cod/Leagues/Hosts/CodRecLeagues/CodRecOpenLeague';
 import { CollegeCodLeague } from 'pages/Games/Cod/Leagues/Hosts/CollegeCodLeague';
 import { CorporateCodLeague } from 'pages/Games/Cod/Leagues/Hosts/CorporateCodLeague';
 import { ECACEsportsLeague as ECACCodLeague } from 'pages/Games/Cod/Leagues/Hosts/ECACEsportsLeague';
@@ -207,6 +207,7 @@ import { PlayflyCollegeLeague as PlayflyLoLLeague } from 'pages/Games/Lol/League
 import { PlayVSLeague as PlayVSLoLLeague } from 'pages/Games/Lol/Leagues/Hosts/PlayVSLeague';
 import { SDCLeague } from 'pages/Games/Lol/Leagues/Hosts/SDCLeague';
 import { NECCLeague as NECCLoLLeague } from 'pages/Games/Lol/Leagues/Hosts/NECCLeague';
+import { BlackTwitchLeague } from 'pages/Games/Lol/Leagues/Hosts/BlackTwitchLeague';
 // Wagers
 import { LolWagers } from 'pages/Games/Lol/Wagers/LolWagers';
 import { Ewagers as LoLEWagers } from 'pages/Games/Lol/Wagers/Hosts/Ewagers';
@@ -240,6 +241,7 @@ import { NemesisNoviceLeague } from 'pages/Games/RL/Leagues/Hosts/NemesisLeagues
 import { NemesisProspectLeague } from 'pages/Games/RL/Leagues/Hosts/NemesisLeagues/NemesisProspectLeague';
 import { NemesisRivalLeague } from 'pages/Games/RL/Leagues/Hosts/NemesisLeagues/NemesisRivalLeague';
 import { NemesisTitanLeague } from 'pages/Games/RL/Leagues/Hosts/NemesisLeagues/NemesisTitanLeague';
+import { NemesisProvisionalLeague } from 'pages/Games/RL/Leagues/Hosts/NemesisLeagues/NemesisProvisionalLeague';
 import { RLPCLeagues } from 'pages/Games/RL/Leagues/Hosts/RLPCLeagues/RLPCLeagues';
 import { RLPCDoubleALeague } from 'pages/Games/RL/Leagues/Hosts/RLPCLeagues/RLPCDoubleALeague';
 import { RLPCSingleALeague } from 'pages/Games/RL/Leagues/Hosts/RLPCLeagues/RLPCSingleALeague';
@@ -322,21 +324,25 @@ import Payment from 'pages/Payment/PaymentCheckouts/Payment';
 // LAN Pages - CURRENT
 // All LANs
 import { AllLans } from 'pages/Games/Conventions/AllLans';
-import { TheRetake2026 } from 'pages/Games/Conventions/Events/TheRetake2026';
 import { ShintoChamps2026 } from 'pages/Games/Cod/Lans/Events/ShintoChamps2026';
 import { HellcaseCS2LAN2026 } from 'pages/Games/Conventions/Events/HellcaseCS2LAN2026';
 import { EWGL3 } from 'pages/Games/Cod/Lans/Events/EWGL3';
 import { GACSHeatwave } from 'pages/Games/Conventions/Events/GACSHeatwave';
-import { TheSummoning2026 } from 'pages/Games/Lol/Lans/Events/TheSummoning2026';
 import { CitadelI } from 'pages/Games/Halo/Lans/Events/CitadelI';
 import { GameandGeek2026 } from 'pages/Games/Halo/Lans/Events/GameandGeek2026';
 import { SFGE2026 } from 'pages/Games/Halo/Lans/Events/SFGE2026';
 import { Conventions } from 'pages/Games/Conventions/Conventions';
 import { HNLxFANDOM2026 } from 'pages/Games/Cod/Lans/Events/HNLxFANDOM2026';
+import { EgoCODLAN4v4 } from 'pages/Games/Cod/Lans/Events/EgoCODLAN4v4';
 import { OhYoshiDiIntRehatched } from 'pages/Games/Halo/Lans/Events/OhYoshiDiIntRehatched';
+import { LANATHONUnderTheSun2026 } from 'pages/Games/Conventions/Events/LANATHONUnderTheSun2026';
+import { FortLAN2026 } from 'pages/Games/Conventions/Events/FortLAN2026';
+import { LANAllNight2026 } from 'pages/Games/Conventions/Events/LANAllNight2026';
 
 // Archived LANs Below
 // 2026
+import { TheSummoning2026 } from 'pages/Games/Lol/Lans/Archived/2026/TheSummoning2026';
+import { TheRetake2026 } from 'pages/Games/Conventions/Archived/2026/TheRetake2026';
 import { ShintoTest } from 'pages/Games/Cod/Lans/Archived/2026/ShintoTest';
 import { RVAEsportsChampionship2026 } from 'pages/Games/Cod/Lans/Archived/2026/RVAEsportsChampionship2026';
 import { ImmerseCon2026 } from 'pages/Games/Conventions/Archived/2026/ImmerseCon2026';
@@ -365,8 +371,9 @@ import { Volan2026 } from 'pages/Games/Conventions/Archived/2026/Volan2026';
 import { LakewoodLeagueXIISpring } from 'pages/Games/Conventions/Archived/2026/LakewoodLeagueXIISpring';
 import { LANAllNightSpring2026 } from 'pages/Games/Conventions/Archived/2026/LANAllNightSpring2026';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+const root = document.getElementById('root');
+
+const app = (
   // <React.StrictMode>
   <ErrorBoundary>
   <BrowserRouter>
@@ -575,6 +582,7 @@ root.render(
           <Route path='/games/LoL/leagues/ecac' element={<ECACLoLLeague />} />
           <Route path='/games/LoL/leagues/nse' element={<NationalStudentLoLLeague />} />
           <Route path='/games/LoL/leagues/playvs' element={<PlayVSLoLLeague />} />
+          <Route path='/games/LoL/leagues/black-twitch-league' element={<BlackTwitchLeague />} />
           {/* Wagers */}
           <Route path='/games/LoL/wagers' element={<LolWagers />} />
           <Route path='/games/LoL/wagers/ewagers' element={<LoLEWagers />} />
@@ -608,6 +616,7 @@ root.render(
           <Route path='/games/RocketLeague/leagues/nemesis-leagues/challenger' element={<NemesisChallengerLeague />} />
           <Route path='/games/RocketLeague/leagues/nemesis-leagues/prospect' element={<NemesisProspectLeague />} />
           <Route path='/games/RocketLeague/leagues/nemesis-leagues/novice' element={<NemesisNoviceLeague />} />
+          <Route path='/games/RocketLeague/leagues/nemesis-leagues/provisional' element={<NemesisProvisionalLeague />} />
           <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues' element={<FrontierDoublesLeagues />} />
           <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues/elite' element={<FrontierEliteLeague />} />
           <Route path='/games/RocketLeague/leagues/frontier-doubles-leagues/star' element={<FrontierStarLeague />} />
@@ -695,6 +704,7 @@ root.render(
           <Route path='/lans/shintochamps2026' element={<ShintoChamps2026 />} />
           <Route path='/lans/ewgl3' element={<EWGL3 />} />
           <Route path='/lans/hnl-x-fandom-2026' element={<HNLxFANDOM2026 />} />
+          <Route path='/lans/ego-cod-lan-4v4' element={<EgoCODLAN4v4 />} />
           {/* Wz */}
           {/* Halo */}
           <Route path='/lans/citadel-i' element={<CitadelI />} />
@@ -702,16 +712,19 @@ root.render(
           <Route path='/lans/sfge-2026' element={<SFGE2026 />} />
           <Route path='/lans/oh-yoshi-di-int-rehatched' element={<OhYoshiDiIntRehatched />} />
           {/* LoL */}
-          <Route path='/lans/the-summoning-2026' element={<TheSummoning2026 />} />
           <Route path='/lans/bec-sololane-showdown' element={<BECSoloLaneShowdown />} />
           {/* Conventions */}
           <Route path='/other-lans' element={<Conventions />} />
-          <Route path='/lans/the-retake' element={<TheRetake2026 />} />
           <Route path='/lans/gacs-operation-heatwave' element={<GACSHeatwave />} />
           <Route path='/lans/hellcase-cs2-2026' element={<HellcaseCS2LAN2026 />} />
+          <Route path='/lans/lan-a-thon-under-the-sun-2026' element={<LANATHONUnderTheSun2026 />} />
+          <Route path='/lans/fortlan-2026' element={<FortLAN2026 />} />
+          <Route path='/lans/lan-all-night-2026' element={<LANAllNight2026 />} />
 
           {/* Archived LANs */}
           {/* 2026 */}
+          <Route path='/lans/the-summoning-2026' element={<TheSummoning2026 />} />
+          <Route path='/lans/the-retake' element={<TheRetake2026 />} />
           <Route path='/lans/shinto-test' element={<ShintoTest />} />
           <Route path='/lans/rva-esports-championship-2026' element={<RVAEsportsChampionship2026 />} />
           <Route path='/lans/immersecon-2026' element={<ImmerseCon2026 />} />
@@ -751,6 +764,12 @@ root.render(
   </ErrorBoundary>
   // </React.StrictMode>
 );
+
+if (root.hasChildNodes()) {
+  ReactDOM.hydrateRoot(root, app);
+} else {
+  ReactDOM.createRoot(root).render(app);
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
