@@ -207,7 +207,7 @@ export const AboutYouStep = ({ form, setField, errors, onNext, onBack }) => {
 };
 
 export const RoleStep = ({ form, setField, onNext, onBack }) => {
-    const showOtherGenre = form.persona === 'player' && form.genre === 'other';
+    const showOtherGenre = form.persona === 'player' && form.genres?.includes('other');
 
     return (
         <>
@@ -219,11 +219,12 @@ export const RoleStep = ({ form, setField, onNext, onBack }) => {
 
             {form.persona === 'player' && (
                 <>
-                    <p className={shared.label} style={{ marginBottom: '.85rem' }}>Which kind of player?</p>
+                    <p className={shared.label} style={{ marginBottom: '.85rem' }}>Which kinds of player? Pick as many as apply.</p>
                     <TileSelect
                         options={PLAYER_GENRES.map(g => ({ ...g, icon: GENRE_ICONS[g.value] }))}
-                        value={form.genre}
-                        onChange={(v) => setField('genre', v)}
+                        value={form.genres}
+                        onChange={(v) => setField('genres', v)}
+                        multi
                         compact
                     />
 
@@ -244,7 +245,7 @@ export const RoleStep = ({ form, setField, onNext, onBack }) => {
 
             <div className={shared.stepFooter}>
                 <button type="button" className={shared.secondaryButton} onClick={onBack}>Back</button>
-                <button type="button" className={shared.primaryButton} disabled={!form.persona || (form.persona === 'player' && !form.genre)} onClick={onNext}>Continue</button>
+                <button type="button" className={shared.primaryButton} disabled={!form.persona || (form.persona === 'player' && !form.genres?.length)} onClick={onNext}>Continue</button>
             </div>
         </>
     );

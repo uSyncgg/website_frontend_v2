@@ -34,12 +34,14 @@ export const HostDetailsStep = ({ form, setField, errors, onNext, onBack }) => {
                 {form.country === 'United States' ? (
                     <AccountField
                         label="State" name="state" as="select" options={US_STATES.map(s => ({ value: s, label: s }))}
-                        value={form.state} onChange={(e) => setField('state', e.target.value)} required error={errors.state}
+                        value={form.state} onChange={(e) => setField('state', e.target.value)} required={false} error={errors.state}
+                        placeholder="Optional, virtual-only? Skip this"
                         hideable hidden={form.hidden?.state} onToggleHide={() => toggleHidden('state')}
                     />
                 ) : (
                     <AccountField
-                        label="State / Province" name="state" value={form.state} onChange={(e) => setField('state', e.target.value)} required error={errors.state}
+                        label="State / Province" name="state" value={form.state} onChange={(e) => setField('state', e.target.value)} required={false} error={errors.state}
+                        placeholder="Optional, virtual-only? Skip this"
                         hideable hidden={form.hidden?.state} onToggleHide={() => toggleHidden('state')}
                     />
                 )}

@@ -1,4 +1,4 @@
-import { FaGamepad, FaBuilding, FaShieldAlt, FaCheckCircle } from "react-icons/fa";
+import { FaGamepad, FaBuilding, FaCheckCircle } from "react-icons/fa";
 import shared from "../../../components/AccountUI/AccountUI.module.css";
 import { LINK_PLATFORMS } from "./accountData";
 
@@ -6,26 +6,26 @@ export const AccountTypeStep = ({ value, onChange, onNext }) => (
     <>
         <p className={shared.eyebrow}>Step 1 · Create account</p>
         <h1 className={shared.stepTitle}>How will you use uSync?</h1>
-        <p className={shared.stepSubtitle}>You can add hosting as a Person later, it's a separate upgrade.</p>
+        <p className={shared.stepSubtitle}>You can add hosting as a Member later, it's a separate upgrade.</p>
 
         <div className={shared.radioCardRow}>
             <div
                 role="button"
                 tabIndex={0}
-                className={`${shared.radioCard} ${value === 'person' ? shared.radioCardSelected : ''}`}
-                onClick={() => onChange('person')}
-                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onChange('person'); } }}
+                className={`${shared.radioCard} ${value === 'member' ? shared.radioCardSelected : ''}`}
+                onClick={() => onChange('member')}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onChange('member'); } }}
             >
                 <FaGamepad className={shared.radioCardIcon} />
                 <div>
-                    <div className={shared.radioCardTitle}>Person</div>
+                    <div className={shared.radioCardTitle}>Member</div>
                     <div className={shared.radioCardDescription}>Build a profile, track stats, get discovered.</div>
                     <div className={shared.hostHint}>
                         You can still host events as a Non-host.{' '}
                         <span className={shared.hintTrigger} tabIndex={0} onClick={(e) => e.stopPropagation()}>
                             See here
                             <span className={shared.hintTooltip}>
-                                Players/Non-hosts can turn on hosting in your settings. Go to Settings → Hosting → Turn on hosting as a Personal account.
+                                Players/Non-hosts can turn on hosting in your settings. Go to Settings → Hosting → Turn on hosting as a Member account.
                             </span>
                         </span>
                     </div>
@@ -46,44 +46,6 @@ export const AccountTypeStep = ({ value, onChange, onNext }) => (
         </div>
 
         <button type="button" className={shared.primaryButton} disabled={!value} onClick={onNext}>Continue</button>
-    </>
-);
-
-export const TwoFactorStep = ({ enabled, onChange, onNext, onBack }) => (
-    <>
-        <p className={shared.eyebrow}>Security</p>
-        <h1 className={shared.stepTitle}>Add two-factor authentication</h1>
-        <p className={shared.stepSubtitle}>Protect your account with a code sent to your email each time you log in from a new device.</p>
-
-        <div className={shared.radioCardRow}>
-            <button
-                type="button"
-                className={`${shared.radioCard} ${enabled ? shared.radioCardSelected : ''}`}
-                onClick={() => onChange(true)}
-            >
-                <FaShieldAlt className={shared.radioCardIcon} />
-                <div>
-                    <div className={shared.radioCardTitle}>Yes, enable it</div>
-                    <div className={shared.radioCardDescription}>Recommended, adds a quick verification step at login.</div>
-                </div>
-            </button>
-
-            <button
-                type="button"
-                className={`${shared.radioCard} ${!enabled ? shared.radioCardSelected : ''}`}
-                onClick={() => onChange(false)}
-            >
-                <div>
-                    <div className={shared.radioCardTitle}>Not right now</div>
-                    <div className={shared.radioCardDescription}>You can turn this on anytime in Settings → Security.</div>
-                </div>
-            </button>
-        </div>
-
-        <div className={shared.stepFooter}>
-            <button type="button" className={shared.secondaryButton} onClick={onBack}>Back</button>
-            <button type="button" className={shared.primaryButton} onClick={onNext}>Continue</button>
-        </div>
     </>
 );
 

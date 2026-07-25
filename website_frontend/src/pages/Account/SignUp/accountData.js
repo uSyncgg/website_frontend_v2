@@ -115,8 +115,6 @@ export const HOST_LINK_PLATFORMS = [
     { value: "twitch", label: "Twitch", icon: SiTwitch },
     { value: "twitter", label: "Twitter / X", icon: FaXTwitter },
     { value: "youtube", label: "YouTube", icon: SiYoutube },
-    { value: "kick", label: "Kick", icon: SiKick },
-    { value: "discord", label: "Discord", icon: SiDiscord },
     { value: "instagram", label: "Instagram", icon: SiInstagram },
 ];
 

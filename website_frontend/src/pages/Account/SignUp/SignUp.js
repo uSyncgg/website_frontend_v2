@@ -1,28 +1,29 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { SeoData, AccountShell, SignupSidebar } from "components";
-import { AccountTypeStep, TwoFactorStep, LinkAccountsStep, SuccessStep } from "./SharedSteps";
+import { AccountTypeStep, LinkAccountsStep, SuccessStep } from "./SharedSteps";
 import { CredentialsStep, AboutYouStep, RoleStep, GamesStep, BracketHostingStep, ProfileBasicsStep } from "./PlayerSteps";
 import { HostDetailsStep, VerifiedInterestStep, HostPasswordStep } from "./HostSteps";
 import { LINK_PLATFORMS, HOST_LINK_PLATFORMS } from "./accountData";
 
-const PERSON_SIDEBAR = ['Account type', 'Credentials', 'About you', 'Your role', 'Your games', 'Bracket hosting', 'Profile basics', 'Security', 'Link accounts'];
-const HOST_SIDEBAR = ['Account type', 'Host details', 'Verified', 'Password', 'Security', 'Link accounts'];
+// 2FA is temporarily removed from both paths (not ready for initial release);
+// it can be reintroduced as its own step later.
+const MEMBER_SIDEBAR = ['Account type', 'Credentials', 'About you', 'Your role', 'Your games', 'Bracket hosting', 'Profile basics', 'Link accounts'];
+const HOST_SIDEBAR = ['Account type', 'Host details', 'Verified', 'Password', 'Link accounts'];
 
 const initialForm = {
     accountType: null,
-    // credentials / person
+    // credentials / member
     username: "", email: "", password: "", confirmPassword: "",
     firstName: "", lastName: "", phone: "", gender: "", birthday: "",
     country: "", state: "", zip: "",
     timezone: "", timezoneMode: "auto", timezoneManual: "",
-    persona: "", genre: "", otherGenre: "",
+    persona: "", genres: [], otherGenre: "",
     games: [], otherGame: "", bracketHosting: null, avatar: "", bio: "",
     // host
     accountName: "", contactName: "", contactEmail: "", contactDiscord: "",
     eventTypes: [], verifiedInterest: null, alsoPlayer: false,
     // shared
-    twoFactorEnabled: false,
     links: {},
     // sensitive fields default to hidden from the public profile for safety
     // (zip is never shown publicly at all, so it has no visibility toggle)
@@ -55,7 +56,8 @@ const validateAboutYou = (form) => {
 
 const validateHostDetails = (form) => {
     const errors = {};
-    ['accountName', 'email', 'country', 'state', 'contactName', 'contactEmail'].forEach(field => {
+    // State is intentionally not required, some hosts are virtual-only.
+    ['accountName', 'email', 'country', 'contactName', 'contactEmail'].forEach(field => {
         if (!form[field]?.trim?.()) errors[field] = "Required.";
     });
     return errors;
@@ -115,7 +117,7 @@ export const SignUp = () => {
 
     const finish = () => navigate('/');
 
-    const sidebarSteps = form.accountType === 'host' ? HOST_SIDEBAR : PERSON_SIDEBAR;
+    const sidebarSteps = form.accountType === 'host' ? HOST_SIDEBAR : MEMBER_SIDEBAR;
     const showSidebar = stepIndex > 0 && stepIndex < sidebarSteps.length;
 
     const renderStep = () => {
@@ -128,8 +130,7 @@ export const SignUp = () => {
                 case 1: return <HostDetailsStep form={form} setField={setField} errors={errors} onNext={() => advance(validateHostDetails)} onBack={back} />;
                 case 2: return <VerifiedInterestStep form={form} setField={setField} onNext={() => advance()} onBack={back} />;
                 case 3: return <HostPasswordStep form={form} setField={setField} errors={errors} onNext={() => advance(validateHostPassword)} onBack={back} />;
-                case 4: return <TwoFactorStep enabled={form.twoFactorEnabled} onChange={(v) => setField('twoFactorEnabled', v)} onNext={() => advance()} onBack={back} />;
-                case 5: return <LinkAccountsStep links={form.links} onChange={handleLinkChange} onFinish={() => advance()} onSkip={() => advance()} onBack={back} platforms={form.alsoPlayer ? LINK_PLATFORMS : HOST_LINK_PLATFORMS} />;
+                case 4: return <LinkAccountsStep links={form.links} onChange={handleLinkChange} onFinish={() => advance()} onSkip={() => advance()} onBack={back} platforms={form.alsoPlayer ? LINK_PLATFORMS : HOST_LINK_PLATFORMS} />;
                 default: return <SuccessStep onDone={finish} />;
             }
         }
@@ -141,8 +142,7 @@ export const SignUp = () => {
             case 4: return <GamesStep form={form} setField={setField} onNext={() => advance()} onBack={back} />;
             case 5: return <BracketHostingStep form={form} setField={setField} onNext={() => advance()} onBack={back} />;
             case 6: return <ProfileBasicsStep form={form} setField={setField} onNext={() => advance()} onBack={back} />;
-            case 7: return <TwoFactorStep enabled={form.twoFactorEnabled} onChange={(v) => setField('twoFactorEnabled', v)} onNext={() => advance()} onBack={back} />;
-            case 8: return <LinkAccountsStep links={form.links} onChange={handleLinkChange} onFinish={() => advance()} onSkip={() => advance()} onBack={back} />;
+            case 7: return <LinkAccountsStep links={form.links} onChange={handleLinkChange} onFinish={() => advance()} onSkip={() => advance()} onBack={back} />;
             default: return <SuccessStep onDone={finish} />;
         }
     };
@@ -151,7 +151,7 @@ export const SignUp = () => {
         <div className="standardContainer">
             <SeoData
                 title={"Sign Up"}
-                description="Create your uSync account as a Person or Host. Track stats, join brackets, and run your own esports events."
+                description="Create your uSync account as a Member or Host. Track stats, join brackets, and run your own esports events."
                 canonicalPath={"/account/signup"}
             />
 
