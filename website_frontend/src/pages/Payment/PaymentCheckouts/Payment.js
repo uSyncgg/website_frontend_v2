@@ -1,7 +1,10 @@
-import { PaymentComponent, CheckoutSteps } from 'components';
+import { CheckoutSteps } from 'components/CheckoutSteps/CheckoutSteps';
 import { useLocation, useNavigate } from 'react-router';
 import styles from '../GeneralPaymentForm/GeneralPaymentForm.module.css';
 import { FaArrowLeft } from 'react-icons/fa';
+import { lazy, Suspense } from 'react';
+
+const PaymentComponent = lazy(() => import('components/PaymentComponent/PaymentComponent').then(p => ({ default: p.PaymentComponent })));
 
 // PLEASE NOTE THIS IS A PAGE FOR TESTING NOT PRODUCTION
 

@@ -1,5 +1,9 @@
-import { SeoData, HostBanner, LanMap } from "components";
+import { SeoData, HostBanner } from "components";
 import { CONVENTION_MARKERS } from 'data/lanMarkers';
+import { lazy, Suspense } from 'react';
+
+const LanMap = lazy(() => import('components/LanMap/LanMap').then(m => ({ default: m.LanMap })));
+
 export const Conventions = () => {
     return (
         <div className="standardContainer">
@@ -8,9 +12,12 @@ export const Conventions = () => {
                 description="Find esports LAN conventions and in-person gaming events. Browse gaming conventions and multi-game LAN events happening across the country."
                 canonicalPath={"/other-lans"}
             />
-            <div className="lanMapContainer">
-                <LanMap markers={CONVENTION_MARKERS} game="Conventions" />
-            </div>
+            
+            <Suspense fallback={<div style={{ minHeight: 400 }} />}>
+                <div className="lanMapContainer">
+                    <LanMap markers={CONVENTION_MARKERS} game="Conventions" />
+                </div>
+            </Suspense>
 
             <div className="eventBannerContainer">
                 <div className="hrEvents" />
