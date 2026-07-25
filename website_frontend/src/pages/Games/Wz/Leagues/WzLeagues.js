@@ -1,4 +1,5 @@
 import { SeoData, HeaderImage, HostBanner, NoEvents } from "components";
+import '../../EventBanners.css';
 
 export const WzLeagues = () => {
     return (

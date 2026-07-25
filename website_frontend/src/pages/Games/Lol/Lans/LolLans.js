@@ -1,4 +1,5 @@
 import { SeoData, HostBanner, NoEvents } from "components";
+import '../../EventBanners.css';
 
 import { LOL_LAN_MARKERS } from 'data/lanMarkers';
 import { lazy, Suspense } from 'react';

@@ -1,6 +1,7 @@
 import { SeoData, HostBanner } from "components";
 import { CONVENTION_MARKERS } from 'data/lanMarkers';
 import { lazy, Suspense } from 'react';
+import '../EventBanners.css';
 
 const LanMap = lazy(() => import('components/LanMap/LanMap').then(m => ({ default: m.LanMap })));
 

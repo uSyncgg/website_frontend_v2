@@ -1,5 +1,6 @@
 import { HeaderImage, HostBanner, BackButton, SeoData } from "components";
 import { useCheckResize } from "hooks";
+import '../../../../EventBanners.css';
 
 export const CodRecLeagues = () => {
     const isMobile = useCheckResize();
