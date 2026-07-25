@@ -28,7 +28,7 @@ export const TileSelect = ({ options, value, onChange, multi = false, compact = 
                         aria-pressed={selected}
                     >
                         {selected && <FaCheck className={styles.tileCheck} />}
-                        {Icon && <Icon className={styles.tileIcon} />}
+                        {opt.logo ? <img src={opt.logo} alt="" className={styles.tileLogo} /> : Icon && <Icon className={styles.tileIcon} />}
                         <span className={styles.tileLabel}>{opt.label}</span>
                         {opt.description && <span className={styles.tileDescription}>{opt.description}</span>}
                     </button>

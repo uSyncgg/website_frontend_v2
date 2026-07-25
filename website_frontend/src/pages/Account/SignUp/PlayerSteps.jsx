@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { FaCamera } from "react-icons/fa";
 import { AccountField, PasswordField, TileSelect } from "components";
 import shared from "../../../components/AccountUI/AccountUI.module.css";
-import { COUNTRIES, US_STATES, GENDERS, GAMES, PLAYER_GENRES, PERSONA_OPTIONS, GENRE_ICONS } from "./accountData";
+import { COUNTRIES, US_STATES, GENDERS, GAMES, PLAYER_GENRES, PERSONA_OPTIONS, GENRE_ICONS, GAME_TOURNAMENT_SUPPORT } from "./accountData";
 import { getTimezoneForAddress, formatTimezoneLabel, COMMON_TIMEZONES } from "./timezone";
 
 export const CredentialsStep = ({ form, setField, errors, onNext, onBack }) => {
@@ -287,7 +287,10 @@ export const GamesStep = ({ form, setField, onNext, onBack }) => {
     );
 };
 
-export const BracketHostingStep = ({ form, setField, onNext, onBack }) => (
+export const BracketHostingStep = ({ form, setField, onNext, onBack }) => {
+    const pickedGames = (form.games || []).filter(g => g !== 'other').map(g => GAMES.find(x => x.value === g)).filter(Boolean);
+
+    return (
     <>
         <p className={shared.eyebrow}>Step 6 · Bracket hosting</p>
         <h1 className={shared.stepTitle}>Do you plan on hosting any brackets?</h1>
@@ -308,6 +311,29 @@ export const BracketHostingStep = ({ form, setField, onNext, onBack }) => (
             </button>
         </div>
 
+        {pickedGames.length > 0 && (
+            <div style={{ marginBottom: '1.5rem' }}>
+                <p className={shared.label} style={{ marginBottom: '.6rem' }}>Tournament support for your games</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
+                    {pickedGames.map(game => {
+                        const supported = GAME_TOURNAMENT_SUPPORT[game.value];
+                        return (
+                            <div key={game.value} style={{ display: 'flex', alignItems: 'center', gap: '.65rem', padding: '.6rem .75rem', borderRadius: '.65rem', border: '1px solid rgba(255,255,255,.08)', background: 'rgba(255,255,255,.03)' }}>
+                                {game.logo && <img src={game.logo} alt="" style={{ width: '1.4rem', height: '1.4rem', borderRadius: '.35rem', objectFit: 'cover' }} />}
+                                <span style={{ flex: 1, fontSize: '.85rem', fontWeight: 600, color: 'rgba(255,255,255,.85)' }}>{game.label}</span>
+                                <span
+                                    className={shared.badge}
+                                    style={supported ? undefined : { background: 'rgba(255,255,255,.06)', color: 'rgba(255,255,255,.5)', border: '1px solid rgba(255,255,255,.14)' }}
+                                >
+                                    {supported ? 'Tournaments live' : 'Coming soon'}
+                                </span>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        )}
+
         <p className={shared.helperText}>Unsure? You can turn this on later in Settings → Hosting anytime. Nothing here is permanent.</p>
         <p className={shared.helperText}>Free plans get 2 hosted tournaments / month.</p>
 
@@ -316,7 +342,8 @@ export const BracketHostingStep = ({ form, setField, onNext, onBack }) => (
             <button type="button" className={shared.primaryButton} disabled={form.bracketHosting === null} onClick={onNext}>Continue</button>
         </div>
     </>
-);
+    );
+};
 
 export const ProfileBasicsStep = ({ form, setField, onNext, onBack }) => {
     const [previewUrl, setPreviewUrl] = useState(null);

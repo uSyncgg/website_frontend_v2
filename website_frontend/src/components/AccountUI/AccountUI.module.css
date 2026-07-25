@@ -520,6 +520,13 @@
     color: #b18af0;
 }
 
+.tileLogo {
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: .45rem;
+    object-fit: cover;
+}
+
 .tileLabel {
     font-weight: 700;
     font-size: .88rem;
@@ -670,6 +677,52 @@
     font-size: .8rem;
     color: rgba(255, 255, 255, .55);
     line-height: 1.4;
+}
+
+/* ===== Hover hint (e.g. "you can still host later") ===== */
+.hostHint {
+    margin-top: .5rem;
+    font-size: .74rem;
+    color: rgba(255, 255, 255, .45);
+    line-height: 1.4;
+}
+
+.hintTrigger {
+    position: relative;
+    display: inline-block;
+    color: #b18af0;
+    font-weight: 700;
+    cursor: help;
+    border-bottom: 1px dotted #b18af0;
+}
+
+.hintTooltip {
+    position: absolute;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 15rem;
+    background: #1c1921;
+    border: 1px solid rgba(255, 255, 255, .16);
+    border-radius: .6rem;
+    padding: .65rem .75rem;
+    font-size: .72rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, .85);
+    line-height: 1.4;
+    text-align: left;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .15s ease-in-out, visibility .15s ease-in-out;
+    box-shadow: 0 .5rem 1.5rem -.5rem rgba(0, 0, 0, .6);
+    z-index: 10;
+    pointer-events: none;
+}
+
+.hintTrigger:hover .hintTooltip,
+.hintTrigger:focus-visible .hintTooltip {
+    opacity: 1;
+    visibility: visible;
 }
 
 /* ===== Checkbox row ===== */

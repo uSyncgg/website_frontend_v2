@@ -9,17 +9,28 @@ export const AccountTypeStep = ({ value, onChange, onNext }) => (
         <p className={shared.stepSubtitle}>You can add hosting as a Person later, it's a separate upgrade.</p>
 
         <div className={shared.radioCardRow}>
-            <button
-                type="button"
+            <div
+                role="button"
+                tabIndex={0}
                 className={`${shared.radioCard} ${value === 'person' ? shared.radioCardSelected : ''}`}
                 onClick={() => onChange('person')}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onChange('person'); } }}
             >
                 <FaGamepad className={shared.radioCardIcon} />
                 <div>
                     <div className={shared.radioCardTitle}>Person</div>
                     <div className={shared.radioCardDescription}>Build a profile, track stats, get discovered.</div>
+                    <div className={shared.hostHint}>
+                        You can still host events as a Non-host.{' '}
+                        <span className={shared.hintTrigger} tabIndex={0} onClick={(e) => e.stopPropagation()}>
+                            See here
+                            <span className={shared.hintTooltip}>
+                                Players/Non-hosts can turn on hosting in your settings. Go to Settings → Hosting → Turn on hosting as a Personal account.
+                            </span>
+                        </span>
+                    </div>
                 </div>
-            </button>
+            </div>
 
             <button
                 type="button"
@@ -76,14 +87,14 @@ export const TwoFactorStep = ({ enabled, onChange, onNext, onBack }) => (
     </>
 );
 
-export const LinkAccountsStep = ({ links, onChange, onFinish, onSkip, onBack }) => (
+export const LinkAccountsStep = ({ links, onChange, onFinish, onSkip, onBack, platforms = LINK_PLATFORMS }) => (
     <>
         <p className={shared.eyebrow}>Almost done</p>
         <h1 className={shared.stepTitle}>Link your accounts</h1>
         <p className={shared.stepSubtitle}>Optional, connect the platforms you use so teammates and organizers can find you. You can always add these later from Settings.</p>
 
         <div className={shared.linkAccountsGrid}>
-            {LINK_PLATFORMS.map(({ value, label, icon: Icon }) => (
+            {platforms.map(({ value, label, icon: Icon }) => (
                 <div className={shared.linkAccountRow} key={value}>
                     <Icon className={shared.linkAccountIcon} />
                     <span className={shared.linkAccountLabel}>{label}</span>

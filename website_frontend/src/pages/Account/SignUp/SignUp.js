@@ -4,6 +4,7 @@ import { SeoData, AccountShell, SignupSidebar } from "components";
 import { AccountTypeStep, TwoFactorStep, LinkAccountsStep, SuccessStep } from "./SharedSteps";
 import { CredentialsStep, AboutYouStep, RoleStep, GamesStep, BracketHostingStep, ProfileBasicsStep } from "./PlayerSteps";
 import { HostDetailsStep, VerifiedInterestStep, HostPasswordStep } from "./HostSteps";
+import { LINK_PLATFORMS, HOST_LINK_PLATFORMS } from "./accountData";
 
 const PERSON_SIDEBAR = ['Account type', 'Credentials', 'About you', 'Your role', 'Your games', 'Bracket hosting', 'Profile basics', 'Security', 'Link accounts'];
 const HOST_SIDEBAR = ['Account type', 'Host details', 'Verified', 'Password', 'Security', 'Link accounts'];
@@ -19,7 +20,7 @@ const initialForm = {
     games: [], otherGame: "", bracketHosting: null, avatar: "", bio: "",
     // host
     accountName: "", contactName: "", contactEmail: "", contactDiscord: "",
-    eventTypes: [], verifiedInterest: null,
+    eventTypes: [], verifiedInterest: null, alsoPlayer: false,
     // shared
     twoFactorEnabled: false,
     links: {},
@@ -128,7 +129,7 @@ export const SignUp = () => {
                 case 2: return <VerifiedInterestStep form={form} setField={setField} onNext={() => advance()} onBack={back} />;
                 case 3: return <HostPasswordStep form={form} setField={setField} errors={errors} onNext={() => advance(validateHostPassword)} onBack={back} />;
                 case 4: return <TwoFactorStep enabled={form.twoFactorEnabled} onChange={(v) => setField('twoFactorEnabled', v)} onNext={() => advance()} onBack={back} />;
-                case 5: return <LinkAccountsStep links={form.links} onChange={handleLinkChange} onFinish={() => advance()} onSkip={() => advance()} onBack={back} />;
+                case 5: return <LinkAccountsStep links={form.links} onChange={handleLinkChange} onFinish={() => advance()} onSkip={() => advance()} onBack={back} platforms={form.alsoPlayer ? LINK_PLATFORMS : HOST_LINK_PLATFORMS} />;
                 default: return <SuccessStep onDone={finish} />;
             }
         }

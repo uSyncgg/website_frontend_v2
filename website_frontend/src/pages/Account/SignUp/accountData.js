@@ -32,16 +32,30 @@ export const GENDERS = [
     { value: "other", label: "Other / Prefer not to say" },
 ];
 
+// Same logo assets already used for these games elsewhere on the site (GameImage.jsx)
 export const GAMES = [
-    { value: "cod", label: "Call of Duty" },
-    { value: "cs2", label: "CS2" },
-    { value: "halo", label: "Halo" },
-    { value: "lol", label: "League of Legends" },
-    { value: "rl", label: "Rocket League" },
-    { value: "valorant", label: "Valorant" },
-    { value: "wz", label: "Warzone" },
+    { value: "cod", label: "Call of Duty", logo: "https://i.imgur.com/gNvoNEo.png" },
+    { value: "cs2", label: "CS2", logo: "https://i.imgur.com/60FwDKN.png" },
+    { value: "halo", label: "Halo", logo: "https://i.imgur.com/wqKJfEu.png" },
+    { value: "lol", label: "League of Legends", logo: "https://i.imgur.com/5riYNow.png" },
+    { value: "rl", label: "Rocket League", logo: "https://i.imgur.com/GJO8JIZ.png" },
+    { value: "valorant", label: "Valorant", logo: "https://i.imgur.com/Gsl3oIp.png" },
+    { value: "wz", label: "Warzone", logo: "https://i.imgur.com/IBGIbY2.png" },
     { value: "other", label: "None / Other" },
 ];
+
+// Only Call of Duty has a live Tournaments section today (see src/index.js);
+// everything else routes to Coming Soon. Surfaced on the Bracket Hosting step
+// so players know what's actually hostable right now.
+export const GAME_TOURNAMENT_SUPPORT = {
+    cod: true,
+    cs2: false,
+    halo: false,
+    lol: false,
+    rl: false,
+    valorant: false,
+    wz: false,
+};
 
 export const PLAYER_GENRES = [
     { value: "fps", label: "FPS", description: "Call of Duty, Valorant, CS2, Halo" },
@@ -78,6 +92,8 @@ export const VERIFIED_BENEFITS = [
     "Dedicated placement on the uSync home page",
 ];
 
+// GB (Gamebattles) is intentionally not offered here, it's reserved for a
+// future uSync Verified perk for CoD players, not a general signup option.
 export const LINK_PLATFORMS = [
     { value: "twitch", label: "Twitch", icon: SiTwitch },
     { value: "twitter", label: "Twitter / X", icon: FaXTwitter },
@@ -90,7 +106,18 @@ export const LINK_PLATFORMS = [
     { value: "discord", label: "Discord", icon: SiDiscord },
     { value: "instagram", label: "Instagram", icon: SiInstagram },
     { value: "cmg", label: "CMG", icon: FaGamepad },
-    { value: "gb", label: "Gamebattles (GB)", icon: FaGamepad },
+];
+
+// Host accounts are organizations, not players, so only their public/social
+// presence makes sense to link here. Player-identity platforms (Steam, Riot,
+// Battle.net, Activision, CMG) only show up if the host also says they play.
+export const HOST_LINK_PLATFORMS = [
+    { value: "twitch", label: "Twitch", icon: SiTwitch },
+    { value: "twitter", label: "Twitter / X", icon: FaXTwitter },
+    { value: "youtube", label: "YouTube", icon: SiYoutube },
+    { value: "kick", label: "Kick", icon: SiKick },
+    { value: "discord", label: "Discord", icon: SiDiscord },
+    { value: "instagram", label: "Instagram", icon: SiInstagram },
 ];
 
 export const GENRE_ICONS = {

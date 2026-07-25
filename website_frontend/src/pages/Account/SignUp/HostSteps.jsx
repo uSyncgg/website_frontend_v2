@@ -84,6 +84,23 @@ export const HostDetailsStep = ({ form, setField, errors, onNext, onBack }) => {
             <p className={shared.label} style={{ marginBottom: '.85rem' }}>What kind of events do you run?</p>
             <TileSelect options={HOST_EVENT_TYPES} value={form.eventTypes} onChange={(v) => setField('eventTypes', v)} multi compact />
 
+            <p className={shared.label} style={{ marginBottom: '.35rem' }}>Are you also a player?</p>
+            <p className={shared.helperText} style={{ marginTop: 0 }}>So people can find you both ways, this unlocks player accounts to link too.</p>
+            <div className={shared.radioCardRow}>
+                <button type="button" className={`${shared.radioCard} ${form.alsoPlayer === true ? shared.radioCardSelected : ''}`} onClick={() => setField('alsoPlayer', true)}>
+                    <div>
+                        <div className={shared.radioCardTitle}>Yes</div>
+                        <div className={shared.radioCardDescription}>Show player-platform links (Steam, Riot, Battle.net, and more) on my account too.</div>
+                    </div>
+                </button>
+                <button type="button" className={`${shared.radioCard} ${form.alsoPlayer === false ? shared.radioCardSelected : ''}`} onClick={() => setField('alsoPlayer', false)}>
+                    <div>
+                        <div className={shared.radioCardTitle}>No</div>
+                        <div className={shared.radioCardDescription}>Keep this a pure host/organization account.</div>
+                    </div>
+                </button>
+            </div>
+
             <div className={shared.stepFooter}>
                 <button type="button" className={shared.secondaryButton} onClick={onBack}>Back</button>
                 <button type="submit" className={shared.primaryButton} disabled={!form.games?.length || !form.eventTypes?.length}>Continue</button>
