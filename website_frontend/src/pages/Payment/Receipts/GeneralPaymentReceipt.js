@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from '../GeneralPaymentForm/GeneralPaymentForm.module.css';
-import { PaymentForm , Receipt, CheckoutSteps } from "components";
+import { PaymentForm , Receipt } from "components";
+import { CheckoutSteps } from 'components/CheckoutSteps/CheckoutSteps';
 
 function GeneralPaymentReceipt(
     {
