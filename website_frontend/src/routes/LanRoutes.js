@@ -8,6 +8,7 @@ import { ShintoChamps2026 } from 'pages/Games/Cod/Lans/Events/ShintoChamps2026';
 import { EWGL3 } from 'pages/Games/Cod/Lans/Events/EWGL3';
 import { HNLxFANDOM2026 } from 'pages/Games/Cod/Lans/Events/HNLxFANDOM2026';
 import { EgoCODLAN4v4 } from 'pages/Games/Cod/Lans/Events/EgoCODLAN4v4';
+import { GACoDModernWarfare4LaunchTournament } from 'pages/Games/Cod/Lans/Events/GACoDModernWarfare4LaunchTournament';
 
 // Halo
 import { CitadelI } from 'pages/Games/Halo/Lans/Events/CitadelI';
@@ -24,6 +25,7 @@ import { HellcaseCS2LAN2026 } from 'pages/Games/Conventions/Events/HellcaseCS2LA
 import { LANATHONUnderTheSun2026 } from 'pages/Games/Conventions/Events/LANATHONUnderTheSun2026';
 import { FortLAN2026 } from 'pages/Games/Conventions/Events/FortLAN2026';
 import { LANAllNight2026 } from 'pages/Games/Conventions/Events/LANAllNight2026';
+import { CS210Mans2026 } from 'pages/Games/Conventions/Events/CS210Mans2026';
 
 // Archived LANs
 // 2026
@@ -65,6 +67,7 @@ const LanRoutes = () => (
         <Route path='ewgl3' element={<EWGL3 />} />
         <Route path='hnl-x-fandom-2026' element={<HNLxFANDOM2026 />} />
         <Route path='ego-cod-lan-4v4' element={<EgoCODLAN4v4 />} />
+        <Route path='ga-cod-modern-warfare-4-launch-tournament' element={<GACoDModernWarfare4LaunchTournament />} />
         {/* Wz */}
         {/* Halo */}
         <Route path='citadel-i' element={<CitadelI />} />
@@ -79,6 +82,7 @@ const LanRoutes = () => (
         <Route path='lan-a-thon-under-the-sun-2026' element={<LANATHONUnderTheSun2026 />} />
         <Route path='fortlan-2026' element={<FortLAN2026 />} />
         <Route path='lan-all-night-2026' element={<LANAllNight2026 />} />
+        <Route path='cs2-10-mans-2026' element={<CS210Mans2026 />} />
 
         {/* Archived LANs */}
         {/* 2026 */}
