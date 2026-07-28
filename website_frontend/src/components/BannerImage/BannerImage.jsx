@@ -11,7 +11,7 @@ function BannerImage({path, imgUrl, alt, verified}) {
             }
 
             <Link to={path}>
-                <img src={imgUrl} alt={alt} className={styles.bannerImage} />
+                <img src={imgUrl} alt={alt} className={styles.bannerImage} loading="lazy" decoding="async" />
             </Link>
         </div>
     );

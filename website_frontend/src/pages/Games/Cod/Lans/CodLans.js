@@ -1,9 +1,6 @@
-import { SeoData, HostBanner, NoEvents } from "components";
+import { SeoData, HostBanner, NoEvents, LanMap } from "components";
 import { COD_LAN_MARKERS } from 'data/lanMarkers';
-import { lazy, Suspense } from 'react';
 import '../../EventBanners.css';
-
-const LanMap = lazy(() => import('components/LanMap/LanMap').then(m => ({ default: m.LanMap })));
 
 export const CodLans = () => {
     return (
@@ -13,11 +10,9 @@ export const CodLans = () => {
                 description="Call of Duty LAN tournaments near you. Find the closest Call of Duty LANs to where you live and work. Every LAN going on near you."
                 canonicalPath={"/games/call-of-duty/lans"}
             />
-            <Suspense fallback={<div style={{ minHeight: 400 }} />}>
-                <div className="lanMapContainer">
-                    <LanMap markers={COD_LAN_MARKERS} game="CoD" />
-                </div>
-            </Suspense>
+            <div className="lanMapContainer">
+                <LanMap markers={COD_LAN_MARKERS} game="CoD" />
+            </div>
 
             <div className="eventBannerContainer">
 

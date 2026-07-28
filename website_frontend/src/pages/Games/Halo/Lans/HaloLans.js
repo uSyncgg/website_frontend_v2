@@ -1,9 +1,6 @@
-import { SeoData, HostBanner, NoEvents } from "components";
+import { SeoData, HostBanner, NoEvents, LanMap } from "components";
 import { HALO_LAN_MARKERS } from 'data/lanMarkers';
-import { lazy, Suspense } from 'react';
 import '../../EventBanners.css';
-
-const LanMap = lazy(() => import('components/LanMap/LanMap').then(m => ({ default: m.LanMap })));
 
 export const HaloLans = () => {
     return (
@@ -14,11 +11,9 @@ export const HaloLans = () => {
                 canonicalPath={"/games/halo/lans"}
             />
 
-            <Suspense fallback={<div style={{ minHeight: 400 }} />}>
-                <div className="lanMapContainer">
-                    <LanMap markers={HALO_LAN_MARKERS} game="Halo" />
-                </div>
-            </Suspense>
+            <div className="lanMapContainer">
+                <LanMap markers={HALO_LAN_MARKERS} game="Halo" />
+            </div>
 
             <div className="eventBannerContainer">
                 <div className="hrEvents" />
