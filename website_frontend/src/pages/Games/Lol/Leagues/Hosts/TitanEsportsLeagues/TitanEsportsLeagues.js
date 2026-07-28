@@ -8,10 +8,12 @@ export const TitanEsportsLeagues = () => {
     const immortal = isMobile ? "Immortal League - 1200 LP Cap | Thursdays" : "1200 LP Cap | Thursdays";
     const ascendant = isMobile ? "Ascendant League - 500 LP Cap | Sundays" : "500 LP Cap | Sundays";
     const vanquisher = isMobile ? "Vanquisher League - M100 Cap | Tuesdays" : "M100 Cap | Tuesdays";
+    const sentinel = isMobile ? "Sentinel League - M100 Avg | Fridays" : "M100 Avg | Fridays";
     const eternal = isMobile ? "Eternal League - Diamond 4 Avg | Mondays" : "Diamond 4 Avg | Mondays";
     const conqueror = isMobile ? "Conqueror League - Diamond 4 Cap | Wednesdays" : "Diamond 4 Cap | Wednesdays";
     const olympus = isMobile ? "Olympus League - Diamond 4 Cap | Fridays" : "Diamond 4 Cap | Fridays";
     const divinity = isMobile ? "Divinity League - Emerald 4 Cap | Mondays" : "Emerald 4 Cap | Mondays";
+    const berserker = isMobile ? "Berserker League - Emerald 4 Avg | Thursdays" : "Emerald 4 Avg | Thursdays";
     const gladiator = isMobile ? "Gladiator League - Platinum 4 Cap | Tuesdays" : "Platinum 4 Cap | Tuesdays";
 
     return (
@@ -63,6 +65,20 @@ export const TitanEsportsLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
+                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/sentinel"}>Sentinel League</HostBanner.Title>
+                    <HostBanner.Image
+                        path={"/games/LoL/leagues/titan-leagues/sentinel"}
+                        imgUrl={"https://i.imgur.com/SoRhxEf.png"}
+                        alt={"Titan Leagues"}
+                        verified={true}
+                    />
+                    <HostBanner.Region>{sentinel}</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/titan-leagues/sentinel"} />
+                </HostBanner>
+
+                <div className="hrEvents" />
+
+                <HostBanner>
                     <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/eternal"}>Eternal League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/LoL/leagues/titan-leagues/eternal"} 
@@ -73,8 +89,6 @@ export const TitanEsportsLeagues = () => {
                     <HostBanner.Region>{eternal}</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/titan-leagues/eternal"} />
                 </HostBanner>
-
-                <div className="hrEvents" />
 
                 <HostBanner>
                     <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/conqueror"}>Conqueror League</HostBanner.Title>
@@ -88,6 +102,8 @@ export const TitanEsportsLeagues = () => {
                     <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/titan-leagues/conqueror"} />
                 </HostBanner>
 
+                <div className="hrEvents" />
+
                 <HostBanner>
                     <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/olympus"}>Olympus League</HostBanner.Title>
                     <HostBanner.Image 
@@ -99,8 +115,6 @@ export const TitanEsportsLeagues = () => {
                     <HostBanner.Region>{olympus}</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/titan-leagues/olympus"} />
                 </HostBanner>
-
-                <div className="hrEvents" />
 
                 <HostBanner>
                     <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/divinity"}>Divinity League</HostBanner.Title>
@@ -114,6 +128,20 @@ export const TitanEsportsLeagues = () => {
                     <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/titan-leagues/divinity"} />
                 </HostBanner>
 
+                <div className="hrEvents" />
+
+                <HostBanner>
+                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/berserker"}>Berserker League</HostBanner.Title>
+                    <HostBanner.Image
+                        path={"/games/LoL/leagues/titan-leagues/berserker"}
+                        imgUrl={"https://i.imgur.com/SoRhxEf.png"}
+                        alt={"Titan Leagues"}
+                        verified={true}
+                    />
+                    <HostBanner.Region>{berserker}</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/titan-leagues/berserker"} />
+                </HostBanner>
+
                 <HostBanner>
                     <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/gladiator"}>Gladiator League</HostBanner.Title>
                     <HostBanner.Image 
@@ -124,7 +152,7 @@ export const TitanEsportsLeagues = () => {
                     />
                     <HostBanner.Region>{gladiator}</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/titan-leagues/gladiator"} />
-                </HostBanner>
+                </HostBanner>              
 
                 <div className="hrEvents" />
 
