@@ -37,6 +37,10 @@ import { Receipt } from "./Receipt/Receipt";
 import { LoadingWheel } from "./LoadingWheel/LoadingWheel";
 import { FormDataCheck } from "./FormDataCheck/FormDataCheck";
 import { CheckoutSteps } from "./CheckoutSteps/CheckoutSteps";
+import { PaymentComponent } from "./PaymentComponent/PaymentComponent";
+
+// Maps (LANs)
+import { LanMap } from "./LanMap/LanMap";
 
 // Misc
 import { TwitterEmbed } from "./TwitterEmbed/TwitterEmbed";
@@ -98,4 +102,6 @@ export {
     VerifiedImage,
     ChooseYourGame,
     ErrorBoundary,
+    PaymentComponent,
+    LanMap,
 };
