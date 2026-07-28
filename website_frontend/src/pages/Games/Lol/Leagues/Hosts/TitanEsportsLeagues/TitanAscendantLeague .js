@@ -1,13 +1,13 @@
 import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../../EventInformation.css';
 
-export const TitanImmortalLeague = () => {
+export const TitanAscendantLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
-                title={"Titan Immortal League - League of Legends"}
-                description="Titan Immortal League. 600LP cap League of Legends league for those that are looking to improve their game and make some money."
-                canonicalPath={"/games/LoL/leagues/titan-leagues/immortal"}
+                title={"Titan Ascendant League - League of Legends"}
+                description="Titan Ascendant League is a League of Legends league with a 500 LP cap. Do you have what it takes to win the entire league?"
+                canonicalPath={"/games/LoL/leagues/titan-leagues/ascendant"}
             />
             <HeaderImage imageClass={"titanLOLLeagues"} />
 
@@ -21,11 +21,11 @@ export const TitanImmortalLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["1st Place = 35% - 2nd Place = 15% - 3rd/4th Place = 5% - Operators = 40%", "Top 16 Teams Advance to Playoffs", "Fearless Draft", "Support on Discord", "Live Streamed Matches"]} />
+                    <EventInfoCard title={"Details"} infoList={["1st Place = 35% - 2nd Place = 15% - 3rd/4th Place = 5% - Operators = 40%", "Support on Discord", "Live Streamed Matches"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$150 Entry Fee", "$25 Forfeit Deposit", "1200 LP Cap S16", "1000 LP Cap S15 / 14-3"]} footer={<ExternalButton host={"Titan Immortal League"} blank={true} title={"Join Now"} path={"https://lol.titanesports.org/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$100 per Team", "Forfeit Deposit TBD", "500 LP Cap S16", "300 LP Cap S15 / 14-3"]} footer={<ExternalButton host={"Titan Ascendant League"} blank={true} title={"Join Now"} path={"https://lol.titanesports.org/"} />}/>
                 </div>
             </div>
 
