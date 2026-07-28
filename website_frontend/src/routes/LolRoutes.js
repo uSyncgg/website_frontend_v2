@@ -56,6 +56,8 @@ import { TitanImmortalLeague } from 'pages/Games/Lol/Leagues/Hosts/TitanEsportsL
 import { TitanOlympusLeague } from 'pages/Games/Lol/Leagues/Hosts/TitanEsportsLeagues/TitanOlympusLeague';
 import { TitanVanquisherLeague } from 'pages/Games/Lol/Leagues/Hosts/TitanEsportsLeagues/TitanVanquisherLeague';
 import { TitanAscendantLeague } from 'pages/Games/Lol/Leagues/Hosts/TitanEsportsLeagues/TitanAscendantLeague ';
+import { TitanBerserkerLeague } from 'pages/Games/Lol/Leagues/Hosts/TitanEsportsLeagues/TitanBerserkerLeague';
+import { TitanSentinelLeague } from 'pages/Games/Lol/Leagues/Hosts/TitanEsportsLeagues/TitanSentinelLeague';
 import { CLOLLeague } from 'pages/Games/Lol/Leagues/Hosts/CLOLLeague';
 import { CorporateLoLLeague } from 'pages/Games/Lol/Leagues/Hosts/CorporateLoLLeague';
 import { ECACEsportsLeague as ECACLoLLeague } from 'pages/Games/Lol/Leagues/Hosts/ECACEsportsLegaue';
@@ -89,6 +91,8 @@ const LolRoutes = () => (
         <Route path='leagues/titan-leagues/divinity' element={<TitanDivinityLeague />} />
         <Route path='leagues/titan-leagues/gladiator' element={<TitanGladiatorLeague />} />
         <Route path='leagues/titan-leagues/ascendant' element={<TitanAscendantLeague />} />
+        <Route path='leagues/titan-leagues/berserker' element={<TitanBerserkerLeague />} />
+        <Route path='leagues/titan-leagues/sentinel' element={<TitanSentinelLeague />} />
         <Route path='leagues/risen-leagues' element={<RisenLeagues />} />
         <Route path='leagues/risen-leagues/champions' element={<RisenChampionsLeague />} />
         <Route path='leagues/risen-leagues/dominate' element={<RisenDominateLeague />} />
