@@ -4,9 +4,9 @@ import '../../../EventInformation.css';
 export const BECSoloLaneShowdown = () => {
     return (
         <div className="standardContainer">
-            <SeoData 
+            <SeoData
                 title={"BEC Solo Lane Showdown - Convention"}
-                description={"Step into the solo lane and prove you're the best 1v1 player in Bakersfield. First Blood, 100 CS, or First Tower — one goal, one winner. Sign yourself up today to earn cash."}
+                description={"Step into the solo lane and prove you're the best 1v1 player in Bakersfield. First Blood, 100 CS, or First Tower: one goal, one winner. Sign yourself up today to earn cash."}
                 canonicalPath={"/lans/bec-sololane-showdown"}
             />
             

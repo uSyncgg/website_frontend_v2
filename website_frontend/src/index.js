@@ -7,6 +7,9 @@ import { BrowserRouter, Routes, Route } from 'react-router';
 // Navbar & Footer
 import { Navbar, Footer, ScrollToTop, ErrorBoundary } from 'components';
 
+// 404 fallback
+import { NotFound } from 'pages/NotFound';
+
 // Home + Top Level Pages
 import { Home } from 'pages/Home';
 import { Games } from 'pages/Games';

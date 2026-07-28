@@ -6,7 +6,7 @@ export const ShintoTest = () => {
         <div className="standardContainer">
             <SeoData
                 title={"Shinto Champs - Call of Duty"}
-                description={"Shinto Champs is a Call of Duty LAN event featuring 48 teams, pool play into double elimination, and a $7,500 prize pool — the last BO7 LAN event of the season."}
+                description={"Shinto Champs is a Call of Duty LAN event featuring 48 teams, pool play into double elimination, and a $7,500 prize pool. It is the last BO7 LAN event of the season."}
                 canonicalPath={"/lans/shinto-test"}
             />
 
