@@ -23,7 +23,7 @@ const ARTICLES = [
         thumbnail: "https://i.imgur.com/Fr7yPnN.png",
         category: "Platform",
         title: "What We Provide",
-        excerpt: "From leagues and LANs to wagers and head-to-head matchups — here's everything uSync brings to the esports community.",
+        excerpt: "From leagues and LANs to wagers and head-to-head matchups, here's everything uSync brings to the esports community.",
     },
     {
         path: "/more/articles/How-to-Join-an-Esports-League",
@@ -44,7 +44,7 @@ const ARTICLES = [
         thumbnail: "https://i.imgur.com/mLgjr7C.png",
         category: "Platform",
         title: "Why uSync Is Like No Other Esports Platform",
-        excerpt: "uSync isn't your standard esports website — it's an aggregator that brings leagues, LANs, tournaments, wagers, and more into one easy-to-use hub.",
+        excerpt: "uSync isn't your standard esports website. It's an aggregator that brings leagues, LANs, tournaments, wagers, and more into one easy-to-use hub.",
     },
     {
         path: "/more/articles/black-ops-7-best-controller-settings",

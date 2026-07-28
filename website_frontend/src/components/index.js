@@ -46,7 +46,6 @@ import { LanMap } from "./LanMap/LanMap";
 import { TwitterEmbed } from "./TwitterEmbed/TwitterEmbed";
 import { EmailIcon } from "./EmailIcon/EmailIcon";
 import { TeamPhoto } from "./TeamPhoto/TeamPhoto";
-import { ArticleImages } from "./ArticleImages/ArticleImages";
 import { VerifiedImage } from "./VerifiedImage/VerifiedImage";
 import { VerifiedText } from "./VerifiedText/VerifiedText";
 
@@ -57,6 +56,9 @@ import { TournamentPagination } from "./TournamentPagination/TournamentPaginatio
 import { filteredTournaments } from "./TournamentFilter/FilteredTournaments";
 import { TournamentList } from "./TournamentList/TournamentList";
 import { HomeTournaments } from "./HomeTournaments/HomeTournaments";
+
+// Articles
+import { ArticleLayout } from "./ArticleLayout/ArticleLayout";
 
 // SEO
 import { SeoData } from "./SeoData/SeoData";
@@ -97,7 +99,7 @@ export {
     filteredTournaments,
     TournamentList,
     HomeTournaments,
-    ArticleImages,
+    ArticleLayout,
     VerifiedText,
     VerifiedImage,
     ChooseYourGame,
