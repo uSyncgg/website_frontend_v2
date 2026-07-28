@@ -1,9 +1,6 @@
-import { SeoData, HostBanner, NoEvents } from "components";
+import { SeoData, HostBanner, NoEvents, LanMap } from "components";
 import { WZ_LAN_MARKERS } from 'data/lanMarkers';
-import { lazy, Suspense } from 'react';
 import '../../EventBanners.css';
-
-const LanMap = lazy(() => import('components/LanMap/LanMap').then(m => ({ default: m.LanMap })));
 
 export const WzLans = () => {
     return (
@@ -14,11 +11,9 @@ export const WzLans = () => {
                 canonicalPath={"/games/warzone/lans"}
             />
 
-            <Suspense fallback={<div style={{ minHeight: 400 }} />}>
-                <div className="lanMapContainer">
-                    <LanMap markers={WZ_LAN_MARKERS} game="Warzone" />
-                </div>
-            </Suspense>
+            <div className="lanMapContainer">
+                <LanMap markers={WZ_LAN_MARKERS} game="Warzone" />
+            </div>
 
             <div className="eventBannerContainer">
                 <div className="hrEvents" />
