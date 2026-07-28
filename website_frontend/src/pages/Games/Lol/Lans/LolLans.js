@@ -1,4 +1,5 @@
 import { SeoData, HostBanner, NoEvents, LanMap } from "components";
+import '../../EventBanners.css';
 
 import { LOL_LAN_MARKERS } from 'data/lanMarkers';
 
@@ -10,7 +11,7 @@ export const LolLans = () => {
                 description="League of Legends LANs near you. Find a LAN that is closest to you on our world renown LAN map."
                 canonicalPath={"/games/LoL/lans"}
             />
-            
+
             <div className="lanMapContainer">
                 <LanMap markers={LOL_LAN_MARKERS} game="LoL" />
             </div>

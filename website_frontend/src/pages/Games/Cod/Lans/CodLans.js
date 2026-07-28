@@ -1,5 +1,6 @@
 import { SeoData, HostBanner, NoEvents, LanMap } from "components";
 import { COD_LAN_MARKERS } from 'data/lanMarkers';
+import '../../EventBanners.css';
 
 export const CodLans = () => {
     return (

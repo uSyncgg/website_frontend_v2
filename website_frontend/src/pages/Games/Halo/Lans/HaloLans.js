@@ -1,5 +1,6 @@
 import { SeoData, HostBanner, NoEvents, LanMap } from "components";
 import { HALO_LAN_MARKERS } from 'data/lanMarkers';
+import '../../EventBanners.css';
 
 export const HaloLans = () => {
     return (
@@ -9,6 +10,7 @@ export const HaloLans = () => {
                 description="Halo LAN tournaments near you and across the world. Find the closest Halo LAN to you today."
                 canonicalPath={"/games/halo/lans"}
             />
+
             <div className="lanMapContainer">
                 <LanMap markers={HALO_LAN_MARKERS} game="Halo" />
             </div>

@@ -9,6 +9,7 @@ export const AllLans = () => {
                 description="Find all esports LAN events across every game title on an interactive map. Browse upcoming in-person gaming tournaments and LAN parties near you."
                 canonicalPath={"/lans/all"}
             />
+
             <div className="lanMapContainer">
                 <LanMap markers={ALL_LAN_MARKERS} showAllGames={true} />
             </div>

@@ -22,7 +22,6 @@ import { ExternalButton } from "./ExternalButton/ExternalButton";
 // Maps
 import MapCoverHome from "./MapCover/MapCoverHome";
 import MapCoverGame from "./MapCover/MapCoverGame";
-import { LanMap } from "./LanMap/LanMap";
 
 // Game & Event Type Bubbles
 import { GameImage } from "./GameImage/GameImage";
@@ -37,8 +36,11 @@ import { PaymentCart } from "./PaymentCart/PaymentCart";
 import { Receipt } from "./Receipt/Receipt";
 import { LoadingWheel } from "./LoadingWheel/LoadingWheel";
 import { FormDataCheck } from "./FormDataCheck/FormDataCheck";
-import { PaymentComponent } from "./PaymentComponent/PaymentComponent";
 import { CheckoutSteps } from "./CheckoutSteps/CheckoutSteps";
+import { PaymentComponent } from "./PaymentComponent/PaymentComponent";
+
+// Maps (LANs)
+import { LanMap } from "./LanMap/LanMap";
 
 // Misc
 import { TwitterEmbed } from "./TwitterEmbed/TwitterEmbed";
@@ -64,6 +66,9 @@ import { SeoData } from "./SeoData/SeoData";
 // Scroll behaviour
 import { ScrollToTop } from "./ScrollToTop/ScrollToTop";
 
+// Error handling
+import { ErrorBoundary } from "./ErrorBoundary/ErrorBoundary";
+
 export {
     Navbar,
     Footer,
@@ -71,8 +76,6 @@ export {
     MapCoverHome,
     PaymentForm,
     PaymentCart,
-    PaymentComponent,
-    CheckoutSteps,
     LoadingWheel,
     FormDataCheck,
     Receipt,
@@ -100,5 +103,7 @@ export {
     VerifiedText,
     VerifiedImage,
     ChooseYourGame,
-    LanMap
+    ErrorBoundary,
+    PaymentComponent,
+    LanMap,
 };
