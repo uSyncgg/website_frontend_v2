@@ -25,7 +25,7 @@ export const TitanAscendantLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$100 per Team", "Forfeit Deposit TBD", "500 LP Cap S16", "300 LP Cap S15 / 14-3"]} footer={<ExternalButton host={"Titan Ascendant League"} blank={true} title={"Join Now"} path={"https://lol.titanesports.org/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$100 per Team", "Forfeit Deposit TBD", "500 LP Cap S16", "300 LP Cap S15 / 14-3"]} footer={<ExternalButton host={"Titan Ascendant League"} blank={true} title={"Join Now"} path={"https://discord.gg/6W6thQEfGn"} />}/>
                 </div>
             </div>
 

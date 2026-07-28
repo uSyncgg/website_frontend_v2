@@ -25,7 +25,7 @@ export const TitanSentinelLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$100 per Team", "Forfeit Deposit TBD", "M100 Avg"]} footer={<ExternalButton host={"Titan Sentinel League"} blank={true} title={"Join Now"} path={"https://lol.titanesports.org/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$100 per Team", "Forfeit Deposit TBD", "M100 Avg"]} footer={<ExternalButton host={"Titan Sentinel League"} blank={true} title={"Join Now"} path={"https://discord.gg/6W6thQEfGn"} />}/>
                 </div>
             </div>
 
