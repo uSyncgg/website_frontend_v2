@@ -21,11 +21,11 @@ export const TitanGladiatorLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["1st Place = 35% - 2nd Place = 15% - 3rd/4th Place = 5% - Operators = 40%", "9 Week Round Robin Group Stage", "3 Week Playoffs", "Standard Draft", "Support on Discord"]} />
+                    <EventInfoCard title={"Details"} infoList={["1st Place = 35% - 2nd Place = 15% - 3rd/4th Place = 5% - Operators = 40%", "9 Week Round Robin Group Stage", "3 Week Playoffs", "Fearless Draft", "Support on Discord"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$25 per Team", "$25 Forfeit Deposit", "Platinum 4 Cap"]} footer={<ExternalButton host={"Titan Gladiator League"} blank={true} title={"Join Now"} path={"https://lol.titanesports.org/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$25 per Team", "$50 Forfeit Deposit", "Platinum 4 Cap"]} footer={<ExternalButton host={"Titan Gladiator League"} blank={true} title={"Join Now"} path={"https://discord.gg/6W6thQEfGn"} />}/>
                 </div>
             </div>
 

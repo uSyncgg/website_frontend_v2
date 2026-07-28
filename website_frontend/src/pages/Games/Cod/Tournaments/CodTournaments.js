@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router";
 import axios from "axios";
 import styles from './CodTournaments.module.css';
+import '../../EventInformation.css';
 
 export const CodTournaments = () => {
     const [searchParams, setSearchParams] = useSearchParams();

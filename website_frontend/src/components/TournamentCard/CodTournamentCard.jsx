@@ -3,6 +3,7 @@ import { FaRegClock, FaGamepad, FaGlobeAmericas, FaMedal } from "react-icons/fa"
 import styles from './TournamentCard.module.css';
 import { HOSTS } from './hosts';
 import { parseEstDate, getOrdinalSuffix } from 'utils/tournamentDate';
+import { trackTournamentJoinClick } from "utils/analytics";
 
 export const CodTournamentCard = ({ tournament, badge }) => {
     const host = HOSTS[tournament.site] || { label: tournament.site, logo: null };
@@ -62,8 +63,10 @@ export const CodTournamentCard = ({ tournament, badge }) => {
     const isFreeEntry = tournament.is_free === true
         || (tournament.entry || '').toLowerCase().includes('free');
 
+    const cardTitle = `${tournament.team_size} ${series} · ${(tournament.gamemode || '').toUpperCase()}`;
+
     return (
-        <a className={styles.tournamentCard} href={tournament.url} target="_blank">
+        <a className={styles.tournamentCard} href={tournament.url} target="_blank" rel="noopener noreferrer" onClick={() => trackTournamentJoinClick(tournament.site, cardTitle, tournament.url)}>
             <div className={styles.hostTile}>
                 {host.logo
                     ? <img src={host.logo} alt={`${host.label} logo`} />
@@ -73,7 +76,7 @@ export const CodTournamentCard = ({ tournament, badge }) => {
 
             <div className={styles.cardInfo}>
                 <h3 className={styles.cardTitle}>
-                    {tournament.team_size} {series} · {(tournament.gamemode || '').toUpperCase()}
+                    {cardTitle}
                     {badge && <span className={styles.homeBadge}>{badge}</span>}
                 </h3>
 

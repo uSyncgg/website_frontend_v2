@@ -1,4 +1,5 @@
-import { PaymentComponent, CheckoutSteps } from 'components';
+import { CheckoutSteps } from 'components/CheckoutSteps/CheckoutSteps';
+import { PaymentComponent } from 'components/PaymentComponent/PaymentComponent';
 import { useLocation, useNavigate } from 'react-router';
 import styles from '../GeneralPaymentForm/GeneralPaymentForm.module.css';
 import { FaArrowLeft } from 'react-icons/fa';

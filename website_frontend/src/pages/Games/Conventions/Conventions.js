@@ -1,5 +1,7 @@
 import { SeoData, HostBanner, LanMap } from "components";
 import { CONVENTION_MARKERS } from 'data/lanMarkers';
+import '../EventBanners.css';
+
 export const Conventions = () => {
     return (
         <div className="standardContainer">
@@ -8,6 +10,7 @@ export const Conventions = () => {
                 description="Find esports LAN conventions and in-person gaming events. Browse gaming conventions and multi-game LAN events happening across the country."
                 canonicalPath={"/other-lans"}
             />
+
             <div className="lanMapContainer">
                 <LanMap markers={CONVENTION_MARKERS} game="Conventions" />
             </div>

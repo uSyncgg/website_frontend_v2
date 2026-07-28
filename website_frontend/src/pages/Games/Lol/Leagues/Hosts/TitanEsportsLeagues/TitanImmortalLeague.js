@@ -25,7 +25,7 @@ export const TitanImmortalLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$150 Entry Fee", "$25 Forfeit Deposit", "600 LP Cap"]} footer={<ExternalButton host={"Titan Immortal League"} blank={true} title={"Join Now"} path={"https://lol.titanesports.org/"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$150 Entry Fee", "$50 Forfeit Deposit", "1200 LP Cap S16", "1000 LP Cap S15 / 14-3"]} footer={<ExternalButton host={"Titan Immortal League"} blank={true} title={"Join Now"} path={"https://discord.gg/6W6thQEfGn"} />}/>
                 </div>
             </div>
 

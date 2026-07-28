@@ -1,5 +1,6 @@
 import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
+import '../../../../EventBanners.css';
 
 export const MinorLeagueEsportsLeagues = () => {
     const isMobile = useCheckResize();
@@ -13,11 +14,11 @@ export const MinorLeagueEsportsLeagues = () => {
     return (
         <div className="standardContainer">
             <SeoData
-                title={"Minoir League Esports - Rocket League"}
+                title={"Minor League Esports - Rocket League"}
                 description="Rocket League Minor League Esports (MLE) leagues. Compete in a Rocket League league of your choice based on your MMR and skills."
                 canonicalPath={"/games/RocketLeague/leagues/mle-leagues"}
             />
-            <HeaderImage title={"Minoir League Esports"} imageClass={"nonVerifiedPage"} />
+            <HeaderImage title={"Minor League Esports"} imageClass={"nonVerifiedPage"} />
 
             <div className="eventBannerContainer">
                 <HostBanner>
@@ -35,8 +36,8 @@ export const MinorLeagueEsportsLeagues = () => {
                 <HostBanner>
                     <HostBanner.Title path={"/games/RocketLeague/leagues/mle-leagues/master"}>Master League</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/mle-leagues/master"} 
-                        imgUrl={"https://i.imgur.com/1ouD021.png"} 
+                        path={"/games/RocketLeague/leagues/mle-leagues/master"}
+                        imgUrl={"https://i.imgur.com/44UEg5N.png"}
                         alt={"Minor League Esports"}
                         verified={false}
                     />
@@ -49,8 +50,8 @@ export const MinorLeagueEsportsLeagues = () => {
                 <HostBanner>
                     <HostBanner.Title path={"/games/RocketLeague/leagues/mle-leagues/champ"}>Champion League</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/mle-leagues/champ"} 
-                        imgUrl={"https://i.imgur.com/1ouD021.png"} 
+                        path={"/games/RocketLeague/leagues/mle-leagues/champ"}
+                        imgUrl={"https://i.imgur.com/U3PRmzs.png"}
                         alt={"Minor League Esports"}
                         verified={false}
                     />
@@ -61,8 +62,8 @@ export const MinorLeagueEsportsLeagues = () => {
                 <HostBanner>
                     <HostBanner.Title path={"/games/RocketLeague/leagues/mle-leagues/academy"}>Academy League</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/mle-leagues/academy"} 
-                        imgUrl={"https://i.imgur.com/1ouD021.png"} 
+                        path={"/games/RocketLeague/leagues/mle-leagues/academy"}
+                        imgUrl={"https://i.imgur.com/6Fzq2oe.png"}
                         alt={"Minor League Esports"}
                         verified={false}
                     />
@@ -75,8 +76,8 @@ export const MinorLeagueEsportsLeagues = () => {
                 <HostBanner>
                     <HostBanner.Title path={"/games/RocketLeague/leagues/mle-leagues/foundation"}>Foundation League</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/mle-leagues/foundation"} 
-                        imgUrl={"https://i.imgur.com/1ouD021.png"} 
+                        path={"/games/RocketLeague/leagues/mle-leagues/foundation"}
+                        imgUrl={"https://i.imgur.com/acXiAPL.png"}
                         alt={"Minor League Esports"}
                         verified={false}
                     />

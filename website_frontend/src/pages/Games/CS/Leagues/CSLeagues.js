@@ -1,4 +1,5 @@
 import { SeoData, HeaderImage, HostBanner } from "components";
+import '../../EventBanners.css';
 
 export const CSLeagues = () => {
     return (

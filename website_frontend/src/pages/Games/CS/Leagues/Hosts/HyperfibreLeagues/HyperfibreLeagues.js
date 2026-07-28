@@ -1,5 +1,6 @@
 import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
 import { useCheckResize } from "hooks";
+import '../../../../EventBanners.css';
 
 export const HyperfibreLeagues = () => {
     const isMobile = useCheckResize();

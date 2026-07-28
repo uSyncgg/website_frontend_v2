@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import styles from './GeneralPaymentForm.module.css';
-import { PaymentForm , PaymentCart, FormDataCheck, LoadingWheel, CheckoutSteps } from "components";
+import { PaymentForm , PaymentCart, FormDataCheck, LoadingWheel } from "components";
+import { CheckoutSteps } from 'components/CheckoutSteps/CheckoutSteps';
 import { useLocation, useNavigate } from "react-router";
 import { FaLock, FaArrowLeft } from "react-icons/fa";
 

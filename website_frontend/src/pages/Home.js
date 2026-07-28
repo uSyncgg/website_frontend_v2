@@ -2,7 +2,7 @@ import React from "react";
 import styles from './Home.module.css';
 import '../index.css';
 import { Link } from "react-router";
-import { ChooseYourGame, SeoData, LanMap, HomeTournaments } from "components";
+import { ChooseYourGame, SeoData, HomeTournaments, LanMap } from "components";
 import { FaMapMarkerAlt, FaLayerGroup, FaSitemap, FaTrophy } from "react-icons/fa";
 import { ALL_LAN_MARKERS } from 'data/lanMarkers';
 
@@ -89,7 +89,7 @@ export const Home = () => {
                 <h2 className={styles.white}>Find Events Near You</h2>
                 <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
                 <p className={styles.subtext}>Browse LAN events happening worldwide.</p>
-
+                
                 <div className={styles.mapContainer}>
                     <LanMap markers={ALL_LAN_MARKERS} className={styles.map} showAllGames={true} />
                 </div>
