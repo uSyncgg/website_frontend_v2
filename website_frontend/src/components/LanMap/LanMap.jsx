@@ -329,7 +329,11 @@ export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAl
                     toggleGame={toggleGame}
                 />
                 <TileLayer
-                    url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+                    // Single fixed host instead of Leaflet's default {s} a/b/c
+                    // sharding — under HTTP/2 that sharding just forces three
+                    // separate handshakes instead of multiplexing tile requests
+                    // over one already-preconnected connection.
+                    url="https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                 />
                 {filteredMarkers.map((marker) => (
