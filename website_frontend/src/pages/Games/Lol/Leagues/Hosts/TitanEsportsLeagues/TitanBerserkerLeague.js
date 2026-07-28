@@ -21,11 +21,11 @@ export const TitanBerserkerLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["1st Place = 35% - 2nd Place = 15% - 3rd/4th Place = 5% - Operators = 40%", "Support on Discord", "Live Streamed Matches"]} />
+                    <EventInfoCard title={"Details"} infoList={["1st Place = 35% - 2nd Place = 15% - 3rd/4th Place = 5% - Operators = 40%", "Fearless Draft", "Support on Discord", "Live Streamed Matches"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$50 per Team", "Forfeit Deposit TBD", "Emerald 4 Avg"]} footer={<ExternalButton host={"Titan Berserker League"} blank={true} title={"Join Now"} path={"https://discord.gg/6W6thQEfGn"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$50 per Team", "$50 Forfeit Deposit", "Emerald 4 Avg"]} footer={<ExternalButton host={"Titan Berserker League"} blank={true} title={"Join Now"} path={"https://discord.gg/6W6thQEfGn"} />}/>
                 </div>
             </div>
 

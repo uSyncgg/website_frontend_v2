@@ -25,7 +25,7 @@ export const TitanDivinityLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$50 per Team", "$25 Forfeit Deposit", "Emerald 4 Cap"]} footer={<ExternalButton host={"Titan Divinity League"} blank={true} title={"Join Now"} path={"https://discord.gg/6W6thQEfGn"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["$50 per Team", "$50 Forfeit Deposit", "Emerald 4 Cap"]} footer={<ExternalButton host={"Titan Divinity League"} blank={true} title={"Join Now"} path={"https://discord.gg/6W6thQEfGn"} />}/>
                 </div>
             </div>
 
