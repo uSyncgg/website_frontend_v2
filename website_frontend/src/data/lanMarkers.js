@@ -3,6 +3,7 @@ export const COD_LAN_MARKERS = [
     { lat: 39.9940032, lng: -83.0060542,  name: "Shinto Champs",       link: "/lans/shintochamps2026",   game: 'CoD' },
     { lat: 21.3010921, lng: -157.8498150, name: "HNL x FANDOM 2026",   link: "/lans/hnl-x-fandom-2026", game: 'CoD' },
     { lat: 35.8813501, lng: -79.0653555,  name: "Ego COD LAN 4v4",     link: "/lans/ego-cod-lan-4v4",   game: 'CoD' },
+    { lat: 39.9939480, lng: -83.0060490,  name: "GA:CoD Modern Warfare 4 Launch Tournament", link: "/lans/ga-cod-modern-warfare-4-launch-tournament", game: 'CoD' },
 ];
 
 export const LOL_LAN_MARKERS = [
@@ -24,6 +25,8 @@ export const CONVENTION_MARKERS = [
     { lat: 32.6613598, lng: -116.9995153, name: "LAN-A-THON Under The Sun 2026",  link: "/lans/lan-a-thon-under-the-sun-2026",   game: 'Conventions' },
     { lat: 41.0764636, lng: -85.1404836,  name: "FortLAN 2026",                   link: "/lans/fortlan-2026",                    game: 'Conventions' },
     { lat: 32.9414733, lng: -97.0592118,  name: "LAN All Night 2026",             link: "/lans/lan-all-night-2026",              game: 'Conventions' },
+    // Offset slightly north from Citadel I / Hellcase CS2 (39.6829806/39.6479806) to avoid overlap on AllLans/Home maps
+    { lat: 39.7127449, lng: -105.0813122, name: "CS2 10-Mans 2026",               link: "/lans/cs2-10-mans-2026",                game: 'Conventions' },
 ];
 
 export const ALL_LAN_MARKERS = [

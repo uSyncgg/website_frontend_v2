@@ -28,7 +28,7 @@ export const LANAllNight2026 = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["BYOC: $95", "Friday General Admission: $12", "Saturday General Admission: $18"]} footer={<ExternalButton host={"LAN All Night 2026"} blank={true} title={"Join Now"} path={"https://www.tixr.com/groups/lanfest/events/lan-all-night-gaming-festival-2026-195402"} /> } />
+                    <EventInfoCard title={"Entry Fee"} infoList={["BYOC: $95", "Friday General Admission: $12", "Saturday General Admission: $18"]} footer={<ExternalButton host={"LAN All Night 2026"} blank={true} title={"Join Now"} path={"https://www.tixr.com/groups/lanfest/events/lan-all-night-gaming-festival-2026-195402"} />} />
                 </div>
             </div>
 
