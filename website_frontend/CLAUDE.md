@@ -16,6 +16,15 @@ Most changes here are made by non-technical contributors working through Claude 
 6. **Address feedback** by reading the PR review comments (`gh pr view --comments`) and pushing fixes to the same branch; this re-triggers review.
 7. **After merge,** delete the feature branch and start the loop again from step 1. Once changes are verified on staging, Matthew promotes `testing_environment` to `main` in a separate production PR.
 
+## Account-Integration Side-Loop
+
+A large, multi-part account-integration effort is underway, tracked on its own root branch: `feature/account-integration`. It is **protected** the same way `main` and `testing_environment` are — nobody edits it directly except Matthew (a hook blocks it for everyone else). It exists so all the account-integration sub-work can be assembled in one place before the whole effort is promoted onward as a unit.
+
+- **If the user's request is account/account-integration-related**, do not follow the standard `feature/<name>` workflow above. First check whether they're already on an `account-feature/*` branch (`git rev-parse --abbrev-ref HEAD`). If not — and especially if they're on `main`, `testing_environment`, or a standard `feature/*` branch — stop and prompt them to create a new branch named `account-feature/<short-kebab-description>` **based off `feature/account-integration`** (not off `main`/`testing_environment`) before making any changes.
+- **Submitting that work for review** uses the `new-pr-accounts` skill, which opens a PR from the `account-feature/*` branch **into `feature/account-integration`** — not the regular `new-pr` skill, and not into `testing_environment`.
+- **Staying up to date** works the same way as the standard loop, but against the integration root: a SessionStart hook compares `account-feature/*` branches against `origin/feature/account-integration` instead of `origin/testing_environment`.
+- **Promoting the whole effort** — merging `feature/account-integration` into `testing_environment`/`main` once all the sub-work has landed — is a separate, owner-driven step done by Matthew. It is not part of `new-pr-accounts` or any other contributor-facing skill.
+
 ## Commands
 
 ```bash
