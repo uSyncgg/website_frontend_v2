@@ -69,6 +69,9 @@ import { ScrollToTop } from "./ScrollToTop/ScrollToTop";
 // Error handling
 import { ErrorBoundary } from "./ErrorBoundary/ErrorBoundary";
 
+// Account Related
+import { SocialLoginButtons } from "./SocialLoginButtons/SocialLoginButtons";
+
 export {
     Navbar,
     Footer,
@@ -106,4 +109,5 @@ export {
     ErrorBoundary,
     PaymentComponent,
     LanMap,
+    SocialLoginButtons,
 };
