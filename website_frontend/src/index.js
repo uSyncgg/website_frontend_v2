@@ -47,6 +47,10 @@ import LanRoutes from './routes/LanRoutes';
 import ArticleRoutes from './routes/ArticleRoutes';
 import TournamentRoutes from './routes/TournamentRoutes';
 
+// Authentication Routes
+import { Login } from 'pages/Accounts/Authentication/Login';
+import { SignUp } from 'pages/Accounts/Authentication/Signup';
+
 const root = document.getElementById('root');
 
 const app = (
@@ -101,6 +105,10 @@ const app = (
             {/* LANs */}
             <Route path='/other-lans' element={<Conventions />} />
             <Route path='/lans/*' element={<LanRoutes />} />
+
+            {/* Authentication Routes */}
+            <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<SignUp />} />
 
           </Routes>
         </ErrorBoundary>
