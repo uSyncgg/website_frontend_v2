@@ -17,7 +17,6 @@ const FEE_TITLES = new Set(["Entry Fee", "Fees"]);
 export const EventInfoCard = ({ title, infoList, regionTitle, regionInfoList, footer }) => {
     const bubbleDef = BUBBLE_CONFIG[title];
     const { profileComplete, loading } = useAuth();
-    console.log(`COMPLETE PROFILE: ${profileComplete}`)
 
     if (bubbleDef) {
         const regionBubbleDef = regionTitle ? (BUBBLE_CONFIG[regionTitle] ?? { icons: [<FaGlobe />] }) : null;
