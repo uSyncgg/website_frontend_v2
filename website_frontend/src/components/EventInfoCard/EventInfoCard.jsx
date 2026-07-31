@@ -1,6 +1,7 @@
 import styles from './EventInfoCard.module.css';
 import React from 'react';
 import { FaCalendarAlt, FaMapMarkerAlt, FaInfoCircle, FaWallet, FaTag, FaGlobe, FaLock } from 'react-icons/fa';
+import { useAuth } from 'hooks';
 
 const BUBBLE_CONFIG = {
     "Date/Place":   { icons: [<FaCalendarAlt />, <FaMapMarkerAlt />] },
@@ -11,10 +12,11 @@ const BUBBLE_CONFIG = {
     "Restrictions": { icons: [<FaGlobe />] },
 };
 
-const FEE_TITLES = new Set(["Entry Fee", "Fees"]);
+const FEE_TITLES = new Set(["Entry Fee", "Fees"]); 
 
 export const EventInfoCard = ({ title, infoList, regionTitle, regionInfoList, footer }) => {
     const bubbleDef = BUBBLE_CONFIG[title];
+    const { profileComplete, loading } = useAuth();
 
     if (bubbleDef) {
         const regionBubbleDef = regionTitle ? (BUBBLE_CONFIG[regionTitle] ?? { icons: [<FaGlobe />] }) : null;
@@ -35,7 +37,7 @@ export const EventInfoCard = ({ title, infoList, regionTitle, regionInfoList, fo
                         </span>
                         <span className={styles.statValue}>{item}</span>
                     </div>
-                ))}
+                ))}            
             </div>
         );
     }
@@ -67,13 +69,18 @@ export const EventInfoCard = ({ title, infoList, regionTitle, regionInfoList, fo
                     <span className={styles.cardIcon}><FaInfoCircle /></span>
                     <span className={styles.title}>{title}</span>
                 </div>
-                {infoList.map((item, index) => (
+
+                {profileComplete && 
+                infoList.map((item, index) => (
                     <div key={index} className={styles.dRow}>
                         <span className={styles.dDot}></span>
                         <span className={styles.dRowText}>{item}</span>
                     </div>
                 ))}
                 {footer && <div className={styles.feeFooter}> {footer} </div>}
+                
+
+                {!profileComplete && <p>Must be Logged in to View More Details.</p>}
             </div>
         </React.Fragment>
     );

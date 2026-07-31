@@ -72,6 +72,9 @@ import { ErrorBoundary } from "./ErrorBoundary/ErrorBoundary";
 // Account Related
 import { SocialLoginButtons } from "./SocialLoginButtons/SocialLoginButtons";
 
+// Route Protection
+import { RequireCompleteProfile } from "./RequiredCompleteProfile/RequiredCompleteProfile";
+
 export {
     Navbar,
     Footer,
@@ -110,4 +113,5 @@ export {
     PaymentComponent,
     LanMap,
     SocialLoginButtons,
+    RequireCompleteProfile
 };

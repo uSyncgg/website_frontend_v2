@@ -18,5 +18,13 @@ export function useAuth() {
         return () => subscription.unsubscribe();
     }, []);
 
-    return { session, user: session?.user ?? null, isLoggedIn: !!session, loading};
+    const profileComplete = session?.user?.app_metadata?.profile_complete === true;
+
+    return { 
+        session, 
+        user: session?.user ?? null, 
+        isLoggedIn: !!session, 
+        profileComplete,
+        loading
+    };
 }
