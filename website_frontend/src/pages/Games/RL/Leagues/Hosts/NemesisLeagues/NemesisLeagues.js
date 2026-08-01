@@ -28,7 +28,7 @@ export const NemesisLeagues = () => {
                         path={"/games/RocketLeague/leagues/nemesis-leagues/titan"} 
                         imgUrl={"https://i.imgur.com/PcmcLLk.png"} 
                         alt={"Nemesis Leagues"}
-                        verified={false}
+                        verified={true}
                     />
                     <HostBanner.Region>{titan}</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/nemesis-leagues/titan"} />
@@ -40,7 +40,7 @@ export const NemesisLeagues = () => {
                         path={"/games/RocketLeague/leagues/nemesis-leagues/rival"} 
                         imgUrl={"https://i.imgur.com/PcmcLLk.png"} 
                         alt={"Nemesis Leagues"}
-                        verified={false}
+                        verified={true}
                     />
                     <HostBanner.Region>{rival}</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/nemesis-leagues/rival"} />
@@ -54,7 +54,7 @@ export const NemesisLeagues = () => {
                         path={"/games/RocketLeague/leagues/nemesis-leagues/challenger"} 
                         imgUrl={"https://i.imgur.com/PcmcLLk.png"} 
                         alt={"Nemesis Leagues"}
-                        verified={false}
+                        verified={true}
                     />
                     <HostBanner.Region>{challenger}</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/nemesis-leagues/challenger"} />
@@ -66,7 +66,7 @@ export const NemesisLeagues = () => {
                         path={"/games/RocketLeague/leagues/nemesis-leagues/prospect"} 
                         imgUrl={"https://i.imgur.com/PcmcLLk.png"} 
                         alt={"Nemesis Leagues"}
-                        verified={false}
+                        verified={true}
                     />
                     <HostBanner.Region>{prospect}</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/nemesis-leagues/prospect"} />
@@ -80,7 +80,7 @@ export const NemesisLeagues = () => {
                         path={"/games/RocketLeague/leagues/nemesis-leagues/novice"} 
                         imgUrl={"https://i.imgur.com/PcmcLLk.png"} 
                         alt={"Nemesis Leagues"}
-                        verified={false}
+                        verified={true}
                     />
                     <HostBanner.Region>{novice}</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/nemesis-leagues/novice"} />
@@ -92,7 +92,7 @@ export const NemesisLeagues = () => {
                         path={"/games/RocketLeague/leagues/nemesis-leagues/provisional"} 
                         imgUrl={"https://i.imgur.com/PcmcLLk.png"} 
                         alt={"Nemesis Leagues"}
-                        verified={false}
+                        verified={true}
                     />
                     <HostBanner.Region>{provisional}</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/nemesis-leagues/provisional"} />
