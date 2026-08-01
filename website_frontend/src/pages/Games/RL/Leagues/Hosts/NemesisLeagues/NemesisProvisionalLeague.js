@@ -1,4 +1,4 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../../EventInformation.css';
 
 export const NemesisProvisionalLeague = () => {
@@ -9,7 +9,11 @@ export const NemesisProvisionalLeague = () => {
                 description="Nemesis Provisional League is a Rocket League league with a 835 - 1202 MMR range. Join this spring and showcase your skills."
                 canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues/provisional"}
             />
-            <HeaderImage title={"Nemesis Provisional"} imageClass={"eventPage"} />
+            <HeaderImage imageClass={"nemesisRLLeagues"} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>
