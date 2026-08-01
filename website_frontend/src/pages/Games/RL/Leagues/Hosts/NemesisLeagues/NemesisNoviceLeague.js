@@ -9,7 +9,7 @@ export const NemesisNoviceLeague = () => {
                 description="Rocket League Novice league is being held every spring by Nemesis. Enroll your teammates today in this action packed 3v3 Rocket League league."
                 canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues/novice"}
             />
-            <HeaderImage imageClass={"nemesisRLLeagues"} />
+            <HeaderImage title={"Nemesis Novice"} imageClass={"eventPage"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

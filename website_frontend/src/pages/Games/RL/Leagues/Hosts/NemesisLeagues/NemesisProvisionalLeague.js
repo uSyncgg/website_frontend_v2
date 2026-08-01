@@ -9,7 +9,7 @@ export const NemesisProvisionalLeague = () => {
                 description="Nemesis Provisional League is a Rocket League league with a 835 - 1202 MMR range. Join this spring and showcase your skills."
                 canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues/provisional"}
             />
-            <HeaderImage imageClass={"nemesisRLLeagues"} />
+            <HeaderImage title={"Nemesis Provisional"} imageClass={"eventPage"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />
