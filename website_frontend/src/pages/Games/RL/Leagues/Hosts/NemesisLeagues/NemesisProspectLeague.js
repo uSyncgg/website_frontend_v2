@@ -1,4 +1,4 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import '../../../../EventInformation.css';
 
 export const NemesisProspectLeague = () => {
@@ -10,6 +10,10 @@ export const NemesisProspectLeague = () => {
                 canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues/prospect"}
             />
             <HeaderImage title={"Nemesis Prospect"} imageClass={"eventPage"} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>

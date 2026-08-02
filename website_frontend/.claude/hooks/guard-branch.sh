@@ -7,6 +7,10 @@
 #   - main / master  → production. Blocked for everyone (promote via PR).
 #   - testing_environment → staging. Blocked for contributors; the owner is
 #     exempt (they legitimately prep staging), identified by git user.email.
+#   - feature/account-integration → root integration branch for the
+#     account-integration effort. Blocked for contributors, same owner
+#     exemption as testing_environment. Sub-work branches off it instead
+#     (account-feature/<short-name>), not off main/testing_environment.
 
 owner_email="oconnormattc@gmail.com"
 
@@ -20,6 +24,11 @@ fi
 
 if [ "$branch" = "testing_environment" ] && [ "$email" != "$owner_email" ]; then
   echo "Blocked: you are on the staging branch 'testing_environment'. Contributors don't edit staging directly. Create a feature branch first (ask: \"start a new branch called feature/<short-name>\"), then make changes — it will reach staging through a pull request." >&2
+  exit 2
+fi
+
+if [ "$branch" = "feature/account-integration" ] && [ "$email" != "$owner_email" ]; then
+  echo "Blocked: you are on 'feature/account-integration', the root integration branch for the account-integration effort. Contributors don't edit it directly. Create a branch off it first (ask: \"start a new branch called account-feature/<short-name>\"), then make changes — it will reach feature/account-integration through a pull request." >&2
   exit 2
 fi
 
