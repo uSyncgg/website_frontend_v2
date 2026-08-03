@@ -191,6 +191,10 @@
     --bg-image: url("https://i.imgur.com/vS99I8m.png");
 }
 
+.nemesisRLLeagues {
+    --bg-image: url("https://imgur.com/octp6aT.png");
+}
+
 /* Verified LAN Hosts */
 .charlestonCrownPage {
     --bg-image: url("https://i.imgur.com/24AyrUR.jpg");
