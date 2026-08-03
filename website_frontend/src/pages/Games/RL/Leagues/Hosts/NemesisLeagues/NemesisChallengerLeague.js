@@ -9,7 +9,7 @@ export const NemesisChallengerLeague = () => {
                 description="Nemesis Challenger League is a Rocket League league with a 1453 - 1609 MMR range. Join this spring and showcase your skills at the highest level."
                 canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues/challenger"}
             />
-            <HeaderImage title={"Nemesis Challenger"} imageClass={"eventPage"} />
+            <HeaderImage imageClass={"nemesisRLLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />
