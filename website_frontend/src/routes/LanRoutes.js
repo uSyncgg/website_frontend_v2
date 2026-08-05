@@ -13,7 +13,6 @@ import { GACoDModernWarfare4LaunchTournament } from 'pages/Games/Cod/Lans/Events
 // Halo
 import { CitadelI } from 'pages/Games/Halo/Lans/Events/CitadelI';
 import { GameandGeek2026 } from 'pages/Games/Halo/Lans/Events/GameandGeek2026';
-import { SFGE2026 } from 'pages/Games/Halo/Lans/Events/SFGE2026';
 import { OhYoshiDiIntRehatched } from 'pages/Games/Halo/Lans/Events/OhYoshiDiIntRehatched';
 
 // LoL
@@ -57,6 +56,7 @@ import { RMCSSpring2026 } from 'pages/Games/Conventions/Archived/2026/RMCSSpring
 import { Volan2026 } from 'pages/Games/Conventions/Archived/2026/Volan2026';
 import { LakewoodLeagueXIISpring } from 'pages/Games/Conventions/Archived/2026/LakewoodLeagueXIISpring';
 import { LANAllNightSpring2026 } from 'pages/Games/Conventions/Archived/2026/LANAllNightSpring2026';
+import { SFGE2026 } from 'pages/Games/Halo/Lans/Archived/2026/SFGE2026';
 
 const LanRoutes = () => (
     <Routes>
@@ -72,7 +72,6 @@ const LanRoutes = () => (
         {/* Halo */}
         <Route path='citadel-i' element={<CitadelI />} />
         <Route path='game-and-geek-2026' element={<GameandGeek2026 />} />
-        <Route path='sfge-2026' element={<SFGE2026 />} />
         <Route path='oh-yoshi-di-int-rehatched' element={<OhYoshiDiIntRehatched />} />
         {/* LoL */}
         <Route path='bec-sololane-showdown' element={<BECSoloLaneShowdown />} />
@@ -114,6 +113,7 @@ const LanRoutes = () => (
         <Route path='volan-2026' element={<Volan2026 />} />
         <Route path='lan-all-night-spring-26' element={<LANAllNightSpring2026 />} />
         <Route path='lakewood-league-xii-spring' element={<LakewoodLeagueXIISpring />} />
+        <Route path='sfge-2026' element={<SFGE2026 />} />
     </Routes>
 );
 
