@@ -2,27 +2,67 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { SeoData, AccountShell, SignupSidebar } from "components";
 import { AccountTypeStep, LinkAccountsStep, SuccessStep } from "./SharedSteps";
-import { CredentialsStep, AboutYouStep, RoleStep, GamesStep, BracketHostingStep, ProfileBasicsStep } from "./PlayerSteps";
-import { HostDetailsStep, VerifiedInterestStep, HostPasswordStep } from "./HostSteps";
-import { LINK_PLATFORMS, HOST_LINK_PLATFORMS } from "./accountData";
+import { CredentialsStep, AboutYouStep, GamesStep, BracketHostingStep, ProfileBasicsStep } from "./PlayerSteps";
+import { HostDetailsStep, HostEventsStep } from "./HostSteps";
+import { SOCIAL_PLATFORMS, GAME_PLATFORMS, COMPETITIVE_PLATFORMS, HOST_LINK_PLATFORMS } from "./accountData";
 
-// 2FA is temporarily removed from both paths (not ready for initial release);
-// it can be reintroduced as its own step later.
-const MEMBER_SIDEBAR = ['Account type', 'Credentials', 'About you', 'Your role', 'Your games', 'Bracket hosting', 'Profile basics', 'Link accounts'];
-const HOST_SIDEBAR = ['Account type', 'Host details', 'Verified', 'Password', 'Link accounts'];
+// An account can be Player, Host, or both. Picking both merges the two flows
+// rather than concatenating them: anything shared (login, role, games, profile,
+// links) is asked exactly once, and only the genuinely host-specific steps get
+// added. That's the whole point of allowing both, one pass instead of two
+// accounts, so don't reintroduce a step that asks the same thing twice.
+//
+// Passwords are deliberately absent: Supabase owns credential storage, so
+// signup only collects the username and email that we keep on our side.
+const buildSteps = (accountTypes) => {
+    const isPlayer = accountTypes.includes('player');
+    const isHost = accountTypes.includes('host');
+
+    const steps = [
+        { id: 'accountType', label: 'Account type' },
+        { id: 'credentials', label: 'Your login' },
+    ];
+
+    // Personal details only make sense for a person, not an org on its own.
+    if (isPlayer) steps.push({ id: 'aboutYou', label: 'About you' });
+
+    // No "Your role" step — roles (Player/Coach/Caster/…) are a profile
+    // decoration, not something registration needs. People add them from
+    // Edit profile when they actually care, instead of guessing up front.
+    steps.push({ id: 'games', label: 'Your games' });
+
+    if (isHost) {
+        steps.push({ id: 'hostDetails', label: 'Host details' });
+        steps.push({ id: 'hostEvents', label: 'Your events' });
+    }
+
+    // A Host account already has hosting turned on, so only offer the opt-in
+    // to player-only accounts.
+    if (isPlayer && !isHost) steps.push({ id: 'bracketHosting', label: 'Bracket hosting' });
+
+    steps.push({ id: 'profileBasics', label: 'Profile basics' });
+    steps.push({ id: 'linkAccounts', label: 'Link accounts' });
+    steps.push({ id: 'success', label: 'Done' });
+
+    return steps;
+};
 
 const initialForm = {
-    accountType: null,
-    // credentials / member
-    username: "", email: "", password: "", confirmPassword: "",
+    accountTypes: [],
+    // shared login (no password, Supabase handles auth)
+    username: "", email: "",
+    // personal details (player)
     firstName: "", lastName: "", phone: "", gender: "", birthday: "",
     country: "", state: "", zip: "",
     timezone: "", timezoneMode: "auto", timezoneManual: "",
-    persona: "", genres: [], otherGenre: "",
+    // Roles aren't collected at signup — they're added later from the profile.
+    personas: [],
     games: [], otherGame: "", bracketHosting: null, avatar: "", bio: "",
-    // host
-    accountName: "", contactName: "", contactEmail: "", contactDiscord: "",
-    eventTypes: [], verifiedInterest: null, alsoPlayer: false,
+    // host / organization — org name + the account email is the whole contact
+    // story, no separate contact-person block
+    accountName: "",
+    hostCountry: "", hostState: "", hostZip: "",
+    eventTypes: [],
     // shared
     links: {},
     // sensitive fields default to hidden from the public profile for safety
@@ -30,44 +70,26 @@ const initialForm = {
     hidden: { email: true, phone: true, gender: true, birthday: true },
 };
 
-const PASSWORD_REQUIREMENTS_MESSAGE = "Password needs an uppercase letter, a lowercase letter, a number, and a special character.";
-
-const passwordMeetsRequirements = (pw) => (
-    pw.length >= 8 && /[a-z]/.test(pw) && /[A-Z]/.test(pw) && /\d/.test(pw) && /[^A-Za-z0-9]/.test(pw)
-);
-
 const validateCredentials = (form) => {
     const errors = {};
     if (!form.username.trim()) errors.username = "Choose a username.";
     if (!form.email.trim()) errors.email = "Enter your email.";
-    if (!form.password) errors.password = "Choose a password.";
-    else if (!passwordMeetsRequirements(form.password)) errors.password = PASSWORD_REQUIREMENTS_MESSAGE;
-    if (form.password && form.password !== form.confirmPassword) errors.confirmPassword = "Passwords don't match.";
     return errors;
 };
 
+// Only first/last name are required — gender and phone are optional by
+// design (Marcos' note), and location is optional too since not everyone
+// wants to share it up front.
 const validateAboutYou = (form) => {
     const errors = {};
-    ['firstName', 'lastName', 'gender', 'birthday', 'country', 'state'].forEach(field => {
-        if (!form[field]?.trim?.() && !form[field]) errors[field] = "Required.";
-    });
+    if (!form.firstName?.trim()) errors.firstName = "Required.";
+    if (!form.lastName?.trim()) errors.lastName = "Required.";
     return errors;
 };
 
 const validateHostDetails = (form) => {
     const errors = {};
-    // State is intentionally not required, some hosts are virtual-only.
-    ['accountName', 'email', 'country', 'contactName', 'contactEmail'].forEach(field => {
-        if (!form[field]?.trim?.()) errors[field] = "Required.";
-    });
-    return errors;
-};
-
-const validateHostPassword = (form) => {
-    const errors = {};
-    if (!form.password) errors.password = "Choose a password.";
-    else if (!passwordMeetsRequirements(form.password)) errors.password = PASSWORD_REQUIREMENTS_MESSAGE;
-    if (form.password && form.password !== form.confirmPassword) errors.confirmPassword = "Passwords don't match.";
+    if (!form.accountName?.trim()) errors.accountName = "Required.";
     return errors;
 };
 
@@ -77,6 +99,11 @@ export const SignUp = () => {
     const [maxStepReached, setMaxStepReached] = useState(0);
     const [form, setForm] = useState(initialForm);
     const [errors, setErrors] = useState({});
+
+    const steps = buildSteps(form.accountTypes);
+    const current = steps[Math.min(stepIndex, steps.length - 1)];
+    const isPlayer = form.accountTypes.includes('player');
+    const isHost = form.accountTypes.includes('host');
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -102,48 +129,63 @@ export const SignUp = () => {
     const back = () => goTo(Math.max(0, stepIndex - 1));
 
     // Once a step has already been filled out, let people jump straight back
-    // to it (or forward to any other step they've already reached) from the sidebar.
+    // to it (or forward to any other step they've already reached).
     const jumpTo = (index) => {
         if (index <= maxStepReached) goTo(index);
     };
 
-    const handleAccountTypeChange = (value) => {
-        setField('accountType', value);
-        // The two paths have entirely different step lists, so progress in one doesn't carry over.
+    const handleAccountTypesChange = (value) => {
+        setForm(prev => {
+            const cur = prev.accountTypes;
+            return { ...prev, accountTypes: cur.includes(value) ? cur.filter(v => v !== value) : [...cur, value] };
+        });
+        // The step list changes shape with the selection, so progress past the
+        // first screen can't be trusted anymore.
         setMaxStepReached(0);
     };
 
     const handleLinkChange = (platform, value) => setForm(prev => ({ ...prev, links: { ...prev.links, [platform]: value } }));
 
-    const finish = () => navigate('/');
+    const finish = () => navigate('/account/profile');
 
-    const sidebarSteps = form.accountType === 'host' ? HOST_SIDEBAR : MEMBER_SIDEBAR;
-    const showSidebar = stepIndex > 0 && stepIndex < sidebarSteps.length;
+    // Sidebar shows every step except the account-type screen and the final
+    // success screen, which aren't really "steps" people navigate between.
+    const sidebarSteps = steps.slice(1, -1).map(s => s.label);
+    const showSidebar = stepIndex > 0 && current.id !== 'success';
 
     const renderStep = () => {
-        if (stepIndex === 0) {
-            return <AccountTypeStep value={form.accountType} onChange={handleAccountTypeChange} onNext={() => advance()} />;
-        }
-
-        if (form.accountType === 'host') {
-            switch (stepIndex) {
-                case 1: return <HostDetailsStep form={form} setField={setField} errors={errors} onNext={() => advance(validateHostDetails)} onBack={back} />;
-                case 2: return <VerifiedInterestStep form={form} setField={setField} onNext={() => advance()} onBack={back} />;
-                case 3: return <HostPasswordStep form={form} setField={setField} errors={errors} onNext={() => advance(validateHostPassword)} onBack={back} />;
-                case 4: return <LinkAccountsStep links={form.links} onChange={handleLinkChange} onFinish={() => advance()} onSkip={() => advance()} onBack={back} platforms={form.alsoPlayer ? LINK_PLATFORMS : HOST_LINK_PLATFORMS} />;
-                default: return <SuccessStep onDone={finish} />;
-            }
-        }
-
-        switch (stepIndex) {
-            case 1: return <CredentialsStep form={form} setField={setField} errors={errors} onNext={() => advance(validateCredentials)} onBack={back} />;
-            case 2: return <AboutYouStep form={form} setField={setField} errors={errors} onNext={() => advance(validateAboutYou)} onBack={back} />;
-            case 3: return <RoleStep form={form} setField={setField} onNext={() => advance()} onBack={back} />;
-            case 4: return <GamesStep form={form} setField={setField} onNext={() => advance()} onBack={back} />;
-            case 5: return <BracketHostingStep form={form} setField={setField} onNext={() => advance()} onBack={back} />;
-            case 6: return <ProfileBasicsStep form={form} setField={setField} onNext={() => advance()} onBack={back} />;
-            case 7: return <LinkAccountsStep links={form.links} onChange={handleLinkChange} onFinish={() => advance()} onSkip={() => advance()} onBack={back} />;
-            default: return <SuccessStep onDone={finish} />;
+        switch (current.id) {
+            case 'accountType':
+                return <AccountTypeStep value={form.accountTypes} onChange={handleAccountTypesChange} onNext={() => advance()} />;
+            case 'credentials':
+                return <CredentialsStep form={form} setField={setField} errors={errors} onNext={() => advance(validateCredentials)} onBack={back} />;
+            case 'aboutYou':
+                return <AboutYouStep form={form} setField={setField} errors={errors} onNext={() => advance(validateAboutYou)} onBack={back} />;
+            case 'games':
+                return <GamesStep form={form} setField={setField} onNext={() => advance()} onBack={back} isPlayer={isPlayer} isHost={isHost} />;
+            case 'hostDetails':
+                return <HostDetailsStep form={form} setField={setField} errors={errors} onNext={() => advance(validateHostDetails)} onBack={back} />;
+            case 'hostEvents':
+                return <HostEventsStep form={form} setField={setField} onNext={() => advance()} onBack={back} />;
+            case 'bracketHosting':
+                return <BracketHostingStep form={form} setField={setField} onNext={() => advance()} onBack={back} />;
+            case 'profileBasics':
+                return <ProfileBasicsStep form={form} setField={setField} onNext={() => advance()} onBack={back} isHost={isHost} />;
+            case 'linkAccounts':
+                return (
+                    <LinkAccountsStep
+                        links={form.links}
+                        onChange={handleLinkChange}
+                        onFinish={() => advance()}
+                        onSkip={() => advance()}
+                        onBack={back}
+                        socialPlatforms={isPlayer ? SOCIAL_PLATFORMS : HOST_LINK_PLATFORMS}
+                        gamePlatforms={isPlayer ? GAME_PLATFORMS : []}
+                        competitivePlatforms={isPlayer ? COMPETITIVE_PLATFORMS : []}
+                    />
+                );
+            default:
+                return <SuccessStep onDone={finish} isPlayer={isPlayer} isHost={isHost} />;
         }
     };
 
@@ -151,11 +193,20 @@ export const SignUp = () => {
         <div className="standardContainer">
             <SeoData
                 title={"Sign Up"}
-                description="Create your uSync account as a Member or Host. Track stats, join brackets, and run your own esports events."
+                description="Create your uSync account as a Player, a Host, or both. Track stats, join brackets, and run your own esports events."
                 canonicalPath={"/account/signup"}
             />
 
-            <AccountShell sidebar={showSidebar ? <SignupSidebar steps={sidebarSteps} activeIndex={stepIndex} maxCompleted={maxStepReached} onStepClick={jumpTo} /> : null}>
+            <AccountShell
+                sidebar={showSidebar ? (
+                    <SignupSidebar
+                        steps={sidebarSteps}
+                        activeIndex={stepIndex - 1}
+                        maxCompleted={maxStepReached - 1}
+                        onStepClick={(i) => jumpTo(i + 1)}
+                    />
+                ) : null}
+            >
                 {renderStep()}
             </AccountShell>
         </div>

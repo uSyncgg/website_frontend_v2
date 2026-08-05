@@ -637,6 +637,7 @@
 }
 
 .radioCard {
+    position: relative;
     display: flex;
     align-items: flex-start;
     gap: .85rem;
@@ -800,6 +801,42 @@
     box-shadow: 0 0 0 3px rgba(142, 106, 206, .18);
 }
 
+/* ===== Link accounts tabs ===== */
+.linkTabs {
+    display: inline-flex;
+    gap: .5rem;
+    padding: .3rem;
+    border-radius: .75rem;
+    border: 1px solid rgba(255, 255, 255, .1);
+    background: rgba(255, 255, 255, .02);
+    margin-bottom: 1.25rem;
+}
+
+.linkTab {
+    padding: .55rem 1.1rem;
+    border-radius: .55rem;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, .55);
+    font-size: .85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .2s ease-in-out, color .2s ease-in-out;
+}
+
+.linkTab:hover {
+    color: rgba(255, 255, 255, .85);
+}
+
+.linkTabActive {
+    background: linear-gradient(135deg, #9b6fe0, #7a5ac9);
+    color: white;
+}
+
+.linkTabActive:hover {
+    color: white;
+}
+
 /* ===== Link accounts grid ===== */
 .linkAccountsGrid {
     display: flex;
@@ -837,14 +874,24 @@
     padding: .5rem .75rem;
     font-size: .85rem;
     border-radius: .5rem;
-    border: 1px solid rgba(255, 255, 255, .12);
-    background: rgba(255, 255, 255, .04);
+    border: 1px solid transparent;
+    background: rgba(255, 255, 255, .06);
     color: white;
     outline: none;
+    transition: border-color .2s ease-in-out, background .2s ease-in-out;
+}
+
+.linkAccountInput::placeholder {
+    color: rgba(255, 255, 255, .32);
+}
+
+.linkAccountInput:hover {
+    background: rgba(255, 255, 255, .09);
 }
 
 .linkAccountInput:focus {
     border-color: #8e6ace;
+    background: rgba(142, 106, 206, .1);
 }
 
 .badge {
@@ -858,4 +905,663 @@
     background: rgba(142, 106, 206, .18);
     color: #b18af0;
     border: 1px solid rgba(142, 106, 206, .4);
+}
+
+/* ===== Progress indicator (sidebar) ===== */
+.progressWrap {
+    margin-bottom: 1.5rem;
+}
+
+.progressTrack {
+    height: .4rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, .08);
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    border-radius: 1rem;
+    background: linear-gradient(90deg, #9b6fe0, #7a5ac9);
+    transition: width .3s ease-in-out;
+}
+
+.progressLabel {
+    color: rgba(255, 255, 255, .45);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .3px;
+    margin: .5rem 0 0;
+}
+
+.sidebarDot {
+    width: .45rem;
+    height: .45rem;
+    border-radius: 50%;
+    background: currentColor;
+    display: block;
+}
+
+/* ===== Multi-select account type check ===== */
+.radioCardCheck {
+    position: absolute;
+    top: .8rem;
+    right: .8rem;
+    color: #b18af0;
+    font-size: .85rem;
+}
+
+/* ===== Inline callout (replaces the easy-to-miss hover tooltip) ===== */
+.calloutNote {
+    display: flex;
+    align-items: flex-start;
+    gap: .55rem;
+    padding: .85rem 1rem;
+    border-radius: .75rem;
+    border: 1px solid rgba(142, 106, 206, .3);
+    background: rgba(142, 106, 206, .1);
+    color: rgba(255, 255, 255, .78);
+    font-size: .83rem;
+    line-height: 1.5;
+    margin: 0 0 1.5rem;
+}
+
+.calloutNote svg {
+    color: #b18af0;
+    flex-shrink: 0;
+    margin-top: .15rem;
+}
+
+.calloutNote strong {
+    color: white;
+    font-weight: 700;
+}
+
+/* ===== Post-signup next steps ===== */
+.successWrap {
+    text-align: center;
+    padding: 1.5rem 0;
+}
+
+.successIcon {
+    font-size: 3rem;
+    color: #b18af0;
+    margin-bottom: 1rem;
+}
+
+.nextUpList {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+    margin: 1.75rem 0;
+    text-align: left;
+}
+
+.nextUpCard {
+    display: flex;
+    align-items: flex-start;
+    gap: .85rem;
+    padding: 1rem 1.15rem;
+    border-radius: .9rem;
+    border: 1px solid rgba(255, 255, 255, .1);
+    background: rgba(255, 255, 255, .03);
+}
+
+.nextUpIcon {
+    font-size: 1.1rem;
+    color: #b18af0;
+    flex-shrink: 0;
+    margin-top: .15rem;
+}
+
+.nextUpTitle {
+    color: white;
+    font-weight: 700;
+    font-size: .92rem;
+    margin-bottom: .2rem;
+}
+
+.nextUpText {
+    color: rgba(255, 255, 255, .55);
+    font-size: .82rem;
+    line-height: 1.5;
+}
+
+.nextUpText strong {
+    color: rgba(255, 255, 255, .85);
+    font-weight: 700;
+}
+
+/* ===== Profile: sections ===== */
+.profileSection {
+    padding-top: 1.75rem;
+    margin-top: 1.75rem;
+    border-top: 1px solid rgba(255, 255, 255, .08);
+}
+
+.profileSection:first-child {
+    padding-top: 0;
+    margin-top: 0;
+    border-top: none;
+}
+
+.profileSectionTitle {
+    color: white;
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -.3px;
+    margin: 0 0 .3rem;
+}
+
+.profileSectionSubtitle {
+    color: rgba(255, 255, 255, .5);
+    font-size: .85rem;
+    line-height: 1.5;
+    margin: 0 0 1.25rem;
+}
+
+/* ===== Profile: header ===== */
+.profileHeader {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.profileAvatar {
+    width: 5.5rem;
+    height: 5.5rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: rgba(142, 106, 206, .18);
+    border: 1.5px solid rgba(255, 255, 255, .16);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b18af0;
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+.profileIdentity {
+    flex: 1;
+    min-width: 12rem;
+}
+
+.profileNameRow {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    flex-wrap: wrap;
+    margin-bottom: .4rem;
+}
+
+.profileUsername {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -.4px;
+    margin: 0;
+}
+
+.verifiedPill {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    padding: .2rem .6rem;
+    border-radius: 1rem;
+    font-size: .7rem;
+    font-weight: 800;
+    letter-spacing: .2px;
+    background: linear-gradient(90deg, #8e6ace, #a97fe0);
+    color: white;
+}
+
+.profileBadgeRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    margin-bottom: .75rem;
+}
+
+.profileMetaRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem 1.1rem;
+    color: rgba(255, 255, 255, .45);
+    font-size: .8rem;
+    font-weight: 600;
+    margin-bottom: .85rem;
+}
+
+.profileMetaItem {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+}
+
+.profileBio {
+    color: rgba(255, 255, 255, .75);
+    font-size: .9rem;
+    line-height: 1.55;
+    margin: 0 0 1rem;
+}
+
+.profileActions {
+    display: flex;
+    gap: .75rem;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+/* ===== Profile: social icon row ===== */
+.socialIconRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .55rem;
+}
+
+.socialIconLink {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.35rem;
+    height: 2.35rem;
+    border-radius: .65rem;
+    border: 1px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .04);
+    color: rgba(255, 255, 255, .75);
+    font-size: 1rem;
+    transition: border-color .2s ease-in-out, color .2s ease-in-out, transform .2s ease-in-out;
+}
+
+.socialIconLink:hover {
+    border-color: #8e6ace;
+    color: #b18af0;
+    transform: translateY(-1px);
+}
+
+/* ===== Profile: stat grid ===== */
+.statGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+    gap: .85rem;
+}
+
+.statTile {
+    padding: 1rem .9rem;
+    border-radius: .85rem;
+    border: 1px solid rgba(255, 255, 255, .1);
+    background: rgba(255, 255, 255, .03);
+    text-align: center;
+}
+
+.statValue {
+    display: block;
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -.3px;
+    margin-bottom: .2rem;
+}
+
+.statLabel {
+    display: block;
+    color: rgba(255, 255, 255, .5);
+    font-size: .74rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+}
+
+/* ===== Profile: achievements ===== */
+.achievementList {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+}
+
+.achievementCard {
+    display: flex;
+    align-items: flex-start;
+    gap: .85rem;
+    padding: 1rem 1.1rem;
+    border-radius: .9rem;
+    border: 1px solid rgba(255, 255, 255, .1);
+    background: rgba(255, 255, 255, .03);
+}
+
+.achievementIconWrap {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: .7rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(142, 106, 206, .16);
+    color: #b18af0;
+    font-size: 1.05rem;
+}
+
+.achievementBody {
+    flex: 1;
+    min-width: 0;
+}
+
+.achievementTitle {
+    color: white;
+    font-weight: 700;
+    font-size: .92rem;
+    margin: 0 0 .2rem;
+}
+
+.achievementDesc {
+    color: rgba(255, 255, 255, .55);
+    font-size: .8rem;
+    line-height: 1.45;
+    margin: 0 0 .35rem;
+}
+
+.achievementDate {
+    color: rgba(255, 255, 255, .35);
+    font-size: .72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .3px;
+}
+
+.achievementRemove {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, .35);
+    cursor: pointer;
+    padding: .3rem;
+    flex-shrink: 0;
+    border-radius: .4rem;
+}
+
+.achievementRemove:hover {
+    color: #f28ba8;
+    background: rgba(224, 105, 138, .12);
+}
+
+.emptyState {
+    color: rgba(255, 255, 255, .4);
+    font-size: .85rem;
+    font-style: italic;
+    padding: .5rem 0;
+}
+
+/* ===== Profile: verified lock ===== */
+.lockedSection {
+    position: relative;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, .1);
+    background: rgba(255, 255, 255, .02);
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.lockedIcon {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    margin: 0 auto .85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(142, 106, 206, .16);
+    border: 1.5px solid #8e6ace;
+    color: #b18af0;
+    font-size: 1.1rem;
+}
+
+.lockedTitle {
+    color: white;
+    font-weight: 800;
+    font-size: 1rem;
+    margin: 0 0 .35rem;
+}
+
+.lockedText {
+    color: rgba(255, 255, 255, .5);
+    font-size: .82rem;
+    line-height: 1.5;
+    margin: 0 auto 1.1rem;
+    max-width: 26rem;
+}
+
+/* ===== Profile: GB rank card ===== */
+.rankCard {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
+    border-radius: .9rem;
+    border: 1px solid rgba(255, 255, 255, .1);
+    background: rgba(255, 255, 255, .03);
+}
+
+.rankBadge {
+    width: 3rem;
+    height: 3rem;
+    border-radius: .8rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.rankInfo {
+    flex: 1;
+    min-width: 0;
+}
+
+.rankUsername {
+    color: rgba(255, 255, 255, .5);
+    font-size: .78rem;
+    font-weight: 600;
+    margin: 0 0 .15rem;
+}
+
+.rankLabel {
+    color: white;
+    font-weight: 800;
+    font-size: 1.05rem;
+    margin: 0;
+}
+
+/* ===== Profile: host events ===== */
+.hostEventGroup {
+    margin-bottom: 1.5rem;
+}
+
+.hostEventGroup:last-child {
+    margin-bottom: 0;
+}
+
+.hostEventGroupTitle {
+    color: rgba(255, 255, 255, .5);
+    font-size: .78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+    margin: 0 0 .65rem;
+}
+
+.hostEventCard {
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+    padding: 1.1rem 1.25rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, .1);
+    background: rgba(255, 255, 255, .03);
+    margin-bottom: .85rem;
+}
+
+.hostEventCard:last-child {
+    margin-bottom: 0;
+}
+
+.hostEventHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    flex-wrap: wrap;
+}
+
+.hostEventTitle {
+    color: white;
+    font-weight: 800;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.hostEventTypeBadge {
+    background: rgba(255, 255, 255, .06);
+    color: rgba(255, 255, 255, .6);
+    border: 1px solid rgba(255, 255, 255, .14);
+}
+
+.hostEventDetails {
+    color: rgba(255, 255, 255, .55);
+    font-size: .85rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.hostEventMetaRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem 1.25rem;
+}
+
+.hostEventMetaItem {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: .82rem;
+    color: rgba(255, 255, 255, .6);
+}
+
+.hostEventFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    flex-wrap: wrap;
+}
+
+.hostEventFee {
+    color: white;
+    font-weight: 800;
+    font-size: .92rem;
+}
+
+.hostEventLink {
+    color: #b18af0;
+    font-weight: 700;
+    font-size: .82rem;
+    text-decoration: none;
+}
+
+.hostEventLink:hover {
+    text-decoration: underline;
+}
+
+/* ===== Profile: image upload tile (host event header/banner) ===== */
+.imageUploadRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+@media only screen and (max-width: 560px) {
+    .imageUploadRow {
+        grid-template-columns: 1fr;
+    }
+}
+
+.imageUploadTile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    height: 6rem;
+    border-radius: .85rem;
+    border: 1.5px dashed rgba(255, 255, 255, .22);
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    color: rgba(255, 255, 255, .4);
+    font-size: .78rem;
+    font-weight: 600;
+    text-align: center;
+    padding: .5rem;
+}
+
+/* ===== Profile: preview switcher (demo scaffolding) ===== */
+.previewSwitcher {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .75rem 1.5rem;
+    padding: .85rem 1.1rem;
+    border-radius: 1rem;
+    border: 1px dashed rgba(142, 106, 206, .4);
+    background: rgba(142, 106, 206, .08);
+    margin-bottom: 1.5rem;
+}
+
+.previewSwitcherLabel {
+    color: rgba(255, 255, 255, .5);
+    font-size: .74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+}
+
+.previewToggleGroup {
+    display: inline-flex;
+    border-radius: .6rem;
+    border: 1px solid rgba(255, 255, 255, .14);
+    overflow: hidden;
+}
+
+.previewToggleBtn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, .55);
+    font-size: .78rem;
+    font-weight: 700;
+    padding: .45rem .85rem;
+    cursor: pointer;
+}
+
+.previewToggleBtn:not(:last-child) {
+    border-right: 1px solid rgba(255, 255, 255, .1);
+}
+
+.previewToggleBtnActive {
+    background: linear-gradient(135deg, #9b6fe0, #7a5ac9);
+    color: white;
+}
+
+/* ===== Profile: sidebar variant (non-linear settings nav) ===== */
+.sidebarStep_plain .sidebarBubble {
+    background: rgba(255, 255, 255, .04);
+    border: 1.5px solid rgba(255, 255, 255, .16);
+    color: rgba(255, 255, 255, .5);
+}
+
+.sidebarStep_plain .sidebarLabel {
+    color: rgba(255, 255, 255, .6);
 }

@@ -1,8 +1,7 @@
-import { FaChessKnight, FaSkullCrossbones, FaFistRaised, FaEllipsisH, FaGamepad } from "react-icons/fa";
-import { GiPistolGun } from "react-icons/gi";
+import { FaGamepad, FaTrophy, FaCrosshairs } from "react-icons/fa";
 import {
     SiTwitch, SiYoutube, SiKick, SiBattledotnet, SiActivision, SiSteam,
-    SiRiotgames, SiDiscord, SiInstagram
+    SiRiotgames, SiDiscord, SiInstagram, SiFaceit
 } from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
 
@@ -41,7 +40,9 @@ export const GAMES = [
     { value: "rl", label: "Rocket League", logo: "https://i.imgur.com/GJO8JIZ.png" },
     { value: "valorant", label: "Valorant", logo: "https://i.imgur.com/Gsl3oIp.png" },
     { value: "wz", label: "Warzone", logo: "https://i.imgur.com/IBGIbY2.png" },
-    { value: "other", label: "None / Other" },
+    // "None" was dropped — the step requires at least one pick, so it was a
+    // contradiction. "Other" reveals a free-text field for unlisted titles.
+    { value: "other", label: "Other" },
 ];
 
 // Only Call of Duty has a live Tournaments section today (see src/index.js);
@@ -57,14 +58,12 @@ export const GAME_TOURNAMENT_SUPPORT = {
     wz: false,
 };
 
-export const PLAYER_GENRES = [
-    { value: "fps", label: "FPS", description: "Call of Duty, Valorant, CS2, Halo" },
-    { value: "moba", label: "MOBA", description: "League of Legends" },
-    { value: "br", label: "Battle Royale", description: "Warzone, Fortnite" },
-    { value: "fighting", label: "Fighting Games", description: "1v1 and versus titles" },
-    { value: "other", label: "Other", description: "Something else entirely" },
-];
-
+// Roles are NOT collected during signup — they're a profile decoration added
+// later from Edit profile, once someone has a reason to care. Registration
+// shouldn't ask for data nothing consumes yet.
+// The old FPS/MOBA genre picker was dropped entirely: it duplicated the Games
+// step. Partner (sponsorship / direct-with-uSync) is also left out — it needs
+// its own path rather than living in this list.
 export const PERSONA_OPTIONS = [
     { value: "player", label: "Player", description: "Compete in tournaments, leagues, LANs, and wagers" },
     { value: "coach", label: "Coach", description: "Lead and develop a roster" },
@@ -72,7 +71,6 @@ export const PERSONA_OPTIONS = [
     { value: "caster", label: "Caster", description: "Commentate and cast matches" },
     { value: "talent", label: "Talent", description: "Host, interview, or create content" },
     { value: "organizer", label: "Organizer", description: "Run brackets and events" },
-    { value: "partner", label: "Partner", description: "Sponsor or collaborate with uSync" },
 ];
 
 export const HOST_EVENT_TYPES = [
@@ -92,36 +90,41 @@ export const VERIFIED_BENEFITS = [
     "Dedicated placement on the uSync home page",
 ];
 
+// Link Accounts is split into three tabs. Socials are where you post,
+// game platforms are your account identity on a publisher's service, and
+// competitive platforms are where you actually compete/scrim.
 // GB (Gamebattles) is intentionally not offered here, it's reserved for a
 // future uSync Verified perk for CoD players, not a general signup option.
-export const LINK_PLATFORMS = [
+export const SOCIAL_PLATFORMS = [
     { value: "twitch", label: "Twitch", icon: SiTwitch },
     { value: "twitter", label: "Twitter / X", icon: FaXTwitter },
     { value: "youtube", label: "YouTube", icon: SiYoutube },
     { value: "kick", label: "Kick", icon: SiKick },
+    { value: "discord", label: "Discord", icon: SiDiscord },
+    { value: "instagram", label: "Instagram", icon: SiInstagram },
+];
+
+export const GAME_PLATFORMS = [
     { value: "battlenet", label: "Battle.net", icon: SiBattledotnet },
     { value: "activision", label: "Activision", icon: SiActivision },
     { value: "steam", label: "Steam", icon: SiSteam },
     { value: "riot", label: "Riot", icon: SiRiotgames },
-    { value: "discord", label: "Discord", icon: SiDiscord },
-    { value: "instagram", label: "Instagram", icon: SiInstagram },
+];
+
+// TODO (team): finalize the per-game list of competitive sites worth linking.
+// Seeded with the ones named so far — CMG and Gankster — plus the majors.
+// Gankster is the LoL/Valorant scrim-finder equivalent of what CMG is for CoD.
+export const COMPETITIVE_PLATFORMS = [
     { value: "cmg", label: "CMG", icon: FaGamepad },
+    { value: "gankster", label: "Gankster", icon: FaCrosshairs },
+    { value: "faceit", label: "FACEIT", icon: SiFaceit },
+    { value: "battlefy", label: "Battlefy", icon: FaTrophy },
+    { value: "esea", label: "ESEA", icon: FaTrophy },
 ];
 
-// Host accounts are organizations, not players, so only their public/social
-// presence makes sense to link here. Player-identity platforms (Steam, Riot,
-// Battle.net, Activision, CMG) only show up if the host also says they play.
-export const HOST_LINK_PLATFORMS = [
-    { value: "twitch", label: "Twitch", icon: SiTwitch },
-    { value: "twitter", label: "Twitter / X", icon: FaXTwitter },
-    { value: "youtube", label: "YouTube", icon: SiYoutube },
-    { value: "instagram", label: "Instagram", icon: SiInstagram },
-];
+export const LINK_PLATFORMS = [...SOCIAL_PLATFORMS, ...GAME_PLATFORMS, ...COMPETITIVE_PLATFORMS];
 
-export const GENRE_ICONS = {
-    fps: GiPistolGun,
-    moba: FaChessKnight,
-    br: FaSkullCrossbones,
-    fighting: FaFistRaised,
-    other: FaEllipsisH,
-};
+// Host-only accounts link their public presence; the game/competitive
+// platforms are identity for competing, so they only appear when the account
+// also includes Player (chosen on the first screen).
+export const HOST_LINK_PLATFORMS = SOCIAL_PLATFORMS.filter(p => ["twitch", "twitter", "youtube", "instagram"].includes(p.value));

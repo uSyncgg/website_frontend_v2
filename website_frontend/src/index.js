@@ -17,6 +17,8 @@ import { Tournaments } from 'pages/Tournaments';
 // Account Pages
 import { Login } from 'pages/Account/Login/Login';
 import { SignUp } from 'pages/Account/SignUp/SignUp';
+import { Profile } from 'pages/Account/Profile/Profile';
+import { EditProfile } from 'pages/Account/Profile/EditProfile';
 
 // More Pages
 import { Articles } from 'pages/More/Articles';
@@ -395,6 +397,8 @@ const app = (
           {/* Account */}
           <Route path='/account/login' element={<Login />} />
           <Route path='/account/signup' element={<SignUp />} />
+          <Route path='/account/profile' element={<Profile />} />
+          <Route path='/account/profile/edit' element={<EditProfile />} />
 
           {/* More Pages */}
           <Route path='/more/verification' element={<Verification />} />

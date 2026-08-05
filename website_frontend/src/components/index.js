@@ -70,6 +70,15 @@ import { TileSelect } from "./AccountUI/TileSelect";
 import { SignupSidebar } from "./AccountUI/SignupSidebar";
 import { AccountShell } from "./AccountUI/AccountShell";
 
+// Account profile
+import { ProfileHeader } from "./AccountUI/ProfileHeader";
+import { StatGrid } from "./AccountUI/StatGrid";
+import { AchievementCard, AchievementList } from "./AccountUI/AchievementCard";
+import { VerifiedLock } from "./AccountUI/VerifiedLock";
+import { GBRankCard } from "./AccountUI/GBRankCard";
+import { HostEventCard } from "./AccountUI/HostEventCard";
+import { ProfileSidebar } from "./AccountUI/ProfileSidebar";
+
 export {
     Navbar,
     Footer,
@@ -112,5 +121,13 @@ export {
     OAuthButtons,
     TileSelect,
     SignupSidebar,
-    AccountShell
+    AccountShell,
+    ProfileHeader,
+    StatGrid,
+    AchievementCard,
+    AchievementList,
+    VerifiedLock,
+    GBRankCard,
+    HostEventCard,
+    ProfileSidebar
 };
