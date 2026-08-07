@@ -33,20 +33,6 @@ export const HaloLans = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/lans/sfge-2026"}>Southern-Fried Gaming Expo 2026</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/lans/sfge-2026"} 
-                        imgUrl={"https://i.imgur.com/1UtSmN5.png"} 
-                        alt={"Southern-Fried Gaming Expo 2026"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Atlanta, GA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/sfge-2026"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
                     <HostBanner.Title path={"/lans/citadel-i"}>Citadel I</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/lans/citadel-i"} 
@@ -58,6 +44,8 @@ export const HaloLans = () => {
                     <HostBanner.Button title={"More Info"} path={"/lans/citadel-i"} />
                 </HostBanner>
 
+                <div className="hrEvents" />
+                
                 <HostBanner>
                     <HostBanner.Title path={"/lans/oh-yoshi-di-int-rehatched"}>Oh Yoshi Di-int Rehatched</HostBanner.Title>
                     <HostBanner.Image
