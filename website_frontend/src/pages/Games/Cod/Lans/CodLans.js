@@ -55,6 +55,8 @@ export const CodLans = () => {
                     <HostBanner.Region>Honolulu, HI</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/lans/hnl-x-fandom-2026"} />
                 </HostBanner>
+                
+                <div className="hrEvents" />
 
                 <HostBanner>
                     <HostBanner.Title path={"/lans/ego-cod-lan-4v4"}>Ego COD LAN 4v4</HostBanner.Title>
@@ -67,8 +69,6 @@ export const CodLans = () => {
                     <HostBanner.Region>Chapel Hill, NC</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/lans/ego-cod-lan-4v4"} />
                 </HostBanner>
-
-                <div className="hrEvents" />
 
                 <HostBanner>
                     <HostBanner.Title path={"/lans/ga-cod-modern-warfare-4-launch-tournament"}>GA:CoD Modern Warfare 4 Launch Tournament</HostBanner.Title>

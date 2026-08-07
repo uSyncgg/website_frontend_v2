@@ -23,11 +23,13 @@ import { PulseLowersLeague } from 'pages/Games/Cod/Leagues/Hosts/PulseXLeagues/P
 import { PulseOpenLeague } from 'pages/Games/Cod/Leagues/Hosts/PulseXLeagues/PulseOpenLeague';
 import { PulseUppersLeague } from 'pages/Games/Cod/Leagues/Hosts/PulseXLeagues/PulseUppersLeague';
 import { AirForceGamingLeague as AirForceCodLeague } from 'pages/Games/Cod/Leagues/Hosts/AirForceGamingLeague';
-import { BeerLeague } from 'pages/Games/Cod/Leagues/Hosts/BeerLeague';
+import { BeerLeague } from 'pages/Games/Cod/Leagues/Hosts/BeerLeague/BeerLeague';
+import { CBLTeamLeague } from 'pages/Games/Cod/Leagues/Hosts/BeerLeague/CBLTeamLeague';
+import { OGBeerLeague } from 'pages/Games/Cod/Leagues/Hosts/BeerLeague/OGBeerLeague';
 import { CasualXPLeague } from 'pages/Games/Cod/Leagues/Hosts/CasualXPLeague';
 import { CodRecLeagues } from 'pages/Games/Cod/Leagues/Hosts/CodRecLeagues/CodRecLeagues';
 import { CodRecPremadeLeague } from 'pages/Games/Cod/Leagues/Hosts/CodRecLeagues/CodRecPremadeLeague';
-import { CodRecOpenLeague } from 'pages/Games/Cod/Leagues/Hosts/CodRecLeagues/CodRecOpenLeague';
+import { CodRecMixedLeague } from 'pages/Games/Cod/Leagues/Hosts/CodRecLeagues/CodRecMixedLeague';
 import { CollegeCodLeague } from 'pages/Games/Cod/Leagues/Hosts/CollegeCodLeague';
 import { CorporateCodLeague } from 'pages/Games/Cod/Leagues/Hosts/CorporateCodLeague';
 import { ECACEsportsLeague as ECACCodLeague } from 'pages/Games/Cod/Leagues/Hosts/ECACEsportsLeague';
@@ -74,6 +76,8 @@ const CodRoutes = () => (
         <Route path='leagues/pulse-x-leagues/pulse-x-open' element={<PulseOpenLeague />} />
         <Route path='leagues/xp-league-cod' element={<XPLeague />} />
         <Route path='leagues/cod-beer-league' element={<BeerLeague />} />
+        <Route path='leagues/cod-beer-league/cbl-team-league' element={<CBLTeamLeague />} />
+        <Route path='leagues/cod-beer-league/og-beer-league' element={<OGBeerLeague />} />
         <Route path='leagues/u18-league' element={<U18CodLeague />} />
         <Route path='leagues/united-rogue-league' element={<UnitedRogueCodLeague />} />
         <Route path='leagues/tpc-womens-cod' element={<TPCWomensCodLeague />} />
@@ -83,9 +87,9 @@ const CodRoutes = () => (
         <Route path='leagues/corporate-cod-league' element={<CorporateCodLeague />} />
         <Route path='leagues/ixi-esports' element={<IXIEsportsLeague />} />
         <Route path='leagues/tpc-league' element={<PremierCircuitLeague />} />
-        <Route path='leagues/cod-rec-leagues' element={<CodRecLeagues />} />
-        <Route path='leagues/cod-rec-leagues/cod-rec-premade-league' element={<CodRecPremadeLeague />} />
-        <Route path='leagues/cod-rec-leagues/cod-rec-open-league' element={<CodRecOpenLeague />} />
+        <Route path='leagues/cod-rec-league' element={<CodRecLeagues />} />
+        <Route path='leagues/cod-rec-league/cod-rec-premade-league' element={<CodRecPremadeLeague />} />
+        <Route path='leagues/cod-rec-league/cod-rec-mixed-league' element={<CodRecMixedLeague />} />
         <Route path='leagues/elite-gaming-warfare-league' element={<EliteWarfareGamingLeague />} />
         <Route path='leagues/casual-xp-league' element={<CasualXPLeague />} />
         {/* TEMP REMOVED, THEY MAY RESTART */}

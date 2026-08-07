@@ -58,6 +58,8 @@
   <url><loc>https://www.usync.gg/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-open</loc></url>
   <url><loc>https://www.usync.gg/games/call-of-duty/leagues/xp-league-cod</loc></url>
   <url><loc>https://www.usync.gg/games/call-of-duty/leagues/cod-beer-league</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/cod-beer-league/cbl-team-league</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/cod-beer-league/og-beer-league</loc></url>
   <url><loc>https://www.usync.gg/games/call-of-duty/leagues/u18-league</loc></url>
   <url><loc>https://www.usync.gg/games/call-of-duty/leagues/united-rogue-league</loc></url>
   <url><loc>https://www.usync.gg/games/call-of-duty/leagues/tpc-womens-cod</loc></url>
@@ -67,9 +69,9 @@
   <url><loc>https://www.usync.gg/games/call-of-duty/leagues/corporate-cod-league</loc></url>
   <url><loc>https://www.usync.gg/games/call-of-duty/leagues/ixi-esports</loc></url>
   <url><loc>https://www.usync.gg/games/call-of-duty/leagues/tpc-league</loc></url>
-  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/cod-rec-leagues</loc></url>
-  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/cod-rec-leagues/cod-rec-premade-league</loc></url>
-  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/cod-rec-leagues/cod-rec-open-league</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/cod-rec-league</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/cod-rec-league/cod-rec-premade-league</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues/cod-rec-league/cod-rec-mixed-league</loc></url>
   <url><loc>https://www.usync.gg/games/call-of-duty/leagues/elite-gaming-warfare-league</loc></url>
   <url><loc>https://www.usync.gg/games/call-of-duty/leagues/casual-xp-league</loc></url>
   <url><loc>https://www.usync.gg/games/call-of-duty/leagues/cxp-leagues</loc></url>
@@ -347,6 +349,7 @@
   <url><loc>https://www.usync.gg/lans/shinto-test</loc></url>
   <url><loc>https://www.usync.gg/lans/rva-esports-championship-2026</loc></url>
   <url><loc>https://www.usync.gg/lans/immersecon-2026</loc></url>
+  <url><loc>https://www.usync.gg/lans/sfge-2026</loc></url>
   <url><loc>https://www.usync.gg/lans/dreamcon2026</loc></url>
   <url><loc>https://www.usync.gg/lans/summercon-ws-2026</loc></url>
   <url><loc>https://www.usync.gg/lans/egochall-tournament</loc></url>

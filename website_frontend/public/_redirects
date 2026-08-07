@@ -48,6 +48,8 @@
 /games/call-of-duty/leagues/pulse-x-leagues/pulse-x-open /index.html 200
 /games/call-of-duty/leagues/xp-league-cod /index.html 200
 /games/call-of-duty/leagues/cod-beer-league /index.html 200
+/games/call-of-duty/leagues/cod-beer-league/cbl-team-league /index.html 200
+/games/call-of-duty/leagues/cod-beer-league/og-beer-league /index.html 200
 /games/call-of-duty/leagues/u18-league /index.html 200
 /games/call-of-duty/leagues/united-rogue-league /index.html 200
 /games/call-of-duty/leagues/tpc-womens-cod /index.html 200
@@ -57,9 +59,9 @@
 /games/call-of-duty/leagues/corporate-cod-league /index.html 200
 /games/call-of-duty/leagues/ixi-esports /index.html 200
 /games/call-of-duty/leagues/tpc-league /index.html 200
-/games/call-of-duty/leagues/cod-rec-leagues /index.html 200
-/games/call-of-duty/leagues/cod-rec-leagues/cod-rec-premade-league /index.html 200
-/games/call-of-duty/leagues/cod-rec-leagues/cod-rec-open-league /index.html 200
+/games/call-of-duty/leagues/cod-rec-league /index.html 200
+/games/call-of-duty/leagues/cod-rec-league/cod-rec-premade-league /index.html 200
+/games/call-of-duty/leagues/cod-rec-league/cod-rec-mixed-league /index.html 200
 /games/call-of-duty/leagues/elite-gaming-warfare-league /index.html 200
 /games/call-of-duty/leagues/casual-xp-league /index.html 200
 /games/call-of-duty/leagues/cxp-leagues /index.html 200

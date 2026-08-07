@@ -1,5 +1,5 @@
 import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData } from "components";
-import '../../../EventInformation.css';
+import '../../../../EventInformation.css';
 
 export const SFGE2026 = () => {
     return (
@@ -14,7 +14,7 @@ export const SFGE2026 = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date/Place"} infoList={["Jul 31st - Aug 2nd, 2026", "Atlanta, GA"]} /> 
+                    <EventInfoCard title={"Date/Place"} infoList={["Jul 31st - Aug 2nd, 2026", "Atlanta, GA"]} />
                 </div>
 
                 <div>
@@ -23,11 +23,11 @@ export const SFGE2026 = () => {
                         , "Halo Infinite FFA Tournament"
                         , "All Tournaments are Free Entry"
                         , "Various Tournament Titles: CS2, Mario Kart, Fortnite, College Football, SSBU, and More"
-                    ]} /> 
+                    ]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["3-Day Weekend Pass (Adult): $85","3-Day Weekend Pass (Child): $50"]} footer={<ExternalButton host={"Southern-Fried Gaming Expo 2026"} blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/southern-fried-gaming-expo-2026/details"} />}/> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["3-Day Weekend Pass (Adult): $85","3-Day Weekend Pass (Child): $50"]} footer={<ExternalButton host={"Southern-Fried Gaming Expo 2026"} blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/southern-fried-gaming-expo-2026/details"} />}/>
                 </div>
             </div>
 
