@@ -1,16 +1,16 @@
 import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData } from "components";
 import '../../../../EventInformation.css';
 
-export const CodRecOpenLeague = () => {
+export const CodRecMixedLeague = () => {
     return (
         <div className="standardContainer">
             <SeoData
-                title={"Rec Open League - Call of Duty"}
+                title={"Rec Mixed League - Call of Duty"}
                 description={"Recreational Call of Duty league for players looking for a challenge. Play weekly matches with your new roster based on your skill level."}
                 canonicalPath={"/games/call-of-duty/leagues/cod-rec-leagues/cod-rec-open-league"}
             />
 
-            <HeaderImage title={"Cod Rec Open League"} imageClass={"eventPage"} />
+            <HeaderImage title={"Cod Rec Mixed League"} imageClass={"eventPage"} />
 
             <div className="eventInfoCardContainer">
                 <div>
@@ -18,16 +18,16 @@ export const CodRecOpenLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["No Prize Pool", "Recreational", "Live Streamed Matches"]} />
+                    <EventInfoCard title={"Details"} infoList={["No Prize Pool", "Recreational", "Tuesday Matches", "Live Streamed Matches"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Sign up as Solo or Duo"]} footer={<ExternalButton host={"Cod Rec Open League"} blank={true} title={"Join Now"} path={"https://www.google.com/url?q=https%3A%2F%2Fcod.esrl.gg%2F&sa=D&sntz=1&usg=AOvVaw359r5MIeBPnIT5_Guhelh-"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Sign up as Solo or Duo"]} footer={<ExternalButton host={"Cod Rec Mixed League"} blank={true} title={"Join Now"} path={"https://www.google.com/url?q=https%3A%2F%2Fcod.esrl.gg%2F&sa=D&sntz=1&usg=AOvVaw359r5MIeBPnIT5_Guhelh-"} />}/>
                 </div>
             </div>
 
             <div className="backButtonContainer">
-                <BackButton path={"/games/call-of-duty/leagues/cod-rec-leagues"} />
+                <BackButton path={"/games/call-of-duty/leagues/cod-rec-league"} />
             </div>
         </div>
     );
