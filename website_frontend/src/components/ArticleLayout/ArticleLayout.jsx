@@ -12,13 +12,6 @@ const formatDate = (isoDate) =>
         day: "numeric",
     });
 
-const JsonLd = ({ data }) => (
-    <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
-);
-
 // Uniform CSS-drawn cover for article cards: uSync purple gradient with a
 // category icon, so every click box matches regardless of source imagery.
 const CardCover = ({ category }) => {
@@ -99,14 +92,13 @@ export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
                 description={article.description}
                 canonicalPath={`/more/articles/${article.slug}`}
                 image={article.image}
+                imageAlt={article.imageAlt}
                 type="article"
                 publishedTime={article.datePublished}
                 modifiedTime={article.dateModified}
-                author="uSync"
+                author={SITE_NAME}
+                jsonLd={[articleLd, breadcrumbLd, ...(faqLd ? [faqLd] : [])]}
             />
-            <JsonLd data={articleLd} />
-            <JsonLd data={breadcrumbLd} />
-            {faqLd && <JsonLd data={faqLd} />}
 
             <div className={styles.pageGrid}>
             <article className={styles.article}>
