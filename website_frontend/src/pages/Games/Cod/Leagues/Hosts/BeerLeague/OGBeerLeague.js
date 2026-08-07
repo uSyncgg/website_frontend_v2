@@ -17,11 +17,11 @@ export const OGBeerLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["8 week regular season + playoffs and separate All-Star weekend", "Top 32 make playoffs, 33-48 are eligible substitutes", "Sign up solo or as a duo"]} />
+                    <EventInfoCard title={"Details"} infoList={["No Prize Pool", "4v4 CDL Ruleset", "8 week regular season + playoffs and separate All-Star weekend", "Top 32 make playoffs, 33-48 are eligible substitutes", "Drink Before / During / After Matches", "Must be 21+ to Enter"]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"OG Beer League"} blank={true} title={"Join Now"} path={"https://www.google.com/url?q=https%3A%2F%2Ftwitter.com%2FCoDBeerLeague&sa=D&sntz=1&usg=AOvVaw3LK3JovZ7B1-JO42DXymZJ"} />}/>
+                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "Sign up solo or as a duo"]} footer={<ExternalButton host={"OG Beer League"} blank={true} title={"Join Now"} path={"https://www.google.com/url?q=https%3A%2F%2Ftwitter.com%2FCoDBeerLeague&sa=D&sntz=1&usg=AOvVaw3LK3JovZ7B1-JO42DXymZJ"} />}/>
                 </div>
             </div>
 
