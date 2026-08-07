@@ -3,6 +3,7 @@ import { FaMapMarkedAlt, FaTrophy, FaBookOpen, FaChartLine, FaLayerGroup } from 
 import { SeoData } from "components/SeoData/SeoData";
 import { articleList } from "pages/More/Articles/articlesData";
 import { SITE_NAME, SITE_URL } from "utils/site";
+import { ORGANIZATION_ID } from "utils/structuredData";
 import styles from "./ArticleLayout.module.css";
 
 const formatDate = (isoDate) =>
@@ -43,17 +44,25 @@ export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
         image: [article.image],
         datePublished: article.datePublished,
         dateModified: article.dateModified,
+        // Same @id as the Organization node the homepage emits, so engines
+        // resolve these to one entity rather than three lookalike publishers.
+        // Kept self-contained (name/logo inline) so the markup still validates
+        // on its own if the reference isn't followed.
         author: {
             "@type": "Organization",
+            "@id": ORGANIZATION_ID,
             name: SITE_NAME,
             url: SITE_URL,
         },
         publisher: {
             "@type": "Organization",
+            "@id": ORGANIZATION_ID,
             name: SITE_NAME,
             logo: {
                 "@type": "ImageObject",
                 url: `${SITE_URL}/logo512.png`,
+                width: 512,
+                height: 512,
             },
         },
         mainEntityOfPage: {
