@@ -6,7 +6,7 @@ export const CodRecLeagues = () => {
     const isMobile = useCheckResize();
 
     const premade = isMobile ? "Premade League - NA" : "NA";
-    const open    = isMobile ? "Open League - NA"    : "NA";
+    const mixed    = isMobile ? "Mixed League - NA"    : "NA";
 
     return (
         <div className="standardContainer">
@@ -16,31 +16,31 @@ export const CodRecLeagues = () => {
                 canonicalPath={"/games/call-of-duty/leagues/cod-rec-leagues"}
             />
 
-            <HeaderImage title={"College Rec Leagues"} imageClass={"nonVerifiedPage"} />
+            <HeaderImage title={"College Rec League"} imageClass={"nonVerifiedPage"} />
 
             <div className="eventBannerContainer">
                 <HostBanner>
-                    <HostBanner.Title path={"/games/call-of-duty/leagues/cod-rec-leagues/cod-rec-premade-league"}>Premade League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/call-of-duty/leagues/cod-rec-league/cod-rec-premade-league"}>Premade League</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/games/call-of-duty/leagues/cod-rec-leagues/cod-rec-premade-league"} 
-                        imgUrl={"https://i.imgur.com/qbmhh4T.png"} 
+                        path={"/games/call-of-duty/leagues/cod-rec-league/cod-rec-premade-league"} 
+                        imgUrl={"https://i.imgur.com/xLmOqds.png"} 
                         alt={"Cod Rec Premade League"}
                         verified={false}
                     />
                     <HostBanner.Region>{premade}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/cod-rec-leagues/cod-rec-premade-league"} />
+                    <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/cod-rec-league/cod-rec-premade-league"} />
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/call-of-duty/leagues/cod-rec-leagues/cod-rec-open-league"}>Open League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/call-of-duty/leagues/cod-rec-league/cod-rec-mixed-league"}>Mixed League</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/games/call-of-duty/leagues/cod-rec-leagues/cod-rec-open-league"} 
-                        imgUrl={"https://i.imgur.com/qbmhh4T.png"} 
-                        alt={"CXP League"}
+                        path={"/games/call-of-duty/leagues/cod-rec-league/cod-rec-mixed-league"} 
+                        imgUrl={"https://i.imgur.com/xLmOqds.png"} 
+                        alt={"Cod Rec Mixed League"}
                         verified={false}
                     />
-                    <HostBanner.Region>{open}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/cod-rec-leagues/cod-rec-open-league"} />
+                    <HostBanner.Region>{mixed}</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/cod-rec-league/cod-rec-mixed-league"} />
                 </HostBanner>
 
                 <div className="hrEvents" />
