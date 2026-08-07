@@ -18,7 +18,7 @@ export const RisenLeagues = () => {
                 description="Risen leagues are League of Legends leagues with huge prize pools and a super competitive environment. Sign yourself or your team up today."
                 canonicalPath={"/games/LoL/leagues/risen-leagues"}
             />
-            <HeaderImage imageClass={"risenLOLLeagues"} />
+            <HeaderImage title={"Risen Leagues"} imageClass={"risenLOLLeagues"} />
 
             <div className="eventBannerContainer">
                 <HostBanner>

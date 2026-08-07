@@ -9,7 +9,7 @@ export const TitanBerserkerLeague = () => {
                 description="Titan Berserker League is a League of Legends league with an Emerald 4 average. Do you have what it takes to win the entire league?"
                 canonicalPath={"/games/LoL/leagues/titan-leagues/berserker"}
             />
-            <HeaderImage imageClass={"titanLOLLeagues"} />
+            <HeaderImage title={"Titan Berserker League"} imageClass={"titanLOLLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

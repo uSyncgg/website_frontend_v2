@@ -9,7 +9,7 @@ export const GanksterGGH2H = () => {
                 description="Gankster GG Valorant scrim finder. A verified platform for finding competitive Valorant scrims with a large number of users and daily matches worldwide."
                 canonicalPath={"/games/Valorant/head-to-head/gankster"}
             />
-            <HeaderImage imageClass={"ganksterPage"} />
+            <HeaderImage title={"GanksterGG"} imageClass={"ganksterPage"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

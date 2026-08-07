@@ -9,7 +9,7 @@ export const GanksterH2H = () => {
                 description="GanksterGG Rocket League scrimmage matches. Play your most competitive scrims from top level teams in Rocket League."
                 canonicalPath={"/games/RocketLeague/head-to-head/gankster"}
             />
-            <HeaderImage imageClass={"ganksterPage"} />
+            <HeaderImage title={"GanksterGG"} imageClass={"ganksterPage"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

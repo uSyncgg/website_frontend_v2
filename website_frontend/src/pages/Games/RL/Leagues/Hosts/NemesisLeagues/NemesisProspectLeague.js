@@ -9,7 +9,7 @@ export const NemesisProspectLeague = () => {
                 description="Looking for a free to enter Rocket League league - look no further. Prospect league is a 1270 - 1452 MMR range based league that is entirely free."
                 canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues/prospect"}
             />
-            <HeaderImage imageClass={"nemesisRLLeagues"} />
+            <HeaderImage title={"Nemesis Prospect"} imageClass={"nemesisRLLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

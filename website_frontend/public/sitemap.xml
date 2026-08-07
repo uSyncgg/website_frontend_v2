@@ -313,7 +313,8 @@
   <url><loc>https://www.usync.gg/games/warzone/wagers/ewagers</loc></url>
 
   <!-- LANs -->
-  <url><loc>https://www.usync.gg/LanMap</loc></url>
+  <!-- /LanMap has no React route and renders a blank page; pulled from the
+       sitemap so it can't be indexed. Decide whether to 301 it to /lans. -->
   <url><loc>https://www.usync.gg/other-lans</loc></url>
   <!-- CoD LANs -->
   <url><loc>https://www.usync.gg/lans/shintochamps2026</loc></url>

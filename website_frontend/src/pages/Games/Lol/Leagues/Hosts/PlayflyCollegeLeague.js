@@ -9,7 +9,7 @@ export const PlayflyCollegeLeague = () => {
                 description="Playfly League of Legends. The collegiate league with massive prize pools. Compete for thousands of dollars for yourself and your school."
                 canonicalPath={"/games/LoL/leagues/playfly"}
             />
-            <HeaderImage imageClass={"playflyPage"} />
+            <HeaderImage title={"Playfly League"} imageClass={"playflyPage"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

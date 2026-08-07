@@ -9,7 +9,7 @@ export const RisenDraftLeague = () => {
                 description="Risen Draft League is a free entry League of Legends league for new players who have hit level 100. This is your chance to improve your game early on."
                 canonicalPath={"/games/LoL/leagues/risen-leagues/draft"}
             />
-            <HeaderImage imageClass={"risenLOLLeagues"} />
+            <HeaderImage title={"Risen Draft League"} imageClass={"risenLOLLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

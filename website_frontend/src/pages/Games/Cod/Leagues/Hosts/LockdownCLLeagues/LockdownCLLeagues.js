@@ -18,7 +18,7 @@ export const LockdownCLLeagues = () => {
                 canonicalPath={"/games/call-of-duty/leagues/lockdowncl-leagues"}
             />
             {/* NOTE VERIFIED BANNER FOR LOCKDOWN LOOKS LIKE SHIT IN HEADER IMAGE */}
-            <HeaderImage imageClass={"lockdownCODLeagues"} />
+            <HeaderImage title={"LockdownCL"} imageClass={"lockdownCODLeagues"} />
 
             <div className="eventBannerContainer">
                 <HostBanner>

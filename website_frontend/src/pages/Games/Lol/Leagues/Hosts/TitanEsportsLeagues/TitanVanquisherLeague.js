@@ -9,7 +9,7 @@ export const TitanVanquisherLeague = () => {
                 description="Titan Vanquisher League is a League of Legends league with a M100 cap. Do you have what it takes to win the entire league?"
                 canonicalPath={"/games/LoL/leagues/titan-leagues/vanquisher"}
             />
-            <HeaderImage imageClass={"titanLOLLeagues"} />
+            <HeaderImage title={"Titan Vanquisher League"} imageClass={"titanLOLLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

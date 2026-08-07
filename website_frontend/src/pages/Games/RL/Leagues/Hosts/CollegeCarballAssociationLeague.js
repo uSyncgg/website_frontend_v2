@@ -9,7 +9,7 @@ export const CollegeCarballAssociationLeague = () => {
                 description="College Carball Association Rocket League league. A verified 3v3 NA and EU college league with world championship. Must be a full time college student."
                 canonicalPath={"/games/RocketLeague/leagues/college-carball-association"}
             />
-            <HeaderImage imageClass={"ccaPage"} />
+            <HeaderImage title={"College Carball Association"} imageClass={"ccaPage"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

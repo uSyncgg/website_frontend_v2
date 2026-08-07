@@ -18,7 +18,7 @@ export const AegisLeagues = () => {
                 description="Aegis League of Legends leagues. Enroll today and meet new friends while competing for large cash prizes."
                 canonicalPath={"/games/LoL/leagues/aegis-leagues"}
             />
-            <HeaderImage imageClass={"aegisLOLLeagues"} />
+            <HeaderImage title={"Aegis Leagues"} imageClass={"aegisLOLLeagues"} />
 
             <div className="eventBannerContainer">
                 <HostBanner>

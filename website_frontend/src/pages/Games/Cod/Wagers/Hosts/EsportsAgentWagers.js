@@ -9,7 +9,7 @@ export const EsportsAgentWagers = () => {
                 description="Live supported cod wagers from Esports Agent. Sign up today and experience the pro league for yourself."
                 canonicalPath={"/games/call-of-duty/wagers/eagent"}
             />
-            <HeaderImage imageClass={"eagentPage"} />
+            <HeaderImage title={"Esports Agent"} imageClass={"eagentPage"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

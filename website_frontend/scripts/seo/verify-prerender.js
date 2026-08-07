@@ -5,6 +5,9 @@
  * link is skipped by react-snap, no HTML is emitted, and the Netlify SPA
  * fallback serves the prerendered homepage under that URL instead — so the page
  * looks fine to a human but is duplicate homepage content to every crawler.
+ *
+ * It also holds the two sitewide invariants fixed in SEO plan phase 2: exactly
+ * one <h1> per page, and a single canonical host in every URL we emit.
  */
 const fs = require("fs");
 const path = require("path");
@@ -17,6 +20,7 @@ const titleOf = (html) => {
   const m = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
   return m ? m[1].trim() : "";
 };
+const h1CountOf = (html) => (html.match(/<h1[\s>]/gi) || []).length;
 const fileFor = (route) =>
   route === "/" ? path.join(BUILD, "index.html") : path.join(BUILD, route.slice(1), "index.html");
 
@@ -63,9 +67,38 @@ if (fs.existsSync(homeFile)) {
   }
 }
 
+// 4. Every route must have exactly one <h1>.
+const emitted = expected.filter((r) => fs.existsSync(fileFor(r)));
+const badHeadings = emitted
+  .map((r) => ({ route: r, n: h1CountOf(fs.readFileSync(fileFor(r), "utf8")) }))
+  .filter(({ n }) => n !== 1);
+if (badHeadings.length) {
+  errors.push(
+    `${badHeadings.length} route(s) do not have exactly one <h1>:\n` +
+      badHeadings.map(({ route, n }) => `    ${route}  (${n})`).join("\n") +
+      `\n  A page's <h1> is its HeaderImage hero — pass it a title. Card and\n` +
+      `  section headings belong at <h2> or below.`
+  );
+}
+
+// 5. The canonical host must be used everywhere, including inside JSON-LD.
+const wrongHost = emitted.filter((r) =>
+  /https:\/\/usync\.gg/.test(fs.readFileSync(fileFor(r), "utf8"))
+);
+if (wrongHost.length) {
+  errors.push(
+    `${wrongHost.length} route(s) reference https://usync.gg instead of the\n` +
+      `  canonical https://www.usync.gg (splits the brand entity signal):\n` +
+      wrongHost.map((r) => `    ${r}`).join("\n") +
+      `\n  Import SITE_URL from src/utils/site.js rather than hardcoding the host.`
+  );
+}
+
 if (errors.length) {
   console.error("\n✗ Prerender verification failed:\n");
   errors.forEach((e) => console.error(`  ${e}\n`));
   process.exit(1);
 }
-console.log(`✓ Prerender verified: ${expected.length} routes, all unique.`);
+console.log(
+  `✓ Prerender verified: ${expected.length} routes — all unique, one <h1> each, canonical host.`
+);

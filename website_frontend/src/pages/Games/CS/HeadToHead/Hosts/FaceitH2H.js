@@ -9,7 +9,7 @@ export const FaceitH2H = () => {
                 description="Compete in the #1 place for free Counter-Strike 2 match ladders - FACEIT. CLimb the ladder and earn rewards / prizes."
                 canonicalPath={"/games/CS2/head-to-head/faceit"}
             />
-            <HeaderImage imageClass={"faceitPage"} />
+            <HeaderImage title={"Faceit"} imageClass={"faceitPage"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

@@ -8,7 +8,7 @@ export const Lol = () => {
                 description="League of Legends LANs, leagues, tournaments, head-to-head, and wagers from every site on Google. Earn money playing League of Legends."
                 canonicalPath={"/games/LoL"}
             />
-            <HeaderImage imageClass={"lolGamePage"} />
+            <HeaderImage title={"League of Legends"} imageClass={"lolGamePage"} />
             <EventTypeImages page={"League of Legends"} />
         </div>
     );

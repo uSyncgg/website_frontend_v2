@@ -9,7 +9,7 @@ export const RLPCTripleALeague = () => {
                 description="RLPC Triple A League for Rocket League players with 1575 - 1799 MMR. Draft based 3v3 NA league. Sign up solo and get drafted to a team."
                 canonicalPath={"/games/RocketLeague/leagues/rlpc-leagues/aaa"}
             />
-            <HeaderImage imageClass={"rlpcRLLeagues"} />
+            <HeaderImage title={"RLPC AAA League"} imageClass={"rlpcRLLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

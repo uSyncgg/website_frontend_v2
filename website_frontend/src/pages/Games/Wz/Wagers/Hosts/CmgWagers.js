@@ -9,7 +9,7 @@ export const CmgWagers = () => {
                 description="Checkmate Gaming Warzone wagers. A verified platform with 24/7 live support. Large number of daily matches worldwide for Warzone wager players 18 and over."
                 canonicalPath={"/games/warzone/wagers/cmg"}
             />
-            <HeaderImage imageClass={"cmgPage"} />
+            <HeaderImage title={"Checkmate Gaming"} imageClass={"cmgPage"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

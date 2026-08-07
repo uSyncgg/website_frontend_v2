@@ -9,7 +9,7 @@ export const NemesisTitanLeague = () => {
                 description="Titan league is for Rocket League players with over 1780+ MMR. The top of the line league by Nemesis is for Rocket League players looking to go pro."
                 canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues/titan"}
             />
-            <HeaderImage imageClass={"nemesisRLLeagues"} />
+            <HeaderImage title={"Nemesis Titan"} imageClass={"nemesisRLLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

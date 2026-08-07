@@ -9,7 +9,7 @@ export const NemesisRivalLeague = () => {
                 description="North America's 1612 - 1779 MMR Rocket League league. Rival league is for players looking to be the best at their craft and improve in Rocket League."
                 canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues/rival"}
             />
-            <HeaderImage imageClass={"nemesisRLLeagues"} />
+            <HeaderImage title={"Nemesis Rival"} imageClass={"nemesisRLLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

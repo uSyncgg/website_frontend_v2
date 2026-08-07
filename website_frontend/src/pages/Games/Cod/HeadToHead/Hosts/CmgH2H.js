@@ -9,7 +9,7 @@ export const CmgH2H = () => {
                 description="Play Call of Duty XP matches and get ranked. Free competitive SND esports ladder matches."
                 canonicalPath={"/games/call-of-duty/head-to-head/cmg"}
             />
-            <HeaderImage imageClass={"cmgPage"} verified={true} />
+            <HeaderImage title={"Checkmate Gaming"} imageClass={"cmgPage"} verified={true} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

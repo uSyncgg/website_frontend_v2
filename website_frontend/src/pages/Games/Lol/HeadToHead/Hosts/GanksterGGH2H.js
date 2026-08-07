@@ -9,7 +9,7 @@ export const GanksterGGH2H = () => {
                 description="Scrim matches for League of Legends from the most integrated provider. Try it free today."
                 canonicalPath={"/games/LoL/head-to-head/gankster"}
             />
-            <HeaderImage imageClass={"ganksterPage"} />
+            <HeaderImage title={"GanksterGG"} imageClass={"ganksterPage"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

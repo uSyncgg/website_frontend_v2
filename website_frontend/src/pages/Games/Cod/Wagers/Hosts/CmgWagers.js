@@ -9,7 +9,7 @@ export const CmgWagers = () => {
                 description="Checkmate Gaming Call of Duty wagers are ideal for making money playing cod. Join to start earning today."
                 canonicalPath={"/games/call-of-duty/wagers/cmg"}
             />
-            <HeaderImage imageClass={"cmgPage"} />
+            <HeaderImage title={"Checkmate Gaming"} imageClass={"cmgPage"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

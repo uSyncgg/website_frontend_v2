@@ -9,7 +9,7 @@ export const TitanDivinityLeague = () => {
                 description="Calling all League of Legends players that are lower rank than Emerald 4. Risen Divinity League is the perfect league for you."
                 canonicalPath={"/games/LoL/leagues/titan-leagues/divinity"}
             />
-            <HeaderImage imageClass={"titanLOLLeagues"} />
+            <HeaderImage title={"Titan Divinity League"} imageClass={"titanLOLLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

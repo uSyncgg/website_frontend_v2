@@ -9,7 +9,7 @@ export const RisenChampionsLeague = () => {
                 description="Risen Champions League is the most prestigious league from Risen. Compete in this League of Legends league for thousands of dollars."
                 canonicalPath={"/games/LoL/leagues/risen-leagues/champions"}
             />
-            <HeaderImage imageClass={"risenLOLLeagues"} />
+            <HeaderImage title={"Risen Champions League"} imageClass={"risenLOLLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

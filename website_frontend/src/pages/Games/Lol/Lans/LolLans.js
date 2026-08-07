@@ -12,6 +12,8 @@ export const LolLans = () => {
                 canonicalPath={"/games/LoL/lans"}
             />
 
+            <h1 className="lanPageTitle">League of Legends LANs</h1>
+
             <div className="lanMapContainer">
                 <LanMap markers={LOL_LAN_MARKERS} game="LoL" />
             </div>
