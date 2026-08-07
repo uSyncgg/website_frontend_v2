@@ -11,6 +11,16 @@
     color: white;
 }
 
+/* Card titles are <h2> (the page's single <h1> is the HeaderImage hero). These
+   pin the browser's old <h1> metrics so demoting the tag changes nothing
+   visually: 2em font-size and 0.67em block margins, both of the heading's own
+   size. */
+.bannerTitle h2 {
+    font-size: 2rem;
+    margin: .67em 0;
+    font-weight: bold;
+}
+
 @media only screen and (max-width: 768px) {
     .bannerTitle {
         display: none;

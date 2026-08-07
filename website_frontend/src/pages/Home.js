@@ -21,8 +21,10 @@ export const Home = () => {
                         <span className={styles.pulseDot} />
                         Compete in Esports Events
                     </Link>
-                    <h1 className={styles.white}>THE WORLD'S LARGEST</h1>
-                    <h1 className={styles.gradientText}>ESPORTS HUB</h1>
+                    <h1 className={styles.heroTitle}>
+                        <span className={styles.white}>THE WORLD'S LARGEST</span>
+                        <span className={styles.gradientText}>ESPORTS HUB</span>
+                    </h1>
                     <h2>
                         Find Verified LANs, Tournaments, and More.
                         <br />

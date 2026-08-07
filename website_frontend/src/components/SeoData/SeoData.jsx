@@ -1,10 +1,10 @@
 import React from "react";
+import { SITE_NAME, SITE_URL } from "utils/site";
 
 export const SeoData = ({ title, description, canonicalPath, image, type, publishedTime, modifiedTime, author }) => {
-    const siteName = "uSync";
+    const siteName = SITE_NAME;
     const fullTitle = title ? `${siteName} | ${title}` : `${siteName} | Esports LANs, Tournaments, & Leagues Hub`;
-    const baseUrl = "https://www.usync.gg";
-    const fullUrl = `${baseUrl}${canonicalPath}`;
+    const fullUrl = `${SITE_URL}${canonicalPath}`;
     const imgUrl = image ? `${image}` : "https://i.imgur.com/A0AhUZp.jpeg";
 
     return (

@@ -95,8 +95,10 @@ export const CodTournaments = () => {
             />
 
             <div className={styles.pageHeader}>
-                <h1 className={styles.white}>CALL OF DUTY</h1>
-                <h1 className={styles.gradientText}>TOURNAMENTS</h1>
+                <h1 className={styles.heroTitle}>
+                    <span className={styles.white}>CALL OF DUTY</span>
+                    <span className={styles.gradientText}>TOURNAMENTS</span>
+                </h1>
                 <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
                 <p className={styles.subtext}>
                     Updated every day.
@@ -168,17 +170,17 @@ export const CodTournaments = () => {
                     </p>
 
                     {!isLoaded ? (
-                        <div className={styles.statusMessage}>
-                            <h1 className="white">Loading tournaments...</h1>
+                        <div className={styles.statusMessage} role="status">
+                            <p className={styles.statusText}>Loading tournaments...</p>
                         </div>
                     ) : tournaments.length === 0 ? (
-                        <div className={styles.statusMessage}>
-                            <h1 className="white">We are experiencing technical difficulties right now.</h1>
-                            <h1 className="white">Please check back later.</h1>
+                        <div className={styles.statusMessage} role="status">
+                            <p className={styles.statusText}>We are experiencing technical difficulties right now.</p>
+                            <p className={styles.statusText}>Please check back later.</p>
                         </div>
                     ) : filteredTourneys.length === 0 ? (
-                        <div className={styles.statusMessage}>
-                            <h1 className="white">No tournaments match your filters.</h1>
+                        <div className={styles.statusMessage} role="status">
+                            <p className={styles.statusText}>No tournaments match your filters.</p>
                         </div>
                     ) : (
                         <TournamentList tournaments={currentTournaments} game={'Cod'} />

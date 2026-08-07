@@ -13,7 +13,9 @@ export const Verification = () => {
             <HeaderImage title={""} verification={true} imageClass={"verificationPage"} />
 
             <div className={styles.sectionTwo}>
-                <h2 className={styles.white}>Verified Features</h2>
+                {/* This page's hero is the verified/non-verified badge pair with no
+                    text, so the first section heading carries the page's <h1>. */}
+                <h1 className={styles.white}>Verified Features</h1>
                 <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
 
                 <div className={styles.subscriptionContainer}>
@@ -32,11 +34,11 @@ export const Verification = () => {
                     <img className={styles.usyncVerified} src="https://i.imgur.com/OSMYolc.png" alt="uSync Verified" />
                     <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
 
-                    <h1 className={styles.verificationDesc}>
-                        uSync Verified providers are the most trustworthy providers that we feature. 
-                        These events are not only extremely well trusted but have shown a record of exceptional quality in their work. 
+                    <p className={styles.verificationDesc}>
+                        uSync Verified providers are the most trustworthy providers that we feature.
+                        These events are not only extremely well trusted but have shown a record of exceptional quality in their work.
                         We strive to verify as many events as possible so that you can bring your organization to the highest level of competitive play.
-                    </h1>
+                    </p>
                 
                 </div>
 

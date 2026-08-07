@@ -2,9 +2,8 @@ import { Link } from "react-router";
 import { FaMapMarkedAlt, FaTrophy, FaBookOpen, FaChartLine, FaLayerGroup } from "react-icons/fa";
 import { SeoData } from "components/SeoData/SeoData";
 import { articleList } from "pages/More/Articles/articlesData";
+import { SITE_NAME, SITE_URL } from "utils/site";
 import styles from "./ArticleLayout.module.css";
-
-const BASE_URL = "https://usync.gg";
 
 const formatDate = (isoDate) =>
     new Date(`${isoDate}T00:00:00`).toLocaleDateString("en-US", {
@@ -37,7 +36,7 @@ const CardCover = ({ category }) => {
 };
 
 export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
-    const url = `${BASE_URL}/more/articles/${article.slug}`;
+    const url = `${SITE_URL}/more/articles/${article.slug}`;
     const related = articleList
         .filter((a) => a.slug !== article.slug)
         .sort((a, b) => (b.category === article.category) - (a.category === article.category))
@@ -53,15 +52,15 @@ export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
         dateModified: article.dateModified,
         author: {
             "@type": "Organization",
-            name: "uSync",
-            url: BASE_URL,
+            name: SITE_NAME,
+            url: SITE_URL,
         },
         publisher: {
             "@type": "Organization",
-            name: "uSync",
+            name: SITE_NAME,
             logo: {
                 "@type": "ImageObject",
-                url: `${BASE_URL}/logo512.png`,
+                url: `${SITE_URL}/logo512.png`,
             },
         },
         mainEntityOfPage: {
@@ -75,8 +74,8 @@ export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
-            { "@type": "ListItem", position: 2, name: "Articles", item: `${BASE_URL}/more/articles` },
+            { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+            { "@type": "ListItem", position: 2, name: "Articles", item: `${SITE_URL}/more/articles` },
             { "@type": "ListItem", position: 3, name: article.name, item: url },
         ],
     };
