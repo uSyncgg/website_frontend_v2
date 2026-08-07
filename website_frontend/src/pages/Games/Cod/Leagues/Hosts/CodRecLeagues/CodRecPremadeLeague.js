@@ -18,7 +18,7 @@ export const CodRecPremadeLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["No Prize Pool", "Recreational", "Live Streamed Matches", "Premade League", "Multiple Skill Divisions"]} />
+                    <EventInfoCard title={"Details"} infoList={["No Prize Pool", "Recreational", "Live Streamed Matches", "Premade League", "Wednesday and Thursday Matches", "Multiple Skill Divisions"]} />
                 </div>
 
                 <div>
@@ -27,7 +27,7 @@ export const CodRecPremadeLeague = () => {
             </div>
 
             <div className="backButtonContainer">
-                <BackButton path={"/games/call-of-duty/leagues/cod-rec-leagues"} />
+                <BackButton path={"/games/call-of-duty/leagues/cod-rec-league"} />
             </div>
         </div>
     );

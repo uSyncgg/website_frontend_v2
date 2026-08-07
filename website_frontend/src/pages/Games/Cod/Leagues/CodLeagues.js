@@ -181,15 +181,15 @@ export const CodLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/call-of-duty/leagues/cod-rec-leagues"}>COD Rec Leagues</HostBanner.Title>
+                    <HostBanner.Title path={"/games/call-of-duty/leagues/cod-rec-league"}>COD Rec League</HostBanner.Title>
                     <HostBanner.Image 
-                        path={"/games/call-of-duty/leagues/cod-rec-leagues"} 
-                        imgUrl={"https://i.imgur.com/qbmhh4T.png"} 
-                        alt={"CoD Rec Leagues"}
+                        path={"/games/call-of-duty/leagues/cod-rec-league"} 
+                        imgUrl={"https://i.imgur.com/xLmOqds.png"} 
+                        alt={"CoD Rec League"}
                         verified={false}
                     />
                     <HostBanner.Region>All Leagues</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/cod-rec-leagues"} />
+                    <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/cod-rec-league"} />
                 </HostBanner>
 
                 <div className="hrEvents" />

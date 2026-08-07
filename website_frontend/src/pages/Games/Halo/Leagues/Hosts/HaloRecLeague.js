@@ -21,7 +21,7 @@ export const HaloRecLeague = () => {
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Details"} infoList={["Multiple Premade and Mixed Divisions - Players can ONLY play on 1 premade team and 1 mixed team MAX", "Wednesdays (Mixed) and Thursdays(Premade) for Gamedays", "9PM EST (Premade) and 10:30PM (Mixed) for Gametimes", "Recreational", "Live Streamed Matches"]} />
+                    <EventInfoCard title={"Details"} infoList={["Multiple Premade and Mixed Divisions - Players can ONLY play on 1 premade team and 1 mixed team MAX", "Wednesdays (Mixed) and Thursdays(Premade) for Gamedays", "9PM EST and 10:30PM for Gametimes", "Recreational", "Live Streamed Matches"]} />
                 </div>
 
                 <div>
