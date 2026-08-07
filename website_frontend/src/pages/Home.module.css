@@ -416,6 +416,26 @@
     box-shadow: 0 0 1.563rem .188rem rgba(153, 102, 255, 0.8);
 } */
 
+.verifiedRow {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    align-items: stretch;
+    gap: 1rem;
+    max-width: 75rem;
+    margin: 0 auto;
+}
+
+.verifiedCol {
+    min-width: 0;
+}
+
+@media only screen and (max-width: 900px) {
+    .verifiedRow {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
+
 .mapContainer {
     position: relative;
 }

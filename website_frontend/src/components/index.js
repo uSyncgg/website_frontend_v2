@@ -56,6 +56,7 @@ import { TournamentPagination } from "./TournamentPagination/TournamentPaginatio
 import { filteredTournaments } from "./TournamentFilter/FilteredTournaments";
 import { TournamentList } from "./TournamentList/TournamentList";
 import { HomeTournaments } from "./HomeTournaments/HomeTournaments";
+import { VerifiedHosts } from "./VerifiedHosts/VerifiedHosts";
 
 // Articles
 import { ArticleLayout } from "./ArticleLayout/ArticleLayout";
@@ -99,6 +100,7 @@ export {
     filteredTournaments,
     TournamentList,
     HomeTournaments,
+    VerifiedHosts,
     ArticleLayout,
     VerifiedText,
     VerifiedImage,

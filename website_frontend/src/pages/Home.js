@@ -2,7 +2,7 @@ import React from "react";
 import styles from './Home.module.css';
 import '../index.css';
 import { Link } from "react-router";
-import { ChooseYourGame, SeoData, HomeTournaments, LanMap } from "components";
+import { ChooseYourGame, SeoData, HomeTournaments, VerifiedHosts, LanMap } from "components";
 import { FaMapMarkerAlt, FaLayerGroup, FaSitemap, FaTrophy } from "react-icons/fa";
 import { ALL_LAN_MARKERS } from 'data/lanMarkers';
 
@@ -81,7 +81,14 @@ export const Home = () => {
 
                 <div className="hr" />
 
-                <HomeTournaments />
+                <div className={styles.verifiedRow}>
+                    <div className={styles.verifiedCol}>
+                        <HomeTournaments />
+                    </div>
+                    <div className={styles.verifiedCol}>
+                        <VerifiedHosts />
+                    </div>
+                </div>
 
                 <div className="hr" />
 
