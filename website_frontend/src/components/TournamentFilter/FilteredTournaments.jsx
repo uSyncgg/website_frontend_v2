@@ -1,7 +1,8 @@
 import { hostKeyFromLabel } from "components/TournamentCard/hosts";
+import { codTitleFromTournament } from "components/CodTitleSelect/codTitles";
 
 export const filteredTournaments = ( tournaments, filters ) => {
-    const { selectedFormats, selectedRegions, selectedSkills, selectedPlatforms, selectedEntry, selectedHosts = [] } = filters;
+    const { selectedFormats, selectedRegions, selectedSkills, selectedPlatforms, selectedEntry, selectedHosts = [], selectedTitles = [] } = filters;
 
     const checks = [
         [selectedFormats, {
@@ -40,7 +41,11 @@ export const filteredTournaments = ( tournaments, filters ) => {
         const hostMatch = selectedHosts.length === 0 ||
             selectedHosts.some(host => hostKeyFromLabel(host) === tournament.site);
 
-        return hostMatch && checks.every(([selected, fieldMap]) =>
+        // Which Call of Duty the tournament is on — picked from the cover tiles
+        const titleMatch = selectedTitles.length === 0 ||
+            selectedTitles.includes(codTitleFromTournament(tournament));
+
+        return hostMatch && titleMatch && checks.every(([selected, fieldMap]) =>
             selected.length === 0 ||
             selected.some(value => tournament[fieldMap[value]] === true)
         )

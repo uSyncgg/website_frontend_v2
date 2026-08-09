@@ -55,6 +55,7 @@ import { TournamentPagination } from "./TournamentPagination/TournamentPaginatio
 import { filteredTournaments } from "./TournamentFilter/FilteredTournaments";
 import { TournamentList } from "./TournamentList/TournamentList";
 import { HomeTournaments } from "./HomeTournaments/HomeTournaments";
+import { CodTitleSelect } from "./CodTitleSelect/CodTitleSelect";
 
 // SEO
 import { SeoData } from "./SeoData/SeoData";
@@ -111,6 +112,7 @@ export {
     filteredTournaments,
     TournamentList,
     HomeTournaments,
+    CodTitleSelect,
     ArticleImages,
     VerifiedText,
     VerifiedImage,

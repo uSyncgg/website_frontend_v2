@@ -47,8 +47,8 @@
     display: flex;
     justify-content: center;
     gap: 1rem;
-    /* Keep in sync with .filterContainer in TournamentFilter.module.css */
-    width: min(26rem, 92vw);
+    /* Wider than .filterContainer since the title count made this a third card */
+    width: min(32rem, 92vw);
     margin: 0 auto 3rem;
 }
 
