@@ -1,5 +1,5 @@
 import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData } from "components";
-import '../../EventInformation.css';
+import '../../../EventInformation.css';
 
 export const GACSHeatwave = () => {
     return (
@@ -14,7 +14,7 @@ export const GACSHeatwave = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date/Place"} infoList={["August 8 - 9th, 2026", "Columbus, OH"]} /> 
+                    <EventInfoCard title={"Date/Place"} infoList={["August 8 - 9th, 2026", "Columbus, OH"]} />
                 </div>
 
                 <div>
@@ -24,11 +24,11 @@ export const GACSHeatwave = () => {
                         , "16 Teams MAX"
                         , "Pool Play Day 1 and Top 8 Day 2"
                         , "Live Streamed Matches"
-                    ]} /> 
+                    ]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $250"]} footer={<ExternalButton host={"GA:CS Operation Heatwave"} blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/ga-cs-operation-heatwave/details"} />}/> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["Team Pass: $250"]} footer={<ExternalButton host={"GA:CS Operation Heatwave"} blank={true} title={"Join Now"} path={"https://www.start.gg/tournament/ga-cs-operation-heatwave/details"} />}/>
                 </div>
             </div>
 
