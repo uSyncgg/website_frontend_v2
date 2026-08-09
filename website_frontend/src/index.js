@@ -15,7 +15,7 @@ import { Lans } from 'pages/Lans';
 import { Tournaments } from 'pages/Tournaments';
 
 // Account Pages
-import { Login } from 'pages/Account/Login/Login';
+import { Auth } from 'pages/Account/Auth/Auth';
 import { SignUp } from 'pages/Account/SignUp/SignUp';
 import { Profile } from 'pages/Account/Profile/Profile';
 import { EditProfile } from 'pages/Account/Profile/EditProfile';
@@ -395,8 +395,11 @@ const app = (
           <Route path='/tournaments' element={<Tournaments />} />
 
           {/* Account */}
-          <Route path='/account/login' element={<Login />} />
-          <Route path='/account/signup' element={<SignUp />} />
+          {/* The auth gate (login + signup) is its own page. Creating an
+              account there hands off to /account/setup, the profile form. */}
+          <Route path='/account/login' element={<Auth mode='login' />} />
+          <Route path='/account/signup' element={<Auth mode='signup' />} />
+          <Route path='/account/setup' element={<SignUp />} />
           <Route path='/account/profile' element={<Profile />} />
           <Route path='/account/profile/edit' element={<EditProfile />} />
 

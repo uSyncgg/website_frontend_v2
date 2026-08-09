@@ -4,7 +4,7 @@ import { SeoData, AccountShell, SignupSidebar } from "components";
 import { AccountTypeStep, LinkAccountsStep, SuccessStep } from "./SharedSteps";
 import { CredentialsStep, AboutYouStep, GamesStep, BracketHostingStep, ProfileBasicsStep } from "./PlayerSteps";
 import { HostDetailsStep, HostEventsStep } from "./HostSteps";
-import { SOCIAL_PLATFORMS, GAME_PLATFORMS, COMPETITIVE_PLATFORMS, HOST_LINK_PLATFORMS } from "./accountData";
+import { SOCIAL_PLATFORMS, GAME_PLATFORMS, EVENT_PLATFORMS, HOST_LINK_PLATFORMS } from "./accountData";
 
 // An account can be Player, Host, or both. Picking both merges the two flows
 // rather than concatenating them: anything shared (login, role, games, profile,
@@ -181,7 +181,7 @@ export const SignUp = () => {
                         onBack={back}
                         socialPlatforms={isPlayer ? SOCIAL_PLATFORMS : HOST_LINK_PLATFORMS}
                         gamePlatforms={isPlayer ? GAME_PLATFORMS : []}
-                        competitivePlatforms={isPlayer ? COMPETITIVE_PLATFORMS : []}
+                        eventPlatforms={isPlayer ? EVENT_PLATFORMS : []}
                     />
                 );
             default:
@@ -192,9 +192,9 @@ export const SignUp = () => {
     return (
         <div className="standardContainer">
             <SeoData
-                title={"Sign Up"}
-                description="Create your uSync account as a Player, a Host, or both. Track stats, join brackets, and run your own esports events."
-                canonicalPath={"/account/signup"}
+                title={"Set Up Your Account"}
+                description="Finish setting up your uSync account as a Player, a Host, or both. Track stats, join brackets, and run your own esports events."
+                canonicalPath={"/account/setup"}
             />
 
             <AccountShell

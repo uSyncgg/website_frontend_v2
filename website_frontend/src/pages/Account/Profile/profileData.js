@@ -115,6 +115,76 @@ export const SAMPLE_PLAYER_PROFILE = {
         ],
     },
 
+    // ---- Player card ----
+    // Which calling card is equipped, and the one social + one event platform
+    // that get printed on the downloadable card.
+    callingCard: "nightfall",
+    cardSocial: "twitter",
+    cardPlatform: "cmg",
+    // Optional cut-out headshot for the card hero. Empty here because a fresh
+    // account has none — the card falls back to the avatar block.
+    photo: "",
+
+    // Account level. Earned by playing, shown on the card and the dashboard.
+    xp: {
+        level: 24,
+        current: 6840,
+        next: 10000,
+        note: "24 events played · high-volume competitor",
+    },
+    // Counters the calling-card unlocks are checked against. These would be
+    // derived from real results; here they're set so the picker shows a mix of
+    // earned and still-locked cards.
+    unlockProgress: {
+        eventsEntered: 64,
+        tournamentWins: 7,
+        lansAttended: 6,
+        winStreak: 8,
+    },
+
+    // Event counts shown on the card and the dashboard metrics.
+    //   events       — everything entered, including wager nights and ladders
+    //   competitions — the structured ones: LANs + tournaments + leagues
+    eventCounts: { lans: 6, tournaments: 24, leagues: 4, events: 64, competitions: 34 },
+
+    earnings: {
+        total: 8450,
+        byGame: [
+            { label: "Call of Duty: Black Ops 7", value: 5200 },
+            { label: "Warzone", value: 1850 },
+            { label: "Rocket League", value: 1400 },
+        ],
+        byType: [
+            { label: "Leagues", value: 3100 },
+            { label: "LANs", value: 2900 },
+            { label: "Tournaments", value: 2450 },
+        ],
+    },
+
+    record: {
+        overall: { w: 333, l: 193 },
+        breakdown: [
+            { label: "Leagues", w: 61, l: 29, note: "4 seasons · 2 titles" },
+            { label: "LANs", w: 34, l: 22, note: "6 events attended" },
+            { label: "Wagers", w: 142, l: 88, note: "Verified hosts only" },
+            { label: "XP matches", w: 96, l: 54, note: "Ladder play" },
+        ],
+    },
+
+    // In-game ranks pulled from each title — deliberately separate from the
+    // uSync match record above, which only counts uSync events.
+    ranks: [
+        { game: "Black Ops 7 · Ranked Play", tier: "Crimson II", rating: "5,120 SR", short: "BO7", tint: "#C2703A" },
+        { game: "Warzone · Ranked", tier: "Diamond I", rating: "3,640 SR", short: "WZ", tint: "#6E7B8B" },
+        { game: "Rocket League · Doubles", tier: "Champion II", rating: "1,285 MMR", short: "RL", tint: "#3E7FC1" },
+    ],
+
+    teams: [
+        { name: "Iron Vanguard", short: "IV", role: "Starting AR", game: "Black Ops 7", type: "Team", officer: false },
+        { name: "Nightfall", short: "NF", role: "Officer", game: "Multi-title", type: "Clan", officer: true },
+        { name: "Redline RL", short: "RL", role: "Substitute", game: "Rocket League", type: "Team", officer: false },
+    ],
+
     // Verified-only fields
     lanStats: [
         { placing: "2nd", event: "uSync Winter LAN 2025", proof: "https://example.com/proof/winter-lan-2025" },

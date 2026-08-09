@@ -92,7 +92,7 @@ export const VERIFIED_BENEFITS = [
 
 // Link Accounts is split into three tabs. Socials are where you post,
 // game platforms are your account identity on a publisher's service, and
-// competitive platforms are where you actually compete/scrim.
+// event platforms are where you actually compete/scrim.
 // GB (Gamebattles) is intentionally not offered here, it's reserved for a
 // future uSync Verified perk for CoD players, not a general signup option.
 export const SOCIAL_PLATFORMS = [
@@ -111,10 +111,10 @@ export const GAME_PLATFORMS = [
     { value: "riot", label: "Riot", icon: SiRiotgames },
 ];
 
-// TODO (team): finalize the per-game list of competitive sites worth linking.
+// TODO (team): finalize the per-game list of event platforms worth linking.
 // Seeded with the ones named so far — CMG and Gankster — plus the majors.
 // Gankster is the LoL/Valorant scrim-finder equivalent of what CMG is for CoD.
-export const COMPETITIVE_PLATFORMS = [
+export const EVENT_PLATFORMS = [
     { value: "cmg", label: "CMG", icon: FaGamepad },
     { value: "gankster", label: "Gankster", icon: FaCrosshairs },
     { value: "faceit", label: "FACEIT", icon: SiFaceit },
@@ -122,9 +122,9 @@ export const COMPETITIVE_PLATFORMS = [
     { value: "esea", label: "ESEA", icon: FaTrophy },
 ];
 
-export const LINK_PLATFORMS = [...SOCIAL_PLATFORMS, ...GAME_PLATFORMS, ...COMPETITIVE_PLATFORMS];
+export const LINK_PLATFORMS = [...SOCIAL_PLATFORMS, ...GAME_PLATFORMS, ...EVENT_PLATFORMS];
 
-// Host-only accounts link their public presence; the game/competitive
-// platforms are identity for competing, so they only appear when the account
-// also includes Player (chosen on the first screen).
+// Host-only accounts link their public presence; the game/event platforms
+// are identity for competing, so they only appear when the account also
+// includes Player (chosen on the first screen).
 export const HOST_LINK_PLATFORMS = SOCIAL_PLATFORMS.filter(p => ["twitch", "twitter", "youtube", "instagram"].includes(p.value));

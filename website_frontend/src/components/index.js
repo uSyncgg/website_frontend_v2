@@ -79,6 +79,11 @@ import { VerifiedLock } from "./AccountUI/VerifiedLock";
 import { GBRankCard } from "./AccountUI/GBRankCard";
 import { HostEventCard } from "./AccountUI/HostEventCard";
 import { ProfileSidebar } from "./AccountUI/ProfileSidebar";
+import { PlayerCard } from "./AccountUI/PlayerCard";
+import { PlayerCardArt } from "./AccountUI/PlayerCardArt";
+import { ProfileHero } from "./AccountUI/ProfileHero";
+import { usePlayerCardOptions } from "./AccountUI/usePlayerCardOptions";
+import { MetricStrip, EarningsCard, MatchRecordCard, RankList, TeamList } from "./AccountUI/ProfileStats";
 
 export {
     Navbar,
@@ -131,5 +136,14 @@ export {
     VerifiedLock,
     GBRankCard,
     HostEventCard,
-    ProfileSidebar
+    ProfileSidebar,
+    PlayerCard,
+    PlayerCardArt,
+    ProfileHero,
+    usePlayerCardOptions,
+    MetricStrip,
+    EarningsCard,
+    MatchRecordCard,
+    RankList,
+    TeamList
 };

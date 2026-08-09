@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaGamepad, FaBuilding, FaCheckCircle, FaCheck, FaCalendarPlus, FaStar } from "react-icons/fa";
 import shared from "../../../components/AccountUI/AccountUI.module.css";
-import { SOCIAL_PLATFORMS, GAME_PLATFORMS, COMPETITIVE_PLATFORMS } from "./accountData";
+import { SOCIAL_PLATFORMS, GAME_PLATFORMS, EVENT_PLATFORMS } from "./accountData";
 
 const ACCOUNT_TYPES = [
     {
@@ -86,12 +86,12 @@ export const LinkAccountsStep = ({
     links, onChange, onFinish, onSkip, onBack,
     socialPlatforms = SOCIAL_PLATFORMS,
     gamePlatforms = GAME_PLATFORMS,
-    competitivePlatforms = COMPETITIVE_PLATFORMS,
+    eventPlatforms = EVENT_PLATFORMS,
 }) => {
     const tabs = [
         { id: 'socials', label: 'Socials', platforms: socialPlatforms },
         { id: 'games', label: 'Game platforms', platforms: gamePlatforms },
-        { id: 'competitive', label: 'Competitive', platforms: competitivePlatforms },
+        { id: 'events', label: 'Event platforms', platforms: eventPlatforms },
     ].filter(t => t.platforms.length > 0);
 
     const [activeTab, setActiveTab] = useState(tabs[0]?.id);

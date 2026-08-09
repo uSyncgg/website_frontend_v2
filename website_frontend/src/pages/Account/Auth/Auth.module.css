@@ -1,0 +1,326 @@
+/* Standalone login / signup page. Field, button, and divider styles are shared
+   with the rest of the account UI (AccountUI.module.css) — only the split-page
+   layout and the pieces unique to the auth gate live here. */
+
+.page {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    max-width: 68rem;
+    margin: 0 auto;
+    padding: 4rem 1.5rem 5rem;
+    min-height: calc(100vh - 66px);
+}
+
+.glow {
+    position: absolute;
+    top: 12%;
+    left: 8%;
+    width: 30rem;
+    height: 30rem;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(142, 106, 206, .22), transparent 65%);
+    filter: blur(40px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ===== Brand column ===== */
+.brandCol {
+    position: relative;
+    z-index: 1;
+    flex: 1 1 24rem;
+    max-width: 27rem;
+}
+
+.brandLogo {
+    height: 2.4rem;
+    width: auto;
+    margin-bottom: 2rem;
+}
+
+.brandHeadline {
+    color: white;
+    font-size: 2.15rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    margin: 0 0 2.25rem;
+}
+
+.brandAccent {
+    background: linear-gradient(135deg, #b18af0, #7a5ac9);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.highlightList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.35rem;
+}
+
+.highlight {
+    display: flex;
+    align-items: flex-start;
+    gap: .9rem;
+}
+
+.highlightIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: .75rem;
+    background: rgba(142, 106, 206, .16);
+    border: 1px solid rgba(142, 106, 206, .3);
+    color: #b18af0;
+    font-size: 1rem;
+}
+
+.highlightTitle {
+    display: block;
+    color: white;
+    font-size: .95rem;
+    font-weight: 700;
+    margin-bottom: .15rem;
+}
+
+.highlightText {
+    display: block;
+    color: rgba(255, 255, 255, .5);
+    font-size: .85rem;
+    line-height: 1.45;
+}
+
+/* ===== Auth card ===== */
+.formCol {
+    position: relative;
+    z-index: 1;
+    flex: 0 1 27rem;
+    width: 100%;
+    min-width: 0;
+}
+
+.authCard {
+    background: rgba(28, 25, 33, .78);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 1.25rem;
+    padding: 2.25rem;
+    box-shadow: 0 1.5rem 3rem -1.25rem rgba(0, 0, 0, .6);
+    text-align: left;
+}
+
+/* ===== Log in / Sign up toggle ===== */
+.tabRow {
+    display: flex;
+    gap: .3rem;
+    padding: .3rem;
+    margin-bottom: 1.75rem;
+    background: rgba(255, 255, 255, .04);
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: .85rem;
+}
+
+.tab {
+    flex: 1;
+    padding: .6rem;
+    border-radius: .6rem;
+    text-align: center;
+    text-decoration: none;
+    color: rgba(255, 255, 255, .55);
+    font-size: .9rem;
+    font-weight: 700;
+    transition: color .2s ease-in-out, background .2s ease-in-out;
+}
+
+.tab:hover {
+    color: white;
+}
+
+.tabActive,
+.tabActive:hover {
+    background: linear-gradient(135deg, #9b6fe0, #7a5ac9);
+    color: white;
+    box-shadow: 0 .5rem 1rem -.5rem rgba(122, 90, 201, .8);
+}
+
+/* ===== OAuth providers ===== */
+.providerStack {
+    display: flex;
+    flex-direction: column;
+    gap: .65rem;
+    margin-top: 1.5rem;
+}
+
+.providerButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .65rem;
+    width: 100%;
+    padding: .85rem 1rem;
+    border-radius: .75rem;
+    border: 1px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .04);
+    color: rgba(255, 255, 255, .85);
+    font-size: .92rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color .2s ease-in-out, background .2s ease-in-out, color .2s ease-in-out, transform .2s ease-in-out;
+}
+
+.providerButton svg {
+    font-size: 1.1rem;
+}
+
+.providerButton:hover {
+    background: rgba(255, 255, 255, .08);
+    transform: translateY(-1px);
+}
+
+.providerGoogle:hover { border-color: #de6a5e; color: #f0a89f; }
+.providerDiscord:hover { border-color: #7a8ff0; color: #a9b6f5; }
+.providerX:hover { border-color: rgba(255, 255, 255, .6); color: white; }
+
+/* ===== Form extras ===== */
+.divider {
+    margin: 1.6rem 0 0;
+}
+
+.fieldSpacer {
+    height: 1.25rem;
+}
+
+/* The shared primary button is built for the two-button step footer, where
+   flex:1 does the sizing. On its own it needs an explicit width. */
+.submitButton {
+    width: 100%;
+}
+
+.submitSpaced {
+    margin-top: 1.5rem;
+}
+
+.optionRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin: .9rem 0 1.5rem;
+}
+
+.rememberLabel {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    color: rgba(255, 255, 255, .65);
+    font-size: .82rem;
+    cursor: pointer;
+}
+
+.checkbox {
+    accent-color: #8e6ace;
+    cursor: pointer;
+}
+
+.linkButton {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #b18af0;
+    font-size: .82rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.linkButton:hover {
+    text-decoration: underline;
+}
+
+.legal {
+    color: rgba(255, 255, 255, .38);
+    font-size: .75rem;
+    line-height: 1.5;
+    text-align: center;
+    margin: 1.25rem 0 0;
+}
+
+/* ===== Password reset confirmation ===== */
+.sentIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 1.25rem;
+    border-radius: .9rem;
+    background: rgba(142, 106, 206, .16);
+    border: 1px solid rgba(142, 106, 206, .3);
+    color: #b18af0;
+    font-size: 1.2rem;
+}
+
+.sentEmail {
+    color: white;
+    font-weight: 700;
+}
+
+/* ===== Responsive ===== */
+@media only screen and (max-width: 950px) {
+    .page {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2.25rem;
+        padding: 2.5rem 1.25rem 3.5rem;
+        min-height: 0;
+    }
+
+    /* flex-basis becomes a height once the page stacks, so the brand column
+       has to size to its content instead. */
+    .brandCol {
+        flex: none;
+        max-width: none;
+        text-align: center;
+    }
+
+    .brandLogo {
+        height: 2.1rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .brandHeadline {
+        font-size: 1.7rem;
+        margin-bottom: 0;
+    }
+
+    /* The value props are supporting material — on a phone the card should be
+       the first thing in reach, so they drop out rather than push it down. */
+    .highlightList {
+        display: none;
+    }
+
+    .formCol {
+        flex: none;
+        align-self: center;
+        max-width: 27rem;
+        width: 100%;
+    }
+
+    .authCard {
+        padding: 1.75rem 1.25rem;
+    }
+}

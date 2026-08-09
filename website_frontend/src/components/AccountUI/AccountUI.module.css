@@ -1565,3 +1565,1466 @@
 .sidebarStep_plain .sidebarLabel {
     color: rgba(255, 255, 255, .6);
 }
+
+/* ===== Profile: headline metric strip ===== */
+.metricStrip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+    gap: .85rem;
+}
+
+.metricTile {
+    padding: 1rem 1.1rem;
+    border-radius: .9rem;
+    border: 1px solid rgba(255, 255, 255, .1);
+    background: rgba(255, 255, 255, .03);
+}
+
+.metricLabel {
+    display: block;
+    color: rgba(255, 255, 255, .5);
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.metricValue {
+    display: block;
+    margin-top: .5rem;
+    color: white;
+    font-size: 1.55rem;
+    font-weight: 800;
+    letter-spacing: -.5px;
+    font-variant-numeric: tabular-nums;
+    /* A record like 333–193 must never break across two lines. */
+    white-space: nowrap;
+}
+
+.metricValueMoney {
+    color: #6bcf8f;
+}
+
+.metricSub {
+    display: block;
+    margin-top: .25rem;
+    color: rgba(255, 255, 255, .35);
+    font-size: .74rem;
+}
+
+.win { color: #6bcf8f; }
+.loss { color: #e0698a; }
+.dash { color: rgba(255, 255, 255, .3); margin: 0 .15rem; }
+
+/* ===== Profile: section toolbar + segmented control ===== */
+.sectionToolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.1rem;
+}
+
+.segmented {
+    display: inline-flex;
+    gap: .25rem;
+    padding: .25rem;
+    border-radius: .7rem;
+    border: 1px solid rgba(255, 255, 255, .1);
+    background: rgba(255, 255, 255, .03);
+}
+
+.segmentedBtn {
+    border: none;
+    background: none;
+    border-radius: .5rem;
+    padding: .4rem .8rem;
+    color: rgba(255, 255, 255, .55);
+    font-size: .76rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.segmentedBtnActive {
+    background: linear-gradient(135deg, #9b6fe0, #7a5ac9);
+    color: white;
+}
+
+/* ===== Profile: earnings ===== */
+.earningsTotal {
+    display: flex;
+    align-items: baseline;
+    gap: .75rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+}
+
+.earningsAmount {
+    color: #6bcf8f;
+    font-size: 2.3rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+
+.earningsCaption {
+    color: rgba(255, 255, 255, .45);
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.breakdownList {
+    display: flex;
+    flex-direction: column;
+    gap: .9rem;
+}
+
+.breakdownRow {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: .5rem;
+}
+
+.breakdownName {
+    color: rgba(255, 255, 255, .85);
+    font-size: .9rem;
+    font-weight: 500;
+}
+
+.breakdownAmount {
+    color: white;
+    font-size: .9rem;
+    font-weight: 700;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.breakdownTrack {
+    grid-column: 1 / -1;
+    height: .4rem;
+    border-radius: .2rem;
+    background: rgba(255, 255, 255, .06);
+    overflow: hidden;
+}
+
+.breakdownTrack i {
+    display: block;
+    height: 100%;
+    border-radius: .2rem;
+    background: linear-gradient(90deg, #7a5ac9, #b18af0);
+    transition: width .45s ease;
+}
+
+.breakdownPct {
+    grid-column: 1 / -1;
+    color: rgba(255, 255, 255, .35);
+    font-size: .72rem;
+}
+
+/* ===== Profile: match record ===== */
+.recordTop {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+}
+
+.recordScore {
+    font-size: 2.1rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -1px;
+    font-variant-numeric: tabular-nums;
+}
+
+.recordCaption {
+    margin-top: .35rem;
+    color: rgba(255, 255, 255, .45);
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.winRing {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+}
+
+.winRing svg {
+    width: 4rem;
+    height: 4rem;
+    transform: rotate(-90deg);
+}
+
+.winRing circle {
+    fill: none;
+    stroke-width: 7;
+}
+
+.winRingTrack {
+    stroke: rgba(255, 255, 255, .07);
+}
+
+.winRingValue {
+    stroke: url(#usyncWinRate);
+    stroke-linecap: round;
+    transition: stroke-dashoffset .5s ease;
+}
+
+.winRingValueText {
+    color: #b18af0;
+    font-size: 1.35rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+
+.recordRow {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: .45rem;
+    padding: .85rem 0;
+    border-top: 1px solid rgba(255, 255, 255, .08);
+}
+
+.recordRow:first-of-type {
+    border-top: none;
+}
+
+.recordRowName {
+    color: rgba(255, 255, 255, .85);
+    font-size: .9rem;
+    font-weight: 500;
+}
+
+.recordRowScore {
+    font-size: .9rem;
+    font-weight: 700;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.recordSplit {
+    grid-column: 1 / -1;
+    display: flex;
+    height: .4rem;
+    border-radius: .2rem;
+    overflow: hidden;
+    background: rgba(255, 255, 255, .06);
+}
+
+.recordSplitWin { background: #6bcf8f; }
+.recordSplitLoss { background: rgba(224, 105, 138, .55); }
+
+.recordMeta {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    color: rgba(255, 255, 255, .35);
+    font-size: .72rem;
+}
+
+.metaSep {
+    color: #8e6ace;
+}
+
+/* ===== Profile: rank / team rows ===== */
+.listRow {
+    display: flex;
+    align-items: center;
+    gap: .85rem;
+    padding: .85rem 0;
+    border-top: 1px solid rgba(255, 255, 255, .08);
+}
+
+.listRow:first-of-type {
+    border-top: none;
+}
+
+.listBadge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.9rem;
+    height: 2.9rem;
+    border-radius: .7rem;
+    border: 1px solid rgba(255, 255, 255, .1);
+    background: linear-gradient(145deg, #2a2340, #171320);
+    color: white;
+    font-size: .8rem;
+    font-weight: 800;
+    letter-spacing: -.02em;
+}
+
+.listBody {
+    display: flex;
+    flex-direction: column;
+    gap: .15rem;
+    min-width: 0;
+}
+
+.listEyebrow {
+    color: rgba(255, 255, 255, .4);
+    font-size: .72rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+.listTitle {
+    color: white;
+    font-size: .95rem;
+    font-weight: 700;
+}
+
+.listTitleRow {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    flex-wrap: wrap;
+}
+
+.listTrailing {
+    margin-left: auto;
+    color: white;
+    font-size: .85rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+.badgeGold {
+    background: rgba(224, 177, 94, .12);
+    border-color: rgba(224, 177, 94, .4);
+    color: #e0b15e;
+}
+
+/* ===== Profile: player card + calling cards ===== */
+.playerCardBlock {
+    display: block;
+}
+
+.playerCardActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .65rem;
+    margin-top: 1rem;
+}
+
+.playerCardPrimary,
+.playerCardGhost {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .7rem 1.1rem;
+    border-radius: .7rem;
+    font-size: .85rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: transform .2s ease-in-out, border-color .2s ease-in-out, background .2s ease-in-out;
+}
+
+.playerCardPrimary {
+    border: none;
+    background: linear-gradient(135deg, #9b6fe0, #7a5ac9);
+    color: white;
+}
+
+.playerCardPrimary:hover {
+    transform: translateY(-1px);
+}
+
+.playerCardGhost {
+    border: 1px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .04);
+    color: rgba(255, 255, 255, .8);
+}
+
+.playerCardGhost:hover {
+    border-color: rgba(255, 255, 255, .3);
+    background: rgba(255, 255, 255, .08);
+}
+
+.playerCardNote {
+    color: rgba(255, 255, 255, .35);
+    font-size: .75rem;
+    margin: .75rem 0 0;
+}
+
+.playerCardSubhead {
+    color: white;
+    font-size: .95rem;
+    font-weight: 800;
+    margin: 1.75rem 0 .25rem;
+}
+
+.playerCardHint {
+    color: rgba(255, 255, 255, .45);
+    font-size: .82rem;
+    margin: 0 0 1rem;
+}
+
+.callingCardGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+    gap: .75rem;
+}
+
+.callingCardTile {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    padding: .5rem .5rem .7rem;
+    border-radius: .8rem;
+    border: 1px solid rgba(255, 255, 255, .1);
+    background: rgba(255, 255, 255, .03);
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    transition: border-color .2s ease-in-out, background .2s ease-in-out, transform .2s ease-in-out;
+}
+
+.callingCardTile:hover:not(:disabled) {
+    border-color: rgba(255, 255, 255, .3);
+    transform: translateY(-1px);
+}
+
+.callingCardTileActive {
+    border-color: #8e6ace;
+    background: rgba(142, 106, 206, .12);
+}
+
+.callingCardTileLocked {
+    cursor: default;
+}
+
+.callingCardThumbWrap {
+    position: relative;
+    display: block;
+}
+
+.callingCardThumb {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: .55rem;
+}
+
+.callingCardTileLocked .callingCardThumb {
+    filter: grayscale(.55) brightness(.5);
+}
+
+.callingCardLock {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .2rem;
+    color: rgba(255, 255, 255, .8);
+    font-size: 1rem;
+}
+
+.callingCardProgress {
+    font-size: .7rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, .65);
+}
+
+.callingCardName {
+    color: white;
+    font-size: .82rem;
+    font-weight: 700;
+    padding: 0 .2rem;
+}
+
+.callingCardTagline {
+    color: rgba(255, 255, 255, .4);
+    font-size: .72rem;
+    line-height: 1.35;
+    padding: 0 .2rem;
+}
+
+.playerCardSelectRow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: .85rem;
+    margin-top: 1.5rem;
+}
+
+.playerCardSelect {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+}
+
+.playerCardSelectLabel {
+    color: rgba(255, 255, 255, .6);
+    font-size: .78rem;
+    font-weight: 600;
+}
+
+/* ============================================================
+   Profile dashboard
+   The account pages use the narrow AccountShell card, but a
+   profile is a dashboard — it takes the width of the device
+   and splits into main + rail once there's room for it.
+   ============================================================ */
+.dashboard {
+    width: min(84rem, 100%);
+    margin: 0 auto;
+    padding: 1.75rem 1.5rem 4.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.dashboardGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+    align-items: start;
+}
+
+@media only screen and (min-width: 1080px) {
+    .dashboardGrid {
+        grid-template-columns: minmax(0, 1fr) 22rem;
+    }
+
+    .dashboardRail {
+        position: sticky;
+        top: 5.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+}
+
+.dashboardCol {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    min-width: 0;
+}
+
+@media only screen and (max-width: 700px) {
+    .dashboard {
+        padding: 1rem .9rem 3rem;
+        gap: .9rem;
+    }
+
+    .dashboardGrid,
+    .dashboardCol {
+        gap: .9rem;
+    }
+}
+
+/* ===== Panels ===== */
+.panel {
+    background: rgba(28, 25, 33, .72);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 1.1rem;
+    padding: 1.5rem 1.6rem 1.7rem;
+    box-shadow: 0 1.25rem 2.5rem -1.5rem rgba(0, 0, 0, .7);
+}
+
+@media only screen and (max-width: 700px) {
+    .panel {
+        padding: 1.15rem 1.1rem 1.35rem;
+        border-radius: .9rem;
+    }
+}
+
+.panelHead {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.1rem;
+}
+
+.panelTitle {
+    color: white;
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.panelSubtitle {
+    color: rgba(255, 255, 255, .45);
+    font-size: .82rem;
+    line-height: 1.5;
+    margin: -.65rem 0 1.1rem;
+}
+
+/* ===== Hero ===== */
+.hero {
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 1.1rem;
+    overflow: hidden;
+    background: rgba(28, 25, 33, .72);
+}
+
+.heroBanner {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 11rem;
+    background-color: #15121d;
+}
+
+.heroBannerFade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(21, 18, 29, .1) 0%, rgba(21, 18, 29, .82) 78%, rgba(28, 25, 33, 1) 100%);
+}
+
+.heroEdit {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .55rem 1rem;
+    border-radius: .7rem;
+    border: 1px solid rgba(255, 255, 255, .18);
+    background: rgba(12, 10, 18, .72);
+    backdrop-filter: blur(8px);
+    color: white;
+    font-size: .82rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: border-color .2s ease-in-out, background .2s ease-in-out;
+}
+
+.heroEdit:hover {
+    border-color: #8e6ace;
+    background: rgba(142, 106, 206, .28);
+    color: white;
+}
+
+.heroBody {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    gap: 1.4rem;
+    padding: 6.5rem 1.75rem 1.6rem;
+}
+
+.heroAvatar {
+    flex-shrink: 0;
+    width: 7.5rem;
+    height: 7.5rem;
+    border-radius: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.6rem;
+    font-weight: 900;
+    color: white;
+    background: linear-gradient(150deg, #8e6ace, #4b3a70);
+    background-size: cover;
+    background-position: center;
+    border: 2px solid rgba(255, 255, 255, .16);
+    box-shadow: 0 1rem 2rem -.75rem rgba(0, 0, 0, .8);
+}
+
+.heroIdentity {
+    min-width: 0;
+    flex: 1;
+}
+
+.heroNameRow {
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+    flex-wrap: wrap;
+}
+
+.heroName {
+    margin: 0;
+    color: white;
+    font-size: clamp(1.75rem, 3.4vw, 2.6rem);
+    font-weight: 900;
+    letter-spacing: -1px;
+    line-height: 1;
+}
+
+.heroLevel {
+    display: inline-flex;
+    align-items: center;
+    padding: .2rem .6rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, .18);
+    background: rgba(255, 255, 255, .06);
+    color: rgba(255, 255, 255, .8);
+    font-size: .72rem;
+    font-weight: 700;
+}
+
+.heroMetaRow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .5rem .85rem;
+    margin-top: .6rem;
+    color: rgba(255, 255, 255, .5);
+    font-size: .85rem;
+}
+
+.heroBadges {
+    display: inline-flex;
+    gap: .4rem;
+    flex-wrap: wrap;
+}
+
+.heroBio {
+    color: rgba(255, 255, 255, .68);
+    font-size: .9rem;
+    line-height: 1.55;
+    margin: .75rem 0 0;
+    max-width: 44rem;
+}
+
+@media only screen and (max-width: 700px) {
+    .heroBanner {
+        height: 8rem;
+    }
+
+    .heroBody {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .9rem;
+        padding: 5rem 1.1rem 1.25rem;
+    }
+
+    .heroAvatar {
+        width: 5.5rem;
+        height: 5.5rem;
+        font-size: 1.9rem;
+    }
+
+    .heroEdit {
+        top: .75rem;
+        right: .75rem;
+        padding: .45rem .75rem;
+        font-size: .78rem;
+    }
+}
+
+/* ============================================================
+   Player card art — the live, tiltable card. Portrait and
+   landscape are the same content at two aspect ratios.
+   ============================================================ */
+.playerCardStage {
+    display: grid;
+    place-items: center;
+    padding: .5rem 0 1rem;
+    perspective: 1200px;
+}
+
+.pcard {
+    --rx: 0deg;
+    --ry: 0deg;
+    --glow-x: 50%;
+    --glow-y: 50%;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 1.25rem;
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, .1), transparent 26%),
+        linear-gradient(158deg, rgba(24, 22, 34, .97), rgba(9, 9, 15, .98));
+    box-shadow: 0 2rem 4rem -1.5rem rgba(0, 0, 0, .8), inset 0 1px 0 rgba(255, 255, 255, .14);
+    transform: rotateX(var(--rx)) rotateY(var(--ry));
+    transform-style: preserve-3d;
+    transition: transform .17s ease, border-color .17s ease, box-shadow .17s ease;
+    cursor: pointer;
+    text-align: left;
+    touch-action: manipulation;
+}
+
+.pcard:hover,
+.pcard:focus-visible {
+    border-color: rgba(150, 111, 235, .85);
+}
+
+.pcardArmed {
+    border-color: rgba(150, 111, 235, .95);
+    touch-action: none;
+}
+
+.pcardField,
+.pcardHolo {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.pcardField {
+    z-index: 0;
+    opacity: .75;
+}
+
+.pcardHolo {
+    z-index: 4;
+    opacity: 0;
+    mix-blend-mode: screen;
+    background:
+        radial-gradient(circle at var(--glow-x) var(--glow-y), rgba(255, 255, 255, .55), transparent 9rem),
+        conic-gradient(from 140deg at var(--glow-x) var(--glow-y), transparent, rgba(37, 196, 242, .34), rgba(147, 100, 232, .32), rgba(241, 196, 92, .2), transparent);
+    transition: opacity .16s ease;
+}
+
+.pcardArmed .pcardHolo {
+    opacity: .72;
+}
+
+.pcardPortrait {
+    --pcard-pad: 1.35rem;
+    --pcard-gap: 1rem;
+    /* Level with the avatar block, down into the first row of stat tiles. */
+    --pcard-photo-top: 3.2rem;
+    --pcard-photo-bottom: 4.4rem;
+    width: min(27rem, 100%);
+    padding: var(--pcard-pad);
+}
+
+.pcardLandscape {
+    width: 100%;
+    max-width: 52rem;
+    padding: 1.5rem 1.6rem;
+}
+
+.pcardBrandRow,
+.pcardFooter {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .9rem;
+}
+
+.pcardWordmark {
+    height: 1.5rem;
+    width: auto;
+}
+
+.pcardVerified {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .3rem .7rem .3rem .4rem;
+    border: 1px solid rgba(147, 100, 232, .58);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, .06);
+    color: white;
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.pcardVerified img {
+    width: 1.1rem;
+    height: 1.1rem;
+}
+
+.pcardHero {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: flex-end;
+    margin: var(--pcard-gap, 1rem) 0 0;
+}
+
+/* A cut-out headshot needs room to hang past the identity block; without one
+   the row is just the avatar and shouldn't leave a hole. */
+.pcardHeroWithPhoto {
+    min-height: 11rem;
+}
+
+.pcardFrame {
+    display: grid;
+    place-items: center;
+    width: 6.5rem;
+    height: 6.5rem;
+    flex-shrink: 0;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: .85rem;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(0, 0, 0, .25));
+}
+
+.pcardFrame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+}
+
+.pcardFrameInitial {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: white;
+}
+
+/* ===== Headshot layer =====
+   Its own layer rather than a child of the hero row: it starts level with the
+   avatar, is anchored to the card's right edge, and runs down past the chips
+   into the stats, where it fades out behind the tiles. z-index 1 keeps it
+   under the content (z-index 3) and over the calling-card art (z-index 0). */
+.pcardPhotoLayer {
+    position: absolute;
+    z-index: 1;
+    top: var(--pcard-photo-top);
+    right: -.25rem;
+    bottom: var(--pcard-photo-bottom);
+    /* Wide enough that height governs the fit, so the player scales to the
+       space between the wordmark and the stats and hugs the right edge —
+       consistent whatever shape the upload was. */
+    width: 88%;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0 74%, rgba(0, 0, 0, .62) 88%, rgba(0, 0, 0, .22) 96%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0 74%, rgba(0, 0, 0, .62) 88%, rgba(0, 0, 0, .22) 96%, transparent 100%);
+}
+
+.pcardPhoto {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom right;
+    filter: drop-shadow(0 1.25rem 1.5rem rgba(0, 0, 0, .55));
+}
+
+/* Light behind the cut-out so it reads as lifted off the art rather than
+   pasted on top of it. */
+.pcardPhotoGlow {
+    position: absolute;
+    left: 8%;
+    right: 4%;
+    bottom: 8%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, .14), transparent 66%);
+    filter: blur(8px);
+}
+
+/* A face-only headshot gets a smaller, higher box so it sits beside the avatar
+   instead of taking over the card. */
+.pcardPhotoLayerWide {
+    top: 2.6rem;
+    bottom: 11rem;
+    right: -.25rem;
+    width: 62%;
+}
+
+/* Keeps the name, meta and chips readable where they cross the player. */
+.pcardScrim {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(100deg, rgba(10, 8, 16, .84) 0%, rgba(10, 8, 16, .5) 40%, rgba(10, 8, 16, 0) 72%),
+        linear-gradient(to top, rgba(10, 8, 16, .5) 0%, rgba(10, 8, 16, 0) 42%);
+}
+
+/* ===== Empty headshot slot =====
+   Live card only. The download is redrawn on canvas, so an empty slot never
+   ends up in someone's PNG. */
+.pcardPhotoSlot {
+    position: absolute;
+    right: 0;
+    bottom: -1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .3rem;
+    width: 9.5rem;
+    height: 12rem;
+    padding: .75rem;
+    border: 1.5px dashed rgba(255, 255, 255, .26);
+    border-radius: 1rem 1rem .6rem .6rem;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .02));
+    color: rgba(255, 255, 255, .68);
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color .2s ease-in-out, background .2s ease-in-out, color .2s ease-in-out, transform .2s ease-in-out;
+}
+
+.pcardPhotoSlot:hover,
+.pcardPhotoSlot:focus-visible {
+    border-color: #b18af0;
+    background: linear-gradient(180deg, rgba(155, 111, 224, .22), rgba(155, 111, 224, .06));
+    color: white;
+    transform: translateY(-2px);
+}
+
+.pcardPhotoSlot svg {
+    width: 3.1rem;
+    height: 3.6rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 4;
+    stroke-linecap: round;
+    opacity: .75;
+}
+
+.pcardPhotoSlotLabel {
+    font-size: .78rem;
+    font-weight: 800;
+}
+
+.pcardPhotoSlotHint {
+    font-size: .66rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    opacity: .55;
+}
+
+.pcardIdentity {
+    position: relative;
+    z-index: 3;
+    padding-top: var(--pcard-gap, 1rem);
+    min-width: 0;
+}
+
+.pcardHandle {
+    margin: 0;
+    color: white;
+    font-size: clamp(1.9rem, 6vw, 2.5rem);
+    font-weight: 900;
+    line-height: .95;
+    letter-spacing: -1px;
+    word-break: break-word;
+}
+
+.pcardHandle::after {
+    content: "";
+    display: block;
+    width: 6rem;
+    height: .38rem;
+    margin-top: .6rem;
+    transform: skewX(-22deg);
+    background: linear-gradient(90deg, #9b6fe0, transparent);
+}
+
+.pcardMeta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .35rem;
+    margin: .7rem 0 0;
+    color: rgba(255, 255, 255, .58);
+    font-size: .82rem;
+    font-weight: 600;
+}
+
+.pcardMeta svg {
+    color: #8cefff;
+    font-size: .85rem;
+}
+
+.pcardDot {
+    color: rgba(255, 255, 255, .3);
+}
+
+.pcardChips {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-top: var(--pcard-gap, 1rem);
+}
+
+.pcardChips span {
+    padding: .4rem .7rem;
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, .06);
+    color: rgba(255, 255, 255, .85);
+    font-size: .76rem;
+    font-weight: 700;
+}
+
+.pcardChips b {
+    color: #b18af0;
+    margin-right: .45rem;
+}
+
+.pcardStats,
+.pcardStatsWide {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    gap: .55rem;
+    margin-top: var(--pcard-gap, 1rem);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.pcardStats div,
+.pcardStatsWide div {
+    padding: .6rem .65rem .55rem;
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: .7rem;
+    background: linear-gradient(180deg, rgba(16, 13, 24, .6), rgba(8, 6, 12, .72));
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.pcardStats span,
+.pcardStatsWide span {
+    display: block;
+    color: rgba(255, 255, 255, .5);
+    font-size: .62rem;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+.pcardStats strong,
+.pcardStatsWide strong {
+    display: block;
+    margin-top: .35rem;
+    color: white;
+    font-size: 1.05rem;
+    font-weight: 800;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+/* Specific enough to beat the `.pcardStats strong` base colour. */
+.pcardStats strong.money,
+.pcardStatsWide strong.money { color: #5ED39B; }
+
+.pcardStats strong.rank,
+.pcardStatsWide strong.rank { color: #86eaff; }
+
+.pcardXp {
+    position: relative;
+    z-index: 3;
+    margin-top: var(--pcard-gap, 1rem);
+    display: grid;
+    gap: .4rem;
+}
+
+.pcardXpCopy {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    color: rgba(255, 255, 255, .5);
+    font-size: .66rem;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+.pcardXpCopy strong {
+    color: white;
+    font-size: .7rem;
+}
+
+.pcardXpTrack {
+    height: .5rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: 1rem;
+    background: rgba(0, 0, 0, .3);
+}
+
+.pcardXpTrack i {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #25c4f2, #9b6fe0, #f1c45c);
+    box-shadow: 0 0 1rem rgba(37, 196, 242, .3);
+}
+
+.pcardXp p {
+    margin: 0;
+    color: rgba(255, 255, 255, .45);
+    font-size: .7rem;
+    font-weight: 600;
+}
+
+.pcardFooter {
+    margin-top: var(--pcard-gap, 1rem);
+    padding-top: .8rem;
+    border-top: 1px solid rgba(255, 255, 255, .14);
+    color: rgba(255, 255, 255, .45);
+    font-size: .74rem;
+    font-weight: 700;
+}
+
+.pcardFooter span:first-child {
+    color: #b18af0;
+}
+
+/* landscape composition */
+.pcardWideGrid {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: 1.5rem;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.pcardWideIdentity {
+    min-width: 0;
+}
+
+.pcardNameRow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.pcardStatsWide {
+    margin-top: 0;
+}
+
+/* The landscape card's identity column gets tight before the viewport does,
+   so its name sizes down ahead of the stacking breakpoint. */
+.pcardLandscape .pcardHandle {
+    font-size: clamp(1.6rem, 3.4vw, 2.6rem);
+}
+
+@media only screen and (max-width: 900px) {
+    .pcardWideGrid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1rem;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .pcardStats,
+    .pcardStatsWide {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .pcardPhoto {
+        width: 10.5rem;
+    }
+
+    .pcardPhotoSlot {
+        width: 8rem;
+        height: 10.5rem;
+    }
+}
+
+/* ===== Calling card patterns =====
+   Each one is the CSS twin of the canvas painter in callingCards.js, so the
+   live card, the profile hero, and the download all wear the same art. */
+.patternCustom {
+    background-image:
+        linear-gradient(90deg, rgba(8, 6, 12, .9), rgba(8, 6, 12, .55) 60%, rgba(8, 6, 12, .32)),
+        linear-gradient(180deg, rgba(8, 6, 12, 0) 42%, rgba(8, 6, 12, .82)),
+        var(--pcard-banner);
+    background-size: cover, cover, cover;
+    background-position: center;
+    opacity: 1;
+}
+
+.pattern_nightfall {
+    background-image:
+        radial-gradient(circle at 22% 20%, rgba(146, 105, 234, .34), transparent 55%),
+        linear-gradient(135deg, transparent 0 40%, rgba(145, 108, 231, .14) 40% 43%, transparent 43% 100%),
+        linear-gradient(158deg, #1b1430, #0a0810);
+}
+
+.pattern_circuit {
+    background-image:
+        linear-gradient(90deg, rgba(37, 196, 242, .16) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(37, 196, 242, .12) 1px, transparent 1px),
+        radial-gradient(circle at 25% 28%, rgba(37, 196, 242, .26), transparent 55%),
+        linear-gradient(158deg, #0d1a20, #080b10);
+    background-size: 28px 28px, 28px 28px, auto, auto;
+}
+
+.pattern_champion {
+    background-image:
+        repeating-conic-gradient(from 230deg at 10% 96%, rgba(241, 196, 92, .18) 0deg 5deg, transparent 5deg 13deg),
+        radial-gradient(circle at 12% 95%, rgba(241, 196, 92, .3), transparent 60%),
+        linear-gradient(158deg, #2a1d0d, #0b0806);
+}
+
+.pattern_lanVeteran {
+    background-image:
+        repeating-linear-gradient(115deg, rgba(94, 211, 155, .1) 0 14px, transparent 14px 46px),
+        radial-gradient(circle at 78% 22%, rgba(94, 211, 155, .24), transparent 58%),
+        linear-gradient(158deg, #0c2119, #070b09);
+}
+
+.pattern_hotStreak {
+    background-image:
+        repeating-linear-gradient(72deg, rgba(224, 87, 92, .14) 0 6px, transparent 6px 34px),
+        radial-gradient(circle at 20% 82%, rgba(224, 87, 92, .32), transparent 58%),
+        linear-gradient(158deg, #2a0f14, #0b0507);
+}
+
+.pattern_verifiedElite {
+    background-image:
+        repeating-radial-gradient(circle at 82% 30%, rgba(177, 138, 240, .16) 0 2px, transparent 2px 58px),
+        linear-gradient(135deg, transparent 0 44%, rgba(255, 255, 255, .05) 44% 50%, transparent 50% 100%),
+        radial-gradient(circle at 82% 30%, rgba(177, 138, 240, .3), transparent 58%),
+        linear-gradient(158deg, #241a3d, #0a0810);
+}
+
+/* ===== Player card panel chrome ===== */
+.playerCardTopRow {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: .25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pcard {
+        transition: none;
+        transform: none;
+    }
+}
+
+/* Portrait card + its controls sit side by side once the panel is wide
+   enough; landscape needs the full width, so it keeps the stacked flow. */
+.playerCardMain {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.playerCardSide {
+    min-width: 0;
+}
+
+@media only screen and (min-width: 1200px) {
+    .playerCardSplit {
+        display: grid;
+        grid-template-columns: minmax(0, 27.5rem) minmax(0, 1fr);
+        grid-template-areas:
+            "top  top"
+            "main side";
+        gap: 1rem 2rem;
+        align-items: start;
+    }
+
+    .playerCardSplit .playerCardTopRow { grid-area: top; }
+    .playerCardSplit .playerCardMain { grid-area: main; }
+    .playerCardSplit .playerCardSide { grid-area: side; }
+
+    .playerCardSplit .playerCardStage {
+        padding-top: 0;
+    }
+
+    .playerCardSplit .playerCardSubhead {
+        margin-top: 0;
+    }
+}
+
+/* ===== Automatic headshot cut-out =====
+   The matting model runs in the browser, so these states cover a download on
+   first use, the compute pass, and the fallback when it can't cope. */
+.cutoutStatus {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-top: .75rem;
+    color: rgba(255, 255, 255, .6);
+    font-size: .78rem;
+    line-height: 1.45;
+}
+
+.cutoutStatus svg {
+    color: #b18af0;
+    flex-shrink: 0;
+}
+
+.cutoutFailed {
+    color: rgba(255, 255, 255, .5);
+}
+
+.cutoutToggle {
+    border: 1px solid rgba(255, 255, 255, .16);
+    background: rgba(255, 255, 255, .05);
+    color: white;
+    font-family: inherit;
+    font-size: .74rem;
+    font-weight: 700;
+    padding: .25rem .6rem;
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
+.cutoutToggle:hover {
+    border-color: #8e6ace;
+    background: rgba(142, 106, 206, .22);
+}
+
+.cutoutSpinner {
+    display: inline-block;
+    width: .85rem;
+    height: .85rem;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, .18);
+    border-top-color: #b18af0;
+    animation: cutoutSpin .7s linear infinite;
+}
+
+@keyframes cutoutSpin {
+    to { transform: rotate(360deg); }
+}
+
+.pcardPhotoBusy {
+    opacity: .45;
+    filter: saturate(.5) blur(1px);
+}
+
+.pcardPhotoWorking {
+    position: absolute;
+    right: .5rem;
+    bottom: 2.5rem;
+    z-index: 4;
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .35rem .65rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, .18);
+    background: rgba(12, 10, 18, .82);
+    color: white;
+    font-size: .7rem;
+    font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cutoutSpinner { animation: none; }
+}
