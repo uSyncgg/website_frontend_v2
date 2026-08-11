@@ -21,6 +21,7 @@ import { HellcaseCS2LAN2026 } from 'pages/Games/Conventions/Events/HellcaseCS2LA
 import { LANATHONUnderTheSun2026 } from 'pages/Games/Conventions/Events/LANATHONUnderTheSun2026';
 import { FortLAN2026 } from 'pages/Games/Conventions/Events/FortLAN2026';
 import { LANAllNight2026 } from 'pages/Games/Conventions/Events/LANAllNight2026';
+import { GearsOfWarEDayLaunchTournament } from 'pages/Games/Conventions/Events/GearsOfWarEDayLaunchTournament';
 
 // Archived LANs
 // 2026
@@ -78,6 +79,7 @@ const LanRoutes = () => (
         <Route path='lan-a-thon-under-the-sun-2026' element={<LANATHONUnderTheSun2026 />} />
         <Route path='fortlan-2026' element={<FortLAN2026 />} />
         <Route path='lan-all-night-2026' element={<LANAllNight2026 />} />
+        <Route path='gears-of-war-e-day-launch-tournament' element={<GearsOfWarEDayLaunchTournament />} />
 
         {/* Archived LANs */}
         {/* 2026 */}
