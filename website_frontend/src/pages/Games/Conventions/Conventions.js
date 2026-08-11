@@ -69,6 +69,20 @@ export const Conventions = () => {
                 </HostBanner>
 
                 <div className="hrEvents" />
+
+                <HostBanner>
+                    <HostBanner.Title path={"/lans/gears-of-war-e-day-launch-tournament"}>Gears of War E-Day Launch Tournament</HostBanner.Title>
+                    <HostBanner.Image
+                        path={"/lans/gears-of-war-e-day-launch-tournament"}
+                        imgUrl={"https://i.imgur.com/UzG9CI7.png"}
+                        alt={"Gears of War E-Day Launch Tournament"}
+                        verified={false}
+                    />
+                    <HostBanner.Region>Columbus, OH</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/lans/gears-of-war-e-day-launch-tournament"} />
+                </HostBanner>
+
+                <div className="hrEvents" />
             </div>
         </div>
     );
