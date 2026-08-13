@@ -83,7 +83,8 @@ import { PlayerCard } from "./AccountUI/PlayerCard";
 import { PlayerCardArt } from "./AccountUI/PlayerCardArt";
 import { ProfileHero } from "./AccountUI/ProfileHero";
 import { usePlayerCardOptions } from "./AccountUI/usePlayerCardOptions";
-import { MetricStrip, EarningsCard, MatchRecordCard, RankList, TeamList } from "./AccountUI/ProfileStats";
+import { MetricStrip, EarningsCard, MatchRecordCard, RankList, TeamList, BreakdownList } from "./AccountUI/ProfileStats";
+import { GameFilter } from "./AccountUI/GameFilter";
 
 export {
     Navbar,
@@ -145,5 +146,7 @@ export {
     EarningsCard,
     MatchRecordCard,
     RankList,
-    TeamList
+    TeamList,
+    BreakdownList,
+    GameFilter
 };

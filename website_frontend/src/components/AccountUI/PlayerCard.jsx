@@ -23,7 +23,18 @@ const CallingCardThumb = ({ card, bannerImage }) => {
  * is framed with the same calling card — changing it here re-skins the whole
  * dashboard, which is the point.
  */
-export const PlayerCard = ({ profile, verified = false, options, stats = [], location, mainGame, xp, progress = {} }) => {
+export const PlayerCard = ({
+    profile,
+    verified = false,
+    options,
+    stats = [],
+    location,
+    mainGame,
+    scopeLabel,
+    xp,
+    progress = {},
+    editable = true,
+}) => {
     const exportCanvas = useRef(null);
     const photoInput = useRef(null);
     const {
@@ -40,6 +51,8 @@ export const PlayerCard = ({ profile, verified = false, options, stats = [], loc
         photoProgress,
         layout,
         setLayout,
+        cardStyle,
+        setCardStyle,
         uploadBanner,
         removeBanner,
         uploadPhoto,
@@ -55,6 +68,8 @@ export const PlayerCard = ({ profile, verified = false, options, stats = [], loc
     } = options;
 
     const displayName = profile.accountType === 'host' ? profile.accountName : profile.username;
+    // Headshots are the Pro style only — see the note in usePlayerCardOptions.
+    const proStyle = cardStyle === 'pro';
 
     const download = () => {
         const canvas = exportCanvas.current;
@@ -67,7 +82,7 @@ export const PlayerCard = ({ profile, verified = false, options, stats = [], loc
             layout,
             card,
             bannerImage: usingBanner ? banner.image : null,
-            photoImage: photo?.image || null,
+            photoImage: proStyle ? photo?.image || null : null,
             photoFraming: photo?.framing || 'bust',
             name: displayName,
             handle: `usync.gg/p/${profile.username}`,
@@ -84,7 +99,8 @@ export const PlayerCard = ({ profile, verified = false, options, stats = [], loc
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `${profile.username || 'player'}-usync-card-${layout}.png`;
+            var scopeSlug = scopeLabel ? '-' + scopeLabel.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : '';
+            a.download = `${profile.username || 'player'}-usync-card${scopeSlug}-${layout}.png`;
             a.click();
             URL.revokeObjectURL(url);
         }, 'image/png');
@@ -95,24 +111,43 @@ export const PlayerCard = ({ profile, verified = false, options, stats = [], loc
         // controls move alongside it instead of stacking under it. Landscape
         // needs the full width and stays stacked.
         <div className={`${styles.playerCardBlock} ${layout === 'portrait' ? styles.playerCardSplit : ''}`}>
-            <div className={styles.playerCardTopRow}>
-                <div className={styles.segmented}>
-                    <button
-                        type="button"
-                        className={`${styles.segmentedBtn} ${layout === 'portrait' ? styles.segmentedBtnActive : ''}`}
-                        onClick={() => setLayout('portrait')}
-                    >
-                        Portrait
-                    </button>
-                    <button
-                        type="button"
-                        className={`${styles.segmentedBtn} ${layout === 'landscape' ? styles.segmentedBtnActive : ''}`}
-                        onClick={() => setLayout('landscape')}
-                    >
-                        Landscape
-                    </button>
+            {editable && (
+                <div className={styles.playerCardTopRow}>
+                    <div className={styles.segmented}>
+                        <button
+                            type="button"
+                            className={`${styles.segmentedBtn} ${!proStyle ? styles.segmentedBtnActive : ''}`}
+                            onClick={() => setCardStyle('standard')}
+                        >
+                            Standard
+                        </button>
+                        <button
+                            type="button"
+                            className={`${styles.segmentedBtn} ${proStyle ? styles.segmentedBtnActive : ''}`}
+                            onClick={() => setCardStyle('pro')}
+                        >
+                            Pro · headshot
+                        </button>
+                    </div>
+
+                    <div className={styles.segmented}>
+                        <button
+                            type="button"
+                            className={`${styles.segmentedBtn} ${layout === 'portrait' ? styles.segmentedBtnActive : ''}`}
+                            onClick={() => setLayout('portrait')}
+                        >
+                            Portrait
+                        </button>
+                        <button
+                            type="button"
+                            className={`${styles.segmentedBtn} ${layout === 'landscape' ? styles.segmentedBtnActive : ''}`}
+                            onClick={() => setLayout('landscape')}
+                        >
+                            Landscape
+                        </button>
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className={styles.playerCardMain}>
                 <div className={styles.playerCardStage}>
@@ -120,11 +155,11 @@ export const PlayerCard = ({ profile, verified = false, options, stats = [], loc
                         layout={layout}
                         card={card}
                         bannerUrl={usingBanner ? banner.url : null}
-                        photoUrl={photo?.url || null}
+                        photoUrl={proStyle ? photo?.url || null : null}
                         photoFraming={photo?.framing || 'bust'}
-                        photoBusy={photoStatus === 'working'}
+                        photoBusy={proStyle && photoStatus === 'working'}
                         avatarUrl={profile.avatar || null}
-                        onAddPhoto={() => photoInput.current?.click()}
+                        onAddPhoto={editable && proStyle ? () => photoInput.current?.click() : null}
                         name={displayName}
                         location={location}
                         mainGame={mainGame}
@@ -133,6 +168,7 @@ export const PlayerCard = ({ profile, verified = false, options, stats = [], loc
                         platform={platform}
                         stats={stats}
                         xp={xp}
+                        scopeLabel={scopeLabel}
                         handle={profile.username}
                     />
                 </div>
@@ -146,6 +182,7 @@ export const PlayerCard = ({ profile, verified = false, options, stats = [], loc
                         <FaDownload /> Download card
                     </button>
 
+                    {editable && (<>
                     <label className={styles.playerCardGhost}>
                         <FaImage /> {banner ? 'Replace banner' : 'Upload banner'}
                         <input
@@ -165,11 +202,13 @@ export const PlayerCard = ({ profile, verified = false, options, stats = [], loc
                         </button>
                     )}
 
-                    <button type="button" className={styles.playerCardGhost} onClick={() => photoInput.current?.click()}>
-                        <FaUser /> {photo ? 'Replace headshot' : 'Add headshot'}
-                    </button>
+                    {proStyle && (
+                        <button type="button" className={styles.playerCardGhost} onClick={() => photoInput.current?.click()}>
+                            <FaUser /> {photo ? 'Replace headshot' : 'Add headshot'}
+                        </button>
+                    )}
 
-                    {photo && (
+                    {proStyle && photo && (
                         <button type="button" className={styles.playerCardGhost} onClick={removePhoto}>
                             <FaTrash /> Remove headshot
                         </button>
@@ -185,9 +224,10 @@ export const PlayerCard = ({ profile, verified = false, options, stats = [], loc
                             e.target.value = '';
                         }}
                     />
+                    </>)}
                 </div>
 
-                {photoOriginal && photoStatus !== 'idle' && (
+                {editable && proStyle && photoOriginal && photoStatus !== 'idle' && (
                     <div className={styles.cutoutStatus}>
                         {photoStatus === 'working' && (
                             <>
@@ -223,6 +263,7 @@ export const PlayerCard = ({ profile, verified = false, options, stats = [], loc
                 )}
             </div>
 
+            {editable && (
             <div className={styles.playerCardSide}>
                 <h3 className={styles.playerCardSubhead}>Calling card</h3>
                 <p className={styles.playerCardHint}>
@@ -305,6 +346,7 @@ export const PlayerCard = ({ profile, verified = false, options, stats = [], loc
                     </label>
                 </div>
             </div>
+            )}
 
             {/* Sized and drawn only when someone actually downloads. */}
             <canvas

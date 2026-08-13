@@ -36,6 +36,10 @@ export const usePlayerCardOptions = ({ profile, verified, progress, socialPlatfo
 
     const [cardId, setCardId] = useState(profile.callingCard || CALLING_CARDS[0].id);
     const [layout, setLayout] = useState('portrait');
+    // Standard is the default on purpose: hardly anyone has a cut-out headshot,
+    // and a card that opens with an empty photo slot reads as unfinished for
+    // the people who never will. Pro is the opt-in for those who do.
+    const [cardStyle, setCardStyle] = useState(profile.photo ? 'pro' : 'standard');
     const [banner, setBanner] = useState(null); // { url, image }
     const [socialId, setSocialId] = useState(profile.cardSocial || linkedSocials[0]?.value || "");
     const [platformId, setPlatformId] = useState(profile.cardPlatform || linkedEventPlatforms[0]?.value || "");
@@ -170,6 +174,8 @@ export const usePlayerCardOptions = ({ profile, verified, progress, socialPlatfo
         banner,
         layout,
         setLayout,
+        cardStyle,
+        setCardStyle,
         uploadBanner,
         removeBanner,
 

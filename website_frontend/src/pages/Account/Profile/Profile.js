@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { FaTrophy } from "react-icons/fa";
 import {
     SeoData, ProfileHero, StatGrid, AchievementList,
     VerifiedLock, GBRankCard, HostEventCard, PlayerCard, usePlayerCardOptions,
-    MetricStrip, EarningsCard, MatchRecordCard, RankList, TeamList
+    MetricStrip, EarningsCard, MatchRecordCard, RankList, TeamList, GameFilter, BreakdownList
 } from "components";
 import shared from "../../../components/AccountUI/AccountUI.module.css";
 import {
@@ -12,18 +12,21 @@ import {
 } from "../SignUp/accountData";
 import {
     SAMPLE_PLAYER_PROFILE, SAMPLE_HOST_PROFILE, ACHIEVEMENT_ICON_OPTIONS,
-    getGbRankTier, HOST_EVENT_TYPE_LABELS
+    getGbRankTier, HOST_EVENT_TYPE_LABELS, getPlayerView, gameLabel, HOST_STATS
 } from "./profileData";
 
 // Signup lets an account be Player, Host, or both, so the profile has to
 // represent all three. A combined account keeps ONE identity header (avatar,
-// name, bio, roles, links) and puts the two sides behind a tab — that's the
-// payoff for merging the signup flows instead of making people hold two
-// accounts.
+// name, bio, roles, links) and puts the two sides behind a tab.
 //
 // This is a dashboard, not a form: it takes the width of the device and splits
-// into a main column and a rail on desktop, rather than sitting in the narrow
-// AccountShell card the signup and auth pages use.
+// into a main column and a rail on desktop.
+//
+// Two things drive what's on screen:
+//   · the game filter — a career only means something per title, so every
+//     number below is scoped to the selected game (or summed across all)
+//   · who's looking — the owner gets the customization controls, a visitor
+//     gets a read-only profile with the card behind a button
 //
 // No backend yet (repo-wide "UI-only mockup" convention), so this renders
 // sample data with a preview switcher. Remove the switcher once real profile
@@ -44,26 +47,25 @@ const Panel = ({ title, subtitle, action, children }) => (
 export const Profile = () => {
     const [preview, setPreview] = useState("player"); // player | host | both
     const [verified, setVerified] = useState(true);
+    const [viewer, setViewer] = useState("owner");    // owner | visitor
     const [activeSide, setActiveSide] = useState("player");
+    const [game, setGame] = useState("all");
+    const [cardOpen, setCardOpen] = useState(false);
 
     const isBoth = preview === "both";
     const hasPlayer = preview === "player" || isBoth;
     const hasHost = preview === "host" || isBoth;
+    const isOwner = viewer === "owner";
 
-    // Which side's content is on screen. Single-type accounts have no tab.
     const side = isBoth ? activeSide : preview;
     const showingPlayer = side === "player";
 
     const profile = {
         ...(hasPlayer ? SAMPLE_PLAYER_PROFILE : {}),
         ...(hasHost ? SAMPLE_HOST_PROFILE : {}),
-        // A combined account is still a person, so the personal identity wins
-        // for the header while the org name shows on the Host tab.
         accountType: hasPlayer ? "player" : "host",
         username: hasPlayer ? SAMPLE_PLAYER_PROFILE.username : SAMPLE_HOST_PROFILE.username,
         bio: hasPlayer ? SAMPLE_PLAYER_PROFILE.bio : SAMPLE_HOST_PROFILE.bio,
-        // The header is the person's, so their location wins over the org's
-        // when an account is both — the org's location belongs to its events.
         state: hasPlayer ? SAMPLE_PLAYER_PROFILE.state : SAMPLE_HOST_PROFILE.state,
         country: hasPlayer ? SAMPLE_PLAYER_PROFILE.country : SAMPLE_HOST_PROFILE.country,
         hidden: hasPlayer ? SAMPLE_PLAYER_PROFILE.hidden : SAMPLE_HOST_PROFILE.hidden,
@@ -75,18 +77,15 @@ export const Profile = () => {
     const eventTypeLabels = hasHost ? (SAMPLE_HOST_PROFILE.eventTypes || []).map(t => HOST_EVENT_TYPES.find(x => x.value === t)?.label || t) : [];
     const gameTiles = (profile.games || []).filter(g => g !== "other").map(g => GAMES.find(x => x.value === g)).filter(Boolean);
 
-    // ---- Player card ----
-    // Everything printed on the card comes from data the profile already shows,
-    // so the card can never claim more than the profile does. The equipped
-    // calling card also skins the hero, which is why this state lives here.
+    // ---- Player, scoped to the selected game ----
     const player = SAMPLE_PLAYER_PROFILE;
-    const counts = player.eventCounts || {};
-    const overall = player.record?.overall || { w: 0, l: 0 };
+    const view = useMemo(() => getPlayerView(player, game), [player, game]);
+    const overall = view.record.overall;
     const totalMatches = overall.w + overall.l;
     const gbTier = getGbRankTier(player.gbRank);
-    const mainGame = GAMES.find(g => g.value === player.games?.[0])?.label;
     const location = [player.state, player.country].filter(Boolean).join(", ");
     const showRank = verified && player.gbRank && player.gbRank !== "unranked";
+    const scopeLabel = view.isAll ? "All games" : gameLabel(game);
 
     const cardOptions = usePlayerCardOptions({
         profile: player,
@@ -96,21 +95,36 @@ export const Profile = () => {
         eventPlatforms: EVENT_PLATFORMS,
     });
 
+    // The card carries the same scope as the dashboard, so a player ends up
+    // with one card per game plus an overall — which is the point.
     const cardStats = [
-        { label: "LANs", value: counts.lans ?? 0 },
-        { label: "Tournaments", value: counts.tournaments ?? 0 },
-        { label: "Leagues", value: counts.leagues ?? 0 },
-        { label: "Earnings", value: `$${(player.earnings?.total || 0).toLocaleString()}`, tone: "money" },
+        { label: "LANs", value: view.counts.lans },
+        { label: "Tournaments", value: view.counts.tournaments },
+        { label: "Leagues", value: view.counts.leagues },
+        { label: "Earnings", value: `$${view.earnings.total.toLocaleString()}`, tone: "money" },
         { label: "W / L", value: `${overall.w}–${overall.l}` },
-        // Rank is a Verified-only unlock elsewhere on the profile, so it only
-        // reaches the card when the player actually has it.
         ...(showRank ? [{ label: "GB rank", value: gbTier.label, tone: "rank" }] : []),
     ];
 
-    const eventsByType = (SAMPLE_HOST_PROFILE.events || []).reduce((acc, ev) => {
+    const hostEventsByType = (SAMPLE_HOST_PROFILE.events || []).reduce((acc, ev) => {
         (acc[ev.type] = acc[ev.type] || []).push(ev);
         return acc;
     }, {});
+
+    const playerCard = (
+        <PlayerCard
+            profile={player}
+            verified={verified}
+            options={cardOptions}
+            stats={cardStats}
+            location={location}
+            mainGame={view.isAll ? null : gameLabel(game)}
+            scopeLabel={scopeLabel}
+            xp={player.xp}
+            progress={player.unlockProgress}
+            editable={isOwner}
+        />
+    );
 
     return (
         <div className="standardContainer">
@@ -132,6 +146,10 @@ export const Profile = () => {
                         <button type="button" className={`${shared.previewToggleBtn} ${!verified ? shared.previewToggleBtnActive : ""}`} onClick={() => setVerified(false)}>Free</button>
                         <button type="button" className={`${shared.previewToggleBtn} ${verified ? shared.previewToggleBtnActive : ""}`} onClick={() => setVerified(true)}>Verified</button>
                     </div>
+                    <div className={shared.previewToggleGroup}>
+                        <button type="button" className={`${shared.previewToggleBtn} ${isOwner ? shared.previewToggleBtnActive : ""}`} onClick={() => setViewer("owner")}>My view</button>
+                        <button type="button" className={`${shared.previewToggleBtn} ${!isOwner ? shared.previewToggleBtnActive : ""}`} onClick={() => { setViewer("visitor"); setCardOpen(false); }}>Visitor's view</button>
+                    </div>
                 </div>
 
                 <ProfileHero
@@ -143,6 +161,7 @@ export const Profile = () => {
                     personaLabels={personaLabels}
                     eventTypeLabels={eventTypeLabels}
                     level={hasPlayer ? player.xp?.level : null}
+                    editable={isOwner}
                 />
 
                 {isBoth && (
@@ -166,55 +185,74 @@ export const Profile = () => {
 
                 {showingPlayer && hasPlayer && (
                     <>
+                        <GameFilter
+                            games={player.games}
+                            value={game}
+                            onChange={setGame}
+                            label="Showing stats for"
+                        />
+
                         <MetricStrip
                             metrics={[
-                                { label: "Earnings", value: `$${(player.earnings?.total || 0).toLocaleString()}`, tone: "money", sub: `Across ${player.earnings?.byGame?.length || 0} titles` },
+                                { label: "Earnings", value: `$${view.earnings.total.toLocaleString()}`, tone: "money", sub: view.isAll ? `Across ${view.games.length} titles` : scopeLabel },
                                 { label: "Record", record: overall, sub: `${totalMatches} matches played` },
-                                { label: "Events", value: counts.events ?? 0, sub: "Entered across all formats" },
-                                { label: "Competitions", value: counts.competitions ?? 0, sub: "LANs, tournaments & leagues" },
+                                { label: "Events", value: view.counts.events, sub: "Entered across all formats" },
+                                { label: "Competitions", value: view.counts.competitions, sub: "LANs, tournaments & leagues" },
                             ]}
                         />
 
                         <div className={shared.dashboardGrid}>
                             <div className={shared.dashboardCol}>
+                                {isOwner ? (
+                                    <Panel
+                                        title={view.isAll ? "Player card — all games" : `Player card — ${scopeLabel}`}
+                                        subtitle="Your shareable card, built from whichever game you're viewing. Equip a calling card, pick what it shows, then download it."
+                                    >
+                                        {playerCard}
+                                    </Panel>
+                                ) : (
+                                    <Panel title="Player card">
+                                        <p className={shared.panelSubtitle} style={{ marginTop: 0 }}>
+                                            {profile.username}'s card for {scopeLabel.toLowerCase()}.
+                                        </p>
+                                        {cardOpen ? (
+                                            <>
+                                                {playerCard}
+                                                <button type="button" className={shared.secondaryButton} style={{ marginTop: "1rem" }} onClick={() => setCardOpen(false)}>
+                                                    Hide card
+                                                </button>
+                                            </>
+                                        ) : (
+                                            <button type="button" className={shared.viewCardButton} onClick={() => setCardOpen(true)}>
+                                                <span className={shared.viewCardArt} aria-hidden="true" />
+                                                <span>
+                                                    <strong>View player card</strong>
+                                                    <span>{scopeLabel} · {cardOptions.card.name}</span>
+                                                </span>
+                                            </button>
+                                        )}
+                                    </Panel>
+                                )}
+
                                 <Panel
-                                    title="Player card"
-                                    subtitle="Your shareable card. Equip a calling card, pick the social and event platform it shows, then download it."
+                                    title="Earnings"
+                                    subtitle={view.isAll
+                                        ? "Verified payouts only — prize money uSync can confirm."
+                                        : `Verified ${scopeLabel} payouts only — prize money uSync can confirm.`}
                                 >
-                                    <PlayerCard
-                                        profile={player}
-                                        verified={verified}
-                                        options={cardOptions}
-                                        stats={cardStats}
-                                        location={location}
-                                        mainGame={mainGame}
-                                        xp={player.xp}
-                                        progress={player.unlockProgress}
-                                    />
+                                    <EarningsCard earnings={view.earnings} allowByGame={view.isAll} />
                                 </Panel>
 
-                                <Panel title="Earnings" subtitle="Verified payouts only — prize money uSync can confirm.">
-                                    <EarningsCard earnings={player.earnings} />
+                                <Panel title="Match record" subtitle={`Every ${view.isAll ? "" : scopeLabel + " "}match played through uSync, split by format.`}>
+                                    <MatchRecordCard record={view.record} />
                                 </Panel>
 
-                                <Panel title="Match record" subtitle="Every match played through uSync, split by format.">
-                                    <MatchRecordCard record={player.record} />
-                                </Panel>
-
-                                <Panel title="Tournament stats">
-                                    <StatGrid stats={player.stats.tournament} />
-                                </Panel>
-
-                                <Panel title="Wager stats">
-                                    <StatGrid stats={player.stats.wager} />
-                                </Panel>
-
-                                <Panel title="XP stats">
-                                    <StatGrid stats={player.stats.xp} />
+                                <Panel title="Placements" subtitle="Podium finishes across every bracket entered.">
+                                    <StatGrid stats={view.placements} />
                                 </Panel>
 
                                 <Panel title="Achievements">
-                                    <AchievementList achievements={player.achievements || []} iconOptions={ACHIEVEMENT_ICON_OPTIONS} />
+                                    <AchievementList achievements={view.achievements} iconOptions={ACHIEVEMENT_ICON_OPTIONS} />
                                 </Panel>
 
                                 <Panel
@@ -236,7 +274,7 @@ export const Profile = () => {
                                         <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
                                             <GBRankCard gbUsername={player.links?.gb} rank={gbTier} />
                                             <div className={shared.achievementList}>
-                                                {(player.lanStats || []).map((lan, i) => (
+                                                {view.lanStats.map((lan, i) => (
                                                     <div className={shared.achievementCard} key={i}>
                                                         <div className={shared.achievementIconWrap}><FaTrophy /></div>
                                                         <div className={shared.achievementBody}>
@@ -245,7 +283,7 @@ export const Profile = () => {
                                                         </div>
                                                     </div>
                                                 ))}
-                                                {(player.lanStats || []).length === 0 && <p className={shared.emptyState}>No LAN results yet.</p>}
+                                                {view.lanStats.length === 0 && <p className={shared.emptyState}>No LAN results for {scopeLabel.toLowerCase()} yet.</p>}
                                             </div>
                                         </div>
                                     </VerifiedLock>
@@ -253,6 +291,120 @@ export const Profile = () => {
                             </div>
 
                             <aside className={shared.dashboardRail}>
+                                {gameTiles.length > 0 && (
+                                    <Panel title="Games">
+                                        <div className={`${shared.tileGrid} ${shared.tileGridCompact}`}>
+                                            {gameTiles.map(g => (
+                                                <button
+                                                    type="button"
+                                                    key={g.value}
+                                                    className={`${shared.tile} ${game === g.value ? shared.tileSelected : ""}`}
+                                                    onClick={() => setGame(game === g.value ? "all" : g.value)}
+                                                >
+                                                    {g.logo && <img src={g.logo} alt="" className={shared.tileLogo} />}
+                                                    <span className={shared.tileLabel}>{g.label}</span>
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </Panel>
+                                )}
+
+                                <Panel title="Ranked play" subtitle="In-game ranks synced from each title — separate from your uSync match record.">
+                                    <RankList ranks={view.ranks} />
+                                </Panel>
+
+                                <Panel title="Teams & clans">
+                                    <TeamList teams={view.teams} />
+                                </Panel>
+                            </aside>
+                        </div>
+                    </>
+                )}
+
+                {!showingPlayer && hasHost && (
+                    <>
+                        <MetricStrip
+                            metrics={[
+                                { label: "Events hosted", value: HOST_STATS.totals.events, sub: `Across ${HOST_STATS.byGame.length} titles` },
+                                { label: "Players hosted", value: HOST_STATS.totals.players.toLocaleString(), sub: "Unique entrants all-time" },
+                                { label: "Prize paid", value: `$${HOST_STATS.totals.prizePaid.toLocaleString()}`, tone: "money", sub: "Verified payouts" },
+                                { label: "Seasons run", value: HOST_STATS.totals.seasons, sub: `Verified host since ${HOST_STATS.totals.verifiedSince}` },
+                            ]}
+                        />
+
+                        <div className={shared.dashboardGrid}>
+                            <div className={shared.dashboardCol}>
+                                {isOwner ? (
+                                    <Panel
+                                        title="Host card"
+                                        subtitle="The venue's shareable card — same treatment players get, with what you've run instead of what you've won."
+                                    >
+                                        <PlayerCard
+                                            profile={SAMPLE_HOST_PROFILE}
+                                            verified={verified}
+                                            options={cardOptions}
+                                            stats={[
+                                                { label: "Events", value: HOST_STATS.totals.events },
+                                                { label: "Players", value: HOST_STATS.totals.players.toLocaleString() },
+                                                { label: "Prize paid", value: `$${HOST_STATS.totals.prizePaid.toLocaleString()}`, tone: "money" },
+                                                { label: "Seasons", value: HOST_STATS.totals.seasons },
+                                                { label: "Titles", value: HOST_STATS.byGame.length },
+                                                { label: "On time", value: "100%", tone: "rank" },
+                                            ]}
+                                            location={[SAMPLE_HOST_PROFILE.state, SAMPLE_HOST_PROFILE.country].filter(Boolean).join(", ")}
+                                            mainGame={null}
+                                            scopeLabel="Host"
+                                            xp={null}
+                                            progress={player.unlockProgress}
+                                            editable={isOwner}
+                                        />
+                                    </Panel>
+                                ) : null}
+
+                                <Panel title="What we run" subtitle="Every event this venue has hosted on uSync, by format.">
+                                    <BreakdownList rows={HOST_STATS.byType} unit="events" />
+                                </Panel>
+
+                                <Panel title="By title" subtitle="Which games this venue actually runs, by event count.">
+                                    <BreakdownList rows={HOST_STATS.byGame} unit="events" />
+                                </Panel>
+
+                                <Panel title="uSync Verified">
+                                    <VerifiedLock
+                                        verified={verified}
+                                        title="Verified hosts only"
+                                        description="Verified hosts get top placement, event analytics, and lower fees for their players."
+                                        ctaLabel="Apply for Verified"
+                                        benefits={VERIFIED_BENEFITS}
+                                    >
+                                        <div className={shared.achievementCard}>
+                                            <img src="https://i.imgur.com/PCHIHQB.png" alt="uSync Verified" style={{ width: "2.5rem", height: "2.5rem", flexShrink: 0 }} />
+                                            <div className={shared.achievementBody}>
+                                                <p className={shared.achievementTitle}>You're a uSync Verified host</p>
+                                                <p className={shared.achievementDesc}>Your events get top placement, analytics, and custom branding on your social images.</p>
+                                            </div>
+                                        </div>
+                                    </VerifiedLock>
+                                </Panel>
+
+                                <Panel title="Events">
+                                    {Object.entries(hostEventsByType).map(([type, events]) => (
+                                        <div className={shared.hostEventGroup} key={type}>
+                                            <p className={shared.hostEventGroupTitle}>{HOST_EVENT_TYPE_LABELS[type]}</p>
+                                            {events.map(ev => (
+                                                <HostEventCard key={ev.id} event={ev} typeLabel={HOST_EVENT_TYPE_LABELS[type]} />
+                                            ))}
+                                        </div>
+                                    ))}
+                                    {(SAMPLE_HOST_PROFILE.events || []).length === 0 && <p className={shared.emptyState}>No events listed yet.</p>}
+                                </Panel>
+                            </div>
+
+                            <aside className={shared.dashboardRail}>
+                                <Panel title="Track record" subtitle="What a player wants to know before they enter.">
+                                    <StatGrid stats={HOST_STATS.reliability} />
+                                </Panel>
+
                                 {gameTiles.length > 0 && (
                                     <Panel title="Games">
                                         <div className={`${shared.tileGrid} ${shared.tileGridCompact}`}>
@@ -265,68 +417,9 @@ export const Profile = () => {
                                         </div>
                                     </Panel>
                                 )}
-
-                                <Panel title="Ranked play" subtitle="In-game ranks synced from each title — separate from your uSync match record.">
-                                    <RankList ranks={player.ranks} />
-                                </Panel>
-
-                                <Panel title="Teams & clans">
-                                    <TeamList teams={player.teams} />
-                                </Panel>
                             </aside>
                         </div>
                     </>
-                )}
-
-                {!showingPlayer && hasHost && (
-                    <div className={shared.dashboardGrid}>
-                        <div className={shared.dashboardCol}>
-                            <Panel title="uSync Verified">
-                                <VerifiedLock
-                                    verified={verified}
-                                    title="Verified hosts only"
-                                    description="Verified hosts get top placement, event analytics, and lower fees for their players."
-                                    ctaLabel="Apply for Verified"
-                                    benefits={VERIFIED_BENEFITS}
-                                >
-                                    <div className={shared.achievementCard}>
-                                        <img src="https://i.imgur.com/PCHIHQB.png" alt="uSync Verified" style={{ width: "2.5rem", height: "2.5rem", flexShrink: 0 }} />
-                                        <div className={shared.achievementBody}>
-                                            <p className={shared.achievementTitle}>You're a uSync Verified host</p>
-                                            <p className={shared.achievementDesc}>Your events get top placement, analytics, and custom branding on your social images.</p>
-                                        </div>
-                                    </div>
-                                </VerifiedLock>
-                            </Panel>
-
-                            <Panel title="Events">
-                                {Object.entries(eventsByType).map(([type, events]) => (
-                                    <div className={shared.hostEventGroup} key={type}>
-                                        <p className={shared.hostEventGroupTitle}>{HOST_EVENT_TYPE_LABELS[type]}</p>
-                                        {events.map(ev => (
-                                            <HostEventCard key={ev.id} event={ev} typeLabel={HOST_EVENT_TYPE_LABELS[type]} />
-                                        ))}
-                                    </div>
-                                ))}
-                                {(SAMPLE_HOST_PROFILE.events || []).length === 0 && <p className={shared.emptyState}>No events listed yet.</p>}
-                            </Panel>
-                        </div>
-
-                        <aside className={shared.dashboardRail}>
-                            {gameTiles.length > 0 && (
-                                <Panel title="Games">
-                                    <div className={`${shared.tileGrid} ${shared.tileGridCompact}`}>
-                                        {gameTiles.map(g => (
-                                            <div className={shared.tile} style={{ cursor: "default" }} key={g.value}>
-                                                {g.logo && <img src={g.logo} alt="" className={shared.tileLogo} />}
-                                                <span className={shared.tileLabel}>{g.label}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </Panel>
-                            )}
-                        </aside>
-                    </div>
                 )}
             </div>
         </div>

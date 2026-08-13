@@ -3028,3 +3028,145 @@
 @media (prefers-reduced-motion: reduce) {
     .cutoutSpinner { animation: none; }
 }
+
+/* ===== Game filter =====
+   A career reads per title, so this is the control that scopes the whole
+   dashboard. Chips where there's room, a select on phones. */
+.gameFilter {
+    display: flex;
+    align-items: center;
+    gap: .85rem;
+    flex-wrap: wrap;
+    padding: .75rem 1rem;
+    border: 1px solid var(--line, rgba(255, 255, 255, .08));
+    border-radius: .9rem;
+    background: rgba(255, 255, 255, .03);
+}
+
+.gameFilterLabel {
+    color: rgba(255, 255, 255, .45);
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.gameFilterChips {
+    display: flex;
+    gap: .4rem;
+    flex-wrap: wrap;
+}
+
+.gameChip {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    padding: .4rem .8rem;
+    border-radius: .6rem;
+    border: 1px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .04);
+    color: rgba(255, 255, 255, .65);
+    font-family: inherit;
+    font-size: .82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: border-color .2s ease-in-out, background .2s ease-in-out, color .2s ease-in-out;
+}
+
+.gameChip img {
+    width: 1.05rem;
+    height: 1.05rem;
+    object-fit: contain;
+}
+
+.gameChip:hover {
+    color: white;
+    border-color: rgba(255, 255, 255, .3);
+}
+
+.gameChipActive {
+    background: linear-gradient(135deg, #9b6fe0, #7a5ac9);
+    border-color: transparent;
+    color: white;
+}
+
+.gameFilterSelect {
+    display: none;
+    width: auto;
+    min-width: 12rem;
+    padding: .5rem .75rem;
+    font-size: .9rem;
+}
+
+@media only screen and (max-width: 620px) {
+    .gameFilterChips { display: none; }
+    .gameFilterSelect { display: block; }
+}
+
+/* ===== Player card: game scope badge ===== */
+.pcardBrandLeft {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    min-width: 0;
+}
+
+.pcardScope {
+    padding: .2rem .55rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, .18);
+    background: rgba(255, 255, 255, .07);
+    color: rgba(255, 255, 255, .85);
+    font-size: .6rem;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* ===== Visitor view: card behind a button =====
+   A profile someone else is reading shouldn't open with a wall of card
+   customization, so the card sits behind this until it's asked for. */
+.viewCardButton {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem 1.1rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .03);
+    color: inherit;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color .2s ease-in-out, background .2s ease-in-out, transform .2s ease-in-out;
+}
+
+.viewCardButton:hover {
+    border-color: #8e6ace;
+    background: rgba(142, 106, 206, .12);
+    transform: translateY(-1px);
+}
+
+.viewCardArt {
+    flex-shrink: 0;
+    width: 3.2rem;
+    height: 4.4rem;
+    border-radius: .5rem;
+    border: 1px solid rgba(255, 255, 255, .14);
+    background:
+        radial-gradient(circle at 30% 22%, rgba(146, 105, 234, .5), transparent 60%),
+        linear-gradient(158deg, #1b1430, #0a0810);
+    box-shadow: 0 .5rem 1rem -.5rem rgba(0, 0, 0, .8);
+}
+
+.viewCardButton strong {
+    display: block;
+    font-size: .95rem;
+}
+
+.viewCardButton span span {
+    color: rgba(255, 255, 255, .45);
+    font-size: .82rem;
+}

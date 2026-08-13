@@ -95,7 +95,30 @@ const drawWordmark = (ctx, x, y, scale, accent) => {
     ctx.textAlign = 'left';
     ctx.textBaseline = 'alphabetic';
     ctx.font = `800 ${25 * scale}px ${SANS}`;
-    ctx.fillText('uSync', x + size + 14 * scale, y + size * .72);
+    const label = 'uSync';
+    ctx.fillText(label, x + size + 14 * scale, y + size * .72);
+    return size + 14 * scale + ctx.measureText(label).width;
+};
+
+// Which game the card is for — an overall card and a CoD card have to be
+// tellable apart at a glance once they're both saved to someone's phone.
+const drawScopeBadge = (ctx, x, y, text, scale, accent) => {
+    const h = 30 * scale;
+    ctx.font = `700 ${13 * scale}px ${MONO}`;
+    const label = text.toUpperCase();
+    const w = ctx.measureText(label).width + 26 * scale;
+
+    roundRect(ctx, x, y, w, h, h / 2);
+    ctx.fillStyle = 'rgba(255,255,255,.07)';
+    ctx.fill();
+    ctx.strokeStyle = accent;
+    ctx.globalAlpha = .5;
+    ctx.lineWidth = 1.5 * scale;
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+
+    ctx.fillStyle = accent;
+    ctx.fillText(label, x + 13 * scale, y + h / 2 + 4.5 * scale);
 };
 
 const drawVerifiedPill = (ctx, rightX, y, scale, accent) => {
@@ -306,6 +329,7 @@ const drawAccentRule = (ctx, x, y, w, accent) => {
  * @param {{label:string,value:string}} [opts.platform]
  * @param {Array<{label:string,value:string,color?:string}>} opts.stats
  * @param {{level:number,current:number,next:number,note?:string}} [opts.xp]
+ * @param {string} [opts.scopeLabel]  which game the card covers, or "All games"
  */
 export const drawPlayerCard = (canvas, opts) => {
     if (!canvas) return;
@@ -314,7 +338,7 @@ export const drawPlayerCard = (canvas, opts) => {
     const H = canvas.height;
     const {
         layout = 'portrait', card, bannerImage, photoImage, photoFraming = 'bust', avatarImage,
-        name, handle, meta, verified, social, platform, stats = [], xp,
+        name, handle, meta, verified, social, platform, stats = [], xp, scopeLabel,
     } = opts;
 
     const accent = bannerImage ? '#9b6fe0' : card.accent;
@@ -330,7 +354,8 @@ export const drawPlayerCard = (canvas, opts) => {
     ctx.fillStyle = accent;
     ctx.fillRect(0, 0, W, 10);
 
-    drawWordmark(ctx, pad, pad, scale, accent);
+    const wordmarkW = drawWordmark(ctx, pad, pad, scale, accent);
+    if (scopeLabel) drawScopeBadge(ctx, pad + wordmarkW + 14 * scale, pad + 6 * scale, scopeLabel, scale, accent);
     if (verified) drawVerifiedPill(ctx, W - pad, pad, scale, accent);
 
     const initial = (name || '?').slice(0, 1).toUpperCase();

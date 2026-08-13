@@ -22,31 +22,36 @@ export const MetricStrip = ({ metrics = [] }) => (
 );
 
 // Earnings split two ways — by game, or by the kind of event it was won at.
-export const EarningsCard = ({ earnings }) => {
+export const EarningsCard = ({ earnings, allowByGame = true }) => {
     const [groupBy, setGroupBy] = useState('game');
-    const rows = (groupBy === 'game' ? earnings.byGame : earnings.byType) || [];
+    // Scoped to one title there's only one "game" to split by, so the toggle
+    // goes away and the event-type breakdown is all that's left.
+    const key = allowByGame ? groupBy : 'type';
+    const rows = (key === 'game' ? earnings.byGame : earnings.byType) || [];
     const max = Math.max(...rows.map(r => r.value), 1);
 
     return (
         <>
-            <div className={styles.sectionToolbar}>
-                <div className={styles.segmented}>
-                    <button
-                        type="button"
-                        className={`${styles.segmentedBtn} ${groupBy === 'game' ? styles.segmentedBtnActive : ''}`}
-                        onClick={() => setGroupBy('game')}
-                    >
-                        By game
-                    </button>
-                    <button
-                        type="button"
-                        className={`${styles.segmentedBtn} ${groupBy === 'type' ? styles.segmentedBtnActive : ''}`}
-                        onClick={() => setGroupBy('type')}
-                    >
-                        By event type
-                    </button>
+            {allowByGame && (
+                <div className={styles.sectionToolbar}>
+                    <div className={styles.segmented}>
+                        <button
+                            type="button"
+                            className={`${styles.segmentedBtn} ${groupBy === 'game' ? styles.segmentedBtnActive : ''}`}
+                            onClick={() => setGroupBy('game')}
+                        >
+                            By game
+                        </button>
+                        <button
+                            type="button"
+                            className={`${styles.segmentedBtn} ${groupBy === 'type' ? styles.segmentedBtnActive : ''}`}
+                            onClick={() => setGroupBy('type')}
+                        >
+                            By event type
+                        </button>
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className={styles.earningsTotal}>
                 <span className={styles.earningsAmount}>{money(earnings.total)}</span>
@@ -184,3 +189,31 @@ export const TeamList = ({ teams = [] }) => (
         {teams.length === 0 && <p className={styles.emptyState}>Not on a team yet.</p>}
     </>
 );
+
+/**
+ * A count-per-label breakdown with a proportional bar — what a venue runs, or
+ * which titles it runs it in. Same bar language as earnings so the two panels
+ * read as one system, but the numbers are counts rather than money.
+ */
+export const BreakdownList = ({ rows = [], unit = "" }) => {
+    const max = Math.max(...rows.map(r => r.value), 1);
+    const total = rows.reduce((n, r) => n + r.value, 0);
+
+    return (
+        <div className={styles.breakdownList}>
+            {rows.map(row => (
+                <div className={styles.breakdownRow} key={row.label}>
+                    <span className={styles.breakdownName}>{row.label}</span>
+                    <span className={styles.breakdownAmount}>{row.value}</span>
+                    <span className={styles.breakdownTrack}>
+                        <i style={{ width: `${(row.value / max * 100).toFixed(1)}%` }} />
+                    </span>
+                    <span className={styles.breakdownPct}>
+                        {(row.value / (total || 1) * 100).toFixed(0)}% of {unit || "total"}
+                    </span>
+                </div>
+            ))}
+            {rows.length === 0 && <p className={styles.emptyState}>Nothing here yet.</p>}
+        </div>
+    );
+};

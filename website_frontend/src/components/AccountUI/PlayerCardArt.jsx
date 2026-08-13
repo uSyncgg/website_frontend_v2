@@ -32,6 +32,7 @@ export const PlayerCardArt = ({
     platform,
     stats = [],
     xp,
+    scopeLabel,
     handle,
 }) => {
     const ref = useRef(null);
@@ -113,9 +114,15 @@ export const PlayerCardArt = ({
         </div>
     );
 
+    // A card is always a card *for something* — one game, or the whole career.
+    const scope = scopeLabel && <span className={styles.pcardScope}>{scopeLabel}</span>;
+
     const brandRow = (
         <div className={styles.pcardBrandRow}>
-            <img className={styles.pcardWordmark} src={USYNC_LOGO} alt="uSync" />
+            <span className={styles.pcardBrandLeft}>
+                <img className={styles.pcardWordmark} src={USYNC_LOGO} alt="uSync" />
+                {scope}
+            </span>
             {verified && (
                 <span className={styles.pcardVerified}>
                     <img src="https://i.imgur.com/PCHIHQB.png" alt="" />
@@ -188,6 +195,7 @@ export const PlayerCardArt = ({
             <span>{bannerUrl ? 'Custom banner' : card.name}</span>
         </div>
     );
+
 
     return (
         <article

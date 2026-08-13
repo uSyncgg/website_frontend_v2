@@ -17,6 +17,7 @@ export const ProfileHero = ({
     personaLabels = [],
     eventTypeLabels = [],
     level,
+    editable = true,
     editHref = "/account/profile/edit",
 }) => {
     const isHost = profile.accountType === "host";
@@ -37,9 +38,11 @@ export const ProfileHero = ({
                 <span className={styles.heroBannerFade} />
             </div>
 
-            <Link to={editHref} className={styles.heroEdit}>
-                <FaPen /> Edit profile
-            </Link>
+            {editable && (
+                <Link to={editHref} className={styles.heroEdit}>
+                    <FaPen /> Edit profile
+                </Link>
+            )}
 
             <div className={styles.heroBody}>
                 <div
