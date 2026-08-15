@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { FaCamera, FaCheckCircle } from "react-icons/fa";
+import { FaCamera, FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
 import { AccountField, TileSelect } from "components";
 import shared from "../../../components/AccountUI/AccountUI.module.css";
 import { COUNTRIES, US_STATES, GENDERS, GAMES, GAME_TOURNAMENT_SUPPORT } from "./accountData";
@@ -298,7 +298,10 @@ export const BracketHostingStep = ({ form, setField, onNext, onBack }) => {
     );
 };
 
-export const ProfileBasicsStep = ({ form, setField, onNext, onBack, isHost }) => {
+// The last step, so it carries the submit. Anything still required is named
+// here with a link straight to the step that asks for it — people can fill the
+// flow out in any order, so the finish is where that gets reconciled.
+export const ProfileBasicsStep = ({ form, setField, onNext, onBack, isHost, finishLabel = 'Continue', missing = [], onFixMissing }) => {
     const [previewUrl, setPreviewUrl] = useState(null);
 
     const handleFile = (e) => {
@@ -350,9 +353,28 @@ export const ProfileBasicsStep = ({ form, setField, onNext, onBack, isHost }) =>
                 />
             </div>
 
+            {missing.length > 0 && (
+                <div className={shared.missingNote}>
+                    <FaExclamationCircle />
+                    <span>
+                        Still needed before we can create the account:{' '}
+                        {missing.map((m, i) => (
+                            <span key={m.label}>
+                                <button type="button" className={shared.missingLink} onClick={() => onFixMissing?.(m.step)}>{m.label}</button>
+                                {i < missing.length - 1 ? ', ' : ''}
+                            </span>
+                        ))}
+                    </span>
+                </div>
+            )}
+
+            <p className={shared.helperText} style={{ margin: '0 0 1rem' }}>
+                Linking your accounts and turning on bracket hosting happen on your profile — you can do both the moment you land there.
+            </p>
+
             <div className={shared.stepFooter}>
                 <button type="button" className={shared.secondaryButton} onClick={onBack}>Back</button>
-                <button type="button" className={shared.primaryButton} onClick={onNext}>Continue</button>
+                <button type="button" className={shared.primaryButton} onClick={onNext}>{finishLabel}</button>
             </div>
         </>
     );

@@ -1,265 +1,110 @@
 .section {
     width: min(72rem, 92vw);
-    margin: 0 auto 2.5rem;
+    margin: 0 auto 2.25rem;
 }
 
-.sectionHeader {
+/* Label and bubbles sit on one line and centre together. Because the row is
+   sized by its contents, a short list looks composed instead of leaving the
+   gaps a fixed grid would. */
+.row {
     display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: .9rem;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: .6rem .9rem;
 }
 
-.eyebrow {
+.label {
     color: rgb(142, 106, 206);
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
-    font-size: .85rem;
+    font-size: .8rem;
     margin: 0;
 }
 
-.resetButton {
-    background: none;
-    border: none;
-    padding: 0;
-    color: rgb(170, 166, 178);
-    font-size: .85rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: color .3s cubic-bezier(.16, 1, .3, 1);
-}
-
-.resetButton:hover {
-    color: white;
-    text-decoration: underline;
-}
-
-/* Horizontal rail — the full set of titles never fits, so it scrolls and
-   snaps rather than wrapping into a ragged grid. */
-.rail {
+.bubbles {
     display: flex;
-    gap: .9rem;
-    overflow-x: auto;
-    scroll-snap-type: x proximity;
-    padding: .35rem .25rem 1rem;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(142, 106, 206, .5) transparent;
-}
-
-.rail::-webkit-scrollbar {
-    height: .4rem;
-}
-
-.rail::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, .04);
-    border-radius: 1rem;
-}
-
-.rail::-webkit-scrollbar-thumb {
-    background: rgba(142, 106, 206, .5);
-    border-radius: 1rem;
-}
-
-.tile {
-    flex: 0 0 auto;
-    width: 8.5rem;
-    scroll-snap-align: start;
-    display: flex;
-    flex-direction: column;
-    background: rgba(28, 25, 33, .75);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, .08);
-    border-radius: .9rem;
-    padding: 0;
-    overflow: hidden;
-    cursor: pointer;
-    text-align: left;
-    box-shadow: 0 1.25rem 2.5rem -1.25rem rgba(0, 0, 0, .6);
-    transition: transform .35s cubic-bezier(.16, 1, .3, 1), border-color .35s cubic-bezier(.16, 1, .3, 1), box-shadow .35s cubic-bezier(.16, 1, .3, 1);
-}
-
-.tile:hover {
-    transform: translateY(-.3rem);
-    border-color: rgba(255, 255, 255, .2);
-    box-shadow: 0 1.5rem 2.75rem -1.25rem rgba(0, 0, 0, .7);
-}
-
-.tileActive {
-    border-color: rgb(142, 106, 206);
-    box-shadow: 0 0 0 1px rgb(142, 106, 206), 0 1.25rem 2.5rem -1rem rgba(142, 106, 206, .5);
-}
-
-/* Titles with nothing running today stay clickable but read as quieter */
-.tileEmpty .art {
-    filter: saturate(.5);
-}
-
-.tileEmpty:hover .art,
-.tileEmpty.tileActive .art {
-    filter: none;
-}
-
-.art {
-    position: relative;
-    aspect-ratio: 3 / 4;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: .15rem;
-    background-color: #0f0d14;
-    overflow: hidden;
+    gap: .5rem;
 }
 
-/* Generated key art: an accent wash from the top-left plus a floor glow, so a
-   title reads as its own thing before any real cover art is dropped in. */
-.artGlow {
-    position: absolute;
-    inset: 0;
-    background-image:
-        linear-gradient(155deg, var(--accent) 0%, transparent 68%),
-        radial-gradient(100% 70% at 50% 115%, var(--accent) 0%, transparent 75%);
-    opacity: .9;
-}
-
-.artStripes {
-    position: absolute;
-    inset: 0;
-    background-image: repeating-linear-gradient(115deg, rgba(255, 255, 255, .05) 0 1px, transparent 1px 9px);
-    opacity: .7;
-}
-
-.artVeil {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .18) 45%, rgba(0, 0, 0, .72) 100%);
-}
-
-/* Over real cover art — just enough to seat the tile on its footer */
-.artVeilLight {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, .45) 100%);
-}
-
-.artImg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.artShort {
-    position: relative;
-    z-index: 1;
-    color: white;
-    font-size: 1.55rem;
-    font-weight: 800;
-    letter-spacing: -.5px;
-    line-height: 1;
-    text-shadow: 0 .15rem .7rem rgba(0, 0, 0, .65);
-}
-
-.artYear {
-    position: relative;
-    z-index: 1;
-    color: rgba(255, 255, 255, .72);
-    font-size: .7rem;
+.bubble {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    background: rgba(28, 25, 33, .75);
+    border: 1px solid rgba(255, 255, 255, .14);
+    /* Fully rounded — the filter chips are squared, and the shape is what
+       separates picking a game from narrowing the results. */
+    border-radius: 999px;
+    color: rgb(170, 166, 178);
+    padding: .42rem .5rem .42rem 1rem;
+    font-size: .9rem;
     font-weight: 600;
-    letter-spacing: .5px;
-    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background .3s cubic-bezier(.16,1,.3,1), border-color .3s cubic-bezier(.16,1,.3,1), color .3s cubic-bezier(.16,1,.3,1), transform .3s cubic-bezier(.16,1,.3,1);
 }
 
-.artAll {
-    background-image: linear-gradient(155deg, #8e6ace 0%, #4c3a76 55%, #1b1723 100%);
+.bubble:hover {
+    border-color: rgb(142, 106, 206);
+    color: white;
+    transform: translateY(-1px);
 }
 
-/* Purple wash over the backdrop photo, so "All Titles" stays visually apart
-   from the real box art next to it and the label keeps its contrast. */
-.artAllWash {
-    position: absolute;
-    inset: 0;
-    background-image: linear-gradient(155deg, rgba(155, 111, 224, .62) 0%, rgba(93, 68, 156, .6) 50%, rgba(27, 23, 35, .72) 100%);
-}
-
-/* The backdrop is already near-monochrome; dropping the last of its colour
-   keeps the wash reading as one clean purple. */
-.artAll .artImg {
-    filter: grayscale(1) contrast(1.05);
-}
-
-.allIcon {
-    position: relative;
-    z-index: 1;
-    color: rgba(255, 255, 255, .85);
-    font-size: 1.35rem;
-    margin-bottom: .35rem;
-}
-
-.artAll .artShort {
-    font-size: 1.1rem;
-    letter-spacing: 2px;
-}
-
-.check {
-    position: absolute;
-    top: .45rem;
-    right: .45rem;
-    z-index: 2;
-    display: grid;
-    place-items: center;
-    width: 1.35rem;
-    height: 1.35rem;
-    border-radius: 50%;
+.bubbleActive {
     background: linear-gradient(135deg, #9b6fe0, #7a5ac9);
+    border-color: transparent;
     color: white;
-    font-size: .65rem;
-    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .5);
 }
 
-.tileMeta {
-    display: flex;
-    flex-direction: column;
-    gap: .15rem;
-    padding: .6rem .7rem .7rem;
+/* A title with nothing on today stays selectable but recedes */
+.bubbleEmpty {
+    opacity: .55;
 }
 
-.tileLabel {
+.bubbleEmpty:hover,
+.bubbleEmpty.bubbleActive {
+    opacity: 1;
+}
+
+.count {
+    display: inline-grid;
+    place-items: center;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    padding: 0 .4rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .07);
+    color: rgb(170, 166, 178);
+    font-size: .78rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.bubble:hover .count { color: white; }
+
+.bubbleActive .count {
+    background: rgba(0, 0, 0, .22);
     color: white;
-    font-size: .82rem;
-    font-weight: 600;
-    line-height: 1.25;
-}
-
-.tileCount {
-    color: rgb(142, 106, 206);
-    font-size: .72rem;
-    font-weight: 600;
-    letter-spacing: .3px;
-    text-transform: uppercase;
-}
-
-.tileEmpty .tileCount {
-    color: rgb(109, 106, 114);
 }
 
 @media only screen and (max-width: 768px) {
     .section {
         width: 92vw;
-        margin-bottom: 2rem;
+        margin-bottom: 1.75rem;
     }
 
-    .tile {
-        width: 7rem;
+    .bubble {
+        font-size: .82rem;
+        padding: .35rem .4rem .35rem .8rem;
     }
 
-    .artShort {
-        font-size: 1.25rem;
-    }
-
-    .tileLabel {
-        font-size: .75rem;
+    .count {
+        min-width: 1.35rem;
+        height: 1.35rem;
+        font-size: .72rem;
     }
 }

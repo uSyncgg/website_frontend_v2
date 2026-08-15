@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { FaGamepad, FaBuilding, FaCheckCircle, FaCheck, FaCalendarPlus, FaStar } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { FaGamepad, FaBuilding, FaCheckCircle, FaCheck, FaCalendarPlus, FaStar, FaSlidersH } from "react-icons/fa";
 import shared from "../../../components/AccountUI/AccountUI.module.css";
 import { SOCIAL_PLATFORMS, GAME_PLATFORMS, EVENT_PLATFORMS } from "./accountData";
 
@@ -130,43 +130,68 @@ export const LinkAccountsStep = ({
     );
 };
 
-// The old "Your first event" and "Interested in Verified?" steps were pulled
-// out of the host flow — asking mid-signup made the flow long and the answers
-// weren't actionable yet. They live here instead as nudges once the account
-// actually exists, which is when someone can act on them.
-export const SuccessStep = ({ onDone, isPlayer, isHost }) => (
-    <div className={shared.successWrap}>
-        <FaCheckCircle className={shared.successIcon} />
-        <h1 className={shared.stepTitle} style={{ textAlign: 'center' }}>You're in!</h1>
-        <p className={shared.stepSubtitle} style={{ textAlign: 'center' }}>
-            {isPlayer && isHost
-                ? "Your uSync account is ready — both your Player and Host sides are set up."
-                : "Your uSync account has been created."}
-        </p>
+// Not a step — a landing. The account exists by the time this shows, so it
+// says so and then gets out of the way, dropping people on their profile where
+// the optional setup (links, bracket hosting) is waiting.
+export const SuccessStep = ({ onDone, isPlayer, isHost, delay = 4 }) => {
+    const [left, setLeft] = useState(delay);
 
-        <div className={shared.nextUpList}>
-            {isHost && (
+    useEffect(() => {
+        if (left <= 0) {
+            onDone?.();
+            return undefined;
+        }
+        const t = setTimeout(() => setLeft(n => n - 1), 1000);
+        return () => clearTimeout(t);
+    }, [left, onDone]);
+
+    return (
+        <div className={shared.successWrap}>
+            <FaCheckCircle className={shared.successIcon} />
+            <h1 className={shared.stepTitle} style={{ textAlign: 'center' }}>You're in!</h1>
+            <p className={shared.stepSubtitle} style={{ textAlign: 'center' }}>
+                {isPlayer && isHost
+                    ? "Your uSync account is ready — both your Player and Host sides are set up."
+                    : "Your uSync account has been created."}
+            </p>
+
+            <div className={shared.nextUpList}>
                 <div className={shared.nextUpCard}>
-                    <FaCalendarPlus className={shared.nextUpIcon} />
+                    <FaSlidersH className={shared.nextUpIcon} />
                     <div>
-                        <div className={shared.nextUpTitle}>Post your first event</div>
-                        <div className={shared.nextUpText}>Head to your profile and hit <strong>Add event</strong> to get your first listing up.</div>
+                        <div className={shared.nextUpTitle}>Finish setting up on your profile</div>
+                        <div className={shared.nextUpText}>
+                            Link your accounts{isPlayer && !isHost ? ', turn on bracket hosting' : ''} and pick a calling card whenever
+                            you like — there's a setup card waiting at the top of your profile.
+                        </div>
                     </div>
                 </div>
-            )}
-            <div className={shared.nextUpCard}>
-                <FaStar className={shared.nextUpIcon} />
-                <div>
-                    <div className={shared.nextUpTitle}>Get uSync Verified</div>
-                    <div className={shared.nextUpText}>
-                        {isHost
-                            ? "Verified hosts get top placement, event analytics, and lower fees for players. Find it under Settings → Verified."
-                            : "Verified players unlock LAN results and a live GameBattles rank on their profile. Find it under Settings → Verified."}
+                {isHost && (
+                    <div className={shared.nextUpCard}>
+                        <FaCalendarPlus className={shared.nextUpIcon} />
+                        <div>
+                            <div className={shared.nextUpTitle}>Post your first event</div>
+                            <div className={shared.nextUpText}>Head to your profile and hit <strong>Add event</strong> to get your first listing up.</div>
+                        </div>
+                    </div>
+                )}
+                <div className={shared.nextUpCard}>
+                    <FaStar className={shared.nextUpIcon} />
+                    <div>
+                        <div className={shared.nextUpTitle}>Get uSync Verified</div>
+                        <div className={shared.nextUpText}>
+                            {isHost
+                                ? "Verified hosts get top placement, event analytics, and lower fees for players."
+                                : "Verified players unlock LAN results and a live GameBattles rank on their profile."}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <button type="button" className={shared.primaryButton} onClick={onDone}>Go to your profile</button>
-    </div>
-);
+            <button type="button" className={shared.primaryButton} onClick={onDone}>Go to your profile</button>
+            <p className={shared.redirectNote} aria-live="polite">
+                Taking you there in {left}s…
+            </p>
+        </div>
+    );
+};

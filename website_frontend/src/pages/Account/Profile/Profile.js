@@ -3,12 +3,13 @@ import { FaTrophy } from "react-icons/fa";
 import {
     SeoData, ProfileHero, StatGrid, AchievementList,
     VerifiedLock, GBRankCard, HostEventCard, PlayerCard, usePlayerCardOptions,
-    MetricStrip, EarningsCard, MatchRecordCard, RankList, TeamList, GameFilter, BreakdownList
+    MetricStrip, EarningsCard, MatchRecordCard, RankList, TeamList, GameFilter, BreakdownList,
+    ProfileSetup
 } from "components";
 import shared from "../../../components/AccountUI/AccountUI.module.css";
 import {
     LINK_PLATFORMS, HOST_LINK_PLATFORMS, PERSONA_OPTIONS, GAMES,
-    HOST_EVENT_TYPES, VERIFIED_BENEFITS, SOCIAL_PLATFORMS, EVENT_PLATFORMS
+    HOST_EVENT_TYPES, VERIFIED_BENEFITS, SOCIAL_PLATFORMS, EVENT_PLATFORMS, GAME_PLATFORMS
 } from "../SignUp/accountData";
 import {
     SAMPLE_PLAYER_PROFILE, SAMPLE_HOST_PROFILE, ACHIEVEMENT_ICON_OPTIONS,
@@ -51,6 +52,14 @@ export const Profile = () => {
     const [activeSide, setActiveSide] = useState("player");
     const [game, setGame] = useState("all");
     const [cardOpen, setCardOpen] = useState(false);
+
+    // Setup the signup flow no longer asks for. Local state stands in for what
+    // the account record would hold once there's a backend.
+    const [links, setLinks] = useState(SAMPLE_PLAYER_PROFILE.links);
+    const [hosting, setHosting] = useState(null);
+    const [avatarUrl, setAvatarUrl] = useState(SAMPLE_PLAYER_PROFILE.avatar || "");
+    const [bio, setBio] = useState(SAMPLE_PLAYER_PROFILE.bio || "");
+    const [setupDismissed, setSetupDismissed] = useState(false);
 
     const isBoth = preview === "both";
     const hasPlayer = preview === "player" || isBoth;
@@ -106,6 +115,23 @@ export const Profile = () => {
         ...(showRank ? [{ label: "GB rank", value: gbTier.label, tone: "rank" }] : []),
     ];
 
+    // What "finished" means for a profile. Bracket hosting counts as done once
+    // it's been answered either way — declining is a decision, not a gap.
+    const linkedCount = Object.keys(links).filter(k => links[k]).length;
+    const setupTasks = [
+        { id: "links", title: "Link your accounts", note: linkedCount ? `${linkedCount} linked` : "Socials, game and event platforms", done: linkedCount > 0 },
+        { id: "hosting", title: "Bracket hosting", note: hosting === null ? "Run your own matches — on or off" : (hosting ? "On" : "Off — you can turn it on later"), done: hosting !== null },
+        { id: "avatar", title: "Add a profile photo", note: avatarUrl ? "Added" : "Shows on your profile and your card", done: !!avatarUrl },
+        { id: "bio", title: "Write a short bio", note: bio ? "Written" : "A line about how you play", done: !!bio },
+        { id: "games", title: "Add your games", note: `${(player.games || []).length} added`, done: (player.games || []).length > 0, href: "/account/profile/edit" },
+    ];
+
+    const linkGroups = [
+        { id: "socials", label: "Socials", platforms: SOCIAL_PLATFORMS },
+        { id: "games", label: "Game platforms", platforms: GAME_PLATFORMS },
+        { id: "events", label: "Event platforms", platforms: EVENT_PLATFORMS },
+    ];
+
     const hostEventsByType = (SAMPLE_HOST_PROFILE.events || []).reduce((acc, ev) => {
         (acc[ev.type] = acc[ev.type] || []).push(ev);
         return acc;
@@ -153,7 +179,7 @@ export const Profile = () => {
                 </div>
 
                 <ProfileHero
-                    profile={profile}
+                    profile={{ ...profile, avatar: avatarUrl || profile.avatar, bio: bio || profile.bio }}
                     verified={verified}
                     card={cardOptions.card}
                     bannerUrl={cardOptions.usingBanner ? cardOptions.banner.url : null}
@@ -185,6 +211,22 @@ export const Profile = () => {
 
                 {showingPlayer && hasPlayer && (
                     <>
+                        {isOwner && !setupDismissed && (
+                            <ProfileSetup
+                                tasks={setupTasks}
+                                hosting={hosting}
+                                onHostingChange={setHosting}
+                                links={links}
+                                onLinkChange={(platform, value) => setLinks(prev => ({ ...prev, [platform]: value }))}
+                                linkGroups={linkGroups}
+                                avatarUrl={avatarUrl}
+                                onAvatarChange={setAvatarUrl}
+                                bio={bio}
+                                onBioChange={setBio}
+                                onDismiss={() => setSetupDismissed(true)}
+                            />
+                        )}
+
                         <GameFilter
                             games={player.games}
                             value={game}

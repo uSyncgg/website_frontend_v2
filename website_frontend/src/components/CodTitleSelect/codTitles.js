@@ -1,13 +1,12 @@
 // The Call of Duty titles we aggregate tournaments for.
 //
-// The order here is the order the tiles render in. `art` is the cover art —
-// portrait images work best, they get cropped to a 3:4 tile. Clear it back to
-// null and the tile falls back to a generated panel built from `accent` and
-// `short`, which is also what shows if the image ever fails to load.
+// The order here is the order the bubbles render in.
 //
-// The trailing "l" on each imgur ID is their 640px thumbnail — the tiles are
-// only ~136px wide, and the full-size covers are 6.6MB all together vs 530KB
-// for these. Drop the "l" to get the original.
+// `art`, `short`, `year` and `accent` are not used by the bubbles, which are
+// text and a count only. They are kept because the covers are sourced and
+// sized already, and a poster view of the titles is the obvious next place for
+// them. The trailing "l" on each imgur ID is their 640px thumbnail; drop it for
+// the full-size original.
 // Only titles with tournaments actually running are listed. Checked against
 // CheckMate Gaming and Console Kings on 2026-08-09: Black Ops 6, Modern
 // Warfare III, Vanguard and Cold War all returned zero active tournaments, and

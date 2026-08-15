@@ -3170,3 +3170,374 @@
     color: rgba(255, 255, 255, .45);
     font-size: .82rem;
 }
+
+/* ===== Signup: finish reconciliation =====
+   Steps can be filled in any order, so the last one names what's still missing
+   and links straight to it rather than just refusing. */
+.missingNote {
+    display: flex;
+    align-items: flex-start;
+    gap: .6rem;
+    padding: .85rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: .8rem;
+    border: 1px solid rgba(224, 105, 138, .35);
+    background: rgba(224, 105, 138, .08);
+    color: rgba(255, 255, 255, .8);
+    font-size: .85rem;
+    line-height: 1.5;
+}
+
+.missingNote svg {
+    color: #e0698a;
+    flex-shrink: 0;
+    margin-top: .15rem;
+}
+
+.missingLink {
+    background: none;
+    border: 0;
+    padding: 0;
+    color: #f28ba8;
+    font: inherit;
+    font-weight: 700;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.sidebarNote {
+    margin: 1.25rem 0 0;
+    color: rgba(255, 255, 255, .35);
+    font-size: .72rem;
+    line-height: 1.45;
+}
+
+.redirectNote {
+    margin: .9rem 0 0;
+    text-align: center;
+    color: rgba(255, 255, 255, .4);
+    font-size: .8rem;
+}
+
+/* ===== Profile setup =====
+   The steps signup no longer asks for, offered where they cost nothing. */
+.setup {
+    border: 1px solid rgba(142, 106, 206, .35);
+    border-radius: 1.1rem;
+    background: linear-gradient(180deg, rgba(142, 106, 206, .1), rgba(28, 25, 33, .72));
+    padding: 1.5rem 1.6rem 1.6rem;
+}
+
+@media only screen and (max-width: 700px) {
+    .setup { padding: 1.15rem 1.1rem 1.25rem; border-radius: .9rem; }
+}
+
+.setupHead {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.setupTitle {
+    margin: 0;
+    color: white;
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.setupSub {
+    margin: .25rem 0 0;
+    color: rgba(255, 255, 255, .5);
+    font-size: .85rem;
+}
+
+.setupMeter {
+    text-align: right;
+}
+
+.setupPercent {
+    display: block;
+    color: #b18af0;
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+
+.setupCount {
+    display: block;
+    margin-top: .2rem;
+    color: rgba(255, 255, 255, .4);
+    font-size: .72rem;
+    font-weight: 600;
+}
+
+.setupTrack {
+    height: .35rem;
+    margin: 1rem 0 1.1rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, .08);
+    overflow: hidden;
+}
+
+.setupTrack i {
+    display: block;
+    height: 100%;
+    border-radius: 1rem;
+    background: linear-gradient(90deg, #7a5ac9, #b18af0);
+    transition: width .35s ease;
+}
+
+.setupTasks {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.setupTask {
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: .8rem;
+    background: rgba(255, 255, 255, .03);
+    overflow: hidden;
+}
+
+.setupTaskDone {
+    border-color: rgba(107, 207, 143, .28);
+    background: rgba(107, 207, 143, .06);
+}
+
+.setupTaskHead {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    width: 100%;
+    padding: .8rem .9rem;
+    border: 0;
+    background: none;
+    color: inherit;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.setupTick {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, .2);
+    color: #6bcf8f;
+    font-size: .7rem;
+}
+
+.setupTaskDone .setupTick {
+    border-color: rgba(107, 207, 143, .5);
+    background: rgba(107, 207, 143, .14);
+}
+
+.setupDot {
+    width: .35rem;
+    height: .35rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .3);
+}
+
+.setupTaskBody {
+    flex: 1;
+    min-width: 0;
+}
+
+.setupTaskTitle {
+    display: block;
+    font-size: .9rem;
+    font-weight: 700;
+}
+
+.setupTaskNote {
+    display: block;
+    color: rgba(255, 255, 255, .42);
+    font-size: .78rem;
+}
+
+.setupAction {
+    flex-shrink: 0;
+    padding: .35rem .75rem;
+    border-radius: .5rem;
+    border: 1px solid rgba(255, 255, 255, .16);
+    background: rgba(255, 255, 255, .05);
+    color: white;
+    font-size: .76rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.setupAction:hover {
+    border-color: #8e6ace;
+    background: rgba(142, 106, 206, .22);
+    color: white;
+}
+
+.setupChevron {
+    flex-shrink: 0;
+    color: rgba(255, 255, 255, .4);
+    font-size: .75rem;
+    transition: transform .2s ease-in-out;
+}
+
+.setupChevronOpen {
+    transform: rotate(180deg);
+}
+
+.setupTaskPanel {
+    padding: 0 .9rem 1rem;
+    border-top: 1px solid rgba(255, 255, 255, .07);
+    margin-top: -.1rem;
+    padding-top: .9rem;
+}
+
+.setupHelp {
+    margin: 0 0 .85rem;
+    color: rgba(255, 255, 255, .6);
+    font-size: .85rem;
+    line-height: 1.5;
+}
+
+.setupChoices {
+    display: flex;
+    gap: .6rem;
+    flex-wrap: wrap;
+}
+
+.setupChoice {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .6rem 1rem;
+    border-radius: .7rem;
+    border: 1px solid rgba(255, 255, 255, .14);
+    background: rgba(255, 255, 255, .04);
+    color: rgba(255, 255, 255, .8);
+    font-family: inherit;
+    font-size: .85rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.setupChoice:hover {
+    border-color: rgba(255, 255, 255, .3);
+    color: white;
+}
+
+.setupChoiceOn {
+    border-color: #8e6ace;
+    background: rgba(142, 106, 206, .2);
+    color: white;
+}
+
+.setupFoot {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin: 1.1rem 0 0;
+    color: rgba(255, 255, 255, .38);
+    font-size: .78rem;
+}
+
+.setupFoot a {
+    color: #b18af0;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.setupFoot a:hover {
+    text-decoration: underline;
+}
+
+/* 100% — the panel retires itself into the achievement it earned. */
+.setupComplete {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 1.4rem;
+    border-radius: 1.1rem;
+    border: 1px solid rgba(224, 177, 94, .4);
+    background: linear-gradient(120deg, rgba(224, 177, 94, .16), rgba(28, 25, 33, .72) 60%);
+}
+
+.setupTrophy {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: .8rem;
+    background: rgba(224, 177, 94, .16);
+    border: 1px solid rgba(224, 177, 94, .4);
+    color: #e0b15e;
+    font-size: 1.1rem;
+}
+
+.setupCompleteTitle {
+    margin: 0;
+    color: #e0b15e;
+    font-size: .98rem;
+    font-weight: 800;
+}
+
+.setupCompleteText {
+    margin: .15rem 0 0;
+    color: rgba(255, 255, 255, .6);
+    font-size: .85rem;
+    line-height: 1.5;
+}
+
+.setupDismiss {
+    margin-left: auto;
+    flex-shrink: 0;
+    padding: .4rem .8rem;
+    border-radius: .6rem;
+    border: 1px solid rgba(255, 255, 255, .16);
+    background: rgba(255, 255, 255, .05);
+    color: rgba(255, 255, 255, .75);
+    font-family: inherit;
+    font-size: .78rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.setupDismiss:hover {
+    color: white;
+    border-color: rgba(255, 255, 255, .3);
+}
+
+.setupAvatarRow {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.setupAvatarDrop {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(255, 255, 255, .25);
+    background-color: rgba(255, 255, 255, .04);
+    background-size: cover;
+    background-position: center;
+    color: rgba(255, 255, 255, .4);
+    cursor: pointer;
+}
+
+.setupAvatarDrop:hover {
+    border-color: #8e6ace;
+    color: white;
+}

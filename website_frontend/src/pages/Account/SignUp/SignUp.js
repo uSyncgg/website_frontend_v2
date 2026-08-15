@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { SeoData, AccountShell, SignupSidebar } from "components";
-import { AccountTypeStep, LinkAccountsStep, SuccessStep } from "./SharedSteps";
-import { CredentialsStep, AboutYouStep, GamesStep, BracketHostingStep, ProfileBasicsStep } from "./PlayerSteps";
+import { AccountTypeStep, SuccessStep } from "./SharedSteps";
+import { CredentialsStep, AboutYouStep, GamesStep, ProfileBasicsStep } from "./PlayerSteps";
 import { HostDetailsStep, HostEventsStep } from "./HostSteps";
-import { SOCIAL_PLATFORMS, GAME_PLATFORMS, EVENT_PLATFORMS, HOST_LINK_PLATFORMS } from "./accountData";
 
 // An account can be Player, Host, or both. Picking both merges the two flows
-// rather than concatenating them: anything shared (login, role, games, profile,
-// links) is asked exactly once, and only the genuinely host-specific steps get
-// added. That's the whole point of allowing both, one pass instead of two
-// accounts, so don't reintroduce a step that asks the same thing twice.
+// rather than concatenating them: anything shared is asked exactly once, and
+// only the genuinely host-specific steps get added.
+//
+// Signup only asks for what an account can't exist without. Linking accounts
+// and turning on bracket hosting used to live here and don't anymore — neither
+// is needed to have an account, and putting them in the way of finishing cost
+// us finished signups. They're offered on the profile instead, where people
+// can do them right away or leave them for later.
 //
 // Passwords are deliberately absent: Supabase owns credential storage, so
 // signup only collects the username and email that we keep on our side.
@@ -36,13 +39,7 @@ const buildSteps = (accountTypes) => {
         steps.push({ id: 'hostEvents', label: 'Your events' });
     }
 
-    // A Host account already has hosting turned on, so only offer the opt-in
-    // to player-only accounts.
-    if (isPlayer && !isHost) steps.push({ id: 'bracketHosting', label: 'Bracket hosting' });
-
     steps.push({ id: 'profileBasics', label: 'Profile basics' });
-    steps.push({ id: 'linkAccounts', label: 'Link accounts' });
-    steps.push({ id: 'success', label: 'Done' });
 
     return steps;
 };
@@ -96,7 +93,8 @@ const validateHostDetails = (form) => {
 export const SignUp = () => {
     const navigate = useNavigate();
     const [stepIndex, setStepIndex] = useState(0);
-    const [maxStepReached, setMaxStepReached] = useState(0);
+    const [visited, setVisited] = useState([0]);
+    const [done, setDone] = useState(false);
     const [form, setForm] = useState(initialForm);
     const [errors, setErrors] = useState({});
 
@@ -114,7 +112,7 @@ export const SignUp = () => {
     const goTo = (index) => {
         setErrors({});
         setStepIndex(index);
-        setMaxStepReached(prev => Math.max(prev, index));
+        setVisited(prev => (prev.includes(index) ? prev : [...prev, index]));
     };
 
     const advance = (validator) => {
@@ -128,30 +126,43 @@ export const SignUp = () => {
 
     const back = () => goTo(Math.max(0, stepIndex - 1));
 
-    // Once a step has already been filled out, let people jump straight back
-    // to it (or forward to any other step they've already reached).
-    const jumpTo = (index) => {
-        if (index <= maxStepReached) goTo(index);
-    };
+    // The counter is a map, not a gate: any step opens in any order, forwards
+    // or backwards. What's enforced is the finish — the account can't be
+    // created until the required fields are filled in.
+    const jumpTo = (index) => goTo(index);
 
     const handleAccountTypesChange = (value) => {
         setForm(prev => {
             const cur = prev.accountTypes;
             return { ...prev, accountTypes: cur.includes(value) ? cur.filter(v => v !== value) : [...cur, value] };
         });
-        // The step list changes shape with the selection, so progress past the
-        // first screen can't be trusted anymore.
-        setMaxStepReached(0);
+        // The step list changes shape with the selection, so anything visited
+        // past the first screen no longer maps to the same step.
+        setVisited([0]);
     };
 
-    const handleLinkChange = (platform, value) => setForm(prev => ({ ...prev, links: { ...prev.links, [platform]: value } }));
+    // Everything still required, in one place, so the last step can name what's
+    // missing and link straight to it instead of just refusing to submit.
+    const missing = [
+        !form.username.trim() && { label: 'a username', step: steps.findIndex(x => x.id === 'credentials') },
+        !form.email.trim() && { label: 'your email', step: steps.findIndex(x => x.id === 'credentials') },
+        isPlayer && !form.firstName?.trim() && { label: 'your first name', step: steps.findIndex(x => x.id === 'aboutYou') },
+        isPlayer && !form.lastName?.trim() && { label: 'your last name', step: steps.findIndex(x => x.id === 'aboutYou') },
+        isHost && !form.accountName?.trim() && { label: 'your organization name', step: steps.findIndex(x => x.id === 'hostDetails') },
+    ].filter(Boolean);
 
-    const finish = () => navigate('/account/profile');
+    const submit = () => {
+        if (missing.length > 0) {
+            goTo(missing[0].step);
+            return;
+        }
+        setDone(true);
+    };
 
-    // Sidebar shows every step except the account-type screen and the final
-    // success screen, which aren't really "steps" people navigate between.
-    const sidebarSteps = steps.slice(1, -1).map(s => s.label);
-    const showSidebar = stepIndex > 0 && current.id !== 'success';
+    // Sidebar shows every step except the account-type screen, which is the
+    // fork the rest of the flow is built from rather than a step in it.
+    const sidebarSteps = steps.slice(1).map(x => x.label);
+    const showSidebar = stepIndex > 0 && !done;
 
     const renderStep = () => {
         switch (current.id) {
@@ -167,25 +178,19 @@ export const SignUp = () => {
                 return <HostDetailsStep form={form} setField={setField} errors={errors} onNext={() => advance(validateHostDetails)} onBack={back} />;
             case 'hostEvents':
                 return <HostEventsStep form={form} setField={setField} onNext={() => advance()} onBack={back} />;
-            case 'bracketHosting':
-                return <BracketHostingStep form={form} setField={setField} onNext={() => advance()} onBack={back} />;
-            case 'profileBasics':
-                return <ProfileBasicsStep form={form} setField={setField} onNext={() => advance()} onBack={back} isHost={isHost} />;
-            case 'linkAccounts':
+            default:
                 return (
-                    <LinkAccountsStep
-                        links={form.links}
-                        onChange={handleLinkChange}
-                        onFinish={() => advance()}
-                        onSkip={() => advance()}
+                    <ProfileBasicsStep
+                        form={form}
+                        setField={setField}
+                        onNext={submit}
                         onBack={back}
-                        socialPlatforms={isPlayer ? SOCIAL_PLATFORMS : HOST_LINK_PLATFORMS}
-                        gamePlatforms={isPlayer ? GAME_PLATFORMS : []}
-                        eventPlatforms={isPlayer ? EVENT_PLATFORMS : []}
+                        isHost={isHost}
+                        finishLabel="Create my account"
+                        missing={missing}
+                        onFixMissing={goTo}
                     />
                 );
-            default:
-                return <SuccessStep onDone={finish} isPlayer={isPlayer} isHost={isHost} />;
         }
     };
 
@@ -202,12 +207,14 @@ export const SignUp = () => {
                     <SignupSidebar
                         steps={sidebarSteps}
                         activeIndex={stepIndex - 1}
-                        maxCompleted={maxStepReached - 1}
+                        visited={visited.map(i => i - 1)}
                         onStepClick={(i) => jumpTo(i + 1)}
                     />
                 ) : null}
             >
-                {renderStep()}
+                {done
+                    ? <SuccessStep onDone={() => navigate('/account/profile')} isPlayer={isPlayer} isHost={isHost} />
+                    : renderStep()}
             </AccountShell>
         </div>
     );
