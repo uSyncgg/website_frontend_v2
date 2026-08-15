@@ -3136,7 +3136,8 @@
     border-radius: 1rem;
     border: 1px solid rgba(255, 255, 255, .12);
     background: rgba(255, 255, 255, .03);
-    color: inherit;
+    /* Explicit, not inherited — body has no colour of its own to inherit. */
+    color: white;
     font-family: inherit;
     text-align: left;
     cursor: pointer;
@@ -3316,7 +3317,9 @@
     padding: .8rem .9rem;
     border: 0;
     background: none;
-    color: inherit;
+    /* Not `inherit` — body never sets a colour, so inheriting walks all the
+       way up to the UA default and lands on black. */
+    color: rgba(255, 255, 255, .9);
     font-family: inherit;
     text-align: left;
     cursor: pointer;
@@ -3354,6 +3357,7 @@
 
 .setupTaskTitle {
     display: block;
+    color: white;
     font-size: .9rem;
     font-weight: 700;
 }
