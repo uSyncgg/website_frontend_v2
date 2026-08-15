@@ -3541,3 +3541,38 @@
     border-color: #8e6ace;
     color: white;
 }
+
+/* ===== Fields inside the setup panel =====
+   The shared field styles are translucent white, tuned for the near-black
+   card. On the setup panel's purple ground those layers stack into a murky
+   box with no visible edge. Inside this panel the fields get their own dark
+   ground and a real border so they read as fields wherever they sit. */
+.setup .linkAccountRow {
+    border-color: rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .05);
+}
+
+.setup .linkAccountInput,
+.setup .input {
+    border: 1px solid rgba(255, 255, 255, .2);
+    background: rgba(6, 4, 10, .92);
+    color: white;
+}
+
+.setup .linkAccountInput::placeholder,
+.setup .input::placeholder {
+    color: rgba(255, 255, 255, .52);
+}
+
+.setup .linkAccountInput:hover,
+.setup .input:hover {
+    border-color: rgba(255, 255, 255, .34);
+    background: rgba(8, 6, 12, .82);
+}
+
+.setup .linkAccountInput:focus,
+.setup .input:focus {
+    border-color: #b18af0;
+    background: rgba(8, 6, 12, .9);
+    box-shadow: 0 0 0 3px rgba(142, 106, 206, .25);
+}

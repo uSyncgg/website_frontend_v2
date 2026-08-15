@@ -1,46 +1,38 @@
 .section {
     width: min(72rem, 92vw);
     margin: 0 auto 2.25rem;
+    text-align: center;
 }
 
-/* Label and bubbles sit on one line and centre together. Because the row is
-   sized by its contents, a short list looks composed instead of leaving the
-   gaps a fixed grid would. */
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: .6rem .9rem;
-}
-
-.label {
+.eyebrow {
     color: rgb(142, 106, 206);
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
-    font-size: .8rem;
-    margin: 0;
+    font-size: .85rem;
+    margin: 0 0 .85rem;
 }
 
+/* Centred and sized by its contents, never a stretched grid, so a short list
+   reads as deliberate instead of half-empty. */
 .bubbles {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: .5rem;
+    gap: .55rem;
 }
 
 .bubble {
     display: inline-flex;
     align-items: center;
-    gap: .5rem;
+    gap: .55rem;
     background: rgba(28, 25, 33, .75);
     border: 1px solid rgba(255, 255, 255, .14);
     /* Fully rounded — the filter chips are squared, and the shape is what
-       separates picking a game from narrowing the results. */
+       separates picking a title from narrowing the results. */
     border-radius: 999px;
     color: rgb(170, 166, 178);
-    padding: .42rem .5rem .42rem 1rem;
+    padding: .3rem .45rem .3rem .35rem;
     font-size: .9rem;
     font-weight: 600;
     cursor: pointer;
@@ -70,6 +62,39 @@
     opacity: 1;
 }
 
+/* Portrait crop, so it still reads as box art at thumbnail size */
+.cover,
+.coverFallback,
+.allIcon {
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 2rem;
+    border-radius: .35rem;
+    object-fit: cover;
+    background: #0f0d14;
+}
+
+.coverFallback,
+.allIcon {
+    display: grid;
+    place-items: center;
+    font-size: .62rem;
+    font-weight: 800;
+    letter-spacing: .3px;
+    color: white;
+}
+
+.coverFallback {
+    background-image: linear-gradient(155deg, var(--accent) 0%, rgba(15, 13, 20, .9) 85%);
+}
+
+.allIcon {
+    background-image: linear-gradient(155deg, #9b6fe0, #4c3a76);
+    font-size: .7rem;
+}
+
+.nameShort { display: none; }
+
 .count {
     display: inline-grid;
     place-items: center;
@@ -91,20 +116,47 @@
     color: white;
 }
 
-@media only screen and (max-width: 768px) {
+/* Phones: a fixed three-up grid instead of wrapping. Nothing scrolls
+   sideways, and the rows stay even however many titles there are. */
+@media only screen and (max-width: 620px) {
     .section {
         width: 92vw;
         margin-bottom: 1.75rem;
     }
 
-    .bubble {
-        font-size: .82rem;
-        padding: .35rem .4rem .35rem .8rem;
+    .bubbles {
+        gap: .5rem;
     }
 
+    .bubble {
+        /* Exactly three per row, and because the row is still centred flex
+           rather than a grid, a trailing pair centres instead of hanging off
+           the left. Two gaps of .5rem come out of the width. */
+        flex: 0 0 calc((100% - 1rem) / 3);
+        justify-content: center;
+        gap: .4rem;
+        padding: .3rem .4rem;
+        font-size: .82rem;
+    }
+
+    .nameFull { display: none; }
+    .nameShort { display: inline; }
+
+    .cover,
+    .coverFallback,
+    .allIcon {
+        width: 1.15rem;
+        height: 1.55rem;
+        border-radius: .28rem;
+    }
+
+    .coverFallback { font-size: .5rem; }
+    .allIcon { font-size: .6rem; }
+
     .count {
-        min-width: 1.35rem;
-        height: 1.35rem;
-        font-size: .72rem;
+        min-width: 1.3rem;
+        height: 1.3rem;
+        padding: 0 .3rem;
+        font-size: .7rem;
     }
 }

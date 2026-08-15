@@ -2,11 +2,13 @@
 //
 // The order here is the order the bubbles render in.
 //
-// `art`, `short`, `year` and `accent` are not used by the bubbles, which are
-// text and a count only. They are kept because the covers are sourced and
-// sized already, and a poster view of the titles is the obvious next place for
-// them. The trailing "l" on each imgur ID is their 640px thumbnail; drop it for
-// the full-size original.
+// `art` is the cover, shown as a portrait thumbnail inside each bubble; if it
+// fails to load the bubble falls back to an `accent` chip carrying the first
+// two letters of `short`. `short` is also the label on phones, where three-up
+// bubbles have no room for "Black Ops Cold War". `year` is currently unused.
+//
+// The trailing "l" on each imgur ID is their 640px thumbnail; drop it for the
+// full-size original.
 // Only titles with tournaments actually running are listed. Checked against
 // CheckMate Gaming and Console Kings on 2026-08-09: Black Ops 6, Modern
 // Warfare III, Vanguard and Cold War all returned zero active tournaments, and
