@@ -329,7 +329,6 @@
   <url><loc>https://www.usync.gg/lans/ewgl3</loc></url>
   <url><loc>https://www.usync.gg/lans/lowtier-major-iv</loc></url>
   <url><loc>https://www.usync.gg/lans/rva-esports-championship-2026</loc></url>
-  <url><loc>https://www.usync.gg/lans/ego-cod-lan-4v4</loc></url>
   <url><loc>https://www.usync.gg/lans/ga-cod-modern-warfare-4-launch-tournament</loc></url>
   <!-- Halo LANs -->
   <!-- LoL LANs -->
@@ -371,5 +370,7 @@
   <url><loc>https://www.usync.gg/lans/charleston-crown-series</loc></url>
   <url><loc>https://www.usync.gg/lans/rmcs-spring-2026</loc></url>
   <url><loc>https://www.usync.gg/lans/volan-2026</loc></url>
+  <url><loc>https://www.usync.gg/lans/ego-cod-lan-4v4</loc></url>
+  <url><loc>https://www.usync.gg/lans/citadel-i</loc></url>
 
 </urlset>
