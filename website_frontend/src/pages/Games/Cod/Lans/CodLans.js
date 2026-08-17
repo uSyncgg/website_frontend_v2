@@ -56,6 +56,18 @@ export const CodLans = () => {
                     <HostBanner.Button title={"More Info"} path={"/lans/ga-cod-modern-warfare-4-launch-tournament"} />
                 </HostBanner>
 
+                <HostBanner>
+                    <HostBanner.Title path={"/lans/california-tier-list-lan"}>California Tier List LAN</HostBanner.Title>
+                    <HostBanner.Image
+                        path={"/lans/california-tier-list-lan"}
+                        imgUrl={"https://i.imgur.com/1fHItii.png"}
+                        alt={"California Tier List LAN"}
+                        verified={false}
+                    />
+                    <HostBanner.Region>Lake Forest, CA</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/lans/california-tier-list-lan"} />
+                </HostBanner>
+
                 <div className="hrEvents" />
 
             </div>
