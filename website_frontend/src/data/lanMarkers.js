@@ -1,7 +1,6 @@
 export const COD_LAN_MARKERS = [
     { lat: 30.0990662, lng: -81.5229898,  name: "EWGL 3",              link: "/lans/ewgl3",              game: 'CoD' },
     { lat: 39.9940032, lng: -83.0060542,  name: "Shinto Champs",       link: "/lans/shintochamps2026",   game: 'CoD' },
-    { lat: 35.8813501, lng: -79.0653555,  name: "Ego COD LAN 4v4",     link: "/lans/ego-cod-lan-4v4",   game: 'CoD' },
     { lat: 39.9939480, lng: -83.0060490,  name: "GA:CoD Modern Warfare 4 Launch Tournament", link: "/lans/ga-cod-modern-warfare-4-launch-tournament", game: 'CoD' },
 ];
 
@@ -10,7 +9,6 @@ export const LOL_LAN_MARKERS = [
 
 export const HALO_LAN_MARKERS = [
     { lat: 35.7735601, lng: -78.6408138,  name: "Game And Geek Expo 2026",         link: "/lans/game-and-geek-2026", game: 'Halo' },
-    { lat: 39.6829806, lng: -105.0793028, name: "Citadel I",                        link: "/lans/citadel-i",          game: 'Halo' },
 ];
 
 export const WZ_LAN_MARKERS = [];
