@@ -7,12 +7,15 @@ import { AllLans } from 'pages/Games/Conventions/AllLans';
 import { ShintoChamps2026 } from 'pages/Games/Cod/Lans/Events/ShintoChamps2026';
 import { EWGL3 } from 'pages/Games/Cod/Lans/Events/EWGL3';
 import { GACoDModernWarfare4LaunchTournament } from 'pages/Games/Cod/Lans/Events/GACoDModernWarfare4LaunchTournament';
+import { CaliforniaTierListLAN } from 'pages/Games/Cod/Lans/Events/CaliforniaTierListLAN';
 
 // Halo
 import { GameandGeek2026 } from 'pages/Games/Halo/Lans/Events/GameandGeek2026';
+import { Ozokucon2026 } from 'pages/Games/Halo/Lans/Events/Ozokucon2026';
 
 // LoL
 import { BECSoloLaneShowdown } from 'pages/Games/Conventions/Archived/2026/BECSoloLaneShowdown';
+import { Pittsburgh5v5GoatGamersLounge } from 'pages/Games/Lol/Lans/Events/Pittsburgh5v5GoatGamersLounge';
 
 // Conventions
 import { HellcaseCS2LAN2026 } from 'pages/Games/Conventions/Events/HellcaseCS2LAN2026';
@@ -67,11 +70,14 @@ const LanRoutes = () => (
         <Route path='shintochamps2026' element={<ShintoChamps2026 />} />
         <Route path='ewgl3' element={<EWGL3 />} />
         <Route path='ga-cod-modern-warfare-4-launch-tournament' element={<GACoDModernWarfare4LaunchTournament />} />
+        <Route path='california-tier-list-lan' element={<CaliforniaTierListLAN />} />
         {/* Wz */}
         {/* Halo */}
         <Route path='game-and-geek-2026' element={<GameandGeek2026 />} />
+        <Route path='ozokucon-2026' element={<Ozokucon2026 />} />
         {/* LoL */}
         <Route path='bec-sololane-showdown' element={<BECSoloLaneShowdown />} />
+        <Route path='5v5-pittsburgh-goat-gamers-lounge' element={<Pittsburgh5v5GoatGamersLounge />} />
         {/* Conventions */}
         <Route path='hellcase-cs2-2026' element={<HellcaseCS2LAN2026 />} />
         <Route path='lan-a-thon-under-the-sun-2026' element={<LANATHONUnderTheSun2026 />} />

@@ -32,6 +32,18 @@ export const HaloLans = () => {
                     <HostBanner.Button title={"More Info"} path={"/lans/game-and-geek-2026"} />
                 </HostBanner>
 
+                <HostBanner>
+                    <HostBanner.Title path={"/lans/ozokucon-2026"}>Ozokucon 2026</HostBanner.Title>
+                    <HostBanner.Image
+                        path={"/lans/ozokucon-2026"}
+                        imgUrl={"https://i.imgur.com/ZGIrDlo.png"}
+                        alt={"Ozokucon 2026"}
+                        verified={false}
+                    />
+                    <HostBanner.Region>Port Huron, MI</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/lans/ozokucon-2026"} />
+                </HostBanner>
+
                 <div className="hrEvents" />
             </div>
         </div>
