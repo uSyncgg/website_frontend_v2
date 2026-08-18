@@ -19,7 +19,19 @@ export const LolLans = () => {
             <div className="eventBannerContainer">
                 <div className="hrEvents" />
 
-                <NoEvents pageType={"LANs"} />
+                {/* <NoEvents pageType={"LANs"} /> */}
+
+                <HostBanner>
+                    <HostBanner.Title path={"/lans/5v5-pittsburgh-goat-gamers-lounge"}>5v5 Pittsburgh - Goat Gamers Lounge</HostBanner.Title>
+                    <HostBanner.Image
+                        path={"/lans/5v5-pittsburgh-goat-gamers-lounge"}
+                        imgUrl={"https://i.imgur.com/VXdSRXE.png"}
+                        alt={"5v5 Pittsburgh - Goat Gamers Lounge"}
+                        verified={false}
+                    />
+                    <HostBanner.Region>Pittsburgh, PA</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/lans/5v5-pittsburgh-goat-gamers-lounge"} />
+                </HostBanner>
 
                 <div className="hrEvents" />
             </div>

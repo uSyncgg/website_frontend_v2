@@ -1,5 +1,5 @@
 import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData } from "components";
-import '../../../EventInformation.css';
+import '../../../../EventInformation.css';
 
 export const CitadelI = () => {
     return (
@@ -14,7 +14,7 @@ export const CitadelI = () => {
 
             <div className="eventInfoCardContainer">
                 <div>
-                    <EventInfoCard title={"Date/Place"} infoList={["August 15 - 17th, 2026", "Lakewood, CO"]} /> 
+                    <EventInfoCard title={"Date/Place"} infoList={["August 15 - 17th, 2026", "Lakewood, CO"]} />
                 </div>
 
                 <div>
@@ -24,11 +24,11 @@ export const CitadelI = () => {
                         , "Casual play and competition throughout the weekend"
                         , "HALO 2 CLASSIC (SAT ONLY)"
                         , "HALO INFINITE (SAT & SUN)"
-                    ]} /> 
+                    ]} />
                 </div>
 
                 <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$25 per day"]} footer={<ExternalButton host={"Citadel I"} blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/citadel-i-halo-lan-2026-08-15?section=overview"} />}/> 
+                    <EventInfoCard title={"Entry Fee"} infoList={["$25 per day"]} footer={<ExternalButton host={"Citadel I"} blank={true} title={"Join Now"} path={"https://nerdstreet.com/events/citadel-i-halo-lan-2026-08-15?section=overview"} />}/>
                 </div>
             </div>
 
