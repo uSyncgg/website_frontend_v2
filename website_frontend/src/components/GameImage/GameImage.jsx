@@ -16,7 +16,7 @@ export const GameImage = ({ games, title }) => {
             <div className={styles.imageContainer}>
                 {Object.keys(games).includes("Call of Duty") && 
                     <Link to={games["Call of Duty"]}>
-                        <img src="https://i.imgur.com/gNvoNEo.png" alt="Call of Duty" />
+                        <img src="https://i.imgur.com/faZHdLx.png" alt="Call of Duty" />
                     </Link>
                 }
 
