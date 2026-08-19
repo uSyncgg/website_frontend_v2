@@ -19,6 +19,18 @@ export const CodLans = () => {
                 <div className="hrEvents" />
 
                 <HostBanner>
+                    <HostBanner.Title path={"/lans/california-tier-list-lan"}>California Tier List LAN</HostBanner.Title>
+                    <HostBanner.Image
+                        path={"/lans/california-tier-list-lan"}
+                        imgUrl={"https://i.imgur.com/1fHItii.png"}
+                        alt={"California Tier List LAN"}
+                        verified={true}
+                    />
+                    <HostBanner.Region>Lake Forest, CA</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/lans/california-tier-list-lan"} />
+                </HostBanner>
+
+                <HostBanner>
                     <HostBanner.Title path={"/lans/ewgl3"}>EWGL 3</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/lans/ewgl3"} 
@@ -29,6 +41,8 @@ export const CodLans = () => {
                     <HostBanner.Region>St Johns, FL</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/lans/ewgl3"} />
                 </HostBanner>
+
+                <div className="hrEvents" />
 
                 <HostBanner>
                     <HostBanner.Title path={"/lans/shintochamps2026"}>Shinto Champs</HostBanner.Title>
@@ -42,8 +56,6 @@ export const CodLans = () => {
                     <HostBanner.Button title={"More Info"} path={"/lans/shintochamps2026"} />
                 </HostBanner>
 
-                <div className="hrEvents" />
-
                 <HostBanner>
                     <HostBanner.Title path={"/lans/ga-cod-modern-warfare-4-launch-tournament"}>GA:CoD Modern Warfare 4 Launch Tournament</HostBanner.Title>
                     <HostBanner.Image
@@ -54,18 +66,6 @@ export const CodLans = () => {
                     />
                     <HostBanner.Region>Columbus, OH</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/lans/ga-cod-modern-warfare-4-launch-tournament"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/california-tier-list-lan"}>California Tier List LAN</HostBanner.Title>
-                    <HostBanner.Image
-                        path={"/lans/california-tier-list-lan"}
-                        imgUrl={"https://i.imgur.com/1fHItii.png"}
-                        alt={"California Tier List LAN"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Lake Forest, CA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/california-tier-list-lan"} />
                 </HostBanner>
 
                 <div className="hrEvents" />
