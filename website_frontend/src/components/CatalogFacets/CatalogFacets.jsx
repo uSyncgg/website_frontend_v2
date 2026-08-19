@@ -1,4 +1,7 @@
+import { useEffect, useRef, useState } from 'react';
 import styles from './CatalogFacets.module.css';
+
+const SEARCH_DEBOUNCE_MS = 300;
 
 /**
  * Toolbar for a catalog index: search box plus a multi-select chip row.
@@ -10,6 +13,10 @@ import styles from './CatalogFacets.module.css';
  *
  * Chips are independent toggles (aria-pressed, not radio semantics) — any
  * number can be active at once and matches are OR'd.
+ *
+ * The search input is debounced locally: `onQueryChange` (which updates the
+ * URL and re-filters) only fires after the user pauses typing, but the input
+ * itself is a local, uncontrolled-feeling value so it never lags a keystroke.
  */
 export const CatalogFacets = ({
     search,
@@ -21,6 +28,23 @@ export const CatalogFacets = ({
     onFacetToggle,
     onFacetClear,
 }) => {
+    const [inputValue, setInputValue] = useState(query);
+    const debounceRef = useRef(null);
+
+    // Stay in sync with external changes to `query` (e.g. a "clear filters"
+    // action elsewhere) without fighting the user mid-keystroke.
+    useEffect(() => {
+        setInputValue(query);
+    }, [query]);
+
+    useEffect(() => () => clearTimeout(debounceRef.current), []);
+
+    const handleChange = (value) => {
+        setInputValue(value);
+        clearTimeout(debounceRef.current);
+        debounceRef.current = setTimeout(() => onQueryChange(value), SEARCH_DEBOUNCE_MS);
+    };
+
     const showSearch = Boolean(search);
     const showFacet = Boolean(facet) && options.length > 0;
 
@@ -38,9 +62,9 @@ export const CatalogFacets = ({
                     <input
                         className={styles.input}
                         type="search"
-                        value={query}
+                        value={inputValue}
                         placeholder={search.placeholder}
-                        onChange={e => onQueryChange(e.target.value)}
+                        onChange={e => handleChange(e.target.value)}
                     />
                 </label>
             }

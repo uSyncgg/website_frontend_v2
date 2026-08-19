@@ -38,6 +38,8 @@
  *             cleanly at the tighter radius (checked on hover, repeatedly).
  */
 
+import { verifiedRowsFor } from './verifiedOrganizers';
+
 export const SECTIONS = [
     { key: 'leagues',     label: 'Leagues' },
     { key: 'lans',        label: 'LANs' },
@@ -57,22 +59,12 @@ export const gamesCatalog = {
         lede: 'Every league, LAN, tournament, wager and head-to-head on uSync, sorted by game.',
     },
 
-    /**
-     * Every row here is verified={true} on its own page — checked against the
-     * live event pages, not copied from the prototype (which listed two
-     * organizers as verified that are not).
-     */
+    // Rows come from catalog/verifiedOrganizers.js — see that file for the
+    // single source of truth every catalog's board derives from.
     heroAside: {
         type: 'verifiedBoard',
         label: 'Verified organizers',
-        rows: [
-            { name: 'LockdownCL',       tag: 'Call of Duty league',      path: '/games/call-of-duty/leagues/lockdowncl-leagues' },
-            { name: 'Titan Esports',    tag: 'League of Legends league', path: '/games/LoL/leagues/titan-leagues' },
-            { name: 'Nemesis Leagues',  tag: 'Rocket League league',     path: '/games/RocketLeague/leagues/nemesis-leagues' },
-            // Checkmate Gaming is verified for both wagers and head-to-head, but a
-            // row is one link — wagers is the destination.
-            { name: 'Checkmate Gaming', tag: 'Call of Duty wagers',      path: '/games/call-of-duty/wagers/cmg' },
-        ],
+        rows: verifiedRowsFor(['leagues', 'wagers']),
     },
 
     search: {

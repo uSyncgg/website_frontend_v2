@@ -1,5 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { useSearchParams } from 'react-router';
+import { GAME_ALIASES } from 'catalog/gameAliases';
 
 /**
  * Filter state for a catalog, persisted in the URL so a filtered view is
@@ -66,7 +67,10 @@ export const useCatalogFilter = (catalog) => {
         const needle = query.trim().toLowerCase();
 
         return catalog.entries.filter(entry => {
-            const matchesQuery = !needle || entry.name.toLowerCase().includes(needle);
+            const aliases = GAME_ALIASES[entry.slug] ?? [];
+            const matchesQuery = !needle
+                || entry.name.toLowerCase().includes(needle)
+                || aliases.some(alias => alias.includes(needle));
             const matchesFacet = activeFacets.length === 0 || activeFacets.includes(entry[facetField]);
             return matchesQuery && matchesFacet;
         });

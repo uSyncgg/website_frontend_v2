@@ -9,6 +9,8 @@
  * not to the game hub).
  */
 
+import { verifiedRowsFor } from './verifiedOrganizers';
+
 export const SECTIONS = [
     { key: 'leagues', label: 'Leagues' },
 ];
@@ -23,21 +25,13 @@ export const leaguesCatalog = {
         lede: 'Every competitive league on uSync, sorted by game — open brackets, invite-only divisions, and everything between.',
     },
 
-    /**
-     * Every row here is verified={true} on its own page, checked directly
-     * against the live league host pages — not carried over from the /games
-     * board, which mixes in a wagers host that doesn't belong on a
-     * leagues-only page.
-     */
+    // Rows come from catalog/verifiedOrganizers.js, scoped to leagues only —
+    // that keeps a wagers-only host (Checkmate Gaming) off this board without
+    // hand-maintaining a second copy of the games catalog's list.
     heroAside: {
         type: 'verifiedBoard',
         label: 'Verified league organizers',
-        rows: [
-            { name: 'LockdownCL',      tag: 'Call of Duty',      path: '/games/call-of-duty/leagues/lockdowncl-leagues' },
-            { name: 'Titan Esports',   tag: 'League of Legends', path: '/games/LoL/leagues/titan-leagues' },
-            { name: 'Nemesis Leagues', tag: 'Rocket League',     path: '/games/RocketLeague/leagues/nemesis-leagues' },
-            { name: 'College Halo',    tag: 'Halo',              path: '/games/halo/leagues/ugc-halo' },
-        ],
+        rows: verifiedRowsFor('leagues', { tagSection: false }),
     },
 
     search: {

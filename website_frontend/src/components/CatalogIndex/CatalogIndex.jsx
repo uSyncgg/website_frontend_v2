@@ -26,7 +26,7 @@ export const CatalogIndex = ({ catalog }) => {
     const count = entries.length;
     const total = catalog.entries.length;
 
-    const aside = catalog.heroAside?.type === 'verifiedBoard'
+    const aside = catalog.heroAside?.type === 'verifiedBoard' && catalog.heroAside.rows?.length > 0
         ? <VerifiedBoard label={catalog.heroAside.label} rows={catalog.heroAside.rows} />
         : catalog.heroAside?.type === 'cta'
             ? <HeroCta {...catalog.heroAside} />
