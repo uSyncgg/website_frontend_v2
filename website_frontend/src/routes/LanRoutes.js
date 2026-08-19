@@ -8,6 +8,9 @@ import { ShintoChamps2026 } from 'pages/Games/Cod/Lans/Events/ShintoChamps2026';
 import { EWGL3 } from 'pages/Games/Cod/Lans/Events/EWGL3';
 import { GACoDModernWarfare4LaunchTournament } from 'pages/Games/Cod/Lans/Events/GACoDModernWarfare4LaunchTournament';
 import { CaliforniaTierListLAN } from 'pages/Games/Cod/Lans/Events/CaliforniaTierListLAN';
+import { GoodbyeBO7DuoLANSwitch } from 'pages/Games/Cod/Lans/Events/GoodbyeBO7DuoLANSwitch';
+import { CaliforniaEsportsMW3Throwback } from 'pages/Games/Cod/Lans/Events/CaliforniaEsportsMW3Throwback';
+import { CaliforniaEsportsMW4Kickoff } from 'pages/Games/Cod/Lans/Events/CaliforniaEsportsMW4Kickoff';
 
 // Halo
 import { GameandGeek2026 } from 'pages/Games/Halo/Lans/Events/GameandGeek2026';
@@ -71,6 +74,9 @@ const LanRoutes = () => (
         <Route path='ewgl3' element={<EWGL3 />} />
         <Route path='ga-cod-modern-warfare-4-launch-tournament' element={<GACoDModernWarfare4LaunchTournament />} />
         <Route path='california-tier-list-lan' element={<CaliforniaTierListLAN />} />
+        <Route path='goodbye-bo7-duo-lan-switch' element={<GoodbyeBO7DuoLANSwitch />} />
+        <Route path='california-esports-mw3-throwback' element={<CaliforniaEsportsMW3Throwback />} />
+        <Route path='california-esports-mw4-kickoff' element={<CaliforniaEsportsMW4Kickoff />} />
         {/* Wz */}
         {/* Halo */}
         <Route path='game-and-geek-2026' element={<GameandGeek2026 />} />
