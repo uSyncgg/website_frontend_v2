@@ -1,4 +1,4 @@
-import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData } from "components";
+import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData, VerifiedText } from "components";
 import '../../../EventInformation.css';
 
 export const CaliforniaTierListLAN = () => {
@@ -11,6 +11,10 @@ export const CaliforniaTierListLAN = () => {
             />
 
             <HeaderImage title={"California Tier List LAN"} imageClass={"eventPage"} />
+
+            <div className="verifiedContainer">
+                <VerifiedText />
+            </div>
 
             <div className="eventInfoCardContainer">
                 <div>
