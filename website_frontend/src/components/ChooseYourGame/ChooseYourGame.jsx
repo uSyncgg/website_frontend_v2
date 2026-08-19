@@ -3,7 +3,7 @@ import { FaChevronRight } from "react-icons/fa";
 import styles from './ChooseYourGame.module.css';
 
 const GAMES = [
-    { name: "Call of Duty", to: "/games/call-of-duty", logo: "https://i.imgur.com/gNvoNEo.png", accent: styles.accentCod },
+    { name: "Call of Duty", to: "/games/call-of-duty", logo: "https://i.imgur.com/faZHdLx.png", accent: styles.accentCod },
     { name: "League of Legends", to: "/games/LoL", logo: "https://i.imgur.com/5riYNow.png", accent: styles.accentLol },
     { name: "Halo", to: "/games/halo", logo: "https://i.imgur.com/wqKJfEu.png", accent: styles.accentHalo },
 ];
