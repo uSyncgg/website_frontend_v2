@@ -3,6 +3,9 @@ export const COD_LAN_MARKERS = [
     { lat: 39.9940032, lng: -83.0060542,  name: "Shinto Champs",       link: "/lans/shintochamps2026",   game: 'CoD' },
     { lat: 39.9939480, lng: -83.0060490,  name: "GA:CoD Modern Warfare 4 Launch Tournament", link: "/lans/ga-cod-modern-warfare-4-launch-tournament", game: 'CoD' },
     { lat: 33.6300943, lng: -117.7042799, name: "California Tier List LAN",         link: "/lans/california-tier-list-lan", game: 'CoD' },
+    { lat: 33.6300943, lng: -117.7042799, name: "Goodbye BO7 Duo LAN Switch",       link: "/lans/goodbye-bo7-duo-lan-switch", game: 'CoD' },
+    { lat: 33.6300943, lng: -117.7042799, name: "California Esports MW3 Throwback", link: "/lans/california-esports-mw3-throwback", game: 'CoD' },
+    { lat: 33.6300943, lng: -117.7042799, name: "California Esports MW4 Kickoff",   link: "/lans/california-esports-mw4-kickoff", game: 'CoD' },
 ];
 
 export const LOL_LAN_MARKERS = [
