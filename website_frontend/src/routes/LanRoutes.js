@@ -6,28 +6,30 @@ import { AllLans } from 'pages/Games/Conventions/AllLans';
 // CoD
 import { ShintoChamps2026 } from 'pages/Games/Cod/Lans/Events/ShintoChamps2026';
 import { EWGL3 } from 'pages/Games/Cod/Lans/Events/EWGL3';
-import { HNLxFANDOM2026 } from 'pages/Games/Cod/Lans/Events/HNLxFANDOM2026';
-import { EgoCODLAN4v4 } from 'pages/Games/Cod/Lans/Events/EgoCODLAN4v4';
 import { GACoDModernWarfare4LaunchTournament } from 'pages/Games/Cod/Lans/Events/GACoDModernWarfare4LaunchTournament';
+import { CaliforniaTierListLAN } from 'pages/Games/Cod/Lans/Events/CaliforniaTierListLAN';
 
 // Halo
-import { CitadelI } from 'pages/Games/Halo/Lans/Events/CitadelI';
 import { GameandGeek2026 } from 'pages/Games/Halo/Lans/Events/GameandGeek2026';
-import { OhYoshiDiIntRehatched } from 'pages/Games/Halo/Lans/Events/OhYoshiDiIntRehatched';
+import { Ozokucon2026 } from 'pages/Games/Halo/Lans/Events/Ozokucon2026';
 
 // LoL
 import { BECSoloLaneShowdown } from 'pages/Games/Conventions/Archived/2026/BECSoloLaneShowdown';
+import { Pittsburgh5v5GoatGamersLounge } from 'pages/Games/Lol/Lans/Events/Pittsburgh5v5GoatGamersLounge';
 
 // Conventions
-import { GACSHeatwave } from 'pages/Games/Conventions/Events/GACSHeatwave';
 import { HellcaseCS2LAN2026 } from 'pages/Games/Conventions/Events/HellcaseCS2LAN2026';
 import { LANATHONUnderTheSun2026 } from 'pages/Games/Conventions/Events/LANATHONUnderTheSun2026';
 import { FortLAN2026 } from 'pages/Games/Conventions/Events/FortLAN2026';
 import { LANAllNight2026 } from 'pages/Games/Conventions/Events/LANAllNight2026';
-import { CS210Mans2026 } from 'pages/Games/Conventions/Events/CS210Mans2026';
+import { GearsOfWarEDayLaunchTournament } from 'pages/Games/Conventions/Events/GearsOfWarEDayLaunchTournament';
 
 // Archived LANs
 // 2026
+import { HNLxFANDOM2026 } from 'pages/Games/Cod/Lans/Archived/2026/HNLxFANDOM2026';
+import { OhYoshiDiIntRehatched } from 'pages/Games/Halo/Lans/Archived/2026/OhYoshiDiIntRehatched';
+import { GACSHeatwave } from 'pages/Games/Conventions/Archived/2026/GACSHeatwave';
+import { CS210Mans2026 } from 'pages/Games/Conventions/Archived/2026/CS210Mans2026';
 import { TheSummoning2026 } from 'pages/Games/Lol/Lans/Archived/2026/TheSummoning2026';
 import { TheRetake2026 } from 'pages/Games/Conventions/Archived/2026/TheRetake2026';
 import { ShintoTest } from 'pages/Games/Cod/Lans/Archived/2026/ShintoTest';
@@ -57,6 +59,8 @@ import { Volan2026 } from 'pages/Games/Conventions/Archived/2026/Volan2026';
 import { LakewoodLeagueXIISpring } from 'pages/Games/Conventions/Archived/2026/LakewoodLeagueXIISpring';
 import { LANAllNightSpring2026 } from 'pages/Games/Conventions/Archived/2026/LANAllNightSpring2026';
 import { SFGE2026 } from 'pages/Games/Halo/Lans/Archived/2026/SFGE2026';
+import { EgoCODLAN4v4 } from 'pages/Games/Cod/Lans/Archived/2026/EgoCODLAN4v4';
+import { CitadelI } from 'pages/Games/Halo/Lans/Archived/2026/CitadelI';
 
 const LanRoutes = () => (
     <Routes>
@@ -65,26 +69,28 @@ const LanRoutes = () => (
         {/* CoD */}
         <Route path='shintochamps2026' element={<ShintoChamps2026 />} />
         <Route path='ewgl3' element={<EWGL3 />} />
-        <Route path='hnl-x-fandom-2026' element={<HNLxFANDOM2026 />} />
-        <Route path='ego-cod-lan-4v4' element={<EgoCODLAN4v4 />} />
         <Route path='ga-cod-modern-warfare-4-launch-tournament' element={<GACoDModernWarfare4LaunchTournament />} />
+        <Route path='california-tier-list-lan' element={<CaliforniaTierListLAN />} />
         {/* Wz */}
         {/* Halo */}
-        <Route path='citadel-i' element={<CitadelI />} />
         <Route path='game-and-geek-2026' element={<GameandGeek2026 />} />
-        <Route path='oh-yoshi-di-int-rehatched' element={<OhYoshiDiIntRehatched />} />
+        <Route path='ozokucon-2026' element={<Ozokucon2026 />} />
         {/* LoL */}
         <Route path='bec-sololane-showdown' element={<BECSoloLaneShowdown />} />
+        <Route path='5v5-pittsburgh-goat-gamers-lounge' element={<Pittsburgh5v5GoatGamersLounge />} />
         {/* Conventions */}
-        <Route path='gacs-operation-heatwave' element={<GACSHeatwave />} />
         <Route path='hellcase-cs2-2026' element={<HellcaseCS2LAN2026 />} />
         <Route path='lan-a-thon-under-the-sun-2026' element={<LANATHONUnderTheSun2026 />} />
         <Route path='fortlan-2026' element={<FortLAN2026 />} />
         <Route path='lan-all-night-2026' element={<LANAllNight2026 />} />
-        <Route path='cs2-10-mans-2026' element={<CS210Mans2026 />} />
+        <Route path='gears-of-war-e-day-launch-tournament' element={<GearsOfWarEDayLaunchTournament />} />
 
         {/* Archived LANs */}
         {/* 2026 */}
+        <Route path='hnl-x-fandom-2026' element={<HNLxFANDOM2026 />} />
+        <Route path='oh-yoshi-di-int-rehatched' element={<OhYoshiDiIntRehatched />} />
+        <Route path='gacs-operation-heatwave' element={<GACSHeatwave />} />
+        <Route path='cs2-10-mans-2026' element={<CS210Mans2026 />} />
         <Route path='the-summoning-2026' element={<TheSummoning2026 />} />
         <Route path='the-retake' element={<TheRetake2026 />} />
         <Route path='shinto-test' element={<ShintoTest />} />
@@ -114,6 +120,8 @@ const LanRoutes = () => (
         <Route path='lan-all-night-spring-26' element={<LANAllNightSpring2026 />} />
         <Route path='lakewood-league-xii-spring' element={<LakewoodLeagueXIISpring />} />
         <Route path='sfge-2026' element={<SFGE2026 />} />
+        <Route path='ego-cod-lan-4v4' element={<EgoCODLAN4v4 />} />
+        <Route path='citadel-i' element={<CitadelI />} />
     </Routes>
 );
 

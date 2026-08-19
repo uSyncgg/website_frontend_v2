@@ -33,29 +33,15 @@ export const HaloLans = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/lans/citadel-i"}>Citadel I</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/lans/citadel-i"} 
-                        imgUrl={"https://i.imgur.com/NXXgHBk.png"} 
-                        alt={"Citadel I"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Lakewood, CO</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/citadel-i"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-                
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/oh-yoshi-di-int-rehatched"}>Oh Yoshi Di-int Rehatched</HostBanner.Title>
+                    <HostBanner.Title path={"/lans/ozokucon-2026"}>Ozokucon 2026</HostBanner.Title>
                     <HostBanner.Image
-                        path={"/lans/oh-yoshi-di-int-rehatched"}
-                        imgUrl={"https://i.imgur.com/hXqNfnx.png"}
-                        alt={"Oh Yoshi Di-int Rehatched"}
+                        path={"/lans/ozokucon-2026"}
+                        imgUrl={"https://i.imgur.com/ZGIrDlo.png"}
+                        alt={"Ozokucon 2026"}
                         verified={false}
                     />
-                    <HostBanner.Region>Visalia, CA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/oh-yoshi-di-int-rehatched"} />
+                    <HostBanner.Region>Port Huron, MI</HostBanner.Region>
+                    <HostBanner.Button title={"More Info"} path={"/lans/ozokucon-2026"} />
                 </HostBanner>
 
                 <div className="hrEvents" />
