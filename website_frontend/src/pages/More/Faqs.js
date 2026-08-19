@@ -85,7 +85,7 @@ export const Faqs = () => {
                         <p className={styles.sectionLabel}>Featured Games</p>
                         <div className={styles.gamesCard}>
                             <Link to={"/games/call-of-duty"} className={styles.gameLink}>
-                                <img src="https://i.imgur.com/gNvoNEo.png" alt="Call of Duty" className={styles.gameImg} />
+                                <img src="https://i.imgur.com/faZHdLx.png" alt="Call of Duty" className={styles.gameImg} />
                             </Link>
                             <Link to={"/games/warzone"} className={styles.gameLink}>
                                 <img src="https://i.imgur.com/IBGIbY2.png" alt="Warzone" className={styles.gameImg} />
