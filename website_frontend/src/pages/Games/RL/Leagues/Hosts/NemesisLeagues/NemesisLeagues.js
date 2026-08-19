@@ -23,7 +23,7 @@ export const NemesisLeagues = () => {
 
             <div className="eventBannerContainer">
                 <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/nemesis-leagues/titan"}>Titan League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/RocketLeague/leagues/nemesis-leagues/titan"} verified={true}>Titan League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/RocketLeague/leagues/nemesis-leagues/titan"} 
                         imgUrl={"https://i.imgur.com/PcmcLLk.png"} 
@@ -35,7 +35,7 @@ export const NemesisLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/nemesis-leagues/rival"}>Rival League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/RocketLeague/leagues/nemesis-leagues/rival"} verified={true}>Rival League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/RocketLeague/leagues/nemesis-leagues/rival"} 
                         imgUrl={"https://i.imgur.com/PcmcLLk.png"} 
@@ -49,7 +49,7 @@ export const NemesisLeagues = () => {
                 <div className="hrEvents" />
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/nemesis-leagues/challenger"}>Challenger League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/RocketLeague/leagues/nemesis-leagues/challenger"} verified={true}>Challenger League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/RocketLeague/leagues/nemesis-leagues/challenger"} 
                         imgUrl={"https://i.imgur.com/PcmcLLk.png"} 
@@ -61,7 +61,7 @@ export const NemesisLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/nemesis-leagues/prospect"}>Prospect League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/RocketLeague/leagues/nemesis-leagues/prospect"} verified={true}>Prospect League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/RocketLeague/leagues/nemesis-leagues/prospect"} 
                         imgUrl={"https://i.imgur.com/PcmcLLk.png"} 
@@ -75,7 +75,7 @@ export const NemesisLeagues = () => {
                 <div className="hrEvents" />
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/nemesis-leagues/novice"}>Novice League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/RocketLeague/leagues/nemesis-leagues/novice"} verified={true}>Novice League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/RocketLeague/leagues/nemesis-leagues/novice"} 
                         imgUrl={"https://i.imgur.com/PcmcLLk.png"} 
@@ -87,7 +87,7 @@ export const NemesisLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/nemesis-leagues/provisional"}>Provisional League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/RocketLeague/leagues/nemesis-leagues/provisional"} verified={true}>Provisional League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/RocketLeague/leagues/nemesis-leagues/provisional"} 
                         imgUrl={"https://i.imgur.com/PcmcLLk.png"} 

@@ -27,7 +27,7 @@ export const TitanEsportsLeagues = () => {
 
             <div className="eventBannerContainer">
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/immortal"}>Immortal League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/immortal"} verified={true}>Immortal League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/LoL/leagues/titan-leagues/immortal"} 
                         imgUrl={"https://i.imgur.com/SoRhxEf.png"} 
@@ -39,7 +39,7 @@ export const TitanEsportsLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/ascendant"}>Ascendant League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/ascendant"} verified={true}>Ascendant League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/LoL/leagues/titan-leagues/ascendant"} 
                         imgUrl={"https://i.imgur.com/SoRhxEf.png"} 
@@ -53,7 +53,7 @@ export const TitanEsportsLeagues = () => {
                 <div className="hrEvents" />
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/vanquisher"}>Vanquisher League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/vanquisher"} verified={true}>Vanquisher League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/LoL/leagues/titan-leagues/vanquisher"} 
                         imgUrl={"https://i.imgur.com/SoRhxEf.png"} 
@@ -65,7 +65,7 @@ export const TitanEsportsLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/sentinel"}>Sentinel League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/sentinel"} verified={true}>Sentinel League</HostBanner.Title>
                     <HostBanner.Image
                         path={"/games/LoL/leagues/titan-leagues/sentinel"}
                         imgUrl={"https://i.imgur.com/SoRhxEf.png"}
@@ -79,7 +79,7 @@ export const TitanEsportsLeagues = () => {
                 <div className="hrEvents" />
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/eternal"}>Eternal League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/eternal"} verified={true}>Eternal League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/LoL/leagues/titan-leagues/eternal"} 
                         imgUrl={"https://i.imgur.com/SoRhxEf.png"} 
@@ -91,7 +91,7 @@ export const TitanEsportsLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/conqueror"}>Conqueror League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/conqueror"} verified={true}>Conqueror League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/LoL/leagues/titan-leagues/conqueror"} 
                         imgUrl={"https://i.imgur.com/SoRhxEf.png"} 
@@ -105,7 +105,7 @@ export const TitanEsportsLeagues = () => {
                 <div className="hrEvents" />
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/olympus"}>Olympus League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/olympus"} verified={true}>Olympus League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/LoL/leagues/titan-leagues/olympus"} 
                         imgUrl={"https://i.imgur.com/SoRhxEf.png"} 
@@ -117,7 +117,7 @@ export const TitanEsportsLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/divinity"}>Divinity League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/divinity"} verified={true}>Divinity League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/LoL/leagues/titan-leagues/divinity"} 
                         imgUrl={"https://i.imgur.com/SoRhxEf.png"} 
@@ -131,7 +131,7 @@ export const TitanEsportsLeagues = () => {
                 <div className="hrEvents" />
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/berserker"}>Berserker League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/berserker"} verified={true}>Berserker League</HostBanner.Title>
                     <HostBanner.Image
                         path={"/games/LoL/leagues/titan-leagues/berserker"}
                         imgUrl={"https://i.imgur.com/SoRhxEf.png"}
@@ -143,7 +143,7 @@ export const TitanEsportsLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/gladiator"}>Gladiator League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/gladiator"} verified={true}>Gladiator League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/LoL/leagues/titan-leagues/gladiator"} 
                         imgUrl={"https://i.imgur.com/SoRhxEf.png"} 

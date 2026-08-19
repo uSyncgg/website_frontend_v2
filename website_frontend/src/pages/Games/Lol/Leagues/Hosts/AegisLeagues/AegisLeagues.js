@@ -22,7 +22,7 @@ export const AegisLeagues = () => {
 
             <div className="eventBannerContainer">
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/aegis-leagues/challenger"}>Challenger League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/aegis-leagues/challenger"} verified={true}>Challenger League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/LoL/leagues/aegis-leagues/challenger"} 
                         imgUrl={"https://i.imgur.com/iy67hgo.png"} 
@@ -34,7 +34,7 @@ export const AegisLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/aegis-leagues/vanguard"}>Vanguard League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/aegis-leagues/vanguard"} verified={true}>Vanguard League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/LoL/leagues/aegis-leagues/vanguard"} 
                         imgUrl={"https://i.imgur.com/iy67hgo.png"} 
@@ -48,7 +48,7 @@ export const AegisLeagues = () => {
                 <div className="hrEvents" />
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/aegis-leagues/marauder"}>Marauder League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/aegis-leagues/marauder"} verified={true}>Marauder League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/LoL/leagues/aegis-leagues/marauder"} 
                         imgUrl={"https://i.imgur.com/iy67hgo.png"} 
@@ -60,7 +60,7 @@ export const AegisLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/aegis-leagues/defenders"}>Defenders League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/aegis-leagues/defenders"} verified={true}>Defenders League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/LoL/leagues/aegis-leagues/defenders"} 
                         imgUrl={"https://i.imgur.com/iy67hgo.png"} 
@@ -74,7 +74,7 @@ export const AegisLeagues = () => {
                 <div className="hrEvents" />
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/aegis-leagues/executioners"}>Executioners League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/aegis-leagues/executioners"} verified={true}>Executioners League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/LoL/leagues/aegis-leagues/executioners"} 
                         imgUrl={"https://i.imgur.com/iy67hgo.png"} 

@@ -22,7 +22,7 @@ export const RisenLeagues = () => {
 
             <div className="eventBannerContainer">
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/risen-leagues/champions"}>Champions League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/risen-leagues/champions"} verified={true}>Champions League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/LoL/leagues/risen-leagues/champions"} 
                         imgUrl={"https://i.imgur.com/s5LrZoC.png"} 
@@ -34,7 +34,7 @@ export const RisenLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/risen-leagues/dominate"}>Dominate League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/risen-leagues/dominate"} verified={true}>Dominate League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/LoL/leagues/risen-leagues/dominate"} 
                         imgUrl={"https://i.imgur.com/s5LrZoC.png"} 
@@ -48,7 +48,7 @@ export const RisenLeagues = () => {
                 <div className="hrEvents" />
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/risen-leagues/unstoppable"}>Unstoppable League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/risen-leagues/unstoppable"} verified={true}>Unstoppable League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/LoL/leagues/risen-leagues/unstoppable"} 
                         imgUrl={"https://i.imgur.com/s5LrZoC.png"} 
@@ -60,7 +60,7 @@ export const RisenLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/risen-leagues/rampage"}>Rampage League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/risen-leagues/rampage"} verified={true}>Rampage League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/LoL/leagues/risen-leagues/rampage"} 
                         imgUrl={"https://i.imgur.com/s5LrZoC.png"} 
@@ -74,7 +74,7 @@ export const RisenLeagues = () => {
                 <div className="hrEvents" />
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/risen-leagues/draft"}>Draft League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/LoL/leagues/risen-leagues/draft"} verified={true}>Draft League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/LoL/leagues/risen-leagues/draft"} 
                         imgUrl={"https://i.imgur.com/s5LrZoC.png"} 

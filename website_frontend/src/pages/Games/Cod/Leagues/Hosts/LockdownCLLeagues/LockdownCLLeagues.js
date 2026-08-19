@@ -22,7 +22,7 @@ export const LockdownCLLeagues = () => {
 
             <div className="eventBannerContainer">
                 <HostBanner>
-                    <HostBanner.Title path={"/games/call-of-duty/leagues/lockdowncl-leagues/legends"}>Legends League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/call-of-duty/leagues/lockdowncl-leagues/legends"} verified={true}>Legends League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/call-of-duty/leagues/lockdowncl-leagues/legends"} 
                         imgUrl={"https://i.imgur.com/Kg7IPyO.png"} 
@@ -34,7 +34,7 @@ export const LockdownCLLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/call-of-duty/leagues/lockdowncl-leagues/uppers"}>Uppers League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/call-of-duty/leagues/lockdowncl-leagues/uppers"} verified={true}>Uppers League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/call-of-duty/leagues/lockdowncl-leagues/uppers"} 
                         imgUrl={"https://i.imgur.com/hppmH7i.png"} 
@@ -48,7 +48,7 @@ export const LockdownCLLeagues = () => {
                 <div className="hrEvents" />
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/call-of-duty/leagues/lockdowncl-leagues/lowers"}>Lowers League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/call-of-duty/leagues/lockdowncl-leagues/lowers"} verified={true}>Lowers League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/call-of-duty/leagues/lockdowncl-leagues/lowers"} 
                         imgUrl={"https://i.imgur.com/iA4qVhT.png"} 
@@ -60,7 +60,7 @@ export const LockdownCLLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/call-of-duty/leagues/lockdowncl-leagues/womens"}>Womens League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/call-of-duty/leagues/lockdowncl-leagues/womens"} verified={true}>Womens League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/call-of-duty/leagues/lockdowncl-leagues/womens"} 
                         imgUrl={"https://i.imgur.com/9E2KYjz.png"} 

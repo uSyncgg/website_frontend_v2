@@ -21,7 +21,7 @@ export const RLPCLeagues = () => {
 
             <div className="eventBannerContainer">
                 <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/rlpc-leagues/major"}>Major League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/RocketLeague/leagues/rlpc-leagues/major"} verified={true}>Major League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/RocketLeague/leagues/rlpc-leagues/major"} 
                         imgUrl={"https://i.imgur.com/kVDfckC.png"} 
@@ -33,7 +33,7 @@ export const RLPCLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/rlpc-leagues/aaa"}>Triple A League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/RocketLeague/leagues/rlpc-leagues/aaa"} verified={true}>Triple A League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/RocketLeague/leagues/rlpc-leagues/aaa"} 
                         imgUrl={"https://i.imgur.com/kVDfckC.png"} 
@@ -47,7 +47,7 @@ export const RLPCLeagues = () => {
                 <div className="hrEvents" />
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/rlpc-leagues/aa"}>Double A League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/RocketLeague/leagues/rlpc-leagues/aa"} verified={true}>Double A League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/RocketLeague/leagues/rlpc-leagues/aa"} 
                         imgUrl={"https://i.imgur.com/kVDfckC.png"} 
@@ -59,7 +59,7 @@ export const RLPCLeagues = () => {
                 </HostBanner>
 
                 <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/rlpc-leagues/a"}>Single A League</HostBanner.Title>
+                    <HostBanner.Title path={"/games/RocketLeague/leagues/rlpc-leagues/a"} verified={true}>Single A League</HostBanner.Title>
                     <HostBanner.Image 
                         path={"/games/RocketLeague/leagues/rlpc-leagues/a"} 
                         imgUrl={"https://i.imgur.com/kVDfckC.png"} 
