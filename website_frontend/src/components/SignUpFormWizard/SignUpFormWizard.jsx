@@ -111,7 +111,7 @@ export const SignUpFormWizard = () => {
         }
 
         try {
-            await axios.post('https://www.usync.gg/signup/complete', payload, {
+            await axios.post('http://localhost:4242/registration', payload, {
                 headers: { Authorization: `Bearer ${session?.access_token}` },
             });
 
