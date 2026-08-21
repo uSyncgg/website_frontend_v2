@@ -10,7 +10,7 @@ export const GoodbyeBO7DuoLANSwitch = () => {
                 title={"Goodbye BO7 Duo LAN Switch - Call of Duty"}
             />
 
-            <HeaderImage title={"Goodbye BO7 Duo LAN Switch"} imageClass={"eventPage"} />
+            <HeaderImage imageClass={"caliTier1"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

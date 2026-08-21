@@ -10,7 +10,7 @@ export const CaliforniaEsportsMW4Kickoff = () => {
                 title={"California Esports MW4 Kickoff - Call of Duty"}
             />
 
-            <HeaderImage title={"California Esports MW4 Kickoff"} imageClass={"eventPage"} />
+            <HeaderImage imageClass={"caliTier4"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

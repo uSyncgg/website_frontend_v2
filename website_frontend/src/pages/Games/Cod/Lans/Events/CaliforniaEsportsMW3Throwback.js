@@ -10,7 +10,7 @@ export const CaliforniaEsportsMW3Throwback = () => {
                 title={"California Esports MW3 Throwback - Call of Duty"}
             />
 
-            <HeaderImage title={"California Esports MW3 Throwback"} imageClass={"eventPage"} />
+            <HeaderImage imageClass={"caliTier3"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />
