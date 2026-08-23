@@ -14,22 +14,9 @@ export const Conventions = () => {
             <div className="lanMapContainer">
                 <LanMap markers={CONVENTION_MARKERS} game="Conventions" />
             </div>
-
-            <div className="eventBannerContainer">
                 <div className="hrEvents" />
 
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/hellcase-cs2-2026"}>Hellcase CS2 LAN 2026</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/lans/hellcase-cs2-2026"} 
-                        imgUrl={"https://i.imgur.com/3vI1PAe.png"} 
-                        alt={"Hellcase CS2 LAN 2026"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Lakewood, CO</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/hellcase-cs2-2026"} />
-                </HostBanner>
-
+            <div className="eventBannerContainer">
                 <HostBanner>
                     <HostBanner.Title path={"/lans/lan-a-thon-under-the-sun-2026"}>LAN-A-THON Under The Sun 2026</HostBanner.Title>
                     <HostBanner.Image
@@ -41,8 +28,6 @@ export const Conventions = () => {
                     <HostBanner.Region>Bonita, CA</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/lans/lan-a-thon-under-the-sun-2026"} />
                 </HostBanner>
-
-                <div className="hrEvents" />
 
                 <HostBanner>
                     <HostBanner.Title path={"/lans/fortlan-2026"}>FortLAN 2026</HostBanner.Title>
@@ -56,6 +41,8 @@ export const Conventions = () => {
                     <HostBanner.Button title={"More Info"} path={"/lans/fortlan-2026"} />
                 </HostBanner>
 
+                <div className="hrEvents" />
+
                 <HostBanner>
                     <HostBanner.Title path={"/lans/lan-all-night-2026"}>LAN All Night 2026</HostBanner.Title>
                     <HostBanner.Image
@@ -67,8 +54,6 @@ export const Conventions = () => {
                     <HostBanner.Region>Grapevine, TX</HostBanner.Region>
                     <HostBanner.Button title={"More Info"} path={"/lans/lan-all-night-2026"} />
                 </HostBanner>
-
-                <div className="hrEvents" />
 
                 <HostBanner>
                     <HostBanner.Title path={"/lans/gears-of-war-e-day-launch-tournament"}>Gears of War E-Day Launch Tournament</HostBanner.Title>

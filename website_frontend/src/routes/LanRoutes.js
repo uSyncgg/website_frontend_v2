@@ -21,7 +21,6 @@ import { BECSoloLaneShowdown } from 'pages/Games/Conventions/Archived/2026/BECSo
 import { Pittsburgh5v5GoatGamersLounge } from 'pages/Games/Lol/Lans/Events/Pittsburgh5v5GoatGamersLounge';
 
 // Conventions
-import { HellcaseCS2LAN2026 } from 'pages/Games/Conventions/Events/HellcaseCS2LAN2026';
 import { LANATHONUnderTheSun2026 } from 'pages/Games/Conventions/Events/LANATHONUnderTheSun2026';
 import { FortLAN2026 } from 'pages/Games/Conventions/Events/FortLAN2026';
 import { LANAllNight2026 } from 'pages/Games/Conventions/Events/LANAllNight2026';
@@ -64,6 +63,7 @@ import { LANAllNightSpring2026 } from 'pages/Games/Conventions/Archived/2026/LAN
 import { SFGE2026 } from 'pages/Games/Halo/Lans/Archived/2026/SFGE2026';
 import { EgoCODLAN4v4 } from 'pages/Games/Cod/Lans/Archived/2026/EgoCODLAN4v4';
 import { CitadelI } from 'pages/Games/Halo/Lans/Archived/2026/CitadelI';
+import { HellcaseCS2LAN2026 } from 'pages/Games/Conventions/Archived/2026/HellcaseCS2LAN2026';
 
 const LanRoutes = () => (
     <Routes>
@@ -85,7 +85,6 @@ const LanRoutes = () => (
         <Route path='bec-sololane-showdown' element={<BECSoloLaneShowdown />} />
         <Route path='5v5-pittsburgh-goat-gamers-lounge' element={<Pittsburgh5v5GoatGamersLounge />} />
         {/* Conventions */}
-        <Route path='hellcase-cs2-2026' element={<HellcaseCS2LAN2026 />} />
         <Route path='lan-a-thon-under-the-sun-2026' element={<LANATHONUnderTheSun2026 />} />
         <Route path='fortlan-2026' element={<FortLAN2026 />} />
         <Route path='lan-all-night-2026' element={<LANAllNight2026 />} />
@@ -128,6 +127,7 @@ const LanRoutes = () => (
         <Route path='sfge-2026' element={<SFGE2026 />} />
         <Route path='ego-cod-lan-4v4' element={<EgoCODLAN4v4 />} />
         <Route path='citadel-i' element={<CitadelI />} />
+        <Route path='hellcase-cs2-2026' element={<HellcaseCS2LAN2026 />} />
     </Routes>
 );
 

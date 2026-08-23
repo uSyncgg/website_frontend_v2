@@ -20,8 +20,6 @@ export const HALO_LAN_MARKERS = [
 export const WZ_LAN_MARKERS = [];
 
 export const CONVENTION_MARKERS = [
-    // Offset slightly south from Citadel I (39.6829806) to avoid overlap on AllLans/Home maps
-    { lat: 39.6479806, lng: -105.0793028, name: "Hellcase CS2 LAN 2026",          link: "/lans/hellcase-cs2-2026",               game: 'Conventions' },
     { lat: 32.6613598, lng: -116.9995153, name: "LAN-A-THON Under The Sun 2026",  link: "/lans/lan-a-thon-under-the-sun-2026",   game: 'Conventions' },
     { lat: 41.0764636, lng: -85.1404836,  name: "FortLAN 2026",                   link: "/lans/fortlan-2026",                    game: 'Conventions' },
     { lat: 32.9414733, lng: -97.0592118,  name: "LAN All Night 2026",             link: "/lans/lan-all-night-2026",              game: 'Conventions' },
