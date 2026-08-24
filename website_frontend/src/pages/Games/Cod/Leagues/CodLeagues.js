@@ -1,7 +1,18 @@
 import { SeoData, HostBanner, HeaderImage } from "components";
+import { useLeagueEvents } from "hooks";
 import '../../EventBanners.css';
 
 export const CodLeagues = () => {
+    // DATABASE CALLING FOR LIST OF COD LEAGUES
+    // const { data, loading, error } = useLeagueEvents("Call of Duty");
+
+    // console.log(`DATA: ${data}`);
+    // console.log(`ERROR: ${error}`);
+
+    // {data.map(tes => (
+    //     console.log(tes)
+    // ))}
+
     return (
         <div className="standardContainer">
             <SeoData
