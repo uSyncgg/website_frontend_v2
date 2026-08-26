@@ -1,0 +1,93 @@
+/* Three layers, each with exactly one job — .card moves, .shell casts the
+   shadow, .clip clips. Putting box-shadow AND overflow:hidden AND a rounded
+   clip all on one element whose ancestor also animates on hover is a known
+   trigger for the browser dropping the rounded-corner clip mask mid-repaint —
+   which exposes this catalog's baked-in-transparent image corners (see
+   games.catalog.js) as a real gap, on hover, only on art with visible
+   content there. Splitting shadow from clip means neither shares a
+   rasterization path with the transform or with each other. */
+.card {
+    display: block;
+    text-decoration: none;
+    transition: transform .35s cubic-bezier(.16,1,.3,1);
+}
+
+.card:hover {
+    transform: translateY(-.3rem);
+}
+
+.shell {
+    /* Shadow only — deliberately NOT clipped (no overflow:hidden here), so
+       painting the shadow never shares a rasterization path with clipping
+       the image inside it. Its radius is purely cosmetic, kept in sync with
+       .clip's (via the shared radiusStandard/radiusWide modifier) so the
+       shadow's shape always matches what's actually visible. */
+    box-shadow: 0 1.5rem 3rem -1.25rem rgba(0, 0, 0, .6);
+    transition: box-shadow .35s cubic-bezier(.16,1,.3,1);
+}
+
+.card:hover .shell {
+    box-shadow: 0 1.75rem 3rem -1.25rem rgba(0, 0, 0, .7), 0 0 1.5rem rgba(142, 106, 206, .35);
+}
+
+.clip {
+    /* Clipping only — no box-shadow, no transform, nothing else competing
+       for this element's compositing behaviour. */
+    background: rgba(255, 255, 255, 0.02);
+    overflow: hidden;
+}
+
+/* Six of the seven source PNGs (see games.catalog.js) have a corner radius
+   baked into the pixels as transparency (~24px at their native 648x864 size;
+   Call of Duty is the only square one). `radiusWide` gives the clip enough
+   margin over that baked corner, at every card width this grid produces,
+   that the clip is never the thing exposing a gap. `radiusStandard` is the
+   tighter, more modest rounding for art confirmed to render cleanly at it. */
+.radiusStandard {
+    border-radius: 0.875rem;
+}
+
+.radiusWide {
+    border-radius: 1.5rem;
+}
+
+.art {
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+}
+
+.image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.body {
+    display: block;
+    padding: .75rem .85rem .9rem;
+}
+
+.name {
+    display: block;
+    color: white;
+    font-size: .92rem;
+    font-weight: 600;
+}
+
+.sections {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .3rem;
+    margin-top: .5rem;
+    color: rgb(150, 146, 158);
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+.sep {
+    color: rgb(142, 106, 206);
+    margin-right: .3rem;
+}

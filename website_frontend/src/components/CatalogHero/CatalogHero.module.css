@@ -1,0 +1,97 @@
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: 4rem 0 2.4rem;
+}
+
+/* Soft accent glow behind the copy, matching the prototype's hero wash */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: -40% 30% 40% -10%;
+    background: radial-gradient(circle at 30% 40%, rgba(142, 106, 206, .16), transparent 62%);
+    pointer-events: none;
+}
+
+.inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.35fr .95fr;
+    gap: 3.5rem;
+    align-items: end;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.copy {
+    min-width: 0;
+}
+
+.eyebrow {
+    color: rgb(142, 106, 206);
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: .85rem;
+    margin: 0 0 .75rem;
+}
+
+.headline {
+    font-size: clamp(2.15rem, 5.6vw, 3.9rem);
+    font-weight: 800;
+    line-height: .96;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.white {
+    color: white;
+}
+
+/* Same gradient the site already uses for accent words in HeaderImage */
+.accent {
+    background: linear-gradient(90deg, #8e6ace 0%, #a97fe0 45%, #6a8fe0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.slant {
+    width: 8.25rem;
+    height: 6px;
+    border: 0;
+    margin: 1.25rem 0 0;
+    background: linear-gradient(90deg, #8e6ace, #a97fe0);
+    transform: skewX(-28deg);
+}
+
+.lede {
+    color: rgb(170, 166, 178);
+    font-size: 1.05rem;
+    max-width: 56ch;
+    margin: 1rem 0 0;
+}
+
+.aside {
+    min-width: 0;
+}
+
+@media only screen and (max-width: 960px) {
+    .inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .hero {
+        padding: 2.5rem 0 1.75rem;
+    }
+
+    .inner {
+        padding: 0 1rem;
+    }
+}
