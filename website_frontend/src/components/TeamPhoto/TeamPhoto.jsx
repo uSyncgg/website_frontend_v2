@@ -35,8 +35,8 @@ export const TeamPhoto = ({member}) => {
             <Link to={teamMembers[member]["socials"]} target='_blank' rel='nofollow'>
                 <img className={styles.photo} src={teamMembers[member]["picture"]} alt={`${teamMembers[member]["name"]}`} />
             </Link>
-            <h1 className={styles.title}>{teamMembers[member]["name"]}</h1>
-            <h1 className={styles.subtitle}>{teamMembers[member]["role"]}</h1>
+            <h3 className={styles.title}>{teamMembers[member]["name"]}</h3>
+            <p className={styles.subtitle}>{teamMembers[member]["role"]}</p>
         </div>
     )
 }

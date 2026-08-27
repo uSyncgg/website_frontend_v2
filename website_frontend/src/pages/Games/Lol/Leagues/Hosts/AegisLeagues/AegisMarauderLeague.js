@@ -9,7 +9,7 @@ export const AegisMarauderLeague = () => {
                 description="Marauder League by Aegis is a Master 600LP cap League of Legends league. Make thousands playing LoL."
                 canonicalPath={"/games/LoL/leagues/aegis-leagues/marauder"}
             />
-            <HeaderImage imageClass={"aegisLOLLeagues"} />
+            <HeaderImage title={"Aegis Marauder League"} imageClass={"aegisLOLLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

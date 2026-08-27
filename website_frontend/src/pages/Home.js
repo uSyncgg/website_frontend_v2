@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import { ChooseYourGame, SeoData, HomeTournaments, LanMap } from "components";
 import { FaMapMarkerAlt, FaLayerGroup, FaSitemap, FaTrophy } from "react-icons/fa";
 import { ALL_LAN_MARKERS } from 'data/lanMarkers';
+import { organizationLd, websiteLd } from 'utils/structuredData';
 
 export const Home = () => {
     return (
@@ -12,6 +13,7 @@ export const Home = () => {
             <SeoData
                 description="uSync is the world's largest selection of esports LANs, Leagues, and Tournaments. Find your next event today."
                 canonicalPath={"/"}
+                jsonLd={[organizationLd, websiteLd]}
             />
 
             <div className={styles.sectionOne}>
@@ -21,8 +23,10 @@ export const Home = () => {
                         <span className={styles.pulseDot} />
                         Compete in Esports Events
                     </Link>
-                    <h1 className={styles.white}>THE WORLD'S LARGEST</h1>
-                    <h1 className={styles.gradientText}>ESPORTS HUB</h1>
+                    <h1 className={styles.heroTitle}>
+                        <span className={styles.white}>THE WORLD'S LARGEST</span>
+                        <span className={styles.gradientText}>ESPORTS HUB</span>
+                    </h1>
                     <h2>
                         Find Verified LANs, Tournaments, and More.
                         <br />

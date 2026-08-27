@@ -9,7 +9,7 @@ export const AegisVanguardLeague = () => {
                 description="Aegis Protectors league is an entry level League of Legends league that has a cash prize for the winning team. Try it today."
                 canonicalPath={"/games/LoL/leagues/aegis-leagues/vanguard"}
             />
-            <HeaderImage imageClass={"aegisLOLLeagues"} />
+            <HeaderImage title={"Aegis Vanguard League"} imageClass={"aegisLOLLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

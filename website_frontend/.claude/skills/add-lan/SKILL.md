@@ -219,6 +219,24 @@ If no matching comment block exists for that game, create one above `<!-- LoL LA
 
 ---
 
+## Step 9b — Sync the prerender route list
+
+**Required.** The sitemap is the source of truth for which routes get prerendered, so adding a
+URL there means `package.json` → `reactSnap.include` has to be regenerated:
+
+```bash
+npm run seo:sync-routes
+```
+
+Confirm the output shows the new LAN being added, e.g. `+ 1 added: /lans/{route-slug}`.
+
+Skipping this **fails the production build** — `postbuild` runs a verifier that refuses to ship
+when the sitemap and the include list disagree. Without the new route in that list, react-snap
+never prerenders the page and Netlify serves the homepage under the LAN's URL instead, which is
+invisible to search engines and reads as duplicate content.
+
+---
+
 ## Step 10 — Confirm completion
 
 Report exactly what was created and updated:
@@ -228,5 +246,6 @@ Report exactly what was created and updated:
 - ✅ HostBanner added to `{game LAN file(s)}`
 - ✅ Redirect added to `public/_redirects`
 - ✅ Sitemap updated
+- ✅ Prerender routes synced (`npm run seo:sync-routes`)
 
 Show the coordinates used so the contributor can verify the map pin is correct.

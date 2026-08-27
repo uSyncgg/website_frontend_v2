@@ -9,7 +9,7 @@ export const RLPCMajorLeague = () => {
                 description="RLPC Major League is for the best Rocket League players with 1800+ MMR. Three seasons per year with a prize pool based on donations."
                 canonicalPath={"/games/RocketLeague/leagues/rlpc-leagues/major"}
             />
-            <HeaderImage imageClass={"rlpcRLLeagues"} />
+            <HeaderImage title={"RLPC Major League"} imageClass={"rlpcRLLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

@@ -11,6 +11,8 @@ export const WzLans = () => {
                 canonicalPath={"/games/warzone/lans"}
             />
 
+            <h1 className="lanPageTitle">Warzone LANs</h1>
+
             <div className="lanMapContainer">
                 <LanMap markers={WZ_LAN_MARKERS} game="Warzone" />
             </div>

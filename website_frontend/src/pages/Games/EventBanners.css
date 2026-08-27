@@ -25,6 +25,25 @@
   font-weight: 450;
 }
 
+/* Page title for the map-led LAN listings. These pages open straight into a
+   Leaflet map, so they have no HeaderImage hero to carry the page's <h1>. */
+.lanPageTitle {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: -0.02em;
+  padding-top: 2.5rem;
+  margin: 0 0 1.5rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .lanPageTitle {
+    font-size: 2rem;
+    padding-top: 1.5rem;
+  }
+}
+
 .lanMapContainer {
   border-radius: .5rem;
   position: relative;

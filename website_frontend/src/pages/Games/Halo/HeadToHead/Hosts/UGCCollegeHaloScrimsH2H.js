@@ -9,7 +9,7 @@ export const UGCCollegeHaloScrimsH2H = () => {
                 description="UGC Halo scrim finder for collegiate teams looking to play against other colleges. Join today and play."
                 canonicalPath={"/games/halo/head-to-head/ugc-scrim"}
             />
-            <HeaderImage imageClass={"ugcPage"} />
+            <HeaderImage title={"UGC College Scrims"} imageClass={"ugcPage"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

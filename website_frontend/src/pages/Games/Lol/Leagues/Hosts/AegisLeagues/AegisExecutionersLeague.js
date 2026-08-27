@@ -9,7 +9,7 @@ export const AegisExecutionersLeague = () => {
                 description="Aegis Executioners League is for League players who are lower than diamond 4. Can you win the entire league?"
                 canonicalPath={"/games/LoL/leagues/aegis-leagues/executioners"}
             />
-            <HeaderImage imageClass={"aegisLOLLeagues"} />
+            <HeaderImage title={"Aegis Executioners League"} imageClass={"aegisLOLLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

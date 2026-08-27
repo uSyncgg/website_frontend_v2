@@ -9,7 +9,7 @@ export const LockdownWomensLeague = () => {
                 description="LCL Womens League is made for the women competitive Call of Duty players that want to compete for cash prizes."
                 canonicalPath={"/games/call-of-duty/leagues/lockdowncl-leagues/womens"}
             />
-            <HeaderImage imageClass={"lockdownCODLeagues"} />
+            <HeaderImage title={"LockdownCL Womens League"} imageClass={"lockdownCODLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

@@ -9,7 +9,7 @@ export const TitanSentinelLeague = () => {
                 description="Titan Sentinel League is a League of Legends league with a Masters 100 average. Do you have what it takes to win the entire league?"
                 canonicalPath={"/games/LoL/leagues/titan-leagues/sentinel"}
             />
-            <HeaderImage imageClass={"titanLOLLeagues"} />
+            <HeaderImage title={"Titan Sentinel League"} imageClass={"titanLOLLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

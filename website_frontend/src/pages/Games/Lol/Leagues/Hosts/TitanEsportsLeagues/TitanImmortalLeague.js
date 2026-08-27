@@ -9,7 +9,7 @@ export const TitanImmortalLeague = () => {
                 description="Titan Immortal League. 600LP cap League of Legends league for those that are looking to improve their game and make some money."
                 canonicalPath={"/games/LoL/leagues/titan-leagues/immortal"}
             />
-            <HeaderImage imageClass={"titanLOLLeagues"} />
+            <HeaderImage title={"Titan Immortal League"} imageClass={"titanLOLLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

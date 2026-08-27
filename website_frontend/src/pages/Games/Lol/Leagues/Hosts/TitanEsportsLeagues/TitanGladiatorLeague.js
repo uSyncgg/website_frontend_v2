@@ -9,7 +9,7 @@ export const TitanGladiatorLeague = () => {
                 description="Titan Gladiator League. The League of Legends league with a Platinum 4 cap. Sign up before spots sell out."
                 canonicalPath={"/games/LoL/leagues/titan-leagues/gladiator"}
             />
-            <HeaderImage imageClass={"titanLOLLeagues"} />
+            <HeaderImage title={"Titan Gladiator League"} imageClass={"titanLOLLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

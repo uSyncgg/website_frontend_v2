@@ -4,7 +4,7 @@ export const LoadingWheel = () => {
     return (
         <div className={`standardContainer ${styles.container}`}>
             <div className={styles.statusMessage}>
-                <h1 className={styles.white}>Loading...</h1>
+                <p className={`${styles.white} ${styles.statusText}`} role="status">Loading...</p>
             </div>
         </div>
     )

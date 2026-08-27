@@ -17,7 +17,7 @@ export const RLPCLeagues = () => {
                 description="Rocket League Pro Circuit - RLPC. A verified Rocket League league with four divisions for players across all skill levels. Sign up today."
                 canonicalPath={"/games/RocketLeague/leagues/rlpc-leagues"}
             />
-            <HeaderImage imageClass={"rlpcRLLeagues"} />
+            <HeaderImage title={"RLPC Leagues"} imageClass={"rlpcRLLeagues"} />
 
             <div className="eventBannerContainer">
                 <HostBanner>

@@ -9,7 +9,7 @@ export const LockdownUppersLeague = () => {
                 description="LockDown Call of Duty League is hosting LCL Uppers - the perfect league for those looking for good competition and a prize pool."
                 canonicalPath={"/games/call-of-duty/leagues/lockdowncl-leagues/uppers"}
             />
-            <HeaderImage imageClass={"lockdownCODLeagues"} />
+            <HeaderImage title={"LockdownCL Uppers League"} imageClass={"lockdownCODLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

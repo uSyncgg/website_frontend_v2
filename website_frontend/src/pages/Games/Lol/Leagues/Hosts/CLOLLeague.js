@@ -9,7 +9,7 @@ export const CLOLLeague = () => {
                 description="College League of Legends league is the most reputable name in all of college league. Play for thousands of dollars in scholarships."
                 canonicalPath={"/games/LoL/leagues/clol"}
             />
-            <HeaderImage imageClass={"CLOLPage"} />
+            <HeaderImage title={"CLOL"} imageClass={"CLOLPage"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

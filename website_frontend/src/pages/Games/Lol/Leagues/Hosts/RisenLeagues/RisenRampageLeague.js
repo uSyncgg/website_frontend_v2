@@ -9,7 +9,7 @@ export const RisenRampageLeague = () => {
                 description="Rampage League - by Risen. Emerald 4 cap League of Legends league with live streamed matches in North America."
                 canonicalPath={"/games/LoL/leagues/risen-leagues/rampage"}
             />
-            <HeaderImage imageClass={"risenLOLLeagues"} />
+            <HeaderImage title={"Risen Rampage League"} imageClass={"risenLOLLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

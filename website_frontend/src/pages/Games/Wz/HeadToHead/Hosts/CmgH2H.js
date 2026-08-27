@@ -9,7 +9,7 @@ export const CmgH2H = () => {
                 description="Checkmate Gaming Warzone head-to-head. A verified platform with free XP matches, ranked ladder by wins, and prizes based on record. 24/7 live support."
                 canonicalPath={"/games/warzone/head-to-head/cmg"}
             />
-            <HeaderImage imageClass={"cmgPage"} />
+            <HeaderImage title={"Checkmate Gaming"} imageClass={"cmgPage"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

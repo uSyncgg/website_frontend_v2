@@ -16,10 +16,10 @@ export const HeaderImage = ({ title, imageClass, verification, verified=false, l
                 <div className={styles.headerImageTitle}>
                     {eyebrow !== undefined && <p className={styles.eyebrow}>{eyebrow}</p>}
 
-                    <h2>
+                    <h1>
                         <span className={styles.white}>{leadWords}</span>
                         {accentWord !== null && <> <span className={styles.gradientText}>{accentWord}</span></>}
-                    </h2>
+                    </h1>
                     <img className="underlineImg" src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
 
                     {subtext !== undefined && <p className={styles.subtext}>{subtext}</p>}
@@ -34,7 +34,7 @@ export const HeaderImage = ({ title, imageClass, verification, verified=false, l
                         </div>
                     }
 
-                    <h2>{title}</h2>
+                    <h1>{title}</h1>
                 </div>
             }
 

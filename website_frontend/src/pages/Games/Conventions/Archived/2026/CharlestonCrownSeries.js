@@ -9,7 +9,7 @@ export const CharlestonCrownSeries = () => {
                 description="The most reputable LAN host is back hosting a Call of Duty LAN event - Charleston Crown Series. Compete against teams in-person for $3k in prizing."
                 canonicalPath={"/lans/charleston-crown-series"}
             />
-            <HeaderImage imageClass={"charlestonCrownPage"} />
+            <HeaderImage title={"Charleston Crown Series"} imageClass={"charlestonCrownPage"} />
 
             <div className="eventInfoCardContainer">
                 <div>

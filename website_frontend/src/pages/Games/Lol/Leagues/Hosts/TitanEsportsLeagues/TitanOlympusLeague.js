@@ -9,7 +9,7 @@ export const TitanOlympusLeague = () => {
                 description="Titan Esports League Olympus league for League of Legends players with a ranking of Diamond 4. Play every Thursday each week during the season."
                 canonicalPath={"/games/LoL/leagues/titan-leagues/olympus"}
             />
-            <HeaderImage imageClass={"titanLOLLeagues"} />
+            <HeaderImage title={"Titan Olympus League"} imageClass={"titanLOLLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

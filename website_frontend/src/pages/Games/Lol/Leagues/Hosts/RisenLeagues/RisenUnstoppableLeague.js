@@ -9,7 +9,7 @@ export const RisenUnstoppableLeague = () => {
                 description="This Emerald 1 cap League of Legends league is perfect for those looking for competition with a prize pool. Sign up today."
                 canonicalPath={"/games/LoL/leagues/risen-leagues/unstoppable"}
             />
-            <HeaderImage imageClass={"risenLOLLeagues"} />
+            <HeaderImage title={"Risen Unstoppable League"} imageClass={"risenLOLLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

@@ -23,7 +23,7 @@ export const TitanEsportsLeagues = () => {
                 description="Titan League of Legends Leagues. Find a league from a reputable provider that suits not only your rank but your schedule."
                 canonicalPath={"/games/LoL/leagues/titan-leagues"}
             />
-            <HeaderImage imageClass={"titanLOLLeagues"} />
+            <HeaderImage title={"Titan Leagues"} imageClass={"titanLOLLeagues"} />
 
             <div className="eventBannerContainer">
                 <HostBanner>

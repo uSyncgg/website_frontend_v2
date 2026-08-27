@@ -2,9 +2,9 @@ import { Link } from "react-router";
 import { FaMapMarkedAlt, FaTrophy, FaBookOpen, FaChartLine, FaLayerGroup } from "react-icons/fa";
 import { SeoData } from "components/SeoData/SeoData";
 import { articleList } from "pages/More/Articles/articlesData";
+import { SITE_NAME, SITE_URL } from "utils/site";
+import { ORGANIZATION_ID } from "utils/structuredData";
 import styles from "./ArticleLayout.module.css";
-
-const BASE_URL = "https://usync.gg";
 
 const formatDate = (isoDate) =>
     new Date(`${isoDate}T00:00:00`).toLocaleDateString("en-US", {
@@ -12,13 +12,6 @@ const formatDate = (isoDate) =>
         month: "long",
         day: "numeric",
     });
-
-const JsonLd = ({ data }) => (
-    <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
-);
 
 // Uniform CSS-drawn cover for article cards: uSync purple gradient with a
 // category icon, so every click box matches regardless of source imagery.
@@ -37,7 +30,7 @@ const CardCover = ({ category }) => {
 };
 
 export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
-    const url = `${BASE_URL}/more/articles/${article.slug}`;
+    const url = `${SITE_URL}/more/articles/${article.slug}`;
     const related = articleList
         .filter((a) => a.slug !== article.slug)
         .sort((a, b) => (b.category === article.category) - (a.category === article.category))
@@ -51,17 +44,25 @@ export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
         image: [article.image],
         datePublished: article.datePublished,
         dateModified: article.dateModified,
+        // Same @id as the Organization node the homepage emits, so engines
+        // resolve these to one entity rather than three lookalike publishers.
+        // Kept self-contained (name/logo inline) so the markup still validates
+        // on its own if the reference isn't followed.
         author: {
             "@type": "Organization",
-            name: "uSync",
-            url: BASE_URL,
+            "@id": ORGANIZATION_ID,
+            name: SITE_NAME,
+            url: SITE_URL,
         },
         publisher: {
             "@type": "Organization",
-            name: "uSync",
+            "@id": ORGANIZATION_ID,
+            name: SITE_NAME,
             logo: {
                 "@type": "ImageObject",
-                url: `${BASE_URL}/logo512.png`,
+                url: `${SITE_URL}/logo512.png`,
+                width: 512,
+                height: 512,
             },
         },
         mainEntityOfPage: {
@@ -75,8 +76,8 @@ export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
-            { "@type": "ListItem", position: 2, name: "Articles", item: `${BASE_URL}/more/articles` },
+            { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+            { "@type": "ListItem", position: 2, name: "Articles", item: `${SITE_URL}/more/articles` },
             { "@type": "ListItem", position: 3, name: article.name, item: url },
         ],
     };
@@ -100,14 +101,13 @@ export const ArticleLayout = ({ article, takeaways, faqs, children }) => {
                 description={article.description}
                 canonicalPath={`/more/articles/${article.slug}`}
                 image={article.image}
+                imageAlt={article.imageAlt}
                 type="article"
                 publishedTime={article.datePublished}
                 modifiedTime={article.dateModified}
-                author="uSync"
+                author={SITE_NAME}
+                jsonLd={[articleLd, breadcrumbLd, ...(faqLd ? [faqLd] : [])]}
             />
-            <JsonLd data={articleLd} />
-            <JsonLd data={breadcrumbLd} />
-            {faqLd && <JsonLd data={faqLd} />}
 
             <div className={styles.pageGrid}>
             <article className={styles.article}>

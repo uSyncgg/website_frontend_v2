@@ -31,12 +31,12 @@ export const ContactUs = () => {
             </div>
 
             <div className={styles.subscriptionContainer}>
-                <h1 className={styles.verificationDesc}>
-                    At uSync we strive to bring all of the tournaments, leagues, LANs, and more to one easy and accessible place. 
-                    You won't have to waste your time going from site to site or endlessly scrolling on Twitter/Discord just to find competition. 
-                    By utilizing the supported events on our website, you have access to all of the esports competitions in one simple place. 
+                <p className={styles.verificationDesc}>
+                    At uSync we strive to bring all of the tournaments, leagues, LANs, and more to one easy and accessible place.
+                    You won't have to waste your time going from site to site or endlessly scrolling on Twitter/Discord just to find competition.
+                    By utilizing the supported events on our website, you have access to all of the esports competitions in one simple place.
                     We are the game hub of competitive titles across all of esports!
-                </h1>
+                </p>
             </div>
 
             <div className="hr" />

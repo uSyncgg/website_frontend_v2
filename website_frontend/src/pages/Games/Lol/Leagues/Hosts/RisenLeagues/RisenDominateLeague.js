@@ -9,7 +9,7 @@ export const RisenDominateLeague = () => {
                 description="Risen Dominate is a League of Legends Diamond 1 cap league. Does your team have what it takes to take the winning trophy?"
                 canonicalPath={"/games/LoL/leagues/risen-leagues/dominate"}
             />
-            <HeaderImage imageClass={"risenLOLLeagues"} />
+            <HeaderImage title={"Risen Dominate League"} imageClass={"risenLOLLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

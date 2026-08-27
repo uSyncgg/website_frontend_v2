@@ -5,7 +5,7 @@ function BannerTitle({path, children}) {
     return (
         <div className={styles.bannerTitle}>
             <Link to={path}>
-                <h1>{children}</h1>
+                <h2>{children}</h2>
             </Link>
         </div>
     );

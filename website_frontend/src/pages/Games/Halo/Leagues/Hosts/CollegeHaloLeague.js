@@ -9,7 +9,7 @@ export const CollegeHaloLeague = () => {
                 description="UGC Halo is the #1 collegiate Halo league. Full time college students can compete at the highest level and win cash prizes."
                 canonicalPath={"/games/halo/leagues/ugc-halo"}
             />
-            <HeaderImage imageClass={"ugcPage"} />
+            <HeaderImage title={"College League"} imageClass={"ugcPage"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

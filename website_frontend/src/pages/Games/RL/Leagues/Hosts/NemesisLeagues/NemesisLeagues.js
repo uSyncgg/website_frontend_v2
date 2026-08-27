@@ -19,7 +19,7 @@ export const NemesisLeagues = () => {
                 description="Nemesis Rocket League Leagues. With range based MMR leagues this is the perfect opportunity for North American RL players wanted to compete at the next level."
                 canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues"}
             />
-            <HeaderImage imageClass={"nemesisRLLeagues"} />
+            <HeaderImage title={"Nemesis Leagues"} imageClass={"nemesisRLLeagues"} />
 
             <div className="eventBannerContainer">
                 <HostBanner>

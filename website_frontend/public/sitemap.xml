@@ -314,15 +314,9 @@
   <url><loc>https://www.usync.gg/games/warzone/wagers/gamersaloon</loc></url>
   <url><loc>https://www.usync.gg/games/warzone/wagers/ewagers</loc></url>
 
-  <!-- Payment -->
-  <url><loc>https://www.usync.gg/paymentform</loc></url>
-  <url><loc>https://www.usync.gg/paymentform/review</loc></url>
-  <url><loc>https://www.usync.gg/checkout</loc></url>
-  <url><loc>https://www.usync.gg/paymentform/test/receipt</loc></url>
-  <url><loc>https://www.usync.gg/payment</loc></url>
-
   <!-- LANs -->
-  <url><loc>https://www.usync.gg/LanMap</loc></url>
+  <!-- /LanMap has no React route and renders a blank page; pulled from the
+       sitemap so it can't be indexed. Decide whether to 301 it to /lans. -->
   <url><loc>https://www.usync.gg/other-lans</loc></url>
   <!-- CoD LANs -->
   <url><loc>https://www.usync.gg/lans/shintochamps2026</loc></url>
@@ -353,25 +347,12 @@
   <url><loc>https://www.usync.gg/lans/cs2-10-mans-2026</loc></url>
   <url><loc>https://www.usync.gg/lans/the-retake</loc></url>
   <url><loc>https://www.usync.gg/lans/shinto-test</loc></url>
-  <url><loc>https://www.usync.gg/lans/rva-esports-championship-2026</loc></url>
   <url><loc>https://www.usync.gg/lans/immersecon-2026</loc></url>
   <url><loc>https://www.usync.gg/lans/sfge-2026</loc></url>
   <url><loc>https://www.usync.gg/lans/dreamcon2026</loc></url>
   <url><loc>https://www.usync.gg/lans/summercon-ws-2026</loc></url>
   <url><loc>https://www.usync.gg/lans/egochall-tournament</loc></url>
   <url><loc>https://www.usync.gg/lans/ewgl2</loc></url>
-  <url><loc>https://www.usync.gg/lans/emerald-city-2026</loc></url>
-  <url><loc>https://www.usync.gg/lans/operation-cupid</loc></url>
-  <url><loc>https://www.usync.gg/lans/belowzerolan-winter-26</loc></url>
-  <url><loc>https://www.usync.gg/lans/shintogc-major-iii-2026</loc></url>
-  <url><loc>https://www.usync.gg/lans/g-site-bo7</loc></url>
-  <url><loc>https://www.usync.gg/lans/heartland-2026</loc></url>
-  <url><loc>https://www.usync.gg/lans/midwest-battleground-2026</loc></url>
-  <url><loc>https://www.usync.gg/lans/kamicon-17</loc></url>
-  <url><loc>https://www.usync.gg/lans/dreamhack-birmingham</loc></url>
-  <url><loc>https://www.usync.gg/lans/forlan-spring-2026</loc></url>
-  <url><loc>https://www.usync.gg/lans/low-ping-lan-2026</loc></url>
-  <url><loc>https://www.usync.gg/lans/tomorrowlan_2026</loc></url>
   <url><loc>https://www.usync.gg/lans/macs-spring-2026</loc></url>
   <url><loc>https://www.usync.gg/lans/charleston-crown-series</loc></url>
   <url><loc>https://www.usync.gg/lans/rmcs-spring-2026</loc></url>

@@ -9,7 +9,7 @@ export const AegisDefendersLeague = () => {
                 description="Aegis Defenders League is for League of Legends players with less than 100LP. Join a league that fits you today."
                 canonicalPath={"/games/LoL/leagues/aegis-leagues/defender"}
             />
-            <HeaderImage imageClass={"aegisLOLLeagues"} />
+            <HeaderImage title={"Aegis Defenders League"} imageClass={"aegisLOLLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

@@ -9,7 +9,7 @@ export const RLPCDoubleALeague = () => {
                 description="RLPC Double A League for Rocket League players with 1350 - 1574 MMR. A free draft based 3v3 North American league. Three seasons per year."
                 canonicalPath={"/games/RocketLeague/leagues/rlpc-leagues/aa"}
             />
-            <HeaderImage imageClass={"rlpcRLLeagues"} />
+            <HeaderImage title={"RLPC AA League"} imageClass={"rlpcRLLeagues"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

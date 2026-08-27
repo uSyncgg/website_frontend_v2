@@ -8,7 +8,7 @@ export const Valorant = () => {
                 description="Find Valorant esports events. Browse head-to-head scrim finders, leagues, and wager platforms for Valorant players of all skill levels."
                 canonicalPath={"/games/Valorant"}
             />
-            <HeaderImage imageClass={"valGamePage"} />
+            <HeaderImage title={"Valorant"} imageClass={"valGamePage"} />
             <EventTypeImages page={"Valorant"} />
         </div>
     );
