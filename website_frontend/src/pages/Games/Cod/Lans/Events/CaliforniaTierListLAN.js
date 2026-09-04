@@ -10,7 +10,7 @@ export const CaliforniaTierListLAN = () => {
                 canonicalPath={"/lans/california-tier-list-lan"}
             />
 
-            <HeaderImage title={"California Tier List LAN"} imageClass={"eventPage"} />
+            <HeaderImage imageClass={"caliTier2"} />
 
             <div className="verifiedContainer">
                 <VerifiedText />
