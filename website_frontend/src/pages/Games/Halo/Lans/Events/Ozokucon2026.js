@@ -1,7 +1,15 @@
 import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData } from "components";
+import { useEvent } from "hooks";
 import '../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
 
 export const Ozokucon2026 = () => {
+    const { data, error } = useEvent("lans", "Halo", "Ozokucon 2026");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -10,7 +18,7 @@ export const Ozokucon2026 = () => {
                 canonicalPath={"/lans/ozokucon-2026"}
             />
 
-            <HeaderImage title={"Ozokucon 2026"} imageClass={"eventPage"} />
+            <HeaderImage title={"Ozokucon 2026"} imageUrl={data?.header_img} />
 
             <div className="eventInfoCardContainer">
                 <div>

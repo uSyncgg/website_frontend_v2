@@ -7,13 +7,6 @@
     margin: 0 auto;
 }
 
-.hrEvents {
-  border-bottom: solid white;
-  margin: 0 auto 2rem;
-  width: 90%;
-  max-width: 900px;
-}
-
 .eventSeparationContainer {
   align-items: center;
   justify-content: center;

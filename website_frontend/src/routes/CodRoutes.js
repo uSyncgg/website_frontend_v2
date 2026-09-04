@@ -35,7 +35,6 @@ import { CorporateCodLeague } from 'pages/Games/Cod/Leagues/Hosts/CorporateCodLe
 import { ECACEsportsLeague as ECACCodLeague } from 'pages/Games/Cod/Leagues/Hosts/ECACEsportsLeague';
 import { EliteWarfareGamingLeague } from 'pages/Games/Cod/Leagues/Hosts/EliteWarfareGamingLeague';
 import { FemaleCodLeague } from 'pages/Games/Cod/Leagues/Hosts/FemaleCodLeague';
-import { IXIEsportsLeague } from 'pages/Games/Cod/Leagues/Hosts/IXIEsportsLeague';
 import { NJCAAELeague as NJCAAECodLeague } from 'pages/Games/Cod/Leagues/Hosts/NJCAAELeague';
 // TEMP REMOVED, THEY MAY RESTART
 // import { OldHeadsCircuitLeague } from 'pages/Games/Cod/Leagues/Hosts/OldHeadsCircuitLeague';
@@ -85,7 +84,6 @@ const CodRoutes = () => (
         <Route path='leagues/zoned-out' element={<ZonedOutGamingLeague />} />
         <Route path='leagues/airforce-league' element={<AirForceCodLeague />} />
         <Route path='leagues/corporate-cod-league' element={<CorporateCodLeague />} />
-        <Route path='leagues/ixi-esports' element={<IXIEsportsLeague />} />
         <Route path='leagues/tpc-league' element={<PremierCircuitLeague />} />
         <Route path='leagues/cod-rec-league' element={<CodRecLeagues />} />
         <Route path='leagues/cod-rec-league/cod-rec-premade-league' element={<CodRecPremadeLeague />} />

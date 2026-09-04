@@ -1,7 +1,15 @@
 import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData, VerifiedText } from "components";
+import { useEvent } from "hooks";
 import '../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
 
 export const CaliforniaEsportsMW4Kickoff = () => {
+    const { data, error } = useEvent("lans", "Call of Duty", "California Esports MW4 Kickoff");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -10,7 +18,7 @@ export const CaliforniaEsportsMW4Kickoff = () => {
                 title={"California Esports MW4 Kickoff - Call of Duty"}
             />
 
-            <HeaderImage imageClass={"caliTier4"} />
+            <HeaderImage imageUrl={data?.header_img} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

@@ -1,16 +1,21 @@
 import { useMemo, useState } from "react";
-import { SeoData, HostBanner, LanMap, EventListFilters } from "components";
-import { COD_LAN_MARKERS } from 'data/lanMarkers';
+import { SeoData, HostBanner, NoEvents, LanMap, EventListFilters } from "components";
+import { useLanEvents } from "hooks";
+import { toLanMarkers } from 'data/lanMarkers';
 import '../../EventBanners.css';
 
-const LANS = [
-    { name: "EWGL 3", path: "/lans/ewgl3", imgUrl: "https://i.imgur.com/7o2e5a3.png", alt: "EWGL 3", verified: false, region: "St Johns, FL", buttonTitle: "More Info" },
-    { name: "Shinto Champs", path: "/lans/shintochamps2026", imgUrl: "https://i.imgur.com/0TKXrhh.png", alt: "Shinto Champs", verified: false, region: "Columbus, OH", buttonTitle: "More Info" },
-    { name: "GA:CoD Modern Warfare 4 Launch Tournament", path: "/lans/ga-cod-modern-warfare-4-launch-tournament", imgUrl: "https://i.imgur.com/EWYDkHI.png", alt: "GA:CoD Modern Warfare 4 Launch Tournament", verified: false, region: "Columbus, OH", buttonTitle: "More Info" },
-    { name: "California Tier List LAN", path: "/lans/california-tier-list-lan", imgUrl: "https://i.imgur.com/1fHItii.png", alt: "California Tier List LAN", verified: false, region: "Lake Forest, CA", buttonTitle: "More Info" },
-];
+const GAME = "Call of Duty";
+const MAP_GAME = "CoD";
 
-const REGION_OPTIONS = Array.from(new Set(LANS.map(l => l.region)));
+const normalizeLan = (event) => ({
+    name: event.name,
+    path: `/lans${event.path}`,
+    imgUrl: event.banner_img,
+    alt: event.name,
+    verified: !!event.verified,
+    region: event.location,
+    buttonTitle: "More Info",
+});
 
 const applyFiltersAndSort = (list, { selectedRegions, verifiedOnly, sort }) => {
     let result = list.filter(l =>
@@ -43,13 +48,23 @@ const LanBanner = ({ lan }) => (
 );
 
 export const CodLans = () => {
+    const { data, loading, error } = useLanEvents(GAME);
+
     const [sort, setSort] = useState('featured');
     const [selectedRegions, setSelectedRegions] = useState([]);
     const [verifiedOnly, setVerifiedOnly] = useState(false);
 
+    const allLans = useMemo(() => (data || []).map(normalizeLan), [data]);
+    const markers = useMemo(() => toLanMarkers(data, GAME), [data]);
+
+    const regionOptions = useMemo(
+        () => Array.from(new Set(allLans.map(l => l.region))),
+        [allLans]
+    );
+
     const filteredLans = useMemo(
-        () => applyFiltersAndSort(LANS, { selectedRegions, verifiedOnly, sort }),
-        [sort, selectedRegions, verifiedOnly]
+        () => applyFiltersAndSort(allLans, { selectedRegions, verifiedOnly, sort }),
+        [allLans, sort, selectedRegions, verifiedOnly]
     );
 
     const clearFilters = () => {
@@ -61,17 +76,18 @@ export const CodLans = () => {
         <div className="standardContainer minorBottomSpace">
             <SeoData
                 title={"Call of Duty LANs"}
-                description="Call of Duty LAN tournaments near you. Find the closest Call of Duty LANs to where you live and work. Every LAN going on near you."
+                description={"Call of Duty LAN tournaments near you. Find the closest Call of Duty LANs to where you live and work. Every LAN going on near you."}
                 canonicalPath={"/games/call-of-duty/lans"}
             />
+
             <div className="lanMapContainer">
-                <LanMap markers={COD_LAN_MARKERS} game="CoD" />
+                <LanMap markers={markers} game={MAP_GAME} />
             </div>
 
             <EventListFilters
                 sort={sort}
                 onSortChange={setSort}
-                regionOptions={REGION_OPTIONS}
+                regionOptions={regionOptions}
                 selectedRegions={selectedRegions}
                 onRegionChange={setSelectedRegions}
                 verifiedOnly={verifiedOnly}
@@ -80,7 +96,15 @@ export const CodLans = () => {
                 onClear={clearFilters}
             />
 
-            {filteredLans.length === 0 ? (
+            {loading ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading LANs...</h2>
+            ) : error ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load LANs right now.</h2>
+            ) : allLans.length === 0 ? (
+                <div className="eventBannerContainer">
+                    <NoEvents pageType={"LANs"} />
+                </div>
+            ) : filteredLans.length === 0 ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No results match your filters.</h2>
             ) : (
                 <div className="eventBannerContainer">

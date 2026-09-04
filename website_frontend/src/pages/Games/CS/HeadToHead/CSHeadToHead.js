@@ -1,13 +1,16 @@
 import { useMemo, useState } from "react";
 import { SeoData, HostBanner, HeaderImage, EventListFilters } from "components";
+import { useXpEvents } from "hooks";
 import '../../EventBanners.css';
 
-const HEAD_TO_HEAD = [
-    { name: "FACEIT", path: "/games/CS2/head-to-head/faceit", imgUrl: "https://i.imgur.com/4GwagUk.png", alt: "Faceit Head to Head", verified: true, buttonTitle: "More Info" },
-    { name: "Pracc", path: "/games/CS2/head-to-head/pracc", imgUrl: "https://i.imgur.com/XERVRrh.png", alt: "Pracc Head to Head", verified: false, buttonTitle: "More Info" },
-    { name: "Esport Scrim", path: "/games/CS2/head-to-head/esport-scrim", imgUrl: "https://i.imgur.com/KIPClg9.png", alt: "Esport Scrim Head to Head", verified: false, buttonTitle: "More Info" },
-    { name: "CKRAS", path: "/games/CS2/head-to-head/ckras", imgUrl: "https://i.imgur.com/ry9oAAw.png", alt: "CKRAS Head to Head", verified: false, buttonTitle: "More Info" },
-];
+const normalizeEntry = (host) => ({
+    name: host.name,
+    path: `/games/CS2/head-to-head${host.path}`,
+    imgUrl: host.banner_img,
+    alt: host.name,
+    verified: !!host.verified,
+    buttonTitle: "More Info",
+});
 
 const applyFiltersAndSort = (list, { verifiedOnly, sort }) => {
     let result = list.filter(h => !verifiedOnly || h.verified);
@@ -36,12 +39,16 @@ const HeadToHeadBanner = ({ entry }) => (
 );
 
 export const CSHeadToHead = () => {
+    const { data, loading, error } = useXpEvents("CS2");
+
     const [sort, setSort] = useState('featured');
     const [verifiedOnly, setVerifiedOnly] = useState(false);
 
+    const allEntries = useMemo(() => (data || []).map(normalizeEntry), [data]);
+
     const filteredEntries = useMemo(
-        () => applyFiltersAndSort(HEAD_TO_HEAD, { verifiedOnly, sort }),
-        [sort, verifiedOnly]
+        () => applyFiltersAndSort(allEntries, { verifiedOnly, sort }),
+        [allEntries, sort, verifiedOnly]
     );
 
     const clearFilters = () => {
@@ -66,7 +73,11 @@ export const CSHeadToHead = () => {
                 onClear={clearFilters}
             />
 
-            {filteredEntries.length === 0 ? (
+            {loading ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading head-to-head platforms...</h2>
+            ) : error ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load head-to-head platforms right now.</h2>
+            ) : filteredEntries.length === 0 ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No results match your filters.</h2>
             ) : (
                 <div className="eventBannerContainer">

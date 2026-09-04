@@ -1,7 +1,22 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
+import { useEvent } from "hooks";
 import '../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
+
+const restrictionInfoList = (data) => [
+    ...Object.values(data.restrictions || {}).flatMap(v => Array.isArray(v) ? [v.map(s => String(s).trim()).join(', ')] : [v]),
+    (data.availability?.length === 1 && data.availability[0] === 'Worldwide')
+        ? 'Available Worldwide'
+        : `Available in: ${(data.availability || []).join(', ')}`,
+];
 
 export const Ewagers = () => {
+    const { data, loading, error } = useEvent("wagers", "Warzone", "Ewagers");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -9,21 +24,33 @@ export const Ewagers = () => {
                 description="Ewagers Warzone wager platform. All game modes from 1v1 to 6v6 with any wager amount. Set your own odds with 5% wager fee. Available worldwide for 18+ players."
                 canonicalPath={"/games/warzone/wagers/ewagers"}
             />
-            <HeaderImage title={"Ewagers"} imageClass={"eventPage"} />
+            <HeaderImage imageUrl={data?.header_img} title={"Ewagers"} />
 
-            <div className="eventInfoCardContainer">
-                <div>
-                    <EventInfoCard title={"Fees"} infoList={["3% Deposit AND Withdrawal Fee", "5% Wager Fee"]} footer={<ExternalButton host={"Ewagers"} blank={true} title={"Join Now"} path={"https://ewagers.co/games?page=1"} />}/>
+            {data?.verified &&
+                <div className="verifiedContainer">
+                    <VerifiedText />
                 </div>
+            }
 
-                <div>
-                    <EventInfoCard title={"Details"} infoList={["All Game Modes / 1v1 - 6v6 Matches", "Any Wager Amount Allowed", "Ability to Set Wager Odds", "Little to No Matches", "Live Website Support"]} />
-                </div>
+            {loading ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Loading wager info...</p>
+            ) : error || !data ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Unable to load this wager platform right now.</p>
+            ) : (
+                <div className="eventInfoCardContainer">
+                    <div>
+                        <EventInfoCard title={"Fees"} infoList={data.fee_details} footer={<ExternalButton host={data.name} blank={true} title={"Join Now"} path={data.url} />}/>
+                    </div>
 
-                <div>
-                    <EventInfoCard title={"Restrictions"} infoList={["18+", "Available Worldwide", "Certain State / Global Restrictions"]} />
+                    <div>
+                        <EventInfoCard title={"Details"} infoList={data.details} />
+                    </div>
+
+                    <div>
+                        <EventInfoCard title={"Restrictions"} infoList={restrictionInfoList(data)} />
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="backButtonContainer">
                 <BackButton path={"/games/warzone/wagers"} />

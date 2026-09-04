@@ -1,7 +1,15 @@
 import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData } from "components";
+import { useEvent } from "hooks";
 import '../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
 
 export const GACoDModernWarfare4LaunchTournament = () => {
+    const { data, error } = useEvent("lans", "Call of Duty", "GA:CoD Modern Warfare 4 Launch Tournament");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -10,7 +18,7 @@ export const GACoDModernWarfare4LaunchTournament = () => {
                 canonicalPath={"/lans/ga-cod-modern-warfare-4-launch-tournament"}
             />
 
-            <HeaderImage title={"GA:CoD Modern Warfare 4 Launch Tournament"} imageClass={"eventPage"} />
+            <HeaderImage title={"GA:CoD Modern Warfare 4 Launch Tournament"} imageUrl={data?.header_img} />
 
             <div className="eventInfoCardContainer">
                 <div>

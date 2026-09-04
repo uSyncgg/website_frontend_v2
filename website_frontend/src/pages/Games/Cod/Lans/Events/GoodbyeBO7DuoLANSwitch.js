@@ -1,7 +1,15 @@
 import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData, VerifiedText } from "components";
+import { useEvent } from "hooks";
 import '../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
 
 export const GoodbyeBO7DuoLANSwitch = () => {
+    const { data, error } = useEvent("lans", "Call of Duty", "Goodbye BO7 Duo LAN Switch");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -10,7 +18,7 @@ export const GoodbyeBO7DuoLANSwitch = () => {
                 title={"Goodbye BO7 Duo LAN Switch - Call of Duty"}
             />
 
-            <HeaderImage imageClass={"caliTier1"} />
+            <HeaderImage imageUrl={data?.header_img} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

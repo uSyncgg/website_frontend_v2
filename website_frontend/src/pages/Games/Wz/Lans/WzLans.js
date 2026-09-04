@@ -1,11 +1,21 @@
 import { useMemo, useState } from "react";
 import { SeoData, HostBanner, NoEvents, LanMap, EventListFilters } from "components";
-import { WZ_LAN_MARKERS } from 'data/lanMarkers';
+import { useLanEvents } from "hooks";
+import { toLanMarkers } from 'data/lanMarkers';
 import '../../EventBanners.css';
 
-const LANS = [];
+const GAME = "Warzone";
+const MAP_GAME = "Warzone";
 
-const REGION_OPTIONS = Array.from(new Set(LANS.map(l => l.region)));
+const normalizeLan = (event) => ({
+    name: event.name,
+    path: `/lans${event.path}`,
+    imgUrl: event.banner_img,
+    alt: event.name,
+    verified: !!event.verified,
+    region: event.location,
+    buttonTitle: "More Info",
+});
 
 const applyFiltersAndSort = (list, { selectedRegions, verifiedOnly, sort }) => {
     let result = list.filter(l =>
@@ -38,13 +48,23 @@ const LanBanner = ({ lan }) => (
 );
 
 export const WzLans = () => {
+    const { data, loading, error } = useLanEvents(GAME);
+
     const [sort, setSort] = useState('featured');
     const [selectedRegions, setSelectedRegions] = useState([]);
     const [verifiedOnly, setVerifiedOnly] = useState(false);
 
+    const allLans = useMemo(() => (data || []).map(normalizeLan), [data]);
+    const markers = useMemo(() => toLanMarkers(data, GAME), [data]);
+
+    const regionOptions = useMemo(
+        () => Array.from(new Set(allLans.map(l => l.region))),
+        [allLans]
+    );
+
     const filteredLans = useMemo(
-        () => applyFiltersAndSort(LANS, { selectedRegions, verifiedOnly, sort }),
-        [sort, selectedRegions, verifiedOnly]
+        () => applyFiltersAndSort(allLans, { selectedRegions, verifiedOnly, sort }),
+        [allLans, sort, selectedRegions, verifiedOnly]
     );
 
     const clearFilters = () => {
@@ -56,18 +76,18 @@ export const WzLans = () => {
         <div className="standardContainer minorBottomSpace">
             <SeoData
                 title={"Warzone LANs"}
-                description="Find Warzone LAN events near you. Browse in-person Call of Duty Warzone LAN tournaments and events happening across North America and beyond."
+                description={"Find Warzone LAN events near you. Browse in-person Call of Duty Warzone LAN tournaments and events happening across North America and beyond."}
                 canonicalPath={"/games/warzone/lans"}
             />
 
             <div className="lanMapContainer">
-                <LanMap markers={WZ_LAN_MARKERS} game="Warzone" />
+                <LanMap markers={markers} game={MAP_GAME} />
             </div>
 
             <EventListFilters
                 sort={sort}
                 onSortChange={setSort}
-                regionOptions={REGION_OPTIONS}
+                regionOptions={regionOptions}
                 selectedRegions={selectedRegions}
                 onRegionChange={setSelectedRegions}
                 verifiedOnly={verifiedOnly}
@@ -76,8 +96,16 @@ export const WzLans = () => {
                 onClear={clearFilters}
             />
 
-            {filteredLans.length === 0 ? (
-                <NoEvents pageType={"LANs"} />
+            {loading ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading LANs...</h2>
+            ) : error ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load LANs right now.</h2>
+            ) : allLans.length === 0 ? (
+                <div className="eventBannerContainer">
+                    <NoEvents pageType={"LANs"} />
+                </div>
+            ) : filteredLans.length === 0 ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No results match your filters.</h2>
             ) : (
                 <div className="eventBannerContainer">
                     {filteredLans.map(lan => (

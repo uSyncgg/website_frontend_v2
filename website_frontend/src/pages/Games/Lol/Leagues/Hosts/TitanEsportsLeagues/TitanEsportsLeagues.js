@@ -1,160 +1,56 @@
 import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
-import { useCheckResize } from "hooks";
+import { useLeagueEvents, useLeagueChildren } from "hooks";
 import '../../../../EventBanners.css';
 
-export const TitanEsportsLeagues = () => {
-    const isMobile = useCheckResize();
+const GAME = "League of Legends";
+const PARENT_NAME = "Titan Esports";
+const ROUTE_PREFIX = "/games/LoL/leagues";
 
-    const immortal = isMobile ? "Immortal League - 1200 LP Cap | Thursdays" : "1200 LP Cap | Thursdays";
-    const ascendant = isMobile ? "Ascendant League - 500 LP Cap | Sundays" : "500 LP Cap | Sundays";
-    const vanquisher = isMobile ? "Vanquisher League - M100 Cap | Tuesdays" : "M100 Cap | Tuesdays";
-    const sentinel = isMobile ? "Sentinel League - M100 Avg | Fridays" : "M100 Avg | Fridays";
-    const eternal = isMobile ? "Eternal League - Diamond 4 Avg | Mondays" : "Diamond 4 Avg | Mondays";
-    const conqueror = isMobile ? "Conqueror League - Diamond 4 Cap | Wednesdays" : "Diamond 4 Cap | Wednesdays";
-    const olympus = isMobile ? "Olympus League - Diamond 4 Cap | Fridays" : "Diamond 4 Cap | Fridays";
-    const divinity = isMobile ? "Divinity League - Emerald 4 Cap | Mondays" : "Emerald 4 Cap | Mondays";
-    const berserker = isMobile ? "Berserker League - Emerald 4 Avg | Thursdays" : "Emerald 4 Avg | Thursdays";
-    const gladiator = isMobile ? "Gladiator League - Platinum 4 Cap | Tuesdays" : "Platinum 4 Cap | Tuesdays";
+export const TitanEsportsLeagues = () => {
+    const { data: hosts } = useLeagueEvents(GAME);
+    const { data: children, loading, error } = useLeagueChildren(GAME, PARENT_NAME);
+
+    const parent = (hosts || []).find(h => h.name === PARENT_NAME);
+    const headerTitle = parent?.verified ? undefined : (parent?.name || undefined);
 
     return (
         <div className="standardContainer">
             <SeoData
                 title={"Titan Leagues - League of Legends"}
-                description="Titan League of Legends Leagues. Find a league from a reputable provider that suits not only your rank but your schedule."
+                description={"Titan League of Legends Leagues. Find a league from a reputable provider that suits not only your rank but your schedule."}
                 canonicalPath={"/games/LoL/leagues/titan-leagues"}
             />
-            <HeaderImage imageClass={"titanLOLLeagues"} />
+            <HeaderImage title={headerTitle} imageClass={"titanLOLLeagues"} imageUrl={parent?.header_img} />
 
             <div className="eventBannerContainer">
-                <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/immortal"} verified={true}>Immortal League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/LoL/leagues/titan-leagues/immortal"} 
-                        imgUrl={"https://i.imgur.com/SoRhxEf.png"} 
-                        alt={"Titan Leagues"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{immortal}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/titan-leagues/immortal"} />
-                </HostBanner>
+                {loading ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>
+                ) : error ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load leagues right now.</h2>
+                ) : (children || []).length === 0 ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No leagues available right now.</h2>
+                ) : (
+                    (children || [])
+                        .slice()
+                        .sort((a, b) => (b.verified ? 1 : 0) - (a.verified ? 1 : 0))
+                        .map(child => {
+                            const path = `${ROUTE_PREFIX}${child.path}`;
 
-                <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/ascendant"} verified={true}>Ascendant League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/LoL/leagues/titan-leagues/ascendant"} 
-                        imgUrl={"https://i.imgur.com/SoRhxEf.png"} 
-                        alt={"Titan Leagues"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{ascendant}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/titan-leagues/ascendant"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/vanquisher"} verified={true}>Vanquisher League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/LoL/leagues/titan-leagues/vanquisher"} 
-                        imgUrl={"https://i.imgur.com/SoRhxEf.png"} 
-                        alt={"Titan Leagues"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{vanquisher}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/titan-leagues/vanquisher"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/sentinel"} verified={true}>Sentinel League</HostBanner.Title>
-                    <HostBanner.Image
-                        path={"/games/LoL/leagues/titan-leagues/sentinel"}
-                        imgUrl={"https://i.imgur.com/SoRhxEf.png"}
-                        alt={"Titan Leagues"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{sentinel}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/titan-leagues/sentinel"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/eternal"} verified={true}>Eternal League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/LoL/leagues/titan-leagues/eternal"} 
-                        imgUrl={"https://i.imgur.com/SoRhxEf.png"} 
-                        alt={"Titan Leagues"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{eternal}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/titan-leagues/eternal"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/conqueror"} verified={true}>Conqueror League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/LoL/leagues/titan-leagues/conqueror"} 
-                        imgUrl={"https://i.imgur.com/SoRhxEf.png"} 
-                        alt={"Titan Leagues"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{conqueror}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/titan-leagues/conqueror"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/olympus"} verified={true}>Olympus League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/LoL/leagues/titan-leagues/olympus"} 
-                        imgUrl={"https://i.imgur.com/SoRhxEf.png"} 
-                        alt={"Titan Leagues"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{olympus}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/titan-leagues/olympus"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/divinity"} verified={true}>Divinity League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/LoL/leagues/titan-leagues/divinity"} 
-                        imgUrl={"https://i.imgur.com/SoRhxEf.png"} 
-                        alt={"Titan Leagues"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{divinity}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/titan-leagues/divinity"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/berserker"} verified={true}>Berserker League</HostBanner.Title>
-                    <HostBanner.Image
-                        path={"/games/LoL/leagues/titan-leagues/berserker"}
-                        imgUrl={"https://i.imgur.com/SoRhxEf.png"}
-                        alt={"Titan Leagues"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{berserker}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/titan-leagues/berserker"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/titan-leagues/gladiator"} verified={true}>Gladiator League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/LoL/leagues/titan-leagues/gladiator"} 
-                        imgUrl={"https://i.imgur.com/SoRhxEf.png"} 
-                        alt={"Titan Leagues"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{gladiator}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/titan-leagues/gladiator"} />
-                </HostBanner>              
-
-                <div className="hrEvents" />
+                            return (
+                                <HostBanner key={path} path={path}>
+                                    <HostBanner.Title path={path} verified={child.verified}>{child.name}</HostBanner.Title>
+                                    <HostBanner.Image
+                                        path={path}
+                                        imgUrl={child.banner_img}
+                                        alt={child.name}
+                                        verified={child.verified}
+                                    />
+                                    <HostBanner.Region>{`${child.team_size} - ${child.region}`}</HostBanner.Region>
+                                    <HostBanner.Button title={"More Info"} path={path} />
+                                </HostBanner>
+                            );
+                        })
+                )}
 
                 <div className="backButtonContainer">
                     <BackButton path={"/games/LoL/leagues"} />

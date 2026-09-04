@@ -1,7 +1,24 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
+import { useEvent } from "hooks";
 import '../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
+
+const restrictionInfoList = (data) => {
+    const avail = (data.availability || []).filter(s => s && s.trim());
+    const items = Object.values(data.restrictions || {}).flatMap(v => Array.isArray(v) ? [v.map(s => String(s).trim()).join(', ')] : [v]);
+    if (avail.length > 0) {
+        items.push(avail.length === 1 && avail[0] === 'Worldwide' ? 'Available Worldwide' : `Available in: ${avail.join(', ')}`);
+    }
+    return items;
+};
 
 export const ShowdownGamingWagers = () => {
+    const { data, loading, error } = useEvent("wagers", "CS2", "Showdown Gaming");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -9,21 +26,33 @@ export const ShowdownGamingWagers = () => {
                 description="Counter-Strike 2 duel wager matches. Compete one on one where winner takes all of the cash wagered."
                 canonicalPath={"/games/CS2/wagers/showdowngaming_cs2"}
             />
-            <HeaderImage title={"Showdown Gaming"} imageClass={"eventPage"} />
+            <HeaderImage imageUrl={data?.header_img} title={"Showdown Gaming"} />
 
-            <div className="eventInfoCardContainer">
-                <div>
-                    <EventInfoCard title={"Fees"} infoList={["Crypto Fees", "Various Site Fees"]} footer={<ExternalButton host={"Showdown Gaming"} blank={true} title={"Join Now"} path={"https://showdown.win/duels"} />}/>
+            {data?.verified &&
+                <div className="verifiedContainer">
+                    <VerifiedText />
                 </div>
+            }
 
-                <div>
-                    <EventInfoCard title={"Details"} infoList={["5v5 and 1v1 Wagers ONLY", "Free Deathmatches", "Crypto Based Wagers", "VERY Small Numbers of User", "No Terms of Service = Less Reliable"]} />
-                </div>
+            {loading ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Loading wager info...</p>
+            ) : error || !data ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Unable to load this wager platform right now.</p>
+            ) : (
+                <div className="eventInfoCardContainer">
+                    <div>
+                        <EventInfoCard title={"Fees"} infoList={data.fee_details} footer={<ExternalButton host={data.name} blank={true} title={"Join Now"} path={data.url} />}/>
+                    </div>
 
-                <div>
-                    <EventInfoCard title={"Restrictions"} infoList={["Available Worldwide"]} />
+                    <div>
+                        <EventInfoCard title={"Details"} infoList={data.details} />
+                    </div>
+
+                    <div>
+                        <EventInfoCard title={"Restrictions"} infoList={restrictionInfoList(data)} />
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="backButtonContainer">
                 <BackButton path={"/games/CS2/wagers"} />

@@ -1,11 +1,16 @@
 import { useMemo, useState } from "react";
 import { SeoData, HostBanner, HeaderImage, EventListFilters } from "components";
+import { useWagerEvents } from "hooks";
 import '../../EventBanners.css';
 
-const WAGERS = [
-    { name: "Checkmate Gaming", path: "/games/halo/wagers/cmg", imgUrl: "https://i.imgur.com/QKP5L9N.png", alt: "CMG Wagers", verified: false, buttonTitle: "More Info" },
-    { name: "Ewagers", path: "/games/halo/wagers/ewagers", imgUrl: "https://i.imgur.com/FAg32lR.png", alt: "Ewagers", verified: false, buttonTitle: "More Info" },
-];
+const normalizeWager = (host) => ({
+    name: host.name,
+    path: `/games/halo/wagers${host.path}`,
+    imgUrl: host.banner_img,
+    alt: host.name,
+    verified: !!host.verified,
+    buttonTitle: "More Info",
+});
 
 const applyFiltersAndSort = (list, { verifiedOnly, sort }) => {
     let result = list.filter(w => !verifiedOnly || w.verified);
@@ -34,12 +39,16 @@ const WagerBanner = ({ wager }) => (
 );
 
 export const HaloWagers = () => {
+    const { data, loading, error } = useWagerEvents("Halo");
+
     const [sort, setSort] = useState('featured');
     const [verifiedOnly, setVerifiedOnly] = useState(false);
 
+    const allWagers = useMemo(() => (data || []).map(normalizeWager), [data]);
+
     const filteredWagers = useMemo(
-        () => applyFiltersAndSort(WAGERS, { verifiedOnly, sort }),
-        [sort, verifiedOnly]
+        () => applyFiltersAndSort(allWagers, { verifiedOnly, sort }),
+        [allWagers, sort, verifiedOnly]
     );
 
     const clearFilters = () => {
@@ -64,7 +73,11 @@ export const HaloWagers = () => {
                 onClear={clearFilters}
             />
 
-            {filteredWagers.length === 0 ? (
+            {loading ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading wagers...</h2>
+            ) : error ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load wagers right now.</h2>
+            ) : filteredWagers.length === 0 ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No results match your filters.</h2>
             ) : (
                 <div className="eventBannerContainer">

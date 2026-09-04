@@ -1,13 +1,21 @@
 import { useMemo, useState } from "react";
-import { SeoData, HostBanner, LanMap, EventListFilters } from "components";
-import { LOL_LAN_MARKERS } from 'data/lanMarkers';
+import { SeoData, HostBanner, NoEvents, LanMap, EventListFilters } from "components";
+import { useLanEvents } from "hooks";
+import { toLanMarkers } from 'data/lanMarkers';
 import '../../EventBanners.css';
 
-const LANS = [
-    { name: "5v5 Pittsburgh - Goat Gamers Lounge", path: "/lans/5v5-pittsburgh-goat-gamers-lounge", imgUrl: "https://i.imgur.com/VXdSRXE.png", alt: "5v5 Pittsburgh - Goat Gamers Lounge", verified: false, region: "Pittsburgh, PA", buttonTitle: "More Info" },
-];
+const GAME = "League of Legends";
+const MAP_GAME = "LoL";
 
-const REGION_OPTIONS = Array.from(new Set(LANS.map(l => l.region)));
+const normalizeLan = (event) => ({
+    name: event.name,
+    path: `/lans${event.path}`,
+    imgUrl: event.banner_img,
+    alt: event.name,
+    verified: !!event.verified,
+    region: event.location,
+    buttonTitle: "More Info",
+});
 
 const applyFiltersAndSort = (list, { selectedRegions, verifiedOnly, sort }) => {
     let result = list.filter(l =>
@@ -40,13 +48,23 @@ const LanBanner = ({ lan }) => (
 );
 
 export const LolLans = () => {
+    const { data, loading, error } = useLanEvents(GAME);
+
     const [sort, setSort] = useState('featured');
     const [selectedRegions, setSelectedRegions] = useState([]);
     const [verifiedOnly, setVerifiedOnly] = useState(false);
 
+    const allLans = useMemo(() => (data || []).map(normalizeLan), [data]);
+    const markers = useMemo(() => toLanMarkers(data, GAME), [data]);
+
+    const regionOptions = useMemo(
+        () => Array.from(new Set(allLans.map(l => l.region))),
+        [allLans]
+    );
+
     const filteredLans = useMemo(
-        () => applyFiltersAndSort(LANS, { selectedRegions, verifiedOnly, sort }),
-        [sort, selectedRegions, verifiedOnly]
+        () => applyFiltersAndSort(allLans, { selectedRegions, verifiedOnly, sort }),
+        [allLans, sort, selectedRegions, verifiedOnly]
     );
 
     const clearFilters = () => {
@@ -58,18 +76,18 @@ export const LolLans = () => {
         <div className="standardContainer minorBottomSpace">
             <SeoData
                 title={"League of Legends LANs"}
-                description="League of Legends LANs near you. Find a LAN that is closest to you on our world renown LAN map."
+                description={"League of Legends LANs near you. Find a LAN that is closest to you on our world renown LAN map."}
                 canonicalPath={"/games/LoL/lans"}
             />
 
             <div className="lanMapContainer">
-                <LanMap markers={LOL_LAN_MARKERS} game="LoL" />
+                <LanMap markers={markers} game={MAP_GAME} />
             </div>
 
             <EventListFilters
                 sort={sort}
                 onSortChange={setSort}
-                regionOptions={REGION_OPTIONS}
+                regionOptions={regionOptions}
                 selectedRegions={selectedRegions}
                 onRegionChange={setSelectedRegions}
                 verifiedOnly={verifiedOnly}
@@ -78,7 +96,15 @@ export const LolLans = () => {
                 onClear={clearFilters}
             />
 
-            {filteredLans.length === 0 ? (
+            {loading ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading LANs...</h2>
+            ) : error ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load LANs right now.</h2>
+            ) : allLans.length === 0 ? (
+                <div className="eventBannerContainer">
+                    <NoEvents pageType={"LANs"} />
+                </div>
+            ) : filteredLans.length === 0 ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No results match your filters.</h2>
             ) : (
                 <div className="eventBannerContainer">

@@ -1,7 +1,24 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
+import { useEvent } from "hooks";
 import '../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
+
+const restrictionInfoList = (data) => {
+    const avail = (data.availability || []).filter(s => s && s.trim());
+    const items = Object.values(data.restrictions || {}).flatMap(v => Array.isArray(v) ? [v.map(s => String(s).trim()).join(', ')] : [v]);
+    if (avail.length > 0) {
+        items.push(avail.length === 1 && avail[0] === 'Worldwide' ? 'Available Worldwide' : `Available in: ${avail.join(', ')}`);
+    }
+    return items;
+};
 
 export const EsportScrimH2H = () => {
+    const { data, loading, error } = useEvent("head-to-head", "CS2", "Esport Scrim");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -9,21 +26,33 @@ export const EsportScrimH2H = () => {
                 description="Esports Scrims is a free Counter-Strike 2 scrim finder. Find your most competitive matches in minutes."
                 canonicalPath={"/games/CS2/head-to-head/esport-scrim"}
             />
-            <HeaderImage title={"Esport Scrim"} imageClass={"eventPage"} />
+            <HeaderImage imageUrl={data?.header_img} title={"Esport Scrim"} />
 
-            <div className="eventInfoCardContainer">
-                <div>
-                    <EventInfoCard title={"Fees"} infoList={["Free Scrim Finder"]} footer={<ExternalButton host={"Esport Scrim"} blank={true} title={"Join Now"} path={"https://esportscrim.com/"} />}/>
+            {data?.verified &&
+                <div className="verifiedContainer">
+                    <VerifiedText />
                 </div>
+            }
 
-                <div>
-                    <EventInfoCard title={"Details"} infoList={["All Levels of Competition", "NO Game Server Provided", "Small Number of Users Searching for Scrims", "Live Discord Support"]} />
-                </div>
+            {loading ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Loading platform info...</p>
+            ) : error || !data ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Unable to load this platform right now.</p>
+            ) : (
+                <div className="eventInfoCardContainer">
+                    <div>
+                        <EventInfoCard title={"Fees"} infoList={["Free Scrim Finder"]} footer={<ExternalButton host={data.name} blank={true} title={"Join Now"} path={data.url} />}/>
+                    </div>
 
-                <div>
-                    <EventInfoCard title={"Restrictions"} infoList={["Available Regions: NA / EUW / EUNE"]} />
+                    <div>
+                        <EventInfoCard title={"Details"} infoList={data.details} />
+                    </div>
+
+                    <div>
+                        <EventInfoCard title={"Restrictions"} infoList={restrictionInfoList(data)} />
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="backButtonContainer">
                 <BackButton path={"/games/CS2/head-to-head"} />

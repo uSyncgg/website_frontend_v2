@@ -1,14 +1,21 @@
 import { useMemo, useState } from "react";
-import { SeoData, HostBanner, LanMap, EventListFilters } from "components";
-import { HALO_LAN_MARKERS } from 'data/lanMarkers';
+import { SeoData, HostBanner, NoEvents, LanMap, EventListFilters } from "components";
+import { useLanEvents } from "hooks";
+import { toLanMarkers } from 'data/lanMarkers';
 import '../../EventBanners.css';
 
-const LANS = [
-    { name: "Game And Geek Expo 2026", path: "/lans/game-and-geek-2026", imgUrl: "https://i.imgur.com/pR1izqw.png", alt: "Game And Geek Expo 2026", verified: false, region: "Raleigh, NC", buttonTitle: "More Info" },
-    { name: "Ozokucon 2026", path: "/lans/ozokucon-2026", imgUrl: "https://i.imgur.com/ZGIrDlo.png", alt: "Ozokucon 2026", verified: false, region: "Port Huron, MI", buttonTitle: "More Info" },
-];
+const GAME = "Halo";
+const MAP_GAME = "Halo";
 
-const REGION_OPTIONS = Array.from(new Set(LANS.map(l => l.region)));
+const normalizeLan = (event) => ({
+    name: event.name,
+    path: `/lans${event.path}`,
+    imgUrl: event.banner_img,
+    alt: event.name,
+    verified: !!event.verified,
+    region: event.location,
+    buttonTitle: "More Info",
+});
 
 const applyFiltersAndSort = (list, { selectedRegions, verifiedOnly, sort }) => {
     let result = list.filter(l =>
@@ -41,13 +48,23 @@ const LanBanner = ({ lan }) => (
 );
 
 export const HaloLans = () => {
+    const { data, loading, error } = useLanEvents(GAME);
+
     const [sort, setSort] = useState('featured');
     const [selectedRegions, setSelectedRegions] = useState([]);
     const [verifiedOnly, setVerifiedOnly] = useState(false);
 
+    const allLans = useMemo(() => (data || []).map(normalizeLan), [data]);
+    const markers = useMemo(() => toLanMarkers(data, GAME), [data]);
+
+    const regionOptions = useMemo(
+        () => Array.from(new Set(allLans.map(l => l.region))),
+        [allLans]
+    );
+
     const filteredLans = useMemo(
-        () => applyFiltersAndSort(LANS, { selectedRegions, verifiedOnly, sort }),
-        [sort, selectedRegions, verifiedOnly]
+        () => applyFiltersAndSort(allLans, { selectedRegions, verifiedOnly, sort }),
+        [allLans, sort, selectedRegions, verifiedOnly]
     );
 
     const clearFilters = () => {
@@ -59,18 +76,18 @@ export const HaloLans = () => {
         <div className="standardContainer minorBottomSpace">
             <SeoData
                 title={"Halo LANs"}
-                description="Halo LAN tournaments near you and across the world. Find the closest Halo LAN to you today."
+                description={"Halo LAN tournaments near you and across the world. Find the closest Halo LAN to you today."}
                 canonicalPath={"/games/halo/lans"}
             />
 
             <div className="lanMapContainer">
-                <LanMap markers={HALO_LAN_MARKERS} game="Halo" />
+                <LanMap markers={markers} game={MAP_GAME} />
             </div>
 
             <EventListFilters
                 sort={sort}
                 onSortChange={setSort}
-                regionOptions={REGION_OPTIONS}
+                regionOptions={regionOptions}
                 selectedRegions={selectedRegions}
                 onRegionChange={setSelectedRegions}
                 verifiedOnly={verifiedOnly}
@@ -79,7 +96,15 @@ export const HaloLans = () => {
                 onClear={clearFilters}
             />
 
-            {filteredLans.length === 0 ? (
+            {loading ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading LANs...</h2>
+            ) : error ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load LANs right now.</h2>
+            ) : allLans.length === 0 ? (
+                <div className="eventBannerContainer">
+                    <NoEvents pageType={"LANs"} />
+                </div>
+            ) : filteredLans.length === 0 ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No results match your filters.</h2>
             ) : (
                 <div className="eventBannerContainer">

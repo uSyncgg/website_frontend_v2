@@ -1,14 +1,16 @@
 import { useMemo, useState } from "react";
 import { SeoData, HostBanner, HeaderImage, EventListFilters } from "components";
+import { useWagerEvents } from "hooks";
 import '../../EventBanners.css';
 
-const WAGERS = [
-    { name: "Checkmate Gaming", path: "/games/call-of-duty/wagers/cmg", imgUrl: "https://i.imgur.com/QKP5L9N.png", alt: "CMG Wagers", verified: true, buttonTitle: "More Info" },
-    { name: "Esports Agent", path: "/games/call-of-duty/wagers/eagent", imgUrl: "https://i.imgur.com/mued0Qd.png", alt: "Esports Agent Wagers", verified: true, buttonTitle: "More Info" },
-    { name: "1v1 Me (App)", path: "/games/call-of-duty/wagers/1v1me", imgUrl: "https://i.imgur.com/BFNJpgg.png", alt: "1v1 Me Wagers", verified: false, buttonTitle: "More Info" },
-    { name: "The Esports Hub", path: "/games/call-of-duty/wagers/the-esports-hub", imgUrl: "https://i.imgur.com/2t8zzc5.png", alt: "Esports Hub Wagers", verified: false, buttonTitle: "More Info" },
-    { name: "Ewagers", path: "/games/call-of-duty/wagers/ewagers", imgUrl: "https://i.imgur.com/FAg32lR.png", alt: "Ewagers", verified: false, buttonTitle: "More Info" },
-];
+const normalizeWager = (host) => ({
+    name: host.name,
+    path: `/games/call-of-duty/wagers${host.path}`,
+    imgUrl: host.banner_img,
+    alt: host.name,
+    verified: !!host.verified,
+    buttonTitle: "More Info",
+});
 
 const applyFiltersAndSort = (list, { verifiedOnly, sort }) => {
     let result = list.filter(w => !verifiedOnly || w.verified);
@@ -37,12 +39,16 @@ const WagerBanner = ({ wager }) => (
 );
 
 export const CodWagers = () => {
+    const { data, loading, error } = useWagerEvents("Call of Duty");
+
     const [sort, setSort] = useState('featured');
     const [verifiedOnly, setVerifiedOnly] = useState(false);
 
+    const allWagers = useMemo(() => (data || []).map(normalizeWager), [data]);
+
     const filteredWagers = useMemo(
-        () => applyFiltersAndSort(WAGERS, { verifiedOnly, sort }),
-        [sort, verifiedOnly]
+        () => applyFiltersAndSort(allWagers, { verifiedOnly, sort }),
+        [allWagers, sort, verifiedOnly]
     );
 
     const clearFilters = () => {
@@ -67,7 +73,11 @@ export const CodWagers = () => {
                 onClear={clearFilters}
             />
 
-            {filteredWagers.length === 0 ? (
+            {loading ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading wagers...</h2>
+            ) : error ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load wagers right now.</h2>
+            ) : filteredWagers.length === 0 ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No results match your filters.</h2>
             ) : (
                 <div className="eventBannerContainer">

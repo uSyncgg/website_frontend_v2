@@ -10,7 +10,7 @@ export const HomeTournaments = () => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        axios.get("https://website-backend-v2.onrender.com/tournaments/cod")
+        axios.get(`${process.env.REACT_APP_API_BASE_URL}/tournaments/cod`)
             .then(res => setTournaments(res.data))
             .catch(err => console.log(err))
             .finally(() => setIsLoaded(true));

@@ -1,39 +1,28 @@
 import { useMemo, useState } from "react";
-import { SeoData, HostBanner, HeaderImage, EventListFilters } from "components";
+import { SeoData, HostBanner, HeaderImage, EventListFilters, NoEvents } from "components";
+import { useLeagueEvents } from "hooks";
 import '../../EventBanners.css';
-
-const LEAGUES = [
-    { name: "Corporate League", path: "/games/Valorant/leagues/corporate", imgUrl: "https://i.imgur.com/k63mdno.png", alt: "Corporate League", verified: false, region: "NA", buttonTitle: "More Info" },
-    { name: "Unified Premier League", path: "/games/Valorant/leagues/unified", imgUrl: "https://i.imgur.com/KDf5r2a.png", alt: "Unified Premier League", verified: false, region: "NA", buttonTitle: "More Info" },
-];
-
-const COLLEGIATE_LEAGUES = [
-    { name: "College Valorant League", path: "/games/Valorant/leagues/riot", imgUrl: "https://i.imgur.com/1Hqgxu0.png", alt: "College Valorant League", verified: true, region: "NA", buttonTitle: "More Info" },
-    { name: "NJCAAE", path: "/games/Valorant/leagues/njcaae", imgUrl: "https://i.imgur.com/Yer31Qr.png", alt: "NJCAAE", verified: false, region: "USA", buttonTitle: "More Info" },
-    { name: "NECC", path: "/games/Valorant/leagues/necc", imgUrl: "https://i.imgur.com/wUMekqz.png", alt: "NECC", verified: false, region: "NA", buttonTitle: "More Info" },
-    { name: "EGFC League", path: "/games/Valorant/leagues/egfc", imgUrl: "https://i.imgur.com/3DTxejo.png", alt: "EGFC League", verified: false, region: "USA", buttonTitle: "More Info" },
-    { name: "Playfly College", path: "/games/Valorant/leagues/playfly-leagues", imgUrl: "https://i.imgur.com/XHCsRTv.png", alt: "Playfly College Leagues", verified: false, region: "NA", buttonTitle: "All Leagues" },
-    { name: "CECC League", path: "/games/Valorant/leagues/cecc", imgUrl: "https://i.imgur.com/WFbWb2d.png", alt: "CECC League", verified: false, region: "USA", buttonTitle: "More Info" },
-    { name: "National Student Esports", path: "/games/Valorant/leagues/nse", imgUrl: "https://i.imgur.com/mJJJD6e.png", alt: "National Student Esports", verified: false, region: "UK", buttonTitle: "More Info" },
-];
-
-const HIGH_SCHOOL_LEAGUES = [
-    { name: "The Esports Company League", path: "/games/Valorant/leagues/tec", imgUrl: "https://i.imgur.com/FZeLamS.png", alt: "The Esports Company League", verified: false, region: "USA", buttonTitle: "More Info" },
-    { name: "NASEF League", path: "/games/Valorant/leagues/nasef", imgUrl: "https://i.imgur.com/x0SaVuR.png", alt: "NASEF League", verified: false, region: "USA", buttonTitle: "More Info" },
-    { name: "EGFH League", path: "/games/Valorant/leagues/egfh", imgUrl: "https://i.imgur.com/3DTxejo.png", alt: "EGFH", verified: false, region: "USA", buttonTitle: "More Info" },
-];
 
 const CATEGORY_LABEL = { collegiate: 'Collegiate', highschool: 'High School' };
 const CATEGORY_OPTIONS = ['Collegiate', 'High School'];
 const CATEGORY_KEY_BY_LABEL = { 'Collegiate': 'collegiate', 'High School': 'highschool' };
 
-const ALL_LEAGUES = [
-    ...LEAGUES.map(l => ({ ...l, category: 'open' })),
-    ...COLLEGIATE_LEAGUES.map(l => ({ ...l, category: 'collegiate' })),
-    ...HIGH_SCHOOL_LEAGUES.map(l => ({ ...l, category: 'highschool' })),
-];
 
-const REGION_OPTIONS = Array.from(new Set(ALL_LEAGUES.map(l => l.region)));
+const normalizeHost = (host) => {
+    const rawPath = host.path.startsWith('/') ? host.path.slice(1) : host.path;
+    const grouped = Array.isArray(host.leagues) && host.leagues.length > 0;
+
+    return {
+        name: host.name,
+        path: `/games/Valorant/leagues/${rawPath}`,
+        imgUrl: host.banner_img,
+        alt: host.name,
+        verified: !!host.verified,
+        region: (grouped ? host.leagues[0]?.region : host.region) || 'NA',
+        buttonTitle: grouped ? 'All Leagues' : 'More Info',
+        category: host.is_college ? 'collegiate' : host.is_hs ? 'highschool' : 'open',
+    };
+};
 
 const isVisible = (league, selectedCategories) => {
     if (selectedCategories.length === 0) return true;
@@ -79,18 +68,30 @@ const LeagueBanner = ({ league }) => {
 };
 
 export const ValorantLeagues = () => {
+    const { data, loading, error } = useLeagueEvents("Valorant");
+
     const [sort, setSort] = useState('featured');
     const [selectedRegions, setSelectedRegions] = useState([]);
     const [selectedCategoryLabels, setSelectedCategoryLabels] = useState([]);
     const [verifiedOnly, setVerifiedOnly] = useState(false);
 
+    const allLeagues = useMemo(
+        () => (data || []).map(normalizeHost),
+        [data]
+    );
+
+    const regionOptions = useMemo(
+        () => Array.from(new Set(allLeagues.map(l => l.region))),
+        [allLeagues]
+    );
+
     const selectedCategories = selectedCategoryLabels.map(label => CATEGORY_KEY_BY_LABEL[label]);
     const filters = { selectedRegions, selectedCategories, verifiedOnly, sort };
 
     const filteredLeagues = useMemo(
-        () => applyFiltersAndSort(ALL_LEAGUES, filters),
+        () => applyFiltersAndSort(allLeagues, filters),
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        [sort, selectedRegions, selectedCategoryLabels, verifiedOnly]
+        [allLeagues, sort, selectedRegions, selectedCategoryLabels, verifiedOnly]
     );
 
     const clearFilters = () => {
@@ -114,7 +115,7 @@ export const ValorantLeagues = () => {
                 categoryOptions={CATEGORY_OPTIONS}
                 selectedCategories={selectedCategoryLabels}
                 onCategoryChange={setSelectedCategoryLabels}
-                regionOptions={REGION_OPTIONS}
+                regionOptions={regionOptions}
                 selectedRegions={selectedRegions}
                 onRegionChange={setSelectedRegions}
                 verifiedOnly={verifiedOnly}
@@ -123,7 +124,15 @@ export const ValorantLeagues = () => {
                 onClear={clearFilters}
             />
 
-            {filteredLeagues.length === 0 ? (
+            {loading ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>
+            ) : error ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load leagues right now.</h2>
+            ) : allLeagues.length === 0 ? (
+                <div className="eventBannerContainer">
+                    <NoEvents pageType={"Leagues"} />
+                </div>
+            ) : filteredLeagues.length === 0 ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No leagues match your filters.</h2>
             ) : (
                 <div className="eventBannerContainer">

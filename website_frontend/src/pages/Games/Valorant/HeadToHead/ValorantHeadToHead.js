@@ -1,13 +1,16 @@
 import { useMemo, useState } from "react";
 import { SeoData, HostBanner, HeaderImage, EventListFilters } from "components";
+import { useXpEvents } from "hooks";
 import '../../EventBanners.css';
 
-const HEAD_TO_HEAD = [
-    { name: "Gankster GG", path: "/games/Valorant/head-to-head/gankster", imgUrl: "https://i.imgur.com/ljDANVi.png", alt: "Gankster GG", verified: true, buttonTitle: "More Info" },
-    { name: "Esport Scrim", path: "/games/Valorant/head-to-head/esport-scrim", imgUrl: "https://i.imgur.com/irkzmva.png", alt: "Esport Scrim", verified: false, buttonTitle: "More Info" },
-    { name: "Collegiate Valorant Esports Hub", path: "/games/Valorant/head-to-head/college-hub", imgUrl: "https://i.imgur.com/InYxRbE.png", alt: "Collegiate Valorant Esports Hub", verified: false, buttonTitle: "More Info" },
-    { name: "Pracc", path: "/games/Valorant/head-to-head/pracc", imgUrl: "https://i.imgur.com/jqe9CCc.png", alt: "Pracc", verified: false, buttonTitle: "More Info" },
-];
+const normalizeEntry = (host) => ({
+    name: host.name,
+    path: `/games/Valorant/head-to-head${host.path}`,
+    imgUrl: host.banner_img,
+    alt: host.name,
+    verified: !!host.verified,
+    buttonTitle: "More Info",
+});
 
 const applyFiltersAndSort = (list, { verifiedOnly, sort }) => {
     let result = list.filter(h => !verifiedOnly || h.verified);
@@ -36,12 +39,16 @@ const HeadToHeadBanner = ({ entry }) => (
 );
 
 export const ValorantHeadToHead = () => {
+    const { data, loading, error } = useXpEvents("Valorant");
+
     const [sort, setSort] = useState('featured');
     const [verifiedOnly, setVerifiedOnly] = useState(false);
 
+    const allEntries = useMemo(() => (data || []).map(normalizeEntry), [data]);
+
     const filteredEntries = useMemo(
-        () => applyFiltersAndSort(HEAD_TO_HEAD, { verifiedOnly, sort }),
-        [sort, verifiedOnly]
+        () => applyFiltersAndSort(allEntries, { verifiedOnly, sort }),
+        [allEntries, sort, verifiedOnly]
     );
 
     const clearFilters = () => {
@@ -66,7 +73,11 @@ export const ValorantHeadToHead = () => {
                 onClear={clearFilters}
             />
 
-            {filteredEntries.length === 0 ? (
+            {loading ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading head-to-head platforms...</h2>
+            ) : error ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load head-to-head platforms right now.</h2>
+            ) : filteredEntries.length === 0 ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No results match your filters.</h2>
             ) : (
                 <div className="eventBannerContainer">

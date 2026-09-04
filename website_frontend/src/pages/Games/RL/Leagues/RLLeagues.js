@@ -1,48 +1,29 @@
 import { useMemo, useState } from "react";
-import { SeoData, HostBanner, HeaderImage, EventListFilters } from "components";
+import { SeoData, HostBanner, HeaderImage, EventListFilters, NoEvents } from "components";
+import { useLeagueEvents } from "hooks";
 import '../../EventBanners.css';
-
-const LEAGUES = [
-    { name: "Nemesis Leagues", path: "/games/RocketLeague/leagues/nemesis-leagues", imgUrl: "https://i.imgur.com/PcmcLLk.png", alt: "Nemesis Leagues", verified: true, region: "NA", buttonTitle: "All Leagues" },
-    { name: "RLPC", path: "/games/RocketLeague/leagues/rlpc-leagues", imgUrl: "https://i.imgur.com/kVDfckC.png", alt: "RLPC Leagues", verified: true, region: "NA", buttonTitle: "All Leagues" },
-    { name: "Rocket Soccar Confederation", path: "/games/RocketLeague/leagues/rsc-leagues", imgUrl: "https://i.imgur.com/QiNSeyE.png", alt: "RSC Leagues", verified: false, region: "NA/EU", buttonTitle: "All Leagues" },
-    { name: "Minor League Esports", path: "/games/RocketLeague/leagues/mle-leagues", imgUrl: "https://i.imgur.com/ydii4DZ.png", alt: "MLE Leagues", verified: false, region: "All Regions", buttonTitle: "All Leagues" },
-    { name: "United Rogue League", path: "/games/RocketLeague/leagues/united-rogue", imgUrl: "https://i.imgur.com/jWphxcz.png", alt: "United Rogue League", verified: false, region: "NA", buttonTitle: "More Info" },
-    { name: "Italian Rocket Champ Leagues", path: "/games/RocketLeague/leagues/italian-leagues", imgUrl: "https://i.imgur.com/VjsPbnv.png", alt: "Italian Leagues", verified: false, region: "ITL", buttonTitle: "All Leagues" },
-    { name: "Frontier Doubles Leagues", path: "/games/RocketLeague/leagues/frontier-doubles-leagues", imgUrl: "https://i.imgur.com/JRaBjWV.png", alt: "Frontier Doubles Leagues", verified: false, region: "NA", buttonTitle: "All Leagues" },
-    { name: "Corporate League", path: "/games/RocketLeague/leagues/corporate", imgUrl: "https://i.imgur.com/k63mdno.png", alt: "Corporate League", verified: false, region: "NA", buttonTitle: "More Info" },
-    { name: "Airforce Gaming League", path: "/games/RocketLeague/leagues/airforce", imgUrl: "https://i.imgur.com/4o2rJWS.png", alt: "Airforce Gaming League", verified: false, region: "NA/EU/APAC", buttonTitle: "More Info" },
-];
-
-const COLLEGIATE_LEAGUES = [
-    { name: "College Carball Association", path: "/games/RocketLeague/leagues/cca", imgUrl: "https://i.imgur.com/UqFxQ9Q.png", alt: "College Carball", verified: true, region: "NA/EU", buttonTitle: "More Info" },
-    { name: "Playfly College", path: "/games/RocketLeague/leagues/playfly", imgUrl: "https://i.imgur.com/XHCsRTv.png", alt: "Playfly College", verified: false, region: "NA", buttonTitle: "More Info" },
-    { name: "ECAC Esports", path: "/games/RocketLeague/leagues/ecac", imgUrl: "https://i.imgur.com/VCXkcNL.png", alt: "ECAC", verified: false, region: "USA", buttonTitle: "More Info" },
-    { name: "NECC", path: "/games/RocketLeague/leagues/necc", imgUrl: "https://i.imgur.com/wUMekqz.png", alt: "NECC", verified: false, region: "NA", buttonTitle: "More Info" },
-    { name: "CECC League", path: "/games/RocketLeague/leagues/cecc", imgUrl: "https://i.imgur.com/WFbWb2d.png", alt: "CECC League", verified: false, region: "USA", buttonTitle: "More Info" },
-    { name: "NJCAAE", path: "/games/RocketLeague/leagues/njcaae", imgUrl: "https://i.imgur.com/jTKBWZM.png", alt: "NJCAAE", verified: false, region: "USA", buttonTitle: "More Info" },
-    { name: "EGFC League", path: "/games/RocketLeague/leagues/egfc", imgUrl: "https://i.imgur.com/3DTxejo.png", alt: "EGFC League", verified: false, region: "USA", buttonTitle: "More Info" },
-    { name: "Australian Esports League", path: "/games/RocketLeague/leagues/ael", imgUrl: "https://i.imgur.com/YYvUqCM.png", alt: "Australian Esports League", verified: false, region: "AUS", buttonTitle: "More Info" },
-];
-
-const HIGH_SCHOOL_LEAGUES = [
-    { name: "PlayVS", path: "/games/RocketLeague/leagues/playvs", imgUrl: "https://i.imgur.com/dj20PCp.png", alt: "PlayVS", verified: false, region: "USA", buttonTitle: "More Info" },
-    { name: "The Esports Company League", path: "/games/RocketLeague/leagues/tec", imgUrl: "https://i.imgur.com/FZeLamS.png", alt: "The Esports Company League", verified: false, region: "USA", buttonTitle: "More Info" },
-    { name: "EGFH League", path: "/games/RocketLeague/leagues/egfh", imgUrl: "https://i.imgur.com/3DTxejo.png", alt: "EGFH League", verified: false, region: "USA", buttonTitle: "More Info" },
-    { name: "Australian Esports League", path: "/games/RocketLeague/leagues/aelhs", imgUrl: "https://i.imgur.com/YYvUqCM.png", alt: "Australian Esports League", verified: false, region: "AUS", buttonTitle: "More Info" },
-];
 
 const CATEGORY_LABEL = { collegiate: 'Collegiate', highschool: 'High School' };
 const CATEGORY_OPTIONS = ['Collegiate', 'High School'];
 const CATEGORY_KEY_BY_LABEL = { 'Collegiate': 'collegiate', 'High School': 'highschool' };
 
-const ALL_LEAGUES = [
-    ...LEAGUES.map(l => ({ ...l, category: 'open' })),
-    ...COLLEGIATE_LEAGUES.map(l => ({ ...l, category: 'collegiate' })),
-    ...HIGH_SCHOOL_LEAGUES.map(l => ({ ...l, category: 'highschool' })),
-];
+// Hosts with a "leagues" array are a group of sub-leagues under one banner
+// ("All Leagues"); everything else is a single league ("More Info").
+const normalizeHost = (host) => {
+    const rawPath = host.path.startsWith('/') ? host.path.slice(1) : host.path;
+    const grouped = Array.isArray(host.leagues) && host.leagues.length > 0;
 
-const REGION_OPTIONS = Array.from(new Set(ALL_LEAGUES.map(l => l.region)));
+    return {
+        name: host.name,
+        path: `/games/RocketLeague/leagues/${rawPath}`,
+        imgUrl: host.banner_img,
+        alt: host.name,
+        verified: !!host.verified,
+        region: (grouped ? host.leagues[0]?.region : host.region) || 'NA',
+        buttonTitle: grouped ? 'All Leagues' : 'More Info',
+        category: host.is_college ? 'collegiate' : host.is_hs ? 'highschool' : 'open',
+    };
+};
 
 const isVisible = (league, selectedCategories) => {
     if (selectedCategories.length === 0) return true;
@@ -88,18 +69,30 @@ const LeagueBanner = ({ league }) => {
 };
 
 export const RLLeagues = () => {
+    const { data, loading, error } = useLeagueEvents("Rocket League");
+
     const [sort, setSort] = useState('featured');
     const [selectedRegions, setSelectedRegions] = useState([]);
     const [selectedCategoryLabels, setSelectedCategoryLabels] = useState([]);
     const [verifiedOnly, setVerifiedOnly] = useState(false);
 
+    const allLeagues = useMemo(
+        () => (data || []).map(normalizeHost),
+        [data]
+    );
+
+    const regionOptions = useMemo(
+        () => Array.from(new Set(allLeagues.map(l => l.region))),
+        [allLeagues]
+    );
+
     const selectedCategories = selectedCategoryLabels.map(label => CATEGORY_KEY_BY_LABEL[label]);
     const filters = { selectedRegions, selectedCategories, verifiedOnly, sort };
 
     const filteredLeagues = useMemo(
-        () => applyFiltersAndSort(ALL_LEAGUES, filters),
+        () => applyFiltersAndSort(allLeagues, filters),
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        [sort, selectedRegions, selectedCategoryLabels, verifiedOnly]
+        [allLeagues, sort, selectedRegions, selectedCategoryLabels, verifiedOnly]
     );
 
     const clearFilters = () => {
@@ -123,7 +116,7 @@ export const RLLeagues = () => {
                 categoryOptions={CATEGORY_OPTIONS}
                 selectedCategories={selectedCategoryLabels}
                 onCategoryChange={setSelectedCategoryLabels}
-                regionOptions={REGION_OPTIONS}
+                regionOptions={regionOptions}
                 selectedRegions={selectedRegions}
                 onRegionChange={setSelectedRegions}
                 verifiedOnly={verifiedOnly}
@@ -132,7 +125,15 @@ export const RLLeagues = () => {
                 onClear={clearFilters}
             />
 
-            {filteredLeagues.length === 0 ? (
+            {loading ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>
+            ) : error ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load leagues right now.</h2>
+            ) : allLeagues.length === 0 ? (
+                <div className="eventBannerContainer">
+                    <NoEvents pageType={"Leagues"} />
+                </div>
+            ) : filteredLeagues.length === 0 ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No leagues match your filters.</h2>
             ) : (
                 <div className="eventBannerContainer">

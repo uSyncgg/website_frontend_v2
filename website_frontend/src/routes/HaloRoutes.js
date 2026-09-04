@@ -11,9 +11,6 @@ import { SaunaScrimsH2H } from 'pages/Games/Halo/HeadToHead/Hosts/SaunaScrimsH2H
 import { UGCCollegeHaloScrimsH2H } from 'pages/Games/Halo/HeadToHead/Hosts/UGCCollegeHaloScrimsH2H';
 // Leagues
 import { HaloLeagues } from 'pages/Games/Halo/Leagues/HaloLeagues';
-import { AscendingBaselineLeagues } from 'pages/Games/Halo/Leagues/Hosts/AscendingBaselineLeagues/AscendingBaselineLeagues';
-import { AscendingBaselineABLeague } from 'pages/Games/Halo/Leagues/Hosts/AscendingBaselineLeagues/AscendingBaselineABLeague';
-import { AscendingBaselinePandemoniumGamesLeague } from 'pages/Games/Halo/Leagues/Hosts/AscendingBaselineLeagues/AscendingBaselinePandemoniumGamesLeague';
 import { HaloAgentLeague } from 'pages/Games/Halo/Leagues/Hosts/HaloAgentLeague';
 import { HaloRecLeague } from 'pages/Games/Halo/Leagues/Hosts/HaloRecLeague';
 import { CollegeHaloLeague } from 'pages/Games/Halo/Leagues/Hosts/CollegeHaloLeague';
@@ -35,9 +32,6 @@ const HaloRoutes = () => (
         {/* Leagues */}
         <Route path='leagues' element={<HaloLeagues />} />
         <Route path='leagues/halo-rec-league' element={<HaloRecLeague />} />
-        <Route path='leagues/ascending-baseline' element={<AscendingBaselineLeagues />} />
-        <Route path='leagues/ascending-baseline/ab' element={<AscendingBaselineABLeague />} />
-        <Route path='leagues/ascending-baseline/pandemonium-games' element={<AscendingBaselinePandemoniumGamesLeague />} />
         <Route path='leagues/halo-agent' element={<HaloAgentLeague />} />
         <Route path='leagues/ugc-halo' element={<CollegeHaloLeague />} />
         {/* Wagers */}

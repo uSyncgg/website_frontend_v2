@@ -1,31 +1,29 @@
 import { useMemo, useState } from "react";
-import { SeoData, HostBanner, HeaderImage, EventListFilters } from "components";
+import { SeoData, HostBanner, HeaderImage, EventListFilters, NoEvents } from "components";
+import { useLeagueEvents } from "hooks";
 import '../../EventBanners.css';
-
-const LEAGUES = [
-    { name: "Halo Rec League", path: "/games/halo/leagues/halo-rec-league", imgUrl: "https://i.imgur.com/6cA46YH.png", alt: "Halo Rec League", verified: true, region: "NA", buttonTitle: "More Info" },
-    { name: "Ascending Baseline", path: "/games/halo/leagues/ascending-baseline", imgUrl: "https://i.imgur.com/W2CJtZK.png", alt: "Ascending Baseline Leagues", verified: false, region: "NA", buttonTitle: "All Leagues" },
-    { name: "Halo Agent", path: "/games/halo/leagues/halo-agent", imgUrl: "https://i.imgur.com/bHzfdu8.png", alt: "Halo Agent League", verified: false, region: "All Regions", buttonTitle: "More Info" },
-];
-
-const COLLEGIATE_LEAGUES = [
-    { name: "College Halo", path: "/games/halo/leagues/ugc-halo", imgUrl: "https://i.imgur.com/JeMuXtx.png", alt: "UGC League", verified: true, region: "NA", buttonTitle: "More Info" },
-];
-
-// Placeholder — no Halo high school leagues have been added to the site yet.
-const HIGH_SCHOOL_LEAGUES = [];
 
 const CATEGORY_LABEL = { collegiate: 'Collegiate', highschool: 'High School' };
 const CATEGORY_OPTIONS = ['Collegiate', 'High School'];
 const CATEGORY_KEY_BY_LABEL = { 'Collegiate': 'collegiate', 'High School': 'highschool' };
 
-const ALL_LEAGUES = [
-    ...LEAGUES.map(l => ({ ...l, category: 'open' })),
-    ...COLLEGIATE_LEAGUES.map(l => ({ ...l, category: 'collegiate' })),
-    ...HIGH_SCHOOL_LEAGUES.map(l => ({ ...l, category: 'highschool' })),
-];
+// Hosts with a "leagues" array are a group of sub-leagues under one banner
+// ("All Leagues"); everything else is a single league ("More Info").
+const normalizeHost = (host) => {
+    const rawPath = host.path.startsWith('/') ? host.path.slice(1) : host.path;
+    const grouped = Array.isArray(host.leagues) && host.leagues.length > 0;
 
-const REGION_OPTIONS = Array.from(new Set(ALL_LEAGUES.map(l => l.region)));
+    return {
+        name: host.name,
+        path: `/games/halo/leagues/${rawPath}`,
+        imgUrl: host.banner_img,
+        alt: host.name,
+        verified: !!host.verified,
+        region: (grouped ? host.leagues[0]?.region : host.region) || 'NA',
+        buttonTitle: grouped ? 'All Leagues' : 'More Info',
+        category: host.is_college ? 'collegiate' : host.is_hs ? 'highschool' : 'open',
+    };
+};
 
 const isVisible = (league, selectedCategories) => {
     if (selectedCategories.length === 0) return true;
@@ -71,18 +69,30 @@ const LeagueBanner = ({ league }) => {
 };
 
 export const HaloLeagues = () => {
+    const { data, loading, error } = useLeagueEvents("Halo");
+
     const [sort, setSort] = useState('featured');
     const [selectedRegions, setSelectedRegions] = useState([]);
     const [selectedCategoryLabels, setSelectedCategoryLabels] = useState([]);
     const [verifiedOnly, setVerifiedOnly] = useState(false);
 
+    const allLeagues = useMemo(
+        () => (data || []).map(normalizeHost),
+        [data]
+    );
+
+    const regionOptions = useMemo(
+        () => Array.from(new Set(allLeagues.map(l => l.region))),
+        [allLeagues]
+    );
+
     const selectedCategories = selectedCategoryLabels.map(label => CATEGORY_KEY_BY_LABEL[label]);
     const filters = { selectedRegions, selectedCategories, verifiedOnly, sort };
 
     const filteredLeagues = useMemo(
-        () => applyFiltersAndSort(ALL_LEAGUES, filters),
+        () => applyFiltersAndSort(allLeagues, filters),
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        [sort, selectedRegions, selectedCategoryLabels, verifiedOnly]
+        [allLeagues, sort, selectedRegions, selectedCategoryLabels, verifiedOnly]
     );
 
     const clearFilters = () => {
@@ -106,7 +116,7 @@ export const HaloLeagues = () => {
                 categoryOptions={CATEGORY_OPTIONS}
                 selectedCategories={selectedCategoryLabels}
                 onCategoryChange={setSelectedCategoryLabels}
-                regionOptions={REGION_OPTIONS}
+                regionOptions={regionOptions}
                 selectedRegions={selectedRegions}
                 onRegionChange={setSelectedRegions}
                 verifiedOnly={verifiedOnly}
@@ -115,7 +125,15 @@ export const HaloLeagues = () => {
                 onClear={clearFilters}
             />
 
-            {filteredLeagues.length === 0 ? (
+            {loading ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>
+            ) : error ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load leagues right now.</h2>
+            ) : allLeagues.length === 0 ? (
+                <div className="eventBannerContainer">
+                    <NoEvents pageType={"Leagues"} />
+                </div>
+            ) : filteredLeagues.length === 0 ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No leagues match your filters.</h2>
             ) : (
                 <div className="eventBannerContainer">
