@@ -1,7 +1,15 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
+import { useEvent } from "hooks";
 import '../../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
 
 export const RSC3v3NALeague = () => {
+    const { data, loading, error } = useEvent("leagues", "Rocket League", "Rocket Soccar Confederation - 3v3 NA League");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -9,21 +17,33 @@ export const RSC3v3NALeague = () => {
                 description="Rocket Soccar Confederation North America 3v3 league. Free to enter with 9 competitive skill divisions. Three seasons annually in April, August, and December."
                 canonicalPath={"/games/RocketLeague/leagues/rsc-leagues/3v3-na"}
             />
-            <HeaderImage title={"RSC NA 3v3"} imageClass={"eventPage"} />
+            <HeaderImage imageUrl={data?.header_img} title={"RSC NA 3v3"} />
 
-            <div className="eventInfoCardContainer">
-                <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual April, August, and December Seasons"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - NA"]} />
+            {data?.verified &&
+                <div className="verifiedContainer">
+                    <VerifiedText />
                 </div>
+            }
 
-                <div>
-                    <EventInfoCard title={"Details"} infoList={["No Prize Pool", "Sign up as a Free Agent", "9 Competitive Skill Divisions", "Draft Based League", "Weekly Matches"]} />
-                </div>
+            {loading ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Loading league info...</p>
+            ) : error || !data ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Unable to load this league right now.</p>
+            ) : (
+                <div className="eventInfoCardContainer">
+                    <div>
+                        <EventInfoCard title={"Date"} infoList={[data.seasonality]} regionTitle={"Region/Type"} regionInfoList={[`${data.team_size} - ${data.region}`]} />
+                    </div>
 
-                <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"RSC NA 3v3"} blank={true} title={"Join Now"} path={"https://discord.com/invite/rsc"} />}/>
+                    <div>
+                        <EventInfoCard title={"Details"} infoList={data.details} />
+                    </div>
+
+                    <div>
+                        <EventInfoCard title={"Entry Fee"} infoList={data.fee_details} footer={<ExternalButton host={data.name} blank={true} title={"Join Now"} path={data.url} />}/>
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="backButtonContainer">
                 <BackButton path={"/games/RocketLeague/leagues/rsc-leagues"} />

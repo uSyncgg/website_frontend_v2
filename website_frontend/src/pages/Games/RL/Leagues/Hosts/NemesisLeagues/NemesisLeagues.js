@@ -1,104 +1,56 @@
 import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
-import { useCheckResize } from "hooks";
+import { useLeagueEvents, useLeagueChildren } from "hooks";
 import '../../../../EventBanners.css';
 
-export const NemesisLeagues = () => {
-    const isMobile = useCheckResize();
+const GAME = "Rocket League";
+const PARENT_NAME = "Nemesis Leagues";
+const ROUTE_PREFIX = "/games/RocketLeague/leagues";
 
-    const titan = isMobile ? "Titan League - 1741+ MMR" : "1741+ MMR";
-    const rival = isMobile ? "Rival League - 1627 - 1740 MMR" : "1626 - 1740 MMR";
-    const challenger = isMobile ? "Challenger League - 1535 - 1625 MMR" : "1535 - 1625 MMR";
-    const prospect = isMobile ? "Prospect League - 1415 - 1534 MMR" : "1415 - 1534 MMR";
-    const novice = isMobile ? "Novice League - 1203 - 1414 MMR" : "1203 - 1414 MMR";
-    const provisional = isMobile ? "Provisional League - 835 - 1202 MMR" : "835 - 1202 MMR";
+export const NemesisLeagues = () => {
+    const { data: hosts } = useLeagueEvents(GAME);
+    const { data: children, loading, error } = useLeagueChildren(GAME, PARENT_NAME);
+
+    const parent = (hosts || []).find(h => h.name === PARENT_NAME);
+    const headerTitle = parent?.verified ? undefined : (parent?.name || undefined);
 
     return (
         <div className="standardContainer">
             <SeoData
                 title={"Nemesis Leagues - Rocket League"}
-                description="Nemesis Rocket League Leagues. With range based MMR leagues this is the perfect opportunity for North American RL players wanted to compete at the next level."
+                description={"Nemesis Rocket League Leagues. With range based MMR leagues this is the perfect opportunity for North American RL players wanted to compete at the next level."}
                 canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues"}
             />
-            <HeaderImage imageClass={"nemesisRLLeagues"} />
+            <HeaderImage title={headerTitle} imageClass={"nemesisRLLeagues"} imageUrl={parent?.header_img} />
 
             <div className="eventBannerContainer">
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/nemesis-leagues/titan"}>Titan League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/nemesis-leagues/titan"} 
-                        imgUrl={"https://i.imgur.com/PcmcLLk.png"} 
-                        alt={"Nemesis Leagues"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{titan}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/nemesis-leagues/titan"} />
-                </HostBanner>
+                {loading ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>
+                ) : error ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load leagues right now.</h2>
+                ) : (children || []).length === 0 ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No leagues available right now.</h2>
+                ) : (
+                    (children || [])
+                        .slice()
+                        .sort((a, b) => (b.verified ? 1 : 0) - (a.verified ? 1 : 0))
+                        .map(child => {
+                            const path = `${ROUTE_PREFIX}${child.path}`;
 
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/nemesis-leagues/rival"}>Rival League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/nemesis-leagues/rival"} 
-                        imgUrl={"https://i.imgur.com/PcmcLLk.png"} 
-                        alt={"Nemesis Leagues"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{rival}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/nemesis-leagues/rival"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/nemesis-leagues/challenger"}>Challenger League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/nemesis-leagues/challenger"} 
-                        imgUrl={"https://i.imgur.com/PcmcLLk.png"} 
-                        alt={"Nemesis Leagues"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{challenger}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/nemesis-leagues/challenger"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/nemesis-leagues/prospect"}>Prospect League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/nemesis-leagues/prospect"} 
-                        imgUrl={"https://i.imgur.com/PcmcLLk.png"} 
-                        alt={"Nemesis Leagues"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{prospect}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/nemesis-leagues/prospect"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/nemesis-leagues/novice"}>Novice League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/nemesis-leagues/novice"} 
-                        imgUrl={"https://i.imgur.com/PcmcLLk.png"} 
-                        alt={"Nemesis Leagues"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{novice}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/nemesis-leagues/novice"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/nemesis-leagues/provisional"}>Provisional League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/nemesis-leagues/provisional"} 
-                        imgUrl={"https://i.imgur.com/PcmcLLk.png"} 
-                        alt={"Nemesis Leagues"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{provisional}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/nemesis-leagues/provisional"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
+                            return (
+                                <HostBanner key={path} path={path}>
+                                    <HostBanner.Title path={path} verified={child.verified}>{child.name}</HostBanner.Title>
+                                    <HostBanner.Image
+                                        path={path}
+                                        imgUrl={child.banner_img}
+                                        alt={child.name}
+                                        verified={child.verified}
+                                    />
+                                    <HostBanner.Region>{`${child.team_size} - ${child.region}`}</HostBanner.Region>
+                                    <HostBanner.Button title={"More Info"} path={path} />
+                                </HostBanner>
+                            );
+                        })
+                )}
 
                 <div className="backButtonContainer">
                     <BackButton path={"/games/RocketLeague/leagues"} />

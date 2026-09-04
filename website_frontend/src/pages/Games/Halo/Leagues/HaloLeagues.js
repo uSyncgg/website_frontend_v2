@@ -1,9 +1,108 @@
-import { SeoData, HeaderImage, HostBanner } from "components";
+import { useMemo, useState } from "react";
+import { SeoData, HostBanner, HeaderImage, EventListFilters, NoEvents } from "components";
+import { useLeagueEvents } from "hooks";
 import '../../EventBanners.css';
 
-export const HaloLeagues = () => {
+const CATEGORY_LABEL = { collegiate: 'Collegiate', highschool: 'High School' };
+const CATEGORY_OPTIONS = ['Collegiate', 'High School'];
+const CATEGORY_KEY_BY_LABEL = { 'Collegiate': 'collegiate', 'High School': 'highschool' };
+
+// Hosts with a "leagues" array are a group of sub-leagues under one banner
+// ("All Leagues"); everything else is a single league ("More Info").
+const normalizeHost = (host) => {
+    const rawPath = host.path.startsWith('/') ? host.path.slice(1) : host.path;
+    const grouped = Array.isArray(host.leagues) && host.leagues.length > 0;
+
+    return {
+        name: host.name,
+        path: `/games/halo/leagues/${rawPath}`,
+        imgUrl: host.banner_img,
+        alt: host.name,
+        verified: !!host.verified,
+        region: (grouped ? host.leagues[0]?.region : host.region) || 'NA',
+        buttonTitle: grouped ? 'All Leagues' : 'More Info',
+        category: host.is_college ? 'collegiate' : host.is_hs ? 'highschool' : 'open',
+    };
+};
+
+const isVisible = (league, selectedCategories) => {
+    if (selectedCategories.length === 0) return true;
+    if (league.category === 'open') return false;
+    return selectedCategories.includes(league.category);
+};
+
+const applyFiltersAndSort = (list, { selectedRegions, selectedCategories, verifiedOnly, sort }) => {
+    let result = list.filter(l =>
+        isVisible(l, selectedCategories) &&
+        (selectedRegions.length === 0 || selectedRegions.includes(l.region)) &&
+        (!verifiedOnly || l.verified)
+    );
+
+    if (sort === 'az') {
+        result = result.slice().sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sort === 'za') {
+        result = result.slice().sort((a, b) => b.name.localeCompare(a.name));
+    } else {
+        result = result.slice().sort((a, b) => (b.verified ? 1 : 0) - (a.verified ? 1 : 0));
+    }
+
+    return result;
+};
+
+const LeagueBanner = ({ league }) => {
+    const regionText = league.category === 'open'
+        ? league.region
+        : `${league.region} | ${CATEGORY_LABEL[league.category]}`;
+
     return (
-        <div className="standardContainer">
+        <HostBanner path={league.path}>
+            <HostBanner.Title path={league.path} verified={league.verified}>{league.name}</HostBanner.Title>
+            <HostBanner.Image
+                path={league.path}
+                imgUrl={league.imgUrl}
+                alt={league.alt}
+            />
+            <HostBanner.Region>{regionText}</HostBanner.Region>
+            <HostBanner.Button title={league.buttonTitle} path={league.path} />
+        </HostBanner>
+    );
+};
+
+export const HaloLeagues = () => {
+    const { data, loading, error } = useLeagueEvents("Halo");
+
+    const [sort, setSort] = useState('featured');
+    const [selectedRegions, setSelectedRegions] = useState([]);
+    const [selectedCategoryLabels, setSelectedCategoryLabels] = useState([]);
+    const [verifiedOnly, setVerifiedOnly] = useState(false);
+
+    const allLeagues = useMemo(
+        () => (data || []).map(normalizeHost),
+        [data]
+    );
+
+    const regionOptions = useMemo(
+        () => Array.from(new Set(allLeagues.map(l => l.region))),
+        [allLeagues]
+    );
+
+    const selectedCategories = selectedCategoryLabels.map(label => CATEGORY_KEY_BY_LABEL[label]);
+    const filters = { selectedRegions, selectedCategories, verifiedOnly, sort };
+
+    const filteredLeagues = useMemo(
+        () => applyFiltersAndSort(allLeagues, filters),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [allLeagues, sort, selectedRegions, selectedCategoryLabels, verifiedOnly]
+    );
+
+    const clearFilters = () => {
+        setSelectedRegions([]);
+        setSelectedCategoryLabels([]);
+        setVerifiedOnly(false);
+    };
+
+    return (
+        <div className="standardContainer minorBottomSpace">
             <SeoData
                 title={"Halo Leagues"}
                 description="Halo esports leagues. Find all of the Halo leagues happening in one place. Find your event today."
@@ -11,66 +110,38 @@ export const HaloLeagues = () => {
             />
             <HeaderImage title={"Halo Leagues"} imageClass={"haloLeaguePage"} />
 
-            <div className="eventBannerContainer">
-                <HostBanner>
-                    <HostBanner.Title path={"/games/halo/leagues/halo-rec-league"}>Halo Rec League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/halo/leagues/halo-rec-league"} 
-                        imgUrl={"https://i.imgur.com/6cA46YH.png"} 
-                        alt={"Halo Rec League"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/halo/leagues/halo-rec-league"} />
-                </HostBanner>
+            <EventListFilters
+                sort={sort}
+                onSortChange={setSort}
+                categoryOptions={CATEGORY_OPTIONS}
+                selectedCategories={selectedCategoryLabels}
+                onCategoryChange={setSelectedCategoryLabels}
+                regionOptions={regionOptions}
+                selectedRegions={selectedRegions}
+                onRegionChange={setSelectedRegions}
+                verifiedOnly={verifiedOnly}
+                onVerifiedChange={setVerifiedOnly}
+                resultCount={filteredLeagues.length}
+                onClear={clearFilters}
+            />
 
-                <HostBanner>
-                    <HostBanner.Title path={"/games/halo/leagues/ascending-baseline"}>Ascending Baseline</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/halo/leagues/ascending-baseline"} 
-                        imgUrl={"https://i.imgur.com/W2CJtZK.png"} 
-                        alt={"Ascending Baseline Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"All Leagues"} path={"/games/halo/leagues/ascending-baseline"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/halo/leagues/halo-agent"}>Halo Agent</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/halo/leagues/halo-agent"} 
-                        imgUrl={"https://i.imgur.com/bHzfdu8.png"} 
-                        alt={"Halo Agent League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>All Regions</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/halo/leagues/halo-agent"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <h2 className="eventSeparationTitle">Collegiate Leagues</h2>
-                <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
-                
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/halo/leagues/ugc-halo"}>College Halo</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/halo/leagues/ugc-halo"} 
-                        imgUrl={"https://i.imgur.com/JeMuXtx.png"} 
-                        alt={"UGC League"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/halo/leagues/ugc-halo"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-            </div>
+            {loading ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>
+            ) : error ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load leagues right now.</h2>
+            ) : allLeagues.length === 0 ? (
+                <div className="eventBannerContainer">
+                    <NoEvents pageType={"Leagues"} />
+                </div>
+            ) : filteredLeagues.length === 0 ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No leagues match your filters.</h2>
+            ) : (
+                <div className="eventBannerContainer">
+                    {filteredLeagues.map(league => (
+                        <LeagueBanner key={league.path} league={league} />
+                    ))}
+                </div>
+            )}
         </div>
     );
 }

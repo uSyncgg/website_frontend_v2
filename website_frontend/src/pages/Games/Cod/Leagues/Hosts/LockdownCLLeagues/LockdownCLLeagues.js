@@ -1,77 +1,56 @@
 import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
-import { useCheckResize } from "hooks";
+import { useLeagueEvents, useLeagueChildren } from "hooks";
 import '../../../../EventBanners.css';
 
-export const LockdownCLLeagues = () => {
-    const isMobile = useCheckResize();
+const GAME = "Call of Duty";
+const PARENT_NAME = "LockdownCL";
+const ROUTE_PREFIX = "/games/call-of-duty/leagues";
 
-    const legends = isMobile ? "Legends League - Crim 3 & Above" : "Crim 3 & Above";
-    const uppers = isMobile ? "Uppers League - Diamond 2 - Crim 2" : "Diamond 2 - Crim 2";
-    const lowers = isMobile ? "Lowers League - Diamond 1 & Below" : "Diamond 1 & Below";
-    const womens = isMobile ? "Womens League - All Skill Levels" : "All Skill Levels";
+export const LockdownCLLeagues = () => {
+    const { data: hosts } = useLeagueEvents(GAME);
+    const { data: children, loading, error } = useLeagueChildren(GAME, PARENT_NAME);
+
+    const parent = (hosts || []).find(h => h.name === PARENT_NAME);
+    const headerTitle = parent?.verified ? undefined : (parent?.name || undefined);
 
     return (
         <div className="standardContainer">
             <SeoData
                 title={"LockdownCL - Call of Duty"}
-                description="Fun but competitive Call of Duty league for free agents that are looking for a draft based league with a cash prize and playoffs."
+                description={"Fun but competitive Call of Duty league for free agents that are looking for a draft based league with a cash prize and playoffs."}
                 canonicalPath={"/games/call-of-duty/leagues/lockdowncl-leagues"}
             />
-            {/* NOTE VERIFIED BANNER FOR LOCKDOWN LOOKS LIKE SHIT IN HEADER IMAGE */}
-            <HeaderImage imageClass={"lockdownCODLeagues"} />
+            <HeaderImage title={headerTitle} imageClass={"lockdownCODLeagues"} imageUrl={parent?.header_img} />
 
             <div className="eventBannerContainer">
-                <HostBanner>
-                    <HostBanner.Title path={"/games/call-of-duty/leagues/lockdowncl-leagues/legends"}>Legends League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/call-of-duty/leagues/lockdowncl-leagues/legends"} 
-                        imgUrl={"https://i.imgur.com/Kg7IPyO.png"} 
-                        alt={"Lockdown COD League"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{legends}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/lockdowncl-leagues/legends"} />
-                </HostBanner>
+                {loading ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>
+                ) : error ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load leagues right now.</h2>
+                ) : (children || []).length === 0 ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No leagues available right now.</h2>
+                ) : (
+                    (children || [])
+                        .slice()
+                        .sort((a, b) => (b.verified ? 1 : 0) - (a.verified ? 1 : 0))
+                        .map(child => {
+                            const path = `${ROUTE_PREFIX}${child.path}`;
 
-                <HostBanner>
-                    <HostBanner.Title path={"/games/call-of-duty/leagues/lockdowncl-leagues/uppers"}>Uppers League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/call-of-duty/leagues/lockdowncl-leagues/uppers"} 
-                        imgUrl={"https://i.imgur.com/hppmH7i.png"} 
-                        alt={"Lockdown COD League"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{uppers}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/lockdowncl-leagues/uppers"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/call-of-duty/leagues/lockdowncl-leagues/lowers"}>Lowers League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/call-of-duty/leagues/lockdowncl-leagues/lowers"} 
-                        imgUrl={"https://i.imgur.com/iA4qVhT.png"} 
-                        alt={"Lockdown COD League"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{lowers}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/lockdowncl-leagues/lowers"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/call-of-duty/leagues/lockdowncl-leagues/womens"}>Womens League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/call-of-duty/leagues/lockdowncl-leagues/womens"} 
-                        imgUrl={"https://i.imgur.com/9E2KYjz.png"} 
-                        alt={"Lockdown COD League"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{womens}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/lockdowncl-leagues/womens"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
+                            return (
+                                <HostBanner key={path} path={path}>
+                                    <HostBanner.Title path={path} verified={child.verified}>{child.name}</HostBanner.Title>
+                                    <HostBanner.Image
+                                        path={path}
+                                        imgUrl={child.banner_img}
+                                        alt={child.name}
+                                        verified={child.verified}
+                                    />
+                                    <HostBanner.Region>{`${child.team_size} - ${child.region}`}</HostBanner.Region>
+                                    <HostBanner.Button title={"More Info"} path={path} />
+                                </HostBanner>
+                            );
+                        })
+                )}
 
                 <div className="backButtonContainer">
                     <BackButton path={"/games/call-of-duty/leagues"} />

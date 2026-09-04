@@ -1,91 +1,56 @@
 import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
-import { useCheckResize } from "hooks";
+import { useLeagueEvents, useLeagueChildren } from "hooks";
 import '../../../../EventBanners.css';
 
-export const FrontierDoublesLeagues = () => {
-    const isMobile = useCheckResize();
+const GAME = "Rocket League";
+const PARENT_NAME = "Frontier Doubles Leagues";
+const ROUTE_PREFIX = "/games/RocketLeague/leagues";
 
-    const elite = isMobile ? "Elite League - 37.5 Salary Cap" : "37.5 Salary Cap";
-    const star = isMobile ? "Star League - 48 Salary Cap" : "48 Salary Cap";
-    const expert = isMobile ? "Expert League - 42 Salary Cap" : "42 Salary Cap";
-    const adept = isMobile ? "Adept Leaue - 36 Salary Cap" : "36 Salary Cap";
-    const origin = isMobile ? "Origin League - 30 Salary Cap" : "30 Salary Cap";
+export const FrontierDoublesLeagues = () => {
+    const { data: hosts } = useLeagueEvents(GAME);
+    const { data: children, loading, error } = useLeagueChildren(GAME, PARENT_NAME);
+
+    const parent = (hosts || []).find(h => h.name === PARENT_NAME);
+    const headerTitle = parent?.verified ? undefined : (parent?.name || "Frontier Doubles Leagues");
 
     return (
         <div className="standardContainer">
             <SeoData
                 title={"Frontier Doubles Leagues - Rocket League"}
-                description="Frontier Double Rocket League leagues. 4 different leagues to choose from based on your MMR. Sign up with your duo today."
+                description={"Frontier Double Rocket League leagues. 4 different leagues to choose from based on your MMR. Sign up with your duo today."}
                 canonicalPath={"/games/RocketLeague/leagues/frontier-doubles-leagues"}
             />
-            <HeaderImage title={"Frontier Doubles Leagues"} imageClass={"nonVerifiedPage"} />
+            <HeaderImage title={headerTitle} imageClass={"nonVerifiedPage"} imageUrl={parent?.header_img} />
 
             <div className="eventBannerContainer">
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/frontier-doubles-leagues/elite"}>Elite League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/frontier-doubles-leagues/elite"} 
-                        imgUrl={"https://i.imgur.com/JRaBjWV.png"} 
-                        alt={"Frontier Doubles Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{elite}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/frontier-doubles-leagues/elite"} />
-                </HostBanner>
+                {loading ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>
+                ) : error ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load leagues right now.</h2>
+                ) : (children || []).length === 0 ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No leagues available right now.</h2>
+                ) : (
+                    (children || [])
+                        .slice()
+                        .sort((a, b) => (b.verified ? 1 : 0) - (a.verified ? 1 : 0))
+                        .map(child => {
+                            const path = `${ROUTE_PREFIX}${child.path}`;
 
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/frontier-doubles-leagues/star"}>Star League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/frontier-doubles-leagues/star"} 
-                        imgUrl={"https://i.imgur.com/JRaBjWV.png"} 
-                        alt={"Frontier Doubles Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{star}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/frontier-doubles-leagues/star"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/frontier-doubles-leagues/expert"}>Expert League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/frontier-doubles-leagues/expert"} 
-                        imgUrl={"https://i.imgur.com/JRaBjWV.png"} 
-                        alt={"Frontier Doubles Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{expert}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/frontier-doubles-leagues/expert"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/frontier-doubles-leagues/adept"}>Adept League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/frontier-doubles-leagues/adept"} 
-                        imgUrl={"https://i.imgur.com/JRaBjWV.png"} 
-                        alt={"Frontier Doubles Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{adept}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/frontier-doubles-leagues/adept"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/frontier-doubles-leagues/origin"}>Origin League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/frontier-doubles-leagues/origin"} 
-                        imgUrl={"https://i.imgur.com/JRaBjWV.png"} 
-                        alt={"Frontier Doubles Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{origin}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/frontier-doubles-leagues/origin"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
+                            return (
+                                <HostBanner key={path} path={path}>
+                                    <HostBanner.Title path={path} verified={child.verified}>{child.name}</HostBanner.Title>
+                                    <HostBanner.Image
+                                        path={path}
+                                        imgUrl={child.banner_img}
+                                        alt={child.name}
+                                        verified={child.verified}
+                                    />
+                                    <HostBanner.Region>{`${child.team_size} - ${child.region}`}</HostBanner.Region>
+                                    <HostBanner.Button title={"More Info"} path={path} />
+                                </HostBanner>
+                            );
+                        })
+                )}
 
                 <div className="backButtonContainer">
                     <BackButton path={"/games/RocketLeague/leagues"} />

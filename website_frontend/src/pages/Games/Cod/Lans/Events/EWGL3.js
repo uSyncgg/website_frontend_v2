@@ -1,7 +1,15 @@
 import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData } from "components";
+import { useEvent } from "hooks";
 import '../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
 
 export const EWGL3 = () => {
+    const { data, error } = useEvent("lans", "Call of Duty", "EWGL 3");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -10,7 +18,7 @@ export const EWGL3 = () => {
                 canonicalPath={"/lans/ewgl3"}
             />
 
-            <HeaderImage title={"EWGL 3"} imageClass={"eventPage"} />
+            <HeaderImage title={"EWGL 3"} imageUrl={data?.header_img} />
 
             <div className="eventInfoCardContainer">
                 <div>

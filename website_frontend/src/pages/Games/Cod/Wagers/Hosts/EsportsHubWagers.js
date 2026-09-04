@@ -1,7 +1,22 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
+import { useEvent } from "hooks";
 import '../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
+
+const restrictionInfoList = (data) => [
+    ...Object.values(data.restrictions || {}).flatMap(v => Array.isArray(v) ? [v.map(s => String(s).trim()).join(', ')] : [v]),
+    (data.availability?.length === 1 && data.availability[0] === 'Worldwide')
+        ? 'Available Worldwide'
+        : `Available in: ${(data.availability || []).join(', ')}`,
+];
 
 export const EsportsHubWagers = () => {
+    const { data, loading, error } = useEvent("wagers", "Call of Duty", "The Esports Hub");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -9,21 +24,33 @@ export const EsportsHubWagers = () => {
                 description="Throwback Call of Duty wagers for old titles like MWR, Bo3, Bo4, Cold War, and more. Play classic cod for money."
                 canonicalPath={"/games/call-of-duty/wagers/the-esports-hub"}
             />
-            <HeaderImage title={"The Esports Hub"} imageClass={"eventPage"} />
+            <HeaderImage imageUrl={data?.header_img} title={"The Esports Hub"} />
 
-            <div className="eventInfoCardContainer">
-                <div>
-                    <EventInfoCard title={"Fees"} infoList={["10% Match Fee", "Varying Deposit / Withdrawal Fee"]} footer={<ExternalButton host={"The Esports Hub"} blank={true} title={"Join Now"} path={"https://theesportshub.com/"} />}/>
+            {data?.verified &&
+                <div className="verifiedContainer">
+                    <VerifiedText />
                 </div>
+            }
 
-                <div>
-                    <EventInfoCard title={"Details"} infoList={["MWR, BO3, BO4, Cold War, and MWII Matches", "Various Rulesets to Choose", "Live Website Support", "Medium Sized User Base", "Available Worldwide, Select Region When Posting"]} />
-                </div>
+            {loading ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Loading wager info...</p>
+            ) : error || !data ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Unable to load this wager platform right now.</p>
+            ) : (
+                <div className="eventInfoCardContainer">
+                    <div>
+                        <EventInfoCard title={"Fees"} infoList={data.fee_details} footer={<ExternalButton host={data.name} blank={true} title={"Join Now"} path={data.url} />}/>
+                    </div>
 
-                <div>
-                    <EventInfoCard title={"Restrictions"} infoList={["13+", "Must Be Legal Resident From: BE, BG, CZ, DK, DE, EE, IE, EL, ES, FR, IT, LV, LT, LU, HU, MT, NL, HE, PL, PT, RO, SI, SK, FI, SE, UK, IS, LI, NO, CH, GB, AT, TR, HR, RU, or GR"]} />
+                    <div>
+                        <EventInfoCard title={"Details"} infoList={data.details} />
+                    </div>
+
+                    <div>
+                        <EventInfoCard title={"Restrictions"} infoList={restrictionInfoList(data)} />
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="backButtonContainer">
                 <BackButton path={"/games/call-of-duty/wagers"} />

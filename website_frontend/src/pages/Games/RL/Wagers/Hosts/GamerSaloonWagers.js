@@ -1,7 +1,22 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
+import { useEvent } from "hooks";
 import '../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
+
+const restrictionInfoList = (data) => [
+    ...Object.values(data.restrictions || {}).flatMap(v => Array.isArray(v) ? [v.map(s => String(s).trim()).join(', ')] : [v]),
+    (data.availability?.length === 1 && data.availability[0] === 'Worldwide')
+        ? 'Available Worldwide'
+        : `Available in: ${(data.availability || []).join(', ')}`,
+];
 
 export const GamerSaloonWagers = () => {
+    const { data, loading, error } = useEvent("wagers", "Rocket League", "Gamer Saloon");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -9,21 +24,33 @@ export const GamerSaloonWagers = () => {
                 description="Gamer Saloon Rocket League wagers. Console only 1v1 best of 3 matches with set buy-in amounts. 10% match fee for Rocket League wager matches."
                 canonicalPath={"/games/RocketLeague/wagers/gamersaloon"}
             />
-            <HeaderImage title={"GamerSaloon"} imageClass={"eventPage"} />
+            <HeaderImage imageUrl={data?.header_img} title={"GamerSaloon"} />
 
-            <div className="eventInfoCardContainer">
-                <div>
-                    <EventInfoCard title={"Fees"} infoList={["Match Fee: 10%", "Varying Deposit/Withdrawal Fee"]} footer={<ExternalButton host={"GamerSaloon"} blank={true} title={"Join Now"} path={"https://www.gamersaloon.com/tournaments/all"} />}/>
+            {data?.verified &&
+                <div className="verifiedContainer">
+                    <VerifiedText />
                 </div>
+            }
 
-                <div>
-                    <EventInfoCard title={"Details"} infoList={["1v1 Best of 3 Console ONLY", "5 Minute Matches", "Set Buy-In Amounts", "Small Numbers of Users"]} />
-                </div>
+            {loading ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Loading wager info...</p>
+            ) : error || !data ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Unable to load this wager platform right now.</p>
+            ) : (
+                <div className="eventInfoCardContainer">
+                    <div>
+                        <EventInfoCard title={"Fees"} infoList={data.fee_details} footer={<ExternalButton host={data.name} blank={true} title={"Join Now"} path={data.url} />}/>
+                    </div>
 
-                <div>
-                    <EventInfoCard title={"Restrictions"} infoList={["18+", "Available Worldwide", "US State Restrictions: AZ, IA, MI, MT, NV, and SD", "NA Server Only"]} />
+                    <div>
+                        <EventInfoCard title={"Details"} infoList={data.details} />
+                    </div>
+
+                    <div>
+                        <EventInfoCard title={"Restrictions"} infoList={restrictionInfoList(data)} />
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="backButtonContainer">
                 <BackButton path={"/games/RocketLeague/wagers"} />

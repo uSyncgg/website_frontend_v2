@@ -1,7 +1,13 @@
+import { useMemo } from "react";
 import { SeoData, LanMap } from "components";
-import { ALL_LAN_MARKERS } from 'data/lanMarkers';
+import { useAllLanEvents } from "hooks";
+import { toLanMarkers } from 'data/lanMarkers';
 
 export const AllLans = () => {
+    const { data } = useAllLanEvents();
+
+    const markers = useMemo(() => toLanMarkers(data), [data]);
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -11,7 +17,7 @@ export const AllLans = () => {
             />
 
             <div className="lanMapContainer">
-                <LanMap markers={ALL_LAN_MARKERS} showAllGames={true} />
+                <LanMap markers={markers} showAllGames={true} />
             </div>
         </div>
     )

@@ -1,116 +1,118 @@
-import { SeoData, HostBanner, NoEvents, LanMap } from "components";
-import { COD_LAN_MARKERS } from 'data/lanMarkers';
+import { useMemo, useState } from "react";
+import { SeoData, HostBanner, NoEvents, LanMap, EventListFilters } from "components";
+import { useLanEvents } from "hooks";
+import { toLanMarkers } from 'data/lanMarkers';
 import '../../EventBanners.css';
 
+const GAME = "Call of Duty";
+const MAP_GAME = "CoD";
+
+const normalizeLan = (event) => ({
+    name: event.name,
+    path: `/lans${event.path}`,
+    imgUrl: event.banner_img,
+    alt: event.name,
+    verified: !!event.verified,
+    region: event.location,
+    buttonTitle: "More Info",
+});
+
+const applyFiltersAndSort = (list, { selectedRegions, verifiedOnly, sort }) => {
+    let result = list.filter(l =>
+        (selectedRegions.length === 0 || selectedRegions.includes(l.region)) &&
+        (!verifiedOnly || l.verified)
+    );
+
+    if (sort === 'az') {
+        result = result.slice().sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sort === 'za') {
+        result = result.slice().sort((a, b) => b.name.localeCompare(a.name));
+    } else {
+        result = result.slice().sort((a, b) => (b.verified ? 1 : 0) - (a.verified ? 1 : 0));
+    }
+
+    return result;
+};
+
+const LanBanner = ({ lan }) => (
+    <HostBanner path={lan.path}>
+        <HostBanner.Title path={lan.path} verified={lan.verified}>{lan.name}</HostBanner.Title>
+        <HostBanner.Image
+            path={lan.path}
+            imgUrl={lan.imgUrl}
+            alt={lan.alt}
+        />
+        <HostBanner.Region>{lan.region}</HostBanner.Region>
+        <HostBanner.Button title={lan.buttonTitle} path={lan.path} />
+    </HostBanner>
+);
+
 export const CodLans = () => {
+    const { data, loading, error } = useLanEvents(GAME);
+
+    const [sort, setSort] = useState('featured');
+    const [selectedRegions, setSelectedRegions] = useState([]);
+    const [verifiedOnly, setVerifiedOnly] = useState(false);
+
+    const allLans = useMemo(() => (data || []).map(normalizeLan), [data]);
+    const markers = useMemo(() => toLanMarkers(data, GAME), [data]);
+
+    const regionOptions = useMemo(
+        () => Array.from(new Set(allLans.map(l => l.region))),
+        [allLans]
+    );
+
+    const filteredLans = useMemo(
+        () => applyFiltersAndSort(allLans, { selectedRegions, verifiedOnly, sort }),
+        [allLans, sort, selectedRegions, verifiedOnly]
+    );
+
+    const clearFilters = () => {
+        setSelectedRegions([]);
+        setVerifiedOnly(false);
+    };
+
     return (
-        <div className="standardContainer">
+        <div className="standardContainer minorBottomSpace">
             <SeoData
                 title={"Call of Duty LANs"}
-                description="Call of Duty LAN tournaments near you. Find the closest Call of Duty LANs to where you live and work. Every LAN going on near you."
+                description={"Call of Duty LAN tournaments near you. Find the closest Call of Duty LANs to where you live and work. Every LAN going on near you."}
                 canonicalPath={"/games/call-of-duty/lans"}
             />
+
             <div className="lanMapContainer">
-                <LanMap markers={COD_LAN_MARKERS} game="CoD" />
+                <LanMap markers={markers} game={MAP_GAME} />
             </div>
 
-            <div className="eventBannerContainer">
+            <EventListFilters
+                sort={sort}
+                onSortChange={setSort}
+                regionOptions={regionOptions}
+                selectedRegions={selectedRegions}
+                onRegionChange={setSelectedRegions}
+                verifiedOnly={verifiedOnly}
+                onVerifiedChange={setVerifiedOnly}
+                resultCount={filteredLans.length}
+                onClear={clearFilters}
+            />
 
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/california-tier-list-lan"}>California Tier List LAN</HostBanner.Title>
-                    <HostBanner.Image
-                        path={"/lans/california-tier-list-lan"}
-                        imgUrl={"https://i.imgur.com/1fHItii.png"}
-                        alt={"California Tier List LAN"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>Lake Forest, CA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/california-tier-list-lan"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/goodbye-bo7-duo-lan-switch"}>Goodbye BO7 Duo LAN Switch</HostBanner.Title>
-                    <HostBanner.Image
-                        path={"/lans/goodbye-bo7-duo-lan-switch"}
-                        imgUrl={"https://i.imgur.com/MsEz4cD.png"}
-                        alt={"Goodbye BO7 Duo LAN Switch"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>Lake Forest, CA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/goodbye-bo7-duo-lan-switch"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/california-esports-mw3-throwback"}>California Esports MW3 Throwback</HostBanner.Title>
-                    <HostBanner.Image
-                        path={"/lans/california-esports-mw3-throwback"}
-                        imgUrl={"https://i.imgur.com/7xT9HY8.png"}
-                        alt={"California Esports MW3 Throwback"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>Lake Forest, CA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/california-esports-mw3-throwback"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/california-esports-mw4-kickoff"}>California Esports MW4 Kickoff</HostBanner.Title>
-                    <HostBanner.Image
-                        path={"/lans/california-esports-mw4-kickoff"}
-                        imgUrl={"https://i.imgur.com/VwMeOPk.png"}
-                        alt={"California Esports MW4 Kickoff"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>Lake Forest, CA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/california-esports-mw4-kickoff"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/ewgl3"}>EWGL 3</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/lans/ewgl3"} 
-                        imgUrl={"https://i.imgur.com/7o2e5a3.png"} 
-                        alt={"EWGL 3"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>St Johns, FL</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/ewgl3"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/shintochamps2026"}>Shinto Champs</HostBanner.Title>
-                    <HostBanner.Image
-                        path={"/lans/shintochamps2026"}
-                        imgUrl={"https://i.imgur.com/0TKXrhh.png"}
-                        alt={"Shinto Champs"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Columbus, OH</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/shintochamps2026"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/ga-cod-modern-warfare-4-launch-tournament"}>GA:CoD Modern Warfare 4 Launch Tournament</HostBanner.Title>
-                    <HostBanner.Image
-                        path={"/lans/ga-cod-modern-warfare-4-launch-tournament"}
-                        imgUrl={"https://i.imgur.com/EWYDkHI.png"}
-                        alt={"GA:CoD Modern Warfare 4 Launch Tournament"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Columbus, OH</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/ga-cod-modern-warfare-4-launch-tournament"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-            </div>
+            {loading ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading LANs...</h2>
+            ) : error ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load LANs right now.</h2>
+            ) : allLans.length === 0 ? (
+                <div className="eventBannerContainer">
+                    <NoEvents pageType={"LANs"} />
+                </div>
+            ) : filteredLans.length === 0 ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No results match your filters.</h2>
+            ) : (
+                <div className="eventBannerContainer">
+                    {filteredLans.map(lan => (
+                        <LanBanner key={lan.path} lan={lan} />
+                    ))}
+                </div>
+            )}
         </div>
     );
 }

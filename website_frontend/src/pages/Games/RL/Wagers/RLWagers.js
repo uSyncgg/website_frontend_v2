@@ -1,9 +1,62 @@
-import { SeoData, HeaderImage, HostBanner } from "components";
+import { useMemo, useState } from "react";
+import { SeoData, HostBanner, HeaderImage, EventListFilters } from "components";
+import { useWagerEvents } from "hooks";
 import '../../EventBanners.css';
 
+const normalizeWager = (host) => ({
+    name: host.name,
+    path: `/games/RocketLeague/wagers${host.path}`,
+    imgUrl: host.banner_img,
+    alt: host.name,
+    verified: !!host.verified,
+    buttonTitle: "More Info",
+});
+
+const applyFiltersAndSort = (list, { verifiedOnly, sort }) => {
+    let result = list.filter(w => !verifiedOnly || w.verified);
+
+    if (sort === 'az') {
+        result = result.slice().sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sort === 'za') {
+        result = result.slice().sort((a, b) => b.name.localeCompare(a.name));
+    } else {
+        result = result.slice().sort((a, b) => (b.verified ? 1 : 0) - (a.verified ? 1 : 0));
+    }
+
+    return result;
+};
+
+const WagerBanner = ({ wager }) => (
+    <HostBanner path={wager.path}>
+        <HostBanner.Title path={wager.path} verified={wager.verified}>{wager.name}</HostBanner.Title>
+        <HostBanner.Image
+            path={wager.path}
+            imgUrl={wager.imgUrl}
+            alt={wager.alt}
+        />
+        <HostBanner.Button title={wager.buttonTitle} path={wager.path} />
+    </HostBanner>
+);
+
 export const RLWagers = () => {
+    const { data, loading, error } = useWagerEvents("Rocket League");
+
+    const [sort, setSort] = useState('featured');
+    const [verifiedOnly, setVerifiedOnly] = useState(false);
+
+    const allWagers = useMemo(() => (data || []).map(normalizeWager), [data]);
+
+    const filteredWagers = useMemo(
+        () => applyFiltersAndSort(allWagers, { verifiedOnly, sort }),
+        [allWagers, sort, verifiedOnly]
+    );
+
+    const clearFilters = () => {
+        setVerifiedOnly(false);
+    };
+
     return (
-        <div className="standardContainer">
+        <div className="standardContainer minorBottomSpace">
             <SeoData
                 title={"Rocket League Wagers"}
                 description="Find the best Rocket League wager sites. Compare platforms like Checkmate Gaming, Gamer Saloon, and Ewagers to wager on your Rocket League skills."
@@ -11,44 +64,28 @@ export const RLWagers = () => {
             />
             <HeaderImage title={"Wagers"} imageClass={"lansPage"} />
 
-            <div className="eventBannerContainer">
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/wagers/cmg"}>Checkmate Gaming</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/wagers/cmg"} 
-                        imgUrl={"https://i.imgur.com/QKP5L9N.png"} 
-                        alt={"Chckmate Gaming Wagers"}
-                        verified={false}
-                    />
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/wagers/cmg"} />
-                </HostBanner>
+            <EventListFilters
+                sort={sort}
+                onSortChange={setSort}
+                verifiedOnly={verifiedOnly}
+                onVerifiedChange={setVerifiedOnly}
+                resultCount={filteredWagers.length}
+                onClear={clearFilters}
+            />
 
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/wagers/gamersaloon"}>Gamer Saloon</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/wagers/gamersaloon"} 
-                        imgUrl={"https://i.imgur.com/M8da8S6.png"} 
-                        alt={"Gamer Saloon Wagers"}
-                        verified={false}
-                    />
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/wagers/gamersaloon"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/wagers/ewagers"}>Ewagers</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/wagers/ewagers"} 
-                        imgUrl={"https://i.imgur.com/FAg32lR.png"} 
-                        alt={"Ewagers"}
-                        verified={false}
-                    />
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/wagers/ewagers"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-            </div>
+            {loading ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading wagers...</h2>
+            ) : error ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load wagers right now.</h2>
+            ) : filteredWagers.length === 0 ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No results match your filters.</h2>
+            ) : (
+                <div className="eventBannerContainer">
+                    {filteredWagers.map(wager => (
+                        <WagerBanner key={wager.path} wager={wager} />
+                    ))}
+                </div>
+            )}
         </div>
     );
 }

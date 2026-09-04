@@ -1,7 +1,15 @@
 import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData } from "components";
+import { useEvent } from "hooks";
 import '../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
 
 export const Pittsburgh5v5GoatGamersLounge = () => {
+    const { data, error } = useEvent("lans", "League of Legends", "5v5 Pittsburgh - Goat Gamers Lounge");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -10,7 +18,7 @@ export const Pittsburgh5v5GoatGamersLounge = () => {
                 canonicalPath={"/lans/5v5-pittsburgh-goat-gamers-lounge"}
             />
 
-            <HeaderImage title={"5v5 Pittsburgh - Goat Gamers Lounge"} imageClass={"eventPage"} />
+            <HeaderImage title={"5v5 Pittsburgh - Goat Gamers Lounge"} imageUrl={data?.header_img} />
 
             <div className="eventInfoCardContainer">
                 <div>

@@ -1,4 +1,16 @@
+.actionSlot {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    justify-self: end;
+    align-self: center;
+    display: flex;
+}
+
 .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     background-color: rgb(49, 49, 49);
     color: rgb(141, 125, 181);
     border: .125rem solid rgb(144, 125, 181);
@@ -6,15 +18,25 @@
     border-radius: .5rem;
     font-weight: bold;
     font-family: 'Helvetica';
-    width: 90%;
+    width: auto;
+    min-width: 132px;
     height: 2.5rem;
-    font-size: inherit;
-    margin-bottom: 2rem;
-    margin-top: 1rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    padding: 0 1rem;
+    margin: 0;
 }
 
 .button:hover {
     background-color: rgb(141, 125, 181);
     color: rgb(49, 49, 49);
     cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+    .button {
+        min-width: 0;
+        padding: 0 0.75rem;
+        font-size: 0.78rem;
+    }
 }

@@ -1,7 +1,15 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
+import { useEvent } from "hooks";
 import '../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
 
 export const EliteWarfareGamingLeague = () => {
+    const { data, loading, error } = useEvent("leagues", "Call of Duty", "Elite Warfare Gaming League");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -9,21 +17,33 @@ export const EliteWarfareGamingLeague = () => {
                 description="Elite Warfare Gaming League is a Call of Duty league for those looking to play against others in their same skill level. Sign up today!"
                 canonicalPath={"/games/call-of-duty/leagues/elite-gaming-warfare-league"}
             />
-            <HeaderImage title={"Elite Warfare Gaming League"} imageClass={"eventPage"} />
+            <HeaderImage imageUrl={data?.header_img} title={"Elite Warfare Gaming League"} />
 
-            <div className="eventInfoCardContainer">
-                <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons (Estimated)"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]} />
+            {data?.verified &&
+                <div className="verifiedContainer">
+                    <VerifiedText />
                 </div>
+            }
 
-                <div>
-                    <EventInfoCard title={"Details"} infoList={["70/30% Prize Pool Split", "4v4 CDL Ruleset Based on Divisions", "Group A: T150 Pro Point Players / NO T250 Ranked Players", "Group B: Crim 3 Ranked Peak / No Pro Point Players / No top U18 Players (Via S7 U18 League)", "Group C: Diamond 3 Ranked Peak / No Pro Point Players / No Challengers Cup Participants / $50 Earnings Limit on COD Agent/CMGs / No top U18 Players (Via S7 U18 League)"]} />
-                </div>
+            {loading ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Loading league info...</p>
+            ) : error || !data ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Unable to load this league right now.</p>
+            ) : (
+                <div className="eventInfoCardContainer">
+                    <div>
+                        <EventInfoCard title={"Date"} infoList={[data.seasonality]} regionTitle={"Region/Type"} regionInfoList={[`${data.team_size} - ${data.region}`]} />
+                    </div>
 
-                <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Group A: $50 Team Pass", "Group B: $40 Team Pass", "Group C: $30 Team Pass"]} footer={<ExternalButton host={"Elite Warfare Gaming League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/Mq3wBGFnNY"} />}/>
+                    <div>
+                        <EventInfoCard title={"Details"} infoList={data.details} />
+                    </div>
+
+                    <div>
+                        <EventInfoCard title={"Entry Fee"} infoList={data.fee_details} footer={<ExternalButton host={data.name} blank={true} title={"Join Now"} path={data.url} />}/>
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="backButtonContainer">
                 <BackButton path={"/games/call-of-duty/leagues"} />

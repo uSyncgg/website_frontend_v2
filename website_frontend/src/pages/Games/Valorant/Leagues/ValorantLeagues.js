@@ -1,9 +1,107 @@
-import { SeoData, HeaderImage, HostBanner } from "components";
+import { useMemo, useState } from "react";
+import { SeoData, HostBanner, HeaderImage, EventListFilters, NoEvents } from "components";
+import { useLeagueEvents } from "hooks";
 import '../../EventBanners.css';
 
-export const ValorantLeagues = () => {
+const CATEGORY_LABEL = { collegiate: 'Collegiate', highschool: 'High School' };
+const CATEGORY_OPTIONS = ['Collegiate', 'High School'];
+const CATEGORY_KEY_BY_LABEL = { 'Collegiate': 'collegiate', 'High School': 'highschool' };
+
+
+const normalizeHost = (host) => {
+    const rawPath = host.path.startsWith('/') ? host.path.slice(1) : host.path;
+    const grouped = Array.isArray(host.leagues) && host.leagues.length > 0;
+
+    return {
+        name: host.name,
+        path: `/games/Valorant/leagues/${rawPath}`,
+        imgUrl: host.banner_img,
+        alt: host.name,
+        verified: !!host.verified,
+        region: (grouped ? host.leagues[0]?.region : host.region) || 'NA',
+        buttonTitle: grouped ? 'All Leagues' : 'More Info',
+        category: host.is_college ? 'collegiate' : host.is_hs ? 'highschool' : 'open',
+    };
+};
+
+const isVisible = (league, selectedCategories) => {
+    if (selectedCategories.length === 0) return true;
+    if (league.category === 'open') return false;
+    return selectedCategories.includes(league.category);
+};
+
+const applyFiltersAndSort = (list, { selectedRegions, selectedCategories, verifiedOnly, sort }) => {
+    let result = list.filter(l =>
+        isVisible(l, selectedCategories) &&
+        (selectedRegions.length === 0 || selectedRegions.includes(l.region)) &&
+        (!verifiedOnly || l.verified)
+    );
+
+    if (sort === 'az') {
+        result = result.slice().sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sort === 'za') {
+        result = result.slice().sort((a, b) => b.name.localeCompare(a.name));
+    } else {
+        result = result.slice().sort((a, b) => (b.verified ? 1 : 0) - (a.verified ? 1 : 0));
+    }
+
+    return result;
+};
+
+const LeagueBanner = ({ league }) => {
+    const regionText = league.category === 'open'
+        ? league.region
+        : `${league.region} | ${CATEGORY_LABEL[league.category]}`;
+
     return (
-        <div className="standardContainer">
+        <HostBanner path={league.path}>
+            <HostBanner.Title path={league.path} verified={league.verified}>{league.name}</HostBanner.Title>
+            <HostBanner.Image
+                path={league.path}
+                imgUrl={league.imgUrl}
+                alt={league.alt}
+            />
+            <HostBanner.Region>{regionText}</HostBanner.Region>
+            <HostBanner.Button title={league.buttonTitle} path={league.path} />
+        </HostBanner>
+    );
+};
+
+export const ValorantLeagues = () => {
+    const { data, loading, error } = useLeagueEvents("Valorant");
+
+    const [sort, setSort] = useState('featured');
+    const [selectedRegions, setSelectedRegions] = useState([]);
+    const [selectedCategoryLabels, setSelectedCategoryLabels] = useState([]);
+    const [verifiedOnly, setVerifiedOnly] = useState(false);
+
+    const allLeagues = useMemo(
+        () => (data || []).map(normalizeHost),
+        [data]
+    );
+
+    const regionOptions = useMemo(
+        () => Array.from(new Set(allLeagues.map(l => l.region))),
+        [allLeagues]
+    );
+
+    const selectedCategories = selectedCategoryLabels.map(label => CATEGORY_KEY_BY_LABEL[label]);
+    const filters = { selectedRegions, selectedCategories, verifiedOnly, sort };
+
+    const filteredLeagues = useMemo(
+        () => applyFiltersAndSort(allLeagues, filters),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [allLeagues, sort, selectedRegions, selectedCategoryLabels, verifiedOnly]
+    );
+
+    const clearFilters = () => {
+        setSelectedRegions([]);
+        setSelectedCategoryLabels([]);
+        setVerifiedOnly(false);
+    };
+
+    return (
+        <div className="standardContainer minorBottomSpace">
             <SeoData
                 title={"Valorant Leagues"}
                 description="Find Valorant leagues for all skill levels. Browse corporate, collegiate, and high school Valorant leagues including NECC, CECC, College Valorant League, and more."
@@ -11,175 +109,38 @@ export const ValorantLeagues = () => {
             />
             <HeaderImage title={"Valorant Leagues"} imageClass={"valLeaguePage"} />
 
-            <div className="eventBannerContainer">
-                <HostBanner>
-                    <HostBanner.Title path={"/games/Valorant/leagues/corporate"}>Corporate League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/Valorant/leagues/corporate"} 
-                        imgUrl={"https://i.imgur.com/k63mdno.png"} 
-                        alt={"Corporate League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/Valorant/leagues/corporate"} />
-                </HostBanner>
+            <EventListFilters
+                sort={sort}
+                onSortChange={setSort}
+                categoryOptions={CATEGORY_OPTIONS}
+                selectedCategories={selectedCategoryLabels}
+                onCategoryChange={setSelectedCategoryLabels}
+                regionOptions={regionOptions}
+                selectedRegions={selectedRegions}
+                onRegionChange={setSelectedRegions}
+                verifiedOnly={verifiedOnly}
+                onVerifiedChange={setVerifiedOnly}
+                resultCount={filteredLeagues.length}
+                onClear={clearFilters}
+            />
 
-                <HostBanner>
-                    <HostBanner.Title path={"/games/Valorant/leagues/unified"}>Unified Premier League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/Valorant/leagues/unified"} 
-                        imgUrl={"https://i.imgur.com/KDf5r2a.png"} 
-                        alt={"Unified Premier League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/Valorant/leagues/unified"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <h2 className="eventSeparationTitle">Collegiate Leagues</h2>
-                <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
-                
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/Valorant/leagues/riot"}>College Valorant League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/Valorant/leagues/riot"} 
-                        imgUrl={"https://i.imgur.com/1Hqgxu0.png"} 
-                        alt={"College Valorant League"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/Valorant/leagues/riot"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/Valorant/leagues/njcaae"}>NJCAAE</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/Valorant/leagues/njcaae"} 
-                        imgUrl={"https://i.imgur.com/Yer31Qr.png"} 
-                        alt={"NJCAAE"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>USA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/Valorant/leagues/njcaae"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/Valorant/leagues/necc"}>NECC</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/Valorant/leagues/necc"} 
-                        imgUrl={"https://i.imgur.com/wUMekqz.png"} 
-                        alt={"NECC"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/Valorant/leagues/necc"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/Valorant/leagues/egfc"}>EGFC League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/Valorant/leagues/egfc"} 
-                        imgUrl={"https://i.imgur.com/3DTxejo.png"} 
-                        alt={"EGFC League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>USA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/Valorant/leagues/egfc"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/Valorant/leagues/playfly-leagues"}>Playfly College</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/Valorant/leagues/playfly-leagues"} 
-                        imgUrl={"https://i.imgur.com/XHCsRTv.png"} 
-                        alt={"Playfly College Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"All Leagues"} path={"/games/Valorant/leagues/playfly-leagues"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/Valorant/leagues/cecc"}>CECC League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/Valorant/leagues/cecc"} 
-                        imgUrl={"https://i.imgur.com/WFbWb2d.png"} 
-                        alt={"CECC League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>USA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/Valorant/leagues/cecc"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/Valorant/leagues/nse"}>National Student Esports</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/Valorant/leagues/nse"} 
-                        imgUrl={"https://i.imgur.com/mJJJD6e.png"} 
-                        alt={"National Student Esports"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>UK</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/Valorant/leagues/nse"} />
-                </HostBanner>
-                
-                <div className="hrEvents" />
-
-                <h2 className="eventSeparationTitle">High School Leagues</h2>
-                <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
-                
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/Valorant/leagues/tec"}>The Esports Company League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/Valorant/leagues/tec"} 
-                        imgUrl={"https://i.imgur.com/FZeLamS.png"} 
-                        alt={"The Esports Company League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>USA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/Valorant/leagues/tec"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/Valorant/leagues/nasef"}>NASEF League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/Valorant/leagues/nasef"} 
-                        imgUrl={"https://i.imgur.com/x0SaVuR.png"} 
-                        alt={"NASEF League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>USA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/Valorant/leagues/nasef"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/Valorant/leagues/egfh"}>EGFH League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/Valorant/leagues/egfh"} 
-                        imgUrl={"https://i.imgur.com/3DTxejo.png"} 
-                        alt={"EGFH"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>USA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/Valorant/leagues/egfh"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-            </div>
+            {loading ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>
+            ) : error ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load leagues right now.</h2>
+            ) : allLeagues.length === 0 ? (
+                <div className="eventBannerContainer">
+                    <NoEvents pageType={"Leagues"} />
+                </div>
+            ) : filteredLeagues.length === 0 ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No leagues match your filters.</h2>
+            ) : (
+                <div className="eventBannerContainer">
+                    {filteredLeagues.map(league => (
+                        <LeagueBanner key={league.path} league={league} />
+                    ))}
+                </div>
+            )}
         </div>
     );
 }

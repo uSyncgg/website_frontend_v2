@@ -1,48 +1,56 @@
 import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
-import { useCheckResize } from "hooks";
+import { useLeagueEvents, useLeagueChildren } from "hooks";
 import '../../../../EventBanners.css';
 
-export const ItalianRocketChampLeagues = () => {
-    const isMobile = useCheckResize();
+const GAME = "Rocket League";
+const PARENT_NAME = "Italian Rocket Champ Leagues";
+const ROUTE_PREFIX = "/games/RocketLeague/leagues";
 
-    const a = isMobile ? "Serie A League - By Rank" : "By Rank";
-    const b = isMobile ? "Serie B League - By Rank" : "By Rank";
+export const ItalianRocketChampLeagues = () => {
+    const { data: hosts } = useLeagueEvents(GAME);
+    const { data: children, loading, error } = useLeagueChildren(GAME, PARENT_NAME);
+
+    const parent = (hosts || []).find(h => h.name === PARENT_NAME);
+    const headerTitle = parent?.verified ? undefined : (parent?.name || "Italian Rocket Champ Leagues");
 
     return (
         <div className="standardContainer">
             <SeoData
                 title={"Italian Rocket Champ Leagues - Rocket League"}
-                description="Italian Rocket League leagues for your playstyle. Grab your Rocket League teammates and sign up for these leagues today."
+                description={"Italian Rocket League leagues for your playstyle. Grab your Rocket League teammates and sign up for these leagues today."}
                 canonicalPath={"/games/RocketLeague/leagues/italian-leagues"}
             />
-            <HeaderImage title={"Italian Rocket Champ Leagues"} imageClass={"nonVerifiedPage"} />
+            <HeaderImage title={headerTitle} imageClass={"nonVerifiedPage"} imageUrl={parent?.header_img} />
 
             <div className="eventBannerContainer">
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/italian-leagues/serie-a"}>Serie A League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/italian-leagues/serie-a"} 
-                        imgUrl={"https://i.imgur.com/VjsPbnv.png"} 
-                        alt={"Italian Rocket Champ Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{a}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/italian-leagues/serie-a"} />
-                </HostBanner>
+                {loading ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>
+                ) : error ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load leagues right now.</h2>
+                ) : (children || []).length === 0 ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No leagues available right now.</h2>
+                ) : (
+                    (children || [])
+                        .slice()
+                        .sort((a, b) => (b.verified ? 1 : 0) - (a.verified ? 1 : 0))
+                        .map(child => {
+                            const path = `${ROUTE_PREFIX}${child.path}`;
 
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/italian-leagues/serie-b"}>Serie B League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/italian-leagues/serie-b"} 
-                        imgUrl={"https://i.imgur.com/VjsPbnv.png"} 
-                        alt={"Italian Rocket Champ Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{b}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/italian-leagues/serie-b"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
+                            return (
+                                <HostBanner key={path} path={path}>
+                                    <HostBanner.Title path={path} verified={child.verified}>{child.name}</HostBanner.Title>
+                                    <HostBanner.Image
+                                        path={path}
+                                        imgUrl={child.banner_img}
+                                        alt={child.name}
+                                        verified={child.verified}
+                                    />
+                                    <HostBanner.Region>{`${child.team_size} - ${child.region}`}</HostBanner.Region>
+                                    <HostBanner.Button title={"More Info"} path={path} />
+                                </HostBanner>
+                            );
+                        })
+                )}
 
                 <div className="backButtonContainer">
                     <BackButton path={"/games/RocketLeague/leagues"} />
