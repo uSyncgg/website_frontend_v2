@@ -1,7 +1,15 @@
 import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData, VerifiedText } from "components";
+import { useEvent } from "hooks";
 import '../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
 
 export const CaliforniaEsportsMW3Throwback = () => {
+    const { data, error } = useEvent("lans", "Call of Duty", "California Esports MW3 Throwback");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -10,7 +18,7 @@ export const CaliforniaEsportsMW3Throwback = () => {
                 title={"California Esports MW3 Throwback - Call of Duty"}
             />
 
-            <HeaderImage imageClass={"caliTier3"} />
+            <HeaderImage imageUrl={data?.header_img} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

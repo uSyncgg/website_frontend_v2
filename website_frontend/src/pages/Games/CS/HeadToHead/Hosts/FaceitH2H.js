@@ -1,7 +1,24 @@
 import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
+import { useEvent } from "hooks";
 import '../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
+
+const restrictionInfoList = (data) => {
+    const avail = (data.availability || []).filter(s => s && s.trim());
+    const items = Object.values(data.restrictions || {}).flatMap(v => Array.isArray(v) ? [v.map(s => String(s).trim()).join(', ')] : [v]);
+    if (avail.length > 0) {
+        items.push(avail.length === 1 && avail[0] === 'Worldwide' ? 'Available Worldwide' : `Available in: ${avail.join(', ')}`);
+    }
+    return items;
+};
 
 export const FaceitH2H = () => {
+    const { data, loading, error } = useEvent("head-to-head", "CS2", "FACEIT");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -9,25 +26,33 @@ export const FaceitH2H = () => {
                 description="Compete in the #1 place for free Counter-Strike 2 match ladders - FACEIT. CLimb the ladder and earn rewards / prizes."
                 canonicalPath={"/games/CS2/head-to-head/faceit"}
             />
-            <HeaderImage imageClass={"faceitPage"} />
+            <HeaderImage imageUrl={data?.header_img} />
 
-            <div className="verifiedContainer">
-                <VerifiedText />
-            </div>
-
-            <div className="eventInfoCardContainer">
-                <div>
-                    <EventInfoCard title={"Fees"} infoList={["Free Match Finder"]} footer={<ExternalButton host={"Faceit"} blank={true} title={"Join Now"} path={"https://www.faceit.com/en/game/cs2"} />}/>
+            {data?.verified &&
+                <div className="verifiedContainer">
+                    <VerifiedText />
                 </div>
+            }
 
-                <div>
-                    <EventInfoCard title={"Details"} infoList={["Various Different Ladders", "FACEIT Points Based on Placing", "Points Can Be Used in The Shop", "Large Number of Users", "Live Website Support"]} />
-                </div>
+            {loading ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Loading platform info...</p>
+            ) : error || !data ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Unable to load this platform right now.</p>
+            ) : (
+                <div className="eventInfoCardContainer">
+                    <div>
+                        <EventInfoCard title={"Fees"} infoList={["Free Match Finder"]} footer={<ExternalButton host={data.name} blank={true} title={"Join Now"} path={data.url} />}/>
+                    </div>
 
-                <div>
-                    <EventInfoCard title={"Restrictions"} infoList={["Available Worldwide"]} />
+                    <div>
+                        <EventInfoCard title={"Details"} infoList={data.details} />
+                    </div>
+
+                    <div>
+                        <EventInfoCard title={"Restrictions"} infoList={restrictionInfoList(data)} />
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="backButtonContainer">
                 <BackButton path={"/games/CS2/head-to-head"} />

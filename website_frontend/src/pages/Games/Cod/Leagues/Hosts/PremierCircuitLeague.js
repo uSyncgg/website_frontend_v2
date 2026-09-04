@@ -1,7 +1,15 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
+import { useEvent } from "hooks";
 import '../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
 
 export const PremierCircuitLeague = () => {
+    const { data, loading, error } = useEvent("leagues", "Call of Duty", "The Premier Circuit League");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -9,21 +17,33 @@ export const PremierCircuitLeague = () => {
                 description="The Premier Circuit (TPC) League is an invite-only top tier Call of Duty amateur league. Challengers players duke it out inm this high stakes league."
                 canonicalPath={"/games/call-of-duty/leagues/tpc-league"}
             />
-            <HeaderImage title={"The Premier Circuit League"} imageClass={"eventPage"} />
+            <HeaderImage imageUrl={data?.header_img} title={"The Premier Circuit League"} />
 
-            <div className="eventInfoCardContainer">
-                <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]} />
+            {data?.verified &&
+                <div className="verifiedContainer">
+                    <VerifiedText />
                 </div>
+            }
 
-                <div>
-                    <EventInfoCard title={"Details"} infoList={["$1,000 Prize Pool", "Stats for Every Game", "Live Streamed Matches", "Qualifier Tournament to Enter", "4v4 CDL Variant", "16 Teams MAX"]} />
-                </div>
+            {loading ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Loading league info...</p>
+            ) : error || !data ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Unable to load this league right now.</p>
+            ) : (
+                <div className="eventInfoCardContainer">
+                    <div>
+                        <EventInfoCard title={"Date"} infoList={[data.seasonality]} regionTitle={"Region/Type"} regionInfoList={[`${data.team_size} - ${data.region}`]} />
+                    </div>
 
-                <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Entry Fee TBD - DM to Enter"]} footer={<ExternalButton host={"The Premier Circuit League"} blank={true} title={"Join Now"} path={"https://x.com/TPCircuit"} />}/>
+                    <div>
+                        <EventInfoCard title={"Details"} infoList={data.details} />
+                    </div>
+
+                    <div>
+                        <EventInfoCard title={"Entry Fee"} infoList={data.fee_details} footer={<ExternalButton host={data.name} blank={true} title={"Join Now"} path={data.url} />}/>
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="backButtonContainer">
                 <BackButton path={"/games/call-of-duty/leagues"} />

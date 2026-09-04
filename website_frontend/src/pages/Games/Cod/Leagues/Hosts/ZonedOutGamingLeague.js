@@ -1,7 +1,15 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
+import { useEvent } from "hooks";
 import '../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
 
 export const ZonedOutGamingLeague = () => {
+    const { data, loading, error } = useEvent("leagues", "Call of Duty", "Zoned Out Gaming League");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -9,21 +17,33 @@ export const ZonedOutGamingLeague = () => {
                 description="Zoned Out Call of Duty league. Multiple different skill divisions hosted during nearly every season of the year."
                 canonicalPath={"/games/call-of-duty/leagues/zoned-out"}
             />
-            <HeaderImage title={"Zoned Out League"} imageClass={"eventPage"} />
+            <HeaderImage imageUrl={data?.header_img} title={"Zoned Out League"} />
 
-            <div className="eventInfoCardContainer">
-                <div>
-                    <EventInfoCard title={"Date"} infoList={["Multiple Seasons per Year"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]} />
+            {data?.verified &&
+                <div className="verifiedContainer">
+                    <VerifiedText />
                 </div>
+            }
 
-                <div>
-                    <EventInfoCard title={"Details"} infoList={["$3,750 Prize Pool Across All Divisions", "Multiple Skill Divisions", "Live Streamed Matches"]} />
-                </div>
+            {loading ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Loading league info...</p>
+            ) : error || !data ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Unable to load this league right now.</p>
+            ) : (
+                <div className="eventInfoCardContainer">
+                    <div>
+                        <EventInfoCard title={"Date"} infoList={[data.seasonality]} regionTitle={"Region/Type"} regionInfoList={[`${data.team_size} - ${data.region}`]} />
+                    </div>
 
-                <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Elite Division - $100 per Team", "Master Division - $60 per Team", "Open Division - $40 per Team"]} footer={<ExternalButton host={"Zoned Out League"} blank={true} title={"Join Now"} path={"https://zonedoutgaming.com/leagues/call-of-duty/"} />}/>
+                    <div>
+                        <EventInfoCard title={"Details"} infoList={data.details} />
+                    </div>
+
+                    <div>
+                        <EventInfoCard title={"Entry Fee"} infoList={data.fee_details} footer={<ExternalButton host={data.name} blank={true} title={"Join Now"} path={data.url} />}/>
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="backButtonContainer">
                 <BackButton path={"/games/call-of-duty/leagues"} />

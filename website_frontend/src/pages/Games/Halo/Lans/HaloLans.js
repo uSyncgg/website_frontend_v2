@@ -1,51 +1,118 @@
-import { SeoData, HostBanner, NoEvents, LanMap } from "components";
-import { HALO_LAN_MARKERS } from 'data/lanMarkers';
+import { useMemo, useState } from "react";
+import { SeoData, HostBanner, NoEvents, LanMap, EventListFilters } from "components";
+import { useLanEvents } from "hooks";
+import { toLanMarkers } from 'data/lanMarkers';
 import '../../EventBanners.css';
 
+const GAME = "Halo";
+const MAP_GAME = "Halo";
+
+const normalizeLan = (event) => ({
+    name: event.name,
+    path: `/lans${event.path}`,
+    imgUrl: event.banner_img,
+    alt: event.name,
+    verified: !!event.verified,
+    region: event.location,
+    buttonTitle: "More Info",
+});
+
+const applyFiltersAndSort = (list, { selectedRegions, verifiedOnly, sort }) => {
+    let result = list.filter(l =>
+        (selectedRegions.length === 0 || selectedRegions.includes(l.region)) &&
+        (!verifiedOnly || l.verified)
+    );
+
+    if (sort === 'az') {
+        result = result.slice().sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sort === 'za') {
+        result = result.slice().sort((a, b) => b.name.localeCompare(a.name));
+    } else {
+        result = result.slice().sort((a, b) => (b.verified ? 1 : 0) - (a.verified ? 1 : 0));
+    }
+
+    return result;
+};
+
+const LanBanner = ({ lan }) => (
+    <HostBanner path={lan.path}>
+        <HostBanner.Title path={lan.path} verified={lan.verified}>{lan.name}</HostBanner.Title>
+        <HostBanner.Image
+            path={lan.path}
+            imgUrl={lan.imgUrl}
+            alt={lan.alt}
+        />
+        <HostBanner.Region>{lan.region}</HostBanner.Region>
+        <HostBanner.Button title={lan.buttonTitle} path={lan.path} />
+    </HostBanner>
+);
+
 export const HaloLans = () => {
+    const { data, loading, error } = useLanEvents(GAME);
+
+    const [sort, setSort] = useState('featured');
+    const [selectedRegions, setSelectedRegions] = useState([]);
+    const [verifiedOnly, setVerifiedOnly] = useState(false);
+
+    const allLans = useMemo(() => (data || []).map(normalizeLan), [data]);
+    const markers = useMemo(() => toLanMarkers(data, GAME), [data]);
+
+    const regionOptions = useMemo(
+        () => Array.from(new Set(allLans.map(l => l.region))),
+        [allLans]
+    );
+
+    const filteredLans = useMemo(
+        () => applyFiltersAndSort(allLans, { selectedRegions, verifiedOnly, sort }),
+        [allLans, sort, selectedRegions, verifiedOnly]
+    );
+
+    const clearFilters = () => {
+        setSelectedRegions([]);
+        setVerifiedOnly(false);
+    };
+
     return (
-        <div className="standardContainer">
+        <div className="standardContainer minorBottomSpace">
             <SeoData
                 title={"Halo LANs"}
-                description="Halo LAN tournaments near you and across the world. Find the closest Halo LAN to you today."
+                description={"Halo LAN tournaments near you and across the world. Find the closest Halo LAN to you today."}
                 canonicalPath={"/games/halo/lans"}
             />
 
             <div className="lanMapContainer">
-                <LanMap markers={HALO_LAN_MARKERS} game="Halo" />
+                <LanMap markers={markers} game={MAP_GAME} />
             </div>
 
-            <div className="eventBannerContainer">
-                <div className="hrEvents" />
+            <EventListFilters
+                sort={sort}
+                onSortChange={setSort}
+                regionOptions={regionOptions}
+                selectedRegions={selectedRegions}
+                onRegionChange={setSelectedRegions}
+                verifiedOnly={verifiedOnly}
+                onVerifiedChange={setVerifiedOnly}
+                resultCount={filteredLans.length}
+                onClear={clearFilters}
+            />
 
-                {/* <NoEvents pageType={"LANs"} /> */}
-
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/game-and-geek-2026"}>Game And Geek Expo 2026</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/lans/game-and-geek-2026"} 
-                        imgUrl={"https://i.imgur.com/pR1izqw.png"} 
-                        alt={"Game And Geek Expo 2026"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Raleigh, NC</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/game-and-geek-2026"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/ozokucon-2026"}>Ozokucon 2026</HostBanner.Title>
-                    <HostBanner.Image
-                        path={"/lans/ozokucon-2026"}
-                        imgUrl={"https://i.imgur.com/ZGIrDlo.png"}
-                        alt={"Ozokucon 2026"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Port Huron, MI</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/ozokucon-2026"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-            </div>
+            {loading ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading LANs...</h2>
+            ) : error ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load LANs right now.</h2>
+            ) : allLans.length === 0 ? (
+                <div className="eventBannerContainer">
+                    <NoEvents pageType={"LANs"} />
+                </div>
+            ) : filteredLans.length === 0 ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No results match your filters.</h2>
+            ) : (
+                <div className="eventBannerContainer">
+                    {filteredLans.map(lan => (
+                        <LanBanner key={lan.path} lan={lan} />
+                    ))}
+                </div>
+            )}
         </div>
     );
 }

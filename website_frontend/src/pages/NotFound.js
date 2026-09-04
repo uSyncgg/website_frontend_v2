@@ -8,36 +8,37 @@ export const NotFound = () => {
             alignItems: "center",
             justifyContent: "center",
             textAlign: "center",
+            minHeight: "60vh",
             padding: "6rem 1.5rem",
         }}>
             <title>uSync | Page Not Found</title>
-            <p style={{
-                color: "rgb(142, 106, 206)",
-                fontWeight: 700,
-                letterSpacing: "1.5px",
+            <h1 style={{
+                fontSize: "clamp(2.5rem, 8vw, 4.5rem)",
+                fontWeight: 800,
+                letterSpacing: "-1px",
                 textTransform: "uppercase",
-                fontSize: ".85rem",
-                marginBottom: ".5rem",
+                lineHeight: 1.1,
+                margin: 0,
+                marginBottom: "1.5rem",
             }}>
-                404
-            </p>
-            <h1 style={{ color: "white", fontWeight: 800, marginBottom: ".75rem" }}>
-                Page Not Found
+                <span style={{ color: "white" }}>404 </span>
+                <span style={{
+                    background: "linear-gradient(90deg, #8e6ace 0%, #a97fe0 45%, #6a8fe0 100%)",
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    color: "transparent",
+                }}>
+                    Not Found
+                </span>
             </h1>
-            <p style={{ color: "rgb(170, 166, 178)", maxWidth: "28rem", marginBottom: "1.5rem" }}>
-                The page you're looking for doesn't exist or may have moved.
+            <p style={{ color: "rgb(170, 166, 178)", maxWidth: "28rem", fontSize: "1.1rem" }}>
+                The page you are looking for does not exist.{" "}
+                <Link to="/" style={{ color: "rgb(142, 106, 206)", fontWeight: 700, textDecoration: "underline" }}>
+                    Click here
+                </Link>
+                {" "}to return to the home page.
             </p>
-            <Link to="/" style={{
-                color: "white",
-                textDecoration: "none",
-                border: "2px solid rgb(142, 106, 206)",
-                borderRadius: "18px",
-                padding: "10px 40px",
-                fontSize: "18px",
-                fontWeight: 700,
-            }}>
-                Back to Home
-            </Link>
         </div>
     );
 }

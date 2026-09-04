@@ -1,63 +1,56 @@
 import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
-import { useCheckResize } from "hooks";
+import { useLeagueEvents, useLeagueChildren } from "hooks";
 import '../../../../EventBanners.css';
 
-export const PulseXLeagues = () => {
-    const isMobile = useCheckResize();
+const GAME = "Call of Duty";
+const PARENT_NAME = "Pulse X League";
+const ROUTE_PREFIX = "/games/call-of-duty/leagues";
 
-    const uppers = isMobile ? "Uppers Division - NA" : "NA";
-    const lowers = isMobile ? "Lowers Division - NA" : "NA";
-    const open = isMobile ? "Open Division - NA" : "NA";
+export const PulseXLeagues = () => {
+    const { data: hosts } = useLeagueEvents(GAME);
+    const { data: children, loading, error } = useLeagueChildren(GAME, PARENT_NAME);
+
+    const parent = (hosts || []).find(h => h.name === PARENT_NAME);
+    const headerTitle = parent?.verified ? undefined : (parent?.name || "Pulse X Leagues");
 
     return (
         <div className="standardContainer">
             <SeoData
                 title={"Pulse X Leagues - Call of Duty"}
-                description="Pulse X CoD League is THE Call of Duty league that you and your team has been looking for. Sign up solo or as a team and compete for thousands!"
+                description={"Pulse X CoD League is THE Call of Duty league that you and your team has been looking for. Sign up solo or as a team and compete for thousands!"}
                 canonicalPath={"/games/call-of-duty/leagues/pulse-x-leagues"}
             />
-            <HeaderImage title={"Pulse X Leagues"} imageClass={"nonVerifiedPage"} />
+            <HeaderImage title={headerTitle} imageClass={"nonVerifiedPage"} imageUrl={parent?.header_img} />
 
             <div className="eventBannerContainer">
-                <HostBanner>
-                    <HostBanner.Title path={"/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-uppers"}>Uppers Division</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-uppers"} 
-                        imgUrl={"https://i.imgur.com/RHgIQV1.jpg"} 
-                        alt={"Pulse X League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{uppers}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-uppers"} />
-                </HostBanner>
+                {loading ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>
+                ) : error ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load leagues right now.</h2>
+                ) : (children || []).length === 0 ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No leagues available right now.</h2>
+                ) : (
+                    (children || [])
+                        .slice()
+                        .sort((a, b) => (b.verified ? 1 : 0) - (a.verified ? 1 : 0))
+                        .map(child => {
+                            const path = `${ROUTE_PREFIX}${child.path}`;
 
-                <HostBanner>
-                    <HostBanner.Title path={"/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-lowers"}>Lowers Division</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-lowers"} 
-                        imgUrl={"https://i.imgur.com/RHgIQV1.jpg"} 
-                        alt={"Pulse X League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{lowers}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-lowers"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-open"}>Open Division</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-open"} 
-                        imgUrl={"https://i.imgur.com/RHgIQV1.jpg"} 
-                        alt={"Pulse X League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{open}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/call-of-duty/leagues/pulse-x-leagues/pulse-x-open"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
+                            return (
+                                <HostBanner key={path} path={path}>
+                                    <HostBanner.Title path={path} verified={child.verified}>{child.name}</HostBanner.Title>
+                                    <HostBanner.Image
+                                        path={path}
+                                        imgUrl={child.banner_img}
+                                        alt={child.name}
+                                        verified={child.verified}
+                                    />
+                                    <HostBanner.Region>{`${child.team_size} - ${child.region}`}</HostBanner.Region>
+                                    <HostBanner.Button title={"More Info"} path={path} />
+                                </HostBanner>
+                            );
+                        })
+                )}
 
                 <div className="backButtonContainer">
                     <BackButton path={"/games/call-of-duty/leagues"} />

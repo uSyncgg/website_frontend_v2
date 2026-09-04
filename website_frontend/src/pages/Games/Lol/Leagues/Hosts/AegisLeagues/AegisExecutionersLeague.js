@@ -1,7 +1,15 @@
 import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
+import { useEvent } from "hooks";
 import '../../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
 
 export const AegisExecutionersLeague = () => {
+    const { data, loading, error } = useEvent("leagues", "League of Legends", "Aegis Executioners League");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -9,25 +17,33 @@ export const AegisExecutionersLeague = () => {
                 description="Aegis Executioners League is for League players who are lower than diamond 4. Can you win the entire league?"
                 canonicalPath={"/games/LoL/leagues/aegis-leagues/executioners"}
             />
-            <HeaderImage imageClass={"aegisLOLLeagues"} />
+            <HeaderImage imageUrl={data?.header_img} />
 
-            <div className="verifiedContainer">
-                <VerifiedText />
-            </div>
-
-            <div className="eventInfoCardContainer">
-                <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Winter Leagues"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]} />
+            {data?.verified &&
+                <div className="verifiedContainer">
+                    <VerifiedText />
                 </div>
+            }
 
-                <div>
-                    <EventInfoCard title={"Details"} infoList={["$840 - $1,680 Prize Pool (Estimate)", "Live Streamed Matches", "Support on Discord"]} />
-                </div>
+            {loading ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Loading league info...</p>
+            ) : error || !data ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Unable to load this league right now.</p>
+            ) : (
+                <div className="eventInfoCardContainer">
+                    <div>
+                        <EventInfoCard title={"Date"} infoList={[data.seasonality]} regionTitle={"Region/Type"} regionInfoList={[`${data.team_size} - ${data.region}`]} />
+                    </div>
 
-                <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$75 per Team", "$25 Forfeit Deposit", "Diamond 4 99 LP Peak from Y2025, Y2024 - S3, Y2024 - S2", "D3 99 LP Peak from Y2024 - S1, Y2023 - S2"]} footer={<ExternalButton host={"Aegis Executioners League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/dBtt7Fg9jv"} />}/>
+                    <div>
+                        <EventInfoCard title={"Details"} infoList={data.details} />
+                    </div>
+
+                    <div>
+                        <EventInfoCard title={"Entry Fee"} infoList={data.fee_details} footer={<ExternalButton host={data.name} blank={true} title={"Join Now"} path={data.url} />}/>
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="backButtonContainer">
                 <BackButton path={"/games/LoL/leagues/aegis-leagues"} />

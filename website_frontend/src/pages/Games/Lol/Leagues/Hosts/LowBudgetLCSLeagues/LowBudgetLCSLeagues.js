@@ -1,104 +1,56 @@
 import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
-import { useCheckResize } from "hooks";
+import { useLeagueEvents, useLeagueChildren } from "hooks";
 import '../../../../EventBanners.css';
 
-export const LowBudgetLCSLeagues = () => {
-    const isMobile = useCheckResize();
+const GAME = "League of Legends";
+const PARENT_NAME = "Low Budget LCS Leagues";
+const ROUTE_PREFIX = "/games/LoL/leagues";
 
-    const executive = isMobile ? "Executive League - Diamond AVG" : "Diamond AVG";
-    const financial = isMobile ? "Financial League - Emerald AVG / Two Diamond 3s" : "Emerald AVG / Two Diamond 3s";
-    const commercial = isMobile ? "Commercial League - Platinum AVG / One Emerald 3" : "Platinum AVG / One Emerald 3";
-    const economy = isMobile ? "Economy League - Gold AVG / One Platinum 3" : "Gold AVG / One Platinum 3";
-    const ceo = isMobile ? "CEO League - Masters 375 LP Cap": "Masters 375 LP Cap";
-    const lta = isMobile ? "LTA League - Uncapped" : "Uncapped";
+export const LowBudgetLCSLeagues = () => {
+    const { data: hosts } = useLeagueEvents(GAME);
+    const { data: children, loading, error } = useLeagueChildren(GAME, PARENT_NAME);
+
+    const parent = (hosts || []).find(h => h.name === PARENT_NAME);
+    const headerTitle = parent?.verified ? undefined : (parent?.name || "Low Budget LCS Leagues");
 
     return (
         <div className="standardContainer">
             <SeoData
                 title={"Low Budget LCS Leagues - League of Legends"}
-                description="Low Budget Leagues. The financial League of Legends leagues you have been searching for. Join based on your rank."
+                description={"Low Budget Leagues. The financial League of Legends leagues you have been searching for. Join based on your rank."}
                 canonicalPath={"/games/LoL/leagues/low-budget-leagues"}
             />
-            <HeaderImage title={"Low Budget LCS Leagues"} imageClass={"nonVerifiedPage"} />
+            <HeaderImage title={headerTitle} imageClass={"nonVerifiedPage"} imageUrl={parent?.header_img} />
 
             <div className="eventBannerContainer">
-               <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/low-budget-leagues/lta"}>LTA League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/LoL/leagues/low-budget-leagues/lta"} 
-                        imgUrl={"https://i.imgur.com/lPFfJL9.png"} 
-                        alt={"Low Budget LCS Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{lta}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/low-budget-leagues/lta"} />
-                </HostBanner>
+                {loading ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>
+                ) : error ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load leagues right now.</h2>
+                ) : (children || []).length === 0 ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No leagues available right now.</h2>
+                ) : (
+                    (children || [])
+                        .slice()
+                        .sort((a, b) => (b.verified ? 1 : 0) - (a.verified ? 1 : 0))
+                        .map(child => {
+                            const path = `${ROUTE_PREFIX}${child.path}`;
 
-                <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/low-budget-leagues/ceo"}>CEO League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/LoL/leagues/low-budget-leagues/ceo"} 
-                        imgUrl={"https://i.imgur.com/lPFfJL9.png"} 
-                        alt={"Low Budget LCS Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{ceo}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/low-budget-leagues/ceo"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/low-budget-leagues/executive"}>Executive League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/LoL/leagues/low-budget-leagues/executive"} 
-                        imgUrl={"https://i.imgur.com/lPFfJL9.png"} 
-                        alt={"Low Budget LCS Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{executive}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/low-budget-leagues/executive"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/low-budget-leagues/financial"}>Financial League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/LoL/leagues/low-budget-leagues/financial"} 
-                        imgUrl={"https://i.imgur.com/lPFfJL9.png"} 
-                        alt={"Low Budget LCS Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{financial}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/low-budget-leagues/financial"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/low-budget-leagues/commercial"}>Commercial League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/LoL/leagues/low-budget-leagues/commercial"} 
-                        imgUrl={"https://i.imgur.com/lPFfJL9.png"} 
-                        alt={"Low Budget LCS Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{commercial}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/low-budget-leagues/commercial"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/LoL/leagues/low-budget-leagues/economy"}>Economy League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/LoL/leagues/low-budget-leagues/economy"} 
-                        imgUrl={"https://i.imgur.com/lPFfJL9.png"} 
-                        alt={"Low Budget LCS Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{economy}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/LoL/leagues/low-budget-leagues/economy"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
+                            return (
+                                <HostBanner key={path} path={path}>
+                                    <HostBanner.Title path={path} verified={child.verified}>{child.name}</HostBanner.Title>
+                                    <HostBanner.Image
+                                        path={path}
+                                        imgUrl={child.banner_img}
+                                        alt={child.name}
+                                        verified={child.verified}
+                                    />
+                                    <HostBanner.Region>{`${child.team_size} - ${child.region}`}</HostBanner.Region>
+                                    <HostBanner.Button title={"More Info"} path={path} />
+                                </HostBanner>
+                            );
+                        })
+                )}
 
                 <div className="backButtonContainer">
                     <BackButton path={"/games/LoL/leagues"} />

@@ -1,9 +1,62 @@
-import { SeoData, HeaderImage, HostBanner } from "components";
+import { useMemo, useState } from "react";
+import { SeoData, HostBanner, HeaderImage, EventListFilters } from "components";
+import { useWagerEvents } from "hooks";
 import '../../EventBanners.css';
 
+const normalizeWager = (host) => ({
+    name: host.name,
+    path: `/games/Valorant/wagers${host.path}`,
+    imgUrl: host.banner_img,
+    alt: host.name,
+    verified: !!host.verified,
+    buttonTitle: "More Info",
+});
+
+const applyFiltersAndSort = (list, { verifiedOnly, sort }) => {
+    let result = list.filter(w => !verifiedOnly || w.verified);
+
+    if (sort === 'az') {
+        result = result.slice().sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sort === 'za') {
+        result = result.slice().sort((a, b) => b.name.localeCompare(a.name));
+    } else {
+        result = result.slice().sort((a, b) => (b.verified ? 1 : 0) - (a.verified ? 1 : 0));
+    }
+
+    return result;
+};
+
+const WagerBanner = ({ wager }) => (
+    <HostBanner path={wager.path}>
+        <HostBanner.Title path={wager.path} verified={wager.verified}>{wager.name}</HostBanner.Title>
+        <HostBanner.Image
+            path={wager.path}
+            imgUrl={wager.imgUrl}
+            alt={wager.alt}
+        />
+        <HostBanner.Button title={wager.buttonTitle} path={wager.path} />
+    </HostBanner>
+);
+
 export const ValorantWagers = () => {
+    const { data, loading, error } = useWagerEvents("Valorant");
+
+    const [sort, setSort] = useState('featured');
+    const [verifiedOnly, setVerifiedOnly] = useState(false);
+
+    const allWagers = useMemo(() => (data || []).map(normalizeWager), [data]);
+
+    const filteredWagers = useMemo(
+        () => applyFiltersAndSort(allWagers, { verifiedOnly, sort }),
+        [allWagers, sort, verifiedOnly]
+    );
+
+    const clearFilters = () => {
+        setVerifiedOnly(false);
+    };
+
     return (
-        <div className="standardContainer">
+        <div className="standardContainer minorBottomSpace">
             <SeoData
                 title={"Valorant Wagers"}
                 description="Find Valorant wager platforms. Compare Ewagers for Valorant money matches. Wager on your Valorant skills against other players worldwide."
@@ -11,20 +64,28 @@ export const ValorantWagers = () => {
             />
             <HeaderImage title={"Wagers"} imageClass={"codh2hPage"} />
 
-            <div className="eventBannerContainer">
-                <HostBanner>
-                    <HostBanner.Title path={"/games/Valorant/wagers/ewagers"}>Ewagers</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/Valorant/wagers/ewagers"} 
-                        imgUrl={"https://i.imgur.com/FAg32lR.png"} 
-                        alt={"Ewagers"}
-                        verified={false}
-                    />
-                    <HostBanner.Button title={"More Info"} path={"/games/Valorant/wagers/ewagers"} />
-                </HostBanner>
+            <EventListFilters
+                sort={sort}
+                onSortChange={setSort}
+                verifiedOnly={verifiedOnly}
+                onVerifiedChange={setVerifiedOnly}
+                resultCount={filteredWagers.length}
+                onClear={clearFilters}
+            />
 
-                <div className="hrEvents" />
-            </div>
+            {loading ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading wagers...</h2>
+            ) : error ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load wagers right now.</h2>
+            ) : filteredWagers.length === 0 ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No results match your filters.</h2>
+            ) : (
+                <div className="eventBannerContainer">
+                    {filteredWagers.map(wager => (
+                        <WagerBanner key={wager.path} wager={wager} />
+                    ))}
+                </div>
+            )}
         </div>
     );
 }

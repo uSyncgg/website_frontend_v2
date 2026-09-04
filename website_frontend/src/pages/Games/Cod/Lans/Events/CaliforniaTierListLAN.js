@@ -1,7 +1,15 @@
 import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData, VerifiedText } from "components";
+import { useEvent } from "hooks";
 import '../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
 
 export const CaliforniaTierListLAN = () => {
+    const { data, error } = useEvent("lans", "Call of Duty", "California Tier List LAN");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -10,7 +18,7 @@ export const CaliforniaTierListLAN = () => {
                 canonicalPath={"/lans/california-tier-list-lan"}
             />
 
-            <HeaderImage imageClass={"caliTier2"} />
+            <HeaderImage imageUrl={data?.header_img} />
 
             <div className="verifiedContainer">
                 <VerifiedText />

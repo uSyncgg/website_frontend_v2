@@ -1,7 +1,15 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
+import { useEvent } from "hooks";
 import '../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
 
 export const FastCupLeague = () => {
+    const { data, loading, error } = useEvent("leagues", "CS2", "Fast Cup");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -9,21 +17,33 @@ export const FastCupLeague = () => {
                 description="Fast Cup is an eastern hemisphere based Counter-Strike 2 league. With monthly leagues this event will have you always improving your game."
                 canonicalPath={"/games/CS2/leagues/fastcup"}
             />
-            <HeaderImage title={"Fast Cup"} imageClass={"eventPage"} />
+            <HeaderImage imageUrl={data?.header_img} title={"Fast Cup"} />
 
-            <div className="eventInfoCardContainer">
-                <div>
-                    <EventInfoCard title={"Date"} infoList={["Monthly Leagues"]} regionTitle={"Region/Type"} regionInfoList={["1v1 - 5v5 - EU, CIS, ME, and SA"]} />
+            {data?.verified &&
+                <div className="verifiedContainer">
+                    <VerifiedText />
                 </div>
+            }
 
-                <div>
-                    <EventInfoCard title={"Details"} infoList={["Large Prize Pools", "Head-To-Head Match Format", "Various Skill Groups Based on Elo", "Anti-Cheat Software to Ensure Legitimacy", "Post Game Statistical Analysis", "Servers Provided", "Various Daily Tournaments"]} />
-                </div>
+            {loading ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Loading league info...</p>
+            ) : error || !data ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Unable to load this league right now.</p>
+            ) : (
+                <div className="eventInfoCardContainer">
+                    <div>
+                        <EventInfoCard title={"Date"} infoList={[data.seasonality]} regionTitle={"Region/Type"} regionInfoList={[`${data.team_size} - ${data.region}`]} />
+                    </div>
 
-                <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"Fast Cup"} blank={true} title={"Join Now"} path={"https://cs2.fastcup.net/leagues/68/210/202/771"} />}/>
+                    <div>
+                        <EventInfoCard title={"Details"} infoList={data.details} />
+                    </div>
+
+                    <div>
+                        <EventInfoCard title={"Entry Fee"} infoList={data.fee_details} footer={<ExternalButton host={data.name} blank={true} title={"Join Now"} path={data.url} />}/>
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="backButtonContainer">
                 <BackButton path={"/games/CS2/leagues"} />

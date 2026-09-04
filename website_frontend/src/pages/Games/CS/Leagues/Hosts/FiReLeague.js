@@ -1,29 +1,49 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
+import { useEvent } from "hooks";
 import '../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
 
 export const FiReLeague = () => {
+    const { data, loading, error } = useEvent("leagues", "CS2", "FiReLEAGUE");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
                 title={"FiRe League - Counter-Strike"}
                 description="Counter-Strike 2 FiReLEAGUE is a year round 5v5 league. With invitational tournaments and qualifiers to win prizes."
-                canonicalPath={"/games/CS2/leagues/firecup"}
+                canonicalPath={"/games/CS2/leagues/fireleague"}
             />
-            <HeaderImage title={"FiRe League"} imageClass={"eventPage"} />
+            <HeaderImage imageUrl={data?.header_img} title={"FiRe League"} />
 
-            <div className="eventInfoCardContainer">
-                <div>
-                    <EventInfoCard title={"Date"} infoList={["Qualifiers / Leagues Year Round"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA, SA, and EU"]} />
+            {data?.verified &&
+                <div className="verifiedContainer">
+                    <VerifiedText />
                 </div>
+            }
 
-                <div>
-                    <EventInfoCard title={"Details"} infoList={["Various Prize Pools", "Invitational Tournaments", "Qualifiers Pre Season", "Based in Buenos Aires", "Live Streamed Matches", "Highly Competitive"]} />
-                </div>
+            {loading ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Loading league info...</p>
+            ) : error || !data ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Unable to load this league right now.</p>
+            ) : (
+                <div className="eventInfoCardContainer">
+                    <div>
+                        <EventInfoCard title={"Date"} infoList={[data.seasonality]} regionTitle={"Region/Type"} regionInfoList={[`${data.team_size} - ${data.region}`]} />
+                    </div>
 
-                <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Variable Cost Based on Event"]} footer={<ExternalButton host={"FiRe League"} blank={true} title={"Join Now"} path={"https://x.com/FiReSPORTSgg"} />}/>
+                    <div>
+                        <EventInfoCard title={"Details"} infoList={data.details} />
+                    </div>
+
+                    <div>
+                        <EventInfoCard title={"Entry Fee"} infoList={data.fee_details} footer={<ExternalButton host={data.name} blank={true} title={"Join Now"} path={data.url} />}/>
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="backButtonContainer">
                 <BackButton path={"/games/CS2/leagues"} />

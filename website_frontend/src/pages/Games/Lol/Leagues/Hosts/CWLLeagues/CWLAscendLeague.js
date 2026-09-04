@@ -1,7 +1,15 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
+import { useEvent } from "hooks";
 import '../../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
 
 export const CWLAscendLeague = () => {
+    const { data, loading, error } = useEvent("leagues", "League of Legends", "CWL Ascend");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -9,21 +17,33 @@ export const CWLAscendLeague = () => {
                 description="Cobalt Winds Ascend League of Legends league. 750 LP Individual cap with NO team cap. This league is for the best of the best."
                 canonicalPath={"/games/LoL/leagues/cobalt-winds-leagues/cwl-ascend"}
             />
-            <HeaderImage title={"CWL Ascend"} imageClass={"eventPage"} />
+            <HeaderImage imageUrl={data?.header_img} title={"CWL Ascend"} />
 
-            <div className="eventInfoCardContainer">
-                <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Fall Seasons"]} regionTitle={"Region/Type"} regionInfoList={["5v5 EUW"]} />
+            {data?.verified &&
+                <div className="verifiedContainer">
+                    <VerifiedText />
                 </div>
+            }
 
-                <div>
-                    <EventInfoCard title={"Details"} infoList={["€350 Prize Pool for First Place, €100 for Second", "2 Consecutive 4-Week Tournaments", "Community Contests and Events During Season and Offseason", "Flexible Rules for EUNE Players", "Support on Discord", "Live Streamed Matches"]} />
-                </div>
+            {loading ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Loading league info...</p>
+            ) : error || !data ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Unable to load this league right now.</p>
+            ) : (
+                <div className="eventInfoCardContainer">
+                    <div>
+                        <EventInfoCard title={"Date"} infoList={[data.seasonality]} regionTitle={"Region/Type"} regionInfoList={[`${data.team_size} - ${data.region}`]} />
+                    </div>
 
-                <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["€40 per Team", "750 LP Individual Cap | No Team Cap"]} footer={<ExternalButton host={"CWL Ascend"} blank={true} title={"Join Now"} path={"https://discord.gg/WTJJmgPgCU"} />}/>
+                    <div>
+                        <EventInfoCard title={"Details"} infoList={data.details} />
+                    </div>
+
+                    <div>
+                        <EventInfoCard title={"Entry Fee"} infoList={data.fee_details} footer={<ExternalButton host={data.name} blank={true} title={"Join Now"} path={data.url} />}/>
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="backButtonContainer">
                 <BackButton path={"/games/LoL/leagues/cobalt-winds-leagues"} />

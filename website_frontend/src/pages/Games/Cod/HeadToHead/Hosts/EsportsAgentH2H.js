@@ -1,7 +1,22 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
+import { useEvent } from "hooks";
 import '../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
+
+const restrictionInfoList = (data) => [
+    ...Object.values(data.restrictions || {}).flatMap(v => Array.isArray(v) ? [v.map(s => String(s).trim()).join(', ')] : [v]),
+    (data.availability?.length === 1 && data.availability[0] === 'Worldwide')
+        ? 'Available Worldwide'
+        : `Available in: ${(data.availability || []).join(', ')}`,
+];
 
 export const EsportsAgentH2H = () => {
+    const { data, loading, error } = useEvent("head-to-head", "Call of Duty", "Esports Agent");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -9,21 +24,33 @@ export const EsportsAgentH2H = () => {
                 description="Esports Agent head to head matches for cod players looking for competitive play. Join now to prove your skill."
                 canonicalPath={"/games/call-of-duty/head-to-head/eagent"}
             />
-            <HeaderImage title={"Esports Agent"} imageClass={"eventPage"} />
+            <HeaderImage imageUrl={data?.header_img} title={"Esports Agent"} />
 
-            <div className="eventInfoCardContainer">
-                <div>
-                    <EventInfoCard title={"Fees"} infoList={["Free XP Matches"]} footer={<ExternalButton host={"Esports Agent"} blank={true} title={"Join Now"} path={"https://esportsagent.gg/wagers"} />}/>
+            {data?.verified &&
+                <div className="verifiedContainer">
+                    <VerifiedText />
                 </div>
+            }
 
-                <div>
-                    <EventInfoCard title={"Details"} infoList={["24/7 Live Support On Site", "Consistent Rule Updates", "Small Number of Daily Users", "CDL Ruleset and Select GAs"]} />
-                </div>
+            {loading ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Loading platform info...</p>
+            ) : error || !data ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Unable to load this platform right now.</p>
+            ) : (
+                <div className="eventInfoCardContainer">
+                    <div>
+                        <EventInfoCard title={"Fees"} infoList={["Free XP Matches"]} footer={<ExternalButton host={data.name} blank={true} title={"Join Now"} path={data.url} />}/>
+                    </div>
 
-                <div>
-                    <EventInfoCard title={"Restrictions"} infoList={["Available Worldwide"]} />
+                    <div>
+                        <EventInfoCard title={"Details"} infoList={data.details} />
+                    </div>
+
+                    <div>
+                        <EventInfoCard title={"Restrictions"} infoList={restrictionInfoList(data)} />
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="backButtonContainer">
                 <BackButton path={"/games/call-of-duty/head-to-head"} />

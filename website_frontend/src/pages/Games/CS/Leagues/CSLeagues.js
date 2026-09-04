@@ -1,9 +1,108 @@
-import { SeoData, HeaderImage, HostBanner } from "components";
+import { useMemo, useState } from "react";
+import { SeoData, HostBanner, HeaderImage, EventListFilters, NoEvents } from "components";
+import { useLeagueEvents } from "hooks";
 import '../../EventBanners.css';
 
-export const CSLeagues = () => {
+const CATEGORY_LABEL = { collegiate: 'Collegiate', highschool: 'High School' };
+const CATEGORY_OPTIONS = ['Collegiate', 'High School'];
+const CATEGORY_KEY_BY_LABEL = { 'Collegiate': 'collegiate', 'High School': 'highschool' };
+
+// Hosts with a "leagues" array are a group of sub-leagues under one banner
+// ("All Leagues"); everything else is a single league ("More Info").
+const normalizeHost = (host) => {
+    const rawPath = host.path.startsWith('/') ? host.path.slice(1) : host.path;
+    const grouped = Array.isArray(host.leagues) && host.leagues.length > 0;
+
+    return {
+        name: host.name,
+        path: `/games/CS2/leagues/${rawPath}`,
+        imgUrl: host.banner_img,
+        alt: host.name,
+        verified: !!host.verified,
+        region: (grouped ? host.leagues[0]?.region : host.region) || 'NA',
+        buttonTitle: grouped ? 'All Leagues' : 'More Info',
+        category: host.is_college ? 'collegiate' : host.is_hs ? 'highschool' : 'open',
+    };
+};
+
+const isVisible = (league, selectedCategories) => {
+    if (selectedCategories.length === 0) return true;
+    if (league.category === 'open') return false;
+    return selectedCategories.includes(league.category);
+};
+
+const applyFiltersAndSort = (list, { selectedRegions, selectedCategories, verifiedOnly, sort }) => {
+    let result = list.filter(l =>
+        isVisible(l, selectedCategories) &&
+        (selectedRegions.length === 0 || selectedRegions.includes(l.region)) &&
+        (!verifiedOnly || l.verified)
+    );
+
+    if (sort === 'az') {
+        result = result.slice().sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sort === 'za') {
+        result = result.slice().sort((a, b) => b.name.localeCompare(a.name));
+    } else {
+        result = result.slice().sort((a, b) => (b.verified ? 1 : 0) - (a.verified ? 1 : 0));
+    }
+
+    return result;
+};
+
+const LeagueBanner = ({ league }) => {
+    const regionText = league.category === 'open'
+        ? league.region
+        : `${league.region} | ${CATEGORY_LABEL[league.category]}`;
+
     return (
-        <div className="standardContainer">
+        <HostBanner path={league.path}>
+            <HostBanner.Title path={league.path} verified={league.verified}>{league.name}</HostBanner.Title>
+            <HostBanner.Image
+                path={league.path}
+                imgUrl={league.imgUrl}
+                alt={league.alt}
+            />
+            <HostBanner.Region>{regionText}</HostBanner.Region>
+            <HostBanner.Button title={league.buttonTitle} path={league.path} />
+        </HostBanner>
+    );
+};
+
+export const CSLeagues = () => {
+    const { data, loading, error } = useLeagueEvents("CS2");
+
+    const [sort, setSort] = useState('featured');
+    const [selectedRegions, setSelectedRegions] = useState([]);
+    const [selectedCategoryLabels, setSelectedCategoryLabels] = useState([]);
+    const [verifiedOnly, setVerifiedOnly] = useState(false);
+
+    const allLeagues = useMemo(
+        () => (data || []).map(normalizeHost),
+        [data]
+    );
+
+    const regionOptions = useMemo(
+        () => Array.from(new Set(allLeagues.map(l => l.region))),
+        [allLeagues]
+    );
+
+    const selectedCategories = selectedCategoryLabels.map(label => CATEGORY_KEY_BY_LABEL[label]);
+    const filters = { selectedRegions, selectedCategories, verifiedOnly, sort };
+
+    const filteredLeagues = useMemo(
+        () => applyFiltersAndSort(allLeagues, filters),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [allLeagues, sort, selectedRegions, selectedCategoryLabels, verifiedOnly]
+    );
+
+    const clearFilters = () => {
+        setSelectedRegions([]);
+        setSelectedCategoryLabels([]);
+        setVerifiedOnly(false);
+    };
+
+    return (
+        <div className="standardContainer minorBottomSpace">
             <SeoData
                 title={"Counter-Strike Leagues"}
                 description="Counter-Strike 2 leagues to prove your CS2 talent and compete like the pros. Join a league today and win huge cash prize pools."
@@ -11,156 +110,38 @@ export const CSLeagues = () => {
             />
             <HeaderImage title={"Counter-Strike 2 Leagues"} imageClass={"cs2LeaguePage"} />
 
-            <div className="eventBannerContainer">
-                <HostBanner>
-                    <HostBanner.Title path={"/games/CS2/leagues/faceitesea"}>FACEIT ESEA</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/CS2/leagues/faceitesea"} 
-                        imgUrl={"https://i.imgur.com/STmx1Aa.png"} 
-                        alt={"FACEIT ESEA League"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>Available Worldwide</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/CS2/leagues/faceitesea"} />
-                </HostBanner>
+            <EventListFilters
+                sort={sort}
+                onSortChange={setSort}
+                categoryOptions={CATEGORY_OPTIONS}
+                selectedCategories={selectedCategoryLabels}
+                onCategoryChange={setSelectedCategoryLabels}
+                regionOptions={regionOptions}
+                selectedRegions={selectedRegions}
+                onRegionChange={setSelectedRegions}
+                verifiedOnly={verifiedOnly}
+                onVerifiedChange={setVerifiedOnly}
+                resultCount={filteredLeagues.length}
+                onClear={clearFilters}
+            />
 
-                <HostBanner>
-                    <HostBanner.Title path={"/games/CS2/leagues/fastcup"}>Fast Cup</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/CS2/leagues/fastcup"} 
-                        imgUrl={"https://i.imgur.com/e7lFoB8.png"} 
-                        alt={"Fast Cup League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>EU, CIS, ME, and SA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/CS2/leagues/fastcup"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/CS2/leagues/corporate"}>Corporate CS2 League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/CS2/leagues/corporate"} 
-                        imgUrl={"https://i.imgur.com/87GfbXz.png"} 
-                        alt={"Corporate CS2 League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/CS2/leagues/corporate"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/CS2/leagues/fireleague"}>FiReLEAGUE</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/CS2/leagues/fireleague"} 
-                        imgUrl={"https://i.imgur.com/gLNXCQA.png"} 
-                        alt={"FiRe League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>NA, EU, and SA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/CS2/leagues/fireleague"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/CS2/leagues/unitedtwentyone"}>United TwentyOne</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/CS2/leagues/unitedtwentyone"} 
-                        imgUrl={"https://i.imgur.com/VTroInj.png"} 
-                        alt={"United TwentyOne League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Available Worldwide</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/CS2/leagues/unitedtwentyone"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/CS2/leagues/hyperfibre-leagues"}>Hyperfibre Leagues</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/CS2/leagues/hyperfibre-leagues"} 
-                        imgUrl={"https://i.imgur.com/Cx4N8HW.png"} 
-                        alt={"Hyperfibre Leagues"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>NZ</HostBanner.Region>
-                    <HostBanner.Button title={"All Leagues"} path={"/games/CS2/leagues/hyperfibre-leagues"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <h2 className="eventSeparationTitle">Collegiate Leagues</h2>
-                <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/CS2/leagues/njcaae"}>NJCAAE</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/CS2/leagues/njcaae"} 
-                        imgUrl={"https://i.imgur.com/jTKBWZM.png"} 
-                        alt={"NJCAAE League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>USA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/CS2/leagues/njcaae"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/CS2/leagues/necc"}>NECC</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/CS2/leagues/necc"} 
-                        imgUrl={"https://i.imgur.com/0JWBSKD.png"} 
-                        alt={"NECC League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/CS2/leagues/necc"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/CS2/leagues/egfc"}>EGFC League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/CS2/leagues/egfc"} 
-                        imgUrl={"https://i.imgur.com/euAj2dR.png"} 
-                        alt={"Dubbz Wagers"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>USA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/CS2/leagues/egfc"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/CS2/leagues/playfly"}>Playfly College</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/CS2/leagues/playfly"} 
-                        imgUrl={"https://i.imgur.com/XHCsRTv.png"} 
-                        alt={"Playfly College League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>NA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/CS2/leagues/playfly"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/CS2/leagues/ael"}>Australian Esports League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/CS2/leagues/ael"} 
-                        imgUrl={"https://i.imgur.com/YYvUqCM.png"} 
-                        alt={"Australian Esports League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>AUS</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/CS2/leagues/ael"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-            </div>
+            {loading ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>
+            ) : error ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load leagues right now.</h2>
+            ) : allLeagues.length === 0 ? (
+                <div className="eventBannerContainer">
+                    <NoEvents pageType={"Leagues"} />
+                </div>
+            ) : filteredLeagues.length === 0 ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No leagues match your filters.</h2>
+            ) : (
+                <div className="eventBannerContainer">
+                    {filteredLeagues.map(league => (
+                        <LeagueBanner key={league.path} league={league} />
+                    ))}
+                </div>
+            )}
         </div>
     );
 }

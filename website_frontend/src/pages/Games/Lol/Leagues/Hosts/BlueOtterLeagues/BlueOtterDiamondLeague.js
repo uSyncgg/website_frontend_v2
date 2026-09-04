@@ -1,7 +1,15 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
+import { useEvent } from "hooks";
 import '../../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
 
 export const BlueOtterDiamondLeague = () => {
+    const { data, loading, error } = useEvent("leagues", "League of Legends", "Blue Otter Diamond League");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -9,21 +17,33 @@ export const BlueOtterDiamondLeague = () => {
                 description="Blue Otter Diamond league is a diamond 1 99LP cap League of Legends league for competitive players in NA."
                 canonicalPath={"/games/LoL/leagues/blue-otter-leagues/diamond"}
             />
-            <HeaderImage title={"Blue Otter Diamond League"} imageClass={"eventPage"} />
+            <HeaderImage imageUrl={data?.header_img} title={"Blue Otter Diamond League"} />
 
-            <div className="eventInfoCardContainer">
-                <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring, Summer, and Winter Seasons"]} regionTitle={"Region/Type"} regionInfoList={["5v5 - NA"]} />
+            {data?.verified &&
+                <div className="verifiedContainer">
+                    <VerifiedText />
                 </div>
+            }
 
-                <div>
-                    <EventInfoCard title={"Details"} infoList={["1st Place - 50% Entry Fees (Estimated)", "Support on Discord", "Live Streamed Matches"]} />
-                </div>
+            {loading ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Loading league info...</p>
+            ) : error || !data ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Unable to load this league right now.</p>
+            ) : (
+                <div className="eventInfoCardContainer">
+                    <div>
+                        <EventInfoCard title={"Date"} infoList={[data.seasonality]} regionTitle={"Region/Type"} regionInfoList={[`${data.team_size} - ${data.region}`]} />
+                    </div>
 
-                <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$100 per Team (Estimated)", "$15 Forfeit Deposit", "Diamond 1 99 LP Cap, 1 Master per Team (100 LP Max)"]} footer={<ExternalButton host={"Blue Otter Diamond League"} blank={true} title={"Join Now"} path={"https://discord.com/invite/gVGSxRT"} />}/>
+                    <div>
+                        <EventInfoCard title={"Details"} infoList={data.details} />
+                    </div>
+
+                    <div>
+                        <EventInfoCard title={"Entry Fee"} infoList={data.fee_details} footer={<ExternalButton host={data.name} blank={true} title={"Join Now"} path={data.url} />}/>
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="backButtonContainer">
                 <BackButton path={"/games/LoL/leagues/blue-otter-leagues"} />

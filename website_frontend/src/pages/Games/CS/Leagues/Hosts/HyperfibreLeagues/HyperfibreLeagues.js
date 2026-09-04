@@ -1,48 +1,56 @@
 import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
-import { useCheckResize } from "hooks";
+import { useLeagueEvents, useLeagueChildren } from "hooks";
 import '../../../../EventBanners.css';
 
-export const HyperfibreLeagues = () => {
-    const isMobile = useCheckResize();
+const GAME = "CS2";
+const PARENT_NAME = "Hyperfibre Leagues";
+const ROUTE_PREFIX = "/games/CS2/leagues";
 
-    const elite = isMobile ? "Elite Division - Competitive" : "Competitive";
-    const social = isMobile ? "Social Division - Casual" : "Casual";
+export const HyperfibreLeagues = () => {
+    const { data: hosts } = useLeagueEvents(GAME);
+    const { data: children, loading, error } = useLeagueChildren(GAME, PARENT_NAME);
+
+    const parent = (hosts || []).find(h => h.name === PARENT_NAME);
+    const headerTitle = parent?.verified ? undefined : (parent?.name || "Hyperfibre Leagues");
 
     return (
         <div className="standardContainer">
             <SeoData
                 title={"Hyperfibre Leagues - Counter-Strike"}
-                description="Hyperfibre leagues based in New Zealand. Compete at a casual or highly competitive level to showcase your Counter-Strike 2 skills."
+                description={"Hyperfibre leagues based in New Zealand. Compete at a casual or highly competitive level to showcase your Counter-Strike 2 skills."}
                 canonicalPath={"/games/CS2/leagues/hyperfibre-leagues"}
             />
-            <HeaderImage title={"Hyperfibre Leagues"} imageClass={"nonVerifiedPage"} />
+            <HeaderImage title={headerTitle} imageClass={"nonVerifiedPage"} imageUrl={parent?.header_img} />
 
             <div className="eventBannerContainer">
-                <HostBanner>
-                    <HostBanner.Title path={"/games/CS2/leagues/hyperfibre-leagues/elite"}>Elite Division</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/CS2/leagues/hyperfibre-leagues/elite"} 
-                        imgUrl={"https://i.imgur.com/Cx4N8HW.png"} 
-                        alt={"Hyperfibre League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{elite}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/CS2/leagues/hyperfibre-leagues/elite"} />
-                </HostBanner>
+                {loading ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>
+                ) : error ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load leagues right now.</h2>
+                ) : (children || []).length === 0 ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No leagues available right now.</h2>
+                ) : (
+                    (children || [])
+                        .slice()
+                        .sort((a, b) => (b.verified ? 1 : 0) - (a.verified ? 1 : 0))
+                        .map(child => {
+                            const path = `${ROUTE_PREFIX}${child.path}`;
 
-                <HostBanner>
-                    <HostBanner.Title path={"/games/CS2/leagues/hyperfibre-leagues/social"}>Social Division</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/CS2/leagues/hyperfibre-leagues/social"} 
-                        imgUrl={"https://i.imgur.com/Cx4N8HW.png"} 
-                        alt={"Hyperfibre League"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{social}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/CS2/leagues/hyperfibre-leagues/social"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
+                            return (
+                                <HostBanner key={path} path={path}>
+                                    <HostBanner.Title path={path} verified={child.verified}>{child.name}</HostBanner.Title>
+                                    <HostBanner.Image
+                                        path={path}
+                                        imgUrl={child.banner_img}
+                                        alt={child.name}
+                                        verified={child.verified}
+                                    />
+                                    <HostBanner.Region>{`${child.team_size} - ${child.region}`}</HostBanner.Region>
+                                    <HostBanner.Button title={"More Info"} path={path} />
+                                </HostBanner>
+                            );
+                        })
+                )}
 
                 <div className="backButtonContainer">
                     <BackButton path={"/games/CS2/leagues"} />

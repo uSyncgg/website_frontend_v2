@@ -1,7 +1,15 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
+import { useEvent } from "hooks";
 import '../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
 
 export const FemaleCodLeague = () => {
+    const { data, loading, error } = useEvent("leagues", "Call of Duty", "Female COD League");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -9,21 +17,33 @@ export const FemaleCodLeague = () => {
                 description="Female Call of Duty league. Female league for aspiring Call of Duty professional players."
                 canonicalPath={"/games/call-of-duty/leagues/fcl"}
             />
-            <HeaderImage title={"Female Call of Duty League"} imageClass={"eventPage"} />
+            <HeaderImage imageUrl={data?.header_img} title={"Female Call of Duty League"} />
 
-            <div className="eventInfoCardContainer">
-                <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Winter and Spring Season"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - NA"]} />
+            {data?.verified &&
+                <div className="verifiedContainer">
+                    <VerifiedText />
                 </div>
+            }
 
-                <div>
-                    <EventInfoCard title={"Details"} infoList={["$1,500 Prize Pool", "Regular Season and Playoffs", "Female ONLY", "Competitive", "Live Streamed Matches"]} />
-                </div>
+            {loading ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Loading league info...</p>
+            ) : error || !data ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Unable to load this league right now.</p>
+            ) : (
+                <div className="eventInfoCardContainer">
+                    <div>
+                        <EventInfoCard title={"Date"} infoList={[data.seasonality]} regionTitle={"Region/Type"} regionInfoList={[`${data.team_size} - ${data.region}`]} />
+                    </div>
 
-                <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["$100 per Team"]} footer={<ExternalButton host={"Female Call of Duty League"} blank={true} title={"Join Now"} path={"https://x.com/FemaleC0DLeague"} />}/>
+                    <div>
+                        <EventInfoCard title={"Details"} infoList={data.details} />
+                    </div>
+
+                    <div>
+                        <EventInfoCard title={"Entry Fee"} infoList={data.fee_details} footer={<ExternalButton host={data.name} blank={true} title={"Join Now"} path={data.url} />}/>
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="backButtonContainer">
                 <BackButton path={"/games/call-of-duty/leagues"} />

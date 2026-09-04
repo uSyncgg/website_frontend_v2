@@ -1,7 +1,15 @@
 import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
+import { useEvent } from "hooks";
 import '../../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
 
 export const NemesisProspectLeague = () => {
+    const { data, loading, error } = useEvent("leagues", "Rocket League", "Nemesis Leagues - Prospect League");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -9,25 +17,33 @@ export const NemesisProspectLeague = () => {
                 description="Looking for a free to enter Rocket League league - look no further. Prospect league is a 1270 - 1452 MMR range based league that is entirely free."
                 canonicalPath={"/games/RocketLeague/leagues/nemesis-leagues/prospect"}
             />
-            <HeaderImage imageClass={"nemesisRLLeagues"} />
+            <HeaderImage imageUrl={data?.header_img} />
 
-            <div className="verifiedContainer">
-                <VerifiedText />
-            </div>
-
-            <div className="eventInfoCardContainer">
-                <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring Season"]} regionTitle={"Region/Type"} regionInfoList={["3v3 - NA"]} />
+            {data?.verified &&
+                <div className="verifiedContainer">
+                    <VerifiedText />
                 </div>
+            }
 
-                <div>
-                    <EventInfoCard title={"Details"} infoList={["$1,000 Prize Pool (Estimated)", "4 Different Divisions", "18 Match Regular Season", "Draft Based League"]} />
-                </div>
+            {loading ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Loading league info...</p>
+            ) : error || !data ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Unable to load this league right now.</p>
+            ) : (
+                <div className="eventInfoCardContainer">
+                    <div>
+                        <EventInfoCard title={"Date"} infoList={[data.seasonality]} regionTitle={"Region/Type"} regionInfoList={[`${data.team_size} - ${data.region}`]} />
+                    </div>
 
-                <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry", "1415 - 1534 MMR"]} footer={<ExternalButton host={"Nemesis Prospect"} blank={true} title={"Join Now"} path={"https://discord.com/invite/nemesisrl"} />}/>
+                    <div>
+                        <EventInfoCard title={"Details"} infoList={data.details} />
+                    </div>
+
+                    <div>
+                        <EventInfoCard title={"Entry Fee"} infoList={data.fee_details} footer={<ExternalButton host={data.name} blank={true} title={"Join Now"} path={data.url} />}/>
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="backButtonContainer">
                 <BackButton path={"/games/RocketLeague/leagues/nemesis-leagues"} />

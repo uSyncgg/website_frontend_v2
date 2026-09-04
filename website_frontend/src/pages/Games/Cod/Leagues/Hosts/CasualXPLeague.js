@@ -1,7 +1,15 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
+import { useEvent } from "hooks";
 import '../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
 
 export const CasualXPLeague = () => {
+    const { data, loading, error } = useEvent("leagues", "Call of Duty", "Casual XP League");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -9,21 +17,33 @@ export const CasualXPLeague = () => {
                 description="Casual XP League (CXP) is a Call of Duty league for those that are looking to try out competitive. Divisions based on rankings and a very active community."
                 canonicalPath={"/games/call-of-duty/leagues/casual-xp-league"}
             />
-            <HeaderImage title={"Casual XP League"} imageClass={"eventPage"} />
+            <HeaderImage imageUrl={data?.header_img} title={"Casual XP League"} />
 
-            <div className="eventInfoCardContainer">
-                <div>
-                    <EventInfoCard title={"Date"} infoList={["Annual Spring and Fall Seasons (Estimated)"]} regionTitle={"Region/Type"} regionInfoList={["4v4 - All Regions"]} />
+            {data?.verified &&
+                <div className="verifiedContainer">
+                    <VerifiedText />
                 </div>
+            }
 
-                <div>
-                    <EventInfoCard title={"Details"} infoList={["Two Divisions: Premier and CXP", "4v4 CDL Ruleset, with 1 Sniper and Smoke Grenade per Team", "11-Game Regular Season, Followed by Playoffs", "Point Cap System: A unique competitive balance system created by CXP and now starting to be recognized across the scene", "Premier Division = Highest Competition Division", "Live Streamed Matches with Record Statistics"]} />
-                </div>
+            {loading ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Loading league info...</p>
+            ) : error || !data ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Unable to load this league right now.</p>
+            ) : (
+                <div className="eventInfoCardContainer">
+                    <div>
+                        <EventInfoCard title={"Date"} infoList={[data.seasonality]} regionTitle={"Region/Type"} regionInfoList={[`${data.team_size} - ${data.region}`]} />
+                    </div>
 
-                <div>
-                    <EventInfoCard title={"Entry Fee"} infoList={["Free Entry"]} footer={<ExternalButton host={"Casual XP League"} blank={true} title={"Join Now"} path={"https://discord.gg/AEgVZM9FY2"} />}/>
+                    <div>
+                        <EventInfoCard title={"Details"} infoList={data.details} />
+                    </div>
+
+                    <div>
+                        <EventInfoCard title={"Entry Fee"} infoList={data.fee_details} footer={<ExternalButton host={data.name} blank={true} title={"Join Now"} path={data.url} />}/>
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="backButtonContainer">
                 <BackButton path={"/games/call-of-duty/leagues"} />

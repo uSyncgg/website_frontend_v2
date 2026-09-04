@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 export const VerifiedImage = ({banner}) => {
     return (
-        <Link to="/more/verification">
+        <Link to="/more/verification" onClick={(e) => e.stopPropagation()}>
             <img className={`${banner === true ? styles.bannerVerified : "verifiedImage"}`} src='https://i.imgur.com/PCHIHQB.png' alt='uSync Verified' />
         </Link>
     )

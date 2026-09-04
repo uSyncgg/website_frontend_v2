@@ -1,76 +1,56 @@
 import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
-import { useCheckResize } from "hooks";
+import { useLeagueEvents, useLeagueChildren } from "hooks";
 import '../../../../EventBanners.css';
 
-export const RLPCLeagues = () => {
-    const isMobile = useCheckResize();
+const GAME = "Rocket League";
+const PARENT_NAME = "RLPC";
+const ROUTE_PREFIX = "/games/RocketLeague/leagues";
 
-    const major = isMobile ? "Major League - 1800 MMR & Above" : "1800 MMR & Above";
-    const single = isMobile ? "Single A League - 1021 - 1349 MMR" : "1021 - 1349 MMR";
-    const double = isMobile ? "Double A League - 1350 - 1574 MMR" : "1450 - 1574 MMR";
-    const triple = isMobile ? " Triple A League - 1575 - 1799 MMR" : "1575 - 1799 MMR";
+export const RLPCLeagues = () => {
+    const { data: hosts } = useLeagueEvents(GAME);
+    const { data: children, loading, error } = useLeagueChildren(GAME, PARENT_NAME);
+
+    const parent = (hosts || []).find(h => h.name === PARENT_NAME);
+    const headerTitle = parent?.verified ? undefined : (parent?.name || undefined);
 
     return (
         <div className="standardContainer">
             <SeoData
                 title={"RLPC Leagues - Rocket League"}
-                description="Rocket League Pro Circuit - RLPC. A verified Rocket League league with four divisions for players across all skill levels. Sign up today."
+                description={"Rocket League Pro Circuit - RLPC. A verified Rocket League league with four divisions for players across all skill levels. Sign up today."}
                 canonicalPath={"/games/RocketLeague/leagues/rlpc-leagues"}
             />
-            <HeaderImage imageClass={"rlpcRLLeagues"} />
+            <HeaderImage title={headerTitle} imageClass={"rlpcRLLeagues"} imageUrl={parent?.header_img} />
 
             <div className="eventBannerContainer">
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/rlpc-leagues/major"}>Major League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/rlpc-leagues/major"} 
-                        imgUrl={"https://i.imgur.com/kVDfckC.png"} 
-                        alt={"RLPC Leagues"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{major}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/rlpc-leagues/major"} />
-                </HostBanner>
+                {loading ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>
+                ) : error ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load leagues right now.</h2>
+                ) : (children || []).length === 0 ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No leagues available right now.</h2>
+                ) : (
+                    (children || [])
+                        .slice()
+                        .sort((a, b) => (b.verified ? 1 : 0) - (a.verified ? 1 : 0))
+                        .map(child => {
+                            const path = `${ROUTE_PREFIX}${child.path}`;
 
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/rlpc-leagues/aaa"}>Triple A League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/rlpc-leagues/aaa"} 
-                        imgUrl={"https://i.imgur.com/kVDfckC.png"} 
-                        alt={"RLPC Leagues"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{triple}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/rlpc-leagues/aaa"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/rlpc-leagues/aa"}>Double A League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/rlpc-leagues/aa"} 
-                        imgUrl={"https://i.imgur.com/kVDfckC.png"} 
-                        alt={"RLPC Leagues"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{double}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/rlpc-leagues/aa"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/rlpc-leagues/a"}>Single A League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/rlpc-leagues/a"} 
-                        imgUrl={"https://i.imgur.com/kVDfckC.png"} 
-                        alt={"RLPC Leagues"}
-                        verified={true}
-                    />
-                    <HostBanner.Region>{single}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/rlpc-leagues/a"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
+                            return (
+                                <HostBanner key={path} path={path}>
+                                    <HostBanner.Title path={path} verified={child.verified}>{child.name}</HostBanner.Title>
+                                    <HostBanner.Image
+                                        path={path}
+                                        imgUrl={child.banner_img}
+                                        alt={child.name}
+                                        verified={child.verified}
+                                    />
+                                    <HostBanner.Region>{`${child.team_size} - ${child.region}`}</HostBanner.Region>
+                                    <HostBanner.Button title={"More Info"} path={path} />
+                                </HostBanner>
+                            );
+                        })
+                )}
 
                 <div className="backButtonContainer">
                     <BackButton path={"/games/RocketLeague/leagues"} />

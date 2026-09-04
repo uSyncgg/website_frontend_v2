@@ -1,91 +1,56 @@
 import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
-import { useCheckResize } from "hooks";
+import { useLeagueEvents, useLeagueChildren } from "hooks";
 import '../../../../EventBanners.css';
 
-export const MinorLeagueEsportsLeagues = () => {
-    const isMobile = useCheckResize();
+const GAME = "Rocket League";
+const PARENT_NAME = "Minor League Esports";
+const ROUTE_PREFIX = "/games/RocketLeague/leagues";
 
-    const premier = isMobile ? "Premier League - 1651 - 1900 MMR" : "1651 - 1900 MMR";
-    const master = isMobile ? "Master League - 1451 - 1650 MMR" : "1451 - 1650 MMR";
-    const champion = isMobile ? "Champion League - 1251 - 1450 MMR" : "1251 - 1450 MMR";
-    const academy = isMobile ? "Academy League - 1000 - 1250 MMR" : "1000 - 1250 MMR";
-    const foundation = isMobile ? "Foundation League - 0 - 1050 MMR" : "0 - 1050 MMR";
+export const MinorLeagueEsportsLeagues = () => {
+    const { data: hosts } = useLeagueEvents(GAME);
+    const { data: children, loading, error } = useLeagueChildren(GAME, PARENT_NAME);
+
+    const parent = (hosts || []).find(h => h.name === PARENT_NAME);
+    const headerTitle = parent?.verified ? undefined : (parent?.name || "Minor League Esports");
 
     return (
         <div className="standardContainer">
             <SeoData
                 title={"Minor League Esports - Rocket League"}
-                description="Rocket League Minor League Esports (MLE) leagues. Compete in a Rocket League league of your choice based on your MMR and skills."
+                description={"Rocket League Minor League Esports (MLE) leagues. Compete in a Rocket League league of your choice based on your MMR and skills."}
                 canonicalPath={"/games/RocketLeague/leagues/mle-leagues"}
             />
-            <HeaderImage title={"Minor League Esports"} imageClass={"nonVerifiedPage"} />
+            <HeaderImage title={headerTitle} imageClass={"nonVerifiedPage"} imageUrl={parent?.header_img} />
 
             <div className="eventBannerContainer">
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/mle-leagues/premier"}>Premier League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/mle-leagues/premier"} 
-                        imgUrl={"https://i.imgur.com/1ouD021.png"} 
-                        alt={"Minor League Esports"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{premier}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/mle-leagues/premier"} />
-                </HostBanner>
+                {loading ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>
+                ) : error ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load leagues right now.</h2>
+                ) : (children || []).length === 0 ? (
+                    <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No leagues available right now.</h2>
+                ) : (
+                    (children || [])
+                        .slice()
+                        .sort((a, b) => (b.verified ? 1 : 0) - (a.verified ? 1 : 0))
+                        .map(child => {
+                            const path = `${ROUTE_PREFIX}${child.path}`;
 
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/mle-leagues/master"}>Master League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/mle-leagues/master"}
-                        imgUrl={"https://i.imgur.com/44UEg5N.png"}
-                        alt={"Minor League Esports"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{master}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/mle-leagues/master"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/mle-leagues/champ"}>Champion League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/mle-leagues/champ"}
-                        imgUrl={"https://i.imgur.com/U3PRmzs.png"}
-                        alt={"Minor League Esports"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{champion}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/mle-leagues/champ"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/mle-leagues/academy"}>Academy League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/mle-leagues/academy"}
-                        imgUrl={"https://i.imgur.com/6Fzq2oe.png"}
-                        alt={"Minor League Esports"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{academy}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/mle-leagues/academy"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/games/RocketLeague/leagues/mle-leagues/foundation"}>Foundation League</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/games/RocketLeague/leagues/mle-leagues/foundation"}
-                        imgUrl={"https://i.imgur.com/acXiAPL.png"}
-                        alt={"Minor League Esports"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>{foundation}</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/games/RocketLeague/leagues/mle-leagues/foundation"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
+                            return (
+                                <HostBanner key={path} path={path}>
+                                    <HostBanner.Title path={path} verified={child.verified}>{child.name}</HostBanner.Title>
+                                    <HostBanner.Image
+                                        path={path}
+                                        imgUrl={child.banner_img}
+                                        alt={child.name}
+                                        verified={child.verified}
+                                    />
+                                    <HostBanner.Region>{`${child.team_size} - ${child.region}`}</HostBanner.Region>
+                                    <HostBanner.Button title={"More Info"} path={path} />
+                                </HostBanner>
+                            );
+                        })
+                )}
 
                 <div className="backButtonContainer">
                     <BackButton path={"/games/RocketLeague/leagues"} />

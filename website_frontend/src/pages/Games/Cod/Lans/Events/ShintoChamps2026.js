@@ -1,7 +1,15 @@
 import { EventInfoCard, HeaderImage, ExternalButton, BackButton, SeoData } from "components";
+import { useEvent } from "hooks";
 import '../../../EventInformation.css';
+import { NotFound } from "pages/NotFound";
 
 export const ShintoChamps2026 = () => {
+    const { data, error } = useEvent("lans", "Call of Duty", "Shinto Champs");
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
     return (
         <div className="standardContainer">
             <SeoData
@@ -10,7 +18,7 @@ export const ShintoChamps2026 = () => {
                 canonicalPath={"/lans/shintochamps2026"}
             />
 
-            <HeaderImage title={"Shinto Champs"} imageClass={"eventPage"} />
+            <HeaderImage title={"Shinto Champs"} imageUrl={data?.header_img} />
 
             <div className="eventInfoCardContainer">
                 <div>

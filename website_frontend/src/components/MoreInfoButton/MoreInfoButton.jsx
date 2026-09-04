@@ -6,7 +6,8 @@ import { trackEventCardClick } from 'utils/analytics';
 function MoreInfoButton({title, path, external=false}) {
     const navigator = useNavigate();
 
-    const handleSubmitNative = () => {
+    const handleSubmitNative = (e) => {
+        e.stopPropagation();
         trackEventCardClick(path, title);
         return(
             navigator(path)
@@ -16,12 +17,12 @@ function MoreInfoButton({title, path, external=false}) {
     return (
         <React.Fragment>
         {external === false &&
-            <button onClick={handleSubmitNative} className={styles.button} type='submit'>{title}</button>
+            <button onClick={handleSubmitNative} className={`${styles.actionSlot} ${styles.button}`} type='submit'>{title}</button>
 
         }
 
         {external === true &&
-            <Link to={path} target='_blank' onClick={() => trackEventCardClick(path, title)}>
+            <Link to={path} target='_blank' onClick={(e) => { e.stopPropagation(); trackEventCardClick(path, title); }} className={styles.actionSlot}>
                 <button className={styles.button}>{title}</button>
             </Link>
         }

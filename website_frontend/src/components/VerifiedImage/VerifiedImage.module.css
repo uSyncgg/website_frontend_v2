@@ -1,9 +1,9 @@
 .bannerVerified {
     position: absolute;
-    width: 6%;
-    height: auto;
-    right: 8%;
-    top: 5%;
+    width: 18px;
+    height: 18px;
+    right: -4px;
+    top: -4px;
     z-index: 2;
 }
 
