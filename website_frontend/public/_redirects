@@ -1,6 +1,8 @@
 / /index.html 200
 /home /index.html 200
 
+/sitemap-events.xml https://website-backend-v2.onrender.com/sitemap.xml 200
+
 # Top Level Pages
 /games /index.html 200
 /leagues /index.html 200

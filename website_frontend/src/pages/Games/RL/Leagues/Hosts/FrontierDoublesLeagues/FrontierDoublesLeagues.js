@@ -1,5 +1,6 @@
 import { SeoData, HeaderImage, HostBanner, BackButton } from "components";
 import { useLeagueEvents, useLeagueChildren } from "hooks";
+import { buildEventPath } from 'utils/eventPaths';
 import '../../../../EventBanners.css';
 
 const GAME = "Rocket League";
@@ -34,7 +35,7 @@ export const FrontierDoublesLeagues = () => {
                         .slice()
                         .sort((a, b) => (b.verified ? 1 : 0) - (a.verified ? 1 : 0))
                         .map(child => {
-                            const path = `${ROUTE_PREFIX}${child.path}`;
+                            const path = buildEventPath(ROUTE_PREFIX, child.path);
 
                             return (
                                 <HostBanner key={path} path={path}>

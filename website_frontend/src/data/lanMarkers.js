@@ -1,3 +1,5 @@
+import { buildEventPath } from 'utils/eventPaths';
+
 // Maps the game name used by the backend/API to the short key LanMap uses
 // for its legend, marker color, and per-page filtering.
 export const LAN_GAME_KEY = {
@@ -21,7 +23,7 @@ const toLanMarker = (event) => ({
     lat: event.lat,
     lng: event.long,
     name: event.name,
-    link: `/lans${event.path}`,
+    link: buildEventPath('/lans', event.path),
     game: LAN_GAME_KEY[event.game] || event.game,
 });
 

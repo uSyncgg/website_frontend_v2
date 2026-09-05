@@ -1,15 +1,15 @@
 import { useMemo, useState } from "react";
 import { SeoData, HostBanner, HeaderImage, EventListFilters, NoEvents } from "components";
 import { useLeagueEvents } from "hooks";
+import { buildEventPath } from 'utils/eventPaths';
 import '../../EventBanners.css';
 
 const normalizeHost = (host) => {
-    const rawPath = host.path.startsWith('/') ? host.path.slice(1) : host.path;
     const grouped = Array.isArray(host.leagues) && host.leagues.length > 0;
 
     return {
         name: host.name,
-        path: `/games/warzone/leagues/${rawPath}`,
+        path: buildEventPath('/games/warzone/leagues', host.path),
         imgUrl: host.banner_img,
         alt: host.name,
         verified: !!host.verified,

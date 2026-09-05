@@ -1,11 +1,12 @@
 import { useMemo, useState } from "react";
 import { SeoData, HostBanner, HeaderImage, EventListFilters } from "components";
 import { useXpEvents } from "hooks";
+import { buildEventPath } from 'utils/eventPaths';
 import '../../EventBanners.css';
 
 const normalizeEntry = (host) => ({
     name: host.name,
-    path: `/games/Valorant/head-to-head${host.path}`,
+    path: buildEventPath('/games/Valorant/head-to-head', host.path),
     imgUrl: host.banner_img,
     alt: host.name,
     verified: !!host.verified,
