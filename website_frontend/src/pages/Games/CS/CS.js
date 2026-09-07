@@ -1,4 +1,5 @@
-import { SeoData, HeaderImage, WaysToCompete, SectionHeading, VerifiedEvents } from "components";
+import { SeoData, HeaderImage, WaysToCompete, SectionHeading } from "components";
+import { VerifiedEventsShowcase } from "pages/Games/Shared/VerifiedEventsShowcase";
 import '../EventBanners.css';
 
 const FORMATS = [
@@ -7,11 +8,6 @@ const FORMATS = [
     { key: "tourneys", name: "Online Tournaments", blurb: "Bracket play, credits or free entry", path: "/Comingsoon", live: false },
     { key: "wagers", name: "Wagers", blurb: "Stake-based matches through a verified host", path: "/games/CS2/wagers", live: true },
     { key: "h2h", name: "Head to Head", blurb: "Challenge a specific opponent", path: "/games/CS2/head-to-head", live: true },
-];
-
-const VERIFIED = [
-    { name: "FACEIT ESEA", path: "/games/CS2/leagues/faceitesea", imgUrl: "https://i.imgur.com/STmx1Aa.png", alt: "FACEIT ESEA League", buttonTitle: "More Info", section: "Leagues" },
-    { name: "FACEIT", path: "/games/CS2/head-to-head/faceit", imgUrl: "https://i.imgur.com/4GwagUk.png", alt: "Faceit Head to Head", buttonTitle: "More Info", section: "HeadToHead" },
 ];
 
 export const CS = () => {
@@ -33,7 +29,7 @@ export const CS = () => {
             <WaysToCompete formats={FORMATS} />
 
             <SectionHeading>Verified Events</SectionHeading>
-            <VerifiedEvents events={VERIFIED} />
+            <VerifiedEventsShowcase game="CS2" gameSlug="CS2" />
         </div>
     );
 }

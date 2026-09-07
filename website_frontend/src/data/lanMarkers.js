@@ -13,6 +13,16 @@ export const LAN_GAME_KEY = {
 // Every game (API name) that currently has a LANs section.
 export const LAN_GAMES = Object.keys(LAN_GAME_KEY);
 
+// Where each game's own LANs listing page lives, for a LAN detail page's
+// back button (the API game name doesn't map 1:1 onto its URL segment).
+export const LAN_GAME_SECTION_PATH = {
+    "Call of Duty": "/games/call-of-duty/lans",
+    "Warzone": "/games/warzone/lans",
+    "Halo": "/games/halo/lans",
+    "League of Legends": "/games/LoL/lans",
+    "Conventions": "/other-lans",
+};
+
 const hasCoordinates = (event) =>
     Number.isFinite(event.lat) && Number.isFinite(event.long) && (event.lat !== 0 || event.long !== 0);
 

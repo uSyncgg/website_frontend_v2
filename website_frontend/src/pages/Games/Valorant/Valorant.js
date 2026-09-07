@@ -1,4 +1,5 @@
-import { SeoData, HeaderImage, WaysToCompete, SectionHeading, VerifiedEvents } from "components";
+import { SeoData, HeaderImage, WaysToCompete, SectionHeading } from "components";
+import { VerifiedEventsShowcase } from "pages/Games/Shared/VerifiedEventsShowcase";
 import '../EventBanners.css';
 
 const FORMATS = [
@@ -7,11 +8,6 @@ const FORMATS = [
     { key: "tourneys", name: "Online Tournaments", blurb: "Bracket play, credits or free entry", path: "/Comingsoon", live: false },
     { key: "wagers", name: "Wagers", blurb: "Stake-based matches through a verified host", path: "/games/Valorant/wagers", live: true },
     { key: "h2h", name: "Head to Head", blurb: "Challenge a specific opponent", path: "/games/Valorant/head-to-head", live: true },
-];
-
-const VERIFIED = [
-    { name: "College Valorant League", path: "/games/Valorant/leagues/riot", imgUrl: "https://i.imgur.com/1Hqgxu0.png", alt: "College Valorant League", buttonTitle: "More Info", section: "Leagues" },
-    { name: "Gankster GG", path: "/games/Valorant/head-to-head/gankster", imgUrl: "https://i.imgur.com/ljDANVi.png", alt: "Gankster GG", buttonTitle: "More Info", section: "HeadToHead" },
 ];
 
 export const Valorant = () => {
@@ -33,7 +29,7 @@ export const Valorant = () => {
             <WaysToCompete formats={FORMATS} />
 
             <SectionHeading>Verified Events</SectionHeading>
-            <VerifiedEvents events={VERIFIED} />
+            <VerifiedEventsShowcase game="Valorant" gameSlug="Valorant" />
         </div>
     );
 }

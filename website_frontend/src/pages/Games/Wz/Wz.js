@@ -1,4 +1,5 @@
-import { SeoData, HeaderImage, WaysToCompete, SectionHeading, VerifiedEvents } from "components";
+import { SeoData, HeaderImage, WaysToCompete, SectionHeading } from "components";
+import { VerifiedEventsShowcase } from "pages/Games/Shared/VerifiedEventsShowcase";
 import '../EventBanners.css';
 
 const FORMATS = [
@@ -7,11 +8,6 @@ const FORMATS = [
     { key: "tourneys", name: "Online Tournaments", blurb: "Bracket play, credits or free entry", path: "/Comingsoon", live: false },
     { key: "wagers", name: "Wagers", blurb: "Stake-based matches through a verified host", path: "/games/warzone/wagers", live: true },
     { key: "h2h", name: "Head to Head", blurb: "Challenge a specific opponent", path: "/games/warzone/head-to-head", live: true },
-];
-
-const VERIFIED = [
-    { name: "Checkmate Gaming", path: "/games/warzone/wagers/cmg", imgUrl: "https://i.imgur.com/QKP5L9N.png", alt: "CMG Wagers", buttonTitle: "More Info", section: "Wagers" },
-    { name: "Checkmate Gaming", path: "/games/warzone/head-to-head/cmg", imgUrl: "https://i.imgur.com/QKP5L9N.png", alt: "CMG Head to Head", buttonTitle: "More Info", section: "HeadToHead" },
 ];
 
 export const Wz = () => {
@@ -33,7 +29,7 @@ export const Wz = () => {
             <WaysToCompete formats={FORMATS} />
 
             <SectionHeading>Verified Events</SectionHeading>
-            <VerifiedEvents events={VERIFIED} />
+            <VerifiedEventsShowcase game="Warzone" gameSlug="warzone" />
         </div>
     );
 }

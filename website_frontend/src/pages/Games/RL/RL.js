@@ -1,4 +1,5 @@
-import { SeoData, HeaderImage, WaysToCompete, SectionHeading, VerifiedEvents } from "components";
+import { SeoData, HeaderImage, WaysToCompete, SectionHeading } from "components";
+import { VerifiedEventsShowcase } from "pages/Games/Shared/VerifiedEventsShowcase";
 import '../EventBanners.css';
 
 const FORMATS = [
@@ -7,13 +8,6 @@ const FORMATS = [
     { key: "tourneys", name: "Online Tournaments", blurb: "Bracket play, credits or free entry", path: "/Comingsoon", live: false },
     { key: "wagers", name: "Wagers", blurb: "Stake-based matches through a verified host", path: "/games/RocketLeague/wagers", live: true },
     { key: "h2h", name: "Head to Head", blurb: "Challenge a specific opponent", path: "/games/RocketLeague/head-to-head", live: true },
-];
-
-const VERIFIED = [
-    { name: "Nemesis Leagues", path: "/games/RocketLeague/leagues/nemesis-leagues", imgUrl: "https://i.imgur.com/PcmcLLk.png", alt: "Nemesis Leagues", buttonTitle: "All Leagues", section: "Leagues" },
-    { name: "RLPC", path: "/games/RocketLeague/leagues/rlpc-leagues", imgUrl: "https://i.imgur.com/kVDfckC.png", alt: "RLPC Leagues", buttonTitle: "All Leagues", section: "Leagues" },
-    { name: "College Carball Association", path: "/games/RocketLeague/leagues/cca", imgUrl: "https://i.imgur.com/UqFxQ9Q.png", alt: "College Carball", buttonTitle: "More Info", section: "Leagues" },
-    { name: "Gankster GG", path: "/games/RocketLeague/head-to-head/gankster", imgUrl: "https://i.imgur.com/ljDANVi.png", alt: "Gankster Head to Head", buttonTitle: "More Info", section: "HeadToHead" },
 ];
 
 export const RL = () => {
@@ -35,7 +29,7 @@ export const RL = () => {
             <WaysToCompete formats={FORMATS} />
 
             <SectionHeading>Verified Events</SectionHeading>
-            <VerifiedEvents events={VERIFIED} />
+            <VerifiedEventsShowcase game="Rocket League" gameSlug="RocketLeague" />
         </div>
     );
 }
