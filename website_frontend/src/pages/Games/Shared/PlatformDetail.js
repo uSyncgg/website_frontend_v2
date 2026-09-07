@@ -1,0 +1,66 @@
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
+import { useParams } from "react-router";
+import { useEventByPath } from "hooks";
+import { buildEventPath } from "utils/eventPaths";
+import { NotFound } from "pages/NotFound";
+import '../EventInformation.css';
+
+const restrictionInfoList = (data) => {
+    const avail = (data.availability || []).filter(s => s && s.trim());
+    const items = Object.values(data.restrictions || {}).flatMap(v => Array.isArray(v) ? [v.map(s => String(s).trim()).join(', ')] : [v]);
+    if (avail.length > 0) {
+        items.push(avail.length === 1 && avail[0] === 'Worldwide' ? 'Available Worldwide' : `Available in: ${avail.join(', ')}`);
+    }
+    return items;
+};
+
+export const PlatformDetail = ({ eventType, game, sectionPath }) => {
+    const params = useParams();
+    const slug = params['*'];
+    const { data, loading, error } = useEventByPath(eventType, game, slug);
+
+    if (error?.response?.status === 404) {
+        return <NotFound />;
+    }
+
+    return (
+        <div className="standardContainer">
+            <SeoData
+                title={data ? `${data.name} - ${game}` : undefined}
+                description={data?.description}
+                canonicalPath={buildEventPath(sectionPath, slug)}
+            />
+            <HeaderImage imageUrl={data?.header_img} title={data?.verified ? undefined : data?.name} />
+
+            {data?.verified &&
+                <div className="verifiedContainer">
+                    <VerifiedText />
+                </div>
+            }
+
+            {loading ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Loading platform info...</p>
+            ) : error || !data ? (
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Unable to load this platform right now.</p>
+            ) : (
+                <div className="eventInfoCardContainer">
+                    <div>
+                        <EventInfoCard title={"Fees"} infoList={data.fee_details} footer={<ExternalButton host={data.name} blank={true} title={"Join Now"} path={data.url} />}/>
+                    </div>
+
+                    <div>
+                        <EventInfoCard title={"Details"} infoList={data.details} />
+                    </div>
+
+                    <div>
+                        <EventInfoCard title={"Restrictions"} infoList={restrictionInfoList(data)} />
+                    </div>
+                </div>
+            )}
+
+            <div className="backButtonContainer">
+                <BackButton path={sectionPath} />
+            </div>
+        </div>
+    );
+}

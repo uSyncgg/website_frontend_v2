@@ -1,4 +1,5 @@
-import { SeoData, HeaderImage, WaysToCompete, SectionHeading, VerifiedEvents } from "components";
+import { SeoData, HeaderImage, WaysToCompete, SectionHeading } from "components";
+import { VerifiedEventsShowcase } from "pages/Games/Shared/VerifiedEventsShowcase";
 import '../EventBanners.css';
 
 const FORMATS = [
@@ -7,13 +8,6 @@ const FORMATS = [
     { key: "tourneys", name: "Online Tournaments", blurb: "Bracket play, credits or free entry", path: "/tournaments/call-of-duty-tournaments", live: true },
     { key: "wagers", name: "Wagers", blurb: "Stake-based matches through a verified host", path: "/games/call-of-duty/wagers", live: true },
     { key: "h2h", name: "Head to Head", blurb: "Challenge a specific opponent", path: "/games/call-of-duty/head-to-head", live: true },
-];
-
-const VERIFIED = [
-    { name: "LockdownCL", path: "/games/call-of-duty/leagues/lockdowncl-leagues", imgUrl: "https://i.imgur.com/MQkAGHe.png", alt: "LockdownCL Leagues", buttonTitle: "All Leagues", section: "Leagues" },
-    { name: "Checkmate Gaming", path: "/games/call-of-duty/wagers/cmg", imgUrl: "https://i.imgur.com/QKP5L9N.png", alt: "CMG Wagers", buttonTitle: "More Info", section: "Wagers" },
-    { name: "Esports Agent", path: "/games/call-of-duty/wagers/eagent", imgUrl: "https://i.imgur.com/mued0Qd.png", alt: "Esports Agent Wagers", buttonTitle: "More Info", section: "Wagers" },
-    { name: "Checkmate Gaming", path: "/games/call-of-duty/head-to-head/cmg", imgUrl: "https://i.imgur.com/QKP5L9N.png", alt: "CMG Head to Head", buttonTitle: "More Info", section: "HeadToHead" },
 ];
 
 export const Cod = () => {
@@ -35,7 +29,7 @@ export const Cod = () => {
             <WaysToCompete formats={FORMATS} />
 
             <SectionHeading>Verified Events</SectionHeading>
-            <VerifiedEvents events={VERIFIED} />
+            <VerifiedEventsShowcase game="Call of Duty" gameSlug="call-of-duty" />
         </div>
     );
 }

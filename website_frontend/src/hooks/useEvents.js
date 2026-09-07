@@ -6,6 +6,10 @@ import {
   getXpEvents,
   getEvent,
   getLeagueChildren,
+  getEventByPath,
+  getLanInformation,
+  getLeagueInformation,
+  getVerifiedEvents,
 } from 'services/events';
 import { LAN_GAMES } from 'data/lanMarkers';
 
@@ -66,6 +70,25 @@ export function useEvent(eventType, game, eventName) {
   );
 }
 
+export function useEventByPath(eventType, game, path) {
+  return useAsync(
+    () => getEventByPath({ event_type: eventType, game, path }),
+    [eventType, game, path]
+  );
+}
+
+export function useLanInfo(path) {
+  return useAsync(() => getLanInformation({ path }), [path]);
+}
+
+export function useLeagueInfo(game, path) {
+  return useAsync(() => getLeagueInformation({ game, path }), [game, path]);
+}
+
 export function useLeagueChildren(game, parent) {
   return useAsync(() => getLeagueChildren({ game, parent }), [game, parent]);
+}
+
+export function useVerifiedEvents(game) {
+  return useAsync(() => getVerifiedEvents({game}), [game]);
 }

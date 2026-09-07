@@ -1,5 +1,5 @@
 import useCheckResize from "./CheckResize/useCheckResize";
-import { useLeagueEvents, useLanEvents, useAllLanEvents, useWagerEvents, useXpEvents, useEvent, useLeagueChildren } from "./useEvents";
+import { useLeagueEvents, useLanEvents, useAllLanEvents, useWagerEvents, useXpEvents, useEvent, useEventByPath, useLanInfo, useLeagueInfo, useLeagueChildren, useVerifiedEvents } from "./useEvents";
 
 export {
     useCheckResize,
@@ -9,5 +9,9 @@ export {
     useWagerEvents,
     useXpEvents,
     useEvent,
-    useLeagueChildren
+    useEventByPath,
+    useLanInfo,
+    useLeagueInfo,
+    useLeagueChildren,
+    useVerifiedEvents
 }

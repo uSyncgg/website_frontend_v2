@@ -2,13 +2,14 @@ import { useMemo } from "react";
 import { SeoData, HostBanner, NoEvents, LanMap } from "components";
 import { useLanEvents } from "hooks";
 import { toLanMarkers } from 'data/lanMarkers';
+import { buildEventPath } from 'utils/eventPaths';
 import '../EventBanners.css';
 
 const GAME = "Conventions";
 
 const normalizeLan = (event) => ({
     name: event.name,
-    path: `/lans${event.path}`,
+    path: buildEventPath('/lans', event.path),
     imgUrl: event.banner_img,
     alt: event.name,
     verified: !!event.verified,

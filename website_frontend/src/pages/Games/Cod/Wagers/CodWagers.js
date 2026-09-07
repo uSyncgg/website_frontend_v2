@@ -1,11 +1,12 @@
 import { useMemo, useState } from "react";
 import { SeoData, HostBanner, HeaderImage, EventListFilters } from "components";
 import { useWagerEvents } from "hooks";
+import { buildEventPath } from 'utils/eventPaths';
 import '../../EventBanners.css';
 
 const normalizeWager = (host) => ({
     name: host.name,
-    path: `/games/call-of-duty/wagers${host.path}`,
+    path: buildEventPath('/games/call-of-duty/wagers', host.path),
     imgUrl: host.banner_img,
     alt: host.name,
     verified: !!host.verified,
