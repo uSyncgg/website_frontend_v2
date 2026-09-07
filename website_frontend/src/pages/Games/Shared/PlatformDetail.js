@@ -5,12 +5,14 @@ import { buildEventPath } from "utils/eventPaths";
 import { NotFound } from "pages/NotFound";
 import '../EventInformation.css';
 
-const restrictionInfoList = (data) => [
-    ...Object.values(data.restrictions || {}).flatMap(v => Array.isArray(v) ? [v.map(s => String(s).trim()).join(', ')] : [v]),
-    (data.availability?.length === 1 && data.availability[0] === 'Worldwide')
-        ? 'Available Worldwide'
-        : `Available in: ${(data.availability || []).join(', ')}`,
-];
+const restrictionInfoList = (data) => {
+    const avail = (data.availability || []).filter(s => s && s.trim());
+    const items = Object.values(data.restrictions || {}).flatMap(v => Array.isArray(v) ? [v.map(s => String(s).trim()).join(', ')] : [v]);
+    if (avail.length > 0) {
+        items.push(avail.length === 1 && avail[0] === 'Worldwide' ? 'Available Worldwide' : `Available in: ${avail.join(', ')}`);
+    }
+    return items;
+};
 
 export const PlatformDetail = ({ eventType, game, sectionPath }) => {
     const params = useParams();
