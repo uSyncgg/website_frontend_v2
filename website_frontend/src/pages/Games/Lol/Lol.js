@@ -1,4 +1,5 @@
-import { SeoData, HeaderImage, WaysToCompete, SectionHeading, VerifiedEvents } from "components";
+import { SeoData, HeaderImage, WaysToCompete, SectionHeading } from "components";
+import { VerifiedEventsShowcase } from "pages/Games/Shared/VerifiedEventsShowcase";
 import '../EventBanners.css';
 
 const FORMATS = [
@@ -7,15 +8,6 @@ const FORMATS = [
     { key: "tourneys", name: "Online Tournaments", blurb: "Bracket play, credits or free entry", path: "/Comingsoon", live: false },
     { key: "wagers", name: "Wagers", blurb: "Stake-based matches through a verified host", path: "/games/LoL/wagers", live: true },
     { key: "h2h", name: "Head to Head", blurb: "Challenge a specific opponent", path: "/games/LoL/head-to-head", live: true },
-];
-
-const VERIFIED = [
-    { name: "Titan Esports", path: "/games/LoL/leagues/titan-leagues", imgUrl: "https://i.imgur.com/SoRhxEf.png", alt: "Titan Esports Leagues", buttonTitle: "All Leagues", section: "Leagues" },
-    { name: "Risen Leagues", path: "/games/LoL/leagues/risen-leagues", imgUrl: "https://i.imgur.com/s5LrZoC.png", alt: "Risen Leagues", buttonTitle: "All Leagues", section: "Leagues" },
-    { name: "Aegis Leagues", path: "/games/LoL/leagues/aegis-leagues", imgUrl: "https://i.imgur.com/o0sTnrZ.png", alt: "Aegis Leagues", buttonTitle: "All Leagues", section: "Leagues" },
-    { name: "CLOL", path: "/games/LoL/leagues/clol", imgUrl: "https://i.imgur.com/2jNA26x.png", alt: "CLOL", buttonTitle: "More Info", section: "Leagues" },
-    { name: "Playfly College", path: "/games/LoL/leagues/playfly", imgUrl: "https://i.imgur.com/XHCsRTv.png", alt: "Playfly College League", buttonTitle: "More Info", section: "Leagues" },
-    { name: "Gankster GG", path: "/games/LoL/head-to-head/gankster", imgUrl: "https://i.imgur.com/ljDANVi.png", alt: "Gankster Head to Head", buttonTitle: "More Info", section: "HeadToHead" },
 ];
 
 export const Lol = () => {
@@ -37,7 +29,7 @@ export const Lol = () => {
             <WaysToCompete formats={FORMATS} />
 
             <SectionHeading>Verified Events</SectionHeading>
-            <VerifiedEvents events={VERIFIED} />
+            <VerifiedEventsShowcase game="League of Legends" gameSlug="LoL" />
         </div>
     );
 }
