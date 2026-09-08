@@ -20,10 +20,6 @@ export const Verification = () => {
                     <Link to={"https://buy.stripe.com/eVadRz4PY0s31mEcMV"} target="_blank">
                         <img src="https://i.imgur.com/EC4OOoS.png" alt="Verified Features" />
                     </Link>
-
-                    <div className={styles.subscription}>
-                        <MoreInfoButton title={"Subscribe"} path={"https://buy.stripe.com/eVadRz4PY0s31mEcMV"} external={true} />
-                    </div>
                 </div>
 
                 <div className="hr" />
