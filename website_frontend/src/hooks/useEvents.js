@@ -10,6 +10,7 @@ import {
   getLanInformation,
   getLeagueInformation,
   getVerifiedEvents,
+  getAllLans
 } from 'services/events';
 import { LAN_GAMES } from 'data/lanMarkers';
 
@@ -36,6 +37,10 @@ export function useLeagueEvents(game) {
 
 export function useLanEvents(game) {
   return useAsync(() => getLanEvents({ game }), [game]);
+}
+
+export function useAllLans() {
+  return useAsync(() => getAllLans(), []);
 }
 
 // Fetches LAN events across every game with a LANs section (one request per
