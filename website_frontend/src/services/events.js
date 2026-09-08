@@ -6,6 +6,9 @@ export const getLeagueEvents = ({ game }) =>
 export const getLanEvents = ({ game }) =>
     apiClient.get(`/events/lans/${encodeURIComponent(game)}`).then(res => res.data);
 
+export const getAllLans = () => 
+    apiClient.get('/events/all_lans').then(res => res.data);
+
 export const getWagerEvents = ({ game }) =>
     apiClient.get(`/events/wagers/${encodeURIComponent(game)}`).then(res => res.data);
 
