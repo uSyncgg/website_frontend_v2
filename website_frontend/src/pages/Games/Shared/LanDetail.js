@@ -20,8 +20,8 @@ export const LanDetail = () => {
     return (
         <div className="standardContainer">
             <SeoData
-                title={data ? `${data.name} - ${data.game}` : undefined}
-                description={data ? `${data.name} in ${data.location} on ${data.date}` : undefined}
+                title={data?.seo_title}
+                description={data?.seo_description}
                 canonicalPath={buildEventPath('/lans', slug)}
             />
             <HeaderImage imageUrl={data?.header_img} title={data?.verified ? undefined : data?.name} />

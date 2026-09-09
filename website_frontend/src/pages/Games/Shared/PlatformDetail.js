@@ -26,8 +26,8 @@ export const PlatformDetail = ({ eventType, game, sectionPath }) => {
     return (
         <div className="standardContainer">
             <SeoData
-                title={data ? `${data.name} - ${game}` : undefined}
-                description={data?.description}
+                title={data?.seo_title}
+                description={data?.seo_description}
                 canonicalPath={buildEventPath(sectionPath, slug)}
             />
             <HeaderImage imageUrl={data?.header_img} title={data?.verified ? undefined : data?.name} />
