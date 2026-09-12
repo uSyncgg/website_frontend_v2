@@ -33,6 +33,7 @@ import { ChooseYourGame } from "./ChooseYourGame/ChooseYourGame";
 
 // Payment Form
 import { PaymentForm } from "./PaymentForm/PaymentForm";
+import { DynamicFormField } from "./PaymentForm/DynamicFormField";
 import { PaymentCart } from "./PaymentCart/PaymentCart";
 import { Receipt } from "./Receipt/Receipt";
 import { LoadingWheel } from "./LoadingWheel/LoadingWheel";
@@ -82,6 +83,7 @@ export {
     EventListFilters,
     MapCoverHome,
     PaymentForm,
+    DynamicFormField,
     PaymentCart,
     LoadingWheel,
     FormDataCheck,
@@ -116,4 +118,5 @@ export {
     WaysToCompete,
     SectionHeading,
     VerifiedEvents,
+    CheckoutSteps
 };

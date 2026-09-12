@@ -3,7 +3,9 @@ import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import styles from './PaymentComponent.module.css';
 import { FaLock } from 'react-icons/fa';
 
-export const NestedPaymentComponent = ({ price }) => {
+const DEFAULT_RETURN_URL = "https://www.usync.gg/paymentform/test/receipt";
+
+export const NestedPaymentComponent = ({ price, returnUrl = DEFAULT_RETURN_URL }) => {
     const stripe = useStripe();
     const elements = useElements();
 
@@ -20,21 +22,21 @@ export const NestedPaymentComponent = ({ price }) => {
 
         setLoading(true);
 
-
-        // Need to make dynamic
         const { error } = await stripe.confirmPayment({
             elements,
             confirmParams: {
-                return_url: "https://www.usync.gg/paymentform/test/receipt",
+                return_url: returnUrl,
             },
         });
 
-        console.log(`ERROR TYPE: ${error.type}`)
-
-        if (error.type === "card_error" || error.type === "validation_error") {
-            setMessage(error.message);
-        } else {
-            setMessage("An unexpected error occured.");
+        // confirmPayment redirects to return_url on success, so `error` is only
+        // populated when it resolves without redirecting (i.e. something failed).
+        if (error) {
+            if (error.type === "card_error" || error.type === "validation_error") {
+                setMessage(error.message);
+            } else {
+                setMessage("An unexpected error occured.");
+            }
         }
 
         setLoading(false);
