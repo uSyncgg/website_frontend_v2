@@ -31,8 +31,13 @@ function PassSelection() {
     const [selectedTierId, setSelectedTierId] = useState(null);
     const [submitting, setSubmitting] = useState(false);
     const [submitError, setSubmitError] = useState(null);
+    const [expandedPlayers, setExpandedPlayers] = useState({});
 
     const methods = useForm({ shouldUnregister: true });
+
+    useEffect(() => {
+        setExpandedPlayers({});
+    }, [selectedTierId]);
 
     useEffect(() => {
         if (tiers && tiers.length && !selectedTierId) {
@@ -184,37 +189,60 @@ function PassSelection() {
                                                     </div>
                                                 </>
                                             )}
-
-                                            {Array.from({ length: selectedTier.team_size || 1 }).map((_, i) => {
-                                                const fields = selectedTier.player_fields || [];
-                                                const [primaryField, ...socialFields] = fields;
-                                                const playerPrefix = selectedTier.team_size > 1 ? `Player ${i + 1} ` : '';
-
-                                                return (
-                                                    <React.Fragment key={i}>
-                                                        {primaryField && (
-                                                            <DynamicFormField
-                                                                field={primaryField}
-                                                                name={`player_info.${i}.gamertag`}
-                                                                label={`${playerPrefix}${primaryField.label || primaryField.key}`}
-                                                            />
-                                                        )}
-                                                        {socialFields.map((field) => (
-                                                            <DynamicFormField
-                                                                key={field.key}
-                                                                field={field}
-                                                                name={`player_info.${i}.socials.${field.key}`}
-                                                                label={`${playerPrefix}${field.label || field.key}`}
-                                                            />
-                                                        ))}
-                                                    </React.Fragment>
-                                                );
-                                            })}
-
-                                            {(selectedTier.form_fields || []).map((field) => (
-                                                <DynamicFormField key={field.key} field={field} name={`custom_fields.${field.key}`} />
-                                            ))}
                                         </div>
+
+                                        {Array.from({ length: selectedTier.team_size || 1 }).map((_, i) => {
+                                            const fields = selectedTier.player_fields || [];
+                                            const fieldMeta = fields.map((field, idx) => ({
+                                                field,
+                                                name: idx === 0 ? `player_info.${i}.gamertag` : `player_info.${i}.socials.${field.key}`
+                                            }));
+                                            const requiredMeta = fieldMeta.filter((m) => m.field.required);
+                                            const optionalMeta = fieldMeta.filter((m) => !m.field.required);
+                                            const isExpanded = !!expandedPlayers[i];
+
+                                            return (
+                                                <div key={i} className={pageStyles.playerSection}>
+                                                    {selectedTier.team_size > 1 && (
+                                                        <p className={pageStyles.playerHeading}>Player {i + 1}</p>
+                                                    )}
+
+                                                    {requiredMeta.length > 0 && (
+                                                        <div className={`${styles.formGrid} ${pageStyles.fieldsGrid}`}>
+                                                            {requiredMeta.map(({ field, name }) => (
+                                                                <DynamicFormField key={name} field={field} name={name} label={field.label || field.key} />
+                                                            ))}
+                                                        </div>
+                                                    )}
+
+                                                    {optionalMeta.length > 0 && !isExpanded && (
+                                                        <button
+                                                            type="button"
+                                                            className={pageStyles.expandToggle}
+                                                            onClick={() => setExpandedPlayers((prev) => ({ ...prev, [i]: true }))}
+                                                        >
+                                                            + Click to add more information
+                                                        </button>
+                                                    )}
+
+                                                    {optionalMeta.length > 0 && isExpanded && (
+                                                        <div className={`${styles.formGrid} ${pageStyles.fieldsGrid} ${pageStyles.optionalFieldsGrid}`}>
+                                                            {optionalMeta.map(({ field, name }) => (
+                                                                <DynamicFormField key={name} field={field} name={name} label={field.label || field.key} />
+                                                            ))}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            );
+                                        })}
+
+                                        {(selectedTier.form_fields || []).length > 0 && (
+                                            <div className={`${styles.formGrid} ${pageStyles.fieldsGrid} ${pageStyles.optionalFieldsGrid}`}>
+                                                {selectedTier.form_fields.map((field) => (
+                                                    <DynamicFormField key={field.key} field={field} name={`custom_fields.${field.key}`} />
+                                                ))}
+                                            </div>
+                                        )}
 
                                         {submitError && (
                                             <div className={pageStyles.submitErrorRow}>
