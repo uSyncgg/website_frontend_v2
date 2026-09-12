@@ -10,12 +10,16 @@ import { createPaymentIntent } from "services/event_registration";
 import { useEventReceipt } from "hooks";
 import { getApiErrorMessage } from "utils/apiError";
 
-// FOR TESTING - swap for REACT_APP_STRIPE_PK when going live
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_TK);
-
 const STEPS = ['Registration', 'Payment', 'Confirmation'];
 
 function PassPayment() {
+    // FOR TESTING - swap for REACT_APP_STRIPE_PK when going live
+    // Must stay inside the component (not module scope): CRA bundles every
+    // page into one main.js, so a top-level call here runs on every route
+    // load - including react-snap's prerender crawl of pages that never
+    // render this component - and throws when the env var isn't set there.
+    const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_TK);
+
     const { registrationId } = useParams();
     const [clientSecret, setClientSecret] = useState('');
     const [total, setTotal] = useState(null);
