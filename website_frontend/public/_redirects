@@ -105,6 +105,7 @@
 /checkout /index.html 200
 /paymentform/test/receipt /index.html 200
 /payment /index.html 200
+/passes/* /index.html 200
 
 # LANs
 /LanMap /index.html 200
