@@ -1,0 +1,15 @@
+/* When the field count is odd, center the last, unpaired field instead of
+   leaving it stranded in the left column. Mirrors PassSelection's fieldsGrid. */
+.fieldsGrid > *:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    width: 100%;
+    max-width: calc(50% - .55rem);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media only screen and (max-width: 600px) {
+    .fieldsGrid > *:last-child:nth-child(odd) {
+        max-width: 100%;
+    }
+}

@@ -14,7 +14,7 @@ import {
 } from 'services/events';
 import { LAN_GAMES } from 'data/lanMarkers';
 
-function useAsync(fetchFn, deps) {
+export function useAsync(fetchFn, deps) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

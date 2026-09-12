@@ -47,7 +47,14 @@ export const LanDetail = () => {
                     </div>
 
                     <div>
-                        <EventInfoCard title={"Entry Fee"} infoList={data.fee_details} footer={<ExternalButton host={data.name} blank={true} title={"Join Now"} path={data.url} />}/>
+                        <EventInfoCard title={"Entry Fee"} infoList={data.fee_details} footer={
+                            <ExternalButton
+                                host={data.name}
+                                blank={!data.usync_pass}
+                                title={"Join Now"}
+                                path={data.usync_pass ? `/passes/${slug}` : data.url}
+                            />
+                        }/>
                     </div>
                 </div>
             )}
