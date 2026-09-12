@@ -1,0 +1,89 @@
+.tierList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: .85rem;
+    margin-bottom: 2rem;
+}
+
+.tierCard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+    padding: 1rem 1.1rem;
+    border-radius: .85rem;
+    border: 1px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .04);
+    cursor: pointer;
+    transition: border-color .2s ease-in-out, background .2s ease-in-out;
+}
+
+.tierCard input {
+    position: absolute;
+    top: .9rem;
+    right: .9rem;
+}
+
+.tierCard:hover {
+    border-color: rgba(255, 255, 255, .25);
+}
+
+.tierSelected {
+    border-color: #8e6ace;
+    background: rgba(142, 106, 206, .1);
+}
+
+.tierDisabled {
+    opacity: .5;
+    cursor: default;
+}
+
+.tierDisabled:hover {
+    border-color: rgba(255, 255, 255, .12);
+}
+
+.tierName {
+    color: white;
+    font-weight: 700;
+    padding-right: 1.5rem;
+}
+
+.tierPrice {
+    color: rgba(255, 255, 255, .75);
+    font-size: .9rem;
+}
+
+.tierRemaining {
+    color: rgba(255, 255, 255, .55);
+    font-size: .7rem;
+}
+
+.tierSoldOut {
+    color: #f28ba8;
+    font-size: .75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* When the field count is odd, center the last, unpaired field instead of
+   leaving it stranded in the left column. Spans both grid columns but caps
+   its own width to one column and centers via auto margins, so its internal
+   label/input stacking is untouched. */
+.fieldsGrid > *:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    width: 100%;
+    max-width: calc(50% - .55rem);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.submitErrorRow {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .fieldsGrid > *:last-child:nth-child(odd) {
+        max-width: 100%;
+    }
+}
