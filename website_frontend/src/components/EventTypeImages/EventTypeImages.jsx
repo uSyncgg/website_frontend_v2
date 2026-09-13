@@ -1,6 +1,7 @@
 import styles from './EventTypeImages.module.css';
 import { Link } from 'react-router';
 import React from 'react';
+import onlineTournamentsBubble from 'assets/images/coming_soon/Online Tournaments Coming Soon Bubble (9.13.26).webp';
 
 const ALL_ARTICLES = [
     { path: "/more/articles/The-Problem-With-Esports",             img: "https://i.imgur.com/vBqSUhI.png", alt: "The Problem With Esports" },
@@ -222,7 +223,7 @@ export const EventTypeImages = ({ page, articleName='' }) => {
             {page === "Coming Soon" && 
                 <div className={styles.imageEventContainer}>
                     <Link to={"#"}>
-                        <img src='https://i.imgur.com/8ZFHAM6.png' alt='Online Tournaments' />
+                        <img src={onlineTournamentsBubble} alt='Online Tournaments' />
                     </Link>
                 </div>
             }
