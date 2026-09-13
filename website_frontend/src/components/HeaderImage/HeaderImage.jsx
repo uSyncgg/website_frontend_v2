@@ -1,6 +1,9 @@
 import styles from './HeaderImage.module.css';
 import './HeaderImageStandard.css'
 import React from 'react';
+import underline from 'assets/images/misc/underline-decorative-graphic_9.6.26.webp';
+import verifiedBadge from 'assets/images/verification/verified-badge-usync-verified_9.6.26.webp';
+import nonVerifiedBadge from 'assets/images/verification/verified-badge-non-verified_9.6.26.webp';
 
 export const HeaderImage = ({ title, imageClass, imageUrl, verification, verified=false, location="", eyebrow, subtext }) => {
 
@@ -27,7 +30,7 @@ export const HeaderImage = ({ title, imageClass, imageUrl, verification, verifie
                         <span className={styles.white}>{leadWords}</span>
                         {accentWord !== null && <> <span className={styles.gradientText}>{accentWord}</span></>}
                     </h2>
-                    <img className="underlineImg" src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
+                    <img className="underlineImg" src={underline} alt="underline" />
 
                     {subtext !== undefined && <p className={styles.subtext}>{subtext}</p>}
                 </div>
@@ -47,8 +50,8 @@ export const HeaderImage = ({ title, imageClass, imageUrl, verification, verifie
 
             {verification !== undefined &&
                 <div className={styles.verificationContainer}>
-                    <img className={styles.verification} src='https://i.imgur.com/PCHIHQB.png' alt='uSync Verified' />
-                    <img className={styles.verification} src="https://i.imgur.com/0MPIBOK.png" alt='nonVerified' />
+                    <img className={styles.verification} src={verifiedBadge} alt='uSync Verified' />
+                    <img className={styles.verification} src={nonVerifiedBadge} alt='nonVerified' />
                 </div>
             }
         </div>

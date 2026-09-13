@@ -1,6 +1,9 @@
 import { SeoData, HeaderImage, MoreInfoButton } from "components";
 import { Link } from "react-router";
 import styles from '../Home.module.css';
+import underline from 'assets/images/misc/underline-decorative-graphic_9.6.26.webp';
+import verifiedFeaturesImage from 'assets/images/verification/verified-features-image-needs-redesign_9.6.26.webp';
+import verifiedBadgeVariant2 from 'assets/images/misc/verified-badge-usync-verified-variant2_9.6.26.webp';
 
 export const Verification = () => {
     return (
@@ -14,19 +17,19 @@ export const Verification = () => {
 
             <div className={styles.sectionTwo}>
                 <h2 className={styles.white}>Verified Features</h2>
-                <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
+                <img className={"underlineImg"} src={underline} alt="underline" />
 
                 <div className={styles.subscriptionContainer}>
                     <Link to={"https://buy.stripe.com/eVadRz4PY0s31mEcMV"} target="_blank">
-                        <img src="https://i.imgur.com/EC4OOoS.png" alt="Verified Features" />
+                        <img src={verifiedFeaturesImage} alt="Verified Features" />
                     </Link>
                 </div>
 
                 <div className="hr" />
 
                 <div className={styles.subscriptionContainer}>
-                    <img className={styles.usyncVerified} src="https://i.imgur.com/OSMYolc.png" alt="uSync Verified" />
-                    <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
+                    <img className={styles.usyncVerified} src={verifiedBadgeVariant2} alt="uSync Verified" />
+                    <img className={"underlineImg"} src={underline} alt="underline" />
 
                     <h1 className={styles.verificationDesc}>
                         uSync Verified providers are the most trustworthy providers that we feature. 

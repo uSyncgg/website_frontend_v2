@@ -1,110 +1,110 @@
 
 .gamesPage {
-    --bg-image: url("https://i.imgur.com/S9U4H7T.png");
+    --bg-image: url("../../assets/images/headers/header-games-page_9.6.26.webp");
 }
 
 .lansPage {
-    --bg-image: url("https://i.imgur.com/YeUPAmO.png");
+    --bg-image: url("../../assets/images/headers/header-lans-page_9.6.26.webp");
 }
 
 .articlesPage {
-    --bg-image: url("https://i.imgur.com/gbB3YxJ.png");
+    --bg-image: url("../../assets/images/headers/header-articles-page_9.6.26.webp");
 }
 
 .leaguesPage {
-    --bg-image: url("https://i.imgur.com/fackjly.png");
+    --bg-image: url("../../assets/images/headers/header-leagues-page_9.6.26.webp");
 }
 
 .tournamentsPage {
-    --bg-image: url("https://i.imgur.com/6nqLPyu.png");
+    --bg-image: url("../../assets/images/headers/header-tournaments-page_9.6.26.webp");
 }
 
 .comingSoonPage {
-    --bg-image: url("https://i.imgur.com/gbB3YxJ.png");
+    --bg-image: url("../../assets/images/headers/header-articles-page_9.6.26.webp");
 }
 
 .reportPage {
-    --bg-image: url("https://i.imgur.com/PoCqBT9.png");
+    --bg-image: url("../../assets/images/headers/report a problem header.webp");
 }
 
 .codGamePage {
-    --bg-image: url("https://i.imgur.com/kZaSdKo.png");
+    --bg-image: url("../../assets/images/game_headers/game-page-header-call-of-duty_9.6.26.webp");
 }
 
 .codh2hPage {
-    --bg-image: url("https://i.imgur.com/8Psf9G6.png");
+    --bg-image: url("../../assets/images/game_event_headers/Cod H2H Header (9.13.26).webp");
 }
 
 .codWagersPage {
-    --bg-image: url("https://i.imgur.com/wvSwn4l.png");
+    --bg-image: url("../../assets/images/game_event_headers/Cod Wagers Header (9.13.26).webp");
 }
 
 .rlGamePage {
-    --bg-image: url("https://i.imgur.com/fomqXSz.png");
+    --bg-image: url("../../assets/images/game_headers/game-page-header-rocket-league_9.6.26.webp");
 }
 
 .rlh2hPage {
-    --bg-image: url("https://i.imgur.com/lw7RZun.png");
+    --bg-image: url("../../assets/images/game_event_headers/RL H2H Header (9.13.26).webp");
 }
 
 .rlLeaguePage {
-    --bg-image: url("https://i.imgur.com/7mjxr12.png");
+    --bg-image: url("../../assets/images/game_event_headers/Rocket League Leagues Header (9.13.26).webp");
 }
 
 .cs2GamePage {
-    --bg-image: url("https://i.imgur.com/2dAutZI.png");
+    --bg-image: url("../../assets/images/game_headers/game-page-header-counter-strike-2_9.6.26.webp");
 }
 
 .cs2LeaguePage {
-    --bg-image: url("https://i.imgur.com/uzLeW90.png");
+    --bg-image: url("../../assets/images/game_event_headers/CS2 Leagues Header (9.13.26).webp");
 }
 
 .cs2h2hPage {
-    --bg-image: url("https://i.imgur.com/JU7dWGw.png");
+    --bg-image: url("../../assets/images/game_event_headers/CS2 H2H Header (9.13.26).webp");
 }
 
 .cs2WagersPage {
-    --bg-image: url("https://i.imgur.com/hIpj6hZ.png");
+    --bg-image: url("../../assets/images/game_event_headers/CS2 Wagers Header (9.13.26).webp");
 }
 
 .haloGamePage {
-    --bg-image: url("https://i.imgur.com/0aE94AJ.png");
+    --bg-image: url("../../assets/images/game_headers/game-page-header-halo_9.6.26.webp");
 }
 
 .haloLeaguePage {
-    --bg-image: url("https://i.imgur.com/Jsdvjf3.png");
+    --bg-image: url("../../assets/images/game_event_headers/Halo Leagues Header (9.13.26).webp");
 }
 
 .haloWagerPage {
-    --bg-image: url("https://i.imgur.com/1Kelw3D.png");
+    --bg-image: url("../../assets/images/game_event_headers/Halo Wagers Header (9.13.26).webp");
 }
 
 .lolGamePage {
-    --bg-image: url("https://i.imgur.com/W9afnxj.png");
+    --bg-image: url("../../assets/images/game_headers/game-page-header-league-of-legends_9.6.26.webp");
 }
 
 .lolLeaguePage {
-    --bg-image: url("https://i.imgur.com/NycBCVA.png");
+    --bg-image: url("../../assets/images/game_event_headers/League of Legends Leagues Header (9.13.26).webp");
 }
 
 .lolWagerPage {
-    --bg-image: url("https://i.imgur.com/IG80Jig.png");
+    --bg-image: url("../../assets/images/game_event_headers/Warzone Wagers Header (9.13.26).webp");
 }
 
 .valGamePage {
-    --bg-image: url("https://i.imgur.com/HqldA9u.png");
+    --bg-image: url("../../assets/images/game_headers/game-page-header-valorant_9.6.26.webp");
 }
 
 .valLeaguePage {
-    --bg-image: url("https://i.imgur.com/4Hsf0iz.png");
+    --bg-image: url("../../assets/images/game_event_headers/Valorant Leagues Header (9.13.26).webp");
 }
 
 .wzGamePage {
-    --bg-image: url("https://i.imgur.com/BdD5G0Y.png");
+    --bg-image: url("../../assets/images/game_headers/game-page-header-warzone_9.6.26.webp");
 }
 
 .wzLeaguePage {
-    --bg-image: url("https://i.imgur.com/5uwlggv.png");
+    --bg-image: url("../../assets/images/game_event_headers/Warzone Leagues Header (9.13.26).webp");
 }
 
 .nonVerifiedPage {
@@ -112,7 +112,7 @@
 }
 
 .verificationPage {
-    --bg-image: url("https://i.imgur.com/r1fPsVm.png");
+    --bg-image: url("../../assets/images/headers/header-verification-page_9.6.26.webp");
     background-position: 50%;
     background-size: 120% 100%;
 }
