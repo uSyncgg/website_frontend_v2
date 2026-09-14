@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router";
 import axios from "axios";
 import styles from './CodTournaments.module.css';
 import '../../EventInformation.css';
+import underline from 'assets/images/misc/underline-decorative-graphic_9.6.26.webp';
 
 export const CodTournaments = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -38,7 +39,7 @@ export const CodTournaments = () => {
     const cardsPerPage = 10;
 
     useEffect(() => {
-        axios.get("https://website-backend-v2.onrender.com/tournaments/cod")
+        axios.get(`${process.env.REACT_APP_API_BASE_URL}/tournaments/cod`)
             .then(res => setTournaments(res.data))
             .catch(err => console.log(err))
             .finally(() => setIsLoaded(true));
@@ -99,7 +100,7 @@ export const CodTournaments = () => {
                     <span className={styles.white}>CALL OF DUTY</span>
                     <span className={styles.gradientText}>TOURNAMENTS</span>
                 </h1>
-                <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
+                <img className={"underlineImg"} src={underline} alt="underline" />
                 <p className={styles.subtext}>
                     Updated every day.
                     Filter by team size, region, platform, skill, and entry fee.

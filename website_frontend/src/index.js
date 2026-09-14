@@ -44,6 +44,7 @@ import RLRoutes from './routes/RLRoutes';
 import ValorantRoutes from './routes/ValorantRoutes';
 import WzRoutes from './routes/WzRoutes';
 import LanRoutes from './routes/LanRoutes';
+import PassesRoutes from './routes/PassesRoutes';
 import ArticleRoutes from './routes/ArticleRoutes';
 import TournamentRoutes from './routes/TournamentRoutes';
 
@@ -97,6 +98,9 @@ const app = (
             <Route path='/paymentform/test/receipt' element={<GeneralPaymentReceipt />} />
             {/* PAYMENT IS A TESTING PAGE NOT MEANT FOR PRODUCTION */}
             <Route path='/payment' element={<Payment />} />
+
+            {/* Event Pass Portal */}
+            <Route path='/passes/*' element={<PassesRoutes />} />
 
             {/* LANs */}
             <Route path='/other-lans' element={<Conventions />} />

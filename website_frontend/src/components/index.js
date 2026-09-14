@@ -13,6 +13,7 @@ import { HeaderImage } from "./HeaderImage/HeaderImage";
 import { HostBanner } from "./HostBanner/HostBanner";
 import MoreInfoButton from "./MoreInfoButton/MoreInfoButton";
 import { BackButton } from "./BackButton/BackButton";
+import { EventListFilters } from "./EventListFilters/EventListFilters";
 
 // Specific Event Information
 import { NoEvents } from "./NoEvents/NoEvents";
@@ -32,6 +33,7 @@ import { ChooseYourGame } from "./ChooseYourGame/ChooseYourGame";
 
 // Payment Form
 import { PaymentForm } from "./PaymentForm/PaymentForm";
+import { DynamicFormField } from "./PaymentForm/DynamicFormField";
 import { PaymentCart } from "./PaymentCart/PaymentCart";
 import { Receipt } from "./Receipt/Receipt";
 import { LoadingWheel } from "./LoadingWheel/LoadingWheel";
@@ -60,6 +62,11 @@ import { HomeTournaments } from "./HomeTournaments/HomeTournaments";
 // Articles
 import { ArticleLayout } from "./ArticleLayout/ArticleLayout";
 
+// Game Hub pages
+import { WaysToCompete } from "./WaysToCompete/WaysToCompete";
+import { SectionHeading } from "./SectionHeading/SectionHeading";
+import { VerifiedEvents } from "./VerifiedEvents/VerifiedEvents";
+
 // SEO
 import { SeoData } from "./SeoData/SeoData";
 
@@ -73,8 +80,10 @@ export {
     Navbar,
     Footer,
     HostBanner,
+    EventListFilters,
     MapCoverHome,
     PaymentForm,
+    DynamicFormField,
     PaymentCart,
     LoadingWheel,
     FormDataCheck,
@@ -106,4 +115,8 @@ export {
     ErrorBoundary,
     PaymentComponent,
     LanMap,
+    WaysToCompete,
+    SectionHeading,
+    VerifiedEvents,
+    CheckoutSteps
 };

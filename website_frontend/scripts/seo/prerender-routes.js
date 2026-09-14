@@ -1,8 +1,11 @@
 /**
  * Single source of truth for which routes get prerendered by react-snap.
  *
- * Derived from public/sitemap.xml, because "what we want indexed" and "what we
- * prerender" should never be able to drift apart. react-snap only discovers
+ * Derived from public/sitemap-static.xml, because "what we want indexed" and
+ * "what we prerender" should never be able to drift apart. (public/sitemap.xml
+ * is an index pointing at that file plus sitemap-events.xml, which the backend
+ * serves for the database-driven event pages — those are rendered client-side
+ * from the API and are not prerendered.) react-snap only discovers
  * routes by following <a> tags from "/", so any page without an inbound link
  * (archived LANs, map-only events) is silently skipped and Netlify then serves
  * the prerendered homepage in its place. An explicit include list prevents that.
@@ -10,7 +13,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const SITEMAP = path.join(__dirname, "..", "..", "public", "sitemap.xml");
+const SITEMAP = path.join(__dirname, "..", "..", "public", "sitemap-static.xml");
 const ORIGIN = "https://www.usync.gg";
 
 /** Routes deliberately kept out of the prerender + index set. */
@@ -21,6 +24,12 @@ const EXCLUDED = {
   "/paymentform/test/receipt": "payment flow",
   "/checkout": "payment flow",
   "/payment": "payment flow",
+};
+
+/** Prerendered but deliberately not in the sitemap. */
+const PRERENDER_ONLY = {
+  // Alias of "/" (canonical points there), so it isn't advertised for indexing.
+  "/home": "homepage alias",
 };
 
 /** Reads every <loc> out of the sitemap as a site-relative path. */
@@ -43,7 +52,11 @@ function sitemapRoutes() {
 
 /** The list react-snap should prerender. */
 function prerenderRoutes() {
-  return sitemapRoutes().filter((r) => !(r in EXCLUDED));
+  const routes = sitemapRoutes().filter((r) => !(r in EXCLUDED));
+  const home = routes.indexOf("/");
+  const extra = Object.keys(PRERENDER_ONLY).filter((r) => !routes.includes(r));
+  routes.splice(home + 1, 0, ...extra);
+  return routes;
 }
 
-module.exports = { prerenderRoutes, sitemapRoutes, EXCLUDED, ORIGIN };
+module.exports = { prerenderRoutes, sitemapRoutes, EXCLUDED, PRERENDER_ONLY, ORIGIN };

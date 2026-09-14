@@ -30,14 +30,14 @@ const expected = prerenderRoutes();
 
 const errors = [];
 
-// 1. package.json must match the sitemap.
+// 1. package.json must match the static sitemap.
 const drift = [
   ...expected.filter((r) => !include.includes(r)).map((r) => `missing from include: ${r}`),
   ...include.filter((r) => !expected.includes(r)).map((r) => `stale in include:     ${r}`),
 ];
 if (drift.length) {
   errors.push(
-    `reactSnap.include is out of sync with sitemap.xml (${drift.length} differences).\n` +
+    `reactSnap.include is out of sync with sitemap-static.xml (${drift.length} differences).\n` +
       drift.map((d) => `    ${d}`).join("\n") +
       `\n  Fix with: npm run seo:sync-routes`
   );
