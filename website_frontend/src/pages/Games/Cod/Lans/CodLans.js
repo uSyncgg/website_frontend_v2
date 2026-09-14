@@ -80,7 +80,7 @@ export const CodLans = () => {
                 description={"Call of Duty LAN tournaments near you. Find the closest Call of Duty LANs to where you live and work. Every LAN going on near you."}
                 canonicalPath={"/games/call-of-duty/lans"}
             />
-
+            <h1 className="lanPageTitle">Call of Duty LANs</h1>
             <div className="lanMapContainer">
                 <LanMap markers={markers} game={MAP_GAME} />
             </div>

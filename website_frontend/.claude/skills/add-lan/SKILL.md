@@ -228,5 +228,6 @@ Report exactly what was created and updated:
 - ✅ HostBanner added to `{game LAN file(s)}`
 - ✅ Redirect added to `public/_redirects`
 - ✅ Sitemap updated
+- ✅ Prerender routes synced (`npm run seo:sync-routes`)
 
 Show the coordinates used so the contributor can verify the map pin is correct.

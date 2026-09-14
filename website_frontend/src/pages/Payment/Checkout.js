@@ -1,5 +1,5 @@
 import { useLocation } from "react-router"
-import { LoadingWheel } from "components";
+import { LoadingWheel, SeoData } from "components";
 import { Elements } from "@stripe/react-stripe-js";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -45,8 +45,14 @@ function Checkout() {
 
     return (
         <React.Fragment>
+            <SeoData
+                title={"Checkout"}
+                description="Complete your uSync event registration."
+                canonicalPath={"/checkout"}
+                robots={"noindex, nofollow"}
+            />
             {
-                loading ? <LoadingWheel /> : 
+                loading ? <LoadingWheel /> :
                 <div>
                     <h1>SUCCESS!</h1>
                 </div>

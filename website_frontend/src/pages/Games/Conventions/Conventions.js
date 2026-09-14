@@ -80,6 +80,8 @@ export const Conventions = () => {
                 canonicalPath={"/other-lans"}
             />
 
+            <h1 className="lanPageTitle">Conventions</h1>
+
             <div className="lanMapContainer">
                 <LanMap markers={markers} game="Conventions" />
             </div>

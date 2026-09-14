@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from '../GeneralPaymentForm/GeneralPaymentForm.module.css';
-import { PaymentForm , Receipt } from "components";
+import { PaymentForm , Receipt, SeoData } from "components";
 import { CheckoutSteps } from 'components/CheckoutSteps/CheckoutSteps';
 
 function GeneralPaymentReceipt(
@@ -13,6 +13,12 @@ function GeneralPaymentReceipt(
 
     return (
         <div className="standardContainer">
+            <SeoData
+                title={"Registration Confirmed"}
+                description="Your uSync event registration is confirmed."
+                canonicalPath={"/paymentform/test/receipt"}
+                robots={"noindex, nofollow"}
+            />
             <div className={styles.checkoutHeader}>
                 <p className={styles.eyebrow}>Secure Checkout</p>
                 <h1 className={styles.eventTitle}>You're All Set</h1>

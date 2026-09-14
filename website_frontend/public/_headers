@@ -11,3 +11,16 @@
   Cache-Control: public, max-age=0, must-revalidate
 /index.html
   Cache-Control: public, max-age=0, must-revalidate
+
+# Checkout and registration flow must never be indexed. These routes are not
+# prerendered, so a crawler that doesn't run JS is served the SPA fallback and
+# never sees the <meta name="robots"> the pages render — the header is what
+# actually enforces it. The meta tag stays as the JS-rendered equivalent.
+/checkout
+  X-Robots-Tag: noindex, nofollow
+/payment
+  X-Robots-Tag: noindex, nofollow
+/paymentform
+  X-Robots-Tag: noindex, nofollow
+/paymentform/*
+  X-Robots-Tag: noindex, nofollow
