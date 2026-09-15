@@ -106,9 +106,12 @@ export const EventListFilters = ({
                 </div>
 
                 {hasActiveFilters && onClear && (
-                    <button type="button" className={styles.clearButton} onClick={onClear}>
-                        Clear all
-                    </button>
+                    <div className={styles.filterGroup}>
+                        <span className={styles.groupLabel}>&nbsp;</span>
+                        <button type="button" className={styles.clearButton} onClick={onClear}>
+                            Clear all
+                        </button>
+                    </div>
                 )}
             </div>
 
