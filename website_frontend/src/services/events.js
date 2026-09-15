@@ -15,9 +15,6 @@ export const getWagerEvents = ({ game }) =>
 export const getXpEvents = ({ game }) =>
     apiClient.get(`/events/head-to-head/${encodeURIComponent(game)}`).then(res => res.data);
 
-export const getEvent = ({ event_type, game, event_name }) => 
-    apiClient.get(`/events/${encodeURIComponent(event_type)}/${encodeURIComponent(game)}/${encodeURIComponent(event_name)}`).then(res => res.data);
-
 export const getLeagueChildren = ({ game, parent }) =>
     apiClient.get(`/events/leagues/${encodeURIComponent(game)}/${encodeURIComponent(parent)}/children`).then(res => res.data);
 
