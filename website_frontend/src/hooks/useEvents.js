@@ -4,7 +4,6 @@ import {
   getLanEvents,
   getWagerEvents,
   getXpEvents,
-  getEvent,
   getLeagueChildren,
   getEventByPath,
   getLanInformation,
@@ -66,13 +65,6 @@ export function useWagerEvents(game) {
 
 export function useXpEvents(game) {
   return useAsync(() => getXpEvents({ game }), [game]);
-}
-
-export function useEvent(eventType, game, eventName) {
-  return useAsync(
-    () => getEvent({ event_type: eventType, game, event_name: eventName }),
-    [eventType, game, eventName]
-  );
 }
 
 export function useEventByPath(eventType, game, path) {
