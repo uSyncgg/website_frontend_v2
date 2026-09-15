@@ -47,6 +47,7 @@ export const EventListFilters = ({
     regionOptions = [],
     selectedRegions = [],
     onRegionChange,
+    regionLabel = "Location",
     categoryOptions = [],
     selectedCategories = [],
     onCategoryChange,
@@ -86,7 +87,7 @@ export const EventListFilters = ({
 
                 {regionOptions.length > 0 && (
                     <ChipGroup
-                        label="Location"
+                        label={regionLabel}
                         options={regionOptions}
                         selected={selectedRegions}
                         onChange={onRegionChange}
