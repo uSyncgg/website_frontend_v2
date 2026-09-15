@@ -5,6 +5,18 @@ import { toLanMarkers } from 'data/lanMarkers';
 import { buildEventPath } from 'utils/eventPaths';
 import '../EventBanners.css';
 
+// Display labels for the game filter, in the order they should appear.
+// "Conventions/Other" is shown to visitors but maps back to the "Conventions"
+// game value the API/lan markers use.
+const GAME_FILTER_OPTIONS = ["Call of Duty", "Halo", "Warzone", "League of Legends", "Conventions/Other"];
+const GAME_BY_FILTER_LABEL = {
+    "Call of Duty": "Call of Duty",
+    "Halo": "Halo",
+    "Warzone": "Warzone",
+    "League of Legends": "League of Legends",
+    "Conventions/Other": "Conventions",
+};
+
 const normalizeLan = (event) => ({
     name: event.name,
     path: buildEventPath('/lans', event.path),
@@ -12,12 +24,14 @@ const normalizeLan = (event) => ({
     alt: event.name,
     verified: !!event.verified,
     region: event.location,
+    game: event.game,
     buttonTitle: "More Info",
 });
 
-const applyFiltersAndSort = (list, { selectedRegions, verifiedOnly, sort }) => {
+const applyFiltersAndSort = (list, { selectedGames, verifiedOnly, sort }) => {
+    const selectedGameValues = selectedGames.map(label => GAME_BY_FILTER_LABEL[label]);
     let result = list.filter(l =>
-        (selectedRegions.length === 0 || selectedRegions.includes(l.region)) &&
+        (selectedGameValues.length === 0 || selectedGameValues.includes(l.game)) &&
         (!verifiedOnly || l.verified)
     );
 
@@ -49,24 +63,19 @@ export const AllLans = () => {
     const { data, loading, error } = useAllLans();
 
     const [sort, setSort] = useState('featured');
-    const [selectedRegions, setSelectedRegions] = useState([]);
+    const [selectedGames, setSelectedGames] = useState([]);
     const [verifiedOnly, setVerifiedOnly] = useState(false);
 
     const allLans = useMemo(() => (data || []).map(normalizeLan), [data]);
     const markers = useMemo(() => toLanMarkers(data), [data]);
 
-    const regionOptions = useMemo(
-        () => Array.from(new Set(allLans.map(l => l.region))),
-        [allLans]
-    );
-
     const filteredLans = useMemo(
-        () => applyFiltersAndSort(allLans, { selectedRegions, verifiedOnly, sort }),
-        [allLans, sort, selectedRegions, verifiedOnly]
+        () => applyFiltersAndSort(allLans, { selectedGames, verifiedOnly, sort }),
+        [allLans, sort, selectedGames, verifiedOnly]
     );
 
     const clearFilters = () => {
-        setSelectedRegions([]);
+        setSelectedGames([]);
         setVerifiedOnly(false);
     };
 
@@ -85,9 +94,10 @@ export const AllLans = () => {
             <EventListFilters
                 sort={sort}
                 onSortChange={setSort}
-                regionOptions={regionOptions}
-                selectedRegions={selectedRegions}
-                onRegionChange={setSelectedRegions}
+                categoryOptions={GAME_FILTER_OPTIONS}
+                selectedCategories={selectedGames}
+                onCategoryChange={setSelectedGames}
+                categoryLabel="Game"
                 verifiedOnly={verifiedOnly}
                 onVerifiedChange={setVerifiedOnly}
                 resultCount={filteredLans.length}
