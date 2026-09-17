@@ -5,7 +5,7 @@ function BannerTitle({path, verified, children}) {
     return (
         <div className={styles.bannerTitle}>
             <Link to={path} className={styles.titleLink} onClick={(e) => e.stopPropagation()}>
-                <h1>{children}</h1>
+                <h2>{children}</h2>
             </Link>
             {verified === true && (
                 <Link

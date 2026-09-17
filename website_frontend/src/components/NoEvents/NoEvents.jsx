@@ -8,13 +8,13 @@ export const NoEvents = ({ pageType }) => {
         <div>
             {pageType === 'LANs' && 
                 <div className={styles.eventContainer}>
-                    <h1>None Upcoming - Please Check Back Tomorrow</h1>
+                    <h2>None Upcoming - Please Check Back Tomorrow</h2>
                 </div>
             }
 
             {pageType === 'Leagues' &&
                 <div className={styles.eventContainer}>
-                    <h1>No Active Leagues - Please Check Back Later</h1>
+                    <h2>No Active Leagues - Please Check Back Later</h2>
                     <h3>
                         Post Your League {" "}
                         <Link to={"/more/eventhost"} className={styles.link}>Here</Link>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import styles from './GeneralPaymentForm.module.css';
-import { PaymentForm , PaymentCart, FormDataCheck, LoadingWheel } from "components";
+import { PaymentForm , PaymentCart, FormDataCheck, LoadingWheel, SeoData } from "components";
 import { CheckoutSteps } from 'components/CheckoutSteps/CheckoutSteps';
 import { useLocation, useNavigate } from "react-router";
 import { FaLock, FaArrowLeft } from "react-icons/fa";
@@ -73,6 +73,12 @@ function GeneralPaymentForm(
     
     return (
         <div className="standardContainer">
+            <SeoData
+                title={review ? "Review Your Registration" : "Event Registration"}
+                description="Register your team for a uSync event."
+                canonicalPath={review ? "/paymentform/review" : "/paymentform"}
+                robots={"noindex, nofollow"}
+            />
             {/* {isLoading && (
                 <LoadingWheel />
             )} */}

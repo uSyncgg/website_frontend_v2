@@ -83,6 +83,8 @@ export const HaloLans = () => {
                 canonicalPath={"/games/halo/lans"}
             />
 
+            <h1 className="lanPageTitle">Halo LANs</h1>
+
             <div className="lanMapContainer">
                 <LanMap markers={markers} game={MAP_GAME} />
             </div>
