@@ -3,6 +3,7 @@ import { SeoData, HostBanner, NoEvents, LanMap, EventListFilters } from "compone
 import { useLanEvents } from "hooks";
 import { toLanMarkers } from 'data/lanMarkers';
 import { buildEventPath } from 'utils/eventPaths';
+import { getStateFromLocation } from 'utils/location';
 import '../../EventBanners.css';
 
 const GAME = "Halo";
@@ -15,12 +16,13 @@ const normalizeLan = (event) => ({
     alt: event.name,
     verified: !!event.verified,
     region: event.location,
+    state: getStateFromLocation(event.location),
     buttonTitle: "More Info",
 });
 
-const applyFiltersAndSort = (list, { selectedRegions, verifiedOnly, sort }) => {
+const applyFiltersAndSort = (list, { selectedStates, verifiedOnly, sort }) => {
     let result = list.filter(l =>
-        (selectedRegions.length === 0 || selectedRegions.includes(l.region)) &&
+        (selectedStates.length === 0 || selectedStates.includes(l.state)) &&
         (!verifiedOnly || l.verified)
     );
 
@@ -52,24 +54,24 @@ export const HaloLans = () => {
     const { data, loading, error } = useLanEvents(GAME);
 
     const [sort, setSort] = useState('featured');
-    const [selectedRegions, setSelectedRegions] = useState([]);
+    const [selectedStates, setSelectedStates] = useState([]);
     const [verifiedOnly, setVerifiedOnly] = useState(false);
 
     const allLans = useMemo(() => (data || []).map(normalizeLan), [data]);
     const markers = useMemo(() => toLanMarkers(data, GAME), [data]);
 
-    const regionOptions = useMemo(
-        () => Array.from(new Set(allLans.map(l => l.region))),
+    const stateOptions = useMemo(
+        () => Array.from(new Set(allLans.map(l => l.state))).sort(),
         [allLans]
     );
 
     const filteredLans = useMemo(
-        () => applyFiltersAndSort(allLans, { selectedRegions, verifiedOnly, sort }),
-        [allLans, sort, selectedRegions, verifiedOnly]
+        () => applyFiltersAndSort(allLans, { selectedStates, verifiedOnly, sort }),
+        [allLans, sort, selectedStates, verifiedOnly]
     );
 
     const clearFilters = () => {
-        setSelectedRegions([]);
+        setSelectedStates([]);
         setVerifiedOnly(false);
     };
 
@@ -90,9 +92,10 @@ export const HaloLans = () => {
             <EventListFilters
                 sort={sort}
                 onSortChange={setSort}
-                regionOptions={regionOptions}
-                selectedRegions={selectedRegions}
-                onRegionChange={setSelectedRegions}
+                regionOptions={stateOptions}
+                regionLabel="State"
+                selectedRegions={selectedStates}
+                onRegionChange={setSelectedStates}
                 verifiedOnly={verifiedOnly}
                 onVerifiedChange={setVerifiedOnly}
                 resultCount={filteredLans.length}

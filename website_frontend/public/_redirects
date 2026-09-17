@@ -1,6 +1,10 @@
 / /index.html 200
 /home /index.html 200
 
+# Database-driven event pages (the /* rules below) rewrite to /200.html, react-snap's
+# unprerendered app shell. /index.html is the prerendered homepage, so rewriting there
+# served the homepage's title and canonical to crawlers on every event URL.
+
 /sitemap-events.xml https://website-backend-v2.onrender.com/sitemap.xml 200
 
 # Top Level Pages
@@ -35,69 +39,69 @@
 /games/call-of-duty /index.html 200
 /games/call-of-duty/lans /index.html 200
 /games/call-of-duty/head-to-head /index.html 200
-/games/call-of-duty/head-to-head/* /index.html 200
+/games/call-of-duty/head-to-head/* /200.html 200
 /games/call-of-duty/leagues /index.html 200
-/games/call-of-duty/leagues/* /index.html 200
+/games/call-of-duty/leagues/* /200.html 200
 /tournaments/call-of-duty-tournaments /index.html 200
 /games/call-of-duty/wagers /index.html 200
-/games/call-of-duty/wagers/* /index.html 200
+/games/call-of-duty/wagers/* /200.html 200
 
 # CS2
 /games/CS2 /index.html 200
 /games/CS2/head-to-head /index.html 200
-/games/CS2/head-to-head/* /index.html 200
+/games/CS2/head-to-head/* /200.html 200
 /games/CS2/leagues /index.html 200
-/games/CS2/leagues/* /index.html 200
+/games/CS2/leagues/* /200.html 200
 /games/CS2/wagers /index.html 200
-/games/CS2/wagers/* /index.html 200
+/games/CS2/wagers/* /200.html 200
 
 # Halo
 /games/halo /index.html 200
 /games/halo/lans /index.html 200
 /games/halo/head-to-head /index.html 200
-/games/halo/head-to-head/* /index.html 200
+/games/halo/head-to-head/* /200.html 200
 /games/halo/leagues /index.html 200
-/games/halo/leagues/* /index.html 200
+/games/halo/leagues/* /200.html 200
 /games/halo/wagers /index.html 200
-/games/halo/wagers/* /index.html 200
+/games/halo/wagers/* /200.html 200
 
 # League of Legends
 /games/LoL /index.html 200
 /games/LoL/lans /index.html 200
 /games/LoL/head-to-head /index.html 200
-/games/LoL/head-to-head/* /index.html 200
+/games/LoL/head-to-head/* /200.html 200
 /games/LoL/leagues /index.html 200
-/games/LoL/leagues/* /index.html 200
+/games/LoL/leagues/* /200.html 200
 /games/LoL/wagers /index.html 200
-/games/LoL/wagers/* /index.html 200
+/games/LoL/wagers/* /200.html 200
 
 # Rocket League
 /games/RocketLeague /index.html 200
 /games/RocketLeague/head-to-head /index.html 200
-/games/RocketLeague/head-to-head/* /index.html 200
+/games/RocketLeague/head-to-head/* /200.html 200
 /games/RocketLeague/leagues /index.html 200
-/games/RocketLeague/leagues/* /index.html 200
+/games/RocketLeague/leagues/* /200.html 200
 /games/RocketLeague/wagers /index.html 200
-/games/RocketLeague/wagers/* /index.html 200
+/games/RocketLeague/wagers/* /200.html 200
 
 # Valorant
 /games/Valorant /index.html 200
 /games/Valorant/head-to-head /index.html 200
-/games/Valorant/head-to-head/* /index.html 200
+/games/Valorant/head-to-head/* /200.html 200
 /games/Valorant/leagues /index.html 200
-/games/Valorant/leagues/* /index.html 200
+/games/Valorant/leagues/* /200.html 200
 /games/Valorant/wagers /index.html 200
-/games/Valorant/wagers/* /index.html 200
+/games/Valorant/wagers/* /200.html 200
 
 # Warzone
 /games/warzone /index.html 200
 /games/warzone/lans /index.html 200
 /games/warzone/head-to-head /index.html 200
-/games/warzone/head-to-head/* /index.html 200
+/games/warzone/head-to-head/* /200.html 200
 /games/warzone/leagues /index.html 200
-/games/warzone/leagues/* /index.html 200
+/games/warzone/leagues/* /200.html 200
 /games/warzone/wagers /index.html 200
-/games/warzone/wagers/* /index.html 200
+/games/warzone/wagers/* /200.html 200
 
 # Payment
 /paymentform /index.html 200
@@ -105,11 +109,11 @@
 /checkout /index.html 200
 /paymentform/test/receipt /index.html 200
 /payment /index.html 200
-/passes/* /index.html 200
+/passes/* /200.html 200
 
 # LANs
 /LanMap /index.html 200
 /other-lans /index.html 200
-/lans/* /index.html 200
+/lans/* /200.html 200
 
 /404.html 404
