@@ -1,0 +1,14 @@
+/* The hub page ends on this list, so it carries the breathing room before the
+   footer. Padding rather than margin so it can't collapse out of the page flow. */
+.list {
+    padding-bottom: 5rem;
+}
+
+.empty {
+    color: rgb(170, 166, 178);
+    font-size: 1.05rem;
+    text-align: center;
+    max-width: 34rem;
+    margin: 0 auto 4rem;
+    padding: 0 1.5rem;
+}

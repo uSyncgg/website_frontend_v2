@@ -4,13 +4,14 @@ import axios from "axios";
 import { CodTournamentCard } from "components";
 import { pickHomepageTournaments } from "utils/pickHomepageTournaments";
 import styles from './HomeTournaments.module.css';
+import underline from 'assets/images/misc/underline-decorative-graphic_9.6.26.webp';
 
 export const HomeTournaments = () => {
     const [tournaments, setTournaments] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        axios.get("https://website-backend-v2.onrender.com/tournaments/cod")
+        axios.get(`${process.env.REACT_APP_API_BASE_URL}/tournaments/cod`)
             .then(res => setTournaments(res.data))
             .catch(err => console.log(err))
             .finally(() => setIsLoaded(true));
@@ -22,7 +23,7 @@ export const HomeTournaments = () => {
         <div className={styles.container}>
             <p className={styles.eyebrow}>Live Right Now</p>
             <h2 className={styles.white}>Tournaments Starting Soon</h2>
-            <img className="underlineImg" src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
+            <img className="underlineImg" src={underline} alt="underline" />
             <p className={styles.subtext}>
                 A live sample of what's running on Call of Duty right now. Browse every match on the full tournaments page.
             </p>

@@ -4,7 +4,7 @@ import { VerifiedBoard } from 'components/VerifiedBoard/VerifiedBoard';
 import { HeroCta } from 'components/HeroCta/HeroCta';
 import { CatalogFacets } from 'components/CatalogFacets/CatalogFacets';
 import { CatalogGrid } from 'components/CatalogGrid/CatalogGrid';
-import { SectionHeading } from 'components/SectionHeading/SectionHeading';
+import { CatalogSectionHeading } from 'components/CatalogSectionHeading/CatalogSectionHeading';
 import { EmptyState } from 'components/EmptyState/EmptyState';
 import { useCatalogFilter } from 'hooks/useCatalogFilter';
 
@@ -47,7 +47,7 @@ export const CatalogIndex = ({ catalog }) => {
                 onFacetClear={clearFacets}
             />
 
-            <SectionHeading
+            <CatalogSectionHeading
                 label={catalog.heading}
                 aside={isFiltered ? `${count} of ${total}` : undefined}
             />
