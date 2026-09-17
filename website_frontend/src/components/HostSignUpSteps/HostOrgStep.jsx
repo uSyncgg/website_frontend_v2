@@ -1,7 +1,25 @@
 import { FormTextInput } from "components/FormTextInput/FormTextInput";
 import { FormSelectInput } from "components/FormSelectInput/FormSelectInput";
 import { FormDataCheck } from "components/FormDataCheck/FormDataCheck";
+import { COUNTRIES } from "data/countries";
 import { useState } from "react";
+
+// Hosts run events for a region rather than a single country, so the broad
+// options are pinned above the full country list (with the US, already
+// pinned, removed from the list below to avoid a duplicate entry).
+const REGION_OPTIONS = [
+    { label: "United States", value: "us" },
+    { label: "North America", value: "north_america" },
+    { label: "Europe", value: "eu" },
+    { label: "LATAM", value: "latam" },
+    { label: "All Regions", value: "all_regions" },
+    { label: "Certain Regions", value: "certain_regions" },
+];
+
+const HOST_COUNTRY_OPTIONS = [
+    ...REGION_OPTIONS,
+    ...COUNTRIES.filter(c => c.value !== "us"),
+];
 
 export const HostOrgStep = () => {
     const [organizationTaken, setOrganizationTaken] = useState("");
@@ -43,11 +61,7 @@ export const HostOrgStep = () => {
                 name={"host_country"}
                 label={"Country"}
                 placeholder={"Select your country"}
-                options={[
-                    { label: "United States of America", value: "us" },
-                    { label: "Mexico", value: "mx" },
-                    { label: "Other", value: "other" },
-                ]}
+                options={HOST_COUNTRY_OPTIONS}
                 disabled={false}
                 inputClassName={""}
                 errorClassName={""}

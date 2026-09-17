@@ -1,0 +1,61 @@
+.section + .section {
+    margin-top: 2rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--line);
+}
+
+.sectionHeading {
+    color: var(--ink);
+    font-size: 1rem;
+    font-weight: 800;
+    margin: 0 0 .85rem;
+}
+
+.tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+    gap: .85rem;
+}
+
+.tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5rem;
+    padding: 1rem .75rem;
+    border-radius: .9rem;
+    border: 1.5px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .03);
+    color: inherit;
+    cursor: pointer;
+    transition: border-color .2s, background .2s, transform .2s;
+}
+
+.tile:hover {
+    border-color: rgba(255, 255, 255, .3);
+    transform: translateY(-1px);
+}
+
+.tileSelected {
+    border-color: #8e6ace;
+    background: rgba(142, 106, 206, .12);
+}
+
+.tile img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: .6rem;
+    object-fit: contain;
+    background: rgba(255, 255, 255, .06);
+}
+
+.tile span {
+    font-size: .85rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.otherInput {
+    margin-top: 1.25rem;
+}

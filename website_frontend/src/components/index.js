@@ -75,6 +75,9 @@ import { SocialLoginButtons } from "./SocialLoginButtons/SocialLoginButtons";
 // Route Protection
 import { RequireCompleteProfile } from "./RequiredCompleteProfile/RequiredCompleteProfile";
 
+// Sign Up Wizard
+import { SignUpFormWizard } from "./SignUpFormWizard/SignUpFormWizard";
+
 export {
     Navbar,
     Footer,
@@ -113,5 +116,6 @@ export {
     PaymentComponent,
     LanMap,
     SocialLoginButtons,
-    RequireCompleteProfile
+    RequireCompleteProfile,
+    SignUpFormWizard
 };

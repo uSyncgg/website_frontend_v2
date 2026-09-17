@@ -1,4 +1,5 @@
 import { useFormContext } from "react-hook-form";
+import styles from "./FormSelectInput.module.css";
 
 export const FormSelectInput = ({ id, required, name, label, placeholder, options, disabled, inputClassName, labelClassName, errorClassName, onFieldBlur }) => {
     const { register, formState: { errors } } = useFormContext();
@@ -7,8 +8,8 @@ export const FormSelectInput = ({ id, required, name, label, placeholder, option
     });
 
     return (
-        <div>
-            {label && <label htmlFor={id} className={labelClassName}>{label}</label>}
+        <div className={styles.field}>
+            {label && <label htmlFor={id} className={`${styles.label} ${labelClassName}`}>{label}</label>}
             <select
                 id={id}
                 {...fieldProps}
@@ -17,7 +18,7 @@ export const FormSelectInput = ({ id, required, name, label, placeholder, option
                     onFieldBlur?.(e.target.value);
                 }}
                 defaultValue=""
-                className={inputClassName}
+                className={`${styles.select} ${inputClassName}`}
                 disabled={disabled}
             >
                 <option value="" disabled>{placeholder}</option>
@@ -26,7 +27,7 @@ export const FormSelectInput = ({ id, required, name, label, placeholder, option
                 ))}
             </select>
 
-            {errors[name] && <span className={errorClassName}>{errors[name].message}</span>}
+            {errors[name] && <span className={`${styles.error} ${errorClassName}`}>{errors[name].message}</span>}
         </div>
     )
 }

@@ -1,5 +1,6 @@
 import { SelectableFormBlock } from "components/SelectableFormBlock/SelectableFormBlock";
 import { useFormContext } from "react-hook-form";
+import styles from "./HostEventStep.module.css";
 
 export const HostEventStep = () => {
     const { watch, setValue } = useFormContext();
@@ -20,15 +21,15 @@ export const HostEventStep = () => {
     };
 
     return (
-        <div role="group" aria-label="Select the event types you plan to host">
+        <div className={styles.tiles} role="group" aria-label="Select the event types you plan to host">
             {options.map(opt => (
                 <SelectableFormBlock
                     key={opt.value}
                     title={opt.title}
                     selected={selected.includes(opt.value)}
                     onToggle={() => toggle(opt.value)}
-                    blockClassName={""}
-                    selectedClassName={""}
+                    blockClassName={styles.tile}
+                    selectedClassName={styles.tileSelected}
                 />
             ))}
         </div>

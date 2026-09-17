@@ -1,0 +1,95 @@
+.choiceRow {
+    display: flex;
+    gap: 1rem;
+}
+
+@media (max-width: 560px) {
+    .choiceRow {
+        flex-direction: column;
+    }
+}
+
+.choice {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5rem;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    border-radius: 1rem;
+    border: 1.5px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .03);
+    color: inherit;
+    cursor: pointer;
+    transition: border-color .2s, background .2s, transform .2s;
+}
+
+.choice:hover {
+    border-color: rgba(255, 255, 255, .3);
+    transform: translateY(-1px);
+}
+
+.choiceSelected {
+    border-color: #8e6ace;
+    background: rgba(142, 106, 206, .12);
+}
+
+.error {
+    display: block;
+    margin-top: .75rem;
+    color: var(--loss);
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.otherRoles {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+}
+
+.otherRolesLabel {
+    color: var(--ink);
+    font-weight: 600;
+    font-size: .85rem;
+    margin: 0 0 .85rem;
+}
+
+.tileRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+}
+
+.tile {
+    flex: 1 1 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: .85rem .75rem;
+    border-radius: .8rem;
+    border: 1.5px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .03);
+    color: inherit;
+    cursor: pointer;
+    font-size: .85rem;
+    font-weight: 600;
+    transition: border-color .2s, background .2s, transform .2s;
+}
+
+.tile:hover {
+    border-color: rgba(255, 255, 255, .3);
+    transform: translateY(-1px);
+}
+
+.tileSelected {
+    border-color: #8e6ace;
+    background: rgba(142, 106, 206, .12);
+}
+
+.otherDetailInput {
+    margin-top: 1.25rem;
+}

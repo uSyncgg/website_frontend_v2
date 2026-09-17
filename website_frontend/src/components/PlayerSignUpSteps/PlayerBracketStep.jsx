@@ -1,5 +1,6 @@
 import { RadioFormBlock } from "components/RadioFormBlock/RadioFormBlock";
 import { useFormContext } from "react-hook-form";
+import styles from "./PlayerBracketStep.module.css";
 
 export const PlayerBracketStep = () => {
     const { watch, setValue } = useFormContext();
@@ -10,8 +11,8 @@ export const PlayerBracketStep = () => {
             <RadioFormBlock
                 title={"Yes, enable it"}
                 description={"Build a \"Create\" view so you can run your own bracket"}
-                blockClassName={""}
-                selectedClassName={""}
+                blockClassName={styles.choice}
+                selectedClassName={styles.choiceSelected}
                 selected={bracketHosting === "yes"}
                 onToggle={() => setValue('bracket_hosting', 'yes')}
             />
@@ -19,8 +20,8 @@ export const PlayerBracketStep = () => {
             <RadioFormBlock
                 title={"Not right now"}
                 description={"You can turn hosting on later."}
-                blockClassName={""}
-                selectedClassName={""}
+                blockClassName={styles.choice}
+                selectedClassName={styles.choiceSelected}
                 selected={bracketHosting === "no"}
                 onToggle={() => setValue('bracket_hosting', 'no')}
             />

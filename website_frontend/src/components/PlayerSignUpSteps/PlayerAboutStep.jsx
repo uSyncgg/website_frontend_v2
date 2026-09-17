@@ -1,9 +1,11 @@
 import { FormTextInput } from "components/FormTextInput/FormTextInput";
 import { FormSelectInput } from "components/FormSelectInput/FormSelectInput";
+import { COUNTRIES } from "data/countries";
+import styles from "./PlayerAboutStep.module.css";
 
 export const PlayerAboutStep = () => {
     return (
-        <div>
+        <div className={styles.grid}>
             <FormTextInput 
                 id={"first_name"}
                 required={true}
@@ -75,11 +77,7 @@ export const PlayerAboutStep = () => {
                 name={"country"}
                 label={"Country"}
                 placeholder={"Select your country"}
-                options={[
-                    { label: "United States of America", value: "us" },
-                    { label: "Mexico", value: "mx" },
-                    { label: "Other", value: "other" },
-                ]}
+                options={COUNTRIES}
                 disabled={false}
                 inputClassName={""}
                 errorClassName={""}

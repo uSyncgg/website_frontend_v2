@@ -1,4 +1,5 @@
 import { useFormContext } from "react-hook-form";
+import styles from "./FormTextArea.module.css";
 
 export const FormTextArea = (
     { 
@@ -24,8 +25,8 @@ export const FormTextArea = (
     const value = watch(name) ?? "";
 
     return (
-        <div>
-            {label && <label htmlFor={id} className={labelClassName}>{label}</label>}
+        <div className={styles.field}>
+            {label && <label htmlFor={id} className={`${styles.label} ${labelClassName}`}>{label}</label>}
             <textarea
                 id={id}
                 {...fieldProps}
@@ -34,16 +35,16 @@ export const FormTextArea = (
                     onFieldBlur?.(e.target.value);
                 }}
                 placeholder={placeholder}
-                className={inputClassName}
+                className={`${styles.textarea} ${inputClassName}`}
                 disabled={disabled}
                 readOnly={disabled}
             />
 
             {maxLength && (
-                <span className={counterClassName}>{value.length}/{maxLength}</span>
+                <span className={`${styles.counter} ${counterClassName}`}>{value.length}/{maxLength}</span>
             )}
 
-            {errors[name] && <span className={errorClassName}>{errors[name].message}</span>}
+            {errors[name] && <span className={`${styles.error} ${errorClassName}`}>{errors[name].message}</span>}
         </div>
     )
 }

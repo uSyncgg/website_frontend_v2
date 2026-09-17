@@ -7,7 +7,7 @@ export const SelectableFormBlock = ({ image = "", title, selected, onToggle, blo
         aria-checked={selected}    
     >
 
-        {image && <img src={image} title={title} />}
+        {image && <img src={image} title={title} alt="" />}
         <span>{title}</span>
 
     </div>

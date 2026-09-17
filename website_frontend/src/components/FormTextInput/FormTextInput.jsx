@@ -1,18 +1,20 @@
 import { useFormContext } from "react-hook-form";
+import styles from "./FormTextInput.module.css";
 
 export const FormTextInput = (
-    { 
-        id, 
-        required, 
-        name, 
-        placeholder, 
+    {
+        id,
+        required,
+        name,
+        placeholder,
         label,
-        type='', 
-        disabled, 
-        taken="", 
+        type='',
+        disabled,
+        taken="",
         image="",
-        inputClassName, 
-        errorClassName, 
+        initials="",
+        inputClassName,
+        errorClassName,
         labelClassName,
         imageClassName="",
         onFieldBlur
@@ -22,32 +24,34 @@ export const FormTextInput = (
     const { onBlur: rhfOnBlur, ...fieldProps } = register(name, {
         required: required ? "This field is required" : false
     });
-    
+    const isRow = !!(image || initials);
+
     return (
-        <div>
-            {image && <img src={image} title={name} className={imageClassName}/>}
-            {label && <label htmlFor={id} className={labelClassName}>{label}</label>}
-            <input 
-                id={id} 
+        <div className={`${styles.field} ${isRow ? styles.linkRow : ''}`}>
+            {image && <img src={image} title={name} alt="" className={`${styles.linkGlyph} ${imageClassName}`}/>}
+            {!image && initials && <span title={name} className={`${styles.linkGlyph} ${styles.linkGlyphText} ${imageClassName}`}>{initials}</span>}
+            {label && <label htmlFor={id} className={`${isRow ? styles.linkLabel : styles.label} ${labelClassName}`}>{label}</label>}
+            <input
+                id={id}
                 {...fieldProps}
                 onBlur={(e) => {
                     rhfOnBlur(e);
                     onFieldBlur?.(e.target.value);
-                }} 
-                placeholder={placeholder} 
+                }}
+                placeholder={placeholder}
                 type={type}
-                className={inputClassName}
+                className={`${isRow ? styles.linkInput : styles.input} ${inputClassName}`}
                 disabled={disabled}
                 readOnly={disabled}
             />
 
             {errors[name] && (
-                <span className={errorClassName}>{errors[name].message}</span>
+                <span className={`${styles.error} ${errorClassName}`}>{errors[name].message}</span>
             )}
 
             {taken !== "" && (
-                <span className={errorClassName}>{taken} is already taken.</span>
+                <span className={`${styles.error} ${errorClassName}`}>{taken} is already taken.</span>
             )}
         </div>
-    )  
+    )
 }

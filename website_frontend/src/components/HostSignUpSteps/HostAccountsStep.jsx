@@ -1,10 +1,17 @@
 import { FormTextInput } from "components/FormTextInput/FormTextInput";
+import styles from "./HostAccountsStep.module.css";
+
+// Same icons used in the site footer (components/Footer/Footer.jsx). Only
+// Twitter/X and Instagram have a footer icon today — Twitch, YouTube, Kick,
+// and Discord have no matching asset anywhere in the codebase yet.
+import twitterIcon from "assets/images/social_icons/social-icon-x-purple_9.6.26.webp";
+import instagramIcon from "assets/images/social_icons/social-icon-instagram-purple_9.6.26.webp";
 
 const options = [
     {
         "name": "host_twitch",
         "label": "Twitch",
-        "image": "twitch img url",
+        "initials": "TW",
         "labelClassName": "",
         "errorClassName": "",
         "inputClassName": "",
@@ -13,7 +20,7 @@ const options = [
     {
         "name": "host_twitter",
         "label": "Twitter/X",
-        "image": "twitter img url",
+        "image": twitterIcon,
         "labelClassName": "",
         "errorClassName": "",
         "inputClassName": "",
@@ -22,7 +29,7 @@ const options = [
     {
         "name": "host_youtube",
         "label": "YouTube",
-        "image": "youtube img url",
+        "initials": "YT",
         "labelClassName": "",
         "errorClassName": "",
         "inputClassName": "",
@@ -31,7 +38,7 @@ const options = [
     {
         "name": "host_kick",
         "label": "Kick",
-        "image": "kick img url",
+        "initials": "KK",
         "labelClassName": "",
         "errorClassName": "",
         "inputClassName": "",
@@ -40,7 +47,7 @@ const options = [
     {
         "name": "host_discord",
         "label": "Discord",
-        "image": "discord img url",
+        "initials": "DC",
         "labelClassName": "",
         "errorClassName": "",
         "inputClassName": "",
@@ -49,7 +56,7 @@ const options = [
     {
         "name": "host_instagram",
         "label": "Instagram",
-        "image": "instagram img url",
+        "image": instagramIcon,
         "labelClassName": "",
         "errorClassName": "",
         "inputClassName": "",
@@ -61,8 +68,7 @@ export const HostAccountsStep = () => {
     const placeholder = "username";
 
     return (
-        <div>
-
+        <div className={styles.linkRows}>
             {
                 options.map(opt => (
                     <FormTextInput
@@ -72,6 +78,7 @@ export const HostAccountsStep = () => {
                         label={opt.label}
                         placeholder={placeholder}
                         image={opt.image}
+                        initials={opt.initials}
                         labelClassName={opt.labelClassName}
                         errorClassName={opt.errorClassName}
                         inputClassName={opt.inputClassName}

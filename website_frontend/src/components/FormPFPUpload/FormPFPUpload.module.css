@@ -1,0 +1,77 @@
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.field + .field {
+    margin-top: 1.25rem;
+}
+
+.label {
+    display: block;
+    color: rgba(255, 255, 255, .85);
+    font-weight: 600;
+    font-size: .85rem;
+    margin-bottom: .45rem;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.preview {
+    flex-shrink: 0;
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: .9rem;
+    display: grid;
+    place-items: center;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--ink);
+    background: linear-gradient(150deg, #8e6ace, #4b3a70);
+    border: 2px solid var(--line-strong);
+    overflow: hidden;
+}
+
+.preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.uploadBtn {
+    padding: .7rem 1.1rem;
+    background: rgba(255, 255, 255, .05);
+    border: 1px solid rgba(255, 255, 255, .14);
+    color: var(--ink);
+    border-radius: .85rem;
+    font-weight: 700;
+    font-size: .88rem;
+    cursor: pointer;
+}
+
+.uploadBtn:hover {
+    border-color: var(--line-strong);
+    background: rgba(255, 255, 255, .09);
+}
+
+.input {
+    /* the real file input is visually hidden; the label/button above triggers it */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.error {
+    display: block;
+    margin-top: .4rem;
+    color: var(--loss);
+    font-size: .8rem;
+    font-weight: 600;
+}
