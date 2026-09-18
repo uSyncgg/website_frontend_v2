@@ -3,19 +3,30 @@ import { useFormContext } from "react-hook-form";
 import { useEffect } from "react";
 import styles from "./PlayerAccountsStep.module.css";
 
-// Same icons used in the site footer (components/Footer/Footer.jsx). Only
-// Twitter/X and Instagram have a footer icon today — everything else here
-// (Twitch, YouTube, Kick, Discord, and every game/competitive platform) has
-// no matching asset anywhere in the codebase yet.
+// Twitter/X and Instagram use the same icons as the site footer
+// (components/Footer/Footer.jsx); the rest were supplied directly for this
+// step. YouTube still has no matching asset and falls back to initials.
 import twitterIcon from "assets/images/social_icons/social-icon-x-purple_9.6.26.webp";
 import instagramIcon from "assets/images/social_icons/social-icon-instagram-purple_9.6.26.webp";
+import twitchIcon from "assets/images/linked_platforms/twitch_09-17-26_transparent.webp";
+import kickIcon from "assets/images/linked_platforms/kick_logo_09-17-26.webp";
+import discordIcon from "assets/images/linked_platforms/discord_logo_09-17-26.webp";
+import battlenetIcon from "assets/images/linked_platforms/Battlenet_logo_09-17-26.webp";
+import activisionIcon from "assets/images/linked_platforms/Activision_logo_09-17-26.webp";
+import steamIcon from "assets/images/linked_platforms/Steam_logo_09-17-26_transparent.webp";
+import riotIcon from "assets/images/linked_platforms/Riot_09-17-26_transparent.webp";
+import cmgIcon from "assets/images/linked_platforms/cmg_logo_09-17-26.webp";
+import ganksterIcon from "assets/images/linked_platforms/gankster_logo_09-17-26.webp";
+import faceitIcon from "assets/images/linked_platforms/faceit_logo_09-17-26.webp";
+import battlefyIcon from "assets/images/linked_platforms/battefly_logo_09-17-26.webp";
+import eseaIcon from "assets/images/linked_platforms/esea_logo_09-17-26.webp";
 
 const OPTIONS = {
     "socials": [
         {
             "name": "twitch",
             "label": "Twitch",
-            "initials": "TW",
+            "image": twitchIcon,
             "labelClassName": "",
             "errorClassName": "",
             "inputClassName": "",
@@ -42,7 +53,7 @@ const OPTIONS = {
         {
             "name": "kick",
             "label": "Kick",
-            "initials": "KK",
+            "image": kickIcon,
             "labelClassName": "",
             "errorClassName": "",
             "inputClassName": "",
@@ -51,7 +62,7 @@ const OPTIONS = {
         {
             "name": "discord",
             "label": "Discord",
-            "initials": "DC",
+            "image": discordIcon,
             "labelClassName": "",
             "errorClassName": "",
             "inputClassName": "",
@@ -72,7 +83,7 @@ const OPTIONS = {
         {
             "name": "battlenet",
             "label": "Battle.net",
-            "initials": "BN",
+            "image": battlenetIcon,
             "labelClassName": "",
             "errorClassName": "",
             "inputClassName": "",
@@ -81,7 +92,7 @@ const OPTIONS = {
         {
             "name": "activision",
             "label": "Activision",
-            "initials": "AV",
+            "image": activisionIcon,
             "labelClassName": "",
             "errorClassName": "",
             "inputClassName": "",
@@ -90,7 +101,7 @@ const OPTIONS = {
         {
             "name": "steam",
             "label": "Steam",
-            "initials": "ST",
+            "image": steamIcon,
             "labelClassName": "",
             "errorClassName": "",
             "inputClassName": "",
@@ -99,7 +110,7 @@ const OPTIONS = {
         {
             "name": "riot",
             "label": "Riot",
-            "initials": "RT",
+            "image": riotIcon,
             "labelClassName": "",
             "errorClassName": "",
             "inputClassName": "",
@@ -110,7 +121,7 @@ const OPTIONS = {
         {
             "name": "cmg",
             "label": "CMG",
-            "initials": "CMG",
+            "image": cmgIcon,
             "labelClassName": "",
             "errorClassName": "",
             "inputClassName": "",
@@ -119,7 +130,7 @@ const OPTIONS = {
         {
             "name": "gankster",
             "label": "Gankster",
-            "initials": "GK",
+            "image": ganksterIcon,
             "labelClassName": "",
             "errorClassName": "",
             "inputClassName": "",
@@ -128,7 +139,7 @@ const OPTIONS = {
         {
             "name": "faceit",
             "label": "Faceit",
-            "initials": "FC",
+            "image": faceitIcon,
             "labelClassName": "",
             "errorClassName": "",
             "inputClassName": "",
@@ -137,7 +148,7 @@ const OPTIONS = {
         {
             "name": "battlefy",
             "label": "Battlefy",
-            "initials": "BF",
+            "image": battlefyIcon,
             "labelClassName": "",
             "errorClassName": "",
             "inputClassName": "",
@@ -146,7 +157,7 @@ const OPTIONS = {
         {
             "name": "esea",
             "label": "ESEA",
-            "initials": "ES",
+            "image": eseaIcon,
             "labelClassName": "",
             "errorClassName": "",
             "inputClassName": "",

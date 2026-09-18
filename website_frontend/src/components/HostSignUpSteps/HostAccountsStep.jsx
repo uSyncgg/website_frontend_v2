@@ -1,17 +1,20 @@
 import { FormTextInput } from "components/FormTextInput/FormTextInput";
 import styles from "./HostAccountsStep.module.css";
 
-// Same icons used in the site footer (components/Footer/Footer.jsx). Only
-// Twitter/X and Instagram have a footer icon today — Twitch, YouTube, Kick,
-// and Discord have no matching asset anywhere in the codebase yet.
+// Twitter/X and Instagram use the same icons as the site footer
+// (components/Footer/Footer.jsx); the rest were supplied directly for this
+// step. YouTube still has no matching asset and falls back to initials.
 import twitterIcon from "assets/images/social_icons/social-icon-x-purple_9.6.26.webp";
 import instagramIcon from "assets/images/social_icons/social-icon-instagram-purple_9.6.26.webp";
+import twitchIcon from "assets/images/linked_platforms/twitch_09-17-26_transparent.webp";
+import kickIcon from "assets/images/linked_platforms/kick_logo_09-17-26.webp";
+import discordIcon from "assets/images/linked_platforms/discord_logo_09-17-26.webp";
 
 const options = [
     {
         "name": "host_twitch",
         "label": "Twitch",
-        "initials": "TW",
+        "image": twitchIcon,
         "labelClassName": "",
         "errorClassName": "",
         "inputClassName": "",
@@ -38,7 +41,7 @@ const options = [
     {
         "name": "host_kick",
         "label": "Kick",
-        "initials": "KK",
+        "image": kickIcon,
         "labelClassName": "",
         "errorClassName": "",
         "inputClassName": "",
@@ -47,7 +50,7 @@ const options = [
     {
         "name": "host_discord",
         "label": "Discord",
-        "initials": "DC",
+        "image": discordIcon,
         "labelClassName": "",
         "errorClassName": "",
         "inputClassName": "",
