@@ -13,6 +13,8 @@
  * straight to every upcoming LAN across every game on one map.
  */
 
+import { GAME_ICONS } from 'catalog/gameIcons';
+
 export const SECTIONS = [
     { key: 'lans', label: 'LANs' },
 ];
@@ -56,8 +58,7 @@ export const lansCatalog = {
             name: 'Call of Duty',
             genre: 'FPS',
             path: '/games/call-of-duty/lans',
-            image: 'https://i.imgur.com/gNvoNEo.png',
-            cornerRadius: 'standard',
+            image: GAME_ICONS['call-of-duty'],
             sections: { lans: '/games/call-of-duty/lans' },
         },
         {
@@ -65,7 +66,7 @@ export const lansCatalog = {
             name: 'Warzone',
             genre: 'Battle Royale',
             path: '/games/warzone/lans',
-            image: 'https://i.imgur.com/IBGIbY2.png',
+            image: GAME_ICONS['warzone'],
             sections: { lans: '/games/warzone/lans' },
         },
         {
@@ -73,7 +74,7 @@ export const lansCatalog = {
             name: 'Halo',
             genre: 'FPS',
             path: '/games/halo/lans',
-            image: 'https://i.imgur.com/wqKJfEu.png',
+            image: GAME_ICONS['halo'],
             sections: { lans: '/games/halo/lans' },
         },
         {
@@ -81,7 +82,7 @@ export const lansCatalog = {
             name: 'League of Legends',
             genre: 'MOBA',
             path: '/games/LoL/lans',
-            image: 'https://i.imgur.com/5riYNow.png',
+            image: GAME_ICONS['league-of-legends'],
             sections: { lans: '/games/LoL/lans' },
         },
     ],

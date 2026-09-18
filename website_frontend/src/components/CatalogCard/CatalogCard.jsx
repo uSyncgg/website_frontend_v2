@@ -14,23 +14,16 @@ import { Link } from 'react-router';
  * Putting a rounded clip on the same element as a box-shadow, under an
  * ancestor that animates, is a known way to get the browser to drop the
  * clip mask mid-repaint — each concern gets its own element so none of them
- * share a rasterization path with the others.
- *
- * `entry.cornerRadius` picks how wide that clip is (see games.catalog.js for
- * the full rationale) — 'standard' for art confirmed to render cleanly,
- * 'wide' (the default) for everything else, giving the clip more margin over
- * the image's own baked-in corner so there's nothing left for the browser to
- * expose if it drops the mask on hover. Applied to both .shell and .clip so
- * the shadow's shape always matches what's actually visible.
+ * share a rasterization path with the others. Applied to both .shell and
+ * .clip so the shadow's shape always matches what's actually visible.
  */
 export const CatalogCard = ({ entry, sections }) => {
     const available = sections.filter(section => Boolean(entry.sections?.[section.key]));
-    const radiusClass = entry.cornerRadius === 'standard' ? styles.radiusStandard : styles.radiusWide;
 
     return (
         <Link to={entry.path} className={styles.card}>
-            <div className={`${styles.shell} ${radiusClass}`}>
-                <div className={`${styles.clip} ${radiusClass}`}>
+            <div className={`${styles.shell} ${styles.radius}`}>
+                <div className={`${styles.clip} ${styles.radius}`}>
                     <div className={styles.art}>
                         {/* Decorative: the link's accessible name comes from the visible
                             title below, so alt text here would just announce it twice. */}

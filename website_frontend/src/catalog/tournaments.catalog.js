@@ -12,6 +12,8 @@
  * shape, deliberately.
  */
 
+import { GAME_ICONS } from 'catalog/gameIcons';
+
 export const SECTIONS = [
     { key: 'tournaments', label: 'Tournaments' },
 ];
@@ -35,8 +37,7 @@ export const tournamentsCatalog = {
             name: 'Call of Duty',
             genre: 'FPS',
             path: '/tournaments/call-of-duty-tournaments',
-            image: 'https://i.imgur.com/gNvoNEo.png',
-            cornerRadius: 'standard',
+            image: GAME_ICONS['call-of-duty'],
             sections: { tournaments: '/tournaments/call-of-duty-tournaments' },
         },
     ],

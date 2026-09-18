@@ -41,16 +41,9 @@
  *             derives its rows live (see `liveVerifiedRowsFor`). Not always
  *             the same as `name` — the API expects "CS2", not this catalog's
  *             display name "Counter-Strike 2".
- *             `cornerRadius` (optional, default 'wide'): how much the card's
- *             rounded-corner clip covers. Most of this catalog's source
- *             images have a corner radius baked into the pixels as
- *             transparency, and on hover the browser can drop the container's
- *             own rounded clip mask for a frame, momentarily exposing that
- *             baked-in transparent corner as a real gap. A wider clip radius
- *             gives more margin over the baked corner so there's nothing left
- *             to expose. Set 'standard' only for art confirmed to render
- *             cleanly at the tighter radius (checked on hover, repeatedly).
  */
+
+import { GAME_ICONS } from 'catalog/gameIcons';
 
 export const SECTIONS = [
     { key: 'leagues',     label: 'Leagues' },
@@ -101,8 +94,7 @@ export const gamesCatalog = {
             apiGame: 'Call of Duty',
             genre: 'FPS',
             path: '/games/call-of-duty',
-            image: 'https://i.imgur.com/gNvoNEo.png',
-            cornerRadius: 'standard',
+            image: GAME_ICONS['call-of-duty'],
             sections: {
                 leagues:     '/games/call-of-duty/leagues',
                 lans:        '/games/call-of-duty/lans',
@@ -118,7 +110,7 @@ export const gamesCatalog = {
             apiGame: 'Warzone',
             genre: 'Battle Royale',
             path: '/games/warzone',
-            image: 'https://i.imgur.com/IBGIbY2.png',
+            image: GAME_ICONS['warzone'],
             sections: {
                 leagues: '/games/warzone/leagues',
                 lans:    '/games/warzone/lans',
@@ -132,7 +124,7 @@ export const gamesCatalog = {
             apiGame: 'Halo',
             genre: 'FPS',
             path: '/games/halo',
-            image: 'https://i.imgur.com/wqKJfEu.png',
+            image: GAME_ICONS['halo'],
             sections: {
                 leagues: '/games/halo/leagues',
                 lans:    '/games/halo/lans',
@@ -146,7 +138,7 @@ export const gamesCatalog = {
             apiGame: 'League of Legends',
             genre: 'MOBA',
             path: '/games/LoL',
-            image: 'https://i.imgur.com/5riYNow.png',
+            image: GAME_ICONS['league-of-legends'],
             sections: {
                 leagues: '/games/LoL/leagues',
                 lans:    '/games/LoL/lans',
@@ -160,7 +152,7 @@ export const gamesCatalog = {
             apiGame: 'Rocket League',
             genre: 'Sports',
             path: '/games/RocketLeague',
-            image: 'https://i.imgur.com/GJO8JIZ.png',
+            image: GAME_ICONS['rocket-league'],
             sections: {
                 leagues: '/games/RocketLeague/leagues',
                 wagers:  '/games/RocketLeague/wagers',
@@ -173,8 +165,7 @@ export const gamesCatalog = {
             apiGame: 'Valorant',
             genre: 'FPS',
             path: '/games/Valorant',
-            image: 'https://i.imgur.com/Gsl3oIp.png',
-            cornerRadius: 'standard',
+            image: GAME_ICONS['valorant'],
             sections: {
                 leagues: '/games/Valorant/leagues',
                 wagers:  '/games/Valorant/wagers',
@@ -187,7 +178,7 @@ export const gamesCatalog = {
             apiGame: 'CS2',
             genre: 'FPS',
             path: '/games/CS2',
-            image: 'https://i.imgur.com/60FwDKN.png',
+            image: GAME_ICONS['cs2'],
             sections: {
                 leagues: '/games/CS2/leagues',
                 wagers:  '/games/CS2/wagers',

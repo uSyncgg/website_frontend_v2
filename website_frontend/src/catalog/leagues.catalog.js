@@ -9,6 +9,8 @@
  * not to the game hub).
  */
 
+import { GAME_ICONS } from 'catalog/gameIcons';
+
 export const SECTIONS = [
     { key: 'leagues', label: 'Leagues' },
 ];
@@ -57,8 +59,7 @@ export const leaguesCatalog = {
             apiGame: 'Call of Duty',
             genre: 'FPS',
             path: '/games/call-of-duty/leagues',
-            image: 'https://i.imgur.com/gNvoNEo.png',
-            cornerRadius: 'standard',
+            image: GAME_ICONS['call-of-duty'],
             sections: { leagues: '/games/call-of-duty/leagues' },
         },
         {
@@ -67,7 +68,7 @@ export const leaguesCatalog = {
             apiGame: 'Warzone',
             genre: 'Battle Royale',
             path: '/games/warzone/leagues',
-            image: 'https://i.imgur.com/IBGIbY2.png',
+            image: GAME_ICONS['warzone'],
             sections: { leagues: '/games/warzone/leagues' },
         },
         {
@@ -76,7 +77,7 @@ export const leaguesCatalog = {
             apiGame: 'Halo',
             genre: 'FPS',
             path: '/games/halo/leagues',
-            image: 'https://i.imgur.com/wqKJfEu.png',
+            image: GAME_ICONS['halo'],
             sections: { leagues: '/games/halo/leagues' },
         },
         {
@@ -85,7 +86,7 @@ export const leaguesCatalog = {
             apiGame: 'League of Legends',
             genre: 'MOBA',
             path: '/games/LoL/leagues',
-            image: 'https://i.imgur.com/5riYNow.png',
+            image: GAME_ICONS['league-of-legends'],
             sections: { leagues: '/games/LoL/leagues' },
         },
         {
@@ -94,7 +95,7 @@ export const leaguesCatalog = {
             apiGame: 'Rocket League',
             genre: 'Sports',
             path: '/games/RocketLeague/leagues',
-            image: 'https://i.imgur.com/GJO8JIZ.png',
+            image: GAME_ICONS['rocket-league'],
             sections: { leagues: '/games/RocketLeague/leagues' },
         },
         {
@@ -103,8 +104,7 @@ export const leaguesCatalog = {
             apiGame: 'Valorant',
             genre: 'FPS',
             path: '/games/Valorant/leagues',
-            image: 'https://i.imgur.com/Gsl3oIp.png',
-            cornerRadius: 'standard',
+            image: GAME_ICONS['valorant'],
             sections: { leagues: '/games/Valorant/leagues' },
         },
         {
@@ -113,7 +113,7 @@ export const leaguesCatalog = {
             apiGame: 'CS2',
             genre: 'FPS',
             path: '/games/CS2/leagues',
-            image: 'https://i.imgur.com/60FwDKN.png',
+            image: GAME_ICONS['cs2'],
             sections: { leagues: '/games/CS2/leagues' },
         },
     ],
