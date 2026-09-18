@@ -37,10 +37,13 @@ export const useCatalogFilter = (catalog) => {
         }, { replace: true });
     }, [setSearchParams]);
 
+    // Store the raw value (not trimmed) so a trailing space mid-typing isn't
+    // silently stripped out from under the user when it round-trips back
+    // through the URL into the input. Matching already trims its own copy
+    // (see `needle` below), so this doesn't affect what matches.
     const setQuery = useCallback(value => commit(next => {
-        const trimmed = value.trim();
-        if (trimmed) {
-            next.set(searchKey, trimmed);
+        if (value.trim()) {
+            next.set(searchKey, value);
         } else {
             next.delete(searchKey);
         }
@@ -70,7 +73,7 @@ export const useCatalogFilter = (catalog) => {
             const aliases = GAME_ALIASES[entry.slug] ?? [];
             const matchesQuery = !needle
                 || entry.name.toLowerCase().includes(needle)
-                || aliases.some(alias => alias.includes(needle));
+                || aliases.some(alias => needle.includes(alias));
             const matchesFacet = activeFacets.length === 0 || activeFacets.includes(entry[facetField]);
             return matchesQuery && matchesFacet;
         });

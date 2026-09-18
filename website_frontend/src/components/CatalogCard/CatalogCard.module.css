@@ -37,12 +37,15 @@
     overflow: hidden;
 }
 
-/* Six of the seven source PNGs (see games.catalog.js) have a corner radius
-   baked into the pixels as transparency (~24px at their native 648x864 size;
-   Call of Duty is the only square one). `radiusWide` gives the clip enough
-   margin over that baked corner, at every card width this grid produces,
-   that the clip is never the thing exposing a gap. `radiusStandard` is the
-   tighter, more modest rounding for art confirmed to render cleanly at it. */
+/* Most of the source PNGs (see games.catalog.js) have a corner radius baked
+   into the pixels as transparency (~24px at their native 648x864 size).
+   `radiusWide` gives the clip enough margin over that baked corner, at every
+   card width this grid produces, that the clip is never the thing exposing
+   a gap. `radiusStandard` is the tighter, more modest rounding for art
+   confirmed (by hover-checking it, repeatedly) to render cleanly at it —
+   there's no property on the art itself yet to check this against, so
+   `cornerRadius` is set per entry by eye until the source images are
+   standardized. */
 .radiusStandard {
     border-radius: 0.875rem;
 }

@@ -79,6 +79,12 @@
     min-width: 0;
 }
 
+/* No aside panel supplied (e.g. tournaments.catalog.js) — let the copy span
+   the full row instead of leaving the reserved second column empty. */
+.inner.noAside {
+    grid-template-columns: 1fr;
+}
+
 @media only screen and (max-width: 960px) {
     .inner {
         grid-template-columns: 1fr;

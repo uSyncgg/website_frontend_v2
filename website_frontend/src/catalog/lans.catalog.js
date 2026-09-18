@@ -5,12 +5,12 @@
  * Only 4 of the 7 titles have LAN events (CS2, Rocket League and Valorant
  * don't — matches the existing site's Lans.js, which lists the same 4).
  *
- * No verified LAN organizer exists anywhere in the codebase (checked directly
- * against every LAN listing page — zero verified={true} on any of them), so
- * unlike leagues.catalog.js this has no `verifiedBoard` to show. The hero's
- * aside slot carries the "All LANs" link instead — the site's existing
- * cross-title map view (EventTypeImages page="All LANs" -> /lans/all) that
- * this redesign would otherwise have no place for.
+ * Unlike leagues.catalog.js, the hero's aside slot deliberately carries a
+ * "All LANs" cta rather than a `verifiedBoard` — LANs are inherently
+ * cross-title events, so the most useful thing to put next to a per-title
+ * grid is a way off of it: the site's existing cross-title map view
+ * (EventTypeImages page="All LANs" -> /lans/all), giving visitors a shortcut
+ * straight to every upcoming LAN across every game on one map.
  */
 
 export const SECTIONS = [

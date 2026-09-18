@@ -11,7 +11,7 @@ import styles from './CatalogHero.module.css';
 export const CatalogHero = ({ eyebrow, headline, accent, lede, aside }) => {
     return (
         <section className={styles.hero}>
-            <div className={styles.inner}>
+            <div className={`${styles.inner} ${aside === undefined ? styles.noAside : ''}`}>
                 <div className={styles.copy}>
                     {eyebrow !== undefined && <p className={styles.eyebrow}>{eyebrow}</p>}
 

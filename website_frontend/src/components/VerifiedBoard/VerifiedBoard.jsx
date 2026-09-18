@@ -1,5 +1,6 @@
 import styles from './VerifiedBoard.module.css';
 import { Link } from 'react-router';
+import verifiedBadge from 'assets/images/verification/verified-badge-usync-verified_9.6.26.webp';
 
 /**
  * Small panel listing verified organizers, sat beside the catalog hero.
@@ -20,7 +21,7 @@ export const VerifiedBoard = ({ label, rows = [] }) => {
             <div className={styles.head}>
                 <img
                     className={styles.mark}
-                    src="https://i.imgur.com/PCHIHQB.png"
+                    src={verifiedBadge}
                     alt=""
                     loading="lazy"
                     decoding="async"

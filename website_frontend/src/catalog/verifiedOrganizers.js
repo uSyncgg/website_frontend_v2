@@ -1,27 +1,4 @@
-/**
- * Single source of truth for verified organizers, shared across every
- * catalog's `heroAside` verifiedBoard.
- *
- * Each row is one organizer verified for exactly one section — a
- * VerifiedBoard row is a single link, so an organizer verified in more than
- * one section (Checkmate Gaming: wagers and head-to-head) gets one entry per
- * section it should actually be linkable from. Every path here must be
- * verified={true} on its own page, checked directly against the live host
- * page, not assumed.
- *
- * Catalogs derive their own board with `verifiedRowsFor` rather than
- * hand-copying rows, so a host verified for a section can't go missing from
- * one catalog's board while showing up on another's, and a host that isn't
- * verified for a section (e.g. a wagers host) can't leak onto a
- * leagues-only board.
- */
-export const VERIFIED_ORGANIZERS = [
-    { name: 'LockdownCL',       game: 'Call of Duty',      section: 'leagues', path: '/games/call-of-duty/leagues/lockdowncl-leagues' },
-    { name: 'Titan Esports',    game: 'League of Legends', section: 'leagues', path: '/games/LoL/leagues/titan-leagues' },
-    { name: 'Nemesis Leagues',  game: 'Rocket League',     section: 'leagues', path: '/games/RocketLeague/leagues/nemesis-leagues' },
-    { name: 'College Halo',     game: 'Halo',              section: 'leagues', path: '/games/halo/leagues/ugc-halo' },
-    { name: 'Checkmate Gaming', game: 'Call of Duty',      section: 'wagers',  path: '/games/call-of-duty/wagers/cmg' },
-];
+import { buildEventPath } from 'utils/eventPaths';
 
 const SECTION_TAG_SUFFIX = {
     leagues: 'league',
@@ -31,21 +8,60 @@ const SECTION_TAG_SUFFIX = {
     h2h: 'head-to-head',
 };
 
-/**
- * Rows for a verifiedBoard, scoped to the given section(s).
- *
- * `tagSection: false` drops the section suffix from the tag, for a catalog
- * already scoped to one section (e.g. leagues.catalog.js), where the tag is
- * just the game name.
- */
-export const verifiedRowsFor = (sections, { tagSection = true } = {}) => {
-    const wanted = Array.isArray(sections) ? sections : [sections];
+// Which /events/{game}/verified response buckets feed which catalog section.
+const SECTION_EVENT_BUCKETS = {
+    leagues: ['league_parent_events', 'league_events'],
+    wagers: ['wager_events'],
+    h2h: ['xp_events'],
+    lans: ['lan_events'],
+};
 
-    return VERIFIED_ORGANIZERS
-        .filter(organizer => wanted.includes(organizer.section))
-        .map(({ name, game, section, path }) => ({
-            name,
-            tag: tagSection ? `${game} ${SECTION_TAG_SUFFIX[section]}` : game,
-            path,
-        }));
+// Rows for a verifiedBoard built from a single /events/{type}/verified/event/type
+// fetch. Like /events/{game}/verified, the payload is bucketed by event kind
+// (e.g. { league_events: [...] }), not a flat array. Each event's own `game`
+// field is matched back to the catalog entry with that `apiGame`, to find the
+// right link prefix and to build the tag; an event with no matching `game`
+// (or a game not in this catalog) is skipped rather than guessed at.
+export const liveVerifiedRowsForType = (payload, entries, section, { tagSection = true } = {}) => {
+    if (!payload) return [];
+
+    const buckets = SECTION_EVENT_BUCKETS[section] ?? [];
+
+    return buckets.flatMap(bucket => payload[bucket] ?? []).flatMap(event => {
+        const entry = entries.find(e => e.apiGame === event.game);
+        const sectionPath = entry?.sections?.[section];
+        if (!sectionPath) return [];
+
+        return [{
+            name: event.name,
+            tag: tagSection ? `${event.game} ${SECTION_TAG_SUFFIX[section]}` : event.game,
+            path: buildEventPath(sectionPath, event.path),
+        }];
+    });
+};
+
+// Rows for a verifiedBoard built from live /events/{game}/verified data
+// (see useVerifiedBoardRows, which samples and caches from the full result).
+export const liveVerifiedRowsFor = (sections, entries, eventsByGame) => {
+    const wanted = Array.isArray(sections) ? sections : [sections];
+    if (!eventsByGame) return [];
+
+    return entries.flatMap(entry => {
+        const payload = entry.apiGame && eventsByGame[entry.apiGame];
+        if (!payload) return [];
+
+        return wanted.flatMap(section => {
+            const sectionPath = entry.sections?.[section];
+            if (!sectionPath) return [];
+
+            const buckets = SECTION_EVENT_BUCKETS[section] ?? [];
+            return buckets
+                .flatMap(bucket => payload[bucket] ?? [])
+                .map(item => ({
+                    name: item.name,
+                    tag: `${entry.name} ${SECTION_TAG_SUFFIX[section]}`,
+                    path: buildEventPath(sectionPath, item.path),
+                }));
+        });
+    });
 };

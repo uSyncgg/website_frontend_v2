@@ -9,10 +9,19 @@
  * Shape:
  *   hero      { eyebrow, headline, accent, lede } — the text hero
  *   heroAside optional panel beside the hero, discriminated by `type`:
- *             { type: 'verifiedBoard', label, rows[] } — real verified
- *               organizers for this catalog's own type, each row one link.
- *               Omit entirely rather than inventing rows — see lans/tournaments
+ *             { type: 'verifiedBoard', label, rows[] } — a static, hand-
+ *               maintained board (see catalog/verifiedOrganizers.js). Omit
+ *               entirely rather than inventing rows — see lans/tournaments
  *               catalogs, where no verified data exists for that type yet.
+ *             { type: 'verifiedBoard', label, sections[] } — a board built
+ *               live, one request per entry's `apiGame`, from
+ *               /events/{game}/verified (see verifiedOrganizers.js's
+ *               `liveVerifiedRowsFor` and useVerifiedBoardRows).
+ *             { type: 'verifiedBoard', label, eventType, section, tagSection }
+ *               — a board built live from a single /events/{type}/verified/
+ *               event/type fetch spanning every game (see
+ *               verifiedOrganizers.js's `liveVerifiedRowsForType` and
+ *               useVerifiedBoardRowsByType) — see leagues.catalog.js.
  *             { type: 'cta', eyebrow, body, buttonLabel, path } — a plain
  *               call-to-action, for when the verified-board slot has nothing
  *               real to show but the space is worth using for something else.
@@ -27,6 +36,11 @@
  *             "coming soon" dead end.
  *   entries   the catalog items. `sections` maps a section key -> its real
  *             path, so a section is "available" iff it has a path here.
+ *             `apiGame` (optional): the `game` value this entry is fetched
+ *             under from /events/{game}/verified, for a `heroAside` that
+ *             derives its rows live (see `liveVerifiedRowsFor`). Not always
+ *             the same as `name` — the API expects "CS2", not this catalog's
+ *             display name "Counter-Strike 2".
  *             `cornerRadius` (optional, default 'wide'): how much the card's
  *             rounded-corner clip covers. Most of this catalog's source
  *             images have a corner radius baked into the pixels as
@@ -37,8 +51,6 @@
  *             to expose. Set 'standard' only for art confirmed to render
  *             cleanly at the tighter radius (checked on hover, repeatedly).
  */
-
-import { verifiedRowsFor } from './verifiedOrganizers';
 
 export const SECTIONS = [
     { key: 'leagues',     label: 'Leagues' },
@@ -53,18 +65,18 @@ export const gamesCatalog = {
 
     hero: {
         // Not "Supported titles" — that already heads the grid below.
-        eyebrow: '5+ Game Titles',
+        eyebrow: '7 Game Titles',
         headline: 'Pick your title.',
         accent: 'Find a real event.',
         lede: 'Every league, LAN, tournament, wager and head-to-head on uSync, sorted by game.',
     },
 
-    // Rows come from catalog/verifiedOrganizers.js — see that file for the
-    // single source of truth every catalog's board derives from.
+    // Rows are fetched live per entry's `apiGame` — see CatalogIndex and
+    // catalog/verifiedOrganizers.js's `liveVerifiedRowsFor`.
     heroAside: {
         type: 'verifiedBoard',
         label: 'Verified organizers',
-        rows: verifiedRowsFor(['leagues', 'wagers']),
+        sections: ['leagues', 'wagers'],
     },
 
     search: {
@@ -86,6 +98,7 @@ export const gamesCatalog = {
         {
             slug: 'call-of-duty',
             name: 'Call of Duty',
+            apiGame: 'Call of Duty',
             genre: 'FPS',
             path: '/games/call-of-duty',
             image: 'https://i.imgur.com/gNvoNEo.png',
@@ -102,6 +115,7 @@ export const gamesCatalog = {
         {
             slug: 'warzone',
             name: 'Warzone',
+            apiGame: 'Warzone',
             genre: 'Battle Royale',
             path: '/games/warzone',
             image: 'https://i.imgur.com/IBGIbY2.png',
@@ -115,6 +129,7 @@ export const gamesCatalog = {
         {
             slug: 'halo',
             name: 'Halo',
+            apiGame: 'Halo',
             genre: 'FPS',
             path: '/games/halo',
             image: 'https://i.imgur.com/wqKJfEu.png',
@@ -128,6 +143,7 @@ export const gamesCatalog = {
         {
             slug: 'league-of-legends',
             name: 'League of Legends',
+            apiGame: 'League of Legends',
             genre: 'MOBA',
             path: '/games/LoL',
             image: 'https://i.imgur.com/5riYNow.png',
@@ -141,6 +157,7 @@ export const gamesCatalog = {
         {
             slug: 'rocket-league',
             name: 'Rocket League',
+            apiGame: 'Rocket League',
             genre: 'Sports',
             path: '/games/RocketLeague',
             image: 'https://i.imgur.com/GJO8JIZ.png',
@@ -153,6 +170,7 @@ export const gamesCatalog = {
         {
             slug: 'valorant',
             name: 'Valorant',
+            apiGame: 'Valorant',
             genre: 'FPS',
             path: '/games/Valorant',
             image: 'https://i.imgur.com/Gsl3oIp.png',
@@ -166,6 +184,7 @@ export const gamesCatalog = {
         {
             slug: 'cs2',
             name: 'Counter-Strike 2',
+            apiGame: 'CS2',
             genre: 'FPS',
             path: '/games/CS2',
             image: 'https://i.imgur.com/60FwDKN.png',

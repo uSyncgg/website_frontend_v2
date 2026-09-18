@@ -7,6 +7,9 @@ import { CatalogGrid } from 'components/CatalogGrid/CatalogGrid';
 import { CatalogSectionHeading } from 'components/CatalogSectionHeading/CatalogSectionHeading';
 import { EmptyState } from 'components/EmptyState/EmptyState';
 import { useCatalogFilter } from 'hooks/useCatalogFilter';
+import { useVerifiedBoardRows, useVerifiedBoardRowsByType } from 'hooks/useVerifiedBoardRows';
+
+const NO_SECTIONS = [];
 
 /**
  * The catalog index pattern: split hero, filter toolbar, filtered grid,
@@ -26,8 +29,31 @@ export const CatalogIndex = ({ catalog }) => {
     const count = entries.length;
     const total = catalog.entries.length;
 
-    const aside = catalog.heroAside?.type === 'verifiedBoard' && catalog.heroAside.rows?.length > 0
-        ? <VerifiedBoard label={catalog.heroAside.label} rows={catalog.heroAside.rows} />
+    // A `verifiedBoard` heroAside is a static `rows` list, a live one that
+    // names `sections` (one fetch per game — games.catalog.js), or a live
+    // one that names `eventType` (one fetch spanning every game —
+    // leagues.catalog.js). Both hooks always run so they stay unconditional
+    // across renders; each is a no-op when its variant isn't in use.
+    const isByGame = catalog.heroAside?.type === 'verifiedBoard' && Boolean(catalog.heroAside.sections);
+    const isByType = catalog.heroAside?.type === 'verifiedBoard' && Boolean(catalog.heroAside.eventType);
+
+    const byGameRows = useVerifiedBoardRows(
+        catalog.key,
+        isByGame ? catalog.heroAside.sections : NO_SECTIONS,
+        catalog.entries
+    );
+    const byTypeRows = useVerifiedBoardRowsByType(
+        catalog.key,
+        isByType ? catalog.heroAside.eventType : null,
+        catalog.entries,
+        isByType ? catalog.heroAside.section : null,
+        { tagSection: catalog.heroAside?.tagSection }
+    );
+
+    const verifiedRows = isByGame ? byGameRows : isByType ? byTypeRows : catalog.heroAside?.rows;
+
+    const aside = catalog.heroAside?.type === 'verifiedBoard' && verifiedRows?.length > 0
+        ? <VerifiedBoard label={catalog.heroAside.label} rows={verifiedRows} />
         : catalog.heroAside?.type === 'cta'
             ? <HeroCta {...catalog.heroAside} />
             : undefined;

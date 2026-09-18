@@ -9,8 +9,6 @@
  * not to the game hub).
  */
 
-import { verifiedRowsFor } from './verifiedOrganizers';
-
 export const SECTIONS = [
     { key: 'leagues', label: 'Leagues' },
 ];
@@ -25,13 +23,14 @@ export const leaguesCatalog = {
         lede: 'Every competitive league on uSync, sorted by game — open brackets, invite-only divisions, and everything between.',
     },
 
-    // Rows come from catalog/verifiedOrganizers.js, scoped to leagues only —
-    // that keeps a wagers-only host (Checkmate Gaming) off this board without
-    // hand-maintaining a second copy of the games catalog's list.
+    // Rows are fetched live from /events/leagues/verified/event/type and
+    // sampled down — see CatalogIndex and useVerifiedBoardRowsByType.
     heroAside: {
         type: 'verifiedBoard',
         label: 'Verified league organizers',
-        rows: verifiedRowsFor('leagues', { tagSection: false }),
+        eventType: 'leagues',
+        section: 'leagues',
+        tagSection: false,
     },
 
     search: {
@@ -55,6 +54,7 @@ export const leaguesCatalog = {
         {
             slug: 'call-of-duty',
             name: 'Call of Duty',
+            apiGame: 'Call of Duty',
             genre: 'FPS',
             path: '/games/call-of-duty/leagues',
             image: 'https://i.imgur.com/gNvoNEo.png',
@@ -64,6 +64,7 @@ export const leaguesCatalog = {
         {
             slug: 'warzone',
             name: 'Warzone',
+            apiGame: 'Warzone',
             genre: 'Battle Royale',
             path: '/games/warzone/leagues',
             image: 'https://i.imgur.com/IBGIbY2.png',
@@ -72,6 +73,7 @@ export const leaguesCatalog = {
         {
             slug: 'halo',
             name: 'Halo',
+            apiGame: 'Halo',
             genre: 'FPS',
             path: '/games/halo/leagues',
             image: 'https://i.imgur.com/wqKJfEu.png',
@@ -80,6 +82,7 @@ export const leaguesCatalog = {
         {
             slug: 'league-of-legends',
             name: 'League of Legends',
+            apiGame: 'League of Legends',
             genre: 'MOBA',
             path: '/games/LoL/leagues',
             image: 'https://i.imgur.com/5riYNow.png',
@@ -88,6 +91,7 @@ export const leaguesCatalog = {
         {
             slug: 'rocket-league',
             name: 'Rocket League',
+            apiGame: 'Rocket League',
             genre: 'Sports',
             path: '/games/RocketLeague/leagues',
             image: 'https://i.imgur.com/GJO8JIZ.png',
@@ -96,6 +100,7 @@ export const leaguesCatalog = {
         {
             slug: 'valorant',
             name: 'Valorant',
+            apiGame: 'Valorant',
             genre: 'FPS',
             path: '/games/Valorant/leagues',
             image: 'https://i.imgur.com/Gsl3oIp.png',
@@ -105,6 +110,7 @@ export const leaguesCatalog = {
         {
             slug: 'cs2',
             name: 'Counter-Strike 2',
+            apiGame: 'CS2',
             genre: 'FPS',
             path: '/games/CS2/leagues',
             image: 'https://i.imgur.com/60FwDKN.png',
