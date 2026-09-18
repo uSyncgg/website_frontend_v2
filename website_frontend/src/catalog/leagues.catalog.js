@@ -1,0 +1,120 @@
+/**
+ * Catalog config for /leagues. Same shape as games.catalog.js — see that
+ * file's header comment for the full field reference.
+ *
+ * Unlike the /games catalog, each entry here is scoped to ONE section
+ * (leagues), so `entry.path` and `entry.sections.leagues` point at the same
+ * place: the game's leagues page directly, matching the real site's existing
+ * per-type listing pages (Leagues.js linked straight to /games/{game}/leagues,
+ * not to the game hub).
+ */
+
+import { GAME_ICONS } from 'catalog/gameIcons';
+
+export const SECTIONS = [
+    { key: 'leagues', label: 'Leagues' },
+];
+
+export const leaguesCatalog = {
+    key: 'leagues',
+
+    hero: {
+        eyebrow: '200+ Leagues',
+        headline: 'Pick your league.',
+        accent: 'Find your division.',
+        lede: 'Every competitive league on uSync, sorted by game — open brackets, invite-only divisions, and everything between.',
+    },
+
+    // Rows are fetched live from /events/leagues/verified/event/type and
+    // sampled down — see CatalogIndex and useVerifiedBoardRowsByType.
+    heroAside: {
+        type: 'verifiedBoard',
+        label: 'Verified league organizers',
+        eventType: 'leagues',
+        section: 'leagues',
+        tagSection: false,
+    },
+
+    search: {
+        param: 'q',
+        label: 'Search titles',
+        placeholder: 'Search titles',
+    },
+
+    facet: {
+        param: 'genre',
+        allLabel: 'All genres',
+        field: 'genre',
+    },
+
+    heading: 'Leagues by title',
+    sections: SECTIONS,
+
+    // Every title has a leagues section, so this mirrors games.catalog.js's
+    // full entry list — just re-pointed straight at each game's leagues page.
+    entries: [
+        {
+            slug: 'call-of-duty',
+            name: 'Call of Duty',
+            apiGame: 'Call of Duty',
+            genre: 'FPS',
+            path: '/games/call-of-duty/leagues',
+            image: GAME_ICONS['call-of-duty'],
+            sections: { leagues: '/games/call-of-duty/leagues' },
+        },
+        {
+            slug: 'warzone',
+            name: 'Warzone',
+            apiGame: 'Warzone',
+            genre: 'Battle Royale',
+            path: '/games/warzone/leagues',
+            image: GAME_ICONS['warzone'],
+            sections: { leagues: '/games/warzone/leagues' },
+        },
+        {
+            slug: 'halo',
+            name: 'Halo',
+            apiGame: 'Halo',
+            genre: 'FPS',
+            path: '/games/halo/leagues',
+            image: GAME_ICONS['halo'],
+            sections: { leagues: '/games/halo/leagues' },
+        },
+        {
+            slug: 'league-of-legends',
+            name: 'League of Legends',
+            apiGame: 'League of Legends',
+            genre: 'MOBA',
+            path: '/games/LoL/leagues',
+            image: GAME_ICONS['league-of-legends'],
+            sections: { leagues: '/games/LoL/leagues' },
+        },
+        {
+            slug: 'rocket-league',
+            name: 'Rocket League',
+            apiGame: 'Rocket League',
+            genre: 'Sports',
+            path: '/games/RocketLeague/leagues',
+            image: GAME_ICONS['rocket-league'],
+            sections: { leagues: '/games/RocketLeague/leagues' },
+        },
+        {
+            slug: 'valorant',
+            name: 'Valorant',
+            apiGame: 'Valorant',
+            genre: 'FPS',
+            path: '/games/Valorant/leagues',
+            image: GAME_ICONS['valorant'],
+            sections: { leagues: '/games/Valorant/leagues' },
+        },
+        {
+            slug: 'cs2',
+            name: 'Counter-Strike 2',
+            apiGame: 'CS2',
+            genre: 'FPS',
+            path: '/games/CS2/leagues',
+            image: GAME_ICONS['cs2'],
+            sections: { leagues: '/games/CS2/leagues' },
+        },
+    ],
+};
