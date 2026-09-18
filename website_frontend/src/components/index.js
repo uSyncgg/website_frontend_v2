@@ -31,6 +31,17 @@ import { EventTypeImages } from "./EventTypeImages/EventTypeImages";
 // Homepage
 import { ChooseYourGame } from "./ChooseYourGame/ChooseYourGame";
 
+// Catalog index pattern (config-driven — see catalog/*.catalog.js)
+import { CatalogIndex } from "./CatalogIndex/CatalogIndex";
+import { CatalogHero } from "./CatalogHero/CatalogHero";
+import { VerifiedBoard } from "./VerifiedBoard/VerifiedBoard";
+import { HeroCta } from "./HeroCta/HeroCta";
+import { CatalogGrid } from "./CatalogGrid/CatalogGrid";
+import { CatalogCard } from "./CatalogCard/CatalogCard";
+import { CatalogFacets } from "./CatalogFacets/CatalogFacets";
+import { CatalogSectionHeading } from "./CatalogSectionHeading/CatalogSectionHeading";
+import { EmptyState } from "./EmptyState/EmptyState";
+
 // Payment Form
 import { PaymentForm } from "./PaymentForm/PaymentForm";
 import { DynamicFormField } from "./PaymentForm/DynamicFormField";
@@ -112,6 +123,15 @@ export {
     VerifiedText,
     VerifiedImage,
     ChooseYourGame,
+    CatalogIndex,
+    CatalogHero,
+    VerifiedBoard,
+    HeroCta,
+    CatalogGrid,
+    CatalogCard,
+    CatalogFacets,
+    CatalogSectionHeading,
+    EmptyState,
     ErrorBoundary,
     PaymentComponent,
     LanMap,
