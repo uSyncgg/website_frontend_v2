@@ -1,0 +1,31 @@
+.linkTabs {
+    display: inline-flex;
+    gap: .5rem;
+    padding: .3rem;
+    border-radius: .75rem;
+    border: 1px solid rgba(255, 255, 255, .1);
+    background: rgba(255, 255, 255, .02);
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.linkTabButton {
+    padding: .55rem 1.1rem;
+    border: 0;
+    border-radius: .55rem;
+    background: transparent;
+    color: rgba(255, 255, 255, .55);
+    font-size: .85rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.linkTabActive {
+    background: linear-gradient(135deg, var(--violet), var(--violet-deep));
+    color: #fff;
+}
+
+.linkRows {
+    display: flex;
+    flex-direction: column;
+}
