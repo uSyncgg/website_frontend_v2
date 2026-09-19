@@ -47,6 +47,20 @@
     letter-spacing: -1px;
 }
 
+/* The hero headline is two visual lines but one <h1> — a page gets exactly one.
+   The margins reproduce the spacing the two stacked <h1>s used to produce. */
+.heroTitle {
+    margin: .67em 0 0;
+}
+
+.heroTitle span {
+    display: block;
+}
+
+.heroTitle span + span {
+    margin-top: .67em;
+}
+
 .sectionOneContainer h2 {
     color: rgb(170, 166, 178);
     margin-top: .25rem;
@@ -142,9 +156,13 @@
     justify-content: center;
 }
 
-.sectionTwo h2 {
+/* h1 is included because pages whose hero carries no text (e.g. /more/verification)
+   promote their first section heading to the page's single <h1>. The explicit
+   margin-top keeps both tags spaced like the <h2> always was. */
+.sectionTwo h1, .sectionTwo h2 {
     font-size: 3rem;
     padding-top: .9rem;
+    margin-top: .83em;
     margin-bottom: .5rem;
 }
 
@@ -466,11 +484,15 @@
     margin-top: 1rem;
 }
 
+/* Body copy, marked up as <p> rather than <h1>. The weight and top margin keep
+   the appearance the old heading tag gave it. */
 .verificationDesc {
     color: white;
     font-size: 2rem;
+    font-weight: bold;
     width: 80%;
     text-align: center;
+    margin-top: .67em;
     margin-bottom: 2rem;
 }
 
@@ -552,7 +574,7 @@
         font-size: 40px;
     }
 
-    .sectionTwo h2 {
+    .sectionTwo h1, .sectionTwo h2 {
         font-size: 2rem;
         padding-top: .5rem;
     }
@@ -610,7 +632,7 @@
         font-size: 1.75rem;
     }
 
-    .sectionTwo h2 {
+    .sectionTwo h1, .sectionTwo h2 {
         font-size: 1.75rem;
     }
 

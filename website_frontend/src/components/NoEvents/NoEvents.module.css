@@ -4,15 +4,18 @@
     padding-bottom: 2rem;
 }
 
-.eventContainer h1 {
+/* Empty-state message is <h2>: the page's <h1> is its HeaderImage hero.
+   The margin keeps the old <h1> spacing (0.67em of 3rem). */
+.eventContainer h2 {
     font-size: 3rem;
+    margin: .67em 0;
 }
 
 .eventContainer h3, .eventContainer p {
     font-size: 2rem;
 }
 
-.eventContainer h1, .eventContainer h3 {
+.eventContainer h2, .eventContainer h3 {
     color: #fff;
 }
 
