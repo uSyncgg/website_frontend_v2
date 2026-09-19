@@ -1,5 +1,6 @@
 .choiceRow {
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
 }
 
@@ -11,7 +12,8 @@
 
 .choice {
     position: relative;
-    flex: 1;
+    flex: 1 1 calc(50% - .5rem);
+    min-width: 9rem;
     display: flex;
     flex-direction: column;
     align-items: center;

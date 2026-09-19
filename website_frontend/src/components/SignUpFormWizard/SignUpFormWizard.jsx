@@ -10,6 +10,7 @@ import { SignUpPathStep } from "components/MutualSignUpSteps/SignUpPathStep";
 import { UserInfoStep } from "components/MutualSignUpSteps/UserInfoStep";
 import { UserGamesStep } from "components/MutualSignUpSteps/UserGamesStep";
 import { ProfileBioStep } from "components/MutualSignUpSteps/ProfileBioStep";
+import { LocationStep } from "components/MutualSignUpSteps/LocationStep";
 
 import { PlayerAboutStep } from "components/PlayerSignUpSteps/PlayerAboutStep";
 import { PlayerBracketStep } from "components/PlayerSignUpSteps/PlayerBracketStep";
@@ -23,6 +24,9 @@ import { HostAccountsStep } from "components/HostSignUpSteps/HostAccountsStep";
 const PATH_STEP = { key: 'signup_path', title: 'Get Started', subtitle: "Pick one or both. If you compete and run events, choose both — it's a single account either way.", Component: SignUpPathStep, fields: [] };
 const MUTUAL_INFO_STEP = { key: 'user_info', title: 'Account Info', subtitle: "This is how you'll show up across uSync.", Component: UserInfoStep, fields: ['username', 'email'] };
 const MUTUAL_BIO_STEP = { key: 'profile_bio', title: 'Profile', subtitle: 'A photo and a line about yourself. Both optional — you can do this later.', Component: ProfileBioStep, fields: ['profile_picture', 'bio'] };
+// Shown whenever "Venue" is picked on the Get Started step, on top of whatever
+// player/host/other steps are already in the sequence.
+const LOCATION_STEP = { key: 'venue_location', title: 'Location', subtitle: "Add every venue you'll be hosting from. You can add more than one.", Component: LocationStep, fields: [] };
 
 // "Games You Play" (player), "Hosted Titles" (host), or "Games You Play & Host"
 // (both) — same UserGamesStep component, told via `props.mode` which field(s) to bind.
@@ -63,12 +67,22 @@ const COMBINED_STEPS = [
 function buildStepSequence(pathSelection) {
     const isPlayer = pathSelection.includes('player');
     const isHost = pathSelection.includes('host');
+    const isVenue = pathSelection.includes('venue');
 
-    if (isPlayer && isHost) return [PATH_STEP, ...COMBINED_STEPS];
-    if (isHost) return [PATH_STEP, ...HOST_STEPS];
-    if (isPlayer) return [PATH_STEP, ...PLAYER_STEPS];
+    let steps;
+    if (isPlayer && isHost) steps = [PATH_STEP, ...COMBINED_STEPS];
+    else if (isHost) steps = [PATH_STEP, ...HOST_STEPS];
+    else if (isPlayer) steps = [PATH_STEP, ...PLAYER_STEPS];
+    else steps = [PATH_STEP];
 
-    return [PATH_STEP];
+    if (!isVenue) return steps;
+
+    // Venue is independent of player/host/other, so it just slots the
+    // Location step in right after Account Info wherever that ends up
+    // (or right after Get Started, if Account Info isn't in the sequence).
+    const infoIndex = steps.findIndex(step => step.key === 'user_info');
+    const insertAt = infoIndex === -1 ? 1 : infoIndex + 1;
+    return [...steps.slice(0, insertAt), LOCATION_STEP, ...steps.slice(insertAt)];
 }
 
 // Fields the sidebar checkmarks care about — kept to a minimal, targeted watch
@@ -103,7 +117,7 @@ function isStepComplete(step, values, passedSteps) {
 }
 
 export const SignUpFormWizard = () => {
-    const methods = useForm({ defaultValues: { signup_path: [] }, mode: 'onBlur' });
+    const methods = useForm({ defaultValues: { signup_path: [], venues: [{ name: '', location: '' }] }, mode: 'onBlur' });
     const { watch, trigger, setError, clearErrors, handleSubmit, formState: { isSubmitting, errors } } = methods;
     const { session } = useAuth();
     const navigate = useNavigate();

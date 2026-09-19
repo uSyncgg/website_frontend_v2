@@ -44,6 +44,13 @@ export const SignUpPathStep = () => {
                     selectedClassName={styles.choiceSelected}
                 />
                 <SelectableFormBlock
+                    title="Venue"
+                    selected={selected.includes('venue')}
+                    onToggle={() => toggle('venue')}
+                    blockClassName={styles.choice}
+                    selectedClassName={styles.choiceSelected}
+                />
+                <SelectableFormBlock
                     title="Other"
                     selected={selected.includes('other')}
                     onToggle={() => toggle('other')}
