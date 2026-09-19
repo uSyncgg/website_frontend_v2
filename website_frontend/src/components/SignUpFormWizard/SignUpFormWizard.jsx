@@ -24,8 +24,8 @@ import { HostAccountsStep } from "components/HostSignUpSteps/HostAccountsStep";
 const PATH_STEP = { key: 'signup_path', title: 'Get Started', subtitle: "Pick one or both. If you compete and run events, choose both — it's a single account either way.", Component: SignUpPathStep, fields: [] };
 const MUTUAL_INFO_STEP = { key: 'user_info', title: 'Account Info', subtitle: "This is how you'll show up across uSync.", Component: UserInfoStep, fields: ['username', 'email'] };
 const MUTUAL_BIO_STEP = { key: 'profile_bio', title: 'Profile', subtitle: 'A photo and a line about yourself. Both optional — you can do this later.', Component: ProfileBioStep, fields: ['profile_picture', 'bio'] };
-// Shown whenever "Venue" is picked on the Get Started step, on top of whatever
-// player/host/other steps are already in the sequence.
+// Shown whenever "Venue" is picked among the Other sub-roles on the Get
+// Started step, on top of whatever player/host steps are already in the sequence.
 const LOCATION_STEP = { key: 'venue_location', title: 'Location', subtitle: "Add every venue you'll be hosting from. You can add more than one.", Component: LocationStep, fields: [] };
 
 // "Games You Play" (player), "Hosted Titles" (host), or "Games You Play & Host"
@@ -64,10 +64,11 @@ const COMBINED_STEPS = [
 
 // The order/composition of the sequence lives entirely here - reorder or interleave
 // player/host steps by editing this function, nothing else needs to change.
-function buildStepSequence(pathSelection) {
+function buildStepSequence(pathSelection, otherRoles) {
     const isPlayer = pathSelection.includes('player');
     const isHost = pathSelection.includes('host');
-    const isVenue = pathSelection.includes('venue');
+    // Venue lives under the "Other" sub-role picker, not as its own top-level option.
+    const isVenue = pathSelection.includes('other') && otherRoles.includes('Venue');
 
     let steps;
     if (isPlayer && isHost) steps = [PATH_STEP, ...COMBINED_STEPS];
@@ -77,9 +78,9 @@ function buildStepSequence(pathSelection) {
 
     if (!isVenue) return steps;
 
-    // Venue is independent of player/host/other, so it just slots the
-    // Location step in right after Account Info wherever that ends up
-    // (or right after Get Started, if Account Info isn't in the sequence).
+    // Venue is independent of player/host, so it just slots the Location
+    // step in right after Account Info wherever that ends up (or right
+    // after Get Started, if Account Info isn't in the sequence).
     const infoIndex = steps.findIndex(step => step.key === 'user_info');
     const insertAt = infoIndex === -1 ? 1 : infoIndex + 1;
     return [...steps.slice(0, insertAt), LOCATION_STEP, ...steps.slice(insertAt)];
@@ -125,8 +126,10 @@ export const SignUpFormWizard = () => {
     const [passedSteps, setPassedSteps] = useState(() => new Set());
 
     const pathSelection = watch('signup_path') ?? [];
+    const otherRoles = watch('other_roles') ?? [];
     const pathKey = [...pathSelection].sort().join(',');
-    const stepSequence = useMemo(() => buildStepSequence(pathSelection), [pathKey]);
+    const otherRolesKey = [...otherRoles].sort().join(',');
+    const stepSequence = useMemo(() => buildStepSequence(pathSelection, otherRoles), [pathKey, otherRolesKey]);
 
     const completionWatch = watch(COMPLETION_WATCH_FIELDS);
     const completionValues = Object.fromEntries(COMPLETION_WATCH_FIELDS.map((name, i) => [name, completionWatch[i]]));

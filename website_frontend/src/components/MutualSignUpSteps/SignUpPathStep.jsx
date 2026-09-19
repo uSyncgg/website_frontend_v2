@@ -3,7 +3,7 @@ import { FormTextInput } from "components/FormTextInput/FormTextInput";
 import { useFormContext } from "react-hook-form";
 import styles from "./SignUpPathStep.module.css";
 
-const OTHER_ROLE_OPTIONS = ["Coach", "Sponsor", "Team", "Viewer", "Other"];
+const OTHER_ROLE_OPTIONS = ["Coach", "Sponsor", "Team", "Viewer", "Venue", "Other"];
 
 export const SignUpPathStep = () => {
     const { watch, setValue, formState: { errors } } = useFormContext();
@@ -40,13 +40,6 @@ export const SignUpPathStep = () => {
                     title="Host"
                     selected={selected.includes('host')}
                     onToggle={() => toggle('host')}
-                    blockClassName={styles.choice}
-                    selectedClassName={styles.choiceSelected}
-                />
-                <SelectableFormBlock
-                    title="Venue"
-                    selected={selected.includes('venue')}
-                    onToggle={() => toggle('venue')}
                     blockClassName={styles.choice}
                     selectedClassName={styles.choiceSelected}
                 />
