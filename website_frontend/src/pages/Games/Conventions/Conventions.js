@@ -1,10 +1,81 @@
-import { SeoData, HostBanner, LanMap } from "components";
-import { CONVENTION_MARKERS } from 'data/lanMarkers';
+import { useMemo, useState } from "react";
+import { SeoData, HostBanner, NoEvents, LanMap, EventListFilters } from "components";
+import { useLanEvents } from "hooks";
+import { toLanMarkers } from 'data/lanMarkers';
+import { buildEventPath } from 'utils/eventPaths';
+import { getStateFromLocation } from 'utils/location';
 import '../EventBanners.css';
 
+const GAME = "Conventions";
+
+const normalizeLan = (event) => ({
+    name: event.name,
+    path: buildEventPath('/lans', event.path),
+    imgUrl: event.banner_img,
+    alt: event.name,
+    verified: !!event.verified,
+    region: event.location,
+    state: getStateFromLocation(event.location),
+    buttonTitle: "More Info",
+});
+
+const applyFiltersAndSort = (list, { selectedStates, verifiedOnly, sort }) => {
+    let result = list.filter(l =>
+        (selectedStates.length === 0 || selectedStates.includes(l.state)) &&
+        (!verifiedOnly || l.verified)
+    );
+
+    if (sort === 'az') {
+        result = result.slice().sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sort === 'za') {
+        result = result.slice().sort((a, b) => b.name.localeCompare(a.name));
+    } else {
+        result = result.slice().sort((a, b) => (b.verified ? 1 : 0) - (a.verified ? 1 : 0));
+    }
+
+    return result;
+};
+
+const LanBanner = ({ lan }) => (
+    <HostBanner path={lan.path}>
+        <HostBanner.Title path={lan.path} verified={lan.verified}>{lan.name}</HostBanner.Title>
+        <HostBanner.Image
+            path={lan.path}
+            imgUrl={lan.imgUrl}
+            alt={lan.alt}
+        />
+        <HostBanner.Region>{lan.region}</HostBanner.Region>
+        <HostBanner.Button title={lan.buttonTitle} path={lan.path} />
+    </HostBanner>
+);
+
 export const Conventions = () => {
+    const { data, loading, error } = useLanEvents(GAME);
+
+    const [sort, setSort] = useState('featured');
+    const [selectedStates, setSelectedStates] = useState([]);
+    const [verifiedOnly, setVerifiedOnly] = useState(false);
+
+    const lans = useMemo(() => (data || []).map(normalizeLan), [data]);
+    const markers = useMemo(() => toLanMarkers(data, GAME), [data]);
+
+    const stateOptions = useMemo(
+        () => Array.from(new Set(lans.map(l => l.state))).sort(),
+        [lans]
+    );
+
+    const filteredLans = useMemo(
+        () => applyFiltersAndSort(lans, { selectedStates, verifiedOnly, sort }),
+        [lans, sort, selectedStates, verifiedOnly]
+    );
+
+    const clearFilters = () => {
+        setSelectedStates([]);
+        setVerifiedOnly(false);
+    };
+
     return (
-        <div className="standardContainer">
+        <div className="standardContainer minorBottomSpace">
             <SeoData
                 title={"Conventions"}
                 description="Find esports LAN conventions and in-person gaming events. Browse gaming conventions and multi-game LAN events happening across the country."
@@ -12,90 +83,39 @@ export const Conventions = () => {
             />
 
             <div className="lanMapContainer">
-                <LanMap markers={CONVENTION_MARKERS} game="Conventions" />
+                <LanMap markers={markers} game="Conventions" />
             </div>
 
-            <div className="eventBannerContainer">
-                <div className="hrEvents" />
+            <EventListFilters
+                sort={sort}
+                onSortChange={setSort}
+                regionOptions={stateOptions}
+                regionLabel="State"
+                selectedRegions={selectedStates}
+                onRegionChange={setSelectedStates}
+                verifiedOnly={verifiedOnly}
+                onVerifiedChange={setVerifiedOnly}
+                resultCount={filteredLans.length}
+                onClear={clearFilters}
+            />
 
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/gacs-operation-heatwave"}>GA:CS Operation Heatwave</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/lans/gacs-operation-heatwave"} 
-                        imgUrl={"https://i.imgur.com/wgR4yga.png"} 
-                        alt={"GA:CS Operation Heatwave"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Columbus, OH</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/gacs-operation-heatwave"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/hellcase-cs2-2026"}>Hellcase CS2 LAN 2026</HostBanner.Title>
-                    <HostBanner.Image 
-                        path={"/lans/hellcase-cs2-2026"} 
-                        imgUrl={"https://i.imgur.com/3vI1PAe.png"} 
-                        alt={"Hellcase CS2 LAN 2026"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Lakewood, CO</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/hellcase-cs2-2026"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/lan-a-thon-under-the-sun-2026"}>LAN-A-THON Under The Sun 2026</HostBanner.Title>
-                    <HostBanner.Image
-                        path={"/lans/lan-a-thon-under-the-sun-2026"}
-                        imgUrl={"https://i.imgur.com/WJxYRyN.png"}
-                        alt={"LAN-A-THON Under The Sun 2026"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Bonita, CA</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/lan-a-thon-under-the-sun-2026"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/fortlan-2026"}>FortLAN 2026</HostBanner.Title>
-                    <HostBanner.Image
-                        path={"/lans/fortlan-2026"}
-                        imgUrl={"https://i.imgur.com/W1iIUMc.png"}
-                        alt={"FortLAN 2026"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Fort Wayne, IN</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/fortlan-2026"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/lan-all-night-2026"}>LAN All Night 2026</HostBanner.Title>
-                    <HostBanner.Image
-                        path={"/lans/lan-all-night-2026"}
-                        imgUrl={"https://i.imgur.com/lKQp2gM.png"}
-                        alt={"LAN All Night 2026"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Grapevine, TX</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/lan-all-night-2026"} />
-                </HostBanner>
-
-                <HostBanner>
-                    <HostBanner.Title path={"/lans/cs2-10-mans-2026"}>CS2 10-Mans 2026</HostBanner.Title>
-                    <HostBanner.Image
-                        path={"/lans/cs2-10-mans-2026"}
-                        imgUrl={"https://i.imgur.com/yQVRnhL.png"}
-                        alt={"CS2 10-Mans 2026"}
-                        verified={false}
-                    />
-                    <HostBanner.Region>Lakewood, CO</HostBanner.Region>
-                    <HostBanner.Button title={"More Info"} path={"/lans/cs2-10-mans-2026"} />
-                </HostBanner>
-
-                <div className="hrEvents" />
-            </div>
+            {loading ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading conventions...</h2>
+            ) : error ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load conventions right now.</h2>
+            ) : lans.length === 0 ? (
+                <div className="eventBannerContainer">
+                    <NoEvents pageType={"LANs"} />
+                </div>
+            ) : filteredLans.length === 0 ? (
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No results match your filters.</h2>
+            ) : (
+                <div className="eventBannerContainer">
+                    {filteredLans.map(lan => (
+                        <LanBanner key={lan.path} lan={lan} />
+                    ))}
+                </div>
+            )}
         </div>
     );
 }

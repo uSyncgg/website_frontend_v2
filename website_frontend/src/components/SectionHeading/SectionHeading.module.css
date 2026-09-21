@@ -1,0 +1,27 @@
+.wrapper {
+    text-align: center;
+    margin: 0 auto 2rem;
+}
+
+.heading {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -.5px;
+    margin: 0 0 .5rem;
+    text-align: center;
+}
+
+.underline {
+    display: block;
+    width: 26.4rem;
+    max-width: 96%;
+    margin: 0 auto;
+}
+
+@media only screen and (max-width: 768px) {
+    .heading {
+        font-size: 1.85rem;
+    }
+}

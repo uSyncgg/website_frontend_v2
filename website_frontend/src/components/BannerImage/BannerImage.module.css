@@ -1,17 +1,30 @@
 .bannerImageWrapper {
   position: relative;
-  display: inline-block;
-  margin-bottom: 1rem;
-  min-height: 120px;
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  width: 74px;
+  height: 74px;
+  flex: none;
+  border-radius: 0.625rem;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .bannerImage {
-    width: 90%;
-    height: auto;
-    border-radius: 1.813rem;
-    transition: filter 0.7s;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.625rem;
+    transition: filter 0.3s;
 }
 
 .bannerImage:hover {
   filter: brightness(135%);
+}
+
+@media only screen and (max-width: 768px) {
+  .bannerImageWrapper {
+    width: 56px;
+    height: 56px;
+  }
 }

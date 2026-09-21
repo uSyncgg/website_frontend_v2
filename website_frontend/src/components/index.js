@@ -13,6 +13,7 @@ import { HeaderImage } from "./HeaderImage/HeaderImage";
 import { HostBanner } from "./HostBanner/HostBanner";
 import MoreInfoButton from "./MoreInfoButton/MoreInfoButton";
 import { BackButton } from "./BackButton/BackButton";
+import { EventListFilters } from "./EventListFilters/EventListFilters";
 
 // Specific Event Information
 import { NoEvents } from "./NoEvents/NoEvents";
@@ -30,8 +31,20 @@ import { EventTypeImages } from "./EventTypeImages/EventTypeImages";
 // Homepage
 import { ChooseYourGame } from "./ChooseYourGame/ChooseYourGame";
 
+// Catalog index pattern (config-driven — see catalog/*.catalog.js)
+import { CatalogIndex } from "./CatalogIndex/CatalogIndex";
+import { CatalogHero } from "./CatalogHero/CatalogHero";
+import { VerifiedBoard } from "./VerifiedBoard/VerifiedBoard";
+import { HeroCta } from "./HeroCta/HeroCta";
+import { CatalogGrid } from "./CatalogGrid/CatalogGrid";
+import { CatalogCard } from "./CatalogCard/CatalogCard";
+import { CatalogFacets } from "./CatalogFacets/CatalogFacets";
+import { CatalogSectionHeading } from "./CatalogSectionHeading/CatalogSectionHeading";
+import { EmptyState } from "./EmptyState/EmptyState";
+
 // Payment Form
 import { PaymentForm } from "./PaymentForm/PaymentForm";
+import { DynamicFormField } from "./PaymentForm/DynamicFormField";
 import { PaymentCart } from "./PaymentCart/PaymentCart";
 import { Receipt } from "./Receipt/Receipt";
 import { LoadingWheel } from "./LoadingWheel/LoadingWheel";
@@ -60,6 +73,11 @@ import { HomeTournaments } from "./HomeTournaments/HomeTournaments";
 // Articles
 import { ArticleLayout } from "./ArticleLayout/ArticleLayout";
 
+// Game Hub pages
+import { WaysToCompete } from "./WaysToCompete/WaysToCompete";
+import { SectionHeading } from "./SectionHeading/SectionHeading";
+import { VerifiedEvents } from "./VerifiedEvents/VerifiedEvents";
+
 // SEO
 import { SeoData } from "./SeoData/SeoData";
 
@@ -82,8 +100,10 @@ export {
     Navbar,
     Footer,
     HostBanner,
+    EventListFilters,
     MapCoverHome,
     PaymentForm,
+    DynamicFormField,
     PaymentCart,
     LoadingWheel,
     FormDataCheck,
@@ -112,10 +132,23 @@ export {
     VerifiedText,
     VerifiedImage,
     ChooseYourGame,
+    CatalogIndex,
+    CatalogHero,
+    VerifiedBoard,
+    HeroCta,
+    CatalogGrid,
+    CatalogCard,
+    CatalogFacets,
+    CatalogSectionHeading,
+    EmptyState,
     ErrorBoundary,
     PaymentComponent,
     LanMap,
     SocialLoginButtons,
     RequireCompleteProfile,
-    SignUpFormWizard
+    SignUpFormWizard,
+    WaysToCompete,
+    SectionHeading,
+    VerifiedEvents,
+    CheckoutSteps
 };

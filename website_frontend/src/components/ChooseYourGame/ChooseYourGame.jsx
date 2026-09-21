@@ -1,11 +1,15 @@
 import { Link } from "react-router";
 import { FaChevronRight } from "react-icons/fa";
 import styles from './ChooseYourGame.module.css';
+import underline from 'assets/images/misc/underline-decorative-graphic_9.6.26.webp';
+import codIcon from 'assets/images/game_icons/game-icon-call-of-duty_9.6.26.webp';
+import lolIcon from 'assets/images/game_icons/game-icon-league-of-legends_9.6.26.webp';
+import haloIcon from 'assets/images/game_icons/game-icon-halo_9.6.26.webp';
 
 const GAMES = [
-    { name: "Call of Duty", to: "/games/call-of-duty", logo: "https://i.imgur.com/gNvoNEo.png", accent: styles.accentCod },
-    { name: "League of Legends", to: "/games/LoL", logo: "https://i.imgur.com/5riYNow.png", accent: styles.accentLol },
-    { name: "Halo", to: "/games/halo", logo: "https://i.imgur.com/wqKJfEu.png", accent: styles.accentHalo },
+    { name: "Call of Duty", to: "/games/call-of-duty", logo: codIcon, accent: styles.accentCod },
+    { name: "League of Legends", to: "/games/LoL", logo: lolIcon, accent: styles.accentLol },
+    { name: "Halo", to: "/games/halo", logo: haloIcon, accent: styles.accentHalo },
 ];
 
 export const ChooseYourGame = () => {
@@ -13,7 +17,7 @@ export const ChooseYourGame = () => {
         <div className={styles.container}>
             <p className={styles.eyebrow}>Community</p>
             <h2 className={styles.white}>Choose Your Game</h2>
-            <img className="underlineImg" src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
+            <img className="underlineImg" src={underline} alt="underline" />
 
             <div className={styles.grid}>
                 {GAMES.map(game => (
