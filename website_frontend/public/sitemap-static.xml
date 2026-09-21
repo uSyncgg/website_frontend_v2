@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- Home Page -->
+  <url><loc>https://www.usync.gg/</loc></url>
+
+  <!-- Top Level Pages -->
+  <url><loc>https://www.usync.gg/games</loc></url>
+  <url><loc>https://www.usync.gg/leagues</loc></url>
+  <url><loc>https://www.usync.gg/lans</loc></url>
+  <url><loc>https://www.usync.gg/tournaments</loc></url>
+
+  <!-- More Pages -->
+  <url><loc>https://www.usync.gg/more/verification</loc></url>
+  <url><loc>https://www.usync.gg/more/eventhost</loc></url>
+  <url><loc>https://www.usync.gg/more/contactus</loc></url>
+  <url><loc>https://www.usync.gg/more/FAQ</loc></url>
+  <url><loc>https://www.usync.gg/more/articles</loc></url>
+  <url><loc>https://www.usync.gg/reportproblem</loc></url>
+  <url><loc>https://www.usync.gg/Comingsoon</loc></url>
+
+  <!-- Articles -->
+  <url><loc>https://www.usync.gg/more/articles/The-Problem-With-Esports</loc><lastmod>2026-07-11</lastmod></url>
+  <url><loc>https://www.usync.gg/more/articles/How-Esports-Can-Be-Better</loc><lastmod>2026-07-11</lastmod></url>
+  <url><loc>https://www.usync.gg/more/articles/How-We-Fix-It</loc><lastmod>2026-07-11</lastmod></url>
+  <url><loc>https://www.usync.gg/more/articles/What-We-Provide</loc><lastmod>2026-07-11</lastmod></url>
+  <url><loc>https://www.usync.gg/more/articles/How-to-Join-an-Esports-League</loc><lastmod>2026-07-11</lastmod></url>
+  <url><loc>https://www.usync.gg/more/articles/why-usync-is-unique</loc><lastmod>2026-07-11</lastmod></url>
+  <url><loc>https://www.usync.gg/more/articles/black-ops-7-best-controller-settings</loc><lastmod>2026-07-11</lastmod></url>
+  <url><loc>https://www.usync.gg/more/articles/best-dpi-valorant-sensitivity</loc><lastmod>2026-07-11</lastmod></url>
+  <url><loc>https://www.usync.gg/more/articles/how-to-enable-120hz-ps5</loc><lastmod>2026-07-11</lastmod></url>
+  <url><loc>https://www.usync.gg/more/articles/esports-tournaments-near-me</loc><lastmod>2026-07-11</lastmod></url>
+  <url><loc>https://www.usync.gg/more/articles/how-to-join-online-gaming-tournaments</loc><lastmod>2026-07-11</lastmod></url>
+
+  <!-- Call of Duty -->
+  <url><loc>https://www.usync.gg/games/call-of-duty</loc></url>
+  <url><loc>https://www.usync.gg/games/call-of-duty/lans</loc></url>
+  <!-- CoD H2H -->
+  <url><loc>https://www.usync.gg/games/call-of-duty/head-to-head</loc></url>
+  <!-- CoD Leagues -->
+  <url><loc>https://www.usync.gg/games/call-of-duty/leagues</loc></url>
+  <!-- CoD Tournaments -->
+  <url><loc>https://www.usync.gg/tournaments/call-of-duty-tournaments</loc></url>
+  <!-- CoD Wagers -->
+  <url><loc>https://www.usync.gg/games/call-of-duty/wagers</loc></url>
+
+  <!-- CS2 -->
+  <url><loc>https://www.usync.gg/games/CS2</loc></url>
+  <!-- CS2 H2H -->
+  <url><loc>https://www.usync.gg/games/CS2/head-to-head</loc></url>
+  <!-- CS2 Leagues -->
+  <url><loc>https://www.usync.gg/games/CS2/leagues</loc></url>
+  <!-- CS2 Wagers -->
+  <url><loc>https://www.usync.gg/games/CS2/wagers</loc></url>
+
+  <!-- Halo -->
+  <url><loc>https://www.usync.gg/games/halo</loc></url>
+  <url><loc>https://www.usync.gg/games/halo/lans</loc></url>
+  <!-- Halo H2H -->
+  <url><loc>https://www.usync.gg/games/halo/head-to-head</loc></url>
+  <!-- Halo Leagues -->
+  <url><loc>https://www.usync.gg/games/halo/leagues</loc></url>
+  <!-- Halo Wagers -->
+  <url><loc>https://www.usync.gg/games/halo/wagers</loc></url>
+
+  <!-- League of Legends -->
+  <url><loc>https://www.usync.gg/games/LoL</loc></url>
+  <url><loc>https://www.usync.gg/games/LoL/lans</loc></url>
+  <!-- LoL H2H -->
+  <url><loc>https://www.usync.gg/games/LoL/head-to-head</loc></url>
+  <!-- LoL Leagues -->
+  <url><loc>https://www.usync.gg/games/LoL/leagues</loc></url>
+  <!-- LoL Wagers -->
+  <url><loc>https://www.usync.gg/games/LoL/wagers</loc></url>
+
+  <!-- Rocket League -->
+  <url><loc>https://www.usync.gg/games/RocketLeague</loc></url>
+  <!-- RL H2H -->
+  <url><loc>https://www.usync.gg/games/RocketLeague/head-to-head</loc></url>
+  <!-- RL Leagues -->
+  <url><loc>https://www.usync.gg/games/RocketLeague/leagues</loc></url>
+  <!-- RL Wagers -->
+  <url><loc>https://www.usync.gg/games/RocketLeague/wagers</loc></url>
+
+  <!-- Valorant -->
+  <url><loc>https://www.usync.gg/games/Valorant</loc></url>
+  <!-- Valorant H2H -->
+  <url><loc>https://www.usync.gg/games/Valorant/head-to-head</loc></url>
+  <!-- Valorant Leagues -->
+  <url><loc>https://www.usync.gg/games/Valorant/leagues</loc></url>
+  <!-- Valorant Wagers -->
+  <url><loc>https://www.usync.gg/games/Valorant/wagers</loc></url>
+
+  <!-- Warzone -->
+  <url><loc>https://www.usync.gg/games/warzone</loc></url>
+  <url><loc>https://www.usync.gg/games/warzone/lans</loc></url>
+  <!-- Warzone H2H -->
+  <url><loc>https://www.usync.gg/games/warzone/head-to-head</loc></url>
+  <!-- Warzone Leagues -->
+  <url><loc>https://www.usync.gg/games/warzone/leagues</loc></url>
+  <!-- Warzone Wagers -->
+  <url><loc>https://www.usync.gg/games/warzone/wagers</loc></url>
+
+  <!-- Payment -->
+  <url><loc>https://www.usync.gg/paymentform</loc></url>
+  <url><loc>https://www.usync.gg/paymentform/review</loc></url>
+  <url><loc>https://www.usync.gg/checkout</loc></url>
+  <url><loc>https://www.usync.gg/paymentform/test/receipt</loc></url>
+  <url><loc>https://www.usync.gg/payment</loc></url>
+
+  <!-- LANs -->
+  <url><loc>https://www.usync.gg/LanMap</loc></url>
+  <url><loc>https://www.usync.gg/other-lans</loc></url>
+
+</urlset>

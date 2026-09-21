@@ -3,6 +3,15 @@ import { SeoData } from "components";
 import { Link } from "react-router";
 import { FaChevronDown } from 'react-icons/fa';
 import styles from './Faqs.module.css';
+import codIcon from 'assets/images/game_icons/game-icon-call-of-duty_9.6.26.webp';
+import warzoneIcon from 'assets/images/game_icons/game-icon-warzone_9.6.26.webp';
+import haloIcon from 'assets/images/game_icons/game-icon-halo_9.6.26.webp';
+import lolIcon from 'assets/images/game_icons/game-icon-league-of-legends_9.6.26.webp';
+import rlIcon from 'assets/images/game_icons/game-icon-rocket-league_9.6.26.webp';
+import valorantIcon from 'assets/images/game_icons/game-icon-valorant_9.6.26.webp';
+import problemThumb from 'assets/images/article_bubbles/article-thumb-the-problem-with-esports_9.6.26.webp';
+import provideThumb from 'assets/images/article_bubbles/article-thumb-what-we-provide_9.6.26.webp';
+import fixItThumb from 'assets/images/article_bubbles/article-thumb-how-we-fix-it_9.6.26.webp';
 
 const FAQS = [
     {
@@ -85,22 +94,22 @@ export const Faqs = () => {
                         <p className={styles.sectionLabel}>Featured Games</p>
                         <div className={styles.gamesCard}>
                             <Link to={"/games/call-of-duty"} className={styles.gameLink}>
-                                <img src="https://i.imgur.com/gNvoNEo.png" alt="Call of Duty" className={styles.gameImg} />
+                                <img src={codIcon} alt="Call of Duty" className={styles.gameImg} />
                             </Link>
                             <Link to={"/games/warzone"} className={styles.gameLink}>
-                                <img src="https://i.imgur.com/IBGIbY2.png" alt="Warzone" className={styles.gameImg} />
+                                <img src={warzoneIcon} alt="Warzone" className={styles.gameImg} />
                             </Link>
                             <Link to={"/games/halo"} className={styles.gameLink}>
-                                <img src="https://i.imgur.com/wqKJfEu.png" alt="Halo" className={styles.gameImg} />
+                                <img src={haloIcon} alt="Halo" className={styles.gameImg} />
                             </Link>
                             <Link to={"/games/LoL"} className={styles.gameLink}>
-                                <img src="https://i.imgur.com/5riYNow.png" alt="League of Legends" className={styles.gameImg} />
+                                <img src={lolIcon} alt="League of Legends" className={styles.gameImg} />
                             </Link>
                             <Link to={"/games/RocketLeague"} className={styles.gameLink}>
-                                <img src="https://i.imgur.com/GJO8JIZ.png" alt="Rocket League" className={styles.gameImg} />
+                                <img src={rlIcon} alt="Rocket League" className={styles.gameImg} />
                             </Link>
                             <Link to={"/games/Valorant"} className={styles.gameLink}>
-                                <img src="https://i.imgur.com/Gsl3oIp.png" alt="Valorant" className={styles.gameImg} />
+                                <img src={valorantIcon} alt="Valorant" className={styles.gameImg} />
                             </Link>
                         </div>
                     </div>
@@ -142,13 +151,13 @@ export const Faqs = () => {
                     </div>
                     <div className={styles.articlesThumbs}>
                         <Link to={"/more/articles/The-Problem-With-Esports"} className={styles.articleThumb}>
-                            <img src="https://i.imgur.com/vBqSUhI.png" alt="The Problem With Esports" className={styles.articleThumbImg} />
+                            <img src={problemThumb} alt="The Problem With Esports" className={styles.articleThumbImg} />
                         </Link>
                         <Link to={"/more/articles/What-We-Provide"} className={styles.articleThumb}>
-                            <img src="https://i.imgur.com/Fr7yPnN.png" alt="What We Provide" className={styles.articleThumbImg} />
+                            <img src={provideThumb} alt="What We Provide" className={styles.articleThumbImg} />
                         </Link>
                         <Link to={"/more/articles/How-We-Fix-It"} className={styles.articleThumb}>
-                            <img src="https://i.imgur.com/Q6NQGsD.png" alt="How We Fix It" className={styles.articleThumbImg} />
+                            <img src={fixItThumb} alt="How We Fix It" className={styles.articleThumbImg} />
                         </Link>
                     </div>
                 </div>

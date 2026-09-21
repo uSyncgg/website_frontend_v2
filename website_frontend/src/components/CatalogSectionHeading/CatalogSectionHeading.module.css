@@ -1,0 +1,30 @@
+.heading {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 1180px;
+    margin: 0 auto 1.1rem;
+    padding: 0 1.5rem;
+}
+
+.label {
+    color: white;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.rule {
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.14);
+}
+
+.aside {
+    color: rgb(170, 166, 178);
+    font-size: .88rem;
+    white-space: nowrap;
+}
