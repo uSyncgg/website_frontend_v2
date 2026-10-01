@@ -12,7 +12,7 @@ import discordIcon from "assets/images/linked_platforms/discord_logo_09-17-26.we
 
 const options = [
     {
-        "name": "host_twitch",
+        "name": "twitch",
         "label": "Twitch",
         "image": twitchIcon,
         "labelClassName": "",
@@ -21,7 +21,7 @@ const options = [
         "imageClassName": ""
     },
     {
-        "name": "host_twitter",
+        "name": "twitter",
         "label": "Twitter/X",
         "image": twitterIcon,
         "labelClassName": "",
@@ -30,7 +30,7 @@ const options = [
         "imageClassName": ""
     },
     {
-        "name": "host_youtube",
+        "name": "youtube",
         "label": "YouTube",
         "initials": "YT",
         "labelClassName": "",
@@ -39,7 +39,7 @@ const options = [
         "imageClassName": ""
     },
     {
-        "name": "host_kick",
+        "name": "kick",
         "label": "Kick",
         "image": kickIcon,
         "labelClassName": "",
@@ -48,7 +48,7 @@ const options = [
         "imageClassName": ""
     },
     {
-        "name": "host_discord",
+        "name": "discord",
         "label": "Discord",
         "image": discordIcon,
         "labelClassName": "",
@@ -57,7 +57,7 @@ const options = [
         "imageClassName": ""
     },
     {
-        "name": "host_instagram",
+        "name": "instagram",
         "label": "Instagram",
         "image": instagramIcon,
         "labelClassName": "",

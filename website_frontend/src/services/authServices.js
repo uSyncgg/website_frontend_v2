@@ -5,7 +5,7 @@ export function signUp(email, password) {
         email,
         password,
         options: {
-            emailRedirectTo: `https://usync.gg/wz` // Change to configure profile form 
+            emailRedirectTo: `${window.location.origin}/complete-profile` 
         }
     })
 }
@@ -15,5 +15,7 @@ export function signInWithPassword(email, password) {
 }
 
 export function signInWithProvider(provider) {
-    return supabase.auth.signInWithOAuth({ provider });
+    return supabase.auth.signInWithOAuth({ provider, options: {
+        redirectTo: `${window.location.origin}/complete-profile`
+    } });
 }

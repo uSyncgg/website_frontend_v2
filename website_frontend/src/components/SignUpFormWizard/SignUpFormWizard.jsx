@@ -20,6 +20,8 @@ import { HostOrgStep } from "components/HostSignUpSteps/HostOrgStep";
 import { HostEventStep } from "components/HostSignUpSteps/HostEventStep";
 import { HostAccountsStep } from "components/HostSignUpSteps/HostAccountsStep";
 
+import { submitSignUpForm } from "services/user";
+
 // Step 0 is always the path choice; every other step's presence depends on it.
 const PATH_STEP = { key: 'signup_path', title: 'Get Started', subtitle: "Pick one or both. If you compete and run events, choose both — it's a single account either way.", Component: SignUpPathStep, fields: [] };
 const MUTUAL_INFO_STEP = { key: 'user_info', title: 'Account Info', subtitle: "This is how you'll show up across uSync.", Component: UserInfoStep, fields: ['username', 'email'] };
@@ -86,6 +88,12 @@ function buildStepSequence(pathSelection, otherRoles) {
     return [...steps.slice(0, insertAt), LOCATION_STEP, ...steps.slice(insertAt)];
 }
 
+// "Other" is a sub-role tag, not a standalone signup path — picking it still
+// requires Player and/or Host so every account has somewhere real to plug into.
+function otherNeedsPlayerOrHost(selection) {
+    return selection.includes('other') && !selection.includes('player') && !selection.includes('host');
+}
+
 // Fields the sidebar checkmarks care about — kept to a minimal, targeted watch
 // list so typing doesn't re-render the whole wizard on every keystroke.
 const COMPLETION_WATCH_FIELDS = ['signup_path', 'other_roles', 'username', 'email', 'first_name', 'last_name', 'organization'];
@@ -104,6 +112,7 @@ function isStepComplete(step, values, passedSteps) {
             const selection = values.signup_path ?? [];
             if (selection.length === 0) return false;
             if (selection.includes('other') && (values.other_roles ?? []).length === 0) return false;
+            if (otherNeedsPlayerOrHost(selection)) return false;
             return true;
         }
         case 'user_info':
@@ -148,6 +157,10 @@ export const SignUpFormWizard = () => {
                 setError('signup_path', { type: 'manual', message: 'Select at least one option to continue.' });
                 return;
             }
+            if (otherNeedsPlayerOrHost(pathSelection)) {
+                setError('signup_path', { type: 'manual', message: 'Other must be paired with Player and/or Host — select at least one to continue.' });
+                return;
+            }
             clearErrors('signup_path');
         } else {
             const valid = await trigger(currentStep.fields);
@@ -170,7 +183,19 @@ export const SignUpFormWizard = () => {
 
     const onSubmit = async (data) => {
         // linked_toggle is UI-only state (which account tab is showing) - not real submission data.
-        const { linked_toggle, profile_picture, ...submissionData } = data;
+        // venues only applies when "Other" + "Venue" is selected; it otherwise carries the
+        // Location step's blank default row and shouldn't be sent.
+        // "other" is a UI-only sub-role gate — it never lands in signup_path itself (the user
+        // is always required to also be player and/or host), but the other_roles/other_role_detail
+        // fields it unlocks still ride along in the payload.
+        const { linked_toggle, profile_picture, venues, ...rest } = data;
+        const rawPath = data.signup_path ?? [];
+        const isVenue = rawPath.includes('other') && (data.other_roles ?? []).includes('Venue');
+        const submissionData = {
+            ...rest,
+            signup_path: rawPath.filter((p) => p !== 'other'),
+            ...(isVenue ? { venues } : {}),
+        };
 
         const payload = new FormData();
         payload.append('data', JSON.stringify(submissionData));
@@ -179,9 +204,14 @@ export const SignUpFormWizard = () => {
         }
 
         try {
-            await axios.post('http://localhost:4242/registration', payload, {
-                headers: { Authorization: `Bearer ${session?.access_token}` },
-            });
+
+            // for (const [key, value] of payload.entries()) {
+            //     console.log(`PAYLOAD ${key}:`, key === 'data' ? JSON.parse(value) : value);
+            // }
+            // await axios.post('http://localhost:4242/registration', payload, {
+            //     headers: { Authorization: `Bearer ${session?.access_token}` },
+            // });
+            await submitSignUpForm(payload, session?.access_token)
 
             navigate('/');
         } catch (err) {
@@ -249,9 +279,9 @@ export const SignUpFormWizard = () => {
                                 )}
 
                                 {!isLastStep ? (
-                                    <FormButton type="button" onClick={handleNext} label="Continue" className={styles.btnPrimary} />
+                                    <FormButton key="continue" type="button" onClick={handleNext} label="Continue" className={styles.btnPrimary} />
                                 ) : (
-                                    <FormButton type="submit" disabled={isSubmitting} label={isSubmitting ? 'Submitting...' : 'Submit'} className={styles.btnPrimary} />
+                                    <FormButton key="submit" type="submit" disabled={isSubmitting} label={isSubmitting ? 'Submitting...' : 'Submit'} className={styles.btnPrimary} />
                                 )}
                             </div>
                         </div>

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import styles from "./FormPFPUpload.module.css";
 
-const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/gif", "image/webp"];
-const MAX_FILE_SIZE = 8 * 1024 * 1024;
+const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/webp"];
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
 export const FormPFPUpload = ({ id, name, label, required, inputClassName, labelClassName, errorClassName, onFieldChange }) => {
     const { register, formState: { errors } } = useFormContext();

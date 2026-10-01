@@ -25,18 +25,19 @@ export const HostOrgStep = () => {
     const [organizationTaken, setOrganizationTaken] = useState("");
 
     const checkOrganizationAvailability = async (value) => {
-        if (!value) {
-            setOrganizationTaken("");
-            return;
-        }
+        // if (!value) {
+        //     setOrganizationTaken("");
+        //     return;
+        // }
 
-        const result = await FormDataCheck({ // NOTE: this needs to be updated to supabase interaction, this is on the sunset mongodb interaction
-            endpoint: "review/organization-availability",
-            formData: { organization: value },
-            collectionName: "",
-        });
+        // const result = await FormDataCheck({ // NOTE: this needs to be updated to supabase interaction, this is on the sunset mongodb interaction
+        //     endpoint: "review/organization-availability",
+        //     formData: { organization: value },
+        //     collectionName: "",
+        // });
 
-        setOrganizationTaken(result.success ? "" : value);
+        // setOrganizationTaken(result.success ? "" : value);
+        setOrganizationTaken("");
     };
 
     return (

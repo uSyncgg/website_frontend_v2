@@ -28,13 +28,13 @@ export const UserInfoStep = () => {
             return;
         }
 
-        const result = await FormDataCheck({ // NOTE: this needs to be updated to supabase interaction, this is on the sunset mongodb interaction
-            endpoint: "review/username-availability",
-            formData: { username: value },
-            collectionName: "accounts",
-        });
+        // const result = await FormDataCheck({ // NOTE: this needs to be updated to supabase interaction, this is on the sunset mongodb interaction
+        //     endpoint: "review/username-availability",
+        //     formData: { username: value },
+        //     collectionName: "accounts",
+        // });
 
-        setUsernameTaken(result.success ? "" : value);
+        // setUsernameTaken(result.success ? "" : value);
     };
 
     const checkEmailInUse = async (value) => {
@@ -43,13 +43,13 @@ export const UserInfoStep = () => {
             return;
         }
 
-        const result = await FormDataCheck({ // Same note as above
-            endpoint: "review/email-availability",
-            formData: { email: value },
-            collectionName: "accounts",
-        });
+        // const result = await FormDataCheck({ // Same note as above
+        //     endpoint: "review/email-availability",
+        //     formData: { email: value },
+        //     collectionName: "accounts",
+        // });
 
-        setEmailTaken(result.success ? "" : value);
+        // setEmailTaken(result.success ? "" : value);
     };
 
     return (

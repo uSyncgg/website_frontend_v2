@@ -83,7 +83,7 @@ function PassSelection() {
         };
 
         try {
-            const result = await submitEventRegistration(payload);
+            const result = await submitEventRegistration(payload); 
             navigate(`/passes/registration/${result.registration_id}/payment`);
         } catch (err) {
             setSubmitError(getApiErrorMessage(err));
