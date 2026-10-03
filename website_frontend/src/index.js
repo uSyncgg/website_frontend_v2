@@ -7,6 +7,9 @@ import { BrowserRouter, Routes, Route } from 'react-router';
 // Navbar & Footer
 import { Navbar, Footer, ScrollToTop, ErrorBoundary } from 'components';
 
+// Account Setup
+import { SignUpFormWizard } from 'components';
+
 // 404 fallback
 import { NotFound } from 'pages/NotFound';
 
@@ -51,6 +54,7 @@ import TournamentRoutes from './routes/TournamentRoutes';
 // Authentication Routes
 import { Login } from 'pages/Accounts/Authentication/Login';
 import { SignUp } from 'pages/Accounts/Authentication/Signup';
+import { RequireCompleteProfile } from 'components';
 
 const root = document.getElementById('root');
 
@@ -113,6 +117,12 @@ const app = (
             {/* Authentication Routes */}
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />
+
+            {/* Profile Completion — the destination RequireCompleteProfile redirects to,
+                so it must not be wrapped by that same guard (that would redirect to itself). */}
+            <Route element={<RequireCompleteProfile />}>
+              <Route path='/complete-profile' element={<SignUpFormWizard />} />
+            </Route>
 
           </Routes>
         </ErrorBoundary>

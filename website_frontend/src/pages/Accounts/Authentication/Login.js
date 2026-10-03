@@ -12,7 +12,7 @@ export const Login = () => {
     const onSubmit = async ({ email, password }) => {
         const { error } = await signInWithPassword(email, password);
         if (error) return setMessage(error.message);
-        navigate("/call-of-duty"); // or wherever a logged-in user should land
+        navigate("/profile"); // Make whatever the users profile will be. Need to figure out how to differentiate, maybe use auth token with profile?
     }
 
     return (
