@@ -10,8 +10,8 @@ export function RequireCompleteProfile() {
     if (!isLoggedIn) {
         return <Navigate to="/login" state={{ from: location }} replace />;
     }
-    if (!profileComplete) {
-        return <Navigate to="/complete-profile" replace />;
-    }
+    // if (!profileComplete) {
+    //     return <Navigate to="/complete-profile" replace />;
+    // }
     return <Outlet />;
 }

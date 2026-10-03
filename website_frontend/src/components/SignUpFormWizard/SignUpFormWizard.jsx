@@ -146,7 +146,7 @@ export const SignUpFormWizard = () => {
 
     const currentStep = stepSequence[stepIndex];
     const isFirstStep = stepIndex === 0;
-    const isLastStep = stepIndex === stepSequence.length - 1;
+    const isLastStep = !isFirstStep && stepIndex === stepSequence.length - 1;
 
     const stepIndexForField = (fieldName) =>
         stepSequence.findIndex(step => step.fields.includes(fieldName));
@@ -217,11 +217,30 @@ export const SignUpFormWizard = () => {
         } catch (err) {
             const field = err.response?.data?.field;
             const message = err.response?.data?.message || 'Something went wrong. Please try again.';
-
+            console.log(field)
+            
             if (field) {
                 setError(field, { type: 'server', message });
                 const targetIndex = stepIndexForField(field);
                 if (targetIndex !== -1) setStepIndex(targetIndex);
+            } else if (err.response?.status === 409) {
+                setError('root', { type: 'email', message: "Email is already in use. Try logging in instead." });
+            } else if (err.response?.status == 422) {
+                const firstError = err.response.data?.detail?.[0];
+                const fieldName = firstError?.loc?.at(-1);              // e.g. "username"
+                const targetIndex = fieldName ? stepIndexForField(fieldName) : -1;
+
+                if (targetIndex !== -1) {
+                    // The bad field is in the form: show the message under that input and jump to its step.
+                    setError(fieldName, { type: 'validation', message: firstError.msg });
+                    setStepIndex(targetIndex);
+                } else {
+                    // No usable field: fall back to the general message under the form.
+                    setError('root', {
+                        type: 'validation',
+                        message: firstError?.msg ?? 'Some of your information is invalid. Please check the form and try again.',
+                    });
+                }
             } else {
                 setError('root', { type: 'server', message });
             }
@@ -281,7 +300,7 @@ export const SignUpFormWizard = () => {
                                 {!isLastStep ? (
                                     <FormButton key="continue" type="button" onClick={handleNext} label="Continue" className={styles.btnPrimary} />
                                 ) : (
-                                    <FormButton key="submit" type="submit" disabled={isSubmitting} label={isSubmitting ? 'Submitting...' : 'Submit'} className={styles.btnPrimary} />
+                                    <FormButton key="submit" type="submit" disabled={isFirstStep || isSubmitting} label={isSubmitting ? 'Submitting...' : 'Submit'} className={styles.btnPrimary} />
                                 )}
                             </div>
                         </div>

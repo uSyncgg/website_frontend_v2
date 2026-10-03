@@ -56,6 +56,12 @@
     text-align: center;
 }
 
+/* Tiles without an image (e.g. "Other") only have the label; auto margins
+   center it vertically in the row-stretched tile. */
+.tile span:only-child {
+    margin-block: auto;
+}
+
 .otherInput {
     margin-top: 1.25rem;
 }

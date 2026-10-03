@@ -54,6 +54,7 @@ import TournamentRoutes from './routes/TournamentRoutes';
 // Authentication Routes
 import { Login } from 'pages/Accounts/Authentication/Login';
 import { SignUp } from 'pages/Accounts/Authentication/Signup';
+import { RequireCompleteProfile } from 'components';
 
 const root = document.getElementById('root');
 
@@ -119,7 +120,9 @@ const app = (
 
             {/* Profile Completion — the destination RequireCompleteProfile redirects to,
                 so it must not be wrapped by that same guard (that would redirect to itself). */}
-            <Route path='/complete-profile' element={<SignUpFormWizard />} />
+            <Route element={<RequireCompleteProfile />}>
+              <Route path='/complete-profile' element={<SignUpFormWizard />} />
+            </Route>
 
           </Routes>
         </ErrorBoundary>

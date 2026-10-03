@@ -4,3 +4,8 @@ export const submitSignUpForm = (payload, token) =>
     apiClient.post(`/users/register`, payload, {
         headers: { Authorization: `Bearer ${token}`},
     }).then(res => res.data);
+
+export const checkUsername = (username, {isPlayer, isHost} = {}) =>
+    apiClient.get(`/users/check/${encodeURIComponent(username)}`, {
+        params: { player: isPlayer, host: isHost }
+    }).then(res => res.data);
