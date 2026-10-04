@@ -1,4 +1,5 @@
-import { GameImage, HeaderImage, SeoData } from "components";
+import { CatalogIndex, SeoData } from "components";
+import { gamesCatalog } from "catalog/games.catalog";
 
 export const Games = () => {
     return (
@@ -9,26 +10,7 @@ export const Games = () => {
                 canonicalPath={"/games"}
             />
 
-            <HeaderImage
-                title={"uSync Titles"}
-                imageClass={"gamesPage"}
-                eyebrow={"7 Supported Games"}
-                subtext={"Pick your title and find verified LANs, tournaments, leagues, and more."}
-            />
-
-            <GameImage 
-                games={
-                    {
-                        "Call of Duty": "/games/call-of-duty",
-                        "Warzone": "/games/warzone",
-                        "Halo": "/games/halo",
-                        "League of Legends": "/games/LoL",
-                        "Rocket League": "/games/RocketLeague",
-                        "Valorant": "/games/Valorant",
-                        "CS2": "/games/CS2"
-                    }
-                }
-            />
+            <CatalogIndex catalog={gamesCatalog} />
         </div>
     );
 }

@@ -1,4 +1,5 @@
-import { SeoData, GameImage, HeaderImage } from "components";
+import { CatalogIndex, SeoData } from "components";
+import { leaguesCatalog } from "catalog/leagues.catalog";
 
 export const Leagues = () => {
     return (
@@ -8,26 +9,8 @@ export const Leagues = () => {
                 description="Find a league to join for competitive esports. With over 200+ leagues we have what you are looking for."
                 canonicalPath={"/leagues"}
             />
-            <HeaderImage
-                title={"League Titles"}
-                imageClass={"leaguesPage"}
-                eyebrow={"200+ Leagues"}
-                subtext={"Find a competitive league to join for your game, at every skill level."}
-            />
-            
-            <GameImage 
-                games={
-                    {
-                        "Call of Duty": "/games/call-of-duty/leagues",
-                        "Warzone": "/games/warzone/leagues",
-                        "Halo": "/games/halo/leagues",
-                        "League of Legends": "/games/LoL/leagues",
-                        "Rocket League": "/games/RocketLeague/leagues",
-                        "Valorant": "/games/Valorant/leagues",
-                        "CS2": "/games/CS2/leagues"
-                    }
-                }
-            />
+
+            <CatalogIndex catalog={leaguesCatalog} />
         </div>
     );
 }

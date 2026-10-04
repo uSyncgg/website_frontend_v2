@@ -1,0 +1,25 @@
+.empty {
+    max-width: 34rem;
+    margin: 0 auto;
+    padding: 2.75rem 1.5rem;
+    text-align: center;
+    border: 1px dashed rgba(255, 255, 255, 0.14);
+    border-radius: 0.75rem;
+}
+
+.title {
+    color: white;
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.body {
+    color: rgb(170, 166, 178);
+    font-size: .92rem;
+    margin: .5rem 0 0;
+}
+
+.action {
+    margin-top: 1.25rem;
+}

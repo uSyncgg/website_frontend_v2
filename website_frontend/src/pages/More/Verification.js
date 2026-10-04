@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { SeoData } from "components";
 import { Link } from "react-router";
 import { FaCheck, FaCheckCircle, FaChevronDown } from 'react-icons/fa';
-import verifiedWordmark from 'assets/images/usync-verified-wordmark.png';
-import verifiedCheck from 'assets/images/verified-check.png';
-import verifiedCross from 'assets/images/verified-cross.png';
+import verifiedWordmark from 'assets/images/misc/verified-badge-usync-verified-variant2_9.6.26.webp';
+import verifiedCheck from 'assets/images/verification/verified-badge-usync-verified_9.6.26.webp';
+import verifiedCross from 'assets/images/verification/verified-badge-non-verified_9.6.26.webp';
 import styles from './Verification.module.css';
 
 const SUBSCRIBE_URL = "https://buy.stripe.com/eVadRz4PY0s31mEcMV";

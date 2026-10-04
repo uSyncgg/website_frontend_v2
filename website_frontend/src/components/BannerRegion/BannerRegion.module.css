@@ -1,7 +1,11 @@
 .region {
-    color: #908d8d;
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
+    color: rgb(170, 166, 178);
     font-family: Helvetica;
-    font-size: 1.313rem;
-    font-weight: 700;
-    text-shadow: 125rem .063rem 125rem #000c;
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin: 0;
+    text-shadow: none;
 }

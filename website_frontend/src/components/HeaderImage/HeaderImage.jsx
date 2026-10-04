@@ -1,8 +1,11 @@
 import styles from './HeaderImage.module.css';
 import './HeaderImageStandard.css'
 import React from 'react';
+import underline from 'assets/images/misc/underline-decorative-graphic_9.6.26.webp';
+import verifiedBadge from 'assets/images/verification/verified-badge-usync-verified_9.6.26.webp';
+import nonVerifiedBadge from 'assets/images/verification/verified-badge-non-verified_9.6.26.webp';
 
-export const HeaderImage = ({ title, imageClass, verification, verified=false, location="", eyebrow, subtext }) => {
+export const HeaderImage = ({ title, imageClass, imageUrl, verification, verified=false, location="", eyebrow, subtext }) => {
 
     // Split the title so the last word gets the gradient accent, matching the
     // homepage / tournaments hero (white lead line + gradient highlight).
@@ -10,8 +13,15 @@ export const HeaderImage = ({ title, imageClass, verification, verified=false, l
     const accentWord = words.length > 1 ? words[words.length - 1] : null;
     const leadWords = accentWord !== null ? words.slice(0, -1).join(" ") : title;
 
+    // imageUrl (from the event's DB payload) takes priority over the static
+    // imageClass background once it has loaded.
+    const style = imageUrl ? { '--bg-image': `url("${imageUrl}")` } : undefined;
+
     return (
-        <div className={`${styles.headerImage} ${imageClass} ${title === undefined ? styles.noTitle : styles.withTitle}`}>
+        <div
+            className={`${styles.headerImage} ${imageUrl ? '' : (imageClass || '')} ${title === undefined ? styles.noTitle : styles.withTitle}`}
+            style={style}
+        >
             {title !== undefined && verification === undefined && verified === false &&
                 <div className={styles.headerImageTitle}>
                     {eyebrow !== undefined && <p className={styles.eyebrow}>{eyebrow}</p>}
@@ -20,7 +30,7 @@ export const HeaderImage = ({ title, imageClass, verification, verified=false, l
                         <span className={styles.white}>{leadWords}</span>
                         {accentWord !== null && <> <span className={styles.gradientText}>{accentWord}</span></>}
                     </h2>
-                    <img className="underlineImg" src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
+                    <img className="underlineImg" src={underline} alt="underline" />
 
                     {subtext !== undefined && <p className={styles.subtext}>{subtext}</p>}
                 </div>
@@ -40,8 +50,8 @@ export const HeaderImage = ({ title, imageClass, verification, verified=false, l
 
             {verification !== undefined &&
                 <div className={styles.verificationContainer}>
-                    <img className={styles.verification} src='https://i.imgur.com/PCHIHQB.png' alt='uSync Verified' />
-                    <img className={styles.verification} src="https://i.imgur.com/0MPIBOK.png" alt='nonVerified' />
+                    <img className={styles.verification} src={verifiedBadge} alt='uSync Verified' />
+                    <img className={styles.verification} src={nonVerifiedBadge} alt='nonVerified' />
                 </div>
             }
         </div>

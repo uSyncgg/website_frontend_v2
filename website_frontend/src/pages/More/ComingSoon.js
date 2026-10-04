@@ -1,5 +1,6 @@
 import { SeoData, GameImage, HeaderImage, EventTypeImages, TwitterEmbed } from "components"
 import './More.css';
+import underline from 'assets/images/misc/underline-decorative-graphic_9.6.26.webp';
 
 export const ComingSoon = () => {
     return (
@@ -32,7 +33,7 @@ export const ComingSoon = () => {
             
             <div>
                 <h2 className="white comingSoonTitle">Event Types</h2>
-                <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
+                <img className={"underlineImg"} src={underline} alt="underline" />
 
                 <EventTypeImages page={"Coming Soon"} />
             </div>

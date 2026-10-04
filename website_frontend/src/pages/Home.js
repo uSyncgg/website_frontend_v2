@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styles from './Home.module.css';
 import '../index.css';
 import { Link } from "react-router";
 import { ChooseYourGame, SeoData, HomeTournaments, LanMap } from "components";
 import { FaMapMarkerAlt, FaLayerGroup, FaSitemap, FaTrophy } from "react-icons/fa";
-import { ALL_LAN_MARKERS } from 'data/lanMarkers';
+import { useAllLanEvents } from "hooks";
+import { toLanMarkers } from 'data/lanMarkers';
+import underline from 'assets/images/misc/underline-decorative-graphic_9.6.26.webp';
 
 export const Home = () => {
+    const { data: lanEvents } = useAllLanEvents();
+    const lanMarkers = useMemo(() => toLanMarkers(lanEvents), [lanEvents]);
+
     return (
         <div className={`standardContainer ${styles.homeDark}`}>
             <SeoData
@@ -53,7 +58,7 @@ export const Home = () => {
 
                 <p className={styles.eyebrow}>Built for the Community</p>
                 <h2 className={styles.white}>Everything in One Hub</h2>
-                <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
+                <img className={"underlineImg"} src={underline} alt="underline" />
                 <p className={styles.subtext}>
                     Whether you play, host, or just watch, uSync has a role for you.
                 </p>
@@ -87,11 +92,11 @@ export const Home = () => {
 
                 <p className={styles.eyebrow}>LAN Map</p>
                 <h2 className={styles.white}>Find Events Near You</h2>
-                <img className={"underlineImg"} src="https://i.imgur.com/eNhKhTI.png" alt="underline" />
+                <img className={"underlineImg"} src={underline} alt="underline" />
                 <p className={styles.subtext}>Browse LAN events happening worldwide.</p>
                 
                 <div className={styles.mapContainer}>
-                    <LanMap markers={ALL_LAN_MARKERS} className={styles.map} showAllGames={true} />
+                    <LanMap markers={lanMarkers} className={styles.map} showAllGames={true} />
                 </div>
 
                 <h3 className={styles.learn}>

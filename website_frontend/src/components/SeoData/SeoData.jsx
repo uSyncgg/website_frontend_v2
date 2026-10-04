@@ -1,11 +1,12 @@
 import React from "react";
+import twitterOgImage from 'assets/images/misc/twitter og.webp';
 
 export const SeoData = ({ title, description, canonicalPath, image, type, publishedTime, modifiedTime, author }) => {
     const siteName = "uSync";
     const fullTitle = title ? `${siteName} | ${title}` : `${siteName} | Esports LANs, Tournaments, & Leagues Hub`;
     const baseUrl = "https://www.usync.gg";
     const fullUrl = `${baseUrl}${canonicalPath}`;
-    const imgUrl = image ? `${image}` : "https://i.imgur.com/A0AhUZp.jpeg";
+    const imgUrl = image ? `${image}` : `${baseUrl}${twitterOgImage}`;
 
     return (
         <React.Fragment>

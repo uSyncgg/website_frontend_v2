@@ -3,6 +3,7 @@ import styles from './Navbar.module.css'
 import { LeaguesNavItem, LanNavItem, MoreNavItem } from "./DropdownNavItems";
 import { GamesNavItem, TournamentNavItem} from "./SingleNavItems";
 import { useState } from "react";
+import navbarLogo from 'assets/images/misc/usync-navbar-logo_9.6.26.webp';
 
 function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -26,7 +27,7 @@ function Navbar() {
             <button className={styles.hamburger} onClick={toggleMenu} />
             <div className={styles.headerLeft}>
                 <Link to="/" onClick={closeMenu}>
-                    <img src="https://i.imgur.com/F5lNU1H.png" alt="uSync Logo" />
+                    <img src={navbarLogo} alt="uSync Logo" />
                 </Link>
             </div>
 

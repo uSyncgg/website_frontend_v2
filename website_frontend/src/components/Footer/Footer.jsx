@@ -1,5 +1,10 @@
 import { Link } from "react-router";
 import styles from './Footer.module.css'
+import navbarLogo from 'assets/images/misc/usync-navbar-logo_9.6.26.webp';
+import linkedinIcon from 'assets/images/social_icons/social-icon-linkedin-purple_9.6.26.webp';
+import instagramIcon from 'assets/images/social_icons/social-icon-instagram-purple_9.6.26.webp';
+import xIcon from 'assets/images/social_icons/social-icon-x-purple_9.6.26.webp';
+import emailIcon from 'assets/images/social_icons/social-icon-email-purple_9.6.26.webp';
 
 function Footer() {
 
@@ -15,26 +20,26 @@ function Footer() {
             <div className={styles.top}>
                 <div className={styles.brandCol}>
                     <Link to="/" className={styles.logoLink}>
-                        <img src="https://i.imgur.com/F5lNU1H.png" alt="uSync Logo" className={styles.logo} />
+                        <img src={navbarLogo} alt="uSync Logo" className={styles.logo} />
                     </Link>
                     <p className={styles.tagline}>
                         The all-in-one hub for esports LANs, leagues, and tournaments.
                     </p>
                     <div className={styles.socials}>
                         <Link to="https://www.linkedin.com/company/usync-llc/" target="_blank" aria-label="LinkedIn">
-                            <img src="https://i.imgur.com/Bx4MX1t.png" alt="LinkedIn Icon" />
+                            <img src={linkedinIcon} alt="LinkedIn Icon" />
                         </Link>
 
                         <Link to="https://www.instagram.com/usyncgg/?next=%2F" target="_blank" aria-label="Instagram">
-                            <img src="https://i.imgur.com/YOav7r1.png" alt="Instagram Icon" />
+                            <img src={instagramIcon} alt="Instagram Icon" />
                         </Link>
 
                         <Link to="https://twitter.com/uSyncGG" target="_blank" aria-label="X (Twitter)">
-                            <img src="https://i.imgur.com/p0wIHEq.png" alt="X Icon" />
+                            <img src={xIcon} alt="X Icon" />
                         </Link>
 
                         <Link to="mailto:contact@usync.gg" target="_blank" aria-label="Email">
-                            <img src="https://i.imgur.com/mUzX7o1.png" alt="Email Icon" />
+                            <img src={emailIcon} alt="Email Icon" />
                         </Link>
                     </div>
                 </div>

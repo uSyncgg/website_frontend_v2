@@ -1,6 +1,10 @@
 import styles from './TeamPhoto.module.css';
 import { Link } from 'react-router';
 import React from 'react';
+import jakePhoto from 'assets/images/contact_us/team-photo-jake-bruscino_9.6.26.webp';
+import masonPhoto from 'assets/images/contact_us/team-photo-mason-wiley_9.6.26.webp';
+import tonyPhoto from 'assets/images/contact_us/team-photo-tony-gomez_9.6.26.webp';
+import matthewPhoto from 'assets/images/contact_us/team-photo-matthew-oconnor_9.6.26.webp';
 
 export const TeamPhoto = ({member}) => {
     const teamMembers = {
@@ -8,25 +12,25 @@ export const TeamPhoto = ({member}) => {
             "socials": "https://www.linkedin.com/in/jake-bruscino/",
             "name": "Jake Bruscino",
             "role": "CEO / Co-Founder",
-            "picture": "https://i.imgur.com/ZbCuZKi.png"
+            "picture": jakePhoto
         },
         "Mace": {
             "socials": "https://www.linkedin.com/in/mason-wiley-b539bb304/",
             "name": "Mason Wiley",
             "role": "CSO / Co-Founder",
-            "picture": "https://i.imgur.com/t0vqLB4.png"
+            "picture": masonPhoto
         },
         "Tone": {
             "socials": "https://www.linkedin.com/in/tonegmz/",
             "name": "Tony Gomez",
             "role": "CMO",
-            "picture": "https://i.imgur.com/AX1uMWJ.png"
+            "picture": tonyPhoto
         },
         "Matt": {
             "socials": "https://www.linkedin.com/in/matthew-o-connor-a9b444228/",
             "name": "Matthew O'Connor",
             "role": "CTO / Co-Founder",
-            "picture": "https://i.imgur.com/gGXFOdn.png"
+            "picture": matthewPhoto
         }
     }
 
