@@ -96,6 +96,11 @@ import { RequireCompleteProfile } from "./RequiredCompleteProfile/RequiredComple
 // Sign Up Wizard
 import { SignUpFormWizard } from "./SignUpFormWizard/SignUpFormWizard";
 
+// Profile
+import { ProfileHeader } from "./ProfileHeader/ProfileHeader";
+import { ProfileViewToggle } from "./ProfileViewToggle/ProfileViewToggle";
+import { ProfileCard } from "./ProfileCard/ProfileCard";
+
 export {
     Navbar,
     Footer,
@@ -150,5 +155,8 @@ export {
     WaysToCompete,
     SectionHeading,
     VerifiedEvents,
-    CheckoutSteps
+    CheckoutSteps,
+    ProfileHeader,
+    ProfileViewToggle,
+    ProfileCard
 };

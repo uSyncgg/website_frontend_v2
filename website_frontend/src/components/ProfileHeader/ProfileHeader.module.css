@@ -1,0 +1,130 @@
+.phead {
+    position: relative;
+    padding: 38px 0 26px;
+    color: var(--ink);
+}
+
+/* Soft violet glow behind the avatar, as in the mockup. */
+.phead::before {
+    content: "";
+    position: absolute;
+    inset: -60% 40% 30% -20%;
+    background: radial-gradient(circle at 30% 45%, rgba(155, 111, 224, .18), transparent 62%);
+    pointer-events: none;
+}
+
+.inner {
+    position: relative;
+    display: flex;
+    gap: 24px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.avatar {
+    width: 118px;
+    height: 118px;
+    flex: none;
+    display: grid;
+    place-items: center;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, .1);
+    background: linear-gradient(150deg, var(--violet) 0%, #5b4a8a 100%);
+    font-size: 38px;
+    font-weight: 900;
+    letter-spacing: -.03em;
+}
+
+.who {
+    flex: 1;
+    min-width: 260px;
+}
+
+.tagline {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+
+.name {
+    margin: 0;
+    font-size: clamp(30px, 4.4vw, 46px);
+    font-weight: 900;
+    line-height: .96;
+    letter-spacing: -.01em;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+}
+
+.verified {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 9px 3px 5px;
+    border-radius: 999px;
+    border: 1px solid rgba(155, 111, 224, .42);
+    background: var(--violet-dim);
+    color: var(--violet-bright);
+    font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.check {
+    width: 15px;
+    height: 15px;
+    flex: none;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--violet);
+}
+
+.check svg {
+    width: 9px;
+    height: 9px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 3.2;
+}
+
+.statline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+    font-size: 13px;
+    color: var(--ink-2);
+}
+
+.sep {
+    margin-right: 8px;
+    color: var(--violet);
+    opacity: .65;
+}
+
+.acts {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+@media (max-width: 560px) {
+    .avatar {
+        width: 88px;
+        height: 88px;
+        font-size: 29px;
+    }
+
+    .who {
+        min-width: 0;
+    }
+
+    .acts {
+        width: 100%;
+    }
+}
