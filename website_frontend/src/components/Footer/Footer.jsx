@@ -71,6 +71,10 @@ function Footer() {
             <div className={styles.bottom}>
                 <p className={styles.copyright}>
                     <span suppressHydrationWarning> © {new Date().getFullYear()} uSync LLC. All rights reserved. {' '}</span>
+                    <Link to="/more/terms-of-service">Terms of Service</Link>
+                    <span className={styles.separator} aria-hidden="true">·</span>
+                    <Link to="/more/privacy-policy">Privacy Policy</Link>
+                    <span className={styles.separator} aria-hidden="true">·</span>
                     <a href="mailto:contact@usync.gg">contact@usync.gg</a>
                 </p>
                 <p className={styles.disclaimer}>
