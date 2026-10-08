@@ -106,6 +106,10 @@ const app = (
             <Route path='/other-lans' element={<Conventions />} />
             <Route path='/lans/*' element={<LanRoutes />} />
 
+            {/* Catch-all. NotFound was imported but never routed, so any URL that
+                reached the SPA without matching a route rendered an empty <main>. */}
+            <Route path='*' element={<NotFound />} />
+
           </Routes>
         </ErrorBoundary>
       </main>
