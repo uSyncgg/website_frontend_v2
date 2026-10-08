@@ -24,3 +24,11 @@
   X-Robots-Tag: noindex, nofollow
 /paymentform/*
   X-Robots-Tag: noindex, nofollow
+
+# Event Pass Portal registration steps (/passes/registration/<id>/payment
+# and .../receipt). Added with the pass portal in #98, after the rules above
+# were written. Same reasoning: per-registration URLs with no search value,
+# not prerendered, so the header is the only thing a non-JS crawler sees.
+# Pass *selection* pages (/passes/<event-slug>) stay indexable on purpose.
+/passes/registration/*
+  X-Robots-Tag: noindex, nofollow

@@ -5,7 +5,7 @@ import styles from '../../Payment/GeneralPaymentForm/GeneralPaymentForm.module.c
 import formStyles from 'components/PaymentForm/PaymentForm.module.css';
 import receiptStyles from 'components/Receipt/Receipt.module.css';
 import pageStyles from './PassReceipt.module.css';
-import { CheckoutSteps, LoadingWheel } from "components";
+import { CheckoutSteps, LoadingWheel, SeoData } from "components";
 import { getEventReceipt } from "services/event_registration";
 import { getApiErrorMessage } from "utils/apiError";
 import { humanizeKey } from "utils/humanize";
@@ -65,6 +65,12 @@ function PassReceipt() {
 
     return (
         <div className="standardContainer">
+            <SeoData
+                title={"Your Pass Receipt"}
+                description="Your uSync event pass registration receipt."
+                canonicalPath={`/passes/registration/${registrationId}/receipt`}
+                robots={"noindex, nofollow"}
+            />
             <div className={styles.checkoutHeader}>
                 <p className={styles.eyebrow}>Secure Checkout</p>
                 <h1 className={styles.eventTitle}>{isPaid ? "You're All Set" : "Finalizing Your Payment"}</h1>
@@ -80,7 +86,7 @@ function PassReceipt() {
                     {/* Recap of what was submitted - mirrors GeneralPaymentReceipt's disabled left-column form */}
                     <div className={styles.sectionOneForm}>
                         <div className={formStyles.formContainer}>
-                            <h1 className={formStyles.formTitle}>Registration Details</h1>
+                            <h2 className={formStyles.formTitle}>Registration Details</h2>
                             <div className={`${styles.formGrid} ${pageStyles.fieldsGrid}`}>
                                 <div>
                                     <label className={formStyles.requiredLabel}>Contact Email</label>
@@ -143,7 +149,7 @@ function PassReceipt() {
                                 <div className={receiptStyles.successBadge}>
                                     <FaCheckCircle />
                                 </div>
-                                <h1 className={receiptStyles.title}>{isPaid ? "Payment Confirmed" : "Payment Processing"}</h1>
+                                <h2 className={receiptStyles.title}>{isPaid ? "Payment Confirmed" : "Payment Processing"}</h2>
                                 <p className={receiptStyles.subtitle}>
                                     {isPaid
                                         ? "A confirmation has been sent to your email."

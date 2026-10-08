@@ -112,7 +112,7 @@ function PassSelection() {
                     <div className={styles.generalFormContainer}>
                         <div className={styles.sectionOneForm}>
                             <div className={formStyles.formContainer}>
-                                <h1 className={formStyles.formTitle}>Choose Your Pass</h1>
+                                <h2 className={formStyles.formTitle}>Choose Your Pass</h2>
 
                                 <div className={pageStyles.tierList}>
                                     {tiers.map((tier) => {

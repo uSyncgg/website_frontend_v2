@@ -112,7 +112,7 @@
 /passes/* /200.html 200
 
 # LANs
-/LanMap /index.html 200
+/LanMap /lans/all 301
 /other-lans /index.html 200
 /lans/* /200.html 200
 
