@@ -10,7 +10,6 @@ export const checkUsername = (username, {isPlayer, isHost} = {}) =>
         params: { player: isPlayer, host: isHost }
     }).then(res => res.data);
 
-export const getProfile = (username, token) => 
-    apiClient.get(`/users/fetch/${encodeURIComponent(username)}/profile`, {
-        headers: { Authorization: `Bearer ${token}` },
-    }).then(res => res.data);
+export const getProfile = (username) =>
+    apiClient.get(`/users/fetch/${encodeURIComponent(username)}/profile`)
+        .then(res => res.data);

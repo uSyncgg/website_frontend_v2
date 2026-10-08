@@ -1,0 +1,30 @@
+.card {
+    background: var(--panel-solid);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 19px 20px 20px;
+    margin-bottom: 20px;
+    color: var(--ink);
+}
+
+.head {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 16px;
+}
+
+.title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--ink);
+}
+
+.rule {
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+}

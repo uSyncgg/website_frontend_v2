@@ -54,6 +54,7 @@ import TournamentRoutes from './routes/TournamentRoutes';
 // Authentication Routes
 import { AuthPage } from 'pages/Accounts/Authentication/AuthPage';
 import { RequireCompleteProfile } from 'components';
+import { Profile } from 'pages/Accounts/Profile/Profile';
 
 const root = document.getElementById('root');
 
@@ -116,6 +117,9 @@ const app = (
             {/* Authentication Routes */}
             <Route path='/login' element={<AuthPage mode="login" />} />
             <Route path='/signup' element={<AuthPage mode="signup" />} />
+
+            {/* Public Profiles */}
+            <Route path='/profile/:username' element={<Profile />} />
 
             {/* Profile Completion — the destination RequireCompleteProfile redirects to,
                 so it must not be wrapped by that same guard (that would redirect to itself). */}

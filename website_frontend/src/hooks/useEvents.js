@@ -20,11 +20,18 @@ export function useAsync(fetchFn, deps) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // Clear the previous result so a stale error (e.g. a 404) or old data
+    // doesn't carry over when deps change, and ignore responses that arrive
+    // after deps have moved on.
+    let cancelled = false;
     setLoading(true);
+    setError(null);
+    setData(null);
     fetchFn()
-      .then(setData)
-      .catch(setError)
-      .finally(() => setLoading(false));
+      .then(result => { if (!cancelled) setData(result); })
+      .catch(err => { if (!cancelled) setError(err); })
+      .finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 
