@@ -1,0 +1,366 @@
+.page {
+    background: var(--ground);
+    color: var(--ink);
+    min-height: 100%;
+    overflow-x: hidden;
+}
+
+.auth {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    max-width: 68rem;
+    margin: 0 auto;
+    padding: 4rem 1.5rem 5rem;
+}
+
+.authGlow {
+    position: absolute;
+    top: 10%;
+    left: 6%;
+    width: 30rem;
+    height: 30rem;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(142, 106, 206, .22), transparent 65%);
+    filter: blur(40px);
+    pointer-events: none;
+}
+
+/* ---------- Brand panel ---------- */
+.authBrand {
+    position: relative;
+    flex: 1 1 24rem;
+    max-width: 27rem;
+}
+
+.mark {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: -.3px;
+}
+
+.mark svg {
+    width: 1.9rem;
+    height: 1.9rem;
+}
+
+.authBrand h2 {
+    font-size: 2.15rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    margin: 2rem 0 2.25rem;
+    text-wrap: balance;
+}
+
+.accent {
+    background: linear-gradient(135deg, var(--violet-bright), var(--violet-deep));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hl {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.35rem;
+}
+
+.hl li {
+    display: flex;
+    gap: .9rem;
+    align-items: flex-start;
+}
+
+.hl strong {
+    display: block;
+    font-size: .95rem;
+}
+
+.hlIcon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: .75rem;
+    background: rgba(142, 106, 206, .16);
+    border: 1px solid rgba(142, 106, 206, .3);
+    color: var(--violet-bright);
+    font-size: .95rem;
+}
+
+.hlText {
+    display: block;
+    color: rgba(255, 255, 255, .5);
+    font-size: .85rem;
+}
+
+/* ---------- Card ---------- */
+.authCard {
+    position: relative;
+    flex: 0 1 27rem;
+    width: 100%;
+    background: rgba(28, 25, 33, .78);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    padding: 2.25rem;
+    box-shadow: 0 1.5rem 3rem -1.25rem rgba(0, 0, 0, .6);
+}
+
+.tabs {
+    display: flex;
+    gap: .3rem;
+    padding: .3rem;
+    margin-bottom: 1.75rem;
+    background: rgba(255, 255, 255, .04);
+    border: 1px solid var(--line);
+    border-radius: .85rem;
+}
+
+.tabs button {
+    flex: 1;
+    padding: .6rem;
+    border: 0;
+    border-radius: .6rem;
+    background: none;
+    color: rgba(255, 255, 255, .55);
+    font-size: .9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: color .2s;
+}
+
+.tabs button:hover {
+    color: var(--ink);
+}
+
+.tabs button[aria-selected="true"] {
+    background: linear-gradient(135deg, var(--violet), var(--violet-deep));
+    color: #fff;
+    box-shadow: 0 .5rem 1rem -.5rem rgba(122, 90, 201, .8);
+}
+
+.stepTitle {
+    color: var(--ink);
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: -.5px;
+    margin: 0 0 .5rem;
+    text-wrap: balance;
+}
+
+.stepSub {
+    color: rgba(255, 255, 255, .55);
+    font-size: .9rem;
+    line-height: 1.55;
+    margin: 0;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    margin: 1.6rem 0 1.25rem;
+}
+
+.divider i {
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, .1);
+}
+
+.divider span {
+    color: var(--ink-3);
+    font-size: .78rem;
+    font-weight: 600;
+}
+
+/* ---------- Form ---------- */
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.field + .field {
+    margin-top: 1.25rem;
+}
+
+.label {
+    display: block;
+    color: rgba(255, 255, 255, .85);
+    font-weight: 600;
+    font-size: .85rem;
+    margin-bottom: .45rem;
+}
+
+.input {
+    width: 100%;
+    padding: .8rem 1rem;
+    font: inherit;
+    font-size: 1rem;
+    border-radius: .65rem;
+    border: 1px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .04);
+    color: var(--ink);
+    outline: none;
+    transition: border-color .2s, box-shadow .2s, background .2s;
+}
+
+.input::placeholder {
+    color: var(--ink-4);
+}
+
+.input:focus {
+    border-color: #8e6ace;
+    background: rgba(142, 106, 206, .08);
+    box-shadow: 0 0 0 3px rgba(142, 106, 206, .18);
+}
+
+.fieldError {
+    color: var(--loss);
+    font-size: .78rem;
+    margin-top: .4rem;
+}
+
+.optRow {
+    display: flex;
+    justify-content: flex-end;
+    margin: .9rem 0 0;
+}
+
+.linkish {
+    background: none;
+    border: 0;
+    color: var(--violet-bright);
+    font-size: .82rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0;
+}
+
+.linkish:hover {
+    text-decoration: underline;
+}
+
+.btnPrimary {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--violet), var(--violet-deep));
+    border: none;
+    color: #fff;
+    font-size: 1.02rem;
+    border-radius: .85rem;
+    cursor: pointer;
+    font-weight: 700;
+    letter-spacing: .3px;
+    transition: transform .25s cubic-bezier(.16, 1, .3, 1), box-shadow .25s, opacity .2s;
+}
+
+.btnPrimary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 1rem 2rem -.75rem rgba(122, 90, 201, .7);
+}
+
+.btnPrimary:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+.msgError,
+.msgSuccess {
+    font-size: .85rem;
+    text-align: center;
+    margin: 1rem 0 0;
+}
+
+.msgError {
+    color: var(--loss);
+}
+
+.msgSuccess {
+    color: var(--win);
+}
+
+.legal {
+    color: var(--ink-4);
+    font-size: .75rem;
+    line-height: 1.5;
+    text-align: center;
+    margin: 1.25rem 0 0;
+}
+
+.footnote {
+    text-align: center;
+    color: var(--ink-3);
+    font-size: .82rem;
+    margin: 1.5rem 0 0;
+}
+
+.footnote button {
+    background: none;
+    border: 0;
+    color: var(--violet-bright);
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0;
+}
+
+.footnote button:hover {
+    text-decoration: underline;
+}
+
+.tabs button:focus-visible,
+.linkish:focus-visible,
+.footnote button:focus-visible,
+.btnPrimary:focus-visible {
+    outline: 2px solid var(--violet-bright);
+    outline-offset: 2px;
+}
+
+@media (max-width: 950px) {
+    .auth {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2.25rem;
+        padding: 2.5rem 1rem 3.5rem;
+    }
+
+    .authBrand {
+        flex: none;
+        max-width: none;
+        text-align: center;
+    }
+
+    .authBrand h2 {
+        font-size: 1.7rem;
+        margin-bottom: 0;
+    }
+
+    .hl {
+        display: none;
+    }
+
+    .authCard {
+        flex: none;
+        align-self: center;
+        max-width: 27rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .authCard {
+        padding: 1.5rem;
+    }
+}

@@ -1,0 +1,40 @@
+.providers {
+    display: flex;
+    flex-direction: column;
+    gap: .65rem;
+    margin: 1.5rem 0 0;
+}
+
+.provider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .65rem;
+    width: 100%;
+    padding: .85rem 1rem;
+    border-radius: .75rem;
+    border: 1px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .04);
+    color: rgba(255, 255, 255, .85);
+    font: inherit;
+    font-size: .92rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color .2s, background .2s, transform .2s;
+}
+
+.provider:hover {
+    border-color: var(--line-strong);
+    background: rgba(255, 255, 255, .08);
+    transform: translateY(-1px);
+}
+
+.provider:focus-visible {
+    outline: 2px solid var(--violet-bright);
+    outline-offset: 2px;
+}
+
+.provider svg {
+    width: 1.05rem;
+    height: 1.05rem;
+}
