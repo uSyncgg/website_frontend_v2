@@ -22,8 +22,8 @@ function buildViews(profile) {
     ];
 }
 
-const GamesCard = ({ games }) => (
-    <ProfileCard title="Games">
+const GamesCard = ({ title, games, emptyText }) => (
+    <ProfileCard title={title}>
         {games?.length > 0 ? (
             <div>
                 {games.map(name => {
@@ -47,7 +47,7 @@ const GamesCard = ({ games }) => (
                 })}
             </div>
         ) : (
-            <p className={styles.muted}>No games added yet.</p>
+            <p className={styles.muted}>{emptyText}</p>
         )}
     </ProfileCard>
 );
@@ -82,7 +82,10 @@ export const Profile = () => {
     const views = buildViews(profile);
     const requested = views.find(v => v.key === searchParams.get('view') && v.available);
     const activeView = requested?.key ?? views.find(v => v.available)?.key ?? 'player';
-    const setView = (key) => setSearchParams({ view: key }, { replace: true });
+    const setView = (key) => setSearchParams(params => {
+        params.set('view', key);
+        return params;
+    }, { replace: true });
 
     const roles = [
         profile.is_player && 'Player',
@@ -94,7 +97,7 @@ export const Profile = () => {
         <div className="standardContainer">
             <SeoData
                 title={profile.username}
-                description={profile.bio ?? `${profile.username}'s profile on uSync.`}
+                description={profile.bio || `${profile.username}'s profile on uSync.`}
                 canonicalPath={`/profile/${encodeURIComponent(profile.username)}`}
                 type="profile"
             />
@@ -106,8 +109,12 @@ export const Profile = () => {
 
                 <div className={styles.cols}>
                     <div>
-                        {activeView === 'player' && <GamesCard games={profile.games} />}
-                        {activeView === 'host' && <ComingSoonCard title="Host profile" />}
+                        {activeView === 'player' &&
+                            <GamesCard title="Games" games={profile.games} emptyText="No games added yet." />
+                        }
+                        {activeView === 'host' &&
+                            <GamesCard title="Hosted Games" games={profile.host_games} emptyText="No hosted games added yet." />
+                        }
                         {activeView === 'venue' && <ComingSoonCard title="Venue profile" />}
                     </div>
 
