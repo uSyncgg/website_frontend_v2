@@ -30,6 +30,8 @@ function getColor(game) {
 
 // Stable identity for a marker — used as the React key, the ref-map key, and
 // the selection id. Falls back to coordinates when a marker has no link.
+const hasPin = (m) => Number.isFinite(m.lat) && Number.isFinite(m.lng);
+
 const markerId = (m) => m.link ?? `${m.lat},${m.lng}`;
 
 function createMarkerIcon(game) {
@@ -257,12 +259,47 @@ function LegendControl({ legendGames, activeGames, toggleGame }) {
     );
 }
 
-export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAllGames = false }) => {
+function EventCard({ marker, selected, onSelect }) {
+    const g = marker.game || 'Conventions';
+    const color = getColor(g);
+    return (
+        <li className={`lanCard${selected ? ' selected' : ''}`}>
+            <button
+                className="lanCardMain"
+                onClick={onSelect}
+                disabled={!onSelect}
+                aria-label={onSelect ? `Show ${marker.name} on the map` : marker.name}
+            >
+                {marker.img && <img className="lanCardImg" src={marker.img} alt="" loading="lazy" />}
+                <span className="lanCardText">
+                    <span className="lanCardGame" style={{ color }}>
+                        <span className="lanCardDot" style={{ backgroundColor: color }} />
+                        {GAME_LABELS[g]}
+                    </span>
+                    <strong className="lanCardName">
+                        {marker.name}
+                        {marker.verified && <span className="lanCardVerified" title="Verified by uSync">✓ Verified</span>}
+                    </strong>
+                    {marker.region && <span className="lanCardRegion">{marker.region}</span>}
+                    {!onSelect && <span className="lanCardNoPin">Not pinned on the map yet</span>}
+                </span>
+            </button>
+            {marker.link && <Link className="lanCardLink" to={marker.link}>Details →</Link>}
+        </li>
+    );
+}
+
+// variant: 'default' (map only), 'explorer' (map + browsable event list side
+// by side), 'preview' (static, non-interactive thumbnail for the home page).
+export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAllGames = false, variant = 'default' }) => {
+    const explorer = variant === 'explorer';
+    const preview = variant === 'preview';
+    const wrapperRef = useRef(null);
     const [mobileActivated, setMobileActivated] = useState(false);
     const [listOpen, setListOpen] = useState(false);
     const [selected, setSelected] = useState(null); // { id, nonce } | null
     const markerRefs = useRef(new Map());
-    const touch = isTouchDevice();
+    const touch = isTouchDevice() && !preview;
 
     const legendGames = showAllGames
         ? GAME_ORDER
@@ -292,23 +329,30 @@ export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAl
     };
 
     const filteredMarkers = markers.filter(m => activeGames.has(m.game || 'Conventions'));
-    const markersById = new Map(filteredMarkers.map(m => [markerId(m), m]));
+    // Markers without coordinates still appear in the list, just not on the map.
+    const pinMarkers = filteredMarkers.filter(hasPin);
+    const markersById = new Map(pinMarkers.map(m => [markerId(m), m]));
 
     const handleListSelect = (id) => {
         setSelected({ id, nonce: Date.now() });
         setListOpen(false);
+        // When the list stacks under the map (narrow screens), bring the map
+        // into view so the fly-in is actually seen.
+        if (explorer) wrapperRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     };
 
     return (
-        <div className="lanMapWrapper">
+        <div className={explorer ? 'lanExplorer' : undefined}>
+          <div className="lanMapWrapper" ref={wrapperRef}>
             <MapContainer
                 center={DEFAULT_CENTER}
                 zoom={DEFAULT_ZOOM}
                 className={className}
                 scrollWheelZoom={false}
-                dragging={!touch}
+                dragging={!touch && !preview}
+                zoomControl={!preview}
             >
-                <CtrlScrollZoom />
+                {!preview && <CtrlScrollZoom />}
                 {touch && <MobileDraggingController enabled={mobileActivated} />}
                 <SelectionController
                     selected={selected}
@@ -316,18 +360,22 @@ export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAl
                     markersById={markersById}
                     markerRefs={markerRefs}
                 />
-                <ListPanelControl
-                    legendGames={legendGames}
-                    filteredMarkers={filteredMarkers}
-                    listOpen={listOpen}
-                    setListOpen={setListOpen}
-                    handleListSelect={handleListSelect}
-                />
-                <LegendControl
-                    legendGames={legendGames}
-                    activeGames={activeGames}
-                    toggleGame={toggleGame}
-                />
+                {!explorer && !preview && (
+                    <ListPanelControl
+                        legendGames={legendGames}
+                        filteredMarkers={filteredMarkers}
+                        listOpen={listOpen}
+                        setListOpen={setListOpen}
+                        handleListSelect={handleListSelect}
+                    />
+                )}
+                {!preview && (
+                    <LegendControl
+                        legendGames={legendGames}
+                        activeGames={activeGames}
+                        toggleGame={toggleGame}
+                    />
+                )}
                 <TileLayer
                     // Single fixed host instead of Leaflet's default {s} a/b/c
                     // sharding — under HTTP/2 that sharding just forces three
@@ -336,7 +384,7 @@ export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAl
                     url={`https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=${process.env.REACT_APP_CARTO_API_KEY}`}
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                 />
-                {filteredMarkers.map((marker) => (
+                {pinMarkers.map((marker) => (
                     <Marker
                         key={markerId(marker)}
                         position={[marker.lat, marker.lng]}
@@ -377,6 +425,29 @@ export const LanMap = ({ markers = [], className = 'lanMap', game = null, showAl
                 <div className="lanMapTapOverlay" onClick={() => setMobileActivated(true)}>
                     Tap to interact with the map
                 </div>
+            )}
+          </div>
+
+          {explorer && (
+                <aside className="lanExplorerList" aria-label="LAN events">
+                    <h2 className="lanExplorerCount">
+                        {filteredMarkers.length} {filteredMarkers.length === 1 ? 'LAN' : 'LANs'}
+                    </h2>
+                    {filteredMarkers.length === 0
+                        ? <p className="lanExplorerEmpty">No LANs match the selected games.</p>
+                        : (
+                            <ul className="lanCardList">
+                                {filteredMarkers.map(m => (
+                                    <EventCard
+                                        key={markerId(m)}
+                                        marker={m}
+                                        selected={selected?.id === markerId(m)}
+                                        onSelect={hasPin(m) ? () => handleListSelect(markerId(m)) : undefined}
+                                    />
+                                ))}
+                            </ul>
+                        )}
+                </aside>
             )}
         </div>
     );

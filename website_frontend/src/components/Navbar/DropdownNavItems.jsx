@@ -108,6 +108,9 @@ export const LanNavItem = ({ closeMenu, isOpen, onToggle }) => {
         <NavLink to="/other-lans" className={styles.dropdownItem} onClick={closeMenu}>
           Other / Conventions
         </NavLink>
+        <NavLink to="/lans/all" className={styles.dropdownItem} onClick={closeMenu}>
+          All LANs
+        </NavLink>
       </div>
     </div>
   );

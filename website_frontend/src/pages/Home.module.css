@@ -418,17 +418,45 @@
 
 .mapContainer {
     position: relative;
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    cursor: pointer;
 }
 
 .map {
     display: block;
     margin: 0 auto;
-    width: 80%;
-    min-height: 45rem;
-    max-height: 60rem;
+    width: 100%;
+    height: 28rem;
     border: rgb(142, 106, 206) .25rem solid;
     border-radius: .5rem;
     position: relative;
+}
+
+.mapCta {
+    position: absolute;
+    left: 50%;
+    bottom: 1.25rem;
+    transform: translateX(-50%);
+    z-index: 1000;
+    padding: .7rem 1.4rem;
+    border-radius: 999px;
+    background: rgb(142, 106, 206);
+    color: #fff;
+    font-weight: 700;
+    white-space: nowrap;
+    box-shadow: 0 0 1.2rem rgba(142, 106, 206, .6);
+    transition: filter .2s ease;
+}
+
+.mapContainer:hover .mapCta {
+    filter: brightness(120%);
+}
+
+@media (max-width: 768px) {
+    .mapContainer { width: 94%; }
+    .map { height: 20rem; }
 }
 
 .learn {

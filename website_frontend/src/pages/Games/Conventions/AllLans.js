@@ -1,8 +1,10 @@
 import { useMemo, useState } from "react";
-import { SeoData, HostBanner, NoEvents, LanMap, EventListFilters } from "components";
+import { SeoData, NoEvents, LanMap, EventListFilters, GameImage } from "components";
 import { useAllLans } from "hooks";
-import { toLanMarkers } from 'data/lanMarkers';
+import { toLanListItems } from 'data/lanMarkers';
 import { buildEventPath } from 'utils/eventPaths';
+import { Link } from "react-router";
+import styles from './AllLans.module.css';
 import '../EventBanners.css';
 
 // Display labels for the game filter, in the order they should appear.
@@ -18,6 +20,7 @@ const GAME_BY_FILTER_LABEL = {
 };
 
 const normalizeLan = (event) => ({
+    raw: event,
     name: event.name,
     path: buildEventPath('/lans', event.path),
     imgUrl: event.banner_img,
@@ -46,19 +49,6 @@ const applyFiltersAndSort = (list, { selectedGames, verifiedOnly, sort }) => {
     return result;
 };
 
-const LanBanner = ({ lan }) => (
-    <HostBanner path={lan.path}>
-        <HostBanner.Title path={lan.path} verified={lan.verified}>{lan.name}</HostBanner.Title>
-        <HostBanner.Image
-            path={lan.path}
-            imgUrl={lan.imgUrl}
-            alt={lan.alt}
-        />
-        <HostBanner.Region>{lan.region}</HostBanner.Region>
-        <HostBanner.Button title={lan.buttonTitle} path={lan.path} />
-    </HostBanner>
-);
-
 export const AllLans = () => {
     const { data, loading, error } = useAllLans();
 
@@ -67,12 +57,15 @@ export const AllLans = () => {
     const [verifiedOnly, setVerifiedOnly] = useState(false);
 
     const allLans = useMemo(() => (data || []).map(normalizeLan), [data]);
-    const markers = useMemo(() => toLanMarkers(data), [data]);
 
     const filteredLans = useMemo(
         () => applyFiltersAndSort(allLans, { selectedGames, verifiedOnly, sort }),
         [allLans, sort, selectedGames, verifiedOnly]
     );
+
+    // Map pins and the side list follow the active filters and sort, so
+    // verified LANs lead the list by default.
+    const markers = useMemo(() => toLanListItems(filteredLans.map(l => l.raw)), [filteredLans]);
 
     const clearFilters = () => {
         setSelectedGames([]);
@@ -87,8 +80,12 @@ export const AllLans = () => {
                 canonicalPath={"/lans/all"}
             />
 
-            <div className="lanMapContainer">
-                <LanMap markers={markers} showAllGames={true} />
+            <div className={styles.intro}>
+                <p className={styles.eyebrow}>Compete In Person</p>
+                <h1 className={styles.title}>All LANs</h1>
+                <p className={styles.subtext}>
+                    Every upcoming LAN across every game. Pick one from the list to jump to it on the map.
+                </p>
             </div>
 
             <EventListFilters
@@ -115,12 +112,31 @@ export const AllLans = () => {
             ) : filteredLans.length === 0 ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No results match your filters.</h2>
             ) : (
-                <div className="eventBannerContainer">
-                    {filteredLans.map(lan => (
-                        <LanBanner key={lan.path} lan={lan} />
-                    ))}
+                <div className={styles.explorer}>
+                    <LanMap
+                        variant="explorer"
+                        className="lanExplorerMap"
+                        markers={markers}
+                        showAllGames={true}
+                    />
                 </div>
             )}
+
+            <div className={styles.more}>
+                <GameImage
+                    title={"Browse LANs by Game"}
+                    games={{
+                        "Call of Duty": "/games/call-of-duty/lans",
+                        "Warzone": "/games/warzone/lans",
+                        "Halo": "/games/halo/lans",
+                        "League of Legends": "/games/LoL/lans"
+                    }}
+                />
+                <h3 className={styles.post}>
+                    Hosting a LAN? Learn how to post it to the map {" "}
+                    <Link to="/more/eventhost">here</Link>
+                </h3>
+            </div>
         </div>
     );
 }

@@ -95,9 +95,14 @@ export const Home = () => {
                 <img className={"underlineImg"} src={underline} alt="underline" />
                 <p className={styles.subtext}>Browse LAN events happening worldwide.</p>
                 
-                <div className={styles.mapContainer}>
-                    <LanMap markers={lanMarkers} className={styles.map} showAllGames={true} />
-                </div>
+                <Link
+                    to="/lans/all"
+                    className={styles.mapContainer}
+                    aria-label="Open the full LAN map and event list"
+                >
+                    <LanMap markers={lanMarkers} className={styles.map} showAllGames={true} variant="preview" />
+                    <span className={styles.mapCta}>Explore the full LAN map →</span>
+                </Link>
 
                 <h3 className={styles.learn}>
                     Learn how to post your LAN to the map {" "}

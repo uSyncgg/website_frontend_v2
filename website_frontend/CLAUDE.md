@@ -100,6 +100,7 @@ Configured via `.env`. The app expects:
 - `REACT_APP_STRIPE_TK` — Test Stripe public key
 - `REACT_APP_AUTH0_DOMAIN` — Auth0 tenant domain
 - `REACT_APP_AUTH0_CLIENTID` — Auth0 client ID
+- `REACT_APP_CARTO_API_KEY` — CARTO basemaps key for the LAN map tiles (free at https://www.carto.com/basemaps/apikey/); without it the map shows "API KEY REQUIRED" tiles
 
 ### Content Pattern
 

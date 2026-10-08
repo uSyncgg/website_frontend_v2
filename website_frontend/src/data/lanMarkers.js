@@ -35,7 +35,15 @@ const toLanMarker = (event) => ({
     name: event.name,
     link: buildEventPath('/lans', event.path),
     game: LAN_GAME_KEY[event.game] || event.game,
+    region: event.location,
+    img: event.banner_img,
+    verified: !!event.verified,
 });
+
+// Like toLanMarkers, but keeps LANs that have no coordinates (lat/lng are
+// null) so list views can still show them without a map pin.
+export const toLanListItems = (events) =>
+    (events || []).map(e => (hasCoordinates(e) ? toLanMarker(e) : { ...toLanMarker(e), lat: null, lng: null }));
 
 export const toLanMarkers = (events, game) =>
     (events || [])
