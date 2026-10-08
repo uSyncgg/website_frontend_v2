@@ -1,6 +1,5 @@
-import { LegalDocument, LegalEmail, SectionRef } from "components";
+import { LegalDocument, LegalEmail, SectionRef, LegalNotice, LegalContactCard, LegalListLabel, LegalCaps } from "components";
 import { Link } from "react-router";
-import styles from 'components/LegalDocument/LegalDocument.module.css';
 
 // Update this date whenever the Terms change (see Section 3).
 const LAST_UPDATED = "October 8, 2026";
@@ -276,7 +275,7 @@ const SECTIONS = [
                 <h3>4.4 Prohibited Activities</h3>
                 <p>You agree not to do, attempt to do, or help anyone else do any of the following:</p>
 
-                <p className={styles.listLabel}>Security and technical abuse</p>
+                <LegalListLabel>Security and technical abuse</LegalListLabel>
                 <ul>
                     <li>
                         Hack, probe, scan, or test the vulnerability of the Services, or breach or circumvent any
@@ -294,7 +293,7 @@ const SECTIONS = [
                     <li>Access non-public areas of the Services, or another user’s account, without authorization.</li>
                 </ul>
 
-                <p className={styles.listLabel}>Scraping and automated access</p>
+                <LegalListLabel>Scraping and automated access</LegalListLabel>
                 <ul>
                     <li>
                         Use any robot, spider, scraper, crawler, or other automated means to access, copy, or collect
@@ -315,7 +314,7 @@ const SECTIONS = [
                     </li>
                 </ul>
 
-                <p className={styles.listLabel}>Illegal and fraudulent use</p>
+                <LegalListLabel>Illegal and fraudulent use</LegalListLabel>
                 <ul>
                     <li>Use the Services for any unlawful purpose or in violation of any applicable law or regulation.</li>
                     <li>
@@ -333,7 +332,7 @@ const SECTIONS = [
                     <li>Post fake, misleading, or deceptive events, prizes, listings, or offers.</li>
                 </ul>
 
-                <p className={styles.listLabel}>Harmful conduct toward others</p>
+                <LegalListLabel>Harmful conduct toward others</LegalListLabel>
                 <ul>
                     <li>Harass, bully, threaten, stalk, intimidate, or abuse anyone.</li>
                     <li>
@@ -348,7 +347,7 @@ const SECTIONS = [
                     <li>Send spam, chain messages, unsolicited promotions, or phishing messages.</li>
                 </ul>
 
-                <p className={styles.listLabel}>Competitive integrity</p>
+                <LegalListLabel>Competitive integrity</LegalListLabel>
                 <ul>
                     <li>
                         Cheat, use unauthorized software or exploits, or engage in match-fixing, collusion, or
@@ -364,7 +363,7 @@ const SECTIONS = [
                     </li>
                 </ul>
 
-                <p className={styles.listLabel}>Misuse of uSync branding</p>
+                <LegalListLabel>Misuse of uSync branding</LegalListLabel>
                 <ul>
                     <li>
                         Display the uSync Verified badge or any uSync logo without authorization, or suggest that uSync
@@ -520,8 +519,8 @@ const SECTIONS = [
                 </p>
                 <ul>
                     <li>
-                        displaying Host event listings, names, logos, and images on uSync and in uSync’s marketing,
-                        newsletters, and social media to promote the event and uSync;
+                        displaying Host event listings, names, logos, and images on uSync and in uSync’s marketing and
+                        social media to promote the event and uSync;
                     </li>
                     <li>
                         displaying usernames, gamertags, team names, and competition results publicly in brackets,
@@ -946,14 +945,14 @@ const SECTIONS = [
         title: "Disclaimers of Warranties",
         content: (
             <>
-                <p className={styles.caps}>
+                <LegalCaps>
                     YOUR USE OF THE SERVICES IS AT YOUR SOLE RISK. THE SERVICES, AND ALL CONTENT, LISTINGS, TOOLS, AND
                     FEATURES AVAILABLE THROUGH THEM, ARE PROVIDED ON AN “AS IS” AND “AS AVAILABLE” BASIS, WITHOUT
                     WARRANTIES OF ANY KIND, WHETHER EXPRESS, IMPLIED, OR STATUTORY. TO THE FULLEST EXTENT PERMITTED BY
                     LAW, USYNC DISCLAIMS ALL WARRANTIES, INCLUDING ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR
                     A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT, AND ANY WARRANTIES ARISING FROM COURSE OF DEALING
                     OR USAGE OF TRADE.
-                </p>
+                </LegalCaps>
                 <p>Without limiting the above, uSync does not warrant that:</p>
                 <ul>
                     <li>the Services will be available continuously, on time, securely, or without interruption or downtime;</li>
@@ -984,7 +983,7 @@ const SECTIONS = [
         content: (
             <>
                 <h3>10.1 Excluded Damages</h3>
-                <p className={styles.caps}>
+                <LegalCaps>
                     TO THE FULLEST EXTENT PERMITTED BY LAW, IN NO EVENT WILL USYNC OR ITS MEMBERS, MANAGERS, OFFICERS,
                     EMPLOYEES, AGENTS, PARTNERS, SUPPLIERS, OR LICENSORS (THE “USYNC PARTIES”) BE LIABLE FOR ANY
                     INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES, OR FOR ANY LOSS OF
@@ -992,23 +991,23 @@ const SECTIONS = [
                     OR OTHER EXPENSES RELATED TO ANY EVENT, ARISING OUT OF OR RELATING TO THE SERVICES OR THESE TERMS,
                     WHETHER BASED ON CONTRACT, TORT (INCLUDING NEGLIGENCE), STRICT LIABILITY, OR ANY OTHER LEGAL THEORY,
                     EVEN IF A USYNC PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
-                </p>
+                </LegalCaps>
 
                 <h3>10.2 No Liability for Third Parties</h3>
-                <p className={styles.caps}>
+                <LegalCaps>
                     TO THE FULLEST EXTENT PERMITTED BY LAW, THE USYNC PARTIES ARE NOT LIABLE FOR THE CONDUCT, ACTS, OR
                     OMISSIONS OF ANY HOST, USER, OR OTHER THIRD PARTY, INCLUDING ANY EVENT CANCELLATION, UNPAID PRIZE,
                     OR UNREFUNDED PASS, OR FOR ANY UNAUTHORIZED ACCESS TO OR USE OF YOUR ACCOUNT OR DATA.
-                </p>
+                </LegalCaps>
 
                 <h3>10.3 Liability Cap</h3>
-                <p className={styles.caps}>
+                <LegalCaps>
                     TO THE FULLEST EXTENT PERMITTED BY LAW, THE TOTAL AGGREGATE LIABILITY OF THE USYNC PARTIES FOR ALL
                     CLAIMS ARISING OUT OF OR RELATING TO THE SERVICES OR THESE TERMS WILL NOT EXCEED THE GREATER OF
                     (A) THE TOTAL FEES YOU PAID DIRECTLY TO USYNC (SUCH AS PLATFORM FEES AND SUBSCRIPTION FEES, BUT NOT
                     PASS PRICES PAID TO OR FOR THE BENEFIT OF HOSTS) DURING THE 12 MONTHS BEFORE THE EVENT GIVING RISE
                     TO THE CLAIM, OR (B) ONE HUNDRED U.S. DOLLARS (US $100).
-                </p>
+                </LegalCaps>
 
                 <h3>10.4 Basis of the Bargain; Exceptions</h3>
                 <p>
@@ -1128,11 +1127,11 @@ const SECTIONS = [
                 </p>
 
                 <h3>12.5 Class Action and Jury Trial Waiver</h3>
-                <p className={styles.caps}>
+                <LegalCaps>
                     YOU AND USYNC AGREE THAT EACH OF US MAY BRING CLAIMS AGAINST THE OTHER ONLY IN AN INDIVIDUAL
                     CAPACITY, AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS, COLLECTIVE, CONSOLIDATED, OR
                     REPRESENTATIVE PROCEEDING. YOU AND USYNC EACH WAIVE THE RIGHT TO A TRIAL BY JURY.
-                </p>
+                </LegalCaps>
                 <p>
                     Unless both you and uSync agree otherwise, the arbitrator may not consolidate more than one
                     person’s Claims and may not preside over any form of class or representative proceeding. If a
@@ -1271,15 +1270,6 @@ const SECTIONS = [
                         signature.
                     </li>
                     <li>
-                        <strong>Text messages.</strong> If you opt in to text messages from uSync, you agree to receive
-                        recurring messages such as event reminders and account notifications and, if you separately
-                        agree, promotional messages, at the mobile number you provide. Message frequency varies. Message
-                        and data rates may apply. Consent is not a condition of any purchase. Reply STOP to cancel or
-                        HELP for help, or contact <LegalEmail subject="SMS Help" />. Carriers are not liable for delayed
-                        or undelivered messages. Our <Link to="/more/privacy-policy">Privacy Policy</Link> explains how
-                        we handle your mobile number, which we never share with third parties for their marketing.
-                    </li>
-                    <li>
                         <strong>Notices to you.</strong> We may send notices to the email address associated with your
                         account or post them on the Services. Please keep your email address current.
                     </li>
@@ -1337,11 +1327,11 @@ const SECTIONS = [
         content: (
             <>
                 <p>If you have questions about these Terms or need to send us a legal notice, please contact us:</p>
-                <div className={styles.contactCard}>
+                <LegalContactCard>
                     <p><strong>uSync LLC</strong></p>
                     <p>Email: <LegalEmail subject="Legal Notice" /></p>
                     <p>Website: <Link to="/more/contactus">www.usync.gg</Link></p>
-                </div>
+                </LegalContactCard>
                 <p>
                     To help us route your message, please use one of these subject lines where it applies: “Legal
                     Notice,” “Notice of Dispute,” “Arbitration Opt-Out,” “DMCA Notice,” “Cancel Subscription,” or
@@ -1368,7 +1358,7 @@ export const TermsOfService = () => (
                     checkout flows, and services we offer (together, the “Services”).
                 </p>
 
-                <div className={styles.notice}>
+                <LegalNotice>
                     <p>
                         <strong>Please read these Terms carefully.</strong>{" "}
                         <SectionRef to="dispute-resolution">Section 12</SectionRef> contains a <strong>binding arbitration
@@ -1376,7 +1366,7 @@ export const TermsOfService = () => (
                         and uSync are resolved. Unless you opt out within 30 days as described in Section 12.7, you and
                         uSync agree to resolve most disputes through individual arbitration rather than in court.
                     </p>
-                </div>
+                </LegalNotice>
             </>
         }
     />

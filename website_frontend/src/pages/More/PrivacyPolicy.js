@@ -1,8 +1,7 @@
-import { LegalDocument, LegalEmail, SectionRef } from "components";
+import { LegalDocument, LegalEmail, SectionRef, LegalNotice, LegalContactCard, LegalTable } from "components";
 import { Link } from "react-router";
-import styles from 'components/LegalDocument/LegalDocument.module.css';
 
-// Update this date whenever the policy changes (see Section 14).
+// Update this date whenever the policy changes (see Section 13).
 const LAST_UPDATED = "October 8, 2026";
 
 const ExternalLink = ({ href, children }) => (
@@ -15,7 +14,7 @@ const CCPA_CATEGORIES = [
         "Identifiers",
         "Name, username, email address, phone number, IP address, account ID, and online and device identifiers",
         "Service providers; Hosts (at your direction); sign-in providers",
-        "Advertising and marketing partners (email address and online and device identifiers only)",
+        "Not sold or shared",
     ],
     [
         "Customer records (Cal. Civ. Code § 1798.80(e))",
@@ -37,15 +36,15 @@ const CCPA_CATEGORIES = [
     ],
     [
         "Internet or other electronic network activity",
-        "Pages viewed, links and buttons clicked, referring websites, device and browser information, and interactions with our emails and ads",
+        "Pages viewed, links and buttons clicked, referring websites, and device and browser information",
         "Service providers, including our analytics provider",
-        "Advertising and marketing partners",
+        "Not sold or shared",
     ],
     [
         "Geolocation data",
         "Approximate location (city, region, or country) derived from your IP address, and the country you provide",
         "Service providers",
-        "Advertising and marketing partners (approximate location only)",
+        "Not sold or shared",
     ],
     [
         "Audio, electronic, visual, or similar information",
@@ -63,7 +62,7 @@ const CCPA_CATEGORIES = [
         "Inferences",
         "Your interests in particular games, events, and types of competition",
         "Service providers",
-        "Advertising and marketing partners",
+        "Not sold or shared",
     ],
     [
         "Sensitive personal information",
@@ -96,10 +95,6 @@ const RETENTION_PERIODS = [
         "User-level and event-level data in Google Analytics is kept for up to 14 months and then deleted automatically. Aggregated reports that do not identify you may be kept longer.",
     ],
     [
-        "Opt-out and consent records",
-        "Records of your choice to opt out of marketing emails, targeted advertising, or text messages, such as your email address or phone number, are kept for as long as needed to honor that choice. Records of text message consent are kept for up to five years after you opt out, so we can demonstrate compliance with telemarketing laws.",
-    ],
-    [
         "De-identified and aggregated information",
         "May be kept indefinitely, because it can no longer reasonably identify you. Examples include historical statistics about events and participation.",
     ],
@@ -127,7 +122,7 @@ const SECTIONS = [
                 <h3>1.2 What This Policy Covers</h3>
                 <p>
                     This policy applies to personal information we collect through the Services and through our
-                    related communications, including email, text messages, and social media. It does not apply to
+                    related communications, including email and social media. It does not apply to
                     information collected by third parties, even if their events, platforms, or websites are listed on
                     or linked from uSync. In particular, when you register for an event, the Host running that event
                     receives your registration information and handles it under its own privacy practices, as
@@ -184,7 +179,6 @@ const SECTIONS = [
                     collect the information you include, such as your name, email address, organization, event
                     details, and the content of your message. Our event submission and problem-report forms are
                     provided through Google Forms, so the information you enter in them is also processed by Google.
-                    If you opt in to text messages, we collect your mobile phone number and a record of your consent.
                     If you enter a contest, sweepstakes, or giveaway, we collect the information requested in its
                     official rules, such as your name, email address, and, if you win, the details needed to deliver
                     your prize.
@@ -212,7 +206,7 @@ const SECTIONS = [
                 </p>
                 <p>
                     We collect much of this information using cookies, browser storage, and similar technologies,
-                    including Google Analytics and the advertising technologies of our partners.{" "}
+                    including Google Analytics.{" "}
                     <SectionRef to="cookies">Section 5</SectionRef> explains these technologies and how you can
                     control them.
                 </p>
@@ -225,9 +219,7 @@ const SECTIONS = [
                     in their events, such as check-in status, results, and placements. We also collect publicly
                     available information about esports events and organizers, such as event names, dates, locations,
                     and organizer contact details published on their websites and social media, to build our event
-                    listings. Finally, our advertising and analytics partners may provide us with information about how
-                    our marketing campaigns perform and, in some cases, about your interests or how you interacted with
-                    our ads.
+                    listings.
                 </p>
 
                 <h3>2.4 Sensitive Information</h3>
@@ -280,24 +272,15 @@ const SECTIONS = [
                     We send service communications, such as account confirmations, password resets, receipts,
                     registration confirmations, changes to events you have registered for, and updates to our Terms of
                     Service or this policy. These messages are necessary to provide the Services, and you cannot opt
-                    out of them while you have an account. We also send marketing emails about new features, events,
-                    promotions, and partner offers, with your consent where the law requires it and otherwise on the
-                    basis of our legitimate interest in promoting uSync. You can unsubscribe from marketing emails at
-                    any time using the link in each message. Text messages are covered
-                    in <SectionRef to="sms">Section 12</SectionRef>.
+                    out of them while you have an account. We do not send marketing emails, newsletters, or text
+                    messages. If we start, we will update this policy first and give you a way to opt out.
                 </p>
 
-                <h3>3.4 For Advertising and Marketing</h3>
+                <h3>3.4 To Promote uSync</h3>
                 <p>
-                    We use information such as your email address, online and device identifiers, the pages you visit
-                    on uSync, and your interactions with our emails and ads to market uSync, measure the effectiveness
-                    of our campaigns, and show you uSync advertising on other websites and platforms. We also work with
-                    advertising partners to show you ads that are relevant to your interests, which can involve sharing
-                    information with those partners as described in Section 4.4. For people in the EEA, the United
-                    Kingdom, and Switzerland, we rely on your consent for targeted advertising and the cookies it uses;
-                    elsewhere, we rely on our legitimate interest in promoting our Services, or on consent where local
-                    law requires it. You can opt out at any time, as explained in Section 8.3. We do not use the personal
-                    information of users we know are under 18 for targeted advertising.
+                    We promote uSync and the events listed on it on our website and our own social media accounts. We
+                    do not use your personal information for targeted advertising, and we do not run ads that track
+                    you across other websites or apps.
                 </p>
 
                 <h3>3.5 To Keep uSync Safe and Fair</h3>
@@ -346,10 +329,7 @@ const SECTIONS = [
         content: (
             <>
                 <p>
-                    We share personal information only in the ways described in this section. All of the sharing
-                    described here excludes text message opt-in data and consent, which we do not share with any third
-                    party other than the service providers that deliver our text messages, and we never share your
-                    mobile phone number with third parties for their marketing or promotional purposes.
+                    We share personal information only in the ways described in this section.
                 </p>
 
                 <h3>4.1 Public Profiles and Competition Information</h3>
@@ -386,8 +366,7 @@ const SECTIONS = [
                     payments; Resend, which delivers our emails, such as receipts and registration confirmations;
                     OpenAI, which provides the automated moderation that screens usernames and profile pictures for
                     prohibited content; Google, which provides analytics (Google Analytics), our event submission and
-                    problem-report forms (Google Forms), and sign-in; and Discord and X, which provide sign-in. We also
-                    use a provider to deliver text messages. Some of these companies also process your information as
+                    problem-report forms (Google Forms), and sign-in; and Discord and X, which provide sign-in. Some of these companies also process your information as
                     independent controllers under their own privacy policies: for example, sign-in providers handle
                     your account with them, and Stripe uses payment information for its own fraud prevention and
                     legal compliance and to operate Link if you choose to use it. Content that loads from other
@@ -395,23 +374,13 @@ const SECTIONS = [
                     Services evolve.
                 </p>
 
-                <h3>4.4 Advertising and Marketing Partners</h3>
+                <h3>4.4 No Sale or Sharing of Personal Information</h3>
                 <p>
-                    We work with advertising and marketing partners, such as advertising networks, social media
-                    platforms, and sponsors, to promote uSync and show you relevant advertising. To do this, we may
-                    share with these partners, or allow them to collect through cookies and similar technologies on
-                    our site, information such as your email address (often in hashed or encoded form), online and
-                    device identifiers, the pages you view and actions you take on uSync, your approximate location,
-                    and inferences about your interests in games and events. Partners may combine this with
-                    information they hold about you from other websites and services. Under some U.S. state privacy
-                    laws, this activity may be considered a “sale” of personal information or “sharing” for
-                    cross-context behavioral advertising (also called targeted advertising). You have the right to opt
-                    out at any time, as explained in Section 8.3.
-                </p>
-                <p>
-                    We never sell or share for advertising the personal information of users we know are under 18,
-                    your mobile phone number or text message opt-in information, your payment card information, or
-                    your date of birth, gender, or account credentials.
+                    We do not sell personal information, and we do not share it for cross-context behavioral
+                    advertising (also called targeted advertising). We have not done either in the past 12 months. We
+                    do not work with advertising networks, and we do not let advertising partners collect information
+                    through cookies or similar technologies on our site. If this changes, we will update this policy
+                    and give you a way to opt out before it takes effect.
                 </p>
 
                 <h3>4.5 Legal Requirements, Safety, and Rights</h3>
@@ -443,7 +412,7 @@ const SECTIONS = [
             <>
                 <p>
                     Cookies are small text files that websites place on your device, and browser storage (such as
-                    local storage and session storage) works in a similar way. We and our partners use these
+                    local storage and session storage) works in a similar way. We and our service providers use these
                     technologies for the purposes described below.
                 </p>
 
@@ -474,16 +443,8 @@ const SECTIONS = [
 
                 <h3>5.3 Advertising Technologies</h3>
                 <p>
-                    Our advertising partners may place cookies, pixels, and similar technologies on uSync to collect
-                    information about your activity on our site and across other websites over time, so they can
-                    measure the effectiveness of ads and show you ads based on your interests. You can opt out of
-                    interest-based advertising from many participating companies through the Digital Advertising
-                    Alliance at <ExternalLink href="https://optout.aboutads.info">optout.aboutads.info</ExternalLink> and
-                    the Network Advertising Initiative
-                    at <ExternalLink href="https://optout.networkadvertising.org">optout.networkadvertising.org</ExternalLink>,
-                    and you can use the settings on your mobile device and social media accounts to limit ad
-                    personalization. Opting out does not mean you will stop seeing ads; the ads you see will simply be
-                    less tailored to your interests.
+                    We do not use advertising cookies, pixels, or similar technologies on uSync, and we do not allow
+                    advertising partners to place them on our site.
                 </p>
 
                 <h3>5.4 Third-Party Content</h3>
@@ -498,11 +459,11 @@ const SECTIONS = [
                 <h3>5.5 Your Choices, Global Privacy Control, and Do Not Track</h3>
                 <p>
                     Most browsers let you block or delete cookies and clear site storage through their settings. If you
-                    block all cookies, some features of the Services may not work properly. We treat a Global Privacy
-                    Control (“GPC”) signal sent by your browser as a valid request to opt out of the sale or sharing of
-                    your personal information for that browser, as described in Section 8.3. Because there is no common
-                    industry standard for “Do Not Track” signals, we do not respond to them, other than honoring GPC as
-                    described above.
+                    block all cookies, some features of the Services may not work properly. Because we do not sell or
+                    share personal information, there is nothing for a Global Privacy Control (“GPC”) signal to opt
+                    you out of; if that changes, we will treat a GPC signal as a valid opt-out request for that
+                    browser. Because there is no common industry standard for “Do Not Track” signals, we do not
+                    respond to them.
                 </p>
             </>
         ),
@@ -588,24 +549,7 @@ const SECTIONS = [
                     that it can no longer be associated with you. The table below sets out our standard retention
                     periods.
                 </p>
-                <div className={`${styles.tableWrap} ${styles.twoColumn}`}>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th scope="col">Information</th>
-                                <th scope="col">How long we keep it</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {RETENTION_PERIODS.map(([information, period]) => (
-                                <tr key={information}>
-                                    <td>{information}</td>
-                                    <td>{period}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                <LegalTable twoColumn columns={["Information", "How long we keep it"]} rows={RETENTION_PERIODS} />
                 <p>
                     We may keep specific information longer than described above when we are legally required to do
                     so; when it is reasonably necessary to resolve a dispute, enforce our Terms of Service, or complete
@@ -648,24 +592,18 @@ const SECTIONS = [
 
                 <h3>8.2 Marketing Communications</h3>
                 <p>
-                    You can stop receiving marketing emails at any time by clicking the unsubscribe link at the bottom
-                    of any marketing email or by contacting us. You can stop receiving text messages by replying STOP,
-                    as described in <SectionRef to="sms">Section 12</SectionRef>. Even if you opt out of marketing, we
-                    will still send service messages about your account, purchases, and registrations.
+                    We do not send marketing emails, newsletters, or text messages. We send only the service messages
+                    described in <SectionRef to="how-we-use">Section 3.3</SectionRef>, about your account, purchases,
+                    and registrations.
                 </p>
 
-                <h3>8.3 Opting Out of the Sale or Sharing of Your Information</h3>
+                <h3>8.3 Sale and Sharing of Your Information</h3>
                 <p>
-                    You can opt out of the sale or sharing of your personal information, and of targeted advertising,
-                    at any time. To do so, email <LegalEmail subject="Do Not Sell or Share My Personal Information" /> with
-                    the subject line “Do Not Sell or Share My Personal Information” and include the email address
-                    associated with your account, if you have one. You can also turn on a Global Privacy Control signal
-                    in a supporting browser or browser extension, and we will treat that signal as an opt-out request
-                    for that browser and, if you are signed in, for your account. You do not need an account to opt
-                    out, and we will not ask you to verify your identity for an opt-out request beyond what we need to
-                    process it. We will process opt-out requests as soon as feasible and no later than 15 business days
-                    after we receive them. You can also limit interest-based advertising using the tools described in
-                    Section 5.3.
+                    As described in <SectionRef to="how-we-share">Section 4.4</SectionRef>, we do not sell your
+                    personal information, share it for targeted advertising, or use it for profiling that produces
+                    legal or similarly significant effects, so there is nothing for you to opt out of. If our
+                    practices change, we will update this policy and give you a way to opt out before any sale or
+                    sharing begins.
                 </p>
 
                 <h3>8.4 How to Submit a Privacy Request</h3>
@@ -739,8 +677,8 @@ const SECTIONS = [
                     sale or sharing of your personal information; to limit the use of sensitive personal information in
                     certain cases; and not to be discriminated against for exercising these rights. We do not use or
                     disclose sensitive personal information for purposes that would give you a right to limit its use
-                    under the CCPA. We do not sell or share the personal information of consumers we know are under 16,
-                    and, as a matter of policy, we extend that protection to all users we know are under 18.
+                    under the CCPA. We do not sell or share personal information, including that of consumers under
+                    16, as described in Section 4.4.
                 </p>
                 <p>
                     The table below describes the categories of personal information we have collected in the past 12
@@ -749,35 +687,16 @@ const SECTIONS = [
                     for the business and commercial purposes described in Section 3. Retention periods for each
                     category are described in Section 7.
                 </p>
-                <div className={styles.tableWrap}>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th scope="col">Category</th>
-                                <th scope="col">Examples</th>
-                                <th scope="col">Disclosed for a business purpose to</th>
-                                <th scope="col">Sold or shared with</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {CCPA_CATEGORIES.map(([category, examples, disclosedTo, soldTo]) => (
-                                <tr key={category}>
-                                    <td>{category}</td>
-                                    <td>{examples}</td>
-                                    <td>{disclosedTo}</td>
-                                    <td>{soldTo}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                <LegalTable
+                    columns={["Category", "Examples", "Disclosed for a business purpose to", "Sold or shared with"]}
+                    rows={CCPA_CATEGORIES}
+                />
                 <p>
-                    To exercise your rights, follow the steps in Section 8.4, or, to opt out of the sale or sharing of
-                    your personal information, follow Section 8.3. California’s “Shine the Light” law (Civil Code
-                    § 1798.83) also allows California residents to request information about the personal information
-                    we disclosed to third parties for their direct marketing purposes in the preceding calendar year.
-                    To make that request, email <LegalEmail subject="Shine the Light Request" /> with the subject line
-                    “Shine the Light Request.”
+                    To exercise your rights, follow the steps in Section 8.4. California’s “Shine the Light” law (Civil
+                    Code § 1798.83) allows California residents to request information about the personal information
+                    a business disclosed to third parties for their direct marketing purposes in the preceding
+                    calendar year. We do not make those disclosures. If you have questions, email{" "}
+                    <LegalEmail subject="Shine the Light Request" /> with the subject line “Shine the Light Request.”
                 </p>
 
                 <h3>9.3 Other U.S. States</h3>
@@ -786,12 +705,13 @@ const SECTIONS = [
                     Texas, Virginia, and a growing number of others, may have the right to confirm whether we process
                     their personal information; to access, correct, and delete it; to obtain a portable copy of it; and
                     to opt out of targeted advertising, the sale of personal information, and profiling used to make
-                    decisions that produce legal or similarly significant effects. In some states, such as Oregon and
+                    decisions that produce legal or similarly significant effects. As described in Section 8.3, we do
+                    not engage in targeted advertising, sell personal information, or use profiling of that kind. In
+                    some states, such as Oregon and
                     Minnesota, you may also request a list of the specific third parties to which we have disclosed
                     your personal information. You can exercise these rights as
-                    described in Section 8, including appealing our decision under Section 8.5. Nevada residents may
-                    direct us not to sell certain covered information by following the opt-out instructions in Section
-                    8.3.
+                    described in Section 8, including appealing our decision under Section 8.5. We do not sell covered
+                    information as defined by Nevada law.
                 </p>
 
                 <h3>9.4 Canada</h3>
@@ -892,35 +812,8 @@ const SECTIONS = [
         ),
     },
     {
-        id: "sms",
-        number: 12,
-        title: "Text Messages (SMS)",
-        content: (
-            <>
-                <p>
-                    If you provide your mobile phone number and opt in to receive text messages from uSync, we will use
-                    your number to send you messages such as event reminders and registration and account
-                    notifications, and, if you separately agree, promotional messages about uSync events and features.
-                    Message frequency varies. Message and data rates may apply. Consent to receive text messages is not
-                    a condition of any purchase. We send text messages only with your consent, which is also our legal
-                    basis for this processing under the GDPR, and you may withdraw it at any time.
-                </p>
-                <p>
-                    You can opt out at any time by replying STOP to any message, after which you will receive one final
-                    message confirming that you have been unsubscribed. For help, reply HELP or contact us
-                    at <LegalEmail subject="SMS Help" />. Carriers are not liable for delayed or undelivered messages.
-                </p>
-                <p>
-                    We do not sell, rent, or share your mobile phone number or text message opt-in consent with third
-                    parties or affiliates for their marketing or promotional purposes. Mobile information is shared
-                    only with the service providers that help us deliver text messages, and only for that purpose.
-                </p>
-            </>
-        ),
-    },
-    {
         id: "third-parties",
-        number: 13,
+        number: 12,
         title: "Third-Party Links & Services",
         content: (
             <>
@@ -938,7 +831,7 @@ const SECTIONS = [
     },
     {
         id: "changes",
-        number: 14,
+        number: 13,
         title: "Changes to This Policy",
         content: (
             <>
@@ -955,7 +848,7 @@ const SECTIONS = [
     },
     {
         id: "contact",
-        number: 15,
+        number: 14,
         title: "Contact Us",
         content: (
             <>
@@ -963,15 +856,14 @@ const SECTIONS = [
                     If you have questions or concerns about this Privacy Policy or our privacy practices, or you want to
                     exercise your privacy rights, please contact our Privacy Officer:
                 </p>
-                <div className={styles.contactCard}>
+                <LegalContactCard>
                     <p><strong>uSync LLC</strong>, Attn: Privacy Officer</p>
                     <p>Email: <LegalEmail subject="Privacy Request" /></p>
                     <p>Website: <Link to="/more/contactus">www.usync.gg</Link></p>
-                </div>
+                </LegalContactCard>
                 <p>
                     To help us respond quickly, please use the subject line that matches your request: “Privacy
-                    Request,” “Do Not Sell or Share My Personal Information,” “Privacy Appeal,” “Shine the Light
-                    Request,” or “Minor Content Removal.” We aim to acknowledge privacy inquiries promptly and to
+                    Request,” “Privacy Appeal,” “Shine the Light Request,” or “Minor Content Removal.” We aim to acknowledge privacy inquiries promptly and to
                     resolve them within the timeframes described in Section 8.4.
                 </p>
             </>
@@ -998,19 +890,18 @@ export const PrivacyPolicy = () => (
                     “Services” have the meanings given there.
                 </p>
 
-                <div className={styles.notice}>
+                <LegalNotice>
                     <p>
                         <strong>The short version.</strong> We collect the information you give us when you create an
                         account, build a profile, or register for an event, along with technical information about how
-                        you use the site. We use it to run uSync, process payments, keep the community safe, and market
-                        our Services. We share registration details with the Hosts whose events you join, rely on
-                        trusted service providers to operate the platform, and work with advertising partners, which
-                        you can opt out of at any time. We never sell or share the personal information of anyone we
-                        know is under 18, and children under 13 may not create accounts. You can access, correct,
-                        download, or delete your information as described
+                        you use the site. We use it to run uSync, process payments, keep the community safe, and improve
+                        our Services. We share registration details with the Hosts whose events you join and rely on
+                        trusted service providers to operate the platform. We do not sell your personal information or
+                        use it for targeted advertising, and children under 13 may not create accounts. You can access,
+                        correct, download, or delete your information as described
                         in <SectionRef to="your-rights">Section 8</SectionRef>.
                     </p>
-                </div>
+                </LegalNotice>
             </>
         }
     />
