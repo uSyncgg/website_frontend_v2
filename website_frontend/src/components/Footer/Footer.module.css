@@ -137,6 +137,11 @@
     text-decoration: underline;
 }
 
+.separator {
+    margin: 0 .5rem;
+    color: rgb(110, 106, 118);
+}
+
 .disclaimer {
     color: rgb(110, 106, 118);
     font-size: .8rem;

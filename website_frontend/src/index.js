@@ -24,6 +24,8 @@ import { PostYourEvent } from 'pages/More/PostYourEvent';
 import { Verification } from 'pages/More/Verification';
 import { ReportProblem } from 'pages/More/ReportProblem';
 import { ComingSoon } from 'pages/More/ComingSoon';
+import { TermsOfService } from 'pages/More/TermsOfService';
+import { PrivacyPolicy } from 'pages/More/PrivacyPolicy';
 
 // Payment Imports
 import GeneralPaymentForm from 'pages/Payment/GeneralPaymentForm/GeneralPaymentForm';
@@ -76,6 +78,8 @@ const app = (
             <Route path='/more/contactus' element={<ContactUs />} />
             <Route path='/more/FAQ' element={<Faqs />} />
             <Route path='/more/articles/*' element={<ArticleRoutes />} />
+            <Route path='/more/terms-of-service' element={<TermsOfService />} />
+            <Route path='/more/privacy-policy' element={<PrivacyPolicy />} />
             <Route path='/reportproblem' element={<ReportProblem />} />
             <Route path='/Comingsoon' element={<ComingSoon />} />
 

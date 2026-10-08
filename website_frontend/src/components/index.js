@@ -81,6 +81,18 @@ import { VerifiedEvents } from "./VerifiedEvents/VerifiedEvents";
 // SEO
 import { SeoData } from "./SeoData/SeoData";
 
+// Legal pages (Terms of Service, Privacy Policy)
+import {
+    LegalDocument,
+    LegalEmail,
+    SectionRef,
+    LegalNotice,
+    LegalContactCard,
+    LegalListLabel,
+    LegalCaps,
+    LegalTable,
+} from "./LegalDocument/LegalDocument";
+
 // Scroll behaviour
 import { ScrollToTop } from "./ScrollToTop/ScrollToTop";
 
@@ -112,6 +124,14 @@ export {
     NoEvents,
     BackButton,
     SeoData,
+    LegalDocument,
+    LegalEmail,
+    SectionRef,
+    LegalNotice,
+    LegalContactCard,
+    LegalListLabel,
+    LegalCaps,
+    LegalTable,
     ScrollToTop,
     TournamentFilter,
     CodTournamentCard,
