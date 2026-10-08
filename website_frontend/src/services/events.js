@@ -29,3 +29,6 @@ export const getLeagueInformation = ({ game, path }) =>
 
 export const getVerifiedEvents = ({ game }) =>
     apiClient.get(`/events/${encodeURIComponent(game)}/verified`).then(res => res.data);
+
+export const getVerifiedEventsByType = ({ event_type }) =>
+    apiClient.get(`/events/${encodeURIComponent(event_type)}/verified/event/type`).then(res => res.data);

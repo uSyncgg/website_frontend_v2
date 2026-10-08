@@ -9,7 +9,8 @@ import {
   getLanInformation,
   getLeagueInformation,
   getVerifiedEvents,
-  getAllLans
+  getAllLans,
+  getVerifiedEventsByType
 } from 'services/events';
 import { LAN_GAMES } from 'data/lanMarkers';
 
@@ -88,4 +89,21 @@ export function useLeagueChildren(game, parent) {
 
 export function useVerifiedEvents(game) {
   return useAsync(() => getVerifiedEvents({game}), [game]);
+}
+
+export function useVerifiedEventsByType(event_type) {
+  return useAsync(() => getVerifiedEventsByType({event_type}), [event_type]);
+}
+
+// Verified events for a fixed set of games, fetched in parallel (one request
+// per game), keyed back by game name. A single game's request failing just
+// drops that game's data rather than blanking the rest. `games` should be a
+// stable reference (e.g. derived from a static catalog) since it's used as
+// the effect dependency.
+export function useVerifiedEventsByGame(games) {
+  return useAsync(
+    () => Promise.all(games.map(game => getVerifiedEvents({ game }).catch(() => null)))
+      .then(results => Object.fromEntries(games.map((game, i) => [game, results[i]]))),
+    [games]
+  );
 }
