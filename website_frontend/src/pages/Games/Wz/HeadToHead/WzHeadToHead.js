@@ -3,6 +3,7 @@ import { SeoData, HostBanner, HeaderImage, EventListFilters } from "components";
 import { useXpEvents } from "hooks";
 import { buildEventPath } from 'utils/eventPaths';
 import '../../EventBanners.css';
+import { getLoadErrorMessage } from "utils/apiError";
 
 const normalizeEntry = (host) => ({
     name: host.name,
@@ -77,7 +78,7 @@ export const WzHeadToHead = () => {
             {loading ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading head-to-head platforms...</h2>
             ) : error ? (
-                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load head-to-head platforms right now.</h2>
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>{getLoadErrorMessage(error, "Unable to load head-to-head platforms right now.")}</h2>
             ) : filteredEntries.length === 0 ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No results match your filters.</h2>
             ) : (

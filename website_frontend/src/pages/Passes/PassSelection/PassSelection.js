@@ -8,7 +8,7 @@ import pageStyles from './PassSelection.module.css';
 import { PaymentForm, DynamicFormField, PaymentCart, LoadingWheel, CheckoutSteps } from "components";
 import { useEventPasses } from "hooks";
 import { submitEventRegistration } from "services/event_registration";
-import { getApiErrorMessage } from "utils/apiError";
+import { getApiErrorMessage, getLoadErrorMessage } from "utils/apiError";
 
 const STEPS = ['Registration', 'Payment', 'Confirmation'];
 
@@ -105,7 +105,7 @@ function PassSelection() {
                 <LoadingWheel />
             ) : error || !tiers || !tiers.length ? (
                 <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>
-                    Unable to load passes for this event right now.
+                    {getLoadErrorMessage(error, "Unable to load passes for this event right now.")}
                 </p>
             ) : (
                 <FormProvider {...methods}>

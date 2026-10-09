@@ -5,6 +5,7 @@ import { toLanMarkers } from 'data/lanMarkers';
 import { buildEventPath } from 'utils/eventPaths';
 import { getStateFromLocation } from 'utils/location';
 import '../EventBanners.css';
+import { getLoadErrorMessage } from "utils/apiError";
 
 const GAME = "Conventions";
 
@@ -102,7 +103,7 @@ export const Conventions = () => {
             {loading ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading conventions...</h2>
             ) : error ? (
-                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load conventions right now.</h2>
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>{getLoadErrorMessage(error, "Unable to load conventions right now.")}</h2>
             ) : lans.length === 0 ? (
                 <div className="eventBannerContainer">
                     <NoEvents pageType={"LANs"} />

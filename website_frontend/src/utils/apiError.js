@@ -5,9 +5,23 @@ const STATUS_FALLBACKS = {
     422: 'Some of the submitted information was invalid.'
 };
 
+export const RATE_LIMIT_MESSAGE =
+    "You're making requests too quickly. Please wait a minute and try again.";
+
+export const isRateLimited = (err) => err?.response?.status === 429;
+
+// For "couldn't load" screens: the rate-limit message on a 429, otherwise the page's own fallback text.
+export const getLoadErrorMessage = (err, fallback) =>
+    isRateLimited(err) ? RATE_LIMIT_MESSAGE : fallback;
+
 export function getApiErrorMessage(err) {
     const status = err?.response?.status;
     const detail = err?.response?.data?.detail;
+
+    // Checked first so slowapi's raw "Rate limit exceeded: ..." body is never shown.
+    if (isRateLimited(err)) {
+        return RATE_LIMIT_MESSAGE;
+    }
 
     if (typeof detail === 'string' && detail.trim()) {
         return detail;
