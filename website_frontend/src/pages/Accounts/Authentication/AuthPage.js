@@ -57,7 +57,8 @@ export const AuthPage = ({ mode }) => {
 
         const { error } = await signInWithPassword(email, password);
         if (error) return setMessage({ type: "error", text: error.message });
-        navigate("/profile"); // Make whatever the users profile will be. Need to figure out how to differentiate, maybe use auth token with profile?
+        // /complete-profile forwards users who already have a profile on to it.
+        navigate("/complete-profile", { replace: true });
     };
 
     return (

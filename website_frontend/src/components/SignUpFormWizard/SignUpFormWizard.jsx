@@ -1,9 +1,8 @@
 import { useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
 import axios from "axios";
 import { FormButton } from "components/FormButton/FormButton";
-import { useAuth } from "hooks";
+import { useAuth, useCurrentUser } from "hooks";
 import styles from "./SignUpFormWizard.module.css";
 
 import { SignUpPathStep } from "components/MutualSignUpSteps/SignUpPathStep";
@@ -130,7 +129,7 @@ export const SignUpFormWizard = () => {
     const methods = useForm({ defaultValues: { signup_path: [], venues: [{ name: '', location: '' }] }, mode: 'onBlur' });
     const { watch, trigger, setError, clearErrors, handleSubmit, formState: { isSubmitting, errors } } = methods;
     const { session } = useAuth();
-    const navigate = useNavigate();
+    const { refresh } = useCurrentUser();
     const [stepIndex, setStepIndex] = useState(0);
     const [passedSteps, setPassedSteps] = useState(() => new Set());
 
@@ -213,7 +212,9 @@ export const SignUpFormWizard = () => {
             // });
             await submitSignUpForm(payload, session?.access_token)
 
-            navigate('/');
+            // Marks the profile complete for the navbar, and RedirectIfProfileComplete
+            // then forwards the user to their new profile page.
+            await refresh();
         } catch (err) {
             const field = err.response?.data?.field;
             const message = err.response?.data?.message || 'Something went wrong. Please try again.';
