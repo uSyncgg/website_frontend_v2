@@ -53,14 +53,16 @@ import TournamentRoutes from './routes/TournamentRoutes';
 
 // Authentication Routes
 import { AuthPage } from 'pages/Accounts/Authentication/AuthPage';
-import { RequireCompleteProfile } from 'components';
+import { RequireCompleteProfile, RedirectIfProfileComplete } from 'components';
 import { Profile } from 'pages/Accounts/Profile/Profile';
+import { CurrentUserProvider } from 'hooks';
 
 const root = document.getElementById('root');
 
 const app = (
   // <React.StrictMode>
   <BrowserRouter>
+    <CurrentUserProvider>
     <ScrollToTop />
     <div className='app-container'>
       <Navbar />
@@ -124,8 +126,13 @@ const app = (
             {/* Profile Completion — the destination RequireCompleteProfile redirects to,
                 so it must not be wrapped by that same guard (that would redirect to itself). */}
             <Route element={<RequireCompleteProfile />}>
-              <Route path='/complete-profile' element={<SignUpFormWizard />} />
+              <Route element={<RedirectIfProfileComplete />}>
+                <Route path='/complete-profile' element={<SignUpFormWizard />} />
+              </Route>
             </Route>
+
+            {/* Profile Settings — placeholder until the settings page is built. */}
+            <Route path='/settings/profile' element={<RequireCompleteProfile />} />
 
           </Routes>
         </ErrorBoundary>
@@ -133,6 +140,7 @@ const app = (
       
       <Footer />
     </div>
+    </CurrentUserProvider>
   </BrowserRouter>
   // </React.StrictMode>
 );

@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import styles from './Navbar.module.css'
 import { LeaguesNavItem, LanNavItem, MoreNavItem } from "./DropdownNavItems";
 import { GamesNavItem, TournamentNavItem} from "./SingleNavItems";
+import { AccountNavItem } from "./AccountNavItem";
 import { useState } from "react";
 import navbarLogo from 'assets/images/misc/usync-navbar-logo_9.6.26.webp';
 
@@ -58,12 +59,13 @@ function Navbar() {
                         isOpen={activeDropdown === 'more'} 
                         onToggle = {() => handleDropdownToggle('more')}
                     />
+
+                    <AccountNavItem closeMenu={closeMenu} variant="menu" />
                 </div>
             </nav>
 
             <div className={`${styles.headerRight} ${menuOpen ? styles.menuOpen : ''}`}>
-                <Link to="/games" className={styles.regButton} onClick={closeMenu}>Register</Link>
-                <Link to="/tournaments" className={styles.logButton} onClick={closeMenu}>Login</Link>
+                <AccountNavItem closeMenu={closeMenu} />
             </div>
         </header>
     )

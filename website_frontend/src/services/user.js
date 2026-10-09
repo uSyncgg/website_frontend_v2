@@ -13,3 +13,8 @@ export const checkUsername = (username, {isPlayer, isHost} = {}) =>
 export const getProfile = (username) =>
     apiClient.get(`/users/fetch/${encodeURIComponent(username)}/profile`)
         .then(res => res.data);
+
+export const getMe = (token) =>
+    apiClient.get(`/users/me`, {
+        headers: { Authorization: `Bearer ${token}`},
+    }).then(res => res.data);
