@@ -3,6 +3,7 @@ import { SeoData, HostBanner, HeaderImage, EventListFilters, NoEvents } from "co
 import { useLeagueEvents } from "hooks";
 import { buildEventPath } from 'utils/eventPaths';
 import '../../EventBanners.css';
+import { getLoadErrorMessage } from "utils/apiError";
 
 const CATEGORY_LABEL = { collegiate: 'Collegiate', highschool: 'High School' };
 const CATEGORY_OPTIONS = ['Collegiate', 'High School'];
@@ -128,7 +129,7 @@ export const RLLeagues = () => {
             {loading ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>
             ) : error ? (
-                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load leagues right now.</h2>
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>{getLoadErrorMessage(error, "Unable to load leagues right now.")}</h2>
             ) : allLeagues.length === 0 ? (
                 <div className="eventBannerContainer">
                     <NoEvents pageType={"Leagues"} />

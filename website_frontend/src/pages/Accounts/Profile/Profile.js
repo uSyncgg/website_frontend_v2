@@ -4,6 +4,7 @@ import { useProfile } from "hooks";
 import { gamesCatalog } from "catalog/games.catalog";
 import { NotFound } from "pages/NotFound";
 import styles from "./Profile.module.css";
+import { getLoadErrorMessage } from "utils/apiError";
 
 // Profile game names come from the sign-up form ("CS 2", "Call of Duty", ...),
 // so match them against the catalog loosely to pick up icons and links.
@@ -74,7 +75,7 @@ export const Profile = () => {
     if (error || !profile) {
         return (
             <div className="standardContainer">
-                <p className={styles.status}>Unable to load this profile right now.</p>
+                <p className={styles.status}>{getLoadErrorMessage(error, "Unable to load this profile right now.")}</p>
             </div>
         );
     }

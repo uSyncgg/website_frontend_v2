@@ -3,6 +3,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import axios from "axios";
 import { FormButton } from "components/FormButton/FormButton";
 import { useAuth, useCurrentUser } from "hooks";
+import { isRateLimited, RATE_LIMIT_MESSAGE } from "utils/apiError";
 import styles from "./SignUpFormWizard.module.css";
 
 import { SignUpPathStep } from "components/MutualSignUpSteps/SignUpPathStep";
@@ -220,7 +221,9 @@ export const SignUpFormWizard = () => {
             const message = err.response?.data?.message || 'Something went wrong. Please try again.';
             console.log(field)
             
-            if (field) {
+            if (isRateLimited(err)) {
+                setError('root', { type: 'server', message: RATE_LIMIT_MESSAGE });
+            } else if (field) {
                 setError(field, { type: 'server', message });
                 const targetIndex = stepIndexForField(field);
                 if (targetIndex !== -1) setStepIndex(targetIndex);
