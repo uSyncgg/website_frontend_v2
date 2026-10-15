@@ -105,15 +105,8 @@
   <!-- Warzone Wagers -->
   <url><loc>https://www.usync.gg/games/warzone/wagers</loc></url>
 
-  <!-- Payment -->
-  <url><loc>https://www.usync.gg/paymentform</loc></url>
-  <url><loc>https://www.usync.gg/paymentform/review</loc></url>
-  <url><loc>https://www.usync.gg/checkout</loc></url>
-  <url><loc>https://www.usync.gg/paymentform/test/receipt</loc></url>
-  <url><loc>https://www.usync.gg/payment</loc></url>
-
   <!-- LANs -->
-  <url><loc>https://www.usync.gg/LanMap</loc></url>
+  <url><loc>https://www.usync.gg/lans/all</loc></url>
   <url><loc>https://www.usync.gg/other-lans</loc></url>
 
 </urlset>

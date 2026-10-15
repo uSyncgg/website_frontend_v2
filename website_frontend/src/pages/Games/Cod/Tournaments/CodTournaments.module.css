@@ -24,6 +24,11 @@
     margin: 0;
 }
 
+/* Two visual lines, one <h1> — the old markup stacked two <h1>s. */
+.heroTitle span {
+    display: block;
+}
+
 .white {
     color: white;
 }
@@ -103,6 +108,15 @@
 .statusMessage {
     padding: 3rem 1rem;
     text-align: center;
+}
+
+/* Loading / empty / error text — status, not headings. Keeps the old <h1>
+   metrics so the states look unchanged. */
+.statusText {
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: .67em 0;
 }
 
 @media only screen and (max-width: 768px) {

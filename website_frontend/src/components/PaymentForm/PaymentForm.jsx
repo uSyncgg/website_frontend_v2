@@ -34,7 +34,7 @@ export const PaymentForm = ({ children, review, formType, reviewEndpoint, id, pr
 
     return (
         <FormProvider {...methods}>
-            <h1 className={styles.formTitle}>{title}</h1>
+            <h2 className={styles.formTitle}>{title}</h2>
             <div className={styles.formContainer}>
                 <form onSubmit={methods.handleSubmit(onSubmit)}>
                     {children}

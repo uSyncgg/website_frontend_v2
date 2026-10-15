@@ -1,12 +1,17 @@
+/* Name is <h3> and role is <p> (both were <h1>, giving the contact page one
+   heading per team member). Margins reproduce the old <h1> spacing. */
 .title {
     color: white;
     font-size: 1.5rem;
     margin-top: .25rem;
+    margin-bottom: .67em;
 }
 
 .subtitle {
     color: white;
     font-size: 1rem;
+    font-weight: bold;
+    margin: .67em 0;
     padding-top: .5rem;
     padding-bottom: 2rem;
 }

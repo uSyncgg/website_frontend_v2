@@ -12,3 +12,10 @@
 .white {
     color: white;
 }
+
+/* Transient status text, not a heading — keeps the old <h1> metrics. */
+.statusText {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: .67em 0;
+}

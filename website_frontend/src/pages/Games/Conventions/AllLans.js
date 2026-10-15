@@ -87,6 +87,8 @@ export const AllLans = () => {
                 canonicalPath={"/lans/all"}
             />
 
+            <h1 className="lanPageTitle">All LANs</h1>
+
             <div className="lanMapContainer">
                 <LanMap markers={markers} showAllGames={true} />
             </div>

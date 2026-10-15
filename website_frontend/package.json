@@ -27,9 +27,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "postbuild": "react-snap",
+    "postbuild": "react-snap && node scripts/seo/verify-prerender.js",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "seo:sync-routes": "node scripts/seo/sync-prerender-routes.js"
   },
   "eslintConfig": {
     "extends": [
@@ -57,8 +58,14 @@
   },
   "reactSnap": {
     "source": "build",
-    "minifyHtml": { "collapseWhitespace": false },
-    "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
+    "minifyHtml": {
+      "collapseWhitespace": false
+    },
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage"
+    ],
     "concurrency": 1,
     "crawl": false,
     "include": [
@@ -73,6 +80,8 @@
       "/more/contactus",
       "/more/FAQ",
       "/more/articles",
+      "/reportproblem",
+      "/Comingsoon",
       "/more/articles/The-Problem-With-Esports",
       "/more/articles/How-Esports-Can-Be-Better",
       "/more/articles/How-We-Fix-It",
@@ -84,15 +93,11 @@
       "/more/articles/how-to-enable-120hz-ps5",
       "/more/articles/esports-tournaments-near-me",
       "/more/articles/how-to-join-online-gaming-tournaments",
-      "/reportproblem",
-      "/Comingsoon",
-      "/tournaments/call-of-duty-tournaments",
-      "/other-lans",
-      "/lans/all",
       "/games/call-of-duty",
       "/games/call-of-duty/lans",
       "/games/call-of-duty/head-to-head",
       "/games/call-of-duty/leagues",
+      "/tournaments/call-of-duty-tournaments",
       "/games/call-of-duty/wagers",
       "/games/CS2",
       "/games/CS2/head-to-head",
@@ -120,8 +125,9 @@
       "/games/warzone/lans",
       "/games/warzone/head-to-head",
       "/games/warzone/leagues",
-      "/games/warzone/wagers"
+      "/games/warzone/wagers",
+      "/lans/all",
+      "/other-lans"
     ]
   }
-
 }

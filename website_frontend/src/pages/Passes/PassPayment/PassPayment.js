@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import styles from '../../Payment/GeneralPaymentForm/GeneralPaymentForm.module.css';
-import { CheckoutSteps, PaymentCart, LoadingWheel } from "components";
+import { CheckoutSteps, PaymentCart, LoadingWheel, SeoData } from "components";
 import { NestedPaymentComponent } from "components/PaymentComponent/NestedPaymentComponent";
 import { stripeAppearance, stripeLoader } from "utils/stripeAppearance";
 import { createPaymentIntent } from "services/event_registration";
@@ -50,6 +50,12 @@ function PassPayment() {
 
     return (
         <div className="standardContainer">
+            <SeoData
+                title={"Complete Your Pass Payment"}
+                description="Securely complete your uSync event pass payment."
+                canonicalPath={`/passes/registration/${registrationId}/payment`}
+                robots={"noindex, nofollow"}
+            />
             <div className={styles.checkoutHeader}>
                 <p className={styles.eyebrow}>Secure Checkout</p>
                 <h1 className={styles.eventTitle}>Payment</h1>
