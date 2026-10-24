@@ -12,6 +12,7 @@ import { ValorantDPI } from 'pages/More/Articles/ValorantDPI';
 import { PS5_120Hz } from 'pages/More/Articles/PS5_120Hz';
 import { EsportsTournamentsNearMe } from 'pages/More/Articles/EsportsTournamentsNearMe';
 import { JoinOnlineTournament } from 'pages/More/Articles/JoinOnlineTournament';
+import { MW4Loadouts } from 'pages/More/Articles/MW4Loadouts';
 
 const ArticleRoutes = () => (
     <Routes>
@@ -27,6 +28,7 @@ const ArticleRoutes = () => (
         <Route path='how-to-enable-120hz-ps5' element={<PS5_120Hz />} />
         <Route path='esports-tournaments-near-me' element={<EsportsTournamentsNearMe />} />
         <Route path='how-to-join-online-gaming-tournaments' element={<JoinOnlineTournament />} />
+        <Route path='best-modern-warfare-4-loadouts' element={<MW4Loadouts />} />
     </Routes>
 );
 
