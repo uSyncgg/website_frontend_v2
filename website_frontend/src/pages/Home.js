@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import styles from './Home.module.css';
 import '../index.css';
 import { Link } from "react-router";
-import { ChooseYourGame, SeoData, HomeTournaments, LanMap } from "components";
+import { ChooseYourGame, SeoData, HomeTournaments, UpcomingEvents, LanMap } from "components";
 import { FaMapMarkerAlt, FaLayerGroup, FaSitemap, FaTrophy } from "react-icons/fa";
 import { useAllLanEvents } from "hooks";
 import { toLanMarkers } from 'data/lanMarkers';
@@ -87,6 +87,10 @@ export const Home = () => {
                 <div className="hr" />
 
                 <HomeTournaments />
+
+                <div className="hr" />
+
+                <UpcomingEvents />
 
                 <div className="hr" />
 
