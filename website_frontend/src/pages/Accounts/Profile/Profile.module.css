@@ -74,6 +74,11 @@
     font-weight: 600;
 }
 
+.location {
+    color: var(--ink-3);
+    font-size: 13px;
+}
+
 .gameLink {
     margin-left: auto;
     padding: 7px 12px;

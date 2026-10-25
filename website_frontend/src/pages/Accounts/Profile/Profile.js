@@ -46,9 +46,23 @@ const GamesCard = ({ title, games, emptyText }) => (
     </ProfileCard>
 );
 
-const ComingSoonCard = ({ title }) => (
-    <ProfileCard title={title}>
-        <EmptyState title="Coming soon" body={`${title} details will show up here.`} />
+const VenuesCard = ({ venues }) => (
+    <ProfileCard title="Venues">
+        {venues?.length > 0 ? (
+            <div>
+                {venues.map(venue => (
+                    <div key={venue.name} className={styles.game}>
+                        <div className={styles.emblem}>{initials(venue.name)}</div>
+                        <div>
+                            <div className={styles.gameName}>{venue.name}</div>
+                            <div className={styles.location}>{venue.location}</div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        ) : (
+            <p className={styles.muted}>No venues yet.</p>
+        )}
     </ProfileCard>
 );
 
@@ -56,7 +70,7 @@ const ComingSoonCard = ({ title }) => (
 const VIEW_CONTENT = {
     player: (profile) => <GamesCard title="Games" games={profile.games} emptyText="No games added yet." />,
     host: (profile) => <GamesCard title="Hosted Games" games={profile.host_games} emptyText="No hosted games added yet." />,
-    venue: () => <ComingSoonCard title="Venue profile" />,
+    venue: (profile) => <VenuesCard venues={profile.venues} />,
 };
 
 export const Profile = () => {
@@ -86,11 +100,11 @@ export const Profile = () => {
         return params;
     }, { replace: true });
 
-    // Set dedupes "Venue" when it's both a view and one of the other roles.
-    const roles = [...new Set([
-        ...views.map(view => view.label),
-        ...(profile.other_roles ?? []),
-    ])];
+    // Roles with their own view (e.g. Venue) show as a view badge, not again in
+    // the "Other roles" card.
+    const viewLabels = views.map(view => view.label);
+    const otherRoles = (profile.other_roles ?? []).filter(role => !viewLabels.includes(role));
+    const roles = [...viewLabels, ...otherRoles];
 
     return (
         <div className="standardContainer">
@@ -125,10 +139,10 @@ export const Profile = () => {
                                 : <p className={styles.muted}>No bio yet.</p>}
                         </ProfileCard>
 
-                        {profile.other_roles?.length > 0 &&
+                        {otherRoles.length > 0 &&
                             <ProfileCard title="Other roles">
                                 <div className={styles.tags}>
-                                    {profile.other_roles.map(role => (
+                                    {otherRoles.map(role => (
                                         <span key={role} className={styles.tag}>{role}</span>
                                     ))}
                                 </div>
