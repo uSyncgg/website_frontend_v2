@@ -2,8 +2,8 @@ import styles from './ProfileViewToggle.module.css';
 
 /**
  * Segmented control for switching between a profile's views (player / host /
- * venue). Views the account doesn't have are shown disabled rather than hidden
- * so the set of profile types stays consistent from profile to profile.
+ * venue). Renders every view it's given; the caller passes only the views the
+ * account has.
  */
 export const ProfileViewToggle = ({ views, active, onChange }) => {
     return (
@@ -14,8 +14,6 @@ export const ProfileViewToggle = ({ views, active, onChange }) => {
                     type="button"
                     role="tab"
                     aria-selected={view.key === active}
-                    disabled={!view.available}
-                    title={view.available ? undefined : `No ${view.label.toLowerCase()} profile`}
                     className={view.key === active ? styles.on : undefined}
                     onClick={() => onChange(view.key)}
                 >

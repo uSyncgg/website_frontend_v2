@@ -5,6 +5,7 @@ import { gamesCatalog } from "catalog/games.catalog";
 import { NotFound } from "pages/NotFound";
 import styles from "./Profile.module.css";
 import { getLoadErrorMessage } from "utils/apiError";
+import { resolveViews } from "./profileViews";
 
 // Profile game names come from the sign-up form ("CS 2", "Call of Duty", ...),
 // so match them against the catalog loosely to pick up icons and links.
@@ -14,14 +15,6 @@ const findCatalogGame = (name) => gamesCatalog.entries.find(entry =>
 );
 
 const initials = (name) => name.split(/\s+/).map(w => w.charAt(0)).join('').slice(0, 3).toUpperCase();
-
-function buildViews(profile) {
-    return [
-        { key: 'player', label: 'Player', available: profile.is_player },
-        { key: 'host', label: 'Host', available: profile.is_host },
-        { key: 'venue', label: 'Venue', available: profile.venues?.length > 0 },
-    ];
-}
 
 const GamesCard = ({ title, games, emptyText }) => (
     <ProfileCard title={title}>
@@ -53,11 +46,32 @@ const GamesCard = ({ title, games, emptyText }) => (
     </ProfileCard>
 );
 
-const ComingSoonCard = ({ title }) => (
-    <ProfileCard title={title}>
-        <EmptyState title="Coming soon" body={`${title} details will show up here.`} />
+const VenuesCard = ({ venues }) => (
+    <ProfileCard title="Venues">
+        {venues?.length > 0 ? (
+            <div>
+                {venues.map(venue => (
+                    <div key={venue.name} className={styles.game}>
+                        <div className={styles.emblem}>{initials(venue.name)}</div>
+                        <div>
+                            <div className={styles.gameName}>{venue.name}</div>
+                            <div className={styles.location}>{venue.location}</div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        ) : (
+            <p className={styles.muted}>No venues yet.</p>
+        )}
     </ProfileCard>
 );
+
+// Main-column content for each view in PROFILE_VIEWS (profileViews.js).
+const VIEW_CONTENT = {
+    player: (profile) => <GamesCard title="Games" games={profile.games} emptyText="No games added yet." />,
+    host: (profile) => <GamesCard title="Hosted Games" games={profile.host_games} emptyText="No hosted games added yet." />,
+    venue: (profile) => <VenuesCard venues={profile.venues} />,
+};
 
 export const Profile = () => {
     const { username } = useParams();
@@ -80,19 +94,17 @@ export const Profile = () => {
         );
     }
 
-    const views = buildViews(profile);
-    const requested = views.find(v => v.key === searchParams.get('view') && v.available);
-    const activeView = requested?.key ?? views.find(v => v.available)?.key ?? 'player';
+    const { views, active: activeView } = resolveViews(profile, searchParams.get('view'));
     const setView = (key) => setSearchParams(params => {
         params.set('view', key);
         return params;
     }, { replace: true });
 
-    const roles = [
-        profile.is_player && 'Player',
-        profile.is_host && 'Host',
-        ...(profile.other_roles ?? []),
-    ].filter(Boolean);
+    // Roles with their own view (e.g. Venue) show as a view badge, not again in
+    // the "Other roles" card.
+    const viewLabels = views.map(view => view.label);
+    const otherRoles = (profile.other_roles ?? []).filter(role => !viewLabels.includes(role));
+    const roles = [...viewLabels, ...otherRoles];
 
     return (
         <div className="standardContainer">
@@ -105,18 +117,19 @@ export const Profile = () => {
 
             <div className={styles.wrap}>
                 <ProfileHeader username={profile.username} verified={profile.verified} roles={roles}>
-                    <ProfileViewToggle views={views} active={activeView} onChange={setView} />
+                    {views.length > 1 &&
+                        <ProfileViewToggle views={views} active={activeView} onChange={setView} />
+                    }
                 </ProfileHeader>
 
                 <div className={styles.cols}>
                     <div>
-                        {activeView === 'player' &&
-                            <GamesCard title="Games" games={profile.games} emptyText="No games added yet." />
+                        {activeView
+                            ? VIEW_CONTENT[activeView](profile)
+                            : <ProfileCard title="Profile">
+                                <EmptyState title="Nothing here yet" body="No player, host or venue profile yet." />
+                            </ProfileCard>
                         }
-                        {activeView === 'host' &&
-                            <GamesCard title="Hosted Games" games={profile.host_games} emptyText="No hosted games added yet." />
-                        }
-                        {activeView === 'venue' && <ComingSoonCard title="Venue profile" />}
                     </div>
 
                     <aside>
@@ -126,10 +139,10 @@ export const Profile = () => {
                                 : <p className={styles.muted}>No bio yet.</p>}
                         </ProfileCard>
 
-                        {profile.other_roles?.length > 0 &&
+                        {otherRoles.length > 0 &&
                             <ProfileCard title="Other roles">
                                 <div className={styles.tags}>
-                                    {profile.other_roles.map(role => (
+                                    {otherRoles.map(role => (
                                         <span key={role} className={styles.tag}>{role}</span>
                                     ))}
                                 </div>
