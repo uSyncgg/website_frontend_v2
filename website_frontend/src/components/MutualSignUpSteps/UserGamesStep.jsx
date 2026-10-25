@@ -1,17 +1,19 @@
 import { SelectableFormBlock } from "components/SelectableFormBlock/SelectableFormBlock";
 import { FormTextInput } from "components/FormTextInput/FormTextInput";
 import { useFormContext } from "react-hook-form";
+import { GAME_ICONS } from "catalog/gameIcons";
 import styles from "./UserGamesStep.module.css";
 
-// Same images used on the Games page (see components/GameImage/GameImage.jsx).
+// Same icons as the Games page (catalog/gameIcons.js). `value` is what gets saved,
+// so it must stay the same even where the display name differs elsewhere.
 const GAME_OPTIONS = [
-    { value: "Call of Duty", title: "Call of Duty", image: "https://i.imgur.com/gNvoNEo.png" },
-    { value: "CS 2", title: "CS 2", image: "https://i.imgur.com/60FwDKN.png" },
-    { value: "Halo", title: "Halo", image: "https://i.imgur.com/wqKJfEu.png" },
-    { value: "League of Legends", title: "League of Legends", image: "https://i.imgur.com/5riYNow.png" },
-    { value: "Rocket League", title: "Rocket League", image: "https://i.imgur.com/GJO8JIZ.png" },
-    { value: "Valorant", title: "Valorant", image: "https://i.imgur.com/Gsl3oIp.png" },
-    { value: "Warzone", title: "Warzone", image: "https://i.imgur.com/IBGIbY2.png" },
+    { value: "Call of Duty", title: "Call of Duty", image: GAME_ICONS['call-of-duty'] },
+    { value: "CS 2", title: "CS 2", image: GAME_ICONS['cs2'] },
+    { value: "Halo", title: "Halo", image: GAME_ICONS['halo'] },
+    { value: "League of Legends", title: "League of Legends", image: GAME_ICONS['league-of-legends'] },
+    { value: "Rocket League", title: "Rocket League", image: GAME_ICONS['rocket-league'] },
+    { value: "Valorant", title: "Valorant", image: GAME_ICONS['valorant'] },
+    { value: "Warzone", title: "Warzone", image: GAME_ICONS['warzone'] },
     { value: "Other", title: "Other", image: "" },
 ];
 

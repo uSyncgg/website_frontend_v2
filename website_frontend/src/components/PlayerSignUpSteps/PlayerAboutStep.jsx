@@ -3,6 +3,12 @@ import { FormSelectInput } from "components/FormSelectInput/FormSelectInput";
 import { COUNTRIES } from "data/countries";
 import styles from "./PlayerAboutStep.module.css";
 
+// Matches the backend's accepted range. The value stays a "YYYY-MM-DD" string, the format
+// the date input and the API both use; a JS Date would add a time and timezone that shift the day.
+const MIN_BIRTH_DATE = "1900-01-01";
+// en-CA formats as YYYY-MM-DD in the user's local time (toISOString would use UTC and can be a day off).
+const todayIso = () => new Date().toLocaleDateString("en-CA");
+
 export const PlayerAboutStep = () => {
     return (
         <div className={styles.grid}>
@@ -66,6 +72,8 @@ export const PlayerAboutStep = () => {
                 label={"Enter your birthday"}
                 disabled={false}
                 type={"date"}
+                min={MIN_BIRTH_DATE}
+                max={todayIso()}
                 inputClassName={""}
                 errorClassName={""}
                 labelClassName={""}

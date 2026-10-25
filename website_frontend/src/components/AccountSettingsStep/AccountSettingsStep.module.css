@@ -1,0 +1,96 @@
+.section + .section {
+    margin-top: 2rem;
+}
+
+.label {
+    display: block;
+    color: rgba(255, 255, 255, .85);
+    font-weight: 600;
+    font-size: .85rem;
+    margin-bottom: .45rem;
+}
+
+.readOnly {
+    margin: 0;
+    padding: .8rem 1rem;
+    border-radius: .65rem;
+    border: 1px solid rgba(255, 255, 255, .08);
+    color: var(--ink-3);
+}
+
+.input {
+    width: 100%;
+    padding: .8rem 1rem;
+    font-size: 1rem;
+    border-radius: .65rem;
+    border: 1px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .04);
+    color: var(--ink);
+    outline: none;
+}
+
+.input:focus {
+    border-color: var(--loss);
+}
+
+.success {
+    display: block;
+    margin-top: .5rem;
+    color: var(--win);
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.error {
+    display: block;
+    margin-top: .5rem;
+    color: var(--loss);
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.btnPrimary,
+.btnDanger {
+    width: 100%;
+    margin-top: 1rem;
+    padding: .85rem;
+    border: none;
+    color: #fff;
+    font-size: .95rem;
+    font-weight: 700;
+    border-radius: .85rem;
+    cursor: pointer;
+}
+
+.btnPrimary {
+    background: linear-gradient(135deg, var(--violet), var(--violet-deep));
+}
+
+.btnDanger {
+    background: var(--loss);
+}
+
+.btnPrimary:disabled,
+.btnDanger:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.dangerZone {
+    padding: 1.25rem;
+    border: 1px solid var(--loss);
+    border-radius: 1rem;
+}
+
+.dangerTitle {
+    margin: 0 0 .5rem;
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--loss);
+}
+
+.dangerText {
+    margin: 0 0 1rem;
+    color: var(--ink-3);
+    font-size: .85rem;
+}

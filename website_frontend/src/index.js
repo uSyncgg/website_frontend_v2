@@ -55,6 +55,7 @@ import TournamentRoutes from './routes/TournamentRoutes';
 import { AuthPage } from 'pages/Accounts/Authentication/AuthPage';
 import { RequireCompleteProfile, RedirectIfProfileComplete } from 'components';
 import { Profile } from 'pages/Accounts/Profile/Profile';
+import { ProfileSettings } from 'pages/Accounts/Settings/ProfileSettings';
 import { CurrentUserProvider } from 'hooks';
 
 const root = document.getElementById('root');
@@ -131,8 +132,10 @@ const app = (
               </Route>
             </Route>
 
-            {/* Profile Settings — placeholder until the settings page is built. */}
-            <Route path='/settings/profile' element={<RequireCompleteProfile />} />
+            {/* Profile Settings — logged-in users only; RequireCompleteProfile sends everyone else to /login. */}
+            <Route path='/settings/profile' element={<RequireCompleteProfile />}>
+              <Route index element={<ProfileSettings />} />
+            </Route>
 
           </Routes>
         </ErrorBoundary>

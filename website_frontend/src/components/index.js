@@ -96,6 +96,8 @@ import { RedirectIfProfileComplete } from "./RequiredCompleteProfile/RedirectIfP
 
 // Sign Up Wizard
 import { SignUpFormWizard } from "./SignUpFormWizard/SignUpFormWizard";
+import { ProfileSettingsWizard } from "./ProfileSettingsWizard/ProfileSettingsWizard";
+import { AccountSettingsStep } from "./AccountSettingsStep/AccountSettingsStep";
 
 // Profile
 import { ProfileHeader } from "./ProfileHeader/ProfileHeader";
@@ -154,6 +156,8 @@ export {
     RequireCompleteProfile,
     RedirectIfProfileComplete,
     SignUpFormWizard,
+    ProfileSettingsWizard,
+    AccountSettingsStep,
     WaysToCompete,
     SectionHeading,
     VerifiedEvents,
