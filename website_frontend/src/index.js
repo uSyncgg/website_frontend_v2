@@ -53,6 +53,8 @@ import TournamentRoutes from './routes/TournamentRoutes';
 
 // Authentication Routes
 import { AuthPage } from 'pages/Accounts/Authentication/AuthPage';
+import { ForgotPassword } from 'pages/Accounts/Authentication/ForgotPassword';
+import { ResetPassword } from 'pages/Accounts/Authentication/ResetPassword';
 import { RequireCompleteProfile, RedirectIfProfileComplete } from 'components';
 import { Profile } from 'pages/Accounts/Profile/Profile';
 import { ProfileSettings } from 'pages/Accounts/Settings/ProfileSettings';
@@ -120,6 +122,8 @@ const app = (
             {/* Authentication Routes */}
             <Route path='/login' element={<AuthPage mode="login" />} />
             <Route path='/signup' element={<AuthPage mode="signup" />} />
+            <Route path='/forgot-password' element={<ForgotPassword />} />
+            <Route path='/reset-password' element={<ResetPassword />} />
 
             {/* Public Profiles */}
             <Route path='/profile/:username' element={<Profile />} />

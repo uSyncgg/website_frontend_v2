@@ -1,15 +1,21 @@
+import { useState } from 'react';
 import styles from './ProfileHeader.module.css';
 
 /**
- * Top of a profile: avatar initial, username, verified badge and a statline of
- * the account's roles. `children` renders on the right (the view toggle).
+ * Top of a profile: avatar (picture, or the username's initial if there isn't one or it fails
+ * to load), username, verified badge and a statline of the account's roles.
+ * `children` renders on the right (the view toggle).
  */
-export const ProfileHeader = ({ username, verified, roles = [], children }) => {
+export const ProfileHeader = ({ username, verified, profilePicture, roles = [], children }) => {
+    const [pictureFailed, setPictureFailed] = useState(false);
+
     return (
         <section className={styles.phead}>
             <div className={styles.inner}>
                 <div className={styles.avatar} aria-hidden="true">
-                    {username.charAt(0).toUpperCase()}
+                    {profilePicture && !pictureFailed
+                        ? <img src={profilePicture} alt="" className={styles.avatarImage} onError={() => setPictureFailed(true)} />
+                        : username.charAt(0).toUpperCase()}
                 </div>
                 <div className={styles.who}>
                     <div className={styles.tagline}>
