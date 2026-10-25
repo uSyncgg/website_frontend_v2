@@ -116,7 +116,13 @@ export const Profile = () => {
             />
 
             <div className={styles.wrap}>
-                <ProfileHeader username={profile.username} verified={profile.verified} roles={roles}>
+                <ProfileHeader
+                    key={profile.profile_picture}
+                    username={profile.username}
+                    verified={profile.verified}
+                    profilePicture={profile.profile_picture}
+                    roles={roles}
+                >
                     {views.length > 1 &&
                         <ProfileViewToggle views={views} active={activeView} onChange={setView} />
                     }

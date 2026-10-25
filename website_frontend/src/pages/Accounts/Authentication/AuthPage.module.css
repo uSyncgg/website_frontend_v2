@@ -1,7 +1,8 @@
+/* .main-content is a flex column, so flex: 1 stretches the page down to the footer on short cards. */
 .page {
+    flex: 1;
     background: var(--ground);
     color: var(--ink);
-    min-height: 100%;
     overflow-x: hidden;
 }
 

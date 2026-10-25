@@ -34,7 +34,7 @@ const HIGHLIGHTS = [
 export const AuthPage = ({ mode }) => {
     const isSignup = mode === "signup";
     const copy = COPY[mode];
-    const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm();
+    const { register, handleSubmit, reset, getValues, formState: { errors, isSubmitting } } = useForm();
     const [message, setMessage] = useState(null);
     const navigate = useNavigate();
 
@@ -132,8 +132,13 @@ export const AuthPage = ({ mode }) => {
 
                         {!isSignup && (
                             <div className={styles.optRow}>
-                                {/* TODO: wire up password reset once it's configured in Supabase. */}
-                                <button type="button" className={styles.linkish}>Forgot password?</button>
+                                <button
+                                    type="button"
+                                    className={styles.linkish}
+                                    onClick={() => navigate("/forgot-password", { state: { email: getValues("email") } })}
+                                >
+                                    Forgot password?
+                                </button>
                             </div>
                         )}
 
