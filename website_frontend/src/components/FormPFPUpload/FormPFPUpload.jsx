@@ -5,16 +5,17 @@ import styles from "./FormPFPUpload.module.css";
 const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
-export const FormPFPUpload = ({ id, name, label, required, inputClassName, labelClassName, errorClassName, onFieldChange }) => {
+// currentUrl: an already-saved picture to show until a new file is picked (profile settings).
+export const FormPFPUpload = ({ id, name, label, required, currentUrl, inputClassName, labelClassName, errorClassName, onFieldChange }) => {
     const { register, formState: { errors } } = useFormContext();
     const [previewUrl, setPreviewUrl] = useState(null);
     const { onChange: rhfOnChange, ...fieldProps } = register(name, {
         required: required ? "This field is required" : false,
         validate: {
             fileType: (files) =>
-                !files?.length || ACCEPTED_TYPES.includes(files[0].type) || "File must be a JPG, PNG, GIF, or WEBP image",
+                !files?.length || ACCEPTED_TYPES.includes(files[0].type) || "File must be a JPG, PNG, or WEBP image",
             fileSize: (files) =>
-                !files?.length || files[0].size <= MAX_FILE_SIZE || "File must be 8MB or smaller",
+                !files?.length || files[0].size <= MAX_FILE_SIZE || "File must be 5MB or smaller",
         },
     });
 
@@ -29,7 +30,7 @@ export const FormPFPUpload = ({ id, name, label, required, inputClassName, label
             {label && <label htmlFor={id} className={`${styles.label} ${labelClassName}`}>{label}</label>}
             <div className={styles.row}>
                 <span className={styles.preview}>
-                    {previewUrl ? <img src={previewUrl} alt="Profile preview" /> : "?"}
+                    {previewUrl || currentUrl ? <img src={previewUrl ?? currentUrl} alt="Profile preview" /> : "?"}
                 </span>
                 <label htmlFor={id} className={styles.uploadBtn}>Upload a photo</label>
                 <input

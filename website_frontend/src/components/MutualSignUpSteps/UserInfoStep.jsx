@@ -2,16 +2,11 @@ import { useEffect, useState } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { FormTextInput } from "components/FormTextInput/FormTextInput";
 import { FormDataCheck } from "components/FormDataCheck/FormDataCheck";
-import { useAuth } from "hooks";
-import { isRateLimited, RATE_LIMIT_MESSAGE } from "utils/apiError";
-import { checkUsername } from "services/user";
-
-const USERNAME_CHECK_DEBOUNCE_MS = 300;
+import { useAuth, useUsernameAvailability } from "hooks";
 
 export const UserInfoStep = () => {
     const { user } = useAuth();
-    const { setValue, getValues, setError, clearErrors } = useFormContext();
-    const [usernameTaken, setUsernameTaken] = useState("");
+    const { setValue, getValues } = useFormContext();
     const [emailTaken, setEmailTaken] = useState("");
 
     const prefillEmail =
@@ -27,62 +22,10 @@ export const UserInfoStep = () => {
     }, [prefillEmail, setValue]);
 
     const username = useWatch({ name: "username" });
-
-    // Check availability once the user stops typing rather than on every keystroke,
-    // which keeps them well under the backend's rate limit. Each keystroke cancels
-    // the pending check, and a response for an older value is ignored.
-    useEffect(() => {
-        let stale = false;
-        const timer = setTimeout(
-            () => checkUsernameAvailability(username, () => stale),
-            USERNAME_CHECK_DEBOUNCE_MS
-        );
-        return () => {
-            stale = true;
-            clearTimeout(timer);
-        };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [username]);
-
-    const checkUsernameAvailability = async (value, isStale = () => false) => {
+    const usernameTaken = useUsernameAvailability(username, () => {
         const path = getValues("signup_path") ?? [];
-        const player = path.includes("player");
-        const host = path.includes("host");
-
-        if (!value) {
-            setUsernameTaken("");
-            return;
-        }
-
-        try {
-            await checkUsername(value, { isPlayer: player, isHost: host });
-            if (isStale()) return;
-            setUsernameTaken("");
-            clearErrors("username");
-        } catch (err) {
-            if (isStale()) return;
-            if (isRateLimited(err)) {
-                setUsernameTaken("");
-                setError("username", { type: "server", message: RATE_LIMIT_MESSAGE });
-            } else if (err.response?.status === 409) {
-                setUsernameTaken(value);
-            } else if (err.response?.status === 422) {
-                setUsernameTaken("");
-                const msg = err.response.data?.detail?.[0]?.msg;
-                setError("username", { type: "validation", message: msg ?? "That username isn't valid." });
-            } else {
-                setUsernameTaken("");
-            }
-        }
-
-        // const result = await FormDataCheck({ // NOTE: this needs to be updated to supabase interaction, this is on the sunset mongodb interaction
-        //     endpoint: "review/username-availability",
-        //     formData: { username: value },
-        //     collectionName: "accounts",
-        // });
-
-        // setUsernameTaken(result.success ? "" : value);
-    };
+        return { isPlayer: path.includes("player"), isHost: path.includes("host") };
+    });
 
     const checkEmailInUse = async (value) => {
         if (!value) {
@@ -90,7 +33,7 @@ export const UserInfoStep = () => {
             return;
         }
 
-        // const result = await FormDataCheck({ // Same note as above
+        // const result = await FormDataCheck({ // NOTE: this needs to be updated to supabase interaction, this is on the sunset mongodb interaction
         //     endpoint: "review/email-availability",
         //     formData: { email: value },
         //     collectionName: "accounts",

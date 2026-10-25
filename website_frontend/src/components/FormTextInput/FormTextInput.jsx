@@ -9,6 +9,8 @@ export const FormTextInput = (
         placeholder,
         label,
         type='',
+        min,
+        max,
         disabled,
         taken="",
         image="",
@@ -40,6 +42,8 @@ export const FormTextInput = (
                 }}
                 placeholder={placeholder}
                 type={type}
+                min={min}
+                max={max}
                 className={`${isRow ? styles.linkInput : styles.input} ${inputClassName}`}
                 disabled={disabled}
                 readOnly={disabled}

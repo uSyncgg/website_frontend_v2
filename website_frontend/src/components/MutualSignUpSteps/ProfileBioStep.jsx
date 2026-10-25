@@ -1,7 +1,7 @@
 import { FormTextArea } from "components/FormTextArea/FormTextArea";
 import { FormPFPUpload } from "components/FormPFPUpload/FormPFPUpload";
 
-export const ProfileBioStep = () => {
+export const ProfileBioStep = ({ currentPictureUrl }) => {
     return (
         <div>
             <FormPFPUpload
@@ -9,6 +9,7 @@ export const ProfileBioStep = () => {
                 name={"profile_picture"}
                 label={"Upload a Profile Picture"}
                 required={false}
+                currentUrl={currentPictureUrl}
                 inputClassName={""}
                 labelClassName={""}
                 errorClassName={""}
