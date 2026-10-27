@@ -1,0 +1,335 @@
+.legalPage {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 5rem;
+}
+
+/* ── Header ── */
+.header {
+    text-align: center;
+}
+
+.eyebrow {
+    color: #8e6ace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0 0 0.5rem;
+}
+
+.pageTitle {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+}
+
+.titleAccent {
+    display: block;
+    width: 3rem;
+    height: 0.22rem;
+    background: #8e6ace;
+    border-radius: 999px;
+    margin: 0 auto 1rem;
+}
+
+.lastUpdated {
+    color: rgb(150, 146, 158);
+    font-size: 0.9rem;
+    margin: 0 0 2rem;
+}
+
+/* ── Two-column layout (table of contents + terms) ── */
+.layout {
+    display: grid;
+    /* TOC column sizes to its longest entry so no section title wraps */
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: start;
+}
+
+.toc {
+    position: sticky;
+    top: 90px;
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
+    background: rgba(28, 25, 33, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    padding: 1.1rem 0.75rem;
+    text-align: left;
+}
+
+.tocLabel {
+    color: #8e6ace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0 0 0.6rem 0.5rem;
+}
+
+.toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.toc a {
+    display: block;
+    color: rgb(170, 164, 184);
+    font-size: 0.86rem;
+    line-height: 1.35;
+    text-decoration: none;
+    padding: 0.4rem 0.5rem;
+    border-radius: 0.5rem;
+    white-space: nowrap;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.toc a:hover {
+    color: white;
+    background: rgba(142, 106, 206, 0.15);
+}
+
+.tocNumber {
+    color: #8e6ace;
+    font-weight: 700;
+    display: inline-block;
+    min-width: 1.6rem;
+}
+
+/* ── Terms body ── */
+.content {
+    background: rgba(28, 25, 33, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    padding: 2.25rem 2.5rem;
+    text-align: left;
+}
+
+.content p,
+.content li {
+    color: rgb(196, 189, 214);
+    font-size: 0.97rem;
+    line-height: 1.75;
+}
+
+.content p {
+    margin: 0 0 1rem;
+}
+
+.content ul,
+.content ol {
+    margin: 0 0 1.1rem;
+    padding-left: 1.4rem;
+}
+
+.content li {
+    margin-bottom: 0.45rem;
+}
+
+.content li::marker {
+    color: #8e6ace;
+}
+
+.content strong {
+    color: white;
+    font-weight: 700;
+}
+
+.content a {
+    color: #b18af0;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    overflow-wrap: anywhere;
+    transition: color 0.2s ease;
+}
+
+.content a:hover {
+    color: #cdb2f5;
+}
+
+.section {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 2rem;
+    margin-top: 2rem;
+    scroll-margin-top: 90px;
+}
+
+.section h2 {
+    color: white;
+    font-size: 1.45rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    margin: 0 0 1.1rem;
+}
+
+.sectionNumber {
+    color: #8e6ace;
+}
+
+.section h3 {
+    color: #ebe5f7;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 1.6rem 0 0.6rem;
+}
+
+.section h2 + h3 {
+    margin-top: 0;
+}
+
+.listLabel.listLabel {
+    color: white;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 1.1rem 0 0.4rem;
+}
+
+/* Conspicuous all-caps legal text (warranty disclaimers, liability limits, class waiver) */
+.caps.caps {
+    color: #e6e0f2;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+/* Arbitration notice at the top of the terms */
+.notice {
+    background: rgba(142, 106, 206, 0.1);
+    border: 1px solid rgba(142, 106, 206, 0.45);
+    border-left-width: 4px;
+    border-radius: 0.875rem;
+    padding: 1.1rem 1.4rem;
+    margin: 0.5rem 0 0.5rem;
+}
+
+.notice p {
+    margin: 0;
+}
+
+.contactCard {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.75rem;
+    padding: 1rem 1.25rem;
+    margin: 0 0 1rem;
+}
+
+.contactCard p {
+    margin: 0 0 0.25rem;
+}
+
+.contactCard p:last-child {
+    margin-bottom: 0;
+}
+
+/* Disclosure tables (e.g. CCPA categories). Scrolls sideways on narrow screens instead of squashing. */
+.tableWrap {
+    overflow-x: auto;
+    margin: 0 0 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.75rem;
+}
+
+.tableWrap table {
+    width: 100%;
+    min-width: 40rem;
+    border-collapse: collapse;
+}
+
+.tableWrap th,
+.tableWrap td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.75rem 0.9rem;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.tableWrap th {
+    color: white;
+    font-weight: 700;
+    background: rgba(142, 106, 206, 0.12);
+}
+
+.tableWrap td {
+    color: rgb(196, 189, 214);
+}
+
+.tableWrap td:first-child {
+    color: white;
+    font-weight: 600;
+}
+
+.tableWrap tr:last-child td {
+    border-bottom: none;
+}
+
+/* Two-column tables (e.g. retention schedule) are narrow enough to wrap instead of scrolling */
+.twoColumn table {
+    min-width: 0;
+}
+
+.twoColumn td:first-child {
+    width: 32%;
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+    .layout {
+        /* minmax(0, …) lets wide children (tables) scroll in place instead of stretching the column */
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.5rem;
+    }
+
+    .toc {
+        position: static;
+        max-height: none;
+    }
+
+    .toc a {
+        white-space: normal;
+    }
+
+    .toc ol {
+        columns: 2;
+        column-gap: 1rem;
+    }
+
+    .toc li {
+        break-inside: avoid;
+    }
+}
+
+@media (max-width: 560px) {
+    .legalPage {
+        padding: 2rem 1rem 4rem;
+    }
+
+    .pageTitle {
+        font-size: 2rem;
+    }
+
+    .content {
+        padding: 1.5rem 1.15rem;
+    }
+
+    .toc ol {
+        columns: 1;
+    }
+
+    .section h2 {
+        font-size: 1.25rem;
+    }
+}

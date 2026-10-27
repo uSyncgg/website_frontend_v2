@@ -11,14 +11,14 @@ export const PaymentCart = ({ pass, fee, eventName }) => {
 
                 <div className={styles.cartItem}>
                     <span>Event Pass</span>
-                    <span>${pass}</span>
+                    <span>${pass.toFixed(2)}</span>
                 </div>
                 <div className={styles.cartItem}>
                     <span className={styles.feeLabel}>
                         Platform Fee
                         <span className={styles.feeNote}>5% &middot; keeps uSync running</span>
                     </span>
-                    <span>${fee}</span>
+                    <span>${fee.toFixed(2)}</span>
                 </div>
 
                 <hr className={styles.cartDivider} />

@@ -51,8 +51,11 @@ function PassSelection() {
         [tiers, selectedTierId]
     );
 
-    const pass = selectedTier ? selectedTier.price_cents / 100 : 0;
-    const fee = pass * 0.05;
+    // Work in whole cents so the fee shown is rounded to the cent, like the amount actually charged.
+    const passCents = selectedTier ? selectedTier.price_cents : 0;
+    const feeCents = Math.round(passCents * 0.05);
+    const pass = passCents / 100;
+    const fee = feeCents / 100;
 
     const onSubmit = async (values) => {
         if (!selectedTier) return;
