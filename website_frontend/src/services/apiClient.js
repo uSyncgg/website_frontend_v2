@@ -2,7 +2,7 @@ import axios from 'axios';
 import { supabase } from './supabaseClient';
 
 const apiClient = axios.create({
-    baseURL: process.env.REACT_APP_API_BASE_URL_TEST,
+    baseURL: process.env.REACT_APP_API_BASE_URL,
 });
 
 // Attach the signed-in user's token to every request that doesn't set its own.
