@@ -7,6 +7,9 @@ import { BrowserRouter, Routes, Route } from 'react-router';
 // Navbar & Footer
 import { Navbar, Footer, ScrollToTop, ErrorBoundary } from 'components';
 
+// Account Setup
+import { SignUpFormWizard } from 'components';
+
 // 404 fallback
 import { NotFound } from 'pages/NotFound';
 
@@ -48,11 +51,21 @@ import PassesRoutes from './routes/PassesRoutes';
 import ArticleRoutes from './routes/ArticleRoutes';
 import TournamentRoutes from './routes/TournamentRoutes';
 
+// Authentication Routes
+import { AuthPage } from 'pages/Accounts/Authentication/AuthPage';
+import { ForgotPassword } from 'pages/Accounts/Authentication/ForgotPassword';
+import { ResetPassword } from 'pages/Accounts/Authentication/ResetPassword';
+import { RequireCompleteProfile, RedirectIfProfileComplete } from 'components';
+import { Profile } from 'pages/Accounts/Profile/Profile';
+import { ProfileSettings } from 'pages/Accounts/Settings/ProfileSettings';
+import { CurrentUserProvider } from 'hooks';
+
 const root = document.getElementById('root');
 
 const app = (
   // <React.StrictMode>
   <BrowserRouter>
+    <CurrentUserProvider>
     <ScrollToTop />
     <div className='app-container'>
       <Navbar />
@@ -106,12 +119,35 @@ const app = (
             <Route path='/other-lans' element={<Conventions />} />
             <Route path='/lans/*' element={<LanRoutes />} />
 
+            {/* Authentication Routes */}
+            <Route path='/login' element={<AuthPage mode="login" />} />
+            <Route path='/signup' element={<AuthPage mode="signup" />} />
+            <Route path='/forgot-password' element={<ForgotPassword />} />
+            <Route path='/reset-password' element={<ResetPassword />} />
+
+            {/* Public Profiles */}
+            <Route path='/profile/:username' element={<Profile />} />
+
+            {/* Profile Completion — the destination RequireCompleteProfile redirects to,
+                so it must not be wrapped by that same guard (that would redirect to itself). */}
+            <Route element={<RequireCompleteProfile />}>
+              <Route element={<RedirectIfProfileComplete />}>
+                <Route path='/complete-profile' element={<SignUpFormWizard />} />
+              </Route>
+            </Route>
+
+            {/* Profile Settings — logged-in users only; RequireCompleteProfile sends everyone else to /login. */}
+            <Route path='/settings/profile' element={<RequireCompleteProfile />}>
+              <Route index element={<ProfileSettings />} />
+            </Route>
+
           </Routes>
         </ErrorBoundary>
       </main>
       
       <Footer />
     </div>
+    </CurrentUserProvider>
   </BrowserRouter>
   // </React.StrictMode>
 );

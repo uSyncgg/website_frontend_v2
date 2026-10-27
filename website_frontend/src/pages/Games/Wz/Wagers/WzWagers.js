@@ -3,6 +3,7 @@ import { SeoData, HostBanner, HeaderImage, EventListFilters } from "components";
 import { useWagerEvents } from "hooks";
 import { buildEventPath } from 'utils/eventPaths';
 import '../../EventBanners.css';
+import { getLoadErrorMessage } from "utils/apiError";
 
 const normalizeWager = (host) => ({
     name: host.name,
@@ -77,7 +78,7 @@ export const WzWagers = () => {
             {loading ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading wagers...</h2>
             ) : error ? (
-                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load wagers right now.</h2>
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>{getLoadErrorMessage(error, "Unable to load wagers right now.")}</h2>
             ) : filteredWagers.length === 0 ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>No results match your filters.</h2>
             ) : (
