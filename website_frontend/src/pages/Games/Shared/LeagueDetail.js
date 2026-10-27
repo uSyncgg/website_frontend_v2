@@ -4,6 +4,7 @@ import { useLeagueInfo } from "hooks";
 import { buildEventPath } from "utils/eventPaths";
 import { NotFound } from "pages/NotFound";
 import '../EventInformation.css';
+import { getLoadErrorMessage } from "utils/apiError";
 
 export const LeagueDetail = ({ game, sectionPath }) => {
     const params = useParams();
@@ -36,7 +37,7 @@ export const LeagueDetail = ({ game, sectionPath }) => {
             {loading ? (
                 <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Loading league info...</p>
             ) : error || !data ? (
-                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Unable to load this league right now.</p>
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>{getLoadErrorMessage(error, "Unable to load this league right now.")}</p>
             ) : isParent ? (
                 <div className="eventBannerContainer">
                     {data.leagues

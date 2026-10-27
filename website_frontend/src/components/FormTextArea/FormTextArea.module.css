@@ -1,0 +1,62 @@
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.field + .field {
+    margin-top: 1.25rem;
+}
+
+.label {
+    display: block;
+    color: rgba(255, 255, 255, .85);
+    font-weight: 600;
+    font-size: .85rem;
+    margin-bottom: .45rem;
+}
+
+.textarea {
+    width: 100%;
+    min-height: 6.5rem;
+    padding: .8rem 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    border-radius: .65rem;
+    border: 1px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .04);
+    color: var(--ink);
+    outline: none;
+    resize: vertical;
+    transition: border-color .2s, box-shadow .2s, background .2s;
+}
+
+.textarea::placeholder {
+    color: var(--ink-4);
+}
+
+.textarea:focus {
+    border-color: #8e6ace;
+    background: rgba(142, 106, 206, .08);
+    box-shadow: 0 0 0 3px rgba(142, 106, 206, .18);
+}
+
+.textarea:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+.counter {
+    align-self: flex-end;
+    margin-top: .35rem;
+    color: var(--ink-3);
+    font-size: .74rem;
+    font-weight: 600;
+}
+
+.error {
+    display: block;
+    margin-top: .4rem;
+    color: var(--loss);
+    font-size: .8rem;
+    font-weight: 600;
+}

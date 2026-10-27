@@ -1,6 +1,7 @@
 import styles from './EventInfoCard.module.css';
 import React from 'react';
 import { FaCalendarAlt, FaMapMarkerAlt, FaInfoCircle, FaWallet, FaTag, FaGlobe, FaLock } from 'react-icons/fa';
+import { useAuth } from 'hooks';
 
 const BUBBLE_CONFIG = {
     "Date/Place":   { icons: [<FaCalendarAlt />, <FaMapMarkerAlt />] },
@@ -11,10 +12,12 @@ const BUBBLE_CONFIG = {
     "Restrictions": { icons: [<FaGlobe />] },
 };
 
-const FEE_TITLES = new Set(["Entry Fee", "Fees"]);
+const FEE_TITLES = new Set(["Entry Fee", "Fees"]); 
 
 export const EventInfoCard = ({ title, infoList, regionTitle, regionInfoList, footer }) => {
     const bubbleDef = BUBBLE_CONFIG[title];
+    const { isLoggedIn, loading } = useAuth();
+    const detailsLocked = !loading && !isLoggedIn && infoList.length === 0;
 
     if (bubbleDef) {
         const regionBubbleDef = regionTitle ? (BUBBLE_CONFIG[regionTitle] ?? { icons: [<FaGlobe />] }) : null;
@@ -35,7 +38,7 @@ export const EventInfoCard = ({ title, infoList, regionTitle, regionInfoList, fo
                         </span>
                         <span className={styles.statValue}>{item}</span>
                     </div>
-                ))}
+                ))}            
             </div>
         );
     }
@@ -67,6 +70,7 @@ export const EventInfoCard = ({ title, infoList, regionTitle, regionInfoList, fo
                     <span className={styles.cardIcon}><FaInfoCircle /></span>
                     <span className={styles.title}>{title}</span>
                 </div>
+
                 {infoList.map((item, index) => (
                     <div key={index} className={styles.dRow}>
                         <span className={styles.dDot}></span>
@@ -74,6 +78,10 @@ export const EventInfoCard = ({ title, infoList, regionTitle, regionInfoList, fo
                     </div>
                 ))}
                 {footer && <div className={styles.feeFooter}> {footer} </div>}
+
+                {/* The backend withholds details from anonymous viewers, so an empty
+                    list while signed out means "locked", not "no details". */}
+                {detailsLocked && <div className={styles.lockedText}>Must be Logged in to View More Details.</div>}
             </div>
         </React.Fragment>
     );

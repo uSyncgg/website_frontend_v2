@@ -5,6 +5,7 @@ import { buildEventPath } from "utils/eventPaths";
 import { LAN_GAME_SECTION_PATH } from "data/lanMarkers";
 import { NotFound } from "pages/NotFound";
 import '../EventInformation.css';
+import { getLoadErrorMessage } from "utils/apiError";
 
 export const LanDetail = () => {
     const params = useParams();
@@ -35,7 +36,7 @@ export const LanDetail = () => {
             {loading ? (
                 <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Loading LAN info...</p>
             ) : error || !data ? (
-                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Unable to load this LAN right now.</p>
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>{getLoadErrorMessage(error, "Unable to load this LAN right now.")}</p>
             ) : (
                 <div className="eventInfoCardContainer">
                     <div>

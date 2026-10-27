@@ -1,0 +1,37 @@
+.choice {
+    position: relative;
+    text-align: left;
+    padding: 1.25rem;
+    border-radius: 1rem;
+    border: 1.5px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .03);
+    color: inherit;
+    cursor: pointer;
+    transition: border-color .2s, background .2s, transform .2s;
+}
+
+.choice:hover {
+    border-color: rgba(255, 255, 255, .3);
+    transform: translateY(-1px);
+}
+
+.choice + .choice {
+    margin-top: 1rem;
+}
+
+.choiceSelected {
+    border-color: #8e6ace;
+    background: rgba(142, 106, 206, .12);
+}
+
+.choice h2 {
+    font-size: .95rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.choice p {
+    color: var(--ink-3);
+    font-size: .82rem;
+    margin: .2rem 0 0;
+}

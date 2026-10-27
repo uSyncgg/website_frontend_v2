@@ -87,6 +87,23 @@ import { ScrollToTop } from "./ScrollToTop/ScrollToTop";
 // Error handling
 import { ErrorBoundary } from "./ErrorBoundary/ErrorBoundary";
 
+// Account Related
+import { SocialLoginButtons } from "./SocialLoginButtons/SocialLoginButtons";
+
+// Route Protection
+import { RequireCompleteProfile } from "./RequiredCompleteProfile/RequiredCompleteProfile";
+import { RedirectIfProfileComplete } from "./RequiredCompleteProfile/RedirectIfProfileComplete";
+
+// Sign Up Wizard
+import { SignUpFormWizard } from "./SignUpFormWizard/SignUpFormWizard";
+import { ProfileSettingsWizard } from "./ProfileSettingsWizard/ProfileSettingsWizard";
+import { AccountSettingsStep } from "./AccountSettingsStep/AccountSettingsStep";
+
+// Profile
+import { ProfileHeader } from "./ProfileHeader/ProfileHeader";
+import { ProfileViewToggle } from "./ProfileViewToggle/ProfileViewToggle";
+import { ProfileCard } from "./ProfileCard/ProfileCard";
+
 export {
     Navbar,
     Footer,
@@ -135,8 +152,17 @@ export {
     ErrorBoundary,
     PaymentComponent,
     LanMap,
+    SocialLoginButtons,
+    RequireCompleteProfile,
+    RedirectIfProfileComplete,
+    SignUpFormWizard,
+    ProfileSettingsWizard,
+    AccountSettingsStep,
     WaysToCompete,
     SectionHeading,
     VerifiedEvents,
-    CheckoutSteps
+    CheckoutSteps,
+    ProfileHeader,
+    ProfileViewToggle,
+    ProfileCard
 };

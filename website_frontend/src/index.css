@@ -1,6 +1,30 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --ground: #15131a;
+  --ground-deep: #100e15;
+  --panel: rgba(28, 25, 33, .72);
+  --panel-solid: #1c1921;
+  --line: rgba(255, 255, 255, .08);
+  --line-strong: rgba(255, 255, 255, .16);
+
+  --violet: #9b6fe0;
+  --violet-deep: #7a5ac9;
+  --violet-bright: #b18af0;
+  --violet-dim: rgba(142, 106, 206, .18);
+
+  --win: #6bcf8f;
+  --loss: #e0698a;
+  --gold: #e0b15e;
+  --cyan: #86eaff;
+
+  --ink: #ffffff;
+  --ink-2: rgba(255, 255, 255, .68);
+  --ink-3: rgba(255, 255, 255, .45);
+  --ink-4: rgba(255, 255, 255, .32);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
