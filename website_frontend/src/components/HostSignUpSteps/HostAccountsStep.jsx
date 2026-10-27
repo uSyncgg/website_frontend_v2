@@ -68,27 +68,33 @@ const options = [
 ]
 
 export const HostAccountsStep = () => {
-    const placeholder = "username";
+    // Linking isn't live yet: show the providers, but lock the inputs.
+    const placeholder = "Coming soon";
 
     return (
-        <div className={styles.linkRows}>
-            {
-                options.map(opt => (
-                    <FormTextInput
-                        key={opt.name}
-                        name={opt.name}
-                        id={opt.name}
-                        label={opt.label}
-                        placeholder={placeholder}
-                        image={opt.image}
-                        initials={opt.initials}
-                        labelClassName={opt.labelClassName}
-                        errorClassName={opt.errorClassName}
-                        inputClassName={opt.inputClassName}
-                        imageClassName={opt.imageClassName}
-                    />
-                ))
-            }
+        <div>
+            <p className={styles.comingSoon}>Account linking is coming soon.</p>
+
+            <div className={styles.linkRows}>
+                {
+                    options.map(opt => (
+                        <FormTextInput
+                            key={opt.name}
+                            name={opt.name}
+                            id={opt.name}
+                            label={opt.label}
+                            placeholder={placeholder}
+                            image={opt.image}
+                            initials={opt.initials}
+                            labelClassName={opt.labelClassName}
+                            errorClassName={opt.errorClassName}
+                            inputClassName={opt.inputClassName}
+                            imageClassName={opt.imageClassName}
+                            disabled
+                        />
+                    ))
+                }
+            </div>
         </div>
     )
 }

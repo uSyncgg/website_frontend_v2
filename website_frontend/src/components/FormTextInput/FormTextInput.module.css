@@ -37,7 +37,8 @@
     box-shadow: 0 0 0 3px rgba(142, 106, 206, .18);
 }
 
-.input:disabled {
+.input:disabled,
+.linkInput:disabled {
     opacity: .6;
     cursor: not-allowed;
 }

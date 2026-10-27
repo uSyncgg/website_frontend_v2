@@ -2,3 +2,10 @@
     display: flex;
     flex-direction: column;
 }
+
+.comingSoon {
+    margin: 0 0 1rem;
+    color: rgba(255, 255, 255, .55);
+    font-size: .85rem;
+    font-weight: 700;
+}
