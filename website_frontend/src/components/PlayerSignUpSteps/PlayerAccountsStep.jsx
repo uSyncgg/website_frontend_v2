@@ -169,7 +169,8 @@ const OPTIONS = {
 export const PlayerAccountsStep = () => {
     const { setValue, watch } = useFormContext();
     const selected = watch('linked_toggle');
-    const placeholder = "username";
+    // Linking isn't live yet: show the providers, but lock the inputs.
+    const placeholder = "Coming soon";
 
     useEffect(() => {
         setValue('linked_toggle', "socials");
@@ -203,6 +204,8 @@ export const PlayerAccountsStep = () => {
                 >Competitive</button>
             </div>
 
+            <p className={styles.comingSoon}>Account linking is coming soon.</p>
+
             <div className={styles.linkRows}>
                 {
                     activeOptions.map(opt => (
@@ -218,6 +221,7 @@ export const PlayerAccountsStep = () => {
                             errorClassName={opt.errorClassName}
                             inputClassName={opt.inputClassName}
                             imageClassName={opt.imageClassName}
+                            disabled
                         />
                     ))
                 }

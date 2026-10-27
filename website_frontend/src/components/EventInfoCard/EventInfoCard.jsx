@@ -16,7 +16,8 @@ const FEE_TITLES = new Set(["Entry Fee", "Fees"]);
 
 export const EventInfoCard = ({ title, infoList, regionTitle, regionInfoList, footer }) => {
     const bubbleDef = BUBBLE_CONFIG[title];
-    const { profileComplete, loading } = useAuth();
+    const { isLoggedIn, loading } = useAuth();
+    const detailsLocked = !loading && !isLoggedIn && infoList.length === 0;
 
     if (bubbleDef) {
         const regionBubbleDef = regionTitle ? (BUBBLE_CONFIG[regionTitle] ?? { icons: [<FaGlobe />] }) : null;
@@ -70,17 +71,17 @@ export const EventInfoCard = ({ title, infoList, regionTitle, regionInfoList, fo
                     <span className={styles.title}>{title}</span>
                 </div>
 
-                {profileComplete && 
-                infoList.map((item, index) => (
+                {infoList.map((item, index) => (
                     <div key={index} className={styles.dRow}>
                         <span className={styles.dDot}></span>
                         <span className={styles.dRowText}>{item}</span>
                     </div>
                 ))}
                 {footer && <div className={styles.feeFooter}> {footer} </div>}
-                
 
-                {!profileComplete && <p>Must be Logged in to View More Details.</p>}
+                {/* The backend withholds details from anonymous viewers, so an empty
+                    list while signed out means "locked", not "no details". */}
+                {detailsLocked && <div className={styles.lockedText}>Must be Logged in to View More Details.</div>}
             </div>
         </React.Fragment>
     );
