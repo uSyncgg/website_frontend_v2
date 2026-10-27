@@ -1,0 +1,545 @@
+/* ============================================================
+   uSync Verified
+   ------------------------------------------------------------
+   Title, features, subscribe, FAQ. Dark-only, matching the
+   uSync palette: mono labels, flat sharp-edged surfaces and
+   hairline rules rather than rounded marketing cards.
+   ============================================================ */
+
+.page {
+    background-color: #15131a;
+    --ink: #ffffff;
+    --ink-soft: rgb(176, 172, 186);
+    --ink-mute: rgb(130, 126, 140);
+    --line: rgba(255, 255, 255, .09);
+    --brand: #8e6ace;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+.mono {
+    font-family: var(--mono);
+    font-size: .72rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
+
+/* ── Title ──────────────────────────────────────────────── */
+.hero {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+    background-color: #15131a;
+    background-image:
+        radial-gradient(60rem 32rem at 78% -10%, rgba(142, 106, 206, .22), transparent 70%),
+        linear-gradient(rgba(255, 255, 255, .022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .022) 1px, transparent 1px);
+    background-size: auto, 4rem 4rem, 4rem 4rem;
+}
+
+.heroInner {
+    max-width: 74rem;
+    margin: 0 auto;
+    padding: 4.5rem 2rem 4rem;
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.heroCopy {
+    text-align: left;
+}
+
+.heroKicker {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    color: var(--brand);
+    margin: 0 0 1.5rem;
+}
+
+.heroKicker::before {
+    content: "";
+    width: 2rem;
+    height: 1px;
+    background: var(--brand);
+}
+
+.heroTitle {
+    color: var(--ink);
+    font-size: 3.6rem;
+    line-height: 1.08;
+    font-weight: 700;
+    letter-spacing: -.035em;
+    margin: 0;
+}
+
+.heroTitleAccent {
+    color: var(--brand);
+}
+
+.heroSubtext {
+    color: var(--ink-soft);
+    font-size: 1.1rem;
+    line-height: 1.75;
+    max-width: 34rem;
+    margin: 1.5rem 0 0;
+}
+
+.marks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem 1.75rem;
+    margin-top: 1.75rem;
+}
+
+.mark {
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    color: var(--ink-mute);
+    font-family: var(--mono);
+    font-size: .72rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.markIcon {
+    width: 1.4rem;
+    height: 1.4rem;
+    flex-shrink: 0;
+}
+
+.heroButtons {
+    display: flex;
+    gap: .85rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.buttonPrimary {
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    text-decoration: none;
+    color: white;
+    background: var(--brand);
+    border: 1px solid var(--brand);
+    font-size: .95rem;
+    font-weight: 600;
+    padding: .8rem 1.6rem;
+    border-radius: .4rem;
+    cursor: pointer;
+    transition: background .25s ease, border-color .25s ease;
+}
+
+.buttonPrimary:hover {
+    color: white;
+    background: #9d7bd8;
+    border-color: #9d7bd8;
+}
+
+/* ── Credential card ────────────────────────────────────── */
+.credential {
+    position: relative;
+    background: linear-gradient(158deg, #241f2e 0%, #1a1720 60%, #191620 100%);
+    border: 1px solid rgba(142, 106, 206, .35);
+    border-radius: .6rem;
+    padding: 2rem;
+    box-shadow: 0 2.5rem 4rem -2rem rgba(0, 0, 0, .85);
+}
+
+.credential::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: .6rem;
+    background: linear-gradient(120deg, rgba(255, 255, 255, .07), transparent 45%);
+    pointer-events: none;
+}
+
+.credentialTop {
+    /* The wordmark and the seal are sized from one height so they always
+       match. The lockup is ~8.9:1, so this height also sets the row width. */
+    --mark-height: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px dashed rgba(255, 255, 255, .14);
+}
+
+.credentialLabel {
+    color: var(--ink-mute);
+    font-family: var(--mono);
+    font-size: .66rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.credentialLabel {
+    margin-bottom: .35rem;
+}
+
+.credentialWordmark {
+    height: var(--mark-height);
+    width: auto;
+}
+
+.credentialSeal {
+    height: var(--mark-height);
+    width: auto;
+    flex-shrink: 0;
+}
+
+.credentialBody {
+    position: relative;
+    padding-top: 1.5rem;
+}
+
+.credentialName {
+    color: var(--ink);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    margin: 0 0 1.5rem;
+}
+
+.credentialRows {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.1rem;
+}
+
+.credentialRowValue {
+    color: var(--ink);
+    font-size: .9rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.credentialCheck {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    margin: 1.75rem 0 0;
+    padding-top: 1.25rem;
+    border-top: 1px dashed rgba(255, 255, 255, .14);
+    color: var(--brand);
+    font-family: var(--mono);
+    font-size: .7rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+
+/* ── Sections ───────────────────────────────────────────── */
+.section {
+    max-width: 74rem;
+    margin: 0 auto;
+    padding: 3.5rem 2rem;
+}
+
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+
+.sectionHead {
+    margin-bottom: 2rem;
+}
+
+.sectionTitle {
+    color: var(--ink);
+    font-size: 2.15rem;
+    font-weight: 700;
+    letter-spacing: -.03em;
+    text-align: left;
+    margin: 0;
+}
+
+.sectionLede {
+    color: var(--ink-soft);
+    font-size: 1.02rem;
+    line-height: 1.75;
+    max-width: 46rem;
+    margin: .6rem 0 0;
+    text-align: left;
+}
+
+/* ── Features + plan ────────────────────────────────────── */
+.planLayout {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+}
+
+.featureList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--line);
+}
+
+.featureRow {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 1.25rem;
+    padding: .95rem .25rem;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+}
+
+.featureNum {
+    color: var(--brand);
+    font-family: var(--mono);
+    font-size: .74rem;
+    letter-spacing: .1em;
+}
+
+.featureName {
+    color: var(--ink);
+    font-size: .98rem;
+    font-weight: 600;
+}
+
+.plan {
+    background: linear-gradient(158deg, #241f2e 0%, #1a1720 65%);
+    border: 1px solid rgba(142, 106, 206, .35);
+    border-radius: .6rem;
+    padding: 2rem;
+}
+
+.planLabel {
+    color: var(--brand);
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    margin: 0 0 1.25rem;
+}
+
+.planPrice {
+    color: var(--ink);
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: -.03em;
+    line-height: 1;
+    margin: 0;
+}
+
+.planPeriod {
+    color: var(--ink-mute);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.planNote {
+    color: var(--ink-soft);
+    font-size: .92rem;
+    line-height: 1.65;
+    margin: .9rem 0 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px dashed rgba(255, 255, 255, .14);
+}
+
+.planList {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+}
+
+.planList li {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    color: var(--ink-soft);
+    font-size: .9rem;
+}
+
+.yes {
+    color: var(--brand);
+    flex-shrink: 0;
+}
+
+.planButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-decoration: none;
+    color: white;
+    background: var(--brand);
+    border: 1px solid var(--brand);
+    border-radius: .4rem;
+    padding: .85rem 1.25rem;
+    font-size: .98rem;
+    font-weight: 700;
+    transition: background .25s ease, border-color .25s ease;
+}
+
+.planButton:hover {
+    color: white;
+    background: #9d7bd8;
+    border-color: #9d7bd8;
+}
+
+.planFinePrint {
+    color: var(--ink-mute);
+    font-family: var(--mono);
+    font-size: .66rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    text-align: center;
+    margin: .9rem 0 0;
+}
+
+/* ── FAQ ────────────────────────────────────────────────── */
+.faqList {
+    border-top: 1px solid var(--line);
+}
+
+.faqItem {
+    border-bottom: 1px solid var(--line);
+}
+
+.faqButton {
+    display: grid;
+    grid-template-columns: 2.75rem 1fr 1.5rem;
+    gap: .75rem;
+    align-items: center;
+    width: 100%;
+    padding: 1.4rem .25rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.faqNum {
+    color: var(--brand);
+    font-family: var(--mono);
+    font-size: .74rem;
+    letter-spacing: .1em;
+}
+
+.faqQuestion {
+    color: var(--ink);
+    font-size: 1.02rem;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    margin: 0;
+}
+
+.faqItemOpen .faqQuestion {
+    color: var(--brand);
+}
+
+.chevron {
+    color: var(--ink-mute);
+    font-size: .85rem;
+    justify-self: end;
+    transition: transform .3s cubic-bezier(.16, 1, .3, 1), color .25s ease;
+}
+
+.chevronOpen {
+    transform: rotate(180deg);
+    color: var(--brand);
+}
+
+.faqAnswer {
+    padding: 0 1.5rem 1.6rem 3.5rem;
+}
+
+.faqAnswer p {
+    color: var(--ink-soft);
+    font-size: .95rem;
+    line-height: 1.8;
+    margin: 0;
+}
+
+.answerLink {
+    color: var(--brand);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color .2s ease;
+}
+
+.answerLink:hover {
+    color: var(--ink);
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media only screen and (max-width: 1000px) {
+    .heroInner {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 4rem 1.5rem;
+    }
+
+    .heroTitle {
+        font-size: 2.9rem;
+    }
+
+    .planLayout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .heroTitle {
+        font-size: 2.3rem;
+    }
+
+    .heroSubtext {
+        font-size: 1rem;
+    }
+
+    .section {
+        padding: 3rem 1.5rem;
+    }
+
+    .sectionTitle {
+        font-size: 1.75rem;
+    }
+
+    .credentialRows {
+        grid-template-columns: 1fr;
+        gap: .85rem;
+    }
+
+    .credentialTop {
+        --mark-height: 1.9rem;
+    }
+
+    .faqAnswer {
+        padding: 0 0 1.5rem 2.75rem;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .credentialTop {
+        --mark-height: 1.45rem;
+    }
+
+    .heroTitle {
+        font-size: 2rem;
+    }
+
+    .buttonPrimary {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .faqButton {
+        grid-template-columns: 2rem 1fr 1.25rem;
+    }
+
+    .faqAnswer {
+        padding-left: 2rem;
+    }
+}
