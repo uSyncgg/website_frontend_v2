@@ -1,4 +1,4 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText, ClaimEventPrompt } from "components";
 import { useParams } from "react-router";
 import { useEventByPath } from "hooks";
 import { buildEventPath } from "utils/eventPaths";
@@ -58,6 +58,8 @@ export const PlatformDetail = ({ eventType, game, sectionPath }) => {
                     </div>
                 </div>
             )}
+
+            {!loading && data && <ClaimEventPrompt eventType="platform" eventName={data.name} />}
 
             <div className="backButtonContainer">
                 <BackButton path={sectionPath} />

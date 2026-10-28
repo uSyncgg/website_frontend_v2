@@ -1,4 +1,4 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText, HostBanner } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText, HostBanner, ClaimEventPrompt } from "components";
 import { useParams } from "react-router";
 import { useLeagueInfo } from "hooks";
 import { buildEventPath } from "utils/eventPaths";
@@ -80,6 +80,8 @@ export const LeagueDetail = ({ game, sectionPath }) => {
                     </div>
                 </div>
             )}
+
+            {!loading && data && <ClaimEventPrompt eventType="league" eventName={data.name} />}
 
             <div className="backButtonContainer">
                 <BackButton path={backPath} />
