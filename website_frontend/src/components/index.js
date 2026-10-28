@@ -92,6 +92,8 @@ import { SocialLoginButtons } from "./SocialLoginButtons/SocialLoginButtons";
 
 // Route Protection
 import { RequireCompleteProfile } from "./RequiredCompleteProfile/RequiredCompleteProfile";
+import { RequireBracketHost } from "./RequireBracketHost/RequireBracketHost";
+import { Bracket, ReportMatchDialog } from "./Bracket/Bracket";
 import { RedirectIfProfileComplete } from "./RequiredCompleteProfile/RedirectIfProfileComplete";
 
 // Sign Up Wizard
@@ -154,6 +156,9 @@ export {
     LanMap,
     SocialLoginButtons,
     RequireCompleteProfile,
+    RequireBracketHost,
+    Bracket,
+    ReportMatchDialog,
     RedirectIfProfileComplete,
     SignUpFormWizard,
     ProfileSettingsWizard,

@@ -1,0 +1,413 @@
+/* ---- elimination tree ---- */
+
+/* The tree scrolls sideways inside its card on small screens, never the page. */
+.scroller {
+    overflow-x: auto;
+    padding-bottom: .5rem;
+}
+
+.tree {
+    --match-w: 13.5rem;
+    --gap: 2.5rem;
+    --line: rgba(255, 255, 255, .18);
+    display: flex;
+    gap: var(--gap);
+    width: max-content;
+    min-width: 100%;
+}
+
+.round {
+    display: flex;
+    flex-direction: column;
+    width: var(--match-w);
+}
+
+.roundTitle {
+    margin: 0 0 .75rem;
+    color: var(--ink-3);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.roundMatches {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.matchWrap {
+    position: relative;
+    /* grow to share the column, but never squash below the card's height */
+    flex: 1 0 auto;
+    display: flex;
+    align-items: center;
+    padding: .4rem 0;
+}
+
+/* Connectors: each match draws half of the elbow joining it to the next round. */
+.outDown::after,
+.outUp::after {
+    content: '';
+    position: absolute;
+    right: calc(var(--gap) / -2);
+    width: calc(var(--gap) / 2);
+    height: 50%;
+    border-right: 1px solid var(--line);
+}
+
+.outDown::after {
+    top: 50%;
+    border-top: 1px solid var(--line);
+}
+
+.outUp::after {
+    bottom: 50%;
+    border-bottom: 1px solid var(--line);
+}
+
+.hasIn::before {
+    content: '';
+    position: absolute;
+    left: calc(var(--gap) / -2);
+    top: 50%;
+    width: calc(var(--gap) / 2);
+    border-top: 1px solid var(--line);
+}
+
+.matchBye {
+    opacity: .5;
+    border-style: dashed;
+}
+
+.match {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    background: var(--panel-solid);
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    overflow: hidden;
+}
+
+.matchClickable {
+    cursor: pointer;
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.matchClickable:hover,
+.matchClickable:focus-visible {
+    border-color: var(--violet);
+    box-shadow: 0 0 0 3px var(--violet-dim);
+    outline: none;
+}
+
+.matchReady {
+    border-color: rgba(155, 111, 224, .55);
+}
+
+.matchLabel {
+    display: block;
+    padding: .25rem .6rem;
+    color: var(--ink-4);
+    font-size: .68rem;
+}
+
+.slot {
+    display: grid;
+    grid-template-columns: 1.4rem 1fr auto;
+    align-items: center;
+    gap: .4rem;
+    height: 2.15rem;
+    padding: 0 .6rem;
+    color: var(--ink-2);
+    font-size: .85rem;
+}
+
+.slot + .slot {
+    border-top: 1px solid var(--line);
+}
+
+.seed {
+    color: var(--ink-4);
+    font-size: .7rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.slotName {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.slotName em {
+    color: var(--ink-4);
+    font-style: normal;
+}
+
+.score {
+    min-width: 1rem;
+    text-align: right;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.slotWinner {
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.slotWinner .score {
+    color: var(--violet-bright);
+}
+
+.slotLoser {
+    color: var(--ink-4);
+}
+
+.reportHint {
+    display: block;
+    padding: .3rem .6rem;
+    border-top: 1px solid var(--line);
+    background: var(--violet-dim);
+    color: var(--violet-bright);
+    font-size: .7rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.championCol {
+    display: flex;
+    align-items: center;
+    padding-top: 1.6rem;
+}
+
+.champion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .3rem;
+    padding: 1.1rem 1.4rem;
+    border: 1px solid var(--gold);
+    border-radius: 12px;
+    background: rgba(224, 177, 94, .08);
+    text-align: center;
+}
+
+.trophy {
+    color: var(--gold);
+    font-size: 1.6rem;
+}
+
+.championLabel {
+    color: var(--gold);
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.championName {
+    color: var(--ink);
+    font-weight: 800;
+}
+
+/* ---- round robin ---- */
+
+.rr {
+    display: grid;
+    grid-template-columns: minmax(0, 22rem) minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.tableWrap {
+    overflow-x: auto;
+}
+
+.standings {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .85rem;
+}
+
+.standings th {
+    padding: .5rem;
+    border-bottom: 1px solid var(--line-strong);
+    color: var(--ink-3);
+    font-size: .7rem;
+    font-weight: 700;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.standings td {
+    padding: .55rem .5rem;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-2);
+    font-variant-numeric: tabular-nums;
+}
+
+.leader td {
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.rrRounds {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+    gap: 1rem;
+}
+
+.rrRound {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+@media (max-width: 800px) {
+    .rr {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---- report dialog ---- */
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10000001;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    background: rgba(10, 9, 14, .78);
+    backdrop-filter: blur(4px);
+}
+
+.dialog {
+    width: min(100%, 24rem);
+    padding: 1.25rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 1rem;
+    background: var(--panel-solid);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .55);
+    color: var(--ink);
+}
+
+.dialogTitle {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+.dialogHint {
+    margin: .25rem 0 1rem;
+    color: var(--ink-3);
+    font-size: .8rem;
+}
+
+.reportRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .6rem 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.reportName {
+    overflow: hidden;
+    font-weight: 600;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.stepper {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    flex-shrink: 0;
+}
+
+.stepper button {
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ink);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.stepper button:hover {
+    border-color: var(--violet);
+}
+
+.stepValue {
+    min-width: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 800;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+.dialogStatus {
+    margin: .9rem 0 0;
+    color: var(--ink-2);
+    font-size: .85rem;
+}
+
+.dialogActions {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-top: 1.25rem;
+}
+
+.spacer {
+    flex: 1;
+}
+
+.primaryBtn,
+.ghostBtn,
+.dangerBtn {
+    padding: .55rem 1rem;
+    border-radius: 8px;
+    font: inherit;
+    font-size: .85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.primaryBtn {
+    border: none;
+    background: linear-gradient(135deg, var(--violet), var(--violet-deep));
+    color: white;
+}
+
+.primaryBtn:disabled {
+    opacity: .5;
+    cursor: default;
+}
+
+.ghostBtn {
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: var(--ink-2);
+}
+
+.dangerBtn {
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--loss);
+}
+
+.dangerBtn:hover {
+    border-color: var(--loss);
+}

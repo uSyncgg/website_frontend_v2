@@ -9,6 +9,7 @@ import styles from '../Navbar/Navbar.module.css';
 const isPrerendering = typeof navigator !== 'undefined' && navigator.userAgent === 'ReactSnap';
 
 const SETTINGS_PATH = '/settings/profile';
+const HOST_PATH = '/host/events';
 
 const Avatar = ({ src }) => {
     const [failed, setFailed] = useState(false);
@@ -63,6 +64,11 @@ const ProfileMenu = ({ profile, logout }) => {
                             Profile
                         </Link>
                     }
+                    {profile?.bracket_hosting &&
+                        <Link to={HOST_PATH} className={styles.dropdownItem} role="menuitem" onClick={close}>
+                            Host Dashboard
+                        </Link>
+                    }
                     <Link to={SETTINGS_PATH} className={styles.dropdownItem} role="menuitem" onClick={close}>
                         Profile Settings
                     </Link>
@@ -111,6 +117,11 @@ export const AccountNavItem = ({ closeMenu, variant = 'header' }) => {
             {profile?.username &&
                 <Link to={`/profile/${encodeURIComponent(profile.username)}`} className={styles.navLink} onClick={closeMenu}>
                     Profile
+                </Link>
+            }
+            {profile?.bracket_hosting &&
+                <Link to={HOST_PATH} className={styles.navLink} onClick={closeMenu}>
+                    Host Dashboard
                 </Link>
             }
             <Link to={SETTINGS_PATH} className={styles.navLink} onClick={closeMenu}>

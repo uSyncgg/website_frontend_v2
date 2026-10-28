@@ -55,7 +55,14 @@ import TournamentRoutes from './routes/TournamentRoutes';
 import { AuthPage } from 'pages/Accounts/Authentication/AuthPage';
 import { ForgotPassword } from 'pages/Accounts/Authentication/ForgotPassword';
 import { ResetPassword } from 'pages/Accounts/Authentication/ResetPassword';
-import { RequireCompleteProfile, RedirectIfProfileComplete } from 'components';
+import { RequireCompleteProfile, RedirectIfProfileComplete, RequireBracketHost } from 'components';
+import { HostEvents } from 'pages/Host/HostEvents';
+import { CreateEvent } from 'pages/Host/CreateEvent';
+import { ManageEvent, EventOverview } from 'pages/Host/ManageEvent';
+import { EventEntrants } from 'pages/Host/EventEntrants';
+import { EventSeeding } from 'pages/Host/EventSeeding';
+import { EventBracket } from 'pages/Host/EventBracket';
+import { PublicBracket } from 'pages/Host/PublicBracket';
 import { Profile } from 'pages/Accounts/Profile/Profile';
 import { ProfileSettings } from 'pages/Accounts/Settings/ProfileSettings';
 import { CurrentUserProvider } from 'hooks';
@@ -140,6 +147,20 @@ const app = (
             <Route path='/settings/profile' element={<RequireCompleteProfile />}>
               <Route index element={<ProfileSettings />} />
             </Route>
+
+            {/* Bracket hosting - accounts with bracket hosting turned on (see RequireBracketHost). Mock data for now. */}
+            <Route path='/host/events' element={<RequireBracketHost />}>
+              <Route index element={<HostEvents />} />
+              <Route path='new' element={<CreateEvent />} />
+              <Route path=':eventId' element={<ManageEvent />}>
+                <Route index element={<EventOverview />} />
+                <Route path='entrants' element={<EventEntrants />} />
+                <Route path='seeding' element={<EventSeeding />} />
+                <Route path='bracket' element={<EventBracket />} />
+              </Route>
+            </Route>
+            {/* Public, read-only bracket page players are sent to. */}
+            <Route path='/brackets/:eventId' element={<PublicBracket />} />
 
           </Routes>
         </ErrorBoundary>
