@@ -1,0 +1,288 @@
+.page {
+    padding: calc(66px + 2.25rem) 1rem 4rem;
+    color: var(--ink);
+}
+
+.inner {
+    max-width: 40rem;
+    margin: 0 auto;
+}
+
+.eyebrow {
+    margin: 0 0 .35rem;
+    color: var(--violet-bright);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.title {
+    margin: 0 0 1.25rem;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 800;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    padding: 1.4rem;
+    border: 1px solid var(--line);
+    border-radius: .875rem;
+    background: var(--panel);
+}
+
+.cardTitle {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.text {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: .9rem;
+    line-height: 1.55;
+}
+
+.text strong {
+    color: var(--ink);
+}
+
+.eventBox {
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+    padding: .8rem 1rem;
+    border: 1px solid rgba(155, 111, 224, .45);
+    border-radius: 10px;
+    background: var(--violet-dim);
+}
+
+.eventLabel {
+    color: var(--violet-bright);
+    font-size: .7rem;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.eventName {
+    color: var(--ink);
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.eventName:hover {
+    color: var(--violet-bright);
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    margin-bottom: .45rem;
+    color: rgba(255, 255, 255, .85);
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.input {
+    width: 100%;
+    padding: .65rem .8rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .03);
+    color: var(--ink);
+    font: inherit;
+    font-size: .9rem;
+}
+
+.input:focus {
+    outline: none;
+    border-color: var(--violet);
+    box-shadow: 0 0 0 3px var(--violet-dim);
+}
+
+.input option {
+    background: var(--panel-solid);
+}
+
+.textarea {
+    min-height: 8rem;
+    resize: vertical;
+}
+
+.dropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .35rem;
+    min-height: 10rem;
+    padding: 1rem;
+    border: 1px dashed var(--line-strong);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .02);
+    color: var(--ink-2);
+    font-size: .88rem;
+    cursor: pointer;
+    transition: border-color .2s ease, background .2s ease;
+}
+
+.dropzone:hover {
+    border-color: var(--violet);
+    background: var(--violet-dim);
+}
+
+.dropzoneFilled {
+    padding: .5rem;
+    border-style: solid;
+}
+
+.dropIcon {
+    color: var(--violet-bright);
+    font-size: 1.6rem;
+}
+
+.previewImg {
+    max-width: 100%;
+    max-height: 18rem;
+    border-radius: 8px;
+    object-fit: contain;
+}
+
+/* The real file input is hidden; the dropzone label opens it. */
+.fileInput {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.hint {
+    margin: .35rem 0 0;
+    color: var(--ink-4);
+    font-size: .75rem;
+}
+
+.changeLink {
+    color: var(--violet-bright);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.checkRow {
+    display: flex;
+    align-items: flex-start;
+    gap: .55rem;
+    color: var(--ink-2);
+    font-size: .85rem;
+    line-height: 1.45;
+    cursor: pointer;
+}
+
+.checkRow input {
+    margin-top: .15rem;
+    width: 1rem;
+    height: 1rem;
+    accent-color: var(--violet);
+}
+
+.error {
+    margin: .35rem 0 0;
+    color: var(--loss);
+    font-size: .8rem;
+    font-weight: 600;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: .6rem;
+}
+
+.primaryBtn,
+.ghostBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: .65rem 1.15rem;
+    border-radius: 8px;
+    font: inherit;
+    font-size: .9rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.primaryBtn {
+    align-self: flex-start;
+    border: none;
+    background: linear-gradient(135deg, var(--violet), var(--violet-deep));
+    color: white;
+}
+
+.actions .primaryBtn {
+    align-self: auto;
+}
+
+.primaryBtn:hover {
+    color: white;
+    filter: brightness(1.12);
+}
+
+.primaryBtn:disabled {
+    opacity: .6;
+    cursor: default;
+    filter: none;
+}
+
+.ghostBtn {
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: var(--ink-2);
+}
+
+.ghostBtn:hover {
+    border-color: var(--violet);
+    color: var(--ink);
+}
+
+.success {
+    align-items: center;
+    text-align: center;
+}
+
+.success .primaryBtn {
+    align-self: center;
+}
+
+.successIcon {
+    color: var(--win);
+    font-size: 2.4rem;
+}
+
+.contactRow {
+    display: flex;
+    gap: .5rem;
+}
+
+.contactSelect {
+    flex: 0 0 9.5rem;
+}
+
+@media (max-width: 480px) {
+    .contactRow {
+        flex-direction: column;
+    }
+
+    .contactSelect {
+        flex-basis: auto;
+    }
+}
