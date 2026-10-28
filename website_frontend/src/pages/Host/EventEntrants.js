@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaSearch, FaTrash, FaUserPlus } from "react-icons/fa";
-import { addEntrant, removeEntrant, setCheckedIn } from "services/hostEventsMock";
+import { addEntrant, removeEntrant, setCheckedIn, isFull } from "services/hostEventsMock";
 import { useManagedEvent } from "./ManageEvent";
 import { isTeamEvent } from "./hostShared";
 import styles from "./Host.module.css";
@@ -19,7 +19,7 @@ export const EventEntrants = () => {
     const [newName, setNewName] = useState('');
     const teams = isTeamEvent(event);
     const locked = !!event.bracket?.published;
-    const full = event.entrants.length >= event.maxEntrants;
+    const full = isFull(event);
 
     const rows = event.entrants
         .filter(e => filter === 'all' || (filter === 'in' ? e.checkedIn : !e.checkedIn))
@@ -56,7 +56,7 @@ export const EventEntrants = () => {
             </div>
 
             <p className={styles.muted} style={{ margin: '0 0 .75rem' }}>
-                {event.entrants.length} of {event.maxEntrants} spots filled · {checkedIn} checked in
+                {event.maxEntrants == null ? `${event.entrants.length} signed up (no cap)` : `${event.entrants.length} of ${event.maxEntrants} spots filled`} · {checkedIn} checked in
                 {locked && ' · The bracket is live, so the entrant list is locked.'}
             </p>
 

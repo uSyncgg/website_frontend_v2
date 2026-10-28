@@ -1,9 +1,69 @@
 /* ---- elimination tree ---- */
 
-/* The tree scrolls sideways inside its card on small screens, never the page. */
+/* ---- zoom frame ---- */
+
+.zoomFrame {
+    position: relative;
+}
+
+.zoomBar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .35rem;
+    margin-bottom: .6rem;
+}
+
+.zoomHint {
+    margin-right: .4rem;
+    color: var(--ink-4);
+    font-size: .72rem;
+}
+
+.zoomBar button {
+    display: inline-grid;
+    place-items: center;
+    min-width: 2rem;
+    height: 2rem;
+    padding: 0 .4rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--ink-2);
+    font: inherit;
+    font-size: .75rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.zoomBar button:hover:not(:disabled) {
+    border-color: var(--violet);
+    color: var(--ink);
+}
+
+.zoomBar button:disabled {
+    opacity: .35;
+    cursor: default;
+}
+
+.zoomValue {
+    min-width: 3.25rem !important;
+    font-variant-numeric: tabular-nums;
+}
+
+/* The bracket scrolls inside its card on small screens or when zoomed in, never the page. */
 .scroller {
-    overflow-x: auto;
+    overflow: auto;
+    max-height: 80vh;
     padding-bottom: .5rem;
+}
+
+/* ---- elimination tree ---- */
+
+.treeRow {
+    display: flex;
+    gap: 2.5rem;
+    width: max-content;
 }
 
 .tree {
@@ -12,8 +72,34 @@
     --line: rgba(255, 255, 255, .18);
     display: flex;
     gap: var(--gap);
+}
+
+.doubleElim {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
     width: max-content;
-    min-width: 100%;
+}
+
+.bracketHeading {
+    margin: 0 0 .9rem;
+    color: var(--ink);
+    font-size: .95rem;
+    font-weight: 800;
+}
+
+.grandCol {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 13.5rem;
+}
+
+.grandNote {
+    margin: 0;
+    color: var(--ink-4);
+    font-size: .75rem;
+    line-height: 1.4;
 }
 
 .round {
@@ -67,6 +153,15 @@
     border-bottom: 1px solid var(--line);
 }
 
+.outStraight::after {
+    content: '';
+    position: absolute;
+    right: calc(var(--gap) / -2);
+    top: 50%;
+    width: calc(var(--gap) / 2);
+    border-top: 1px solid var(--line);
+}
+
 .hasIn::before {
     content: '';
     position: absolute;
@@ -74,6 +169,44 @@
     top: 50%;
     width: calc(var(--gap) / 2);
     border-top: 1px solid var(--line);
+}
+
+.emptySlot {
+    height: 4.5rem;
+}
+
+.matchDisputed {
+    border-color: var(--loss) !important;
+}
+
+.matchNoShow {
+    border-color: var(--gold) !important;
+}
+
+.badge {
+    display: block;
+    padding: .3rem .6rem;
+    border-top: 1px solid var(--line);
+    font-size: .7rem;
+    font-weight: 800;
+    letter-spacing: .04em;
+    text-align: center;
+}
+
+.badgeDisputed {
+    background: rgba(224, 105, 138, .16);
+    color: var(--loss);
+}
+
+.badgeNoShow {
+    background: rgba(224, 177, 94, .14);
+    color: var(--gold);
+}
+
+.badgeAwaiting {
+    color: var(--ink-3);
+    font-weight: 600;
+    letter-spacing: 0;
 }
 
 .matchBye {
@@ -166,6 +299,21 @@
     color: var(--violet-bright);
 }
 
+.slotYou {
+    background: rgba(155, 111, 224, .1);
+}
+
+.youTag {
+    margin-left: .4rem;
+    padding: .05rem .35rem;
+    border-radius: 4px;
+    background: var(--violet-dim);
+    color: var(--violet-bright);
+    font-size: .62rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
 .slotLoser {
     color: var(--ink-4);
 }
@@ -185,6 +333,60 @@
     display: flex;
     align-items: center;
     padding-top: 1.6rem;
+}
+
+/* ---- dialog notices ---- */
+
+.notice {
+    margin-bottom: 1rem;
+    padding: .7rem .8rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .03);
+    font-size: .82rem;
+}
+
+.notice strong {
+    display: block;
+    margin-bottom: .3rem;
+    font-size: .75rem;
+    letter-spacing: .05em;
+}
+
+.notice p {
+    margin: .2rem 0;
+    color: var(--ink-2);
+    line-height: 1.4;
+}
+
+.noticeDisputed {
+    border-color: rgba(224, 105, 138, .6);
+    background: rgba(224, 105, 138, .08);
+}
+
+.noticeDisputed strong {
+    color: var(--loss);
+}
+
+.noticeNoShow {
+    border-color: rgba(224, 177, 94, .6);
+    background: rgba(224, 177, 94, .07);
+}
+
+.noticeNoShow strong {
+    color: var(--gold);
+}
+
+.noticeActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-top: .6rem;
+}
+
+.ago {
+    color: var(--ink-4);
+    font-size: .75rem;
 }
 
 .champion {

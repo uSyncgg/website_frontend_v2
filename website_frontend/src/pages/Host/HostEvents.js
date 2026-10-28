@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { FaCalendarAlt, FaGamepad, FaPlus, FaSitemap } from "react-icons/fa";
 import { useHostEvents, eventStage } from "services/hostEventsMock";
-import { MockBanner, StageChip, formatDate, formatLabel } from "./hostShared";
+import { MockBanner, StageChip, capacityLabel, formatDate, formatLabel, unitLabel } from "./hostShared";
 import styles from "./Host.module.css";
 
 // /host/events - every event this host runs.
@@ -39,7 +39,7 @@ export const HostEvents = () => {
                         <div className={styles.eventGrid}>
                             {events.map(event => {
                                 const stage = eventStage(event);
-                                const filled = Math.min(100, (event.entrants.length / event.maxEntrants) * 100);
+                                const filled = event.maxEntrants ? Math.min(100, (event.entrants.length / event.maxEntrants) * 100) : 100;
                                 return (
                                     <Link key={event.id} to={`/host/events/${event.id}`} className={styles.eventCard}>
                                         <div className={styles.eventCardTop}>
@@ -56,7 +56,7 @@ export const HostEvents = () => {
                                         </div>
                                         <div>
                                             <div className={styles.fillLabel}>
-                                                <span>{event.entrants.length} / {event.maxEntrants} {event.teamSize === '1v1' ? 'players' : 'teams'}</span>
+                                                <span>{capacityLabel(event)} {unitLabel(event)}</span>
                                                 <span>{event.entrants.filter(e => e.checkedIn).length} checked in</span>
                                             </div>
                                             <div className={styles.fillBar}><span style={{ width: `${filled}%` }} /></div>
