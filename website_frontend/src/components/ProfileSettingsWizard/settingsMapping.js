@@ -50,6 +50,10 @@ export function toFormValues(settings) {
         hosted_games: settings.hosted_games,
         other_hosted_games: text(settings.other_hosted_games),
         event_types: settings.event_types,
+
+        // Only used when the account adds the player or host role (see RoleUsernameStep).
+        role_username_mode: 'current',
+        role_username: '',
     };
 }
 
@@ -79,3 +83,29 @@ export function buildPayloads(changedFields, values) {
 }
 
 export const sectionFields = (section) => SECTION_FIELDS[section];
+
+// The host details sent when an existing account becomes a host (POST /users/me/host).
+export function buildHostDetails(values) {
+    return {
+        hosted_games: values.hosted_games ?? [],
+        other_hosted_games: toApiValue('other_hosted_games', values.other_hosted_games ?? ''),
+        organization: values.organization.trim(),
+        host_country: values.host_country,
+        event_types: values.event_types ?? [],
+    };
+}
+
+// The player details sent when an existing account becomes a player (POST /users/me/player).
+export function buildPlayerDetails(values) {
+    const optional = (field) => toApiValue(field, values[field] ?? '');
+    return {
+        first_name: values.first_name.trim(),
+        last_name: values.last_name.trim(),
+        phone_number: optional('phone_number'),
+        gender: optional('gender'),
+        date_of_birth: optional('date_of_birth'),
+        country: optional('country'),
+        interests: values.interests ?? [],
+        other_games: optional('other_games'),
+    };
+}

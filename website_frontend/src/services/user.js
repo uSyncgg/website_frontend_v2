@@ -52,3 +52,16 @@ export const changeUsername = (username, token) =>
 export const deleteAccount = (token) =>
     apiClient.delete(`/users/me`, authHeader(token))
         .then(res => res.data);
+
+// Adds the host role to a signed-in account (e.g. a player becoming a host too).
+// `payload` is { username, host: { hosted_games, other_hosted_games, organization, host_country, event_types } }.
+// `username` is the name to host under - their current one, or a new one that then applies everywhere.
+export const becomeHost = (payload, token) =>
+    apiClient.post(`/users/me/host`, payload, authHeader(token))
+        .then(res => res.data);
+
+// Adds the player role to a signed-in account (e.g. a host or venue who also competes).
+// `payload` is { username, player: { first_name, last_name, phone_number, gender, date_of_birth, country, interests, other_games } }.
+export const becomePlayer = (payload, token) =>
+    apiClient.post(`/users/me/player`, payload, authHeader(token))
+        .then(res => res.data);

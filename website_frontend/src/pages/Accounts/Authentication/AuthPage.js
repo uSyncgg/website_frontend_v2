@@ -67,13 +67,6 @@ export const AuthPage = ({ mode }) => {
                 <span className={styles.authGlow} aria-hidden="true" />
 
                 <div className={styles.authBrand}>
-                    <span className={styles.mark}>
-                        <svg viewBox="0 0 32 32" aria-hidden="true">
-                            <rect width="32" height="32" rx="9" fill="#9b6fe0" />
-                            <path d="M21.5 11.2c-1.4-1.1-3.3-1.7-5.4-1.7-3.6 0-6 1.6-6 4.1 0 2.2 1.7 3.4 5.2 4 2.6.5 3.4.9 3.4 1.8s-1.1 1.5-2.9 1.5c-2 0-3.8-.6-5.3-1.8l-1.6 2.6c1.8 1.4 4.2 2.1 6.8 2.1 3.8 0 6.3-1.7 6.3-4.4 0-2.3-1.6-3.5-5.3-4.2-2.5-.4-3.3-.8-3.3-1.6 0-.8 1-1.3 2.6-1.3 1.6 0 3.2.5 4.5 1.4z" fill="#fff" />
-                        </svg>
-                        uSync
-                    </span>
                     <h2>The all-in-one hub for esports <span className={styles.accent}>LANs, leagues, and tournaments.</span></h2>
                     <ul className={styles.hl}>
                         {HIGHLIGHTS.map(({ icon, title, text }) => (

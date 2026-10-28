@@ -277,3 +277,28 @@
         display: none;
     }
 }
+
+/* Profile settings: confirmation after a role is added. */
+.notice {
+    margin: 0 0 1rem;
+    padding: .7rem .9rem;
+    border: 1px solid rgba(107, 207, 143, .45);
+    border-radius: 10px;
+    background: rgba(107, 207, 143, .08);
+    color: var(--win);
+    font-size: .88rem;
+    font-weight: 600;
+}
+
+/* Profile settings: marks the steps of a role being added. */
+.newTag {
+    margin-left: .45rem;
+    padding: .05rem .35rem;
+    border-radius: 4px;
+    background: var(--violet-dim);
+    color: var(--violet-bright);
+    font-size: .62rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
