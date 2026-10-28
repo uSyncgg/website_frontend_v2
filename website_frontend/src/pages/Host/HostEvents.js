@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { FaCalendarAlt, FaGamepad, FaPlus, FaSitemap } from "react-icons/fa";
 import { useHostEvents, eventStage } from "services/hostEventsMock";
-import { MockBanner, StageChip, capacityLabel, formatDate, formatLabel, unitLabel } from "./hostShared";
+import { MockBanner, ShareButton, StageChip, capacityLabel, formatDate, formatLabel, unitLabel } from "./hostShared";
 import styles from "./Host.module.css";
 
 // /host/events - every event this host runs.
@@ -41,7 +41,8 @@ export const HostEvents = () => {
                                 const stage = eventStage(event);
                                 const filled = event.maxEntrants ? Math.min(100, (event.entrants.length / event.maxEntrants) * 100) : 100;
                                 return (
-                                    <Link key={event.id} to={`/host/events/${event.id}`} className={styles.eventCard}>
+                                    <div key={event.id} className={styles.eventCard}>
+                                        <Link to={`/host/events/${event.id}`} className={styles.eventCardLink}>
                                         <div className={styles.eventCardTop}>
                                             <div>
                                                 <h2 className={styles.eventName}>{event.name}</h2>
@@ -61,7 +62,13 @@ export const HostEvents = () => {
                                             </div>
                                             <div className={styles.fillBar}><span style={{ width: `${filled}%` }} /></div>
                                         </div>
-                                    </Link>
+                                        </Link>
+                                        <div className={styles.eventCardActions}>
+                                            <Link to={`/host/events/${event.id}`} className={`${styles.secondaryBtn} ${styles.smallBtn}`}>Manage</Link>
+                                            <ShareButton event={event} className={`${styles.ghostBtn} ${styles.smallBtn}`} />
+                                            <Link to={`/brackets/${event.id}`} className={`${styles.ghostBtn} ${styles.smallBtn}`}>Public page</Link>
+                                        </div>
+                                    </div>
                                 );
                             })}
                         </div>

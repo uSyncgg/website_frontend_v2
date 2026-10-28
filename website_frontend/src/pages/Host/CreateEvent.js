@@ -28,29 +28,31 @@ export const CreateEvent = () => {
         name: '', game: 'Call of Duty', format: 'single_elim', teamSize: '1v1', bestOf: 3,
         maxEntrants: '16', uncapped: false,
         date: start.date, time: start.time, locationType: 'online', venue: '', prize: '',
-        description: '', rules: '', checkInRequired: true, noShowMinutes: '10',
-        usePayments: false,
+        description: '', rules: '', checkInRequired: true, noShowMinutes: '10', noShowOff: false,
+        usePayments: true,
     });
     const [payments, setPayments] = useState({
         payoutEmail: '', tiers: [{ name: 'Player Pass', price: '', capacity: '' }],
-        playerFields: ['Discord'], questions: [], refundPolicy: '',
     });
+    // What every player fills in when they sign up (free or paid), so the host knows who joined.
+    const [signupForm, setSignupForm] = useState({ playerFields: ['Discord'], questions: [] });
     const [submitted, setSubmitted] = useState(false);
 
     const set = (field) => (e) => setForm(f => ({ ...f, [field]: e.target.type === 'checkbox' ? e.target.checked : e.target.value }));
     const setPay = (field, value) => setPayments(p => ({ ...p, [field]: value }));
     const setTier = (i, field, value) => setPay('tiers', payments.tiers.map((t, j) => (j === i ? { ...t, [field]: value } : t)));
-    const setQuestion = (i, field, value) => setPay('questions', payments.questions.map((q, j) => (j === i ? { ...q, [field]: value } : q)));
-    const togglePlayerField = (f) => setPay('playerFields', payments.playerFields.includes(f)
-        ? payments.playerFields.filter(x => x !== f)
-        : [...payments.playerFields, f]);
+    const setSignup = (field, value) => setSignupForm(f => ({ ...f, [field]: value }));
+    const setQuestion = (i, field, value) => setSignup('questions', signupForm.questions.map((q, j) => (j === i ? { ...q, [field]: value } : q)));
+    const togglePlayerField = (f) => setSignup('playerFields', signupForm.playerFields.includes(f)
+        ? signupForm.playerFields.filter(x => x !== f)
+        : [...signupForm.playerFields, f]);
 
     const maxNum = Number(form.maxEntrants);
     const errors = {
         name: !form.name.trim() && 'Give your event a name',
         venue: form.locationType === 'in_person' && !form.venue.trim() && 'Add where the event is held',
         maxEntrants: !form.uncapped && (!Number.isInteger(maxNum) || maxNum < 2) && 'Enter a whole number of 2 or more, or tick "No cap"',
-        noShowMinutes: !(Number(form.noShowMinutes) >= 0) && 'Enter how many minutes to wait',
+        noShowMinutes: !form.noShowOff && !(Number(form.noShowMinutes) >= 0) && 'Enter how many minutes to wait, or turn the timer off',
         payoutEmail: form.usePayments && !/^\S+@\S+\.\S+$/.test(payments.payoutEmail) && 'Add the email we send payouts to',
         tiers: form.usePayments && payments.tiers.some(t => !t.name.trim() || !(Number(t.price) > 0)) && 'Every pass needs a name and a price above $0',
     };
@@ -61,17 +63,21 @@ export const CreateEvent = () => {
         e.preventDefault();
         setSubmitted(true);
         if (hasErrors) return;
-        const { date, time, uncapped, usePayments, ...rest } = form;
+        const { date, time, uncapped, usePayments, noShowOff, ...rest } = form;
         const lowestPrice = Math.min(...payments.tiers.map(t => Number(t.price)));
         const id = createEvent({
             ...rest,
             name: form.name.trim(),
             bestOf: Number(form.bestOf),
             maxEntrants: uncapped ? null : maxNum,
-            noShowMinutes: Number(form.noShowMinutes),
+            noShowMinutes: noShowOff ? null : Number(form.noShowMinutes),
             startsAt: new Date(`${date}T${time}`).toISOString(),
             entryFee: usePayments ? `$${lowestPrice.toFixed(2)}` : 'Free',
             payments: usePayments ? { enabled: true, ...payments } : { enabled: false },
+            signupForm: {
+                ...signupForm,
+                questions: signupForm.questions.filter(q => q.label.trim()),
+            },
             registrationOpen: true,
         });
         navigate(`/host/events/${id}`);
@@ -185,18 +191,84 @@ export const CreateEvent = () => {
                         </label>
 
                         <div className={styles.field}>
-                            <label htmlFor="noShowMinutes">No-show timer (minutes)</label>
+                            <label htmlFor="noShowMinutes">No-show timer in minutes (optional)</label>
                             <input id="noShowMinutes" type="number" min={0} step={1} inputMode="numeric" className={styles.input}
-                                style={{ maxWidth: '10rem' }} value={form.noShowMinutes} onChange={set('noShowMinutes')} />
-                            <p className={styles.fieldHint}>Players can "Report No Show" this long after the event starts. You decide what happens next.</p>
+                                style={{ maxWidth: '10rem' }} value={form.noShowOff ? '' : form.noShowMinutes} onChange={set('noShowMinutes')}
+                                disabled={form.noShowOff} placeholder={form.noShowOff ? 'Off' : ''} />
+                            <label className={styles.checkRow} style={{ marginTop: '.5rem' }}>
+                                <input type="checkbox" checked={form.noShowOff} onChange={set('noShowOff')} /> Don't use a no-show timer
+                            </label>
+                            <p className={styles.fieldHint}>
+                                {form.noShowOff
+                                    ? 'Players won\'t see a "Report No Show" button.'
+                                    : 'Players can "Report No Show" this long after the event starts. You decide what happens next.'}
+                            </p>
                             {err('noShowMinutes')}
                         </div>
                     </section>
 
                     <section className={`${styles.card} ${styles.form}`}>
+                        <h2 className={styles.sectionTitle}>Details players will see</h2>
+                        <div className={styles.field}>
+                            <label htmlFor="description">Description</label>
+                            <textarea id="description" className={styles.textarea} value={form.description} onChange={set('description')} maxLength={1000} />
+                        </div>
+                        <div className={styles.field}>
+                            <label htmlFor="rules">Rules</label>
+                            <textarea id="rules" className={styles.textarea} value={form.rules} onChange={set('rules')} maxLength={3000}
+                                placeholder="Maps, settings, how to report scores, no-show policy..." />
+                        </div>
+                    </section>
+
+                    <section className={`${styles.card} ${styles.form}`}>
+                        <h2 className={styles.sectionTitle}>Sign-up form</h2>
+                        <p className={styles.blurb} style={{ margin: 0 }}>
+                            Everyone who signs up fills this in, free or paid, so you can see exactly who joined. You'll find their answers on the Entrants tab.
+                        </p>
+                        <div>
+                            <span className={styles.fieldLabel}>Ask each player for</span>
+                            <div className={styles.pillGrid}>
+                                <span className={`${styles.pill} ${styles.pillOn} ${styles.pillLocked}`}>Gamertag (always)</span>
+                                {PLAYER_FIELD_OPTIONS.map(f => (
+                                    <button key={f} type="button" aria-pressed={signupForm.playerFields.includes(f)}
+                                        className={`${styles.pill} ${signupForm.playerFields.includes(f) ? styles.pillOn : ''}`}
+                                        onClick={() => togglePlayerField(f)}>{f}</button>
+                                ))}
+                            </div>
+                            {form.teamSize !== '1v1' && <p className={styles.fieldHint}>Team passes also ask for a team name and captain, and collect these for all {form.teamSize.split('v')[0]} players.</p>}
+                        </div>
+
+                        <div>
+                            <span className={styles.fieldLabel}>Extra questions</span>
+                            {signupForm.questions.map((q, i) => (
+                                <div key={i} className={styles.questionRow}>
+                                    <input className={styles.input} value={q.label} onChange={e => setQuestion(i, 'label', e.target.value)} placeholder="Question" aria-label="Question" />
+                                    <select className={styles.select} value={q.type} onChange={e => setQuestion(i, 'type', e.target.value)} aria-label="Answer type">
+                                        <option value="text">Short answer</option>
+                                        <option value="select">Dropdown</option>
+                                    </select>
+                                    <label className={styles.checkRow}>
+                                        <input type="checkbox" checked={q.required} onChange={e => setQuestion(i, 'required', e.target.checked)} /> Required
+                                    </label>
+                                    <button type="button" className={`${styles.iconBtn} ${styles.removeBtn}`}
+                                        onClick={() => setSignup('questions', signupForm.questions.filter((_, j) => j !== i))} aria-label="Remove question"><FaTrash /></button>
+                                    {q.type === 'select' &&
+                                        <input className={`${styles.input} ${styles.questionOptions}`} value={q.options} onChange={e => setQuestion(i, 'options', e.target.value)}
+                                            placeholder="Options, separated by commas" aria-label="Dropdown options" />
+                                    }
+                                </div>
+                            ))}
+                            <button type="button" className={`${styles.ghostBtn} ${styles.smallBtn}`} onClick={() => setSignup('questions', [...signupForm.questions, blankQuestion()])}>
+                                <FaPlus /> Add a question
+                            </button>
+                        </div>
+
+                    </section>
+
+                    <section className={`${styles.card} ${styles.form}`}>
                         <h2 className={styles.sectionTitle}>Payments</h2>
                         <div className={styles.segmented} role="radiogroup" aria-label="Payments">
-                            {[[false, 'Free / handled elsewhere'], [true, 'Collect entry fees with uSync']].map(([value, label]) => (
+                            {[[true, 'Collect entry fees with uSync'], [false, 'Free / handled elsewhere']].map(([value, label]) => (
                                 <button key={label} type="button" role="radio" aria-checked={form.usePayments === value}
                                     className={`${styles.segment} ${form.usePayments === value ? styles.segmentActive : ''}`}
                                     onClick={() => setForm(f => ({ ...f, usePayments: value }))}>{label}</button>
@@ -251,69 +323,12 @@ export const CreateEvent = () => {
                                     {err('tiers')}
                                 </div>
 
-                                <div>
-                                    <span className={styles.fieldLabel}>Ask each player for</span>
-                                    <div className={styles.pillGrid}>
-                                        <span className={`${styles.pill} ${styles.pillOn} ${styles.pillLocked}`}>Gamertag (always)</span>
-                                        {PLAYER_FIELD_OPTIONS.map(f => (
-                                            <button key={f} type="button" aria-pressed={payments.playerFields.includes(f)}
-                                                className={`${styles.pill} ${payments.playerFields.includes(f) ? styles.pillOn : ''}`}
-                                                onClick={() => togglePlayerField(f)}>{f}</button>
-                                        ))}
-                                    </div>
-                                    {form.teamSize !== '1v1' && <p className={styles.fieldHint}>Team passes also ask for a team name and captain, and collect these for all {form.teamSize.split('v')[0]} players.</p>}
-                                </div>
-
-                                <div>
-                                    <span className={styles.fieldLabel}>Extra questions</span>
-                                    {payments.questions.map((q, i) => (
-                                        <div key={i} className={styles.questionRow}>
-                                            <input className={styles.input} value={q.label} onChange={e => setQuestion(i, 'label', e.target.value)} placeholder="Question" aria-label="Question" />
-                                            <select className={styles.select} value={q.type} onChange={e => setQuestion(i, 'type', e.target.value)} aria-label="Answer type">
-                                                <option value="text">Short answer</option>
-                                                <option value="select">Dropdown</option>
-                                            </select>
-                                            <label className={styles.checkRow}>
-                                                <input type="checkbox" checked={q.required} onChange={e => setQuestion(i, 'required', e.target.checked)} /> Required
-                                            </label>
-                                            <button type="button" className={`${styles.iconBtn} ${styles.removeBtn}`}
-                                                onClick={() => setPay('questions', payments.questions.filter((_, j) => j !== i))} aria-label="Remove question"><FaTrash /></button>
-                                            {q.type === 'select' &&
-                                                <input className={`${styles.input} ${styles.questionOptions}`} value={q.options} onChange={e => setQuestion(i, 'options', e.target.value)}
-                                                    placeholder="Options, separated by commas" aria-label="Dropdown options" />
-                                            }
-                                        </div>
-                                    ))}
-                                    <button type="button" className={`${styles.ghostBtn} ${styles.smallBtn}`} onClick={() => setPay('questions', [...payments.questions, blankQuestion()])}>
-                                        <FaPlus /> Add a question
-                                    </button>
-                                </div>
-
-                                <div className={styles.field}>
-                                    <label htmlFor="refundPolicy">Refund policy</label>
-                                    <textarea id="refundPolicy" className={styles.textarea} style={{ minHeight: '4rem' }} value={payments.refundPolicy}
-                                        onChange={e => setPay('refundPolicy', e.target.value)} placeholder="e.g. Full refund until check-in opens." />
-                                </div>
-
                                 <div className={styles.field}>
                                     <label htmlFor="prizePaid">Prize (optional)</label>
                                     <input id="prizePaid" className={styles.input} value={form.prize} onChange={set('prize')} placeholder="e.g. 70% of the pot to 1st" />
                                 </div>
                             </div>
                         }
-                    </section>
-
-                    <section className={`${styles.card} ${styles.form}`}>
-                        <h2 className={styles.sectionTitle}>Details players will see</h2>
-                        <div className={styles.field}>
-                            <label htmlFor="description">Description</label>
-                            <textarea id="description" className={styles.textarea} value={form.description} onChange={set('description')} maxLength={1000} />
-                        </div>
-                        <div className={styles.field}>
-                            <label htmlFor="rules">Rules</label>
-                            <textarea id="rules" className={styles.textarea} value={form.rules} onChange={set('rules')} maxLength={3000}
-                                placeholder="Maps, settings, how to report scores, no-show policy..." />
-                        </div>
                     </section>
 
                     {submitted && hasErrors && <p className={styles.fieldError}>Fix the highlighted fields above.</p>}

@@ -179,7 +179,7 @@ export const EventOverview = () => {
                             <dt>Entry fee</dt><dd>{event.payments?.enabled ? `${event.entryFee} via uSync payments` : (event.entryFee || 'Free')}</dd>
                             <dt>Prize</dt><dd>{event.prize || '-'}</dd>
                             <dt>Check-in</dt><dd>{event.checkInRequired ? 'Required' : 'Not required'}</dd>
-                            <dt>No-show timer</dt><dd>{event.noShowMinutes ?? 10} min after start</dd>
+                            <dt>No-show timer</dt><dd>{event.noShowMinutes == null ? 'Off' : `${event.noShowMinutes} min after start`}</dd>
                         </dl>
                     </section>
                     {(event.description || event.rules) &&

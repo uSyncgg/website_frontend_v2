@@ -1,39 +1,122 @@
-import { useEffect, useRef, useState } from "react";
-import { FaTrophy, FaSearchMinus, FaSearchPlus } from "react-icons/fa";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { FaTrophy, FaSearchMinus, FaSearchPlus, FaExpand } from "react-icons/fa";
 import { roundName, losersRoundName, isEntrant } from "utils/bracket";
 import styles from "./Bracket.module.css";
 
-const MIN_ZOOM = 0.4;
-const MAX_ZOOM = 2;
-const clampZoom = (z) => Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, Math.round(z * 100) / 100));
+const MIN_ZOOM = 0.3;
+const MAX_ZOOM = 2.5;
+const DRAG_THRESHOLD = 4;
+const clampZoom = (z) => Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, z));
 
-// Ctrl/Cmd + scroll (or trackpad pinch) zooms the bracket instead of the page.
-const ZoomFrame = ({ children }) => {
-    const [zoom, setZoom] = useState(1);
+// The bracket sits on a canvas you can grab and drag around (open-hand cursor)
+// and zoom with the scroll wheel, toward the cursor - like a map. A short drag
+// doesn't count as a click, so matches stay clickable.
+const PanZoom = ({ children }) => {
     const frameRef = useRef(null);
+    const contentRef = useRef(null);
+    const drag = useRef(null);
+    const justDragged = useRef(false);
+    const [view, setView] = useState({ x: 0, y: 0, zoom: 1 });
+    const [dragging, setDragging] = useState(false);
+    const [height, setHeight] = useState(320);
+
+    // Frame height follows the bracket's natural height, within limits.
+    useLayoutEffect(() => {
+        const el = contentRef.current;
+        const measure = () => setHeight(Math.max(260, Math.min(el.offsetHeight + 24, window.innerHeight * 0.75)));
+        measure();
+        const ro = new ResizeObserver(measure);
+        ro.observe(el);
+        return () => ro.disconnect();
+    }, []);
+
+    // Zoom so the point under (cx, cy) stays put.
+    const zoomAt = (factor, cx, cy) => setView(v => {
+        const zoom = clampZoom(v.zoom * factor);
+        const k = zoom / v.zoom;
+        return { zoom, x: cx - (cx - v.x) * k, y: cy - (cy - v.y) * k };
+    });
+
+    const zoomCenter = (factor) => {
+        const r = frameRef.current.getBoundingClientRect();
+        zoomAt(factor, r.width / 2, r.height / 2);
+    };
+
+    const fit = () => {
+        const frame = frameRef.current.getBoundingClientRect();
+        const w = contentRef.current.offsetWidth;
+        const h = contentRef.current.offsetHeight;
+        const zoom = clampZoom(Math.min(1, (frame.width - 24) / w, (frame.height - 24) / h));
+        setView({ zoom, x: 12, y: 12 });
+    };
 
     useEffect(() => {
         const el = frameRef.current;
         const onWheel = (e) => {
-            if (!e.ctrlKey && !e.metaKey) return;
             e.preventDefault();
-            setZoom(z => clampZoom(z * Math.exp(-e.deltaY * 0.0015)));
+            const r = el.getBoundingClientRect();
+            zoomAt(Math.exp(-e.deltaY * 0.0015), e.clientX - r.left, e.clientY - r.top);
         };
-        // Must be non-passive so preventDefault stops the browser zooming the whole page.
+        // Non-passive so the page doesn't scroll while zooming the bracket.
         el.addEventListener('wheel', onWheel, { passive: false });
         return () => el.removeEventListener('wheel', onWheel);
     }, []);
 
+    const onPointerDown = (e) => {
+        if (e.button !== 0) return;
+        drag.current = { startX: e.clientX, startY: e.clientY, x: view.x, y: view.y, moved: false, id: e.pointerId };
+    };
+
+    const onPointerMove = (e) => {
+        const d = drag.current;
+        if (!d) return;
+        const dx = e.clientX - d.startX;
+        const dy = e.clientY - d.startY;
+        if (!d.moved && Math.hypot(dx, dy) < DRAG_THRESHOLD) return;
+        if (!d.moved) {
+            d.moved = true;
+            frameRef.current.setPointerCapture(d.id);
+            setDragging(true);
+        }
+        setView(v => ({ ...v, x: d.x + dx, y: d.y + dy }));
+    };
+
+    const endDrag = () => {
+        if (drag.current?.moved) {
+            justDragged.current = true;
+            setTimeout(() => { justDragged.current = false; }, 0);
+        }
+        drag.current = null;
+        setDragging(false);
+    };
+
     return (
         <div className={styles.zoomFrame}>
             <div className={styles.zoomBar}>
-                <span className={styles.zoomHint}>Ctrl + scroll to zoom</span>
-                <button type="button" onClick={() => setZoom(z => clampZoom(z - 0.1))} aria-label="Zoom out" disabled={zoom <= MIN_ZOOM}><FaSearchMinus /></button>
-                <button type="button" className={styles.zoomValue} onClick={() => setZoom(1)} title="Reset zoom">{Math.round(zoom * 100)}%</button>
-                <button type="button" onClick={() => setZoom(z => clampZoom(z + 0.1))} aria-label="Zoom in" disabled={zoom >= MAX_ZOOM}><FaSearchPlus /></button>
+                <span className={styles.zoomHint}>Drag to move · scroll to zoom</span>
+                <button type="button" onClick={() => zoomCenter(1 / 1.2)} aria-label="Zoom out" disabled={view.zoom <= MIN_ZOOM}><FaSearchMinus /></button>
+                <button type="button" className={styles.zoomValue} onClick={() => setView({ x: 0, y: 0, zoom: 1 })} title="Reset to 100%">{Math.round(view.zoom * 100)}%</button>
+                <button type="button" onClick={() => zoomCenter(1.2)} aria-label="Zoom in" disabled={view.zoom >= MAX_ZOOM}><FaSearchPlus /></button>
+                <button type="button" onClick={fit} aria-label="Fit bracket to view" title="Fit to view"><FaExpand /></button>
             </div>
-            <div className={styles.scroller} ref={frameRef}>
-                <div style={{ zoom }}>{children}</div>
+            <div
+                ref={frameRef}
+                className={`${styles.canvas} ${dragging ? styles.canvasDragging : ''}`}
+                style={{ height }}
+                onPointerDown={onPointerDown}
+                onPointerMove={onPointerMove}
+                onPointerUp={endDrag}
+                onPointerCancel={endDrag}
+                // Swallow the click that ends a drag so it doesn't open a match.
+                onClickCapture={(e) => { if (justDragged.current) { e.stopPropagation(); e.preventDefault(); } }}
+            >
+                <div
+                    ref={contentRef}
+                    className={styles.canvasContent}
+                    style={{ transform: `translate(${view.x}px, ${view.y}px) scale(${view.zoom})` }}
+                >
+                    {children}
+                </div>
             </div>
         </div>
     );
@@ -204,11 +287,11 @@ const PoolPlay = ({ built, cardProps }) => (
 export const Bracket = ({ format, built, entrants, onSelect, canSelect, stateOf, viewerId }) => {
     const cardProps = { entrants, onSelect, canSelect, stateOf, viewerId };
     return (
-        <ZoomFrame>
+        <PanZoom>
             {format === 'round_robin' && <PoolPlay built={built} cardProps={cardProps} />}
             {format === 'double_elim' && <DoubleElim built={built} cardProps={cardProps} />}
             {format === 'single_elim' && <SingleElim built={built} cardProps={cardProps} />}
-        </ZoomFrame>
+        </PanZoom>
     );
 };
 

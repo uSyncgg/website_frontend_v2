@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { FaSearch, FaTrash, FaUserPlus } from "react-icons/fa";
 import { addEntrant, removeEntrant, setCheckedIn, isFull } from "services/hostEventsMock";
 import { useManagedEvent } from "./ManageEvent";
-import { isTeamEvent } from "./hostShared";
+import { Modal, formatDate, isTeamEvent } from "./hostShared";
 import styles from "./Host.module.css";
 
 const FILTERS = [
@@ -11,12 +11,42 @@ const FILTERS = [
     { key: 'out', label: 'Not checked in' },
 ];
 
+// Everything this entrant filled in when they signed up.
+const EntrantDetails = ({ event, entrant, onClose }) => {
+    const team = isTeamEvent(event);
+    const answers = Object.entries(entrant.answers ?? {});
+    return (
+        <Modal title={entrant.name} onClose={onClose}>
+            <dl className={styles.detailList}>
+                {team && <><dt>Captain</dt><dd>@{entrant.captain}</dd></>}
+                {team && entrant.teammates?.length > 0 && <><dt>Teammates</dt><dd>{entrant.teammates.join(', ')}</dd></>}
+                {!team && <><dt>Gamertag</dt><dd>{entrant.captain}</dd></>}
+                <dt>Email</dt><dd>{entrant.email || '-'}</dd>
+                <dt>Signed up</dt><dd>{formatDate(entrant.registeredAt)}</dd>
+                <dt>Checked in</dt><dd>{entrant.checkedIn ? 'Yes' : 'No'}</dd>
+                {event.payments?.enabled && <><dt>Pass</dt><dd>{entrant.pass ?? event.payments.tiers[0]?.name ?? '-'}</dd></>}
+                <dt>Skill rating</dt><dd>{entrant.rating}</dd>
+            </dl>
+            <h4 className={styles.sectionTitle} style={{ margin: '1.25rem 0 .6rem', fontSize: '.9rem' }}>Sign-up answers</h4>
+            {answers.length
+                ? (
+                    <dl className={styles.detailList}>
+                        {answers.map(([q, a]) => <Fragment key={q}><dt>{q}</dt><dd>{a || '-'}</dd></Fragment>)}
+                    </dl>
+                )
+                : <p className={styles.muted}>This entrant was added by hand, so there are no sign-up answers.</p>
+            }
+        </Modal>
+    );
+};
+
 // /host/events/:eventId/entrants - everyone signed up for the event.
 export const EventEntrants = () => {
     const event = useManagedEvent();
     const [query, setQuery] = useState('');
     const [filter, setFilter] = useState('all');
     const [newName, setNewName] = useState('');
+    const [viewingId, setViewingId] = useState(null);
     const teams = isTeamEvent(event);
     const locked = !!event.bracket?.published;
     const full = isFull(event);
@@ -77,7 +107,9 @@ export const EventEntrants = () => {
                         {rows.map(entrant => (
                             <tr key={entrant.id}>
                                 <td className={styles.num}>{event.entrants.indexOf(entrant) + 1}</td>
-                                <td className={styles.entrantName}>{entrant.name}</td>
+                                <td>
+                                    <button type="button" className={styles.linkBtn} onClick={() => setViewingId(entrant.id)}>{entrant.name}</button>
+                                </td>
                                 {teams && <td>@{entrant.captain}</td>}
                                 <td className={styles.num}>{entrant.rating}</td>
                                 <td>{new Date(entrant.registeredAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</td>
@@ -103,6 +135,10 @@ export const EventEntrants = () => {
                     </tbody>
                 </table>
             </div>
+
+            {viewingId && event.entrants.find(e => e.id === viewingId) &&
+                <EntrantDetails event={event} entrant={event.entrants.find(e => e.id === viewingId)} onClose={() => setViewingId(null)} />
+            }
 
             {!locked &&
                 <form className={`${styles.card} ${styles.toolbar}`} style={{ marginTop: '1rem', marginBottom: 0 }} onSubmit={add}>

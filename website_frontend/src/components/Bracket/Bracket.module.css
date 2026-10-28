@@ -1,5 +1,3 @@
-/* ---- elimination tree ---- */
-
 /* ---- zoom frame ---- */
 
 .zoomFrame {
@@ -51,11 +49,36 @@
     font-variant-numeric: tabular-nums;
 }
 
-/* The bracket scrolls inside its card on small screens or when zoomed in, never the page. */
-.scroller {
-    overflow: auto;
-    max-height: 80vh;
-    padding-bottom: .5rem;
+/* Grab-and-drag canvas: the bracket moves inside it, never the page. */
+.canvas {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background:
+        radial-gradient(circle, rgba(255, 255, 255, .05) 1px, transparent 1px) 0 0 / 22px 22px,
+        var(--ground-deep);
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+}
+
+.canvasDragging {
+    cursor: grabbing;
+}
+
+.canvasDragging .match {
+    cursor: grabbing;
+}
+
+.canvasContent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 12px;
+    width: max-content;
+    transform-origin: 0 0;
+    will-change: transform;
 }
 
 /* ---- elimination tree ---- */

@@ -38,15 +38,37 @@ const useMockViewer = (event) => {
 const RegisterDialog = ({ event, onClose, onRegistered }) => {
     const pay = event.payments?.enabled ? event.payments : null;
     const team = isTeamEvent(event);
+    const form = event.signupForm ?? { playerFields: [], questions: [] };
+    const teammateCount = team ? Number(event.teamSize[0]) - 1 : 0;
     const [name, setName] = useState('');
+    const [captain, setCaptain] = useState('');
+    const [email, setEmail] = useState('');
+    const [teammates, setTeammates] = useState(() => Array(teammateCount).fill(''));
+    const [answers, setAnswers] = useState({});
+    const [tried, setTried] = useState(false);
     const [tierIndex, setTierIndex] = useState(0);
     const tier = pay?.tiers[tierIndex];
     const price = tier ? Number(tier.price) : 0;
+    const answer = (key) => (e) => setAnswers(a => ({ ...a, [key]: e.target.value }));
+
+    const missing = [
+        !name.trim() && 'name',
+        team && !captain.trim() && 'captain',
+        !/^\S+@\S+\.\S+$/.test(email) && 'email',
+        ...form.questions.filter(q => q.required && !answers[q.label]?.trim()).map(q => q.label),
+    ].filter(Boolean);
 
     const submit = (e) => {
         e.preventDefault();
-        if (!name.trim()) return;
-        onRegistered(addEntrant(event.id, name.trim(), { captain: name.trim(), pass: tier?.name }));
+        setTried(true);
+        if (missing.length) return;
+        onRegistered(addEntrant(event.id, name.trim(), {
+            captain: (team ? captain : name).trim(),
+            email: email.trim(),
+            teammates: teammates.map(t => t.trim()).filter(Boolean),
+            answers,
+            pass: tier?.name,
+        }));
         onClose();
     };
 
@@ -57,6 +79,44 @@ const RegisterDialog = ({ event, onClose, onRegistered }) => {
                     <label htmlFor="reg-name">{team ? 'Team name' : 'Gamertag'}</label>
                     <input id="reg-name" className={styles.input} value={name} onChange={e => setName(e.target.value)} autoFocus maxLength={40} />
                 </div>
+                {team &&
+                    <div className={styles.field}>
+                        <label htmlFor="reg-captain">Captain's gamertag</label>
+                        <input id="reg-captain" className={styles.input} value={captain} onChange={e => setCaptain(e.target.value)} maxLength={40} />
+                    </div>
+                }
+                {teammates.map((t, i) => (
+                    <div key={i} className={styles.field}>
+                        <label htmlFor={`reg-mate-${i}`}>Teammate {i + 2} gamertag (optional)</label>
+                        <input id={`reg-mate-${i}`} className={styles.input} value={t}
+                            onChange={e => setTeammates(list => list.map((x, j) => (j === i ? e.target.value : x)))} maxLength={40} />
+                    </div>
+                ))}
+                <div className={styles.field}>
+                    <label htmlFor="reg-email">Contact email</label>
+                    <input id="reg-email" type="email" className={styles.input} value={email} onChange={e => setEmail(e.target.value)} />
+                </div>
+                {form.playerFields.map(f => (
+                    <div key={f} className={styles.field}>
+                        <label htmlFor={`reg-${f}`}>{team ? `Captain's ${f}` : f}</label>
+                        <input id={`reg-${f}`} className={styles.input} value={answers[f] ?? ''} onChange={answer(f)} />
+                    </div>
+                ))}
+                {form.questions.map(q => (
+                    <div key={q.label} className={styles.field}>
+                        <label htmlFor={`reg-q-${q.label}`}>{q.label}{q.required ? '' : ' (optional)'}</label>
+                        {q.type === 'select'
+                            ? (
+                                <select id={`reg-q-${q.label}`} className={styles.select} value={answers[q.label] ?? ''} onChange={answer(q.label)}>
+                                    <option value="" disabled>Select...</option>
+                                    {q.options.split(',').map(o => o.trim()).filter(Boolean).map(o => <option key={o}>{o}</option>)}
+                                </select>
+                            )
+                            : <input id={`reg-q-${q.label}`} className={styles.input} value={answers[q.label] ?? ''} onChange={answer(q.label)} />
+                        }
+                    </div>
+                ))}
+                {tried && missing.length > 0 && <p className={styles.fieldError}>Fill in: {missing.join(', ')}.</p>}
 
                 {pay &&
                     <>
@@ -72,11 +132,6 @@ const RegisterDialog = ({ event, onClose, onRegistered }) => {
                                 ))}
                             </div>
                         </div>
-                        {(pay.playerFields?.length > 0 || pay.questions?.length > 0) &&
-                            <p className={styles.fieldHint}>
-                                You'll also be asked for: {[...(pay.playerFields ?? []), ...(pay.questions ?? []).map(q => q.label)].filter(Boolean).join(', ')}.
-                            </p>
-                        }
                         <dl className={styles.detailList}>
                             <dt>Pass</dt><dd>${price.toFixed(2)}</dd>
                             <dt>uSync fee (5%)</dt><dd>${(price * USYNC_FEE).toFixed(2)}</dd>
@@ -88,7 +143,7 @@ const RegisterDialog = ({ event, onClose, onRegistered }) => {
 
                 <div className={styles.formActions}>
                     <button type="button" className={styles.ghostBtn} onClick={onClose}>Cancel</button>
-                    <button type="submit" className={styles.primaryBtn} disabled={!name.trim()}>
+                    <button type="submit" className={styles.primaryBtn}>
                         {pay ? `Continue to payment` : 'Sign up'}
                     </button>
                 </div>
@@ -106,6 +161,7 @@ export const PublicBracket = () => {
     const [registering, setRegistering] = useState(false);
     const [reportingId, setReportingId] = useState(null);
     const [now, setNow] = useState(() => Date.now());
+    const [tab, setTab] = useState(null);
 
     // Keep the no-show countdown current.
     useEffect(() => {
@@ -140,13 +196,15 @@ export const PublicBracket = () => {
     const myState = myMatch && stateOf(myMatch);
     const opponent = myMatch && byId[myMatch.a === me.id ? myMatch.b : myMatch.a];
     const noShowAt = noShowUnlocksAt(event);
-    const noShowOpen = now >= noShowAt.getTime();
+    const noShowOpen = noShowAt != null && now >= noShowAt.getTime();
     const reporting = reportingId && built && allMatches(built).find(m => m.id === reportingId);
 
     const canRegister = !me && event.registrationOpen && !published && !isFull(event);
+    // Live events open on the bracket; upcoming ones on the event info.
+    const activeTab = tab ?? (published ? 'bracket' : 'info');
 
     const unregister = () => {
-        if (window.confirm(`Unregister ${me.name} from ${event.name}?${pay ? ' Refunds follow the host\'s refund policy.' : ''}`)) {
+        if (window.confirm(`Unregister ${me.name} from ${event.name}?`)) {
             removeEntrant(event.id, me.id);
             setViewerId('');
         }
@@ -199,6 +257,18 @@ export const PublicBracket = () => {
                     </div>
                 </div>
 
+                <nav className={styles.tabs} aria-label="Event sections">
+                    {[['info', 'Event info'], ['bracket', 'Bracket']].map(([key, label]) => (
+                        <button key={key} type="button" aria-pressed={activeTab === key}
+                            className={`${styles.tab} ${styles.tabButton} ${activeTab === key ? styles.tabActive : ''}`}
+                            onClick={() => setTab(key)}>
+                            {label}
+                            {key === 'bracket' && myMatch && <span className={styles.tabDot} aria-label="you have a match to play" />}
+                        </button>
+                    ))}
+                </nav>
+
+                {activeTab === 'info' &&
                 <div className={styles.publicLayout}>
                     <div className={styles.publicMain}>
                         {event.description &&
@@ -230,12 +300,6 @@ export const PublicBracket = () => {
                             </section>
                         }
 
-                        {pay?.refundPolicy &&
-                            <section className={styles.card}>
-                                <h2 className={styles.sectionTitle}>Refund policy</h2>
-                                <p className={styles.preWrap}>{pay.refundPolicy}</p>
-                            </section>
-                        }
                     </div>
 
                     <aside className={styles.publicSide}>
@@ -246,6 +310,11 @@ export const PublicBracket = () => {
                                 {pay && <> · <FaTicketAlt /> from ${Math.min(...pay.tiers.map(t => Number(t.price))).toFixed(2)}</>}
                             </p>
 
+                            {myMatch &&
+                                <button type="button" className={`${styles.secondaryBtn} ${styles.fullBtn}`} style={{ marginBottom: '.75rem' }} onClick={() => setTab('bracket')}>
+                                    You have a match - go to the bracket
+                                </button>
+                            }
                             {me
                                 ? (
                                     <>
@@ -265,6 +334,12 @@ export const PublicBracket = () => {
                             }
                         </section>
 
+                    </aside>
+                </div>
+                }
+
+                {activeTab === 'bracket' &&
+                    <>
                         {myMatch &&
                             <section className={`${styles.card} ${styles.myMatch}`}>
                                 <h2 className={styles.sectionTitle}>Your match</h2>
@@ -278,19 +353,16 @@ export const PublicBracket = () => {
                                 )}
                                 <div className={styles.stackBtns}>
                                     <button type="button" className={styles.primaryBtn} onClick={() => setReportingId(myMatch.id)}>Report score</button>
-                                    {myState !== 'no_show' &&
+                                    {myState !== 'no_show' && noShowAt &&
                                         <button type="button" className={styles.ghostBtn} disabled={!noShowOpen} onClick={submitNoShow}>
                                             Report No Show
                                         </button>
                                     }
-                                    {!noShowOpen && myState !== 'no_show' &&
+                                    {noShowAt && !noShowOpen && myState !== 'no_show' &&
                                         <span className={styles.fieldHint}>Unlocks at {noShowAt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })} ({event.noShowMinutes} min after start)</span>}
                                 </div>
                             </section>
                         }
-                    </aside>
-                </div>
-
                 {published
                     ? (
                         <section className={styles.card}>
@@ -319,6 +391,9 @@ export const PublicBracket = () => {
                         </section>
                     )
                 }
+                    </>
+                }
+
             </div>
 
             {registering && <RegisterDialog event={event} onClose={() => setRegistering(false)} onRegistered={setViewerId} />}

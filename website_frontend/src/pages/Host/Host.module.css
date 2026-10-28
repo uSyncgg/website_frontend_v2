@@ -1252,3 +1252,70 @@
         flex-wrap: wrap;
     }
 }
+
+.linkBtn {
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--ink);
+    font: inherit;
+    font-weight: 600;
+    text-align: left;
+    text-decoration: underline;
+    text-decoration-color: var(--line-strong);
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+
+.linkBtn:hover {
+    color: var(--violet-bright);
+    text-decoration-color: var(--violet-bright);
+}
+
+/* The top of a dashboard card opens the event; the action row sits under it. */
+.eventCardLink {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+    color: inherit;
+    text-decoration: none;
+}
+
+.eventCardLink:hover {
+    color: inherit;
+}
+
+.eventCardLink:hover .eventName {
+    color: var(--violet-bright);
+}
+
+.eventCardActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .45rem;
+    padding-top: .75rem;
+    border-top: 1px solid var(--line);
+}
+
+.tabButton {
+    border: none;
+    background: none;
+    font: inherit;
+    font-size: .9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.tabDot {
+    display: inline-block;
+    width: .45rem;
+    height: .45rem;
+    margin-left: .4rem;
+    border-radius: 50%;
+    background: var(--violet-bright);
+    vertical-align: middle;
+}
+
+.myMatch {
+    margin-bottom: 1rem;
+}

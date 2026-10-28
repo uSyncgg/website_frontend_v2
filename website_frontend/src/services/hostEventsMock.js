@@ -7,7 +7,7 @@ import { buildBracket, bracketProgress, allMatches, sameMatchup, withResult, wit
 // backend will need (noted beside it), so swapping in real requests later only
 // touches this file.
 
-const STORAGE_KEY = 'usync.mock.hostEvents.v2';
+const STORAGE_KEY = 'usync.mock.hostEvents.v3';
 
 // ---- demo data -------------------------------------------------------------
 
@@ -97,9 +97,34 @@ const baseEvent = {
     registrationOpen: true,
     noShowMinutes: 10,
     payments: { enabled: false },
+    // What each player fills in at sign-up (always asked, free or paid).
+    signupForm: { playerFields: ['Discord'], questions: [] },
     delays: [],
     bracket: null,
 };
+
+// Fills in plausible sign-up answers for the demo entrants.
+const demoAnswer = (field, entrant, i) => {
+    const tag = entrant.captain.toLowerCase();
+    if (field === 'Discord') return `${tag}`;
+    if (field === 'Activision ID') return `${entrant.captain}#${4821 + i * 37}`;
+    if (field === 'Riot ID') return `${entrant.captain}#NA${i + 1}`;
+    if (field === 'Preferred platform') return ['PC', 'PlayStation', 'Xbox'][i % 3];
+    return `${entrant.captain}`;
+};
+
+const withSignupAnswers = (event) => ({
+    ...event,
+    entrants: event.entrants.map((entrant, i) => ({
+        ...entrant,
+        email: `${entrant.captain.toLowerCase()}@example.com`,
+        answers: Object.fromEntries([
+            ...(event.signupForm?.playerFields ?? []),
+            ...(event.signupForm?.questions ?? []).map(q => q.label),
+        ].map(field => [field, demoAnswer(field, entrant, i)])),
+        teammates: event.teamSize === '1v1' ? [] : Array.from({ length: Number(event.teamSize[0]) - 1 }, (_, n) => TAGS[(i * 5 + n + 3) % TAGS.length]),
+    })),
+});
 
 const buildDemoEvents = () => {
     const friday = {
@@ -120,9 +145,10 @@ const buildDemoEvents = () => {
             enabled: true,
             payoutEmail: 'host@example.com',
             tiers: [{ name: 'Player Pass', price: '10.00', capacity: '' }],
+        },
+        signupForm: {
             playerFields: ['Activision ID', 'Discord'],
             questions: [{ label: 'Preferred platform', type: 'select', options: 'PC, PlayStation, Xbox', required: true }],
-            refundPolicy: 'Full refund until check-in opens.',
         },
         entrants: makeEntrants(TAGS.slice(0, 13), { checkedIn: i => i % 4 !== 2 }),
         createdAt: daysFromNow(-12),
@@ -192,7 +218,7 @@ const buildDemoEvents = () => {
         createdAt: daysFromNow(-30),
     }), 99);
 
-    return [friday, valorant, doubleElim, pool];
+    return [friday, valorant, doubleElim, pool].map(e => withSignupAnswers({ ...baseEvent, ...e }));
 };
 
 // ---- store -----------------------------------------------------------------
@@ -275,7 +301,9 @@ export const matchNoShow = (bracket, match) =>
     sameMatchup(bracket.noShows?.[match.id], match) ? bracket.noShows[match.id] : null;
 
 // When players can start reporting no-shows: the host's timer after the start time.
-export const noShowUnlocksAt = (event) => new Date(new Date(event.startsAt).getTime() + (event.noShowMinutes ?? 10) * 60000);
+// null when the host turned the no-show timer off.
+export const noShowUnlocksAt = (event) =>
+    event.noShowMinutes == null ? null : new Date(new Date(event.startsAt).getTime() + event.noShowMinutes * 60000);
 
 // ---- writes (mock) ---------------------------------------------------------
 
