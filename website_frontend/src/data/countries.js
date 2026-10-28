@@ -198,3 +198,13 @@ export const COUNTRIES = [
     { label: "Zambia", value: "zm" },
     { label: "Zimbabwe", value: "zw" },
 ];
+
+// The US is pinned to the top for quick access and also kept in its alphabetical
+// spot, so it shows up twice. A disabled divider separates the pinned entry.
+export const COUNTRY_DIVIDER = { label: "──────────", value: "", disabled: true };
+
+export const COUNTRIES_US_FIRST = [
+    COUNTRIES.find(c => c.value === "us"),
+    COUNTRY_DIVIDER,
+    ...COUNTRIES,
+];

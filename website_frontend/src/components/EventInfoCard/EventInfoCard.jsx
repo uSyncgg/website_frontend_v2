@@ -2,6 +2,7 @@ import styles from './EventInfoCard.module.css';
 import React from 'react';
 import { FaCalendarAlt, FaMapMarkerAlt, FaInfoCircle, FaWallet, FaTag, FaGlobe, FaLock } from 'react-icons/fa';
 import { useAuth } from 'hooks';
+import { Link } from 'react-router';
 
 const BUBBLE_CONFIG = {
     "Date/Place":   { icons: [<FaCalendarAlt />, <FaMapMarkerAlt />] },
@@ -81,7 +82,15 @@ export const EventInfoCard = ({ title, infoList, regionTitle, regionInfoList, fo
 
                 {/* The backend withholds details from anonymous viewers, so an empty
                     list while signed out means "locked", not "no details". */}
-                {detailsLocked && <div className={styles.lockedText}>Must be Logged in to View More Details.</div>}
+                {detailsLocked &&
+                    <div className={styles.locked}>
+                        <div className={styles.lockedText}>Must be Logged in to View More Details.</div>
+                        <div className={styles.lockedActions}>
+                            <Link to="/signup" className={styles.lockedPrimary}>Sign Up</Link>
+                            <Link to="/login" className={styles.lockedSecondary}>Log In</Link>
+                        </div>
+                    </div>
+                }
             </div>
         </React.Fragment>
     );

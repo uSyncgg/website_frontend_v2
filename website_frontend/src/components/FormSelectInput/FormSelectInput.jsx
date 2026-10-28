@@ -22,8 +22,9 @@ export const FormSelectInput = ({ id, required, name, label, placeholder, option
                 disabled={disabled}
             >
                 <option value="" disabled>{placeholder}</option>
-                {options.map(opt => (
-                    <option key={opt.value} value={opt.value}>{opt.label}</option>
+                {/* Keyed by index: a list may pin an option above its normal spot, repeating its value. */}
+                {options.map((opt, i) => (
+                    <option key={i} value={opt.value} disabled={opt.disabled}>{opt.label}</option>
                 ))}
             </select>
 
