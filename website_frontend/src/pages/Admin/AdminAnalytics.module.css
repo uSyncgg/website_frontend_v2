@@ -1,0 +1,378 @@
+.page {
+    padding: calc(66px + 2.5rem) 1rem 4rem;
+    color: var(--ink);
+}
+
+.inner {
+    max-width: 68rem;
+    margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+}
+
+.eyebrow {
+    margin: 0 0 .35rem;
+    color: var(--violet-bright);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.title {
+    margin: 0;
+    font-size: clamp(1.75rem, 4vw, 2.4rem);
+    font-weight: 800;
+}
+
+.subtitle {
+    margin: .35rem 0 0;
+    color: var(--ink-3);
+    font-size: .85rem;
+}
+
+.mockBadge {
+    flex-shrink: 0;
+    padding: .35rem .7rem;
+    border: 1px solid var(--gold);
+    border-radius: 999px;
+    color: var(--gold);
+    font-size: .75rem;
+    font-weight: 700;
+}
+
+.error {
+    padding: calc(66px + 2rem) 1rem;
+    color: var(--ink-2);
+    text-align: center;
+}
+
+/* Filters */
+.filterRow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .75rem;
+    margin-bottom: 1rem;
+}
+
+.filterLabel {
+    color: var(--ink-2);
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.segmented {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    padding: 3px;
+    border: 1px solid var(--line-strong);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .02);
+}
+
+.segment {
+    padding: .4rem .75rem;
+    border: none;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--ink-2);
+    font: inherit;
+    font-size: .8rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.segment:hover {
+    color: var(--ink);
+}
+
+.segmentActive {
+    background: var(--violet-dim);
+    color: var(--ink);
+    box-shadow: inset 0 0 0 1px var(--violet);
+}
+
+/* Stat tiles */
+.tiles {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: .85rem;
+}
+
+.tile {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    padding: 1.1rem 1.2rem;
+    border: 1px solid var(--line);
+    border-radius: .875rem;
+    background: var(--panel);
+}
+
+.tileLabel {
+    color: var(--ink-2);
+    font-size: .8rem;
+    font-weight: 600;
+}
+
+.tileValue {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+
+.tileDelta {
+    color: var(--ink-3);
+    font-size: .78rem;
+}
+
+.tileDelta strong {
+    color: var(--win);
+}
+
+.footnote {
+    margin: .6rem 0 1.75rem;
+    color: var(--ink-4);
+    font-size: .75rem;
+}
+
+/* Cards */
+.card {
+    margin-bottom: 1.25rem;
+    padding: 1.25rem;
+    border: 1px solid var(--line);
+    border-radius: .875rem;
+    background: var(--panel);
+}
+
+.cardHeader {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: .75rem;
+    margin-bottom: 1.25rem;
+}
+
+.cardTitle {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.cardSubtitle {
+    margin: .25rem 0 0;
+    color: var(--ink-3);
+    font-size: .8rem;
+}
+
+.cardSubtitle strong {
+    color: var(--ink-2);
+}
+
+.chartNote {
+    margin: .9rem 0 0;
+    color: var(--ink-3);
+    font-size: .78rem;
+}
+
+.chartNote strong {
+    color: var(--ink-2);
+}
+
+/* Column chart (sign-ups over time) */
+.columnChart {
+    position: relative;
+    padding-left: 2.25rem;
+}
+
+.columnGrid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 12rem;
+    pointer-events: none;
+}
+
+.gridLine {
+    position: absolute;
+    left: 2.25rem;
+    right: 0;
+    border-top: 1px dashed var(--line);
+}
+
+.gridValue {
+    position: absolute;
+    left: 0;
+    transform: translateY(50%);
+    color: var(--ink-4);
+    font-size: .68rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.columns {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 12rem;
+    border-bottom: 1px solid var(--line-strong);
+}
+
+.columnHit {
+    position: relative;
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    outline: none;
+}
+
+.column {
+    width: 100%;
+    max-width: 2.5rem;
+    margin: 0 auto;
+    min-height: 1px;
+    border-radius: 4px 4px 0 0;
+    background: var(--violet);
+    transition: background .15s ease;
+}
+
+.columnHover,
+.columnHit:focus-visible .column {
+    background: var(--violet-bright);
+}
+
+.tooltip {
+    position: absolute;
+    bottom: calc(100% - 2.5rem);
+    left: 50%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: .15rem;
+    padding: .5rem .65rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    background: var(--panel-solid);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .45);
+    color: var(--ink-2);
+    font-size: .75rem;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.tooltipLeft {
+    left: auto;
+    right: 50%;
+}
+
+.tooltipTitle {
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.tooltip strong {
+    color: var(--ink);
+}
+
+.columnAxis {
+    display: flex;
+    gap: 2px;
+    margin-top: .4rem;
+}
+
+.axisLabel {
+    flex: 1;
+    overflow: visible;
+    color: var(--ink-4);
+    font-size: .68rem;
+    white-space: nowrap;
+}
+
+/* Horizontal bar chart (games) */
+.barChart {
+    display: flex;
+    flex-direction: column;
+    gap: .55rem;
+}
+
+.barRow {
+    display: grid;
+    grid-template-columns: 9.5rem 1fr 6.5rem;
+    align-items: center;
+    gap: .85rem;
+}
+
+.barLabel {
+    color: var(--ink);
+    font-size: .88rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.barTrack {
+    height: 1.1rem;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, .04);
+}
+
+.bar {
+    height: 100%;
+    min-width: 2px;
+    border-radius: 0 4px 4px 0;
+    background: var(--violet);
+}
+
+.barRow:hover .bar {
+    background: var(--violet-bright);
+}
+
+.barValue {
+    color: var(--ink);
+    font-size: .85rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.barPct {
+    margin-left: .3rem;
+    color: var(--ink-3);
+    font-weight: 500;
+}
+
+@media (max-width: 800px) {
+    .tiles {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 520px) {
+    .page {
+        padding-top: calc(66px + 1.5rem);
+    }
+
+    .tileValue {
+        font-size: 1.6rem;
+    }
+
+    .barRow {
+        grid-template-columns: 6.5rem 1fr 5rem;
+        gap: .6rem;
+    }
+
+    .barLabel {
+        font-size: .8rem;
+    }
+}

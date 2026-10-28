@@ -92,6 +92,7 @@ import { SocialLoginButtons } from "./SocialLoginButtons/SocialLoginButtons";
 
 // Route Protection
 import { RequireCompleteProfile } from "./RequiredCompleteProfile/RequiredCompleteProfile";
+import { RequireAdmin } from "./RequireAdmin/RequireAdmin";
 import { RedirectIfProfileComplete } from "./RequiredCompleteProfile/RedirectIfProfileComplete";
 
 // Sign Up Wizard
@@ -154,6 +155,7 @@ export {
     LanMap,
     SocialLoginButtons,
     RequireCompleteProfile,
+    RequireAdmin,
     RedirectIfProfileComplete,
     SignUpFormWizard,
     ProfileSettingsWizard,

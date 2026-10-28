@@ -55,7 +55,8 @@ import TournamentRoutes from './routes/TournamentRoutes';
 import { AuthPage } from 'pages/Accounts/Authentication/AuthPage';
 import { ForgotPassword } from 'pages/Accounts/Authentication/ForgotPassword';
 import { ResetPassword } from 'pages/Accounts/Authentication/ResetPassword';
-import { RequireCompleteProfile, RedirectIfProfileComplete } from 'components';
+import { RequireCompleteProfile, RedirectIfProfileComplete, RequireAdmin } from 'components';
+import { AdminAnalytics } from 'pages/Admin/AdminAnalytics';
 import { Profile } from 'pages/Accounts/Profile/Profile';
 import { ProfileSettings } from 'pages/Accounts/Settings/ProfileSettings';
 import { CurrentUserProvider } from 'hooks';
@@ -139,6 +140,11 @@ const app = (
             {/* Profile Settings — logged-in users only; RequireCompleteProfile sends everyone else to /login. */}
             <Route path='/settings/profile' element={<RequireCompleteProfile />}>
               <Route index element={<ProfileSettings />} />
+            </Route>
+
+            {/* Admin - authorized accounts only (see RequireAdmin). Read-only. */}
+            <Route path='/admin' element={<RequireAdmin />}>
+              <Route path='analytics' element={<AdminAnalytics />} />
             </Route>
 
           </Routes>
