@@ -1,4 +1,4 @@
-import { buildSingleElim, buildRoundRobin, buildBracket, allMatches, bracketProgress, seedPlacement, shuffle, withResult, FORMATS } from "./bracket";
+import { buildSingleElim, buildRoundRobin, buildBracket, allMatches, bracketProgress, seedPlacement, shuffle, withResult, FORMATS, placements } from "./bracket";
 
 const ids = (n) => Array.from({ length: n }, (_, i) => `p${i + 1}`);
 
@@ -97,4 +97,21 @@ test("double elim: grand final reset appears when the losers-side player wins ga
 
 test("pool play is labelled Pool Play", () => {
     expect(FORMATS.round_robin.label).toBe("Pool Play");
+});
+
+test("single elim 3rd place is the semifinal loser who lost to the champion", () => {
+    // p4 upsets p1 in their semi, then p2 wins the final: 3rd is p3 (lost to champion p2).
+    let results = {};
+    let built = buildSingleElim(ids(4));
+    results = withResult(results, built.rounds[0][0], 0, 2); // p1 v p4 -> p4
+    results = withResult(results, built.rounds[0][1], 2, 0); // p2 v p3 -> p2
+    built = buildSingleElim(ids(4), results);
+    results = withResult(results, built.rounds[1][0], 0, 2); // p4 v p2 -> p2
+    expect(placements('single_elim', buildSingleElim(ids(4), results))).toEqual(["p2", "p4", "p3"]);
+});
+
+test("placements: double elim and pool play", () => {
+    expect(placements('double_elim', playOut('double_elim', ids(8)))).toEqual(["p1", "p2", "p3"]);
+    expect(placements('round_robin', playOut('round_robin', ids(5), (m) => m.a < m.b))).toEqual(["p1", "p2", "p3"]);
+    expect(placements('single_elim', buildSingleElim(ids(4)))).toBeNull();
 });

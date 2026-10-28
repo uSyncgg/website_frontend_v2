@@ -226,6 +226,32 @@ export const buildBracket = (format, seeds, results) => {
     return buildSingleElim(seeds, results);
 };
 
+// Final placings once the event is decided: [1st, 2nd, 3rd] (3rd may be null).
+// - Single elim: 3rd goes to the semifinal loser who lost to the eventual champion.
+// - Double elim: 2nd is the grand-final loser, 3rd is the losers-final loser.
+// - Pool play: the top three in the standings once every match is played.
+export const placements = (format, built) => {
+    if (format === 'round_robin') {
+        const { done, total } = bracketProgress(built);
+        if (!total || done < total) return null;
+        return built.standings.slice(0, 3).map(row => row.id);
+    }
+    if (!built.champion) return null;
+    if (format === 'double_elim') {
+        const gf = built.grandFinal[built.grandFinal.length - 1];
+        const lf = built.losersRounds[built.losersRounds.length - 1]?.[0];
+        const second = gf.status === 'complete' ? gf.loser : null;
+        const third = lf && isEntrant(lf.loser) ? lf.loser : null;
+        return [built.champion, second, third];
+    }
+    const rounds = built.rounds;
+    const final = rounds[rounds.length - 1][0];
+    const semis = rounds.length >= 2 ? rounds[rounds.length - 2] : [];
+    const championsSemi = semis.find(m => m.winner === built.champion);
+    const third = championsSemi && isEntrant(championsSemi.loser) ? championsSemi.loser : null;
+    return [built.champion, final.loser, third];
+};
+
 export const allMatches = (built) => [
     ...built.rounds.flat(),
     ...(built.losersRounds ?? []).flat(),

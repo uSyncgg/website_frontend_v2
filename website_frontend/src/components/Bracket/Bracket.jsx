@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { FaTrophy, FaSearchMinus, FaSearchPlus, FaExpand } from "react-icons/fa";
-import { roundName, losersRoundName, isEntrant } from "utils/bracket";
+import { roundName, losersRoundName, isEntrant, placements } from "utils/bracket";
 import styles from "./Bracket.module.css";
 
 const MIN_ZOOM = 0.3;
@@ -62,38 +62,110 @@ const PanZoom = ({ children }) => {
         return () => el.removeEventListener('wheel', onWheel);
     }, []);
 
+    // Every finger/mouse currently down on the canvas, by pointer id.
+    const pointers = useRef(new Map());
+    const pinch = useRef(null);
+    const viewRef = useRef(view);
+    viewRef.current = view;
+
+    const local = (e) => {
+        const r = frameRef.current.getBoundingClientRect();
+        return { x: e.clientX - r.left, y: e.clientY - r.top };
+    };
+
+    // Capture keeps the gesture going if a finger slides off the canvas; it can
+    // fail for a pointer the browser no longer tracks, which is harmless.
+    const capture = (id) => {
+        try {
+            frameRef.current.setPointerCapture(id);
+        } catch {
+            // ignore
+        }
+    };
+
+    const startDrag = (id, p) => {
+        drag.current = { startX: p.x, startY: p.y, x: viewRef.current.x, y: viewRef.current.y, moved: false, id };
+    };
+
+    // Two fingers: zoom around the midpoint between them (like a map); moving
+    // both fingers together pans.
+    const startPinch = () => {
+        const [p1, p2] = [...pointers.current.values()];
+        pinch.current = {
+            dist: Math.hypot(p2.x - p1.x, p2.y - p1.y) || 1,
+            mid: { x: (p1.x + p2.x) / 2, y: (p1.y + p2.y) / 2 },
+            view: viewRef.current,
+        };
+        if (drag.current) drag.current.moved = true; // a pinch is never a click
+        setDragging(true);
+    };
+
     const onPointerDown = (e) => {
-        if (e.button !== 0) return;
-        drag.current = { startX: e.clientX, startY: e.clientY, x: view.x, y: view.y, moved: false, id: e.pointerId };
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        const p = local(e);
+        pointers.current.set(e.pointerId, p);
+        if (pointers.current.size === 1) startDrag(e.pointerId, p);
+        if (pointers.current.size === 2) {
+            startPinch();
+            capture(e.pointerId);
+        }
     };
 
     const onPointerMove = (e) => {
+        if (!pointers.current.has(e.pointerId)) return;
+        const p = local(e);
+        pointers.current.set(e.pointerId, p);
+
+        if (pinch.current && pointers.current.size >= 2) {
+            const [p1, p2] = [...pointers.current.values()];
+            const start = pinch.current;
+            const dist = Math.hypot(p2.x - p1.x, p2.y - p1.y);
+            const mid = { x: (p1.x + p2.x) / 2, y: (p1.y + p2.y) / 2 };
+            const zoom = clampZoom(start.view.zoom * dist / start.dist);
+            const k = zoom / start.view.zoom;
+            setView({ zoom, x: mid.x - (start.mid.x - start.view.x) * k, y: mid.y - (start.mid.y - start.view.y) * k });
+            return;
+        }
+
         const d = drag.current;
-        if (!d) return;
-        const dx = e.clientX - d.startX;
-        const dy = e.clientY - d.startY;
+        if (!d || d.id !== e.pointerId) return;
+        const dx = p.x - d.startX;
+        const dy = p.y - d.startY;
         if (!d.moved && Math.hypot(dx, dy) < DRAG_THRESHOLD) return;
         if (!d.moved) {
             d.moved = true;
-            frameRef.current.setPointerCapture(d.id);
+            capture(d.id);
             setDragging(true);
         }
         setView(v => ({ ...v, x: d.x + dx, y: d.y + dy }));
     };
 
-    const endDrag = () => {
-        if (drag.current?.moved) {
-            justDragged.current = true;
-            setTimeout(() => { justDragged.current = false; }, 0);
+    const endDrag = (e) => {
+        pointers.current.delete(e.pointerId);
+        const wasGesture = drag.current?.moved || pinch.current;
+        if (pointers.current.size === 1) {
+            // Lifting one finger of a pinch: carry on panning with the other.
+            pinch.current = null;
+            const [[id, p]] = [...pointers.current.entries()];
+            startDrag(id, p);
+            drag.current.moved = true;
+            return;
         }
-        drag.current = null;
-        setDragging(false);
+        if (pointers.current.size === 0) {
+            if (wasGesture) {
+                justDragged.current = true;
+                setTimeout(() => { justDragged.current = false; }, 0);
+            }
+            pinch.current = null;
+            drag.current = null;
+            setDragging(false);
+        }
     };
 
     return (
         <div className={styles.zoomFrame}>
             <div className={styles.zoomBar}>
-                <span className={styles.zoomHint}>Drag to move · scroll to zoom</span>
+                <span className={styles.zoomHint}>Drag to move · scroll or pinch to zoom</span>
                 <button type="button" onClick={() => zoomCenter(1 / 1.2)} aria-label="Zoom out" disabled={view.zoom <= MIN_ZOOM}><FaSearchMinus /></button>
                 <button type="button" className={styles.zoomValue} onClick={() => setView({ x: 0, y: 0, zoom: 1 })} title="Reset to 100%">{Math.round(view.zoom * 100)}%</button>
                 <button type="button" onClick={() => zoomCenter(1.2)} aria-label="Zoom in" disabled={view.zoom >= MAX_ZOOM}><FaSearchPlus /></button>
@@ -200,18 +272,28 @@ const Tree = ({ rounds, titleOf, merges, cardProps }) => (
     </div>
 );
 
-const Champion = ({ name }) => (
-    <div className={styles.champion}>
-        <FaTrophy className={styles.trophy} />
-        <span className={styles.championLabel}>Champion</span>
-        <span className={styles.championName}>{name}</span>
+const PLACES = [
+    { label: '1st place', className: 'podiumFirst' },
+    { label: '2nd place', className: 'podiumSecond' },
+    { label: '3rd place', className: 'podiumThird' },
+];
+
+// Final standings, shown above the bracket once the event is decided.
+const Podium = ({ places, entrants }) => (
+    <div className={styles.podium} aria-label="Final placings">
+        {PLACES.map((place, i) => places[i] && (
+            <div key={place.label} className={`${styles.podiumSpot} ${styles[place.className]}`}>
+                <FaTrophy className={styles.podiumIcon} aria-hidden="true" />
+                <span className={styles.podiumLabel}>{place.label}</span>
+                <span className={styles.podiumName}>{entrants[places[i]]?.name}</span>
+            </div>
+        ))}
     </div>
 );
 
 const SingleElim = ({ built, cardProps }) => (
     <div className={styles.treeRow}>
         <Tree rounds={built.rounds} titleOf={r => roundName(r, built.rounds.length)} merges={built.rounds.map(() => true)} cardProps={cardProps} />
-        {built.champion && <div className={styles.championCol}><Champion name={cardProps.entrants[built.champion]?.name} /></div>}
     </div>
 );
 
@@ -235,7 +317,6 @@ const DoubleElim = ({ built, cardProps }) => {
                     ))}
                     {built.grandFinal.length === 1 && built.grandFinal[0].status !== 'complete' &&
                         <p className={styles.grandNote}>If the losers-bracket side wins, a reset match decides it.</p>}
-                    {built.champion && <Champion name={cardProps.entrants[built.champion]?.name} />}
                 </div>
             </div>
             {lr.length > 0 &&
@@ -286,12 +367,16 @@ const PoolPlay = ({ built, cardProps }) => (
 // report states (disputed / no-show / awaiting); viewerId highlights "your" matches.
 export const Bracket = ({ format, built, entrants, onSelect, canSelect, stateOf, viewerId }) => {
     const cardProps = { entrants, onSelect, canSelect, stateOf, viewerId };
+    const places = placements(format, built);
     return (
+        <>
+        {places && <Podium places={places} entrants={entrants} />}
         <PanZoom>
             {format === 'round_robin' && <PoolPlay built={built} cardProps={cardProps} />}
             {format === 'double_elim' && <DoubleElim built={built} cardProps={cardProps} />}
             {format === 'single_elim' && <SingleElim built={built} cardProps={cardProps} />}
         </PanZoom>
+        </>
     );
 };
 
