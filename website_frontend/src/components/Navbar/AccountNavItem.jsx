@@ -75,8 +75,8 @@ const ProfileMenu = ({ profile, logout }) => {
     );
 };
 
-// variant="header" renders in the top-right of the navbar (desktop);
-// variant="menu" renders as plain links at the bottom of the hamburger menu (mobile).
+// variant="header" renders in the top-right of the navbar (desktop and mobile);
+// variant="menu" also renders at the bottom of the hamburger menu (mobile only).
 export const AccountNavItem = ({ closeMenu, variant = 'header' }) => {
     const { status, profile, logout } = useCurrentUser();
 
@@ -87,7 +87,7 @@ export const AccountNavItem = ({ closeMenu, variant = 'header' }) => {
     if (status === 'anonymous') {
         return (
             <div className={variant === 'header' ? styles.accountButtons : styles.mobileAccount}>
-                <Link to="/login" className={styles.secondaryButton} onClick={closeMenu}>Login</Link>
+                <Link to="/login" className={styles.secondaryButton} onClick={closeMenu}>Log In</Link>
                 <Link to="/signup" className={styles.primaryButton} onClick={closeMenu}>Sign Up</Link>
             </div>
         );

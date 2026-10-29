@@ -2,6 +2,7 @@ import styles from './EventInfoCard.module.css';
 import React from 'react';
 import { FaCalendarAlt, FaMapMarkerAlt, FaInfoCircle, FaWallet, FaTag, FaGlobe, FaLock } from 'react-icons/fa';
 import { useAuth } from 'hooks';
+import { Link, useLocation } from 'react-router';
 
 const BUBBLE_CONFIG = {
     "Date/Place":   { icons: [<FaCalendarAlt />, <FaMapMarkerAlt />] },
@@ -17,6 +18,7 @@ const FEE_TITLES = new Set(["Entry Fee", "Fees"]);
 export const EventInfoCard = ({ title, infoList, regionTitle, regionInfoList, footer }) => {
     const bubbleDef = BUBBLE_CONFIG[title];
     const { isLoggedIn, loading } = useAuth();
+    const location = useLocation();
     const detailsLocked = !loading && !isLoggedIn && infoList.length === 0;
 
     if (bubbleDef) {
@@ -81,7 +83,16 @@ export const EventInfoCard = ({ title, infoList, regionTitle, regionInfoList, fo
 
                 {/* The backend withholds details from anonymous viewers, so an empty
                     list while signed out means "locked", not "no details". */}
-                {detailsLocked && <div className={styles.lockedText}>Must be Logged in to View More Details.</div>}
+                {detailsLocked &&
+                    <div className={styles.locked}>
+                        <div className={styles.lockedText}>Must be Logged in to View More Details.</div>
+                        <div className={styles.lockedActions}>
+                            {/* `from` brings the user back to this event after logging in. */}
+                            <Link to="/signup" state={{ from: location }} className={styles.lockedPrimary}>Sign Up</Link>
+                            <Link to="/login" state={{ from: location }} className={styles.lockedSecondary}>Log In</Link>
+                        </div>
+                    </div>
+                }
             </div>
         </React.Fragment>
     );

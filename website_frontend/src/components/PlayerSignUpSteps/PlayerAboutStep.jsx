@@ -1,6 +1,6 @@
 import { FormTextInput } from "components/FormTextInput/FormTextInput";
 import { FormSelectInput } from "components/FormSelectInput/FormSelectInput";
-import { COUNTRIES } from "data/countries";
+import { COUNTRIES_US_FIRST } from "data/countries";
 import styles from "./PlayerAboutStep.module.css";
 
 // Matches the backend's accepted range. The value stays a "YYYY-MM-DD" string, the format
@@ -85,7 +85,7 @@ export const PlayerAboutStep = () => {
                 name={"country"}
                 label={"Country"}
                 placeholder={"Select your country"}
-                options={COUNTRIES}
+                options={COUNTRIES_US_FIRST}
                 disabled={false}
                 inputClassName={""}
                 errorClassName={""}
