@@ -350,9 +350,11 @@
         margin-top: 0;
     }
     .headerRight {
+        /* Shared with .accountDropdown so it always lines up with the screen edge. */
+        --header-right-gap: 1rem;
         order: 2;
         margin-left: auto;
-        margin-right: 1rem;
+        margin-right: var(--header-right-gap);
         height: 66px;
     }
     .headerMiddle { order: 3; }
@@ -377,7 +379,7 @@
 
     .accountDropdown {
         width: 10rem;
-        right: -1rem;
+        right: calc(-1 * var(--header-right-gap));
     }
 
     .mobileAccount {
@@ -426,7 +428,7 @@
     }
 
     .headerRight {
-        margin-right: 0.75rem;
+        --header-right-gap: 0.75rem;
     }
 
     .accountButtons {

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Cropper from "react-easy-crop";
 import { FaSearchMinus, FaSearchPlus } from "react-icons/fa";
 import styles from "./FormPFPUpload.module.css";
@@ -14,8 +15,11 @@ const loadImage = (src) => new Promise((resolve, reject) => {
     img.src = src;
 });
 
+const EXTENSIONS = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp" };
+
 // Draws the selected square of the source image onto a fixed-size canvas and
 // returns it as a File, so the form submits it exactly like a picked file.
+// Throws if the browser couldn't produce an image.
 const cropToFile = async (src, area, sourceFile) => {
     const img = await loadImage(src);
     const canvas = document.createElement("canvas");
@@ -25,14 +29,15 @@ const cropToFile = async (src, area, sourceFile) => {
     ctx.imageSmoothingQuality = "high";
     ctx.drawImage(img, area.x, area.y, area.width, area.height, 0, 0, OUTPUT_SIZE, OUTPUT_SIZE);
 
-    // PNG keeps transparency; everything else becomes a compact JPEG.
-    const type = sourceFile.type === "image/png" ? "image/png" : "image/jpeg";
-    const blob = await new Promise(resolve => canvas.toBlob(resolve, type, 0.92));
+    // Keep the source's format so PNG/WEBP transparency survives. Browsers that can't
+    // encode it (older Safari can't write WEBP) fall back to PNG, so trust blob.type.
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, sourceFile.type, 0.92));
+    if (!blob?.size || !EXTENSIONS[blob.type]) throw new Error("Crop failed");
     const baseName = sourceFile.name.replace(/\.[^.]+$/, "") || "profile";
-    return new File([blob], `${baseName}.${type === "image/png" ? "png" : "jpg"}`, { type });
+    return new File([blob], `${baseName}.${EXTENSIONS[blob.type]}`, { type: blob.type });
 };
 
-export const ImageCropModal = ({ file, onCancel, onApply }) => {
+export const ImageCropModal = ({ file, onCancel, onApply, onError }) => {
     const [src, setSrc] = useState(null);
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useState(MIN_ZOOM);
@@ -58,16 +63,23 @@ export const ImageCropModal = ({ file, onCancel, onApply }) => {
     const apply = async () => {
         if (!area) return;
         setSaving(true);
+        let cropped;
         try {
-            onApply(await cropToFile(src, area, file));
+            cropped = await cropToFile(src, area, file);
+        } catch {
+            onError();
+            return;
         } finally {
             setSaving(false);
         }
+        onApply(cropped);
     };
 
     const stepZoom = (delta) => setZoom(z => Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, z + delta)));
 
-    return (
+    // Portalled to <body>: a parent with backdrop-filter (the form .card) would
+    // otherwise trap this fixed overlay inside its own box.
+    return createPortal(
         <div className={styles.overlay} role="dialog" aria-modal="true" aria-labelledby="pfp-crop-title">
             <div className={styles.modal}>
                 <h2 id="pfp-crop-title" className={styles.modalTitle}>Crop your photo</h2>
@@ -117,6 +129,7 @@ export const ImageCropModal = ({ file, onCancel, onApply }) => {
                     </button>
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 };

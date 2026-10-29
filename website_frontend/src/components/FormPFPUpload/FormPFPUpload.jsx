@@ -8,15 +8,14 @@ const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
 // currentUrl: an already-saved picture to show until a new file is picked (profile settings).
 export const FormPFPUpload = ({ id, name, label, required, currentUrl, inputClassName, labelClassName, errorClassName, onFieldChange }) => {
-    const { register, formState: { errors } } = useFormContext();
+    const { register, watch, getValues, formState: { errors } } = useFormContext();
     const [previewUrl, setPreviewUrl] = useState(null);
-    // The picked image waiting in the crop dialog, and the last uncropped original
-    // (so "Adjust" can re-crop from the full image rather than the cropped one).
+    // The picked image waiting in the crop dialog, and the uncropped original of the
+    // file the form currently holds (so "Adjust" re-crops from the full image).
     const [cropFile, setCropFile] = useState(null);
     const [originalFile, setOriginalFile] = useState(null);
+    const [cropError, setCropError] = useState(null);
     const inputRef = useRef(null);
-    // What the input held before the crop dialog opened, restored on cancel.
-    const appliedFiles = useRef(null);
     const { onChange: rhfOnChange, ref: rhfRef, ...fieldProps } = register(name, {
         required: required ? "This field is required" : false,
         validate: {
@@ -27,49 +26,69 @@ export const FormPFPUpload = ({ id, name, label, required, currentUrl, inputClas
         },
     });
 
+    // The preview always follows react-hook-form's value, so it stays right after a
+    // remount (stepping Back and forward) or a parent resetField.
+    const file = watch(name)?.[0] ?? null;
+
     useEffect(() => {
-        return () => {
-            if (previewUrl) URL.revokeObjectURL(previewUrl);
-        };
-    }, [previewUrl]);
+        if (!file) {
+            setPreviewUrl(null);
+            setOriginalFile(null);
+            return;
+        }
+        const url = URL.createObjectURL(file);
+        setPreviewUrl(url);
+        return () => URL.revokeObjectURL(url);
+    }, [file]);
 
     // Puts `files` in the real input and tells react-hook-form, as if picked by hand.
-    const commitFiles = (files) => {
+    // `source` is the uncropped original, or null when the file wasn't cropped.
+    const commitFiles = (files, source = null) => {
         const input = inputRef.current;
         input.files = files;
-        appliedFiles.current = files;
         rhfOnChange({ target: input, type: "change" });
-        const file = files?.[0] ?? null;
-        setPreviewUrl(file ? URL.createObjectURL(file) : null);
-        onFieldChange?.(file);
+        setOriginalFile(source);
+        onFieldChange?.(files?.[0] ?? null);
+    };
+
+    // Puts the input back to what react-hook-form holds, undoing the browser's selection.
+    const restoreInput = () => {
+        const held = getValues(name);
+        if (held?.length) {
+            inputRef.current.files = held;
+        } else {
+            inputRef.current.value = "";
+        }
     };
 
     const handlePick = (e) => {
-        const file = e.target.files?.[0] ?? null;
+        const picked = e.target.files?.[0] ?? null;
+        setCropError(null);
         // Nothing picked, or a type we can't crop: hand straight to validation.
-        if (!file || !ACCEPTED_TYPES.includes(file.type)) {
+        if (!picked || !ACCEPTED_TYPES.includes(picked.type)) {
             commitFiles(e.target.files);
             return;
         }
-        setCropFile(file);
+        setCropFile(picked);
     };
 
     const handleCropApply = (cropped) => {
         const transfer = new DataTransfer();
         transfer.items.add(cropped);
-        setOriginalFile(cropFile);
+        const source = cropFile;
         setCropFile(null);
-        commitFiles(transfer.files);
+        commitFiles(transfer.files, source);
     };
 
     const handleCropCancel = () => {
         setCropFile(null);
-        // Undo the browser's selection so the input matches what's previewed.
-        if (appliedFiles.current) {
-            inputRef.current.files = appliedFiles.current;
-        } else {
-            inputRef.current.value = "";
-        }
+        restoreInput();
+    };
+
+    // A failed crop is thrown away; the user has to pick the photo again.
+    const handleCropError = () => {
+        handleCropCancel();
+        setCropError("Something went wrong cropping your photo. Please try uploading it again.");
     };
 
     return (
@@ -99,8 +118,9 @@ export const FormPFPUpload = ({ id, name, label, required, currentUrl, inputClas
                 />
             </div>
             {cropFile &&
-                <ImageCropModal file={cropFile} onCancel={handleCropCancel} onApply={handleCropApply} />
+                <ImageCropModal file={cropFile} onCancel={handleCropCancel} onApply={handleCropApply} onError={handleCropError} />
             }
+            {cropError && <span className={`${styles.error} ${errorClassName}`}>{cropError}</span>}
             {errors[name] && <span className={`${styles.error} ${errorClassName}`}>{errors[name].message}</span>}
         </div>
     )
