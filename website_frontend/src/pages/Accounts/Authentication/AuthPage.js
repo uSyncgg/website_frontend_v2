@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { signInWithPassword, signUp } from "services/authServices";
+import { PasswordChecklist, validatePassword, friendlyAuthError } from "./PasswordChecklist";
 import styles from "./AuthPage.module.css";
 
 // /login and /signup both render this page; `mode` picks the copy and the submit action.
@@ -34,7 +35,7 @@ const HIGHLIGHTS = [
 export const AuthPage = ({ mode }) => {
     const isSignup = mode === "signup";
     const copy = COPY[mode];
-    const { register, handleSubmit, reset, getValues, formState: { errors, isSubmitting } } = useForm();
+    const { register, handleSubmit, reset, getValues, watch, formState: { errors, isSubmitting } } = useForm();
     const [message, setMessage] = useState(null);
     const navigate = useNavigate();
 
@@ -50,7 +51,7 @@ export const AuthPage = ({ mode }) => {
         if (isSignup) {
             const { error } = await signUp(email, password);
             setMessage(error
-                ? { type: "error", text: error.message }
+                ? { type: "error", text: friendlyAuthError(error) }
                 : { type: "success", text: "Check your email to confirm your account." });
             return;
         }
@@ -119,7 +120,7 @@ export const AuthPage = ({ mode }) => {
                             <input
                                 {...register("password", {
                                     required: "Password is required.",
-                                    ...(isSignup && { minLength: { value: 8, message: "Password must be at least 8 characters." } }),
+                                    ...(isSignup && { validate: validatePassword }),
                                 })}
                                 id="auth-pass"
                                 className={styles.input}
@@ -127,6 +128,7 @@ export const AuthPage = ({ mode }) => {
                                 autoComplete={isSignup ? "new-password" : "current-password"}
                                 placeholder="••••••••"
                             />
+                            {isSignup && <PasswordChecklist password={watch("password")} />}
                             {errors.password && <span className={styles.fieldError}>{errors.password.message}</span>}
                         </div>
 
