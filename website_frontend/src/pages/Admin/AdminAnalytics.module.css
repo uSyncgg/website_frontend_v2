@@ -352,6 +352,165 @@
     font-weight: 500;
 }
 
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: .25rem;
+    margin-bottom: 1.5rem;
+    /* Drawn as a shadow so the active tab's underline can sit on top of it without overflowing. */
+    box-shadow: inset 0 -1px 0 var(--line);
+}
+
+.tab {
+    padding: .65rem 1rem;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    color: var(--ink-2);
+    font: inherit;
+    font-size: .9rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.tab:hover {
+    color: var(--ink);
+}
+
+.tabActive {
+    border-bottom-color: var(--violet);
+    color: var(--ink);
+}
+
+/* Events tab */
+.select {
+    padding: .45rem .7rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 10px;
+    background: var(--panel-solid);
+    color: var(--ink);
+    font: inherit;
+    font-size: .85rem;
+}
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem 1rem;
+    color: var(--ink-2);
+    font-size: .8rem;
+}
+
+.legendItem {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+}
+
+.swatch {
+    width: .8rem;
+    height: .8rem;
+    border-radius: 3px;
+}
+
+.swatchAging {
+    background: var(--gold);
+}
+
+.swatchStale {
+    background: var(--loss);
+}
+
+.tableWrap {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .85rem;
+}
+
+.table th {
+    padding: .5rem .75rem;
+    border-bottom: 1px solid var(--line-strong);
+    color: var(--ink-3);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-align: left;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.table td {
+    padding: .65rem .75rem;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-2);
+    vertical-align: top;
+}
+
+/* Stale rows: a tinted background plus a colored left edge, and the age is spelled out in text. */
+.rowAging td {
+    background: rgba(224, 177, 94, .1);
+}
+
+.rowAging td:first-child {
+    box-shadow: inset 3px 0 0 var(--gold);
+}
+
+.rowStale td {
+    background: rgba(224, 105, 138, .12);
+}
+
+.rowStale td:first-child {
+    box-shadow: inset 3px 0 0 var(--loss);
+}
+
+.eventName {
+    color: var(--ink) !important;
+    font-weight: 600;
+}
+
+.status {
+    text-transform: capitalize;
+}
+
+.updatedAgo {
+    display: block;
+    color: var(--ink-3);
+    font-size: .75rem;
+}
+
+.updatedBy {
+    color: var(--ink-3) !important;
+}
+
+.sortButton {
+    padding: 0;
+    border: none;
+    background: none;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    cursor: pointer;
+}
+
+.sortButton:hover,
+.sortActive {
+    color: var(--ink);
+}
+
+/* Finance tab */
+.plannedList {
+    margin: .75rem 0 0;
+    padding-left: 1.25rem;
+    color: var(--ink-2);
+    font-size: .9rem;
+    line-height: 1.8;
+}
+
 @media (max-width: 800px) {
     .tiles {
         grid-template-columns: repeat(2, minmax(0, 1fr));

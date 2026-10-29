@@ -5,7 +5,7 @@ import { useLeagueEvents, useLanEvents, useAllLanEvents, useWagerEvents, useXpEv
 import { useEventPasses, useEventReceipt } from "./useEventRegistration";
 import { useProfile, useSettings } from "./useUsers";
 import { useUsernameAvailability } from "./useUsernameAvailability";
-import { useAdminAnalytics } from "./useAdminAnalytics";
+import { useAdminAnalytics, useAdminEvents } from "./useAdminAnalytics";
 
 export {
     useCheckResize,
@@ -30,5 +30,6 @@ export {
     useProfile,
     useSettings,
     useUsernameAvailability,
-    useAdminAnalytics
+    useAdminAnalytics,
+    useAdminEvents
 }

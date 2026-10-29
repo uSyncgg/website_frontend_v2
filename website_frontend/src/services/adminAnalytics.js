@@ -2,24 +2,58 @@ import apiClient from "./apiClient";
 
 // Read-only admin analytics. Nothing here writes to the database.
 //
-// Until the backend exposes GET /admin/analytics, the page runs on mock data.
-// Set REACT_APP_ADMIN_ANALYTICS_MOCK=false once the endpoint is live.
-const USE_MOCK = process.env.REACT_APP_ADMIN_ANALYTICS_MOCK !== 'false';
+// Reads GET /admin/analytics and GET /admin/events. The backend only answers accounts listed in
+// its ADMIN_EMAILS and runs these on a READ ONLY database transaction.
+// Set REACT_APP_ADMIN_ANALYTICS_MOCK=true to use sample data instead (e.g. without a backend).
+const USE_MOCK = process.env.REACT_APP_ADMIN_ANALYTICS_MOCK === 'true';
 
 // Expected response shape (the mock returns the same thing):
 // {
 //   generated_at: ISO timestamp,
 //   totals:  { total, players, hosts, venues },   // total counts each account once,
 //                                                 // so it can be less than the sum
-//   signups: [{ date: 'YYYY-MM-DD', total, players, hosts, venues }],  // one row per day, oldest first
+//   signups: [{ date: 'YYYY-MM-DD', total, players, hosts, venues }],  // days with sign-ups, oldest first
 //   games:   { players: { [game]: count }, hosts: { [game]: count } }  // games picked at sign-up
 // }
 export const getAdminAnalytics = (token) => {
     if (USE_MOCK) return Promise.resolve(buildMockAnalytics());
     return apiClient.get(`/admin/analytics`, {
         headers: { Authorization: `Bearer ${token}` },
+    }).then(res => ({ ...res.data, signups: fillDays(res.data.signups) }));
+};
+
+// Response shape:
+// {
+//   generated_at: ISO timestamp,
+//   events: [{ id, name, event_type: 'LAN' | 'LEAGUE' | 'LEAGUE_GROUP' | 'WAGER' | 'XP', game, path,
+//              status, verified, host_owned, updated_at, updated_by }]   // newest update first
+// }
+// updated_by is always null until the backend records who made each edit.
+export const getAdminEvents = (token) => {
+    if (USE_MOCK) return Promise.resolve(buildMockEvents());
+    return apiClient.get(`/admin/events`, {
+        headers: { Authorization: `Bearer ${token}` },
     }).then(res => res.data);
 };
+
+const isoDay = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+
+// The backend only returns days that had sign-ups; the charts slice by day count, so add
+// zero rows for every missing day, covering at least the last year up to today.
+function fillDays(rows) {
+    const byDate = new Map(rows.map(r => [r.date, r]));
+    const day = new Date();
+    day.setHours(0, 0, 0, 0);
+    day.setDate(day.getDate() - (MOCK_DAYS - 1));
+    if (rows.length && new Date(`${rows[0].date}T00:00:00`) < day) day.setTime(new Date(`${rows[0].date}T00:00:00`).getTime());
+
+    const today = isoDay(new Date());
+    const filled = [];
+    for (let iso = isoDay(day); iso <= today; day.setDate(day.getDate() + 1), iso = isoDay(day)) {
+        filled.push(byDate.get(iso) ?? { date: iso, total: 0, players: 0, hosts: 0, venues: 0 });
+    }
+    return filled;
+}
 
 export const isMockAnalytics = USE_MOCK;
 
@@ -84,4 +118,29 @@ function buildMockAnalytics() {
             hosts: spread(MOCK_GAME_WEIGHTS.hosts, totals.hosts),
         },
     };
+}
+
+const MOCK_EVENT_TYPES = ['LAN', 'LEAGUE', 'LEAGUE', 'LEAGUE', 'LEAGUE_GROUP', 'WAGER', 'XP'];
+
+function buildMockEvents() {
+    const rand = seeded(7);
+    const games = Object.keys(MOCK_GAME_WEIGHTS.players).filter(g => g !== 'Other');
+    const events = Array.from({ length: 60 }, (_, i) => {
+        const updated = new Date();
+        updated.setDate(updated.getDate() - Math.floor(rand() * rand() * 200));
+        return {
+            id: `mock-${i}`,
+            name: `Sample Event ${i + 1}`,
+            event_type: MOCK_EVENT_TYPES[Math.floor(rand() * MOCK_EVENT_TYPES.length)],
+            game: games[Math.floor(rand() * games.length)],
+            path: null,
+            status: rand() < 0.8 ? 'approved' : 'pending',
+            verified: rand() < 0.3,
+            host_owned: rand() < 0.2,
+            updated_at: updated.toISOString(),
+            updated_by: null,
+        };
+    });
+    events.sort((a, b) => b.updated_at.localeCompare(a.updated_at));
+    return { generated_at: new Date().toISOString(), events };
 }
