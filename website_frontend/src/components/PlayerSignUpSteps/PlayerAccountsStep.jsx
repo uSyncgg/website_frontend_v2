@@ -173,7 +173,7 @@ export const PlayerAccountsStep = () => {
     const placeholder = "Coming soon";
 
     useEffect(() => {
-        setValue('linked_toggle', "socials");
+        setValue('linked_toggle', "game_platforms");
     }, [setValue]);
 
     const activeOptions = OPTIONS[selected] ?? [];
@@ -182,19 +182,19 @@ export const PlayerAccountsStep = () => {
         <div>
             <div className={styles.linkTabs} role="tablist">
                 <button
-                    className={`${styles.linkTabButton} ${selected === 'socials' ? styles.linkTabActive : ''}`}
-                    onClick={() => setValue('linked_toggle', 'socials')}
-                    type="button"
-                    role="tab"
-                    aria-selected={selected === 'socials'}
-                >Socials</button>
-                <button
                     className={`${styles.linkTabButton} ${selected === 'game_platforms' ? styles.linkTabActive : ''}`}
                     onClick={() => setValue('linked_toggle', 'game_platforms')}
                     type="button"
                     role="tab"
                     aria-selected={selected === 'game_platforms'}
                 >Game Platforms</button>
+                <button
+                    className={`${styles.linkTabButton} ${selected === 'socials' ? styles.linkTabActive : ''}`}
+                    onClick={() => setValue('linked_toggle', 'socials')}
+                    type="button"
+                    role="tab"
+                    aria-selected={selected === 'socials'}
+                >Socials</button>
                 <button
                     className={`${styles.linkTabButton} ${selected === 'competitive' ? styles.linkTabActive : ''}`}
                     onClick={() => setValue('linked_toggle', 'competitive')}

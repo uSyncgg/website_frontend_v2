@@ -14,8 +14,9 @@ import { updateUserSettings, updatePlayerSettings, updateHostSettings, updatePro
 import { toFormValues, buildPayloads, sectionFields, buildHostDetails, buildPlayerDetails } from "./settingsMapping";
 import styles from "components/SignUpFormWizard/SignUpFormWizard.module.css";
 
-// Username and email live on the Account step instead, and linked accounts aren't editable here yet.
-const EXCLUDED_STEPS = new Set(['user_info', 'player_accounts', 'host_accounts']);
+// Username and email live on the Account step instead, and host linked accounts aren't editable here yet.
+// Player linked accounts show here (locked, "coming soon") so existing players can add links once linking launches.
+const EXCLUDED_STEPS = new Set(['user_info', 'host_accounts']);
 
 const ACCOUNT_STEP = { key: 'account', title: 'Account', subtitle: 'Change your username, or delete your account.', Component: AccountSettingsStep, fields: [], saveFields: [] };
 
