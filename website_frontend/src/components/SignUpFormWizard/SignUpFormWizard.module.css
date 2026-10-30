@@ -277,3 +277,13 @@
         display: none;
     }
 }
+
+@media (max-width: 600px) {
+    .shell {
+        padding: 1.25rem .75rem 2.5rem;
+    }
+
+    .card {
+        padding: 1.5rem 1rem;
+    }
+}
