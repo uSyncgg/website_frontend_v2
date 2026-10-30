@@ -125,7 +125,7 @@ export const SignUpFormWizard = () => {
                     // No usable field: fall back to the general message under the form.
                     setError('root', {
                         type: 'validation',
-                        message: firstError?.msg ?? 'Some of your information is invalid. Please check the form and try again.',
+                        message: firstError?.msg ?? 'Some required fields are missing or incorrect. Please review and try again.',
                     });
                 }
             } else {
