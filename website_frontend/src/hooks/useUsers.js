@@ -5,9 +5,8 @@ export function useProfile(username) {
     return useAsync(() => getProfile(username), [username]);
 }
 
-export function useSettings(token) {
-    
-
+// reloadKey: change it to fetch the settings again (e.g. after adding a role).
+export function useSettings(token, reloadKey = 0) {
     return useAsync(
         () => {
             if (!token) {
@@ -15,5 +14,5 @@ export function useSettings(token) {
             } else {
                 return getSettings(token);
             } 
-        }, [token]);
+        }, [token, reloadKey]);
 }

@@ -28,24 +28,27 @@ const MUTUAL_INFO_STEP = { key: 'user_info', title: 'Account Info', subtitle: "T
 const MUTUAL_BIO_STEP = { key: 'profile_bio', title: 'Profile', subtitle: 'A photo and a line about yourself. Both optional — you can do this later.', Component: ProfileBioStep, fields: ['profile_picture', 'bio'], saveFields: ['profile_picture', 'bio'] };
 // Shown whenever "Venue" is picked among the Other sub-roles on the Get
 // Started step, on top of whatever player/host steps are already in the sequence.
-const LOCATION_STEP = { key: 'venue_location', title: 'Location', subtitle: "Add every venue you'll be hosting from. You can add more than one.", Component: LocationStep, fields: [], saveFields: ['venues'] };
+export const LOCATION_STEP = { key: 'venue_location', title: 'Location', subtitle: "Add every venue you'll be hosting from. You can add more than one.", Component: LocationStep, fields: [], saveFields: ['venues'] };
 
 // "Games You Play" (player), "Hosted Titles" (host), or "Games You Play & Host"
 // (both) — same UserGamesStep component, told via `props.mode` which field(s) to bind.
-const PLAYER_GAMES_STEP = { key: 'user_games', title: 'Games You Play', subtitle: 'Pick as many as you like — this drives the events we surface for you.', Component: UserGamesStep, props: { mode: 'player' }, fields: ['other_games'], saveFields: ['interests', 'other_games'] };
-const HOST_GAMES_STEP = { key: 'user_games', title: 'Hosted Titles', subtitle: 'Pick every title you run events for.', Component: UserGamesStep, props: { mode: 'host' }, fields: ['other_hosted_games'], saveFields: ['hosted_games', 'other_hosted_games'] };
+export const PLAYER_GAMES_STEP = { key: 'user_games', title: 'Games You Play', subtitle: 'Pick as many as you like — this drives the events we surface for you.', Component: UserGamesStep, props: { mode: 'player' }, fields: ['other_games'], saveFields: ['interests', 'other_games'] };
+export const HOST_GAMES_STEP = { key: 'user_games', title: 'Hosted Titles', subtitle: 'Pick every title you run events for.', Component: UserGamesStep, props: { mode: 'host' }, fields: ['other_hosted_games'], saveFields: ['hosted_games', 'other_hosted_games'] };
 const COMBINED_GAMES_STEP = { key: 'user_games', title: 'Games You Play & Host', subtitle: 'Pick as many as you like in each — this drives the events we surface for you.', Component: UserGamesStep, props: { mode: 'combined' }, fields: ['other_games', 'other_hosted_games'], saveFields: ['interests', 'other_games', 'hosted_games', 'other_hosted_games'] };
 
-const PLAYER_ABOUT_STEP = { key: 'player_about', title: 'About You', subtitle: 'Only your name shows publicly by default.', Component: PlayerAboutStep, fields: PLAYER_ABOUT_FIELDS, saveFields: PLAYER_ABOUT_FIELDS };
-const HOST_ORG_STEP = { key: 'host_org', title: 'Organization', subtitle: 'This is the name players will see on every event you run.', Component: HostOrgStep, fields: ['organization', 'host_country'], saveFields: ['organization', 'host_country'] };
-const HOST_EVENTS_STEP = { key: 'host_events', title: 'Event Types', subtitle: 'Pick every format you host.', Component: HostEventStep, fields: [], saveFields: ['event_types'] };
+export const PLAYER_ABOUT_STEP = { key: 'player_about', title: 'About You', subtitle: 'Only your name shows publicly by default.', Component: PlayerAboutStep, fields: PLAYER_ABOUT_FIELDS, saveFields: PLAYER_ABOUT_FIELDS };
+export const HOST_ORG_STEP = { key: 'host_org', title: 'Organization', subtitle: 'This is the name players will see on every event you run.', Component: HostOrgStep, fields: ['organization', 'host_country'], saveFields: ['organization', 'host_country'] };
+export const HOST_EVENTS_STEP = { key: 'host_events', title: 'Event Types', subtitle: 'Pick every format you host.', Component: HostEventStep, fields: [], saveFields: ['event_types'] };
 const PLAYER_ACCOUNTS_STEP = { key: 'player_accounts', title: 'Linked Accounts', subtitle: 'Optional — connect the platforms you use so teammates and organizers can find you.', Component: PlayerAccountsStep, fields: [], saveFields: [...SOCIAL_FIELDS, ...PLAYER_PLATFORM_FIELDS, ...PLAYER_COMPETITIVE_FIELDS] };
+
+// Hosts always get bracket hosting, so this step only appears for players who aren't hosts.
+export const PLAYER_BRACKET_STEP = { key: 'player_bracket', title: 'Bracket Hosting', subtitle: 'Want to run your own brackets for friends or your team? You can change this later.', Component: PlayerBracketStep, fields: [], saveFields: ['bracket_hosting'] };
 
 const PLAYER_STEPS = [
     MUTUAL_INFO_STEP,
     PLAYER_ABOUT_STEP,
     PLAYER_GAMES_STEP,
-    { key: 'player_bracket', title: 'Bracket Hosting', subtitle: 'Want to run your own brackets for friends or your team? You can change this later.', Component: PlayerBracketStep, fields: [], saveFields: ['bracket_hosting'] },
+    PLAYER_BRACKET_STEP,
     MUTUAL_BIO_STEP,
     PLAYER_ACCOUNTS_STEP,
 ];
