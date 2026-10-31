@@ -6,6 +6,7 @@ import { isMockAnalytics } from "services/adminAnalytics";
 import { getLoadErrorMessage } from "utils/apiError";
 import { AdminEventsTab } from "./AdminEventsTab";
 import { AdminFinanceTab } from "./AdminFinanceTab";
+import { AdminArticlesTab } from "./AdminArticlesTab";
 import styles from "./AdminAnalytics.module.css";
 
 // /admin/analytics - read-only dashboard for site admins: accounts, events and (soon) finance.
@@ -272,6 +273,7 @@ const TABS = [
     { key: 'overview', label: 'Overview', Component: OverviewTab },
     { key: 'events', label: 'Events', Component: AdminEventsTab },
     { key: 'finance', label: 'Finance', Component: AdminFinanceTab },
+    { key: 'articles', label: 'Articles', Component: AdminArticlesTab },
 ];
 
 export const AdminAnalytics = () => {

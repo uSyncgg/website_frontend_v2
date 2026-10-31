@@ -535,3 +535,117 @@
         font-size: .8rem;
     }
 }
+
+/* Articles tab */
+.form {
+    display: grid;
+    gap: 1rem;
+}
+
+.formRow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 1rem;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+}
+
+.fieldLabel {
+    color: var(--ink-2);
+    font-size: .8rem;
+    font-weight: 700;
+}
+
+.hint {
+    color: var(--ink-3);
+    font-size: .75rem;
+}
+
+.input {
+    width: 100%;
+    padding: .55rem .75rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 10px;
+    background: var(--panel-solid);
+    color: var(--ink);
+    font: inherit;
+    font-size: .88rem;
+}
+
+.input:focus {
+    outline: 2px solid var(--violet);
+    outline-offset: 1px;
+}
+
+.textarea {
+    min-height: 14rem;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+.faqRow {
+    display: grid;
+    gap: .5rem;
+    padding: .75rem;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+}
+
+.formActions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .75rem;
+}
+
+.primaryButton,
+.ghostButton,
+.dangerButton {
+    padding: .6rem 1.1rem;
+    border-radius: 10px;
+    font: inherit;
+    font-size: .88rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.primaryButton {
+    border: none;
+    background: linear-gradient(135deg, var(--violet), var(--violet-deep));
+    color: #fff;
+}
+
+.primaryButton:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.ghostButton {
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: var(--ink-2);
+}
+
+.dangerButton {
+    padding: .35rem .7rem;
+    border: 1px solid var(--loss);
+    background: transparent;
+    color: var(--loss);
+    font-size: .78rem;
+}
+
+.formError {
+    color: var(--loss);
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.formSuccess {
+    color: var(--ink-2);
+    font-size: .85rem;
+    font-weight: 600;
+}
