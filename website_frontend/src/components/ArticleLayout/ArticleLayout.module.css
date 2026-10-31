@@ -307,6 +307,14 @@
     padding-bottom: 1rem;
 }
 
+.body img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 1.25rem 0;
+    border-radius: 12px;
+}
+
 .body p {
     color: rgb(200, 197, 208);
     font-size: 1.1rem;
