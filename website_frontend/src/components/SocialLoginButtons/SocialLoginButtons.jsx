@@ -9,11 +9,11 @@ const PROVIDERS = [
     { id: 'x', label: 'Continue with X', Icon: FaXTwitter },
 ];
 
-export function SocialLoginButtons() {
+export function SocialLoginButtons({ returnTo }) {
     return(
         <div className={styles.providers}>
             {PROVIDERS.map(({ id, label, Icon }) => (
-                <button key={id} type="button" className={styles.provider} onClick={() => signInWithProvider(id)}>
+                <button key={id} type="button" className={styles.provider} onClick={() => signInWithProvider(id, returnTo)}>
                     <Icon aria-hidden="true" />
                     {label}
                 </button>
