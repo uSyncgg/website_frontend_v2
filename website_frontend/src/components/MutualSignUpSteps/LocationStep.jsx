@@ -3,6 +3,8 @@ import { FormTextInput } from "components/FormTextInput/FormTextInput";
 import { FormButton } from "components/FormButton/FormButton";
 import styles from "./LocationStep.module.css";
 
+// A venue profile needs at least one location, so every row is required (rows can only be
+// removed while there's more than one).
 export const LocationStep = () => {
     const { control } = useFormContext();
     const { fields, append, remove } = useFieldArray({ control, name: "venues" });
@@ -30,7 +32,7 @@ export const LocationStep = () => {
                         name={`venues.${index}.name`}
                         label={"Venue Name"}
                         placeholder={"uSync Arena"}
-                        required={false}
+                        required={true}
                         disabled={false}
                         inputClassName={""}
                         errorClassName={""}
@@ -42,7 +44,7 @@ export const LocationStep = () => {
                         name={`venues.${index}.location`}
                         label={"Venue Location"}
                         placeholder={"123 Main St, Austin, TX"}
-                        required={false}
+                        required={true}
                         disabled={false}
                         inputClassName={""}
                         errorClassName={""}

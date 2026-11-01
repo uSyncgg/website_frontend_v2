@@ -1,11 +1,12 @@
-import { useParams, useSearchParams, Link } from "react-router";
-import { SeoData, LoadingWheel, EmptyState, ProfileHeader, ProfileViewToggle, ProfileCard } from "components";
-import { useProfile } from "hooks";
+import { useParams, useNavigate, Link, Navigate } from "react-router";
+import { SeoData, LoadingWheel, ProfileHeader, ProfileViewToggle, ProfileCard } from "components";
+import { useCurrentUser, useProfile } from "hooks";
 import { gamesCatalog } from "catalog/games.catalog";
 import { NotFound } from "pages/NotFound";
 import styles from "./Profile.module.css";
 import { getLoadErrorMessage } from "utils/apiError";
 import { resolveViews } from "./profileViews";
+import { PROFILE_LABELS, profileUrl } from "utils/profiles";
 
 // Profile game names come from the sign-up form ("CS 2", "Call of Duty", ...),
 // so match them against the catalog loosely to pick up icons and links.
@@ -46,11 +47,11 @@ const GamesCard = ({ title, games, emptyText }) => (
     </ProfileCard>
 );
 
-const VenuesCard = ({ venues }) => (
-    <ProfileCard title="Venues">
-        {venues?.length > 0 ? (
+const VenuesCard = ({ locations }) => (
+    <ProfileCard title="Locations">
+        {locations?.length > 0 ? (
             <div>
-                {venues.map(venue => (
+                {locations.map(venue => (
                     <div key={venue.name} className={styles.game}>
                         <div className={styles.emblem}>{initials(venue.name)}</div>
                         <div>
@@ -61,32 +62,38 @@ const VenuesCard = ({ venues }) => (
                 ))}
             </div>
         ) : (
-            <p className={styles.muted}>No venues yet.</p>
+            <p className={styles.muted}>No locations yet.</p>
         )}
     </ProfileCard>
 );
 
-// Main-column content for each view in PROFILE_VIEWS (profileViews.js).
-const VIEW_CONTENT = {
-    player: (profile) => <GamesCard title="Games" games={profile.games} emptyText="No games added yet." />,
-    host: (profile) => <GamesCard title="Hosted Games" games={profile.host_games} emptyText="No hosted games added yet." />,
-    venue: (profile) => <VenuesCard venues={profile.venues} />,
+// Main-column content for each profile type. `details` is shaped by the type.
+const TYPE_CONTENT = {
+    player: (details) => <GamesCard title="Games" games={details.games} emptyText="No games added yet." />,
+    host: (details) => <GamesCard title="Hosted Games" games={details.hosted_games} emptyText="No hosted games added yet." />,
+    venue: (details) => <VenuesCard locations={details.locations} />,
 };
 
+// /profile/:publicId/:username - the public_id finds the profile; the username is only there
+// so the link reads well, and gets corrected if the profile has been renamed.
 export const Profile = () => {
-    const { username } = useParams();
-    const [searchParams, setSearchParams] = useSearchParams();
-    const { data: profile, loading, error } = useProfile(username);
+    const { publicId, username } = useParams();
+    const navigate = useNavigate();
+    const { data, loading, error } = useProfile(publicId);
+    // Right after the URL changes (e.g. switching views), the hook still holds the previous
+    // profile for one render before it starts the new fetch. Only use data for the profile in
+    // the URL - otherwise the rename check below would "correct" the URL back to the old one.
+    const profile = data?.public_id === publicId ? data : null;
 
     if (error?.response?.status === 404) {
         return <NotFound />;
     }
 
-    if (loading) {
+    if (loading || (!error && !profile)) {
         return <div className="standardContainer"><LoadingWheel /></div>;
     }
 
-    if (error || !profile) {
+    if (error) {
         return (
             <div className="standardContainer">
                 <p className={styles.status}>{getLoadErrorMessage(error, "Unable to load this profile right now.")}</p>
@@ -94,24 +101,22 @@ export const Profile = () => {
         );
     }
 
-    const { views, active: activeView } = resolveViews(profile, searchParams.get('view'));
-    const setView = (key) => setSearchParams(params => {
-        params.set('view', key);
-        return params;
-    }, { replace: true });
+    if (profile.username !== username) {
+        return <Navigate to={profileUrl(profile)} replace />;
+    }
 
-    // Roles with their own view (e.g. Venue) show as a view badge, not again in
-    // the "Other roles" card.
-    const viewLabels = views.map(view => view.label);
-    const otherRoles = (profile.other_roles ?? []).filter(role => !viewLabels.includes(role));
-    const roles = [...viewLabels, ...otherRoles];
+    const { views, active } = resolveViews(profile);
+    const openView = (key) => navigate(views.find(view => view.key === key).path);
+
+    const otherRoles = profile.other_roles ?? [];
+    const roles = [PROFILE_LABELS[profile.type], ...otherRoles];
 
     return (
         <div className="standardContainer">
             <SeoData
                 title={profile.username}
                 description={profile.bio || `${profile.username}'s profile on uSync.`}
-                canonicalPath={`/profile/${encodeURIComponent(profile.username)}`}
+                canonicalPath={profileUrl(profile)}
                 type="profile"
             />
 
@@ -124,18 +129,13 @@ export const Profile = () => {
                     roles={roles}
                 >
                     {views.length > 1 &&
-                        <ProfileViewToggle views={views} active={activeView} onChange={setView} />
+                        <ProfileViewToggle views={views} active={active} onChange={openView} />
                     }
                 </ProfileHeader>
 
                 <div className={styles.cols}>
                     <div>
-                        {activeView
-                            ? VIEW_CONTENT[activeView](profile)
-                            : <ProfileCard title="Profile">
-                                <EmptyState title="Nothing here yet" body="No player, host or venue profile yet." />
-                            </ProfileCard>
-                        }
+                        {TYPE_CONTENT[profile.type](profile.details ?? {})}
                     </div>
 
                     <aside>
@@ -163,3 +163,52 @@ export const Profile = () => {
         </div>
     );
 }
+
+// /profile - the signed in user's own profile (the navbar's "Profile" link). With a finished
+// account it forwards to the default profile's page. Before sign-up is finished there's no
+// profile to show yet, so it's a blank one pointing to the sign-up form.
+// RequireCompleteProfile has already sent logged-out users to /login.
+export const MyProfile = () => {
+    const { status, defaultProfile } = useCurrentUser();
+
+    if (status === 'loading' || status === 'anonymous') {
+        return <div className="standardContainer"><LoadingWheel /></div>;
+    }
+
+    if (status === 'complete' && defaultProfile) {
+        return <Navigate to={profileUrl(defaultProfile)} replace />;
+    }
+
+    if (status === 'error') {
+        return (
+            <div className="standardContainer">
+                <p className={styles.status}>Unable to load your profile right now.</p>
+            </div>
+        );
+    }
+
+    return (
+        <div className="standardContainer">
+            <div className={styles.wrap}>
+                <ProfileHeader username="Your profile" verified={false} profilePicture={null} />
+
+                <div className={styles.cols}>
+                    <div>
+                        <ProfileCard title="Profile">
+                            <div className={styles.incomplete}>
+                                <p className={styles.incompleteText}>Your profile is incomplete.</p>
+                                <Link to="/complete-profile" className={styles.completeLink}>Complete it here</Link>
+                            </div>
+                        </ProfileCard>
+                    </div>
+
+                    <aside>
+                        <ProfileCard title="About">
+                            <p className={styles.muted}>No bio yet.</p>
+                        </ProfileCard>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    );
+};
