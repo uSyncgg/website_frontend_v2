@@ -111,6 +111,17 @@
 /payment /index.html 200
 /passes/* /200.html 200
 
+# Accounts. Client-only (not prerendered), so they rewrite to the /200.html app shell.
+# /complete-profile and /reset-password are also where Supabase sends users back after
+# email verification, OAuth and password reset links, so they must survive a full page load.
+/login /200.html 200
+/signup /200.html 200
+/forgot-password /200.html 200
+/reset-password /200.html 200
+/complete-profile /200.html 200
+/profile/* /200.html 200
+/settings/* /200.html 200
+
 # LANs
 /LanMap /index.html 200
 /other-lans /index.html 200
