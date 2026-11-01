@@ -56,8 +56,8 @@ import { AuthPage } from 'pages/Accounts/Authentication/AuthPage';
 import { ForgotPassword } from 'pages/Accounts/Authentication/ForgotPassword';
 import { ResetPassword } from 'pages/Accounts/Authentication/ResetPassword';
 import { RequireCompleteProfile, RedirectIfProfileComplete } from 'components';
-import { Profile } from 'pages/Accounts/Profile/Profile';
-import { ProfileSettings } from 'pages/Accounts/Settings/ProfileSettings';
+import { Profile, MyProfile } from 'pages/Accounts/Profile/Profile';
+import { ProfileSettings, ProfileSettingsHome, AddProfile } from 'pages/Accounts/Settings/ProfileSettings';
 import { CurrentUserProvider } from 'hooks';
 
 const root = document.getElementById('root');
@@ -126,7 +126,13 @@ const app = (
             <Route path='/reset-password' element={<ResetPassword />} />
 
             {/* Public Profiles */}
-            <Route path='/profile/:username' element={<Profile />} />
+            {/* The signed in user's own profile: forwards to their default profile, or shows a
+                blank "incomplete" profile before sign-up is finished. */}
+            <Route path='/profile' element={<RequireCompleteProfile />}>
+              <Route index element={<MyProfile />} />
+            </Route>
+            {/* :username is optional - the page corrects it to the profile's current name. */}
+            <Route path='/profile/:publicId/:username?' element={<Profile />} />
 
             {/* Profile Completion — the destination RequireCompleteProfile redirects to,
                 so it must not be wrapped by that same guard (that would redirect to itself). */}
@@ -136,9 +142,12 @@ const app = (
               </Route>
             </Route>
 
-            {/* Profile Settings — logged-in users only; RequireCompleteProfile sends everyone else to /login. */}
+            {/* Profile Settings — logged-in users only; RequireCompleteProfile sends everyone else to /login.
+                Each profile (player, host, venue) has its own settings; /add/:type adds a new one. */}
             <Route path='/settings/profile' element={<RequireCompleteProfile />}>
-              <Route index element={<ProfileSettings />} />
+              <Route index element={<ProfileSettingsHome />} />
+              <Route path='add/:type' element={<AddProfile />} />
+              <Route path=':type' element={<ProfileSettings />} />
             </Route>
 
           </Routes>
