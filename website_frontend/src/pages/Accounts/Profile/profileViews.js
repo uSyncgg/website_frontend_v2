@@ -1,18 +1,11 @@
-// Every view a profile can have, in toggle order. The first available one is
-// the default. To add a view, add an entry here and its content in Profile.js.
-// `roles` is the profile's other_roles as a Set.
-export const PROFILE_VIEWS = [
-    { key: 'player', label: 'Player', isAvailable: (profile) => profile.is_player },
-    { key: 'host', label: 'Host', isAvailable: (profile) => profile.is_host },
-    { key: 'venue', label: 'Venue', isAvailable: (profile, roles) => roles.has('Venue') },
-];
+import { PROFILE_LABELS, byProfileType, profileUrl } from "utils/profiles";
 
-// Picks the views this profile has and which one to show. A requested view the
-// profile doesn't have falls back to the default; `active` is null when the
-// profile has no views at all.
-export function resolveViews(profile, requested) {
-    const roles = new Set(profile.other_roles ?? []);
-    const views = PROFILE_VIEWS.filter(view => view.isAvailable(profile, roles));
-    const active = views.find(view => view.key === requested)?.key ?? views[0]?.key ?? null;
-    return { views, active };
+// Each profile is its own page; the toggle switches between the account's profiles.
+// Views come from the profile being shown plus `others` (the same account's other
+// profiles), in player/host/venue order. `active` is the shown profile's type.
+export function resolveViews(profile) {
+    const views = [profile, ...(profile.others ?? [])]
+        .sort(byProfileType)
+        .map(p => ({ key: p.type, label: PROFILE_LABELS[p.type], path: profileUrl(p) }));
+    return { views, active: profile.type };
 }

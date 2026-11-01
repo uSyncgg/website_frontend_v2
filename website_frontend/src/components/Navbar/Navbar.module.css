@@ -242,10 +242,39 @@
     position: absolute;
     right: 0;
     top: 100%;
-    width: 100%;
+    width: max-content;
+    min-width: 100%;
     background-color: rgb(33, 37, 31);
     box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5);
     z-index: 1000;
+}
+
+/* Account menu: who you're viewing as, and the profiles you can switch to. */
+.dropdownLabel {
+    display: block;
+    padding: .75rem 1rem .25rem;
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: rgb(160, 160, 160);
+    white-space: nowrap;
+}
+
+.dropdownCurrent {
+    display: block;
+    padding: 0 1rem .75rem;
+    color: white;
+    font-weight: 600;
+    white-space: nowrap;
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+.dropdownError {
+    display: block;
+    padding: .5rem 1rem;
+    color: #ff7a7a;
+    font-size: .8rem;
 }
 
 .dropdownButton {
