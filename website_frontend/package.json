@@ -17,6 +17,7 @@
     "leaflet-gesture-handling": "^1.2.2",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
+    "react-easy-crop": "6.2.3",
     "react-hook-form": "^7.71.1",
     "react-icons": "^5.5.0",
     "react-leaflet": "^5.0.0",
@@ -58,8 +59,14 @@
   },
   "reactSnap": {
     "source": "build",
-    "minifyHtml": { "collapseWhitespace": false },
-    "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
+    "minifyHtml": {
+      "collapseWhitespace": false
+    },
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage"
+    ],
     "concurrency": 1,
     "crawl": false,
     "include": [

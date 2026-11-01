@@ -1,6 +1,8 @@
 {
+  "id": "/",
   "short_name": "uSync",
   "name": "uSync | Esports LANs, Tournaments, & Leagues Hub",
+  "description": "Find esports LANs, tournaments, leagues and head-to-head platforms in one place.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,18 +10,28 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "icon-192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any"
     },
     {
-      "src": "logo512.png",
+      "src": "icon-512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "theme_color": "#15131a",
+  "orientation": "portrait",
+  "theme_color": "#21251f",
   "background_color": "#15131a"
 }
