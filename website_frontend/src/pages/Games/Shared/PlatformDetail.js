@@ -4,6 +4,7 @@ import { useEventByPath } from "hooks";
 import { buildEventPath } from "utils/eventPaths";
 import { NotFound } from "pages/NotFound";
 import '../EventInformation.css';
+import { getLoadErrorMessage } from "utils/apiError";
 
 const restrictionInfoList = (data) => {
     const avail = (data.availability || []).filter(s => s && s.trim());
@@ -41,7 +42,7 @@ export const PlatformDetail = ({ eventType, game, sectionPath }) => {
             {loading ? (
                 <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Loading platform info...</p>
             ) : error || !data ? (
-                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>Unable to load this platform right now.</p>
+                <p style={{ textAlign: 'center', color: 'white', fontSize: '1.5rem', padding: '2rem 0' }}>{getLoadErrorMessage(error, "Unable to load this platform right now.")}</p>
             ) : (
                 <div className="eventInfoCardContainer">
                     <div>

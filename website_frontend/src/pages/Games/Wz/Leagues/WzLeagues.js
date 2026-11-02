@@ -3,6 +3,7 @@ import { SeoData, HostBanner, HeaderImage, EventListFilters, NoEvents } from "co
 import { useLeagueEvents } from "hooks";
 import { buildEventPath } from 'utils/eventPaths';
 import '../../EventBanners.css';
+import { getLoadErrorMessage } from "utils/apiError";
 
 const normalizeHost = (host) => {
     const grouped = Array.isArray(host.leagues) && host.leagues.length > 0;
@@ -94,7 +95,7 @@ export const WzLeagues = () => {
             {loading ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>
             ) : error ? (
-                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load leagues right now.</h2>
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>{getLoadErrorMessage(error, "Unable to load leagues right now.")}</h2>
             ) : allLeagues.length === 0 ? (
                 <div className="eventBannerContainer">
                     <NoEvents pageType={"Leagues"} />

@@ -1,0 +1,58 @@
+.venueCard {
+    padding: 1.25rem;
+    border-radius: 1rem;
+    border: 1.5px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .03);
+}
+
+.venueCard + .venueCard {
+    margin-top: 1.25rem;
+}
+
+.venueHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.venueLabel {
+    color: var(--ink);
+    font-weight: 700;
+    font-size: .85rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.removeBtn {
+    background: none;
+    border: 0;
+    color: var(--loss);
+    font-size: .8rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0;
+}
+
+.removeBtn:hover {
+    text-decoration: underline;
+}
+
+.addBtn {
+    width: 100%;
+    margin-top: 1.25rem;
+    padding: .85rem;
+    background: rgba(255, 255, 255, .05);
+    border: 1.5px dashed rgba(255, 255, 255, .2);
+    color: var(--ink);
+    border-radius: .8rem;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: .88rem;
+    transition: border-color .2s, background .2s;
+}
+
+.addBtn:hover {
+    border-color: #8e6ace;
+    background: rgba(142, 106, 206, .1);
+}

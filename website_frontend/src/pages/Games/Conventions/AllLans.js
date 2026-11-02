@@ -4,6 +4,7 @@ import { useAllLans } from "hooks";
 import { toLanMarkers } from 'data/lanMarkers';
 import { buildEventPath } from 'utils/eventPaths';
 import '../EventBanners.css';
+import { getLoadErrorMessage } from "utils/apiError";
 
 // Display labels for the game filter, in the order they should appear.
 // "Conventions/Other" is shown to visitors but maps back to the "Conventions"
@@ -107,7 +108,7 @@ export const AllLans = () => {
             {loading ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading LANs...</h2>
             ) : error ? (
-                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Unable to load LANs right now.</h2>
+                <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>{getLoadErrorMessage(error, "Unable to load LANs right now.")}</h2>
             ) : allLans.length === 0 ? (
                 <div className="eventBannerContainer">
                     <NoEvents pageType={"LANs"} />

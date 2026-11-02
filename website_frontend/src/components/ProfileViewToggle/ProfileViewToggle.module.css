@@ -1,0 +1,54 @@
+.seg {
+    display: flex;
+    gap: 5px;
+    background: rgba(255, 255, 255, .04);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 4px;
+}
+
+.seg button {
+    font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border: 0;
+    border-radius: 7px;
+    background: none;
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: background .16s, color .16s;
+}
+
+.seg button:hover:not(:disabled):not(.on) {
+    color: var(--ink);
+    background: var(--violet-dim);
+}
+
+.seg button:disabled {
+    color: var(--ink-4);
+    cursor: not-allowed;
+}
+
+.seg button:focus-visible {
+    outline: 2px solid var(--violet-bright);
+    outline-offset: 2px;
+}
+
+.seg .on {
+    background: var(--violet);
+    color: #fff;
+}
+
+@media (max-width: 560px) {
+    .seg {
+        width: 100%;
+    }
+
+    .seg button {
+        flex: 1;
+        padding: 8px 6px;
+    }
+}
