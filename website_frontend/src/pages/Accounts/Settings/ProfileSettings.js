@@ -4,7 +4,7 @@ import { LoadingWheel, ProfileSettingsWizard, SignUpFormWizard } from "component
 import { useAuth, useCurrentUser, useSettings } from "hooks";
 import { useAsync } from "hooks/useEvents";
 import { getMe } from "services/user";
-import { getLoadErrorMessage } from "utils/apiError";
+import { getApiErrorMessage, getLoadErrorMessage } from "utils/apiError";
 import { PROFILE_LABELS, PROFILE_TYPES, addProfileUrl, byProfileType, missingProfileTypes, settingsUrl } from "utils/profiles";
 import styles from "./ProfileSettings.module.css";
 
@@ -29,14 +29,32 @@ const PickerAvatar = ({ profile }) => {
 };
 
 // /settings/profile - fetches the account's profiles and asks which one to edit, however many
-// there are. Each type the account doesn't have yet shows as a faded, dotted "Add a ... profile"
+// there are. With 2+ profiles, each non-default card has a "Make default" button. Each type the account doesn't have yet shows as a faded, dotted "Add a ... profile"
 // card that opens the add-a-profile form. RequireCompleteProfile has already sent logged-out users to /login.
 export const ProfileSettingsHome = () => {
     const { session } = useAuth();
-    const { status } = useCurrentUser();
+    const { status, defaultProfile, switchProfile } = useCurrentUser();
     const location = useLocation();
     const token = session?.access_token;
     const { data: me, loading, error } = useAsync(() => getMe(token), [token], { skip: !token });
+    const [switching, setSwitching] = useState(null);
+    const [switchError, setSwitchError] = useState("");
+
+    // switchProfile updates the shared /me (and so the navbar), so read the default from there;
+    // this page's own fetch only covers the moment before the navbar's lookup has finished.
+    const defaultType = defaultProfile?.type ?? me?.default_profile?.type;
+
+    const handleMakeDefault = async (type) => {
+        setSwitchError("");
+        setSwitching(type);
+        try {
+            await switchProfile(type);
+        } catch (err) {
+            setSwitchError(getApiErrorMessage(err));
+        } finally {
+            setSwitching(null);
+        }
+    };
 
     // No account yet, so nothing to edit: finish sign-up first. The navbar already knows
     // (status), and the fetch's 404 covers a visit before it does.
@@ -60,15 +78,29 @@ export const ProfileSettingsHome = () => {
                 <p className={styles.pickerSub}>Which profile do you want to edit?</p>
 
                 <div className={styles.cards}>
+                    {/* A div, not a Link: the "Make default" button can't sit inside a link. */}
                     {profiles.map(profile => (
-                        <Link key={profile.type} to={settingsUrl(profile.type)} className={styles.card}>
-                            <PickerAvatar profile={profile} />
-                            <span className={styles.cardText}>
-                                <span className={styles.cardType}>{PROFILE_LABELS[profile.type]}</span>
-                                <span className={styles.cardName}>{profile.username}</span>
-                            </span>
-                            {profile.type === me.default_profile?.type && <span className={styles.cardDefault}>Default</span>}
-                        </Link>
+                        <div key={profile.type} className={styles.card}>
+                            <Link to={settingsUrl(profile.type)} className={styles.cardLink}>
+                                <PickerAvatar profile={profile} />
+                                <span className={styles.cardText}>
+                                    <span className={styles.cardType}>{PROFILE_LABELS[profile.type]}</span>
+                                    <span className={styles.cardName}>{profile.username}</span>
+                                </span>
+                            </Link>
+                            {profile.type === defaultType
+                                ? <span className={styles.cardDefault}>Default</span>
+                                : profiles.length > 1 &&
+                                    <button
+                                        type="button"
+                                        className={styles.cardMakeDefault}
+                                        disabled={switching !== null}
+                                        onClick={() => handleMakeDefault(profile.type)}
+                                    >
+                                        {switching === profile.type ? "Saving..." : "Make default"}
+                                    </button>
+                            }
+                        </div>
                     ))}
 
                     {missingProfileTypes(profiles).map(type => (
@@ -81,6 +113,7 @@ export const ProfileSettingsHome = () => {
                         </Link>
                     ))}
                 </div>
+                {switchError && <p className={styles.pickerError} role="alert">{switchError}</p>}
             </div>
         </div>
     );
