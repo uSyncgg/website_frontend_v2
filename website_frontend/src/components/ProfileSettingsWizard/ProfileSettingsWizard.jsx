@@ -10,7 +10,7 @@ import { toFormValues, buildProfileUpdate } from "utils/profileForm";
 import { updateProfileSettings, updateProfilePicture } from "services/user";
 import styles from "components/SignUpFormWizard/SignUpFormWizard.module.css";
 
-const ACCOUNT_STEP = { key: 'account', title: 'Account', subtitle: "Change this profile's username, make it your default, or delete your account.", Component: AccountSettingsStep, fields: [], saveFields: [] };
+const ACCOUNT_STEP = { key: 'account', title: 'Account', subtitle: "Change this profile's username, make it your default, delete it, or delete your account.", Component: AccountSettingsStep, fields: [], saveFields: [] };
 
 const sameValue = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 

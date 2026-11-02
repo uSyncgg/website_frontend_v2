@@ -59,6 +59,11 @@ export const setDefaultProfile = (type, token) =>
     apiClient.patch(`/users/me/default-profile`, { type }, authHeader(token))
         .then(res => res.data);
 
+// Returns the updated /me. 409 if it's the account's only profile.
+export const deleteProfile = (type, token) =>
+    apiClient.delete(`/users/me/profiles/${type}`, authHeader(token))
+        .then(res => res.data);
+
 export const deleteAccount = (token) =>
     apiClient.delete(`/users/me`, authHeader(token))
         .then(res => res.data);
