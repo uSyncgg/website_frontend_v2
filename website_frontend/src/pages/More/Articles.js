@@ -8,6 +8,7 @@ import provideThumb from 'assets/images/article_bubbles/article-thumb-what-we-pr
 import joinLeagueThumb from 'assets/images/article_bubbles/article-thumb-how-to-join-esports-league_9.6.26.webp';
 import esportsBetterThumb from 'assets/images/article_bubbles/article-thumb-how-esports-can-be-better_9.6.26.webp';
 import uniqueThumb from 'assets/images/article_bubbles/article-thumb-why-usync-is-unique_9.6.26.webp';
+import mw4Thumb from 'assets/images/article_bubbles/article-thumb-mw4-best-loadouts_10.24.26.webp';
 import bo7Thumb from 'assets/images/article_bubbles/article-thumb-bo7-controller-settings_9.6.26.webp';
 import dpiThumb from 'assets/images/article_bubbles/article-thumb-best-dpi-valorant_9.6.26.webp';
 import ps5Thumb from 'assets/images/article_bubbles/article-thumb-enable-120hz-ps5_9.6.26.webp';
@@ -91,6 +92,13 @@ const ARTICLES = [
         category: "Guide",
         title: "How to Join an Online Gaming Tournament",
         excerpt: "Choose your game and format, find a reputable event on uSync, read the rules, register, prepare your connection, check in early, and play.",
+    },
+    {
+        path: "/more/articles/best-modern-warfare-4-loadouts",
+        thumbnail: mw4Thumb,
+        category: "Guide",
+        title: "Best Modern Warfare 4 Loadouts: The Top 5 Meta Builds",
+        excerpt: "Three assault rifles and two SMGs carry the early Modern Warfare 4 meta. Here is every attachment, the alternates, and the gear to run with them.",
     },
 ];
 
