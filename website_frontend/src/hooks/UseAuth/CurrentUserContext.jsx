@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { supabase } from "services/supabaseClient";
-import { getMe, setDefaultProfile } from "services/user";
+import { deleteProfile, getMe, setDefaultProfile } from "services/user";
 import { byProfileType } from "utils/profiles";
 import { useAuth } from "./useAuth";
 
@@ -55,6 +55,12 @@ export function CurrentUserProvider({ children }) {
         setMe(await setDefaultProfile(type, token));
     }, [token]);
 
+    // Deletes one profile. The response is the new /me (with the oldest remaining profile as
+    // the default if the deleted one was). Throws on failure so the caller can show the error.
+    const removeProfile = useCallback(async (type) => {
+        setMe(await deleteProfile(type, token));
+    }, [token]);
+
     const logout = useCallback(async () => {
         await supabase.auth.signOut();
         // Hard reload so nothing on the page holds on to the old user's state.
@@ -68,6 +74,7 @@ export function CurrentUserProvider({ children }) {
         profiles: [...(me?.profiles ?? [])].sort(byProfileType),
         refresh,
         switchProfile,
+        removeProfile,
         logout,
     };
 

@@ -2,8 +2,7 @@ import { Link } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { useCurrentUser } from "hooks";
-import { getApiErrorMessage } from "utils/apiError";
-import { PROFILE_LABELS, addProfileUrl, missingProfileTypes, profileUrl } from "utils/profiles";
+import { addProfileUrl, missingProfileTypes, profileUrl } from "utils/profiles";
 import styles from '../Navbar/Navbar.module.css';
 
 // react-snap prerenders with no session; render the neutral placeholder so the
@@ -19,38 +18,16 @@ const Avatar = ({ src }) => {
     return <img src={src} alt="" className={styles.avatarImage} onError={() => setFailed(true)} />;
 };
 
-// The menu's items, shared by the desktop dropdown and the mobile hamburger menu. The navbar
-// shows the account's default profile; "Switch to" makes another profile the default.
+// The menu's items, shared by the desktop dropdown and the mobile hamburger menu.
 // Before sign-up is finished there's no default profile: Profile goes to /profile (a blank
 // profile pointing to the sign-up form) and Settings sends them to the form too.
+// Switching the default profile lives in Profile Settings.
 const AccountLinks = ({ itemClass, buttonClass, onNavigate }) => {
-    const { defaultProfile, profiles, switchProfile, logout } = useCurrentUser();
-    const [switching, setSwitching] = useState(null);
-    const [switchError, setSwitchError] = useState("");
-
-    const others = profiles.filter(profile => profile.type !== defaultProfile?.type);
+    const { defaultProfile, profiles, logout } = useCurrentUser();
     const canAdd = missingProfileTypes(profiles);
-
-    const handleSwitch = async (type) => {
-        setSwitchError("");
-        setSwitching(type);
-        try {
-            await switchProfile(type);
-        } catch (err) {
-            setSwitchError(getApiErrorMessage(err));
-        } finally {
-            setSwitching(null);
-        }
-    };
 
     return (
         <>
-            {defaultProfile &&
-                <>
-                    <span className={styles.dropdownLabel}>{PROFILE_LABELS[defaultProfile.type]} profile</span>
-                    <span className={styles.dropdownCurrent}>{defaultProfile.username}</span>
-                </>
-            }
             <Link to={defaultProfile ? profileUrl(defaultProfile) : '/profile'} className={itemClass} role="menuitem" onClick={onNavigate}>
                 Profile
             </Link>
@@ -59,23 +36,9 @@ const AccountLinks = ({ itemClass, buttonClass, onNavigate }) => {
                 Profile Settings
             </Link>
 
-            {others.map(profile => (
-                <button
-                    key={profile.type}
-                    type="button"
-                    className={buttonClass}
-                    role="menuitem"
-                    disabled={switching !== null}
-                    onClick={() => handleSwitch(profile.type)}
-                >
-                    {switching === profile.type ? 'Switching...' : `Switch to ${profile.username} (${PROFILE_LABELS[profile.type]})`}
-                </button>
-            ))}
-            {switchError && <span className={styles.dropdownError}>{switchError}</span>}
-
             {defaultProfile && canAdd.length > 0 &&
                 <Link to={addProfileUrl(canAdd[0])} className={itemClass} role="menuitem" onClick={onNavigate}>
-                    Add a profile
+                    Add a Profile
                 </Link>
             }
 

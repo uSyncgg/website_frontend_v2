@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { useFormContext, useWatch } from "react-hook-form";
 import { FormTextInput } from "components/FormTextInput/FormTextInput";
 import { FormButton } from "components/FormButton/FormButton";
 import { useAuth, useCurrentUser, useUsernameAvailability } from "hooks";
 import { getApiErrorMessage } from "utils/apiError";
+import { PROFILE_LABELS } from "utils/profiles";
 import { changeUsername, deleteAccount } from "services/user";
 import styles from "./AccountSettingsStep.module.css";
 
@@ -12,11 +14,13 @@ import styles from "./AccountSettingsStep.module.css";
 const sameName = (a, b) => a.trim().toLowerCase() === b.trim().toLowerCase();
 
 // Last step of profile settings: read-only email, this profile's username, making it the
-// default, and account deletion (which removes every profile).
+// default, deleting just this profile (only when the account has another one), and account
+// deletion (which removes every profile).
 // savedUsername is the username currently stored on the backend.
 export const AccountSettingsStep = ({ type, savedUsername, isDefault, onUsernameSaved }) => {
     const { user, session } = useAuth();
-    const { refresh, logout, switchProfile, profiles } = useCurrentUser();
+    const { refresh, logout, switchProfile, removeProfile, profiles } = useCurrentUser();
+    const navigate = useNavigate();
     const { trigger, setError, formState: { errors } } = useFormContext();
     const token = session?.access_token;
 
@@ -30,6 +34,10 @@ export const AccountSettingsStep = ({ type, savedUsername, isDefault, onUsername
     const [isDefaultNow, setIsDefaultNow] = useState(isDefault);
     const [defaultSaving, setDefaultSaving] = useState(false);
     const [defaultError, setDefaultError] = useState("");
+
+    const [profileConfirmText, setProfileConfirmText] = useState("");
+    const [deletingProfile, setDeletingProfile] = useState(false);
+    const [deleteProfileError, setDeleteProfileError] = useState("");
 
     const [confirmText, setConfirmText] = useState("");
     const [deleting, setDeleting] = useState(false);
@@ -70,6 +78,19 @@ export const AccountSettingsStep = ({ type, savedUsername, isDefault, onUsername
             setDefaultError(getApiErrorMessage(err));
         } finally {
             setDefaultSaving(false);
+        }
+    };
+
+    const handleDeleteProfile = async () => {
+        setDeleteProfileError("");
+        setDeletingProfile(true);
+        try {
+            // Updates the navbar, including the new default if this one was the default.
+            await removeProfile(type);
+            navigate("/settings/profile", { replace: true });
+        } catch (err) {
+            setDeleteProfileError(getApiErrorMessage(err));
+            setDeletingProfile(false);
         }
     };
 
@@ -133,6 +154,36 @@ export const AccountSettingsStep = ({ type, savedUsername, isDefault, onUsername
                             />
                         </>
                     }
+                </section>
+            }
+
+            {/* The only profile can't be deleted on its own (the backend 409s): delete the account instead. */}
+            {profiles.length > 1 &&
+                <section className={`${styles.section} ${styles.dangerZone}`}>
+                    <h3 className={styles.dangerTitle}>Delete this {PROFILE_LABELS[type].toLowerCase()} profile</h3>
+                    <p className={styles.dangerText}>
+                        This permanently deletes this profile and everything on it. Your other profiles and your
+                        account stay.{isDefaultNow && " Your oldest remaining profile becomes your default."} This
+                        can't be undone.
+                    </p>
+                    <label htmlFor="delete_profile_confirm" className={styles.label}>
+                        Type <strong>{savedUsername}</strong> to confirm
+                    </label>
+                    <input
+                        id="delete_profile_confirm"
+                        className={styles.input}
+                        value={profileConfirmText}
+                        onChange={(e) => setProfileConfirmText(e.target.value)}
+                        autoComplete="off"
+                    />
+                    {deleteProfileError && <span className={styles.error}>{deleteProfileError}</span>}
+                    <FormButton
+                        type="button"
+                        onClick={handleDeleteProfile}
+                        disabled={profileConfirmText !== savedUsername || deletingProfile}
+                        label={deletingProfile ? "Deleting..." : "Delete this profile"}
+                        className={styles.btnDanger}
+                    />
                 </section>
             }
 
