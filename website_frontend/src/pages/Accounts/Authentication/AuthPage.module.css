@@ -302,6 +302,12 @@
     margin: 1.25rem 0 0;
 }
 
+.legal a {
+    color: var(--violet-bright);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
 .footnote {
     text-align: center;
     color: var(--ink-3);
@@ -324,6 +330,7 @@
 
 .tabs button:focus-visible,
 .linkish:focus-visible,
+.legal a:focus-visible,
 .footnote button:focus-visible,
 .btnPrimary:focus-visible {
     outline: 2px solid var(--violet-bright);
