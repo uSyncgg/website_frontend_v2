@@ -17,6 +17,7 @@
 
 .row {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 1rem;
 }
@@ -74,4 +75,134 @@
     color: var(--loss);
     font-size: .8rem;
     font-weight: 600;
+}
+
+.adjustBtn {
+    padding: .7rem 1.1rem;
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--violet-bright);
+    border-radius: .85rem;
+    font-weight: 700;
+    font-size: .88rem;
+    cursor: pointer;
+}
+
+.adjustBtn:hover {
+    background: var(--violet-dim);
+}
+
+/* Crop dialog - sits above the fixed navbar. */
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10000001;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    background: rgba(10, 9, 14, .78);
+    backdrop-filter: blur(4px);
+}
+
+.modal {
+    width: min(100%, 28rem);
+    padding: 1.25rem;
+    background: var(--panel-solid);
+    border: 1px solid var(--line-strong);
+    border-radius: 1rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .55);
+}
+
+.modalTitle {
+    margin: 0;
+    color: var(--ink);
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.modalHint {
+    margin: .3rem 0 1rem;
+    color: var(--ink-3);
+    font-size: .82rem;
+}
+
+.cropArea {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: .75rem;
+    overflow: hidden;
+    background: var(--ground-deep);
+}
+
+.zoomRow {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    margin-top: 1rem;
+}
+
+.zoomBtn {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    flex-shrink: 0;
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ink-2);
+    cursor: pointer;
+}
+
+.zoomBtn:hover {
+    color: var(--ink);
+    border-color: var(--violet);
+}
+
+.zoomSlider {
+    flex: 1;
+    accent-color: var(--violet);
+}
+
+.modalActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: .6rem;
+    margin-top: 1.25rem;
+}
+
+.cancelBtn,
+.applyBtn {
+    padding: .65rem 1.2rem;
+    border-radius: 8px;
+    font-size: .9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cancelBtn {
+    color: var(--ink-2);
+    background: transparent;
+    border: 1px solid var(--line-strong);
+}
+
+.cancelBtn:hover {
+    color: var(--ink);
+    border-color: var(--violet);
+}
+
+.applyBtn {
+    color: white;
+    border: none;
+    background: linear-gradient(135deg, var(--violet), var(--violet-deep));
+}
+
+.applyBtn:hover:not(:disabled) {
+    filter: brightness(1.12);
+}
+
+.applyBtn:disabled {
+    opacity: .6;
+    cursor: default;
 }
