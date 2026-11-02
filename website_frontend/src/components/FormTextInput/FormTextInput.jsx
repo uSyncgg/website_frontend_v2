@@ -1,4 +1,4 @@
-import { useFormContext } from "react-hook-form";
+import { get, useFormContext } from "react-hook-form";
 import styles from "./FormTextInput.module.css";
 
 export const FormTextInput = (
@@ -27,6 +27,8 @@ export const FormTextInput = (
         required: required ? "This field is required" : false
     });
     const isRow = !!(image || initials);
+    // get() walks dotted names like "venues.0.name", which errors[name] can't.
+    const error = get(errors, name);
 
     return (
         <div className={`${styles.field} ${isRow ? styles.linkRow : ''}`}>
@@ -49,8 +51,8 @@ export const FormTextInput = (
                 readOnly={disabled}
             />
 
-            {errors[name] && (
-                <span className={`${styles.error} ${errorClassName}`}>{errors[name].message}</span>
+            {error && (
+                <span className={`${styles.error} ${errorClassName}`}>{error.message}</span>
             )}
 
             {taken !== "" && (

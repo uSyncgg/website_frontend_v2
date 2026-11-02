@@ -19,6 +19,8 @@
 /more/contactus /index.html 200
 /more/FAQ /index.html 200
 /more/articles /index.html 200
+/more/terms-of-service /index.html 200
+/more/privacy-policy /index.html 200
 /reportproblem /index.html 200
 /Comingsoon /index.html 200
 
@@ -119,6 +121,7 @@
 /forgot-password /200.html 200
 /reset-password /200.html 200
 /complete-profile /200.html 200
+/profile /200.html 200
 /profile/* /200.html 200
 /settings/* /200.html 200
 
