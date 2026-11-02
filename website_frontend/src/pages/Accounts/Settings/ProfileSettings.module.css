@@ -76,6 +76,48 @@
     background: rgba(142, 106, 206, .12);
 }
 
+/* The clickable part of a profile card (avatar and name); "Default" / "Make default" sit beside it. */
+.cardLink {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: inherit;
+    text-decoration: none;
+}
+
+.cardMakeDefault {
+    margin-left: auto;
+    flex: none;
+    padding: .4rem .8rem;
+    border: 1.5px solid #8e6ace;
+    border-radius: 999px;
+    background: transparent;
+    color: #b89cf0;
+    font: inherit;
+    font-size: .75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+}
+
+.cardMakeDefault:hover:not(:disabled) {
+    background: #8e6ace;
+    color: #fff;
+}
+
+.cardMakeDefault:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.pickerError {
+    margin: 1rem 0 0;
+    color: #ff7a7a;
+    font-size: .85rem;
+}
+
 .avatar {
     flex: none;
     width: 3rem;

@@ -101,6 +101,7 @@ import { ErrorBoundary } from "./ErrorBoundary/ErrorBoundary";
 
 // Account Related
 import { SocialLoginButtons } from "./SocialLoginButtons/SocialLoginButtons";
+import { PasswordChecklist } from "./PasswordChecklist/PasswordChecklist";
 
 // Route Protection
 import { RequireCompleteProfile } from "./RequiredCompleteProfile/RequiredCompleteProfile";
@@ -173,6 +174,7 @@ export {
     PaymentComponent,
     LanMap,
     SocialLoginButtons,
+    PasswordChecklist,
     RequireCompleteProfile,
     RedirectIfProfileComplete,
     SignUpFormWizard,

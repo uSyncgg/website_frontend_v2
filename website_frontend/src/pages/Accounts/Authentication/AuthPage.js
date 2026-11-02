@@ -1,8 +1,9 @@
-import { SocialLoginButtons } from "components";
+import { SocialLoginButtons, PasswordChecklist } from "components";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { DEFAULT_AUTH_PATH, getReturnPath, signInWithPassword, signUp } from "services/authServices";
+import { validatePassword, friendlyAuthError } from "utils/passwordRules";
 import styles from "./AuthPage.module.css";
 
 // /login and /signup both render this page; `mode` picks the copy and the submit action.
@@ -34,7 +35,7 @@ const HIGHLIGHTS = [
 export const AuthPage = ({ mode }) => {
     const isSignup = mode === "signup";
     const copy = COPY[mode];
-    const { register, handleSubmit, reset, getValues, formState: { errors, isSubmitting } } = useForm();
+    const { register, handleSubmit, reset, getValues, control, formState: { errors, isSubmitting } } = useForm();
     const [message, setMessage] = useState(null);
     const navigate = useNavigate();
     const location = useLocation();
@@ -55,7 +56,7 @@ export const AuthPage = ({ mode }) => {
         if (isSignup) {
             const { error } = await signUp(email, password, returnTo);
             setMessage(error
-                ? { type: "error", text: error.message }
+                ? { type: "error", text: friendlyAuthError(error) }
                 : { type: "success", text: "Check your email to confirm your account." });
             return;
         }
@@ -123,7 +124,7 @@ export const AuthPage = ({ mode }) => {
                             <input
                                 {...register("password", {
                                     required: "Password is required.",
-                                    ...(isSignup && { minLength: { value: 8, message: "Password must be at least 8 characters." } }),
+                                    ...(isSignup && { validate: validatePassword }),
                                 })}
                                 id="auth-pass"
                                 className={styles.input}
@@ -131,6 +132,7 @@ export const AuthPage = ({ mode }) => {
                                 autoComplete={isSignup ? "new-password" : "current-password"}
                                 placeholder="••••••••"
                             />
+                            {isSignup && <PasswordChecklist control={control} />}
                             {errors.password && <span className={styles.fieldError}>{errors.password.message}</span>}
                         </div>
 
