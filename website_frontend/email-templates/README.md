@@ -11,7 +11,7 @@ Keep `{{ .ConfirmationURL }}` intact; it is the link.
 
 ## Sender avatar (BIMI)
 
-`bimi-logo.svg` is SVG Tiny PS. Host it at `https://usync.gg/bimi-logo.svg` (copy to `public/`),
+`bimi-logo.svg` is SVG Tiny PS. Host it at `https://www.usync.gg/bimi-logo.svg` (copy to `public/`),
 set DMARC to `p=quarantine` or `p=reject`, then add DNS:
-`default._bimi.usync.gg TXT "v=BIMI1; l=https://usync.gg/bimi-logo.svg;"`.
+`default._bimi.usync.gg TXT "v=BIMI1; l=https://www.usync.gg/bimi-logo.svg;"`.
 Gmail also needs a VMC/CMC certificate (`a=` tag).

@@ -2,8 +2,9 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "hooks";
+import { PasswordChecklist } from "components";
 import { updatePassword } from "services/authServices";
-import { PasswordChecklist, validatePassword, friendlyAuthError } from "./PasswordChecklist";
+import { validatePassword, friendlyAuthError } from "utils/passwordRules";
 import styles from "./AuthPage.module.css";
 
 // An expired or already-used reset link lands here with error params instead of a session.
@@ -16,7 +17,7 @@ export const ResetPassword = () => {
     const { session, loading } = useAuth();
     const navigate = useNavigate();
     const [linkError] = useState(linkHasError);
-    const { register, handleSubmit, getValues, watch, formState: { errors, isSubmitting } } = useForm();
+    const { register, handleSubmit, getValues, control, formState: { errors, isSubmitting } } = useForm();
     const [message, setMessage] = useState(null);
 
     const onSubmit = async ({ password }) => {
@@ -52,7 +53,7 @@ export const ResetPassword = () => {
                                         autoComplete="new-password"
                                         placeholder="••••••••"
                                     />
-                                    <PasswordChecklist password={watch("password")} />
+                                    <PasswordChecklist control={control} />
                                     {errors.password && <span className={styles.fieldError}>{errors.password.message}</span>}
                                 </div>
                                 <div className={styles.field}>

@@ -1,9 +1,9 @@
-import { SocialLoginButtons } from "components";
+import { SocialLoginButtons, PasswordChecklist } from "components";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { signInWithPassword, signUp } from "services/authServices";
-import { PasswordChecklist, validatePassword, friendlyAuthError } from "./PasswordChecklist";
+import { validatePassword, friendlyAuthError } from "utils/passwordRules";
 import styles from "./AuthPage.module.css";
 
 // /login and /signup both render this page; `mode` picks the copy and the submit action.
@@ -35,7 +35,7 @@ const HIGHLIGHTS = [
 export const AuthPage = ({ mode }) => {
     const isSignup = mode === "signup";
     const copy = COPY[mode];
-    const { register, handleSubmit, reset, getValues, watch, formState: { errors, isSubmitting } } = useForm();
+    const { register, handleSubmit, reset, getValues, control, formState: { errors, isSubmitting } } = useForm();
     const [message, setMessage] = useState(null);
     const navigate = useNavigate();
 
@@ -128,7 +128,7 @@ export const AuthPage = ({ mode }) => {
                                 autoComplete={isSignup ? "new-password" : "current-password"}
                                 placeholder="••••••••"
                             />
-                            {isSignup && <PasswordChecklist password={watch("password")} />}
+                            {isSignup && <PasswordChecklist control={control} />}
                             {errors.password && <span className={styles.fieldError}>{errors.password.message}</span>}
                         </div>
 
