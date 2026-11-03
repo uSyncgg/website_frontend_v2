@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import { FaCheck, FaChevronDown, FaUserCircle } from "react-icons/fa";
 import { useCurrentUser } from "hooks";
-import { PROFILE_LABELS, profileUrl } from "utils/profiles";
+import { PROFILE_LABELS, canHostBrackets, profileUrl } from "utils/profiles";
 import { getApiErrorMessage } from "utils/apiError";
 import styles from '../Navbar/Navbar.module.css';
 
@@ -79,7 +79,7 @@ const ViewSwitch = ({ itemClass, onNavigate }) => {
 // profile pointing to the sign-up form) and Settings sends them to the form too.
 // Switching the default profile lives in Profile Settings.
 const AccountLinks = ({ itemClass, buttonClass, onNavigate }) => {
-    const { defaultProfile, logout } = useCurrentUser();
+    const { defaultProfile, profiles, logout } = useCurrentUser();
 
     return (
         <>
@@ -87,7 +87,7 @@ const AccountLinks = ({ itemClass, buttonClass, onNavigate }) => {
             <Link to={defaultProfile ? profileUrl(defaultProfile) : '/profile'} className={itemClass} role="menuitem" onClick={onNavigate}>
                 Profile
             </Link>
-            {defaultProfile?.bracket_hosting &&
+            {profiles.some(canHostBrackets) &&
                 <Link to={HOST_PATH} className={itemClass} role="menuitem" onClick={onNavigate}>
                     Host Dashboard
                 </Link>

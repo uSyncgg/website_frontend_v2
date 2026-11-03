@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate, useSearchParams } from "react-router";
 import { FaPlus, FaTrash } from "react-icons/fa";
+import { useCurrentUser } from "hooks";
 import { createEvent } from "services/hostEventsMock";
 import { FORMATS } from "utils/bracket";
+import { PROFILE_LABELS, canHostBrackets, profileUrl } from "utils/profiles";
 import { BEST_OF, GAMES, MockBanner, TEAM_SIZES } from "./hostShared";
 import styles from "./Host.module.css";
 
@@ -20,9 +22,14 @@ const defaultStart = () => {
 const blankTier = () => ({ name: '', price: '', capacity: '' });
 const blankQuestion = () => ({ label: '', type: 'text', options: '', required: false });
 
-// /host/events/new
+// /host/events/new, or /host/events/new?profile=<public_id> from a host or venue profile's
+// "Add event" button: the event is posted as that profile and listed on it.
 export const CreateEvent = () => {
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    const { profiles } = useCurrentUser();
+    const hostProfile = profiles.find(p => p.public_id === searchParams.get('profile') && canHostBrackets(p));
+    const backTo = hostProfile ? profileUrl(hostProfile) : '/host/events';
     const start = defaultStart();
     const [form, setForm] = useState({
         name: '', game: 'Call of Duty', format: 'single_elim', teamSize: '1v1', bestOf: 3,
@@ -79,6 +86,7 @@ export const CreateEvent = () => {
                 questions: signupForm.questions.filter(q => q.label.trim()),
             },
             registrationOpen: true,
+            hostProfile: hostProfile?.public_id ?? null,
         });
         navigate(`/host/events/${id}`);
     };
@@ -94,9 +102,14 @@ export const CreateEvent = () => {
                 <MockBanner />
                 <div className={styles.pageHeader}>
                     <div>
-                        <p className={styles.eyebrow}><Link to="/host/events" className={styles.eyebrow}>Host Dashboard</Link></p>
+                        <p className={styles.eyebrow}>
+                            <Link to={backTo} className={styles.eyebrow}>{hostProfile ? hostProfile.username : 'Host Dashboard'}</Link>
+                        </p>
                         <h1 className={styles.title}>Create an event</h1>
-                        <p className={styles.subtitle}>Players can sign up as soon as you create it. You'll build the bracket once sign-ups close.</p>
+                        <p className={styles.subtitle}>
+                            {hostProfile && <>Posting as <strong>{hostProfile.username}</strong> ({PROFILE_LABELS[hostProfile.type]}), so it shows on that profile. </>}
+                            Players can sign up as soon as you create it. You'll build the bracket once sign-ups close.
+                        </p>
                     </div>
                 </div>
 
@@ -333,7 +346,7 @@ export const CreateEvent = () => {
 
                     {submitted && hasErrors && <p className={styles.fieldError}>Fix the highlighted fields above.</p>}
                     <div className={styles.formActions}>
-                        <Link to="/host/events" className={styles.ghostBtn}>Cancel</Link>
+                        <Link to={backTo} className={styles.ghostBtn}>Cancel</Link>
                         <button type="submit" className={styles.primaryBtn}>Create event</button>
                     </div>
                 </form>

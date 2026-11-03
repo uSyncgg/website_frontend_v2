@@ -101,6 +101,8 @@ const baseEvent = {
     signupForm: { playerFields: ['Discord'], questions: [] },
     delays: [],
     bracket: null,
+    // public_id of the host or venue profile it was posted as (null from the Host Dashboard).
+    hostProfile: null,
 };
 
 // Fills in plausible sign-up answers for the demo entrants.
@@ -307,26 +309,26 @@ export const noShowUnlocksAt = (event) =>
 
 // ---- writes (mock) ---------------------------------------------------------
 
-// POST /host/events
+// POST /brackets { host_profile, ... } (the host or venue profile it's posted as)
 export const createEvent = (fields) => {
     const id = `evt-${Date.now().toString(36)}`;
     save([{ ...baseEvent, ...fields, id, entrants: [], createdAt: new Date().toISOString() }, ...events]);
     return id;
 };
 
-// PATCH /host/events/:id
+// PATCH /brackets/:id
 export const updateEvent = (id, fields) => update(id, () => fields);
 
-// DELETE /host/events/:id
+// DELETE /brackets/:id
 export const deleteEvent = (id) => save(events.filter(e => e.id !== id));
 
-// PATCH /host/events/:id { starts_at } - the backend will notify every registered player.
+// POST /brackets/:id/delays { starts_at, reason } - the backend will notify every registered player.
 export const delayStart = (id, newStartsAt, reason) => update(id, e => ({
     startsAt: newStartsAt,
     delays: [...(e.delays ?? []), { from: e.startsAt, to: newStartsAt, reason, at: new Date().toISOString() }],
 }));
 
-// POST /host/events/:id/entrants (manual add by the host, or a player registering)
+// POST /brackets/:id/entrants (host adds by name) or POST /brackets/:id/registration (a signed-in player)
 export const addEntrant = (id, name, fields = {}) => {
     const entrantId = `e${Date.now().toString(36)}`;
     update(id, e => ({
@@ -343,36 +345,36 @@ export const addEntrant = (id, name, fields = {}) => {
     return entrantId;
 };
 
-// DELETE /host/events/:id/entrants/:entrantId (host removes, or player unregisters)
+// DELETE /brackets/:id/entrants/:entrantId (host removes) or DELETE /brackets/:id/registration (player unregisters)
 export const removeEntrant = (id, entrantId) => update(id, e => ({
     entrants: e.entrants.filter(x => x.id !== entrantId),
 }));
 
-// PATCH /host/events/:id/entrants/:entrantId { checked_in }
+// PATCH /brackets/:id/entrants/:entrantId { checked_in } or POST /brackets/:id/registration/check-in (player)
 export const setCheckedIn = (id, entrantId, checkedIn) => update(id, e => ({
     entrants: e.entrants.map(x => (x.id === entrantId ? { ...x, checkedIn } : x)),
 }));
 
-// PUT /host/events/:id/bracket - saves a draft bracket from the seeding screen.
+// PUT /brackets/:id/bracket { seeds } - saves a draft bracket from the seeding screen.
 export const saveBracketDraft = (id, seeds) => update(id, e => ({ bracket: emptyBracket(e.format, seeds) }));
 
-// POST /host/events/:id/bracket/publish - players can see it and results can be reported.
+// POST /brackets/:id/bracket/publish - players can see it and results can be reported.
 export const publishBracket = (id) => update(id, e => ({
     registrationOpen: false,
     bracket: { ...e.bracket, published: true },
 }));
 
-// DELETE /host/events/:id/bracket
+// DELETE /brackets/:id/bracket
 export const resetBracket = (id) => update(id, () => ({ bracket: null }));
 
-// PUT /host/events/:id/bracket/matches/:matchId { score_a, score_b } - the host's call is final.
+// PUT /brackets/:id/bracket/matches/:matchId { score_a, score_b, forfeit } - the host's call is final.
 export const hostReportMatch = (id, match, scoreA, scoreB, { forfeit = false } = {}) => updateBracket(id, b => ({
     results: withResult(b.results, match, scoreA, scoreB, forfeit ? { forfeit: true } : {}),
     ...clearMatchMeta(b, match.id),
     log: [...b.log, logEntry(match, scoreA, scoreB, forfeit ? 'forfeit' : 'host', b.results[match.id] ?? null, priorMeta(b, match.id))],
 }));
 
-// POST /host/events/:id/bracket/matches/:matchId/reports { score_a, score_b }
+// POST /brackets/:id/bracket/matches/:matchId/reports { score_a, score_b }
 // When both sides agree on the winner the result is confirmed and the winner advances.
 // Returns 'confirmed' | 'disputed' | 'waiting'.
 export const playerReportMatch = (id, match, entrantId, scoreA, scoreB) => {
@@ -395,7 +397,7 @@ export const playerReportMatch = (id, match, entrantId, scoreA, scoreB) => {
     return theirs ? 'disputed' : 'waiting';
 };
 
-// POST /host/events/:id/bracket/matches/:matchId/no-show
+// POST /brackets/:id/bracket/matches/:matchId/no-show
 export const reportNoShow = (id, match, reporterId) => updateBracket(id, b => ({
     noShows: {
         ...b.noShows,
@@ -403,17 +405,17 @@ export const reportNoShow = (id, match, reporterId) => updateBracket(id, b => ({
     },
 }));
 
-// DELETE /host/events/:id/bracket/matches/:matchId/no-show
+// DELETE /brackets/:id/bracket/matches/:matchId/no-show
 export const dismissNoShow = (id, matchId) => updateBracket(id, b => ({ noShows: withoutResult(b.noShows ?? {}, matchId) }));
 
-// DELETE /host/events/:id/bracket/matches/:matchId - un-report a match.
+// DELETE /brackets/:id/bracket/matches/:matchId - un-report a match.
 export const clearMatch = (id, match) => updateBracket(id, b => ({
     results: withoutResult(b.results, match.id),
     ...clearMatchMeta(b, match.id),
     log: [...b.log, logEntry(match, null, null, 'cleared', b.results[match.id] ?? null, priorMeta(b, match.id))],
 }));
 
-// POST /host/events/:id/bracket/log/:entryId/revert - put the match back how it was before that decision.
+// POST /brackets/:id/bracket/log/:entryId/revert - put the match back how it was before that decision.
 export const revertDecision = (id, entryId) => updateBracket(id, b => {
     const entry = b.log.find(l => l.id === entryId);
     if (!entry || entry.reverted) return {};

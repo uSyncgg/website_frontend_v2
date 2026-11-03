@@ -1,47 +1,61 @@
-import { useState } from "react";
 import { Link } from "react-router";
 import { ProfileCard } from "components";
+import { useCurrentUser } from "hooks";
 import { useAsync } from "hooks/useEvents";
 import { gamesCatalog } from "catalog/games.catalog";
 import { getProfileEvents } from "services/user";
+import { useHostEvents } from "services/hostEventsMock";
 import { buildEventPath } from "utils/eventPaths";
+import { canHostBrackets, createEventUrl } from "utils/profiles";
+import { formatDate } from "pages/Host/hostShared";
 import { initials } from "./profileGames";
 import styles from "./Profile.module.css";
 
-// Which catalog section (and so which page) each kind of event lives under.
+// Which catalog section (and so which page) each kind of event lives under. Bracket events
+// aren't in the catalog: their path is already the public bracket page.
 const KIND_SECTION = { lan: 'lans', league: 'leagues', wager: 'wagers', h2h: 'h2h' };
-const KIND_LABEL = { lan: 'LAN', league: 'League', wager: 'Wagers', h2h: 'Head-to-head' };
+const KIND_LABEL = { lan: 'LAN', league: 'League', wager: 'Wagers', h2h: 'Head-to-head', bracket: 'Bracket' };
 
 // An event's page on the site: its game's section plus the event's path, as the game pages
 // link them. Events whose game isn't in the catalog have no page to link to.
 const eventUrl = (event) => {
+    if (event.kind === 'bracket') return event.path;
     const entry = gamesCatalog.entries.find(e => e.apiGame === event.game);
     const section = entry?.sections?.[KIND_SECTION[event.kind]];
     return section ? buildEventPath(section, event.path) : null;
 };
 
-// Adding an event from the profile isn't built yet; the button says so.
-const AddEventButton = () => {
-    const [clicked, setClicked] = useState(false);
-    return (
-        <button type="button" className={styles.cardAction} onClick={() => setClicked(true)}>
-            {clicked ? 'Coming soon' : '+ Add event'}
-        </button>
-    );
-};
+// MOCKUP: bracket events created in this browser as this profile, shaped like the API's
+// profile events, until the bracket hosting API is live.
+const mockBracketEvents = (events, publicId) => events
+    .filter(e => e.hostProfile === publicId)
+    .map(e => ({
+        kind: 'bracket',
+        name: e.name,
+        game: e.game,
+        path: `/brackets/${e.id}`,
+        date: e.startsAt,
+        location: e.locationType === 'online' ? 'Online' : e.venue,
+    }));
 
 /**
  * The events a host or venue runs on uSync (the ones its account owns). The owner gets an
- * "Add event" button, which is coming soon.
+ * "Add event" button that opens the bracket event setup, posting as this profile.
  */
 export const EventsCard = ({ profile, isOwner }) => {
     const { data, loading, error } = useAsync(() => getProfileEvents(profile.public_id), [profile.public_id]);
+    const hostEvents = useHostEvents();
+    // The public profile doesn't say whether bracket hosting is on; the owner's own summary does.
+    const { profiles } = useCurrentUser();
+    const own = profiles.find(p => p.public_id === profile.public_id);
     // Until the backend serves this list everywhere, a 404 just means no events to show.
-    const events = data ?? [];
-    const failed = error && error.response?.status !== 404;
+    const events = [...mockBracketEvents(hostEvents, profile.public_id), ...(data ?? [])];
+    const failed = error && error.response?.status !== 404 && events.length === 0;
+    const addEvent = isOwner && canHostBrackets(own) &&
+        <Link to={createEventUrl(profile.public_id)} className={styles.cardAction}>+ Add event</Link>;
 
     return (
-        <ProfileCard title="Events" action={isOwner && <AddEventButton />}>
+        <ProfileCard title="Events" action={addEvent}>
             {loading ? (
                 <p className={styles.muted}>Loading events…</p>
             ) : failed ? (
@@ -54,14 +68,16 @@ export const EventsCard = ({ profile, isOwner }) => {
                 <div>
                     {events.map(event => {
                         const url = eventUrl(event);
+                        // Bracket events send their start as an ISO timestamp; other kinds send display text.
+                        const date = event.kind === 'bracket' && event.date ? formatDate(event.date) : event.date;
                         return (
                             <div key={`${event.kind}-${event.path}`} className={styles.game}>
                                 <div className={styles.emblem}>{initials(event.name)}</div>
                                 <div>
                                     <div className={styles.eyebrow}>{event.game} · {KIND_LABEL[event.kind]}</div>
                                     <div className={styles.gameName}>{event.name}</div>
-                                    {(event.date || event.location) &&
-                                        <div className={styles.location}>{[event.date, event.location].filter(Boolean).join(' · ')}</div>
+                                    {(date || event.location) &&
+                                        <div className={styles.location}>{[date, event.location].filter(Boolean).join(' · ')}</div>
                                     }
                                 </div>
                                 {url && <Link to={url} className={styles.gameLink}>View event</Link>}

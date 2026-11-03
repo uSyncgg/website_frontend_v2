@@ -27,6 +27,13 @@ export const statsUrl = (profile, gameSlug) =>
 
 export const settingsUrl = (type) => `/settings/profile/${type}`;
 
+// Host and venue profiles post bracket events, unless they turned bracket hosting off. It's on
+// by default, so a profile summary from before /users/me listed bracket_hosting counts as on.
+export const canHostBrackets = (profile) => !!profile && profile.type !== 'player' && profile.bracket_hosting !== false;
+
+// Creating a bracket event, posted as the given host or venue profile (by public_id).
+export const createEventUrl = (publicId) => `/host/events/new?profile=${encodeURIComponent(publicId)}`;
+
 export const addProfileUrl = (type) => `/settings/profile/add/${type}`;
 
 // Sorts profiles (or anything with a `type`) into PROFILE_TYPES order.
