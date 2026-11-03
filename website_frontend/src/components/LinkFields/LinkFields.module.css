@@ -1,0 +1,132 @@
+.group {
+    margin: 0 0 .75rem;
+    padding: 0;
+    border: 0;
+}
+
+.legend {
+    margin-bottom: .5rem;
+    padding: 0;
+    color: var(--violet-bright);
+    font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.field {
+    display: grid;
+    grid-template-columns: 28px 6.5rem minmax(0, 1fr);
+    align-items: center;
+    gap: .65rem;
+    padding: .2rem 0;
+}
+
+.mark {
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--violet-bright);
+}
+
+.mark img,
+.mark svg {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.preview {
+    grid-column: 3;
+    margin-top: -.1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--ink-3);
+    font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+    font-size: 11px;
+}
+
+.invalid {
+    color: #ff8a8a;
+}
+
+.soon .input {
+    cursor: not-allowed;
+    border-style: dashed;
+    background: transparent;
+}
+
+.soon .input::placeholder {
+    color: var(--violet-bright);
+    font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.soon .mark,
+.soon .label {
+    opacity: .5;
+}
+
+.label {
+    font-size: .88rem;
+    color: var(--ink-2);
+}
+
+.input {
+    width: 100%;
+    height: 2.25rem;
+    padding: 0 .7rem;
+    border-radius: 8px;
+    border: 1px solid var(--line-strong);
+    background: rgba(255, 255, 255, .03);
+    color: var(--ink);
+    font-size: .88rem;
+}
+
+.input:focus {
+    outline: none;
+    border-color: var(--violet);
+    box-shadow: 0 0 0 3px var(--violet-dim);
+}
+
+.linkButton {
+    justify-self: start;
+    height: 2.25rem;
+    padding: 0 .9rem;
+    border-radius: 8px;
+    border: 1px solid rgba(155, 111, 224, .5);
+    background: var(--violet-dim);
+    color: var(--ink);
+    font-size: .85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.linkButton:hover {
+    border-color: var(--violet);
+}
+
+@media (max-width: 480px) {
+    .field {
+        grid-template-columns: 28px minmax(0, 1fr);
+    }
+
+    /* Game accounts keep their button on the platform's line. */
+    .gameField {
+        grid-template-columns: 28px minmax(0, 1fr) auto;
+    }
+
+    .input,
+    .preview {
+        grid-column: 1 / -1;
+    }
+}

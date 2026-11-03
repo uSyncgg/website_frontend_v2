@@ -1,8 +1,9 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useEffect, useRef, useState } from "react";
-import { FaUserCircle } from "react-icons/fa";
+import { FaCheck, FaChevronDown, FaUserCircle } from "react-icons/fa";
 import { useCurrentUser } from "hooks";
-import { addProfileUrl, missingProfileTypes, profileUrl } from "utils/profiles";
+import { PROFILE_LABELS, profileUrl } from "utils/profiles";
+import { getApiErrorMessage } from "utils/apiError";
 import styles from '../Navbar/Navbar.module.css';
 
 // react-snap prerenders with no session; render the neutral placeholder so the
@@ -18,16 +19,69 @@ const Avatar = ({ src }) => {
     return <img src={src} alt="" className={styles.avatarImage} onError={() => setFailed(true)} />;
 };
 
+// "Viewing as": the account's profiles, the current view (the default profile) ticked. Picking
+// another switches the view everywhere (navbar, Profile link) and opens that profile. Views will
+// also decide what the rest of the site offers (e.g. hosts bidding on spots).
+const ViewSwitch = ({ itemClass, onNavigate }) => {
+    const { defaultProfile, profiles, switchProfile } = useCurrentUser();
+    const navigate = useNavigate();
+    const [switching, setSwitching] = useState(null);
+    const [error, setError] = useState('');
+
+    if (!defaultProfile || profiles.length < 2) return null;
+
+    const choose = async (profile) => {
+        setError('');
+        if (profile.type !== defaultProfile.type) {
+            setSwitching(profile.type);
+            try {
+                await switchProfile(profile.type);
+            } catch (err) {
+                setError(getApiErrorMessage(err));
+                setSwitching(null);
+                return;
+            }
+            setSwitching(null);
+        }
+        onNavigate?.();
+        navigate(profileUrl(profile));
+    };
+
+    return (
+        <div className={styles.viewSwitch} role="group" aria-label="Viewing as">
+            <span className={styles.viewHeading}>Viewing as</span>
+            {profiles.map(profile => {
+                const active = profile.type === defaultProfile.type;
+                return (
+                    <button
+                        key={profile.type}
+                        type="button"
+                        role="menuitemradio"
+                        aria-checked={active}
+                        className={`${itemClass} ${styles.dropdownButton} ${styles.viewOption} ${active ? styles.viewActive : ''}`}
+                        onClick={() => choose(profile)}
+                        disabled={switching !== null}
+                    >
+                        <span>{PROFILE_LABELS[profile.type]}</span>
+                        {switching === profile.type ? <span className={styles.viewHint}>…</span> : active && <FaCheck aria-hidden="true" />}
+                    </button>
+                );
+            })}
+            {error && <span className={styles.viewError} role="alert">{error}</span>}
+        </div>
+    );
+};
+
 // The menu's items, shared by the desktop dropdown and the mobile hamburger menu.
 // Before sign-up is finished there's no default profile: Profile goes to /profile (a blank
 // profile pointing to the sign-up form) and Settings sends them to the form too.
 // Switching the default profile lives in Profile Settings.
 const AccountLinks = ({ itemClass, buttonClass, onNavigate }) => {
-    const { defaultProfile, profiles, logout } = useCurrentUser();
-    const canAdd = missingProfileTypes(profiles);
+    const { defaultProfile, logout } = useCurrentUser();
 
     return (
         <>
+            <ViewSwitch itemClass={itemClass} onNavigate={onNavigate} />
             <Link to={defaultProfile ? profileUrl(defaultProfile) : '/profile'} className={itemClass} role="menuitem" onClick={onNavigate}>
                 Profile
             </Link>
@@ -35,12 +89,6 @@ const AccountLinks = ({ itemClass, buttonClass, onNavigate }) => {
             <Link to="/settings/profile" className={itemClass} role="menuitem" onClick={onNavigate}>
                 Profile Settings
             </Link>
-
-            {defaultProfile && canAdd.length > 0 &&
-                <Link to={addProfileUrl(canAdd[0])} className={itemClass} role="menuitem" onClick={onNavigate}>
-                    Add a Profile
-                </Link>
-            }
 
             <button type="button" className={buttonClass} role="menuitem" onClick={logout}>
                 Logout
@@ -76,13 +124,21 @@ const ProfileMenu = () => {
         <div className={styles.accountMenu} ref={wrapperRef}>
             <button
                 type="button"
-                className={styles.avatarButton}
-                aria-label="Account menu"
+                className={styles.accountTrigger}
+                aria-label={defaultProfile ? `Account menu, viewing as ${PROFILE_LABELS[defaultProfile.type]}` : 'Account menu'}
                 aria-haspopup="menu"
                 aria-expanded={open}
                 onClick={() => setOpen(o => !o)}
             >
-                <Avatar key={defaultProfile?.profile_picture} src={defaultProfile?.profile_picture} />
+                <span className={styles.avatarButton}>
+                    <Avatar key={defaultProfile?.profile_picture} src={defaultProfile?.profile_picture} />
+                </span>
+                {defaultProfile &&
+                    <span className={styles.viewLabel}>
+                        {PROFILE_LABELS[defaultProfile.type]}
+                        <FaChevronDown aria-hidden="true" />
+                    </span>
+                }
             </button>
 
             {open &&

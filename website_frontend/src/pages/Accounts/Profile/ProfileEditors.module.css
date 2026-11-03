@@ -1,0 +1,163 @@
+.textarea,
+.input {
+    width: 100%;
+    padding: .65rem .75rem;
+    border-radius: 8px;
+    border: 1px solid var(--line-strong);
+    background: rgba(255, 255, 255, .03);
+    color: var(--ink);
+    font: inherit;
+    font-size: .92rem;
+}
+
+.textarea {
+    resize: vertical;
+    line-height: 1.5;
+}
+
+.textarea:focus,
+.input:focus {
+    outline: none;
+    border-color: var(--violet);
+    box-shadow: 0 0 0 3px var(--violet-dim);
+}
+
+.input {
+    margin-top: .75rem;
+}
+
+.tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+    gap: .6rem;
+}
+
+.tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .4rem;
+    padding: .75rem .5rem;
+    border-radius: 10px;
+    border: 1px solid var(--line-strong);
+    background: rgba(255, 255, 255, .02);
+    color: var(--ink-2);
+    font-size: .8rem;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.tile:hover {
+    border-color: rgba(255, 255, 255, .3);
+}
+
+.tileSelected {
+    border-color: var(--violet);
+    background: var(--violet-dim);
+    color: var(--ink);
+}
+
+.tile img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: .5rem;
+    object-fit: contain;
+}
+
+.label {
+    margin: 1rem 0 .5rem;
+    color: var(--violet-bright);
+    font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.locationRow {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 2.4rem;
+    gap: .5rem;
+    align-items: end;
+}
+
+.locationRow .input {
+    margin-top: .5rem;
+}
+
+.remove,
+.add {
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: var(--ink-2);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.remove {
+    height: 2.55rem;
+    font-size: 1.1rem;
+}
+
+.remove:disabled {
+    opacity: .35;
+    cursor: default;
+}
+
+.add {
+    margin-top: .75rem;
+    padding: .45rem .9rem;
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.remove:not(:disabled):hover,
+.add:hover {
+    border-color: var(--violet);
+    color: var(--ink);
+}
+
+.status {
+    margin: .5rem 0 0;
+    font-size: .82rem;
+    color: var(--ink-3);
+}
+
+.ok {
+    color: #7ee0a1;
+}
+
+.bad {
+    color: #ff8a8a;
+}
+
+/* On phones each location is its own card: name and remove on top, where it is below. */
+@media (max-width: 480px) {
+    .locationRow {
+        grid-template-columns: minmax(0, 1fr) 2.4rem;
+        grid-template-areas: "name remove" "place place";
+        padding: .25rem .6rem .6rem;
+        margin-top: .6rem;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+    }
+
+    .locationRow .input:nth-child(1) {
+        grid-area: name;
+    }
+
+    .locationRow .input:nth-child(2) {
+        grid-area: place;
+    }
+
+    .remove {
+        grid-area: remove;
+    }
+}
+
+.pictureStatus {
+    margin: 0 0 12px;
+    font-size: .85rem;
+    color: var(--ink-2);
+}

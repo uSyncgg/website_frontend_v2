@@ -2,13 +2,14 @@
 // { type, username, picture, bio, bracket_hosting, other_roles, other_role_detail, details: {...} }.
 // Used by sign-up, adding a profile and profile settings, so all three send the same thing.
 
-import { PROFILE_TYPES, bioField, bracketField, copyBioField, copyPictureField, pictureField, usernameField } from "./profiles";
+import { PROFILE_TYPES, bioField, bracketField, copyBioField, copyPictureField, linksField, pictureField, usernameField } from "./profiles";
+import { linkChanges } from "./linkedPlatforms";
 
 // Fields stored on the profile itself (shared by every type).
 const PROFILE_FIELDS = ['bio', 'bracket_hosting', 'other_roles', 'other_role_detail'];
 
 // Fields stored in `details`, per type. The form's `venues` is sent as `details.locations`.
-// Game account IDs (battlenet, steam, ...) aren't collected yet - linking is "coming soon".
+// Game accounts (battlenet, steam, ...) will be linked by signing in to the platform, not typed in.
 const DETAIL_FIELDS = {
     player: ['first_name', 'last_name', 'phone_number', 'gender', 'date_of_birth', 'country', 'interests', 'other_games'],
     host: ['organization', 'host_country', 'hosted_games', 'other_hosted_games', 'event_types'],
@@ -62,6 +63,9 @@ export function buildProfileEntry(type, values, { picture = null, bio = '', incl
         bio: toApiValue('bio', bio ?? ''),
         details: detailsFor(type, values),
     };
+
+    const links = linkChanges({ type }, values[linksField(type)]);
+    if (Object.keys(links).length > 0) entry.links = links;
 
     // Asked per profile. Left unanswered, the backend defaults it to on.
     if (values[bracketField(type)] !== undefined) {

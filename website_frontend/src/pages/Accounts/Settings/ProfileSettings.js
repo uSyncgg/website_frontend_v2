@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, Navigate, useLocation, useParams } from "react-router";
-import { LoadingWheel, ProfileSettingsWizard, SignUpFormWizard } from "components";
+import { LinkAccountsModal, LoadingWheel, ProfileSettingsWizard, SignUpFormWizard } from "components";
 import { useAuth, useCurrentUser, useSettings } from "hooks";
 import { useAsync } from "hooks/useEvents";
 import { getMe } from "services/user";
@@ -11,9 +11,10 @@ import styles from "./ProfileSettings.module.css";
 const Loading = () => <div className="standardContainer"><LoadingWheel /></div>;
 
 // Above a profile's settings and the add-a-profile form: back to the profile picker.
-const SettingsBar = () => (
+const SettingsBar = ({ children }) => (
     <div className={styles.bar}>
         <Link to="/settings/profile" className={styles.barLink}>← All profiles</Link>
+        {children}
     </div>
 );
 
@@ -130,6 +131,9 @@ export const ProfileSettings = () => {
     // Switching profiles changes `type` a render before the hook drops the previous profile's
     // settings, so only use settings for the profile in the URL.
     const settings = data?.type === type ? data : null;
+    const [editingLinks, setEditingLinks] = useState(false);
+    // Settings as of the last link editor save; remounts the wizard so its fields match.
+    const [saved, setSaved] = useState(null);
 
     // No account yet: finish sign-up first.
     if (status === 'incomplete') {
@@ -156,11 +160,25 @@ export const ProfileSettings = () => {
     // The wizard reads its defaultValues once, so only mount it after the data has arrived.
     if (loading || !settings) return <Loading />;
 
+    const current = saved?.type === type ? saved : settings;
+
     return (
         <div className={styles.settingsPage}>
-            <SettingsBar />
+            <SettingsBar>
+                <button type="button" className={styles.barButton} onClick={() => setEditingLinks(true)}>Linked accounts</button>
+            </SettingsBar>
+            {editingLinks &&
+                <LinkAccountsModal
+                    profile={current}
+                    onClose={() => setEditingLinks(false)}
+                    onSaved={(next) => {
+                        setSaved(next);
+                        setEditingLinks(false);
+                    }}
+                />
+            }
             {/* key: a fresh form for each profile, so one profile's edits can't carry into another's. */}
-            <ProfileSettingsWizard key={type} settings={settings} />
+            <ProfileSettingsWizard key={current === saved ? `${type}-saved` : type} settings={current} />
         </div>
     );
 };
