@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import { FaCheck, FaChevronDown, FaUserCircle } from "react-icons/fa";
 import { useCurrentUser } from "hooks";
@@ -22,11 +22,10 @@ const Avatar = ({ src }) => {
 };
 
 // "Viewing as": the account's profiles, the current view (the default profile) ticked. Picking
-// another switches the view everywhere (navbar, Profile link) and opens that profile. Views will
+// another switches the view everywhere (navbar, Profile link) and keeps you on the page you're on. Views will
 // also decide what the rest of the site offers (e.g. hosts bidding on spots).
 const ViewSwitch = ({ itemClass, onNavigate }) => {
     const { defaultProfile, profiles, switchProfile } = useCurrentUser();
-    const navigate = useNavigate();
     const [switching, setSwitching] = useState(null);
     const [error, setError] = useState('');
 
@@ -46,7 +45,6 @@ const ViewSwitch = ({ itemClass, onNavigate }) => {
             setSwitching(null);
         }
         onNavigate?.();
-        navigate(profileUrl(profile));
     };
 
     return (
