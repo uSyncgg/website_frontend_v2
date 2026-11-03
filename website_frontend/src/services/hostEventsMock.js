@@ -103,7 +103,7 @@ const baseEvent = {
     signupForm: { playerFields: ['Discord'], questions: [] },
     delays: [],
     bracket: null,
-    // public_id of the host or venue profile it was posted as (null from the Host Dashboard).
+    // public_id of the host or venue profile it was posted as (null from the Event Dashboard).
     hostProfile: null,
 };
 
@@ -431,6 +431,31 @@ export const revertDecision = (id, entryId) => updateBracket(id, b => {
         log: b.log.map(l => (l.id === entryId ? { ...l, reverted: true, revertedAt: new Date().toISOString() } : l)),
     };
 });
+
+// MOCKUP ONLY: which entrant this browser is in each event, standing in for "the signed-in
+// account's entrant" (GET /brackets/{id} returns it as viewer_entrant_id).
+const viewerKey = (eventId) => `usync.mock.viewer.${eventId}`;
+
+export const getMockViewer = (eventId) => {
+    try {
+        return localStorage.getItem(viewerKey(eventId)) || '';
+    } catch {
+        return '';
+    }
+};
+
+export const setMockViewer = (eventId, entrantId) => {
+    try {
+        localStorage.setItem(viewerKey(eventId), entrantId);
+    } catch {
+        // storage unavailable - keep it for this visit only
+    }
+};
+
+// GET /brackets/entered - the events you're signed up for, each with your entrant.
+export const useEnteredEvents = () => useHostEvents()
+    .map(event => ({ event, entrant: event.entrants.find(e => e.id === getMockViewer(event.id)) }))
+    .filter(row => row.entrant);
 
 // Mockup only: put the demo events back.
 export const resetDemoEvents = () => save(buildDemoEvents());

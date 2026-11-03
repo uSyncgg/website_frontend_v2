@@ -5,7 +5,7 @@ import { useHostEvent, eventStage, updateEvent, deleteEvent, delayStart } from "
 import { buildBracket, bracketProgress } from "utils/bracket";
 import { MockBanner, Modal, ShareButton, StageChip, capacityLabel, formatDate, formatLabel, unitLabel } from "./hostShared";
 import styles from "./Host.module.css";
-import { EVENT_TYPES } from "utils/hostEvents";
+import { EVENT_TYPES, HOSTING_DASHBOARD_PATH } from "utils/hostEvents";
 
 export const useManagedEvent = () => useOutletContext();
 
@@ -19,7 +19,7 @@ export const ManageEvent = () => {
             <div className={`standardContainer ${styles.page}`}>
                 <div className={`${styles.inner} ${styles.emptyState}`}>
                     <h1 className={styles.sectionTitle}>Event not found</h1>
-                    <Link to="/host/events" className={styles.secondaryBtn}>Back to your events</Link>
+                    <Link to={HOSTING_DASHBOARD_PATH} className={styles.secondaryBtn}>Back to your events</Link>
                 </div>
             </div>
         );
@@ -43,7 +43,7 @@ export const ManageEvent = () => {
 
                 <div className={styles.pageHeader}>
                     <div>
-                        <p className={styles.eyebrow}><Link to="/host/events" className={styles.eyebrow}>Host Dashboard</Link> / Manage event</p>
+                        <p className={styles.eyebrow}><Link to={HOSTING_DASHBOARD_PATH} className={styles.eyebrow}>Event Dashboard</Link> / Manage event</p>
                         <h1 className={styles.title}>{event.name}</h1>
                         <div className={styles.metaRow}>
                             <StageChip stage={stage} />
@@ -154,7 +154,7 @@ export const EventOverview = () => {
     const remove = () => {
         if (!window.confirm(`Delete "${event.name}"? This can't be undone.`)) return;
         deleteEvent(event.id);
-        navigate('/host/events');
+        navigate(HOSTING_DASHBOARD_PATH);
     };
 
     return (

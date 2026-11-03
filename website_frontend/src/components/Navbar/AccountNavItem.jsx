@@ -2,15 +2,14 @@ import { Link } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import { FaCheck, FaChevronDown, FaUserCircle } from "react-icons/fa";
 import { useCurrentUser } from "hooks";
-import { PROFILE_LABELS, canHostBrackets, profileUrl } from "utils/profiles";
+import { PROFILE_LABELS, profileUrl } from "utils/profiles";
+import { EVENT_DASHBOARD_PATH } from "utils/hostEvents";
 import { getApiErrorMessage } from "utils/apiError";
 import styles from '../Navbar/Navbar.module.css';
 
 // react-snap prerenders with no session; render the neutral placeholder so the
 // snapshot never bakes in logged-out buttons and matches the first client render.
 const isPrerendering = typeof navigator !== 'undefined' && navigator.userAgent === 'ReactSnap';
-
-const HOST_PATH = '/host/events';
 
 const Avatar = ({ src }) => {
     const [failed, setFailed] = useState(false);
@@ -85,10 +84,10 @@ const AccountLinks = ({ itemClass, buttonClass, onNavigate }) => {
             <Link to={defaultProfile ? profileUrl(defaultProfile) : '/profile'} className={itemClass} role="menuitem" onClick={onNavigate}>
                 Profile
             </Link>
-            {/* Only while viewing as a host or venue that hosts brackets (see RequireBracketHost). */}
-            {canHostBrackets(defaultProfile) &&
-                <Link to={HOST_PATH} className={itemClass} role="menuitem" onClick={onNavigate}>
-                    Host Dashboard
+            {/* Events you've entered, and (viewing as a host) the ones you run. Needs a finished sign-up. */}
+            {defaultProfile &&
+                <Link to={EVENT_DASHBOARD_PATH} className={itemClass} role="menuitem" onClick={onNavigate}>
+                    Event Dashboard
                 </Link>
             }
             {/* Goes straight to the profile's settings when there's only one, otherwise asks which. */}
@@ -103,7 +102,7 @@ const AccountLinks = ({ itemClass, buttonClass, onNavigate }) => {
     );
 };
 
-// Two menus side by side: the avatar opens the account menu (Profile, Host Dashboard, Settings,
+// Two menus side by side: the avatar opens the account menu (Profile, Event Dashboard, Settings,
 // Logout) and the view label opens "Viewing as". With a single profile there's nothing to
 // switch to, so the label is just a label.
 const ProfileMenu = () => {

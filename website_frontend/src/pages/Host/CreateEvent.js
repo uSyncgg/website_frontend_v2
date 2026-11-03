@@ -5,7 +5,7 @@ import { useCurrentUser } from "hooks";
 import { createEvent } from "services/hostEventsMock";
 import { FORMATS } from "utils/bracket";
 import { PROFILE_LABELS, canHostBrackets, profileUrl } from "utils/profiles";
-import { EVENT_TYPES, HOST_GAMES, TOURNAMENT_GAME } from "utils/hostEvents";
+import { EVENT_TYPES, HOST_GAMES, HOSTING_DASHBOARD_PATH, TOURNAMENT_GAME } from "utils/hostEvents";
 import { BEST_OF, MockBanner, TEAM_SIZES } from "./hostShared";
 import styles from "./Host.module.css";
 
@@ -34,7 +34,7 @@ export const CreateEvent = () => {
     // Posted as the profile the button was on, otherwise the one you're viewing as.
     const requested = profiles.find(p => p.public_id === searchParams.get('profile') && canHostBrackets(p));
     const hostProfile = requested ?? (canHostBrackets(defaultProfile) ? defaultProfile : undefined);
-    const backTo = hostProfile ? profileUrl(hostProfile) : '/host/events';
+    const backTo = hostProfile ? profileUrl(hostProfile) : HOSTING_DASHBOARD_PATH;
     const start = defaultStart();
     const typeParam = searchParams.get('type');
     const gameParam = searchParams.get('game');
@@ -124,7 +124,7 @@ export const CreateEvent = () => {
                 <div className={styles.pageHeader}>
                     <div>
                         <p className={styles.eyebrow}>
-                            <Link to={backTo} className={styles.eyebrow}>{hostProfile ? hostProfile.username : 'Host Dashboard'}</Link>
+                            <Link to={backTo} className={styles.eyebrow}>{hostProfile ? hostProfile.username : 'Event Dashboard'}</Link>
                         </p>
                         <h1 className={styles.title}>Create an event</h1>
                         <p className={styles.subtitle}>

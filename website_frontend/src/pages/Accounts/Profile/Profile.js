@@ -8,7 +8,7 @@ import { getLoadErrorMessage } from "utils/apiError";
 import { resolveViews } from "./profileViews";
 import { EditAboutModal, EditGamesModal, EditLocationsModal, EditUsernameModal, usePictureEditor } from "./ProfileEditors";
 import { PlayerStats } from "./PlayerStats";
-import { AboutCard, EventsCard } from "./ProfileSections";
+import { AboutCard, EventsCard, OwnerEventsCard } from "./ProfileSections";
 import { gameEmblem, initials, playerGames } from "./profileGames";
 import { PROFILE_LABELS, profileUrl, statsUrl } from "utils/profiles";
 
@@ -61,20 +61,26 @@ const VenuesCard = ({ locations, onEdit }) => (
 
 // Main-column content for each profile type. `edit(what)` opens an owner editor (undefined for
 // everyone else). A player's page is their stats: every game, or one game at .../stats/:game.
+// The owner also sees "Your events" first: entered events above a player's stats, and on a host
+// or venue profile their hosted events in place of the public Events card (visitors see that).
 const TYPE_CONTENT = {
     player: (profile, { edit, isOwner, gameSlug }) => (
-        <PlayerStats profile={profile} gameSlug={gameSlug} isOwner={isOwner} onEditGames={edit('games')} />
+        <>
+            {isOwner && <OwnerEventsCard profile={profile} />}
+            <PlayerStats profile={profile} gameSlug={gameSlug} isOwner={isOwner} onEditGames={edit('games')} />
+        </>
     ),
     host: (profile, { edit, isOwner }) => (
         <>
-            <EventsCard profile={profile} isOwner={isOwner} />
+            {isOwner ? <OwnerEventsCard profile={profile} /> : <EventsCard profile={profile} />}
             <GamesCard title="Hosted Games" games={profile.details.hosted_games} emptyText="No hosted games added yet." onEdit={edit('games')} />
         </>
     ),
     venue: (profile, { edit, isOwner }) => (
         <>
+            {isOwner && <OwnerEventsCard profile={profile} />}
             <VenuesCard locations={profile.details.locations} onEdit={edit('locations')} />
-            <EventsCard profile={profile} isOwner={isOwner} />
+            {!isOwner && <EventsCard profile={profile} />}
         </>
     ),
 };

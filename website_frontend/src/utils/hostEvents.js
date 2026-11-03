@@ -11,6 +11,10 @@ export const EVENT_TYPES = {
     tournament: 'Tournament',
 };
 
+// The Event Dashboard (everyone signed in): Entered and Hosting tabs.
+export const EVENT_DASHBOARD_PATH = '/dashboard';
+export const HOSTING_DASHBOARD_PATH = `${EVENT_DASHBOARD_PATH}?tab=hosting`;
+
 // Tournaments can only be posted for Call of Duty for now (the only title with a tournaments page).
 export const TOURNAMENT_GAME = 'Call of Duty';
 

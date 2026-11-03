@@ -5,9 +5,9 @@ import { useCurrentUser } from "hooks";
 import { useAsync } from "hooks/useEvents";
 import { gamesCatalog } from "catalog/games.catalog";
 import { getProfileEvents } from "services/user";
-import { useHostEvents } from "services/hostEventsMock";
+import { useHostEvents, useEnteredEvents, eventStage, STAGE_LABELS } from "services/hostEventsMock";
 import { buildEventPath } from "utils/eventPaths";
-import { EVENT_TYPES } from "utils/hostEvents";
+import { EVENT_DASHBOARD_PATH, EVENT_TYPES } from "utils/hostEvents";
 import { canHostBrackets, createEventUrl } from "utils/profiles";
 import { formatDate } from "pages/Host/hostShared";
 import { initials } from "./profileGames";
@@ -71,29 +71,25 @@ const AddEventButton = ({ profile }) => {
 };
 
 /**
- * The events a host or venue runs on uSync (the ones its account owns). The owner gets an
- * "Add event" button that opens the bracket event setup, posting as this profile.
+ * The events a host or venue runs on uSync (the ones its account owns), as visitors see them.
+ * The owner sees OwnerEventsCard instead.
  */
-export const EventsCard = ({ profile, isOwner }) => {
+export const EventsCard = ({ profile }) => {
     const { data, loading, error } = useAsync(() => getProfileEvents(profile.public_id), [profile.public_id]);
     const hostEvents = useHostEvents();
-    // The public profile doesn't say whether bracket hosting is on; the owner's own summary does.
-    const { profiles } = useCurrentUser();
-    const own = profiles.find(p => p.public_id === profile.public_id);
     // Until the backend serves this list everywhere, a 404 just means no events to show.
     const events = [...mockBracketEvents(hostEvents, profile.public_id), ...(data ?? [])];
     const failed = error && error.response?.status !== 404 && events.length === 0;
-    const addEvent = isOwner && canHostBrackets(own) && <AddEventButton profile={own} />;
 
     return (
-        <ProfileCard title="Events" action={addEvent}>
+        <ProfileCard title="Events">
             {loading ? (
                 <p className={styles.muted}>Loading events…</p>
             ) : failed ? (
                 <p className={styles.muted}>Events can't be loaded right now.</p>
             ) : events.length === 0 ? (
                 <p className={styles.muted}>
-                    {isOwner ? "You don't have any events on uSync yet." : `${profile.username} doesn't have any events on uSync yet.`}
+                    {`${profile.username} doesn't have any events on uSync yet.`}
                 </p>
             ) : (
                 <div>
@@ -115,6 +111,64 @@ export const EventsCard = ({ profile, isOwner }) => {
                             </div>
                         );
                     })}
+                </div>
+            )}
+        </ProfileCard>
+    );
+};
+
+// How many rows "Your events" shows before pointing to the Event Dashboard.
+const OWNER_EVENTS_SHOWN = 5;
+
+/**
+ * "Your events", only on your own profile (never shown to anyone else): on a player profile the
+ * events you're entered in, on a host or venue profile the events you run (it takes the place of
+ * the public Events card there, with the "+ Add event" button). Each row opens the event (the
+ * manage page for ones you host), and the card links to the Event Dashboard.
+ */
+export const OwnerEventsCard = ({ profile }) => {
+    const entered = useEnteredEvents();
+    const hosted = useHostEvents();
+    const { profiles } = useCurrentUser();
+    const own = profiles.find(p => p.public_id === profile.public_id);
+    const hosting = profile.type !== 'player';
+    const rows = hosting
+        ? hosted.map(event => ({ event, url: `/host/events/${event.id}`, action: 'Manage', note: `${event.entrants.length} signed up` }))
+        : entered.map(({ event, entrant }) => ({ event, url: `/brackets/${event.id}`, action: 'View event', note: `Entered as ${entrant.name}` }));
+    const dashboardUrl = `${EVENT_DASHBOARD_PATH}?tab=${hosting ? 'hosting' : 'entered'}`;
+
+    return (
+        <ProfileCard
+            title={hosting ? "Events you're hosting" : "Events you're entered in"}
+            action={
+                <div className={styles.cardActions}>
+                    {hosting && canHostBrackets(own) && <AddEventButton profile={own} />}
+                    <Link to={dashboardUrl} className={styles.cardAction}>Event Dashboard</Link>
+                </div>
+            }
+        >
+            {rows.length === 0 ? (
+                <p className={styles.muted}>
+                    {hosting ? "You aren't running any events yet." : "You aren't entered in any events yet."}
+                </p>
+            ) : (
+                <div>
+                    {rows.slice(0, OWNER_EVENTS_SHOWN).map(({ event, url, action, note }) => (
+                        <div key={event.id} className={styles.game}>
+                            <div className={styles.emblem}>{initials(event.name)}</div>
+                            <div>
+                                <div className={styles.eyebrow}>{event.game} · {EVENT_TYPES[event.eventType] ?? 'Event'} · {STAGE_LABELS[eventStage(event)]}</div>
+                                <div className={styles.gameName}>{event.name}</div>
+                                <div className={styles.location}>{formatDate(event.startsAt)} · {note}</div>
+                            </div>
+                            <Link to={url} className={styles.gameLink}>{action}</Link>
+                        </div>
+                    ))}
+                    {rows.length > OWNER_EVENTS_SHOWN &&
+                        <p className={styles.muted}>
+                            <Link to={dashboardUrl}>See all {rows.length} in your Event Dashboard</Link>
+                        </p>
+                    }
                 </div>
             )}
         </ProfileCard>

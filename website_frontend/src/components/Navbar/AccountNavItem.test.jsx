@@ -19,7 +19,7 @@ describe('AccountNavItem', () => {
         fireEvent.click(screen.getByRole('button', { name: 'Account menu' }));
         expect(screen.getByRole('menuitem', { name: 'Profile' })).toBeInTheDocument();
         expect(screen.getByRole('menuitem', { name: 'Settings' })).toBeInTheDocument();
-        expect(screen.getByRole('menuitem', { name: 'Host Dashboard' })).toBeInTheDocument();
+        expect(screen.getByRole('menuitem', { name: 'Event Dashboard' })).toHaveAttribute('href', '/dashboard');
         expect(screen.queryByText('Viewing as')).toBeNull();
         expect(screen.queryByText('Profile Settings')).toBeNull();
     });

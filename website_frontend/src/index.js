@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Routes, Route } from 'react-router';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router';
 
 // Navbar & Footer
 import { Navbar, Footer, ScrollToTop, ErrorBoundary } from 'components';
@@ -58,7 +58,8 @@ import { AuthPage } from 'pages/Accounts/Authentication/AuthPage';
 import { ForgotPassword } from 'pages/Accounts/Authentication/ForgotPassword';
 import { ResetPassword } from 'pages/Accounts/Authentication/ResetPassword';
 import { RequireCompleteProfile, RedirectIfProfileComplete, RequireBracketHost } from 'components';
-import { HostEvents } from 'pages/Host/HostEvents';
+import { EventDashboard } from 'pages/Host/EventDashboard';
+import { EVENT_DASHBOARD_PATH, HOSTING_DASHBOARD_PATH } from 'utils/hostEvents';
 import { CreateEvent } from 'pages/Host/CreateEvent';
 import { ManageEvent, EventOverview } from 'pages/Host/ManageEvent';
 import { EventEntrants } from 'pages/Host/EventEntrants';
@@ -162,9 +163,14 @@ const app = (
               <Route path=':type' element={<ProfileSettings />} />
             </Route>
 
+            {/* Event Dashboard - every signed-in account: events entered, and (as a host) events run. */}
+            <Route path={EVENT_DASHBOARD_PATH} element={<RequireCompleteProfile />}>
+              <Route index element={<EventDashboard />} />
+            </Route>
+
             {/* Bracket hosting - accounts with bracket hosting turned on (see RequireBracketHost). Mock data for now. */}
             <Route path='/host/events' element={<RequireBracketHost />}>
-              <Route index element={<HostEvents />} />
+              <Route index element={<Navigate to={HOSTING_DASHBOARD_PATH} replace />} />
               <Route path='new' element={<CreateEvent />} />
               <Route path=':eventId' element={<ManageEvent />}>
                 <Route index element={<EventOverview />} />

@@ -4,7 +4,7 @@ import { FaCalendarAlt, FaCheckCircle, FaClock, FaGamepad, FaMapMarkerAlt, FaSit
 import { Bracket, ReportMatchDialog } from "components/Bracket/Bracket";
 import {
     useHostEvent, eventStage, isFull, addEntrant, removeEntrant, setCheckedIn,
-    matchState, matchReports, playerReportMatch, reportNoShow, noShowUnlocksAt,
+    matchState, matchReports, playerReportMatch, reportNoShow, noShowUnlocksAt, getMockViewer, setMockViewer,
 } from "services/hostEventsMock";
 import { buildBracket, allMatches } from "utils/bracket";
 import { EVENT_TYPES } from "utils/hostEvents";
@@ -14,24 +14,14 @@ import styles from "./Host.module.css";
 const USYNC_FEE = 0.05;
 
 // MOCKUP ONLY: which entrant this browser is "logged in" as, so player actions
-// (register, report scores, report no-shows) can be tried without real accounts.
-const viewerKey = (eventId) => `usync.mock.viewer.${eventId}`;
+// (register, report scores, report no-shows) can be tried without real accounts. The Event
+// Dashboard's Entered tab lists the events this is set for.
 const useMockViewer = (event) => {
-    const [viewerId, setViewerId] = useState(() => {
-        try {
-            return localStorage.getItem(viewerKey(event?.id)) || '';
-        } catch {
-            return '';
-        }
-    });
+    const [viewerId, setViewerId] = useState(() => getMockViewer(event?.id));
     const valid = event?.entrants.some(e => e.id === viewerId) ? viewerId : '';
     const choose = (id) => {
         setViewerId(id);
-        try {
-            localStorage.setItem(viewerKey(event.id), id);
-        } catch {
-            // storage unavailable - keep it for this visit only
-        }
+        setMockViewer(event.id, id);
     };
     return [valid, choose];
 };
