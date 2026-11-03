@@ -1,4 +1,6 @@
+/* flex: 1 fills <main> (a flex column) down to the footer; min-height: 100% doesn't in a flex parent. */
 .page {
+    flex: 1;
     background: var(--ground);
     color: var(--ink);
     min-height: 100%;
@@ -275,5 +277,22 @@
 
     .stepLabel {
         display: none;
+    }
+}
+
+.submitHint {
+    margin: .75rem 0 0;
+    text-align: right;
+    font-size: .8rem;
+    color: var(--ink-3, rgba(255, 255, 255, .6));
+}
+
+@media (max-width: 600px) {
+    .shell {
+        padding: 1.25rem .75rem 2.5rem;
+    }
+
+    .card {
+        padding: 1.5rem 1rem;
     }
 }

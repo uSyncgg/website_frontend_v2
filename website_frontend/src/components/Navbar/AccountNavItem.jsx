@@ -1,14 +1,15 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useEffect, useRef, useState } from "react";
-import { FaUserCircle } from "react-icons/fa";
+import { FaCheck, FaChevronDown, FaUserCircle } from "react-icons/fa";
 import { useCurrentUser } from "hooks";
+import { PROFILE_LABELS, profileUrl } from "utils/profiles";
+import { getApiErrorMessage } from "utils/apiError";
 import styles from '../Navbar/Navbar.module.css';
 
 // react-snap prerenders with no session; render the neutral placeholder so the
 // snapshot never bakes in logged-out buttons and matches the first client render.
 const isPrerendering = typeof navigator !== 'undefined' && navigator.userAgent === 'ReactSnap';
 
-const SETTINGS_PATH = '/settings/profile';
 const HOST_PATH = '/host/events';
 
 const Avatar = ({ src }) => {
@@ -20,7 +21,91 @@ const Avatar = ({ src }) => {
     return <img src={src} alt="" className={styles.avatarImage} onError={() => setFailed(true)} />;
 };
 
-const ProfileMenu = ({ profile, logout }) => {
+// "Viewing as": the account's profiles, the current view (the default profile) ticked. Picking
+// another switches the view everywhere (navbar, Profile link) and opens that profile. Views will
+// also decide what the rest of the site offers (e.g. hosts bidding on spots).
+const ViewSwitch = ({ itemClass, onNavigate }) => {
+    const { defaultProfile, profiles, switchProfile } = useCurrentUser();
+    const navigate = useNavigate();
+    const [switching, setSwitching] = useState(null);
+    const [error, setError] = useState('');
+
+    if (!defaultProfile || profiles.length < 2) return null;
+
+    const choose = async (profile) => {
+        setError('');
+        if (profile.type !== defaultProfile.type) {
+            setSwitching(profile.type);
+            try {
+                await switchProfile(profile.type);
+            } catch (err) {
+                setError(getApiErrorMessage(err));
+                setSwitching(null);
+                return;
+            }
+            setSwitching(null);
+        }
+        onNavigate?.();
+        navigate(profileUrl(profile));
+    };
+
+    return (
+        <div className={styles.viewSwitch} role="group" aria-label="Viewing as">
+            <span className={styles.viewHeading}>Viewing as</span>
+            {profiles.map(profile => {
+                const active = profile.type === defaultProfile.type;
+                return (
+                    <button
+                        key={profile.type}
+                        type="button"
+                        role="menuitemradio"
+                        aria-checked={active}
+                        className={`${itemClass} ${styles.dropdownButton} ${styles.viewOption} ${active ? styles.viewActive : ''}`}
+                        onClick={() => choose(profile)}
+                        disabled={switching !== null}
+                    >
+                        <span>{PROFILE_LABELS[profile.type]}</span>
+                        {switching === profile.type ? <span className={styles.viewHint}>…</span> : active && <FaCheck aria-hidden="true" />}
+                    </button>
+                );
+            })}
+            {error && <span className={styles.viewError} role="alert">{error}</span>}
+        </div>
+    );
+};
+
+// The menu's items, shared by the desktop dropdown and the mobile hamburger menu.
+// Before sign-up is finished there's no default profile: Profile goes to /profile (a blank
+// profile pointing to the sign-up form) and Settings sends them to the form too.
+// Switching the default profile lives in Profile Settings.
+const AccountLinks = ({ itemClass, buttonClass, onNavigate }) => {
+    const { defaultProfile, profile, logout } = useCurrentUser();
+
+    return (
+        <>
+            <ViewSwitch itemClass={itemClass} onNavigate={onNavigate} />
+            <Link to={defaultProfile ? profileUrl(defaultProfile) : '/profile'} className={itemClass} role="menuitem" onClick={onNavigate}>
+                Profile
+            </Link>
+            {profile?.bracket_hosting &&
+                <Link to={HOST_PATH} className={itemClass} role="menuitem" onClick={onNavigate}>
+                    Host Dashboard
+                </Link>
+            }
+            {/* Goes straight to the profile's settings when there's only one, otherwise asks which. */}
+            <Link to="/settings/profile" className={itemClass} role="menuitem" onClick={onNavigate}>
+                Profile Settings
+            </Link>
+
+            <button type="button" className={buttonClass} role="menuitem" onClick={logout}>
+                Logout
+            </button>
+        </>
+    );
+};
+
+const ProfileMenu = () => {
+    const { defaultProfile } = useCurrentUser();
     const [open, setOpen] = useState(false);
     const wrapperRef = useRef(null);
 
@@ -42,49 +127,44 @@ const ProfileMenu = ({ profile, logout }) => {
         };
     }, [open]);
 
-    const close = () => setOpen(false);
-
     return (
         <div className={styles.accountMenu} ref={wrapperRef}>
             <button
                 type="button"
-                className={styles.avatarButton}
-                aria-label="Account menu"
+                className={styles.accountTrigger}
+                aria-label={defaultProfile ? `Account menu, viewing as ${PROFILE_LABELS[defaultProfile.type]}` : 'Account menu'}
                 aria-haspopup="menu"
                 aria-expanded={open}
                 onClick={() => setOpen(o => !o)}
             >
-                <Avatar key={profile?.profile_picture} src={profile?.profile_picture} />
+                <span className={styles.avatarButton}>
+                    <Avatar key={defaultProfile?.profile_picture} src={defaultProfile?.profile_picture} />
+                </span>
+                {defaultProfile &&
+                    <span className={styles.viewLabel}>
+                        {PROFILE_LABELS[defaultProfile.type]}
+                        <FaChevronDown aria-hidden="true" />
+                    </span>
+                }
             </button>
 
             {open &&
                 <div className={styles.accountDropdown} role="menu">
-                    {profile?.username &&
-                        <Link to={`/profile/${encodeURIComponent(profile.username)}`} className={styles.dropdownItem} role="menuitem" onClick={close}>
-                            Profile
-                        </Link>
-                    }
-                    {profile?.bracket_hosting &&
-                        <Link to={HOST_PATH} className={styles.dropdownItem} role="menuitem" onClick={close}>
-                            Host Dashboard
-                        </Link>
-                    }
-                    <Link to={SETTINGS_PATH} className={styles.dropdownItem} role="menuitem" onClick={close}>
-                        Profile Settings
-                    </Link>
-                    <button type="button" className={`${styles.dropdownItem} ${styles.dropdownButton}`} role="menuitem" onClick={logout}>
-                        Logout
-                    </button>
+                    <AccountLinks
+                        itemClass={styles.dropdownItem}
+                        buttonClass={`${styles.dropdownItem} ${styles.dropdownButton}`}
+                        onNavigate={() => setOpen(false)}
+                    />
                 </div>
             }
         </div>
     );
 };
 
-// variant="header" renders in the top-right of the navbar (desktop);
-// variant="menu" renders as plain links at the bottom of the hamburger menu (mobile).
+// variant="header" renders in the top-right of the navbar (desktop and mobile);
+// variant="menu" also renders at the bottom of the hamburger menu (mobile only).
 export const AccountNavItem = ({ closeMenu, variant = 'header' }) => {
-    const { status, profile, logout } = useCurrentUser();
+    const { status } = useCurrentUser();
 
     if (isPrerendering || status === 'loading') {
         return variant === 'header' ? <div className={styles.accountPlaceholder} /> : null;
@@ -93,43 +173,21 @@ export const AccountNavItem = ({ closeMenu, variant = 'header' }) => {
     if (status === 'anonymous') {
         return (
             <div className={variant === 'header' ? styles.accountButtons : styles.mobileAccount}>
-                <Link to="/login" className={styles.secondaryButton} onClick={closeMenu}>Login</Link>
+                <Link to="/login" className={styles.secondaryButton} onClick={closeMenu}>Log In</Link>
                 <Link to="/signup" className={styles.primaryButton} onClick={closeMenu}>Sign Up</Link>
             </div>
         );
     }
 
-    if (status === 'incomplete') {
-        return (
-            <div className={variant === 'header' ? styles.accountButtons : styles.mobileAccount}>
-                <Link to="/complete-profile" className={styles.primaryButton} onClick={closeMenu}>Complete Profile</Link>
-            </div>
-        );
-    }
-
-    // 'complete', or 'error' (logged in but the profile lookup failed - still offer Logout).
+    // 'complete', 'incomplete' (sign-up not finished - same menu, Profile and Settings lead to
+    // the form), or 'error' (logged in but the lookup failed - still offer Logout).
     if (variant === 'header') {
-        return <ProfileMenu profile={profile} logout={logout} />;
+        return <ProfileMenu />;
     }
 
     return (
         <div className={styles.mobileAccount}>
-            {profile?.username &&
-                <Link to={`/profile/${encodeURIComponent(profile.username)}`} className={styles.navLink} onClick={closeMenu}>
-                    Profile
-                </Link>
-            }
-            {profile?.bracket_hosting &&
-                <Link to={HOST_PATH} className={styles.navLink} onClick={closeMenu}>
-                    Host Dashboard
-                </Link>
-            }
-            <Link to={SETTINGS_PATH} className={styles.navLink} onClick={closeMenu}>
-                Profile Settings
-            </Link>
-            <button type="button" className={styles.navLink} onClick={logout}>
-                Logout
-            </button>
+            <AccountLinks itemClass={styles.navLink} buttonClass={styles.navLink} onNavigate={closeMenu} />
         </div>
     );
 };
