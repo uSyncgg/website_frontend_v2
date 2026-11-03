@@ -57,7 +57,8 @@ import TournamentRoutes from './routes/TournamentRoutes';
 import { AuthPage } from 'pages/Accounts/Authentication/AuthPage';
 import { ForgotPassword } from 'pages/Accounts/Authentication/ForgotPassword';
 import { ResetPassword } from 'pages/Accounts/Authentication/ResetPassword';
-import { RequireCompleteProfile, RedirectIfProfileComplete, RequireAdmin } from 'components';
+import { RequireCompleteProfile, RedirectIfProfileComplete, RequireAdmin, NudgeHost } from 'components';
+import { NudgeTest } from 'pages/Admin/NudgeTest';
 import { AdminAnalytics } from 'pages/Admin/AdminAnalytics';
 import { Profile, MyProfile } from 'pages/Accounts/Profile/Profile';
 import { ProfileSettings, ProfileSettingsHome, AddProfile } from 'pages/Accounts/Settings/ProfileSettings';
@@ -160,11 +161,17 @@ const app = (
               <Route path='analytics' element={<AdminAnalytics />} />
             </Route>
 
+            {/* Local-only page for previewing admin nudge popups. */}
+            {process.env.NODE_ENV === 'development' &&
+              <Route path='/dev/nudge-test' element={<NudgeTest />} />
+            }
+
           </Routes>
         </ErrorBoundary>
       </main>
       
       <Footer />
+      <NudgeHost />
     </div>
     </CurrentUserProvider>
   </BrowserRouter>
