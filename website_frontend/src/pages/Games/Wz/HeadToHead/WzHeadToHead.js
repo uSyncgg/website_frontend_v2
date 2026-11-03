@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { SeoData, HostBanner, HeaderImage, EventListFilters } from "components";
+import { SeoData, HostBanner, HeaderImage, EventListFilters, AddYourEventButton } from "components";
 import { useXpEvents } from "hooks";
 import { buildEventPath } from 'utils/eventPaths';
 import '../../EventBanners.css';
@@ -65,6 +65,9 @@ export const WzHeadToHead = () => {
                 canonicalPath={"/games/warzone/head-to-head"}
             />
             <HeaderImage title={"Head-to-Head"} imageClass={"lolLeaguePage"} />
+
+            <AddYourEventButton />
+
 
             <EventListFilters
                 sort={sort}

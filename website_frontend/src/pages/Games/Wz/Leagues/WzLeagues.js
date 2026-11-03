@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { SeoData, HostBanner, HeaderImage, EventListFilters, NoEvents } from "components";
+import { SeoData, HostBanner, HeaderImage, EventListFilters, NoEvents, AddYourEventButton } from "components";
 import { useLeagueEvents } from "hooks";
 import { buildEventPath } from 'utils/eventPaths';
 import '../../EventBanners.css';
@@ -77,6 +77,8 @@ export const WzLeagues = () => {
                 canonicalPath={"/games/warzone/leagues"}
             />
             <HeaderImage title={"Warzone Leagues"} imageClass={"wzLeaguePage"} />
+
+            <AddYourEventButton />
 
             {!loading && !error && allLeagues.length > 0 &&
                 <EventListFilters

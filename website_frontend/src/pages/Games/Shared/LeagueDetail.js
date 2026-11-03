@@ -1,4 +1,4 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText, HostBanner } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText, HostBanner, AddYourEventButton } from "components";
 import { useParams } from "react-router";
 import { useLeagueInfo } from "hooks";
 import { buildEventPath } from "utils/eventPaths";
@@ -27,6 +27,7 @@ export const LeagueDetail = ({ game, sectionPath }) => {
                 canonicalPath={buildEventPath(sectionPath, slug)}
             />
             <HeaderImage imageUrl={data?.header_img} title={data?.verified ? undefined : data?.name} />
+            <AddYourEventButton type="league" game={game} />
 
             {data?.verified &&
                 <div className="verifiedContainer">

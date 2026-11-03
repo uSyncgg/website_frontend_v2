@@ -7,6 +7,7 @@ import {
     matchState, matchReports, playerReportMatch, reportNoShow, noShowUnlocksAt,
 } from "services/hostEventsMock";
 import { buildBracket, allMatches } from "utils/bracket";
+import { EVENT_TYPES } from "utils/hostEvents";
 import { MockBanner, Modal, ShareButton, StageChip, capacityLabel, entrantsById, formatDate, formatLabel, unitLabel, isTeamEvent } from "./hostShared";
 import styles from "./Host.module.css";
 
@@ -240,7 +241,7 @@ export const PublicBracket = () => {
 
                 <div className={styles.pageHeader}>
                     <div>
-                        <p className={styles.eyebrow}>{event.game} event</p>
+                        <p className={styles.eyebrow}>{event.game} · {EVENT_TYPES[event.eventType] ?? 'Event'}</p>
                         <h1 className={styles.title}>{event.name}</h1>
                         <div className={styles.metaRow}>
                             <StageChip stage={stage} />
@@ -281,6 +282,7 @@ export const PublicBracket = () => {
                         <section className={styles.card}>
                             <h2 className={styles.sectionTitle}>Details</h2>
                             <dl className={styles.detailList}>
+                                <dt>Type</dt><dd>{EVENT_TYPES[event.eventType] ?? '-'}</dd>
                                 <dt>Game</dt><dd>{event.game}</dd>
                                 <dt>Format</dt><dd>{formatLabel(event.format)}, best of {event.bestOf}</dd>
                                 <dt>Team size</dt><dd>{event.teamSize}</dd>

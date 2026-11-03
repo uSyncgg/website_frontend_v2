@@ -5,7 +5,6 @@ import { FORMATS } from "utils/bracket";
 import { resetDemoEvents, STAGE_LABELS } from "services/hostEventsMock";
 import styles from "./Host.module.css";
 
-export const GAMES = ["Call of Duty", "CS 2", "Halo", "League of Legends", "Rocket League", "Valorant", "Warzone", "Other"];
 export const TEAM_SIZES = ["1v1", "2v2", "3v3", "4v4", "5v5"];
 export const BEST_OF = [1, 3, 5, 7];
 

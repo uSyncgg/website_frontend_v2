@@ -5,6 +5,7 @@ import { useHostEvent, eventStage, updateEvent, deleteEvent, delayStart } from "
 import { buildBracket, bracketProgress } from "utils/bracket";
 import { MockBanner, Modal, ShareButton, StageChip, capacityLabel, formatDate, formatLabel, unitLabel } from "./hostShared";
 import styles from "./Host.module.css";
+import { EVENT_TYPES } from "utils/hostEvents";
 
 export const useManagedEvent = () => useOutletContext();
 
@@ -170,6 +171,7 @@ export const EventOverview = () => {
                     <section className={styles.card}>
                         <h2 className={styles.sectionTitle}>Details</h2>
                         <dl className={styles.detailList}>
+                            <dt>Type</dt><dd>{EVENT_TYPES[event.eventType] ?? '-'}</dd>
                             <dt>Game</dt><dd>{event.game}</dd>
                             <dt>Format</dt><dd>{formatLabel(event.format)}, best of {event.bestOf}</dd>
                             <dt>Team size</dt><dd>{event.teamSize}</dd>

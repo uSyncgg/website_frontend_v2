@@ -31,8 +31,14 @@ export const settingsUrl = (type) => `/settings/profile/${type}`;
 // by default, so a profile summary from before /users/me listed bracket_hosting counts as on.
 export const canHostBrackets = (profile) => !!profile && profile.type !== 'player' && profile.bracket_hosting !== false;
 
-// Creating a bracket event, posted as the given host or venue profile (by public_id).
-export const createEventUrl = (publicId) => `/host/events/new?profile=${encodeURIComponent(publicId)}`;
+// Creating a bracket event, posted as the given host or venue profile (by public_id). `type`
+// and `game` pre-fill the form, e.g. from the Leagues page you were on.
+export const createEventUrl = (publicId, { type, game } = {}) => {
+    const params = new URLSearchParams({ profile: publicId });
+    if (type) params.set('type', type);
+    if (game) params.set('game', game);
+    return `/host/events/new?${params}`;
+};
 
 export const addProfileUrl = (type) => `/settings/profile/add/${type}`;
 

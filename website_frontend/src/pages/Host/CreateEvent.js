@@ -5,7 +5,8 @@ import { useCurrentUser } from "hooks";
 import { createEvent } from "services/hostEventsMock";
 import { FORMATS } from "utils/bracket";
 import { PROFILE_LABELS, canHostBrackets, profileUrl } from "utils/profiles";
-import { BEST_OF, GAMES, MockBanner, TEAM_SIZES } from "./hostShared";
+import { EVENT_TYPES, HOST_GAMES } from "utils/hostEvents";
+import { BEST_OF, MockBanner, TEAM_SIZES } from "./hostShared";
 import styles from "./Host.module.css";
 
 // Same shape as the existing pass portal (/passes/:slug): pass tiers, per-player
@@ -24,7 +25,8 @@ const blankQuestion = () => ({ label: '', type: 'text', options: '', required: f
 
 // /host/events/new, or /host/events/new?profile=<public_id> from a host or venue profile's
 // "Add event" button: the event is posted as that profile (or the one you're viewing as) and
-// listed on it.
+// listed on it. ?type= and ?game= pre-fill the form from the page the host came from (the
+// "Add your event" button on a game's Leagues page opens it as a league for that game).
 export const CreateEvent = () => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
@@ -34,8 +36,13 @@ export const CreateEvent = () => {
     const hostProfile = requested ?? (canHostBrackets(defaultProfile) ? defaultProfile : undefined);
     const backTo = hostProfile ? profileUrl(hostProfile) : '/host/events';
     const start = defaultStart();
+    const typeParam = searchParams.get('type');
+    const gameParam = searchParams.get('game');
     const [form, setForm] = useState({
-        name: '', game: 'Call of Duty', format: 'single_elim', teamSize: '1v1', bestOf: 3,
+        name: '',
+        eventType: EVENT_TYPES[typeParam] ? typeParam : '',
+        game: HOST_GAMES.includes(gameParam) ? gameParam : HOST_GAMES[0],
+        format: 'single_elim', teamSize: '1v1', bestOf: 3,
         maxEntrants: '16', uncapped: false,
         date: start.date, time: start.time, locationType: 'online', venue: '', prize: '',
         description: '', rules: '', checkInRequired: true, noShowMinutes: '10', noShowOff: false,
@@ -57,10 +64,15 @@ export const CreateEvent = () => {
         ? signupForm.playerFields.filter(x => x !== f)
         : [...signupForm.playerFields, f]);
 
+    // LANs are always in person, so they always need a venue.
+    const isLan = form.eventType === 'lan';
+    const locationType = isLan ? 'in_person' : form.locationType;
+
     const maxNum = Number(form.maxEntrants);
     const errors = {
         name: !form.name.trim() && 'Give your event a name',
-        venue: form.locationType === 'in_person' && !form.venue.trim() && 'Add where the event is held',
+        eventType: !form.eventType && 'Pick what kind of event this is',
+        venue: locationType === 'in_person' && !form.venue.trim() && (isLan ? 'Add where the LAN is held' : 'Add where the event is held'),
         maxEntrants: !form.uncapped && (!Number.isInteger(maxNum) || maxNum < 2) && 'Enter a whole number of 2 or more, or tick "No cap"',
         noShowMinutes: !form.noShowOff && !(Number(form.noShowMinutes) >= 0) && 'Enter how many minutes to wait, or turn the timer off',
         notifyEmail: form.usePayments && !/^\S+@\S+\.\S+$/.test(payments.notifyEmail) && 'Add the email we should notify about new sign-ups',
@@ -78,6 +90,8 @@ export const CreateEvent = () => {
         const id = createEvent({
             ...rest,
             name: form.name.trim(),
+            locationType,
+            venue: locationType === 'in_person' ? form.venue.trim() : '',
             bestOf: Number(form.bestOf),
             maxEntrants: uncapped ? null : maxNum,
             noShowMinutes: noShowOff ? null : Number(form.noShowMinutes),
@@ -120,6 +134,15 @@ export const CreateEvent = () => {
                     <section className={`${styles.card} ${styles.form}`}>
                         <h2 className={styles.sectionTitle}>The basics</h2>
                         <div className={styles.field}>
+                            <label htmlFor="eventType">Event type</label>
+                            <select id="eventType" className={styles.select} value={form.eventType} onChange={set('eventType')}>
+                                <option value="" disabled>Choose a type</option>
+                                {Object.entries(EVENT_TYPES).map(([key, label]) => <option key={key} value={key}>{label}</option>)}
+                            </select>
+                            {err('eventType')}
+                        </div>
+
+                        <div className={styles.field}>
                             <label htmlFor="name">Event name</label>
                             <input id="name" className={styles.input} value={form.name} onChange={set('name')} placeholder="e.g. Friday Night 1v1s" maxLength={80} />
                             {err('name')}
@@ -129,7 +152,7 @@ export const CreateEvent = () => {
                             <div className={styles.field}>
                                 <label htmlFor="game">Game</label>
                                 <select id="game" className={styles.select} value={form.game} onChange={set('game')}>
-                                    {GAMES.map(g => <option key={g}>{g}</option>)}
+                                    {HOST_GAMES.map(g => <option key={g}>{g}</option>)}
                                 </select>
                             </div>
                             <div className={styles.field}>
@@ -154,12 +177,13 @@ export const CreateEvent = () => {
                         <div className={styles.fieldRow}>
                             <div className={styles.field}>
                                 <label htmlFor="locationType">Where</label>
-                                <select id="locationType" className={styles.select} value={form.locationType} onChange={set('locationType')}>
+                                <select id="locationType" className={styles.select} value={locationType} onChange={set('locationType')} disabled={isLan}>
                                     <option value="online">Online</option>
-                                    <option value="in_person">In person (LAN)</option>
+                                    <option value="in_person">In person</option>
                                 </select>
+                                {isLan && <p className={styles.fieldHint}>LANs are held in person.</p>}
                             </div>
-                            {form.locationType === 'in_person' &&
+                            {locationType === 'in_person' &&
                                 <div className={styles.field}>
                                     <label htmlFor="venue">Venue / address</label>
                                     <input id="venue" className={styles.input} value={form.venue} onChange={set('venue')} placeholder="Venue name, city" />

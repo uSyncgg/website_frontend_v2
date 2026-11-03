@@ -121,6 +121,7 @@ import { LinkAccountsModal } from "./LinkAccountsModal/LinkAccountsModal";
 import { ShareButton } from "./ShareButton/ShareButton";
 import { ProfileViewToggle } from "./ProfileViewToggle/ProfileViewToggle";
 import { ProfileCard } from "./ProfileCard/ProfileCard";
+import { AddYourEventButton } from "./AddYourEventButton/AddYourEventButton";
 
 export {
     Navbar,
@@ -197,5 +198,6 @@ export {
     LinkAccountsModal,
     ShareButton,
     ProfileViewToggle,
-    ProfileCard
+    ProfileCard,
+    AddYourEventButton
 };

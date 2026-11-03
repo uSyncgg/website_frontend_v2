@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { SeoData, HostBanner, HeaderImage, EventListFilters, NoEvents } from "components";
+import { SeoData, HostBanner, HeaderImage, EventListFilters, NoEvents, AddYourEventButton } from "components";
 import { useLeagueEvents } from "hooks";
 import { buildEventPath } from 'utils/eventPaths';
 import '../../EventBanners.css';
@@ -110,6 +110,9 @@ export const CodLeagues = () => {
                 canonicalPath={"/games/call-of-duty/leagues"}
             />
             <HeaderImage title={"Call of Duty Leagues"} imageClass={"lansPage"} />
+
+            <AddYourEventButton />
+
 
             <EventListFilters
                 sort={sort}

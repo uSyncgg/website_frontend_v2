@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { SeoData, HostBanner, NoEvents, LanMap, EventListFilters } from "components";
+import { SeoData, HostBanner, NoEvents, LanMap, EventListFilters, AddYourEventButton } from "components";
 import { useLanEvents } from "hooks";
 import { toLanMarkers } from 'data/lanMarkers';
 import { buildEventPath } from 'utils/eventPaths';
@@ -87,6 +87,9 @@ export const HaloLans = () => {
             <div className="lanMapContainer">
                 <LanMap markers={markers} game={MAP_GAME} />
             </div>
+
+            <AddYourEventButton />
+
 
             <EventListFilters
                 sort={sort}

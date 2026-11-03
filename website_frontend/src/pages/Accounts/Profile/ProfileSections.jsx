@@ -7,6 +7,7 @@ import { gamesCatalog } from "catalog/games.catalog";
 import { getProfileEvents } from "services/user";
 import { useHostEvents } from "services/hostEventsMock";
 import { buildEventPath } from "utils/eventPaths";
+import { EVENT_TYPES } from "utils/hostEvents";
 import { canHostBrackets, createEventUrl } from "utils/profiles";
 import { formatDate } from "pages/Host/hostShared";
 import { initials } from "./profileGames";
@@ -32,6 +33,7 @@ const mockBracketEvents = (events, publicId) => events
     .filter(e => e.hostProfile === publicId)
     .map(e => ({
         kind: 'bracket',
+        event_type: e.eventType,
         name: e.name,
         game: e.game,
         path: `/brackets/${e.id}`,
@@ -103,7 +105,7 @@ export const EventsCard = ({ profile, isOwner }) => {
                             <div key={`${event.kind}-${event.path}`} className={styles.game}>
                                 <div className={styles.emblem}>{initials(event.name)}</div>
                                 <div>
-                                    <div className={styles.eyebrow}>{event.game} · {KIND_LABEL[event.kind]}</div>
+                                    <div className={styles.eyebrow}>{event.game} · {(event.kind === 'bracket' && EVENT_TYPES[event.event_type]) || KIND_LABEL[event.kind]}</div>
                                     <div className={styles.gameName}>{event.name}</div>
                                     {(date || event.location) &&
                                         <div className={styles.location}>{[date, event.location].filter(Boolean).join(' · ')}</div>

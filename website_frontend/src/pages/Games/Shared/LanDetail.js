@@ -1,4 +1,4 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText, AddYourEventButton } from "components";
 import { useParams } from "react-router";
 import { useLanInfo } from "hooks";
 import { buildEventPath } from "utils/eventPaths";
@@ -26,6 +26,7 @@ export const LanDetail = () => {
                 canonicalPath={buildEventPath('/lans', slug)}
             />
             <HeaderImage imageUrl={data?.header_img} title={data?.verified ? undefined : data?.name} />
+            <AddYourEventButton type="lan" game={data?.game} />
 
             {data?.verified &&
                 <div className="verifiedContainer">

@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { SeoData, HostBanner, HeaderImage, EventListFilters } from "components";
+import { SeoData, HostBanner, HeaderImage, EventListFilters, AddYourEventButton } from "components";
 import { useWagerEvents } from "hooks";
 import { buildEventPath } from 'utils/eventPaths';
 import '../../EventBanners.css';
@@ -65,6 +65,9 @@ export const CodWagers = () => {
                 canonicalPath={"/games/call-of-duty/wagers"}
             />
             <HeaderImage title={"Wagers"} imageClass={"codWagersPage"} />
+
+            <AddYourEventButton />
+
 
             <EventListFilters
                 sort={sort}
