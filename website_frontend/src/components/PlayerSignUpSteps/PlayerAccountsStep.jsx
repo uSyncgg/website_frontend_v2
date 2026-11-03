@@ -19,7 +19,6 @@ import cmgIcon from "assets/images/linked_platforms/cmg_logo_09-17-26.webp";
 import ganksterIcon from "assets/images/linked_platforms/gankster_logo_09-17-26.webp";
 import faceitIcon from "assets/images/linked_platforms/faceit_logo_09-17-26.webp";
 import battlefyIcon from "assets/images/linked_platforms/battefly_logo_09-17-26.webp";
-import eseaIcon from "assets/images/linked_platforms/esea_logo_09-17-26.webp";
 
 const OPTIONS = {
     "socials": [
@@ -153,16 +152,7 @@ const OPTIONS = {
             "errorClassName": "",
             "inputClassName": "",
             "imageClassName": ""
-        },
-        {
-            "name": "esea",
-            "label": "ESEA",
-            "image": eseaIcon,
-            "labelClassName": "",
-            "errorClassName": "",
-            "inputClassName": "",
-            "imageClassName": ""
-        },
+        }
     ]
 }
 

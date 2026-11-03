@@ -1,0 +1,182 @@
+/* Settings and add-a-profile: the bar and the form share one dark area that fills <main>
+   from the navbar to the footer, so no page background shows around the bar. */
+.settingsPage {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--ground);
+}
+
+/* Bar above a profile's settings: back to the picker, and profiles that can still be added. */
+.bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.25rem 16px 0;
+}
+
+.barLink {
+    color: var(--ink-2, rgba(255, 255, 255, .75));
+    font-size: .85rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.barLink:hover {
+    color: #b89cf0;
+}
+
+/* /settings/profile with 2+ profiles: pick which one to edit. */
+.pickerPage {
+    flex: 1;
+    background: var(--ground);
+}
+
+.picker {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2.5rem 16px 3rem;
+    color: var(--ink);
+}
+
+.pickerTitle {
+    margin: 0 0 .35rem;
+    font-size: 1.6rem;
+}
+
+.pickerSub {
+    margin: 0 0 1.75rem;
+    color: var(--ink-2, rgba(255, 255, 255, .75));
+}
+
+.cards {
+    display: grid;
+    gap: .85rem;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-radius: 1rem;
+    border: 1.5px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .03);
+    color: inherit;
+    text-decoration: none;
+    transition: border-color .2s, background .2s;
+}
+
+.card:hover {
+    border-color: #8e6ace;
+    background: rgba(142, 106, 206, .12);
+}
+
+/* The clickable part of a profile card (avatar and name); "Default" / "Make default" sit beside it. */
+.cardLink {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: inherit;
+    text-decoration: none;
+}
+
+.cardMakeDefault {
+    margin-left: auto;
+    flex: none;
+    padding: .4rem .8rem;
+    border: 1.5px solid #8e6ace;
+    border-radius: 999px;
+    background: transparent;
+    color: #b89cf0;
+    font: inherit;
+    font-size: .75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+}
+
+.cardMakeDefault:hover:not(:disabled) {
+    background: #8e6ace;
+    color: #fff;
+}
+
+.cardMakeDefault:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.pickerError {
+    margin: 1rem 0 0;
+    color: #ff7a7a;
+    font-size: .85rem;
+}
+
+.avatar {
+    flex: none;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    background: rgba(142, 106, 206, .25);
+    font-weight: 700;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cardText {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.cardType {
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: #b89cf0;
+}
+
+.cardName {
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.cardDefault {
+    margin-left: auto;
+    font-size: .75rem;
+    color: var(--ink-2, rgba(255, 255, 255, .75));
+}
+
+/* A profile type the account doesn't have yet: same card, dotted and faded until hovered. */
+.cardAdd {
+    border-style: dashed;
+    border-color: rgba(255, 255, 255, .2);
+    background: transparent;
+    opacity: .55;
+}
+
+.cardAdd:hover {
+    opacity: 1;
+    border-color: #8e6ace;
+}
+
+.cardAdd .avatar {
+    background: transparent;
+    border: 1.5px dashed rgba(255, 255, 255, .3);
+    font-size: 1.4rem;
+    font-weight: 400;
+}
