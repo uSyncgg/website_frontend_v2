@@ -12,7 +12,7 @@ const canHostBrackets = (profile) => profile?.bracket_hosting === true;
 // Host tools: only accounts that turned on bracket hosting in their setup.
 // Logged out -> /login. Logged in without it -> profile settings to turn it on.
 export function RequireBracketHost() {
-    const { status, profile } = useCurrentUser();
+    const { status, defaultProfile: profile } = useCurrentUser();
     const location = useLocation();
 
     if (DEV_PREVIEW) return <Outlet />;

@@ -79,7 +79,7 @@ const ViewSwitch = ({ itemClass, onNavigate }) => {
 // profile pointing to the sign-up form) and Settings sends them to the form too.
 // Switching the default profile lives in Profile Settings.
 const AccountLinks = ({ itemClass, buttonClass, onNavigate }) => {
-    const { defaultProfile, profile, logout } = useCurrentUser();
+    const { defaultProfile, logout } = useCurrentUser();
 
     return (
         <>
@@ -87,7 +87,7 @@ const AccountLinks = ({ itemClass, buttonClass, onNavigate }) => {
             <Link to={defaultProfile ? profileUrl(defaultProfile) : '/profile'} className={itemClass} role="menuitem" onClick={onNavigate}>
                 Profile
             </Link>
-            {profile?.bracket_hosting &&
+            {defaultProfile?.bracket_hosting &&
                 <Link to={HOST_PATH} className={itemClass} role="menuitem" onClick={onNavigate}>
                     Host Dashboard
                 </Link>
