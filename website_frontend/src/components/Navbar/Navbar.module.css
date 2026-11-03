@@ -221,7 +221,8 @@
     transition: border-color 0.2s ease;
 }
 
-/* Avatar plus the current view ("Player"), one button that opens the account menu. */
+/* The avatar (opens the account menu) and the current view label ("Player", opens "Viewing as")
+   are two buttons styled alike. */
 .accountTrigger {
     display: flex;
     align-items: center;
@@ -236,6 +237,18 @@
 .accountTrigger:hover .avatarButton,
 .accountTrigger[aria-expanded="true"] .avatarButton {
     border-color: rgb(142, 106, 206);
+}
+
+.accountTriggers {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.viewTrigger:hover .viewLabel,
+.viewTrigger[aria-expanded="true"] .viewLabel {
+    border-color: rgb(142, 106, 206);
+    background: rgba(142, 106, 206, .3);
 }
 
 /* Fixed width (fits PLAYER, the longest) so switching views never moves the avatar beside it. */

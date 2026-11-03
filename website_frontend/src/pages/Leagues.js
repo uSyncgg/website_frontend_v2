@@ -10,8 +10,7 @@ export const Leagues = () => {
                 canonicalPath={"/leagues"}
             />
 
-            <AddYourEventButton type="league" />
-            <CatalogIndex catalog={leaguesCatalog} />
+            <CatalogIndex catalog={leaguesCatalog} heroAction={<AddYourEventButton type="league" align="start" />} />
         </div>
     );
 }

@@ -47,6 +47,16 @@ describe('CreateEvent', () => {
         expect(screen.getByLabelText('Event type')).toHaveValue('');
     });
 
+    it('locks tournaments to Call of Duty', () => {
+        renderAt('/host/events/new?type=tournament&game=Halo');
+        expect(screen.getByLabelText('Game')).toHaveValue('Call of Duty');
+        expect(screen.getByLabelText('Game')).toBeDisabled();
+        expect(screen.getByText('Only Call of Duty tournaments for now.')).toBeInTheDocument();
+        fireEvent.change(screen.getByLabelText('Event type'), { target: { value: 'league' } });
+        expect(screen.getByLabelText('Game')).toHaveValue('Halo');
+        expect(screen.getByLabelText('Game')).not.toBeDisabled();
+    });
+
     it('requires an event type when nothing pre-filled it', () => {
         renderAt('/host/events/new');
         expect(screen.getByLabelText('Event type')).toHaveValue('');

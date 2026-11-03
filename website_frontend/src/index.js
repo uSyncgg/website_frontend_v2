@@ -23,7 +23,7 @@ import { Tournaments } from 'pages/Tournaments';
 // More Pages
 import { ContactUs } from 'pages/More/ContactUs';
 import { Faqs } from 'pages/More/Faqs';
-import { PostYourEvent } from 'pages/More/PostYourEvent';
+import { PostYourEventEntry } from 'pages/More/PostYourEventEntry';
 import { Verification } from 'pages/More/Verification';
 import { ReportProblem } from 'pages/More/ReportProblem';
 import { ComingSoon } from 'pages/More/ComingSoon';
@@ -94,7 +94,7 @@ const app = (
 
             {/* More Pages */}
             <Route path='/more/verification' element={<Verification />} />
-            <Route path='/more/eventhost' element={<PostYourEvent />} />
+            <Route path='/more/eventhost' element={<PostYourEventEntry />} />
             <Route path='/more/contactus' element={<ContactUs />} />
             <Route path='/more/FAQ' element={<Faqs />} />
             <Route path='/more/articles/*' element={<ArticleRoutes />} />

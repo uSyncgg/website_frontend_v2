@@ -23,7 +23,8 @@ const Avatar = ({ src }) => {
 
 // "Viewing as": the account's profiles, the current view (the default profile) ticked. Picking
 // another switches the view everywhere (navbar, Profile link) and keeps you on the page you're on. Views will
-// also decide what the rest of the site offers (e.g. hosts bidding on spots).
+// also decide what the rest of the site offers (e.g. hosts bidding on spots). It opens from the
+// view label next to the avatar, on its own (the avatar opens the account menu).
 const ViewSwitch = ({ itemClass, onNavigate }) => {
     const { defaultProfile, profiles, switchProfile } = useCurrentUser();
     const [switching, setSwitching] = useState(null);
@@ -72,16 +73,15 @@ const ViewSwitch = ({ itemClass, onNavigate }) => {
     );
 };
 
-// The menu's items, shared by the desktop dropdown and the mobile hamburger menu.
+// The account menu's items (no view switching - that's the view label's menu), shared by the
+// avatar's dropdown and the mobile hamburger menu.
 // Before sign-up is finished there's no default profile: Profile goes to /profile (a blank
 // profile pointing to the sign-up form) and Settings sends them to the form too.
-// Switching the default profile lives in Profile Settings.
 const AccountLinks = ({ itemClass, buttonClass, onNavigate }) => {
     const { defaultProfile, logout } = useCurrentUser();
 
     return (
         <>
-            <ViewSwitch itemClass={itemClass} onNavigate={onNavigate} />
             <Link to={defaultProfile ? profileUrl(defaultProfile) : '/profile'} className={itemClass} role="menuitem" onClick={onNavigate}>
                 Profile
             </Link>
@@ -93,7 +93,7 @@ const AccountLinks = ({ itemClass, buttonClass, onNavigate }) => {
             }
             {/* Goes straight to the profile's settings when there's only one, otherwise asks which. */}
             <Link to="/settings/profile" className={itemClass} role="menuitem" onClick={onNavigate}>
-                Profile Settings
+                Settings
             </Link>
 
             <button type="button" className={buttonClass} role="menuitem" onClick={logout}>
@@ -103,19 +103,24 @@ const AccountLinks = ({ itemClass, buttonClass, onNavigate }) => {
     );
 };
 
+// Two menus side by side: the avatar opens the account menu (Profile, Host Dashboard, Settings,
+// Logout) and the view label opens "Viewing as". With a single profile there's nothing to
+// switch to, so the label is just a label.
 const ProfileMenu = () => {
-    const { defaultProfile } = useCurrentUser();
-    const [open, setOpen] = useState(false);
+    const { defaultProfile, profiles } = useCurrentUser();
+    // null, 'account' or 'view'.
+    const [open, setOpen] = useState(null);
     const wrapperRef = useRef(null);
+    const canSwitch = !!defaultProfile && profiles.length > 1;
 
     useEffect(() => {
         if (!open) return;
 
         const handleClickOutside = (e) => {
-            if (!wrapperRef.current?.contains(e.target)) setOpen(false);
+            if (!wrapperRef.current?.contains(e.target)) setOpen(null);
         };
         const handleEscape = (e) => {
-            if (e.key === 'Escape') setOpen(false);
+            if (e.key === 'Escape') setOpen(null);
         };
 
         document.addEventListener('mousedown', handleClickOutside);
@@ -126,34 +131,56 @@ const ProfileMenu = () => {
         };
     }, [open]);
 
+    const toggle = (menu) => setOpen(current => (current === menu ? null : menu));
+    const viewLabel = defaultProfile && PROFILE_LABELS[defaultProfile.type];
+
     return (
         <div className={styles.accountMenu} ref={wrapperRef}>
-            <button
-                type="button"
-                className={styles.accountTrigger}
-                aria-label={defaultProfile ? `Account menu, viewing as ${PROFILE_LABELS[defaultProfile.type]}` : 'Account menu'}
-                aria-haspopup="menu"
-                aria-expanded={open}
-                onClick={() => setOpen(o => !o)}
-            >
-                <span className={styles.avatarButton}>
-                    <Avatar key={defaultProfile?.profile_picture} src={defaultProfile?.profile_picture} />
-                </span>
-                {defaultProfile &&
-                    <span className={styles.viewLabel}>
-                        {PROFILE_LABELS[defaultProfile.type]}
-                        <FaChevronDown aria-hidden="true" />
+            <div className={styles.accountTriggers}>
+                <button
+                    type="button"
+                    className={styles.accountTrigger}
+                    aria-label="Account menu"
+                    aria-haspopup="menu"
+                    aria-expanded={open === 'account'}
+                    onClick={() => toggle('account')}
+                >
+                    <span className={styles.avatarButton}>
+                        <Avatar key={defaultProfile?.profile_picture} src={defaultProfile?.profile_picture} />
                     </span>
-                }
-            </button>
+                </button>
+                {viewLabel && (canSwitch
+                    ? (
+                        <button
+                            type="button"
+                            className={`${styles.accountTrigger} ${styles.viewTrigger}`}
+                            aria-label={`Viewing as ${viewLabel}, switch view`}
+                            aria-haspopup="menu"
+                            aria-expanded={open === 'view'}
+                            onClick={() => toggle('view')}
+                        >
+                            <span className={styles.viewLabel}>
+                                {viewLabel}
+                                <FaChevronDown aria-hidden="true" />
+                            </span>
+                        </button>
+                    )
+                    : <span className={styles.viewLabel} aria-label={`Viewing as ${viewLabel}`}>{viewLabel}</span>
+                )}
+            </div>
 
-            {open &&
+            {open === 'account' &&
                 <div className={styles.accountDropdown} role="menu">
                     <AccountLinks
                         itemClass={styles.dropdownItem}
                         buttonClass={`${styles.dropdownItem} ${styles.dropdownButton}`}
-                        onNavigate={() => setOpen(false)}
+                        onNavigate={() => setOpen(null)}
                     />
+                </div>
+            }
+            {open === 'view' &&
+                <div className={styles.accountDropdown} role="menu">
+                    <ViewSwitch itemClass={styles.dropdownItem} onNavigate={() => setOpen(null)} />
                 </div>
             }
         </div>

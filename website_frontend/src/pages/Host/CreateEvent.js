@@ -5,7 +5,7 @@ import { useCurrentUser } from "hooks";
 import { createEvent } from "services/hostEventsMock";
 import { FORMATS } from "utils/bracket";
 import { PROFILE_LABELS, canHostBrackets, profileUrl } from "utils/profiles";
-import { EVENT_TYPES, HOST_GAMES } from "utils/hostEvents";
+import { EVENT_TYPES, HOST_GAMES, TOURNAMENT_GAME } from "utils/hostEvents";
 import { BEST_OF, MockBanner, TEAM_SIZES } from "./hostShared";
 import styles from "./Host.module.css";
 
@@ -67,6 +67,9 @@ export const CreateEvent = () => {
     // LANs are always in person, so they always need a venue.
     const isLan = form.eventType === 'lan';
     const locationType = isLan ? 'in_person' : form.locationType;
+    // Only Call of Duty tournaments can be posted for now.
+    const isTournament = form.eventType === 'tournament';
+    const game = isTournament ? TOURNAMENT_GAME : form.game;
 
     const maxNum = Number(form.maxEntrants);
     const errors = {
@@ -90,6 +93,7 @@ export const CreateEvent = () => {
         const id = createEvent({
             ...rest,
             name: form.name.trim(),
+            game,
             locationType,
             venue: locationType === 'in_person' ? form.venue.trim() : '',
             bestOf: Number(form.bestOf),
@@ -151,9 +155,10 @@ export const CreateEvent = () => {
                         <div className={styles.fieldRow}>
                             <div className={styles.field}>
                                 <label htmlFor="game">Game</label>
-                                <select id="game" className={styles.select} value={form.game} onChange={set('game')}>
+                                <select id="game" className={styles.select} value={game} onChange={set('game')} disabled={isTournament}>
                                     {HOST_GAMES.map(g => <option key={g}>{g}</option>)}
                                 </select>
+                                {isTournament && <p className={styles.fieldHint}>Only Call of Duty tournaments for now.</p>}
                             </div>
                             <div className={styles.field}>
                                 <label htmlFor="teamSize">Team size</label>

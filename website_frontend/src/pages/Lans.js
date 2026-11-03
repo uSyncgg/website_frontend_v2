@@ -10,8 +10,7 @@ export const Lans = () => {
                 canonicalPath={"/lans"}
             />
 
-            <AddYourEventButton type="lan" />
-            <CatalogIndex catalog={lansCatalog} />
+            <CatalogIndex catalog={lansCatalog} heroAction={<AddYourEventButton type="lan" align="start" />} />
         </div>
     );
 }

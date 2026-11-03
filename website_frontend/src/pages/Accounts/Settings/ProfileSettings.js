@@ -75,7 +75,7 @@ export const ProfileSettingsHome = () => {
     return (
         <div className={styles.pickerPage}>
             <div className={styles.picker}>
-                <h1 className={styles.pickerTitle}>Profile settings</h1>
+                <h1 className={styles.pickerTitle}>Settings</h1>
                 <p className={styles.pickerSub}>Which profile do you want to edit?</p>
 
                 <div className={styles.cards}>

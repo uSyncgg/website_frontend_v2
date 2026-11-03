@@ -11,6 +11,9 @@ export const EVENT_TYPES = {
     tournament: 'Tournament',
 };
 
+// Tournaments can only be posted for Call of Duty for now (the only title with a tournaments page).
+export const TOURNAMENT_GAME = 'Call of Duty';
+
 // Catalog section key -> event type.
 const SECTION_TYPES = { leagues: 'league', lans: 'lan', tournaments: 'tournament' };
 

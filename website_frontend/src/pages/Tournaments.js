@@ -10,8 +10,7 @@ export const Tournaments = () => {
                 canonicalPath={"/tournaments"}
             />
 
-            <AddYourEventButton type="tournament" />
-            <CatalogIndex catalog={tournamentsCatalog} />
+            <CatalogIndex catalog={tournamentsCatalog} heroAction={<AddYourEventButton type="tournament" align="start" />} />
         </div>
     );
 }
