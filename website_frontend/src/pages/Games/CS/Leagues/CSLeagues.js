@@ -111,9 +111,6 @@ export const CSLeagues = () => {
             />
             <HeaderImage title={"Counter-Strike 2 Leagues"} imageClass={"cs2LeaguePage"} />
 
-            <AddYourEventButton />
-
-
             <EventListFilters
                 sort={sort}
                 onSortChange={setSort}
@@ -128,6 +125,8 @@ export const CSLeagues = () => {
                 resultCount={filteredLeagues.length}
                 onClear={clearFilters}
             />
+
+            <AddYourEventButton />
 
             {loading ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>

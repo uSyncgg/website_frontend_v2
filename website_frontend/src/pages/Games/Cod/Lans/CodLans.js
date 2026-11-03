@@ -88,9 +88,6 @@ export const CodLans = () => {
                 <LanMap markers={markers} game={MAP_GAME} />
             </div>
 
-            <AddYourEventButton />
-
-
             <EventListFilters
                 sort={sort}
                 onSortChange={setSort}
@@ -103,6 +100,8 @@ export const CodLans = () => {
                 resultCount={filteredLans.length}
                 onClear={clearFilters}
             />
+
+            <AddYourEventButton />
 
             {loading ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading LANs...</h2>

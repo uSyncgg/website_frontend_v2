@@ -111,9 +111,6 @@ export const CodLeagues = () => {
             />
             <HeaderImage title={"Call of Duty Leagues"} imageClass={"lansPage"} />
 
-            <AddYourEventButton />
-
-
             <EventListFilters
                 sort={sort}
                 onSortChange={setSort}
@@ -128,6 +125,8 @@ export const CodLeagues = () => {
                 resultCount={filteredLeagues.length}
                 onClear={clearFilters}
             />
+
+            <AddYourEventButton />
 
             {loading ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>

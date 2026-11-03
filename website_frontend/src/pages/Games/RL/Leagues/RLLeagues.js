@@ -111,9 +111,6 @@ export const RLLeagues = () => {
             />
             <HeaderImage title={"Rocket League Leagues"} imageClass={"rlLeaguePage"} />
 
-            <AddYourEventButton />
-
-
             <EventListFilters
                 sort={sort}
                 onSortChange={setSort}
@@ -128,6 +125,8 @@ export const RLLeagues = () => {
                 resultCount={filteredLeagues.length}
                 onClear={clearFilters}
             />
+
+            <AddYourEventButton />
 
             {loading ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>

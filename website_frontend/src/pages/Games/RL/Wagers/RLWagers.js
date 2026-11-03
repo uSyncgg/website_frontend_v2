@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { SeoData, HostBanner, HeaderImage, EventListFilters, AddYourEventButton } from "components";
+import { SeoData, HostBanner, HeaderImage, EventListFilters } from "components";
 import { useWagerEvents } from "hooks";
 import { buildEventPath } from 'utils/eventPaths';
 import '../../EventBanners.css';
@@ -65,9 +65,6 @@ export const RLWagers = () => {
                 canonicalPath={"/games/RocketLeague/wagers"}
             />
             <HeaderImage title={"Wagers"} imageClass={"lansPage"} />
-
-            <AddYourEventButton />
-
 
             <EventListFilters
                 sort={sort}

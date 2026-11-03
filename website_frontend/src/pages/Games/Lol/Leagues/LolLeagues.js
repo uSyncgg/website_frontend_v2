@@ -111,9 +111,6 @@ export const LolLeagues = () => {
             />
             <HeaderImage title={"League of Legends Leagues"} imageClass={"lolLeaguePage"} />
 
-            <AddYourEventButton />
-
-
             <EventListFilters
                 sort={sort}
                 onSortChange={setSort}
@@ -128,6 +125,8 @@ export const LolLeagues = () => {
                 resultCount={filteredLeagues.length}
                 onClear={clearFilters}
             />
+
+            <AddYourEventButton />
 
             {loading ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>

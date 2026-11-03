@@ -6,8 +6,8 @@ import { canHostBrackets, createEventUrl } from "utils/profiles";
 import styles from "./AddYourEventButton.module.css";
 
 /**
- * "Add your event" on the league, LAN, wager and head-to-head pages. Only shown while viewing as
- * a host or venue that hosts brackets (the same rule as the host pages). It opens the event form
+ * "Add your event", centered just above the events on the league, LAN and tournament pages.
+ * Only shown while viewing as a host profile (with bracket hosting on). It opens the event form
  * pre-filled with this page's event type and game, worked out from the URL; detail pages that
  * know better (e.g. a LAN's own game) pass `type` / `game`.
  */
@@ -15,7 +15,7 @@ export const AddYourEventButton = ({ type, game }) => {
     const { defaultProfile } = useCurrentUser();
     const { pathname } = useLocation();
 
-    if (!canHostBrackets(defaultProfile)) return null;
+    if (defaultProfile?.type !== 'host' || !canHostBrackets(defaultProfile)) return null;
 
     const fromPath = eventContextFromPath(pathname);
     const prefill = { type: type ?? fromPath.type, game: game ?? fromPath.game };

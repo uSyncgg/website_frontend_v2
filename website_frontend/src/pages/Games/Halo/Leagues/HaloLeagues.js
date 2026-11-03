@@ -111,9 +111,6 @@ export const HaloLeagues = () => {
             />
             <HeaderImage title={"Halo Leagues"} imageClass={"haloLeaguePage"} />
 
-            <AddYourEventButton />
-
-
             <EventListFilters
                 sort={sort}
                 onSortChange={setSort}
@@ -128,6 +125,8 @@ export const HaloLeagues = () => {
                 resultCount={filteredLeagues.length}
                 onClear={clearFilters}
             />
+
+            <AddYourEventButton />
 
             {loading ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>

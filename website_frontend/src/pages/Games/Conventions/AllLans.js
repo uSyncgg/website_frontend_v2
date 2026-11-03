@@ -92,8 +92,6 @@ export const AllLans = () => {
                 <LanMap markers={markers} showAllGames={true} />
             </div>
 
-            <AddYourEventButton type="lan" />
-
             <EventListFilters
                 sort={sort}
                 onSortChange={setSort}
@@ -106,6 +104,8 @@ export const AllLans = () => {
                 resultCount={filteredLans.length}
                 onClear={clearFilters}
             />
+
+            <AddYourEventButton type="lan" />
 
             {loading ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading LANs...</h2>

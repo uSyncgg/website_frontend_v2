@@ -78,8 +78,6 @@ export const WzLeagues = () => {
             />
             <HeaderImage title={"Warzone Leagues"} imageClass={"wzLeaguePage"} />
 
-            <AddYourEventButton />
-
             {!loading && !error && allLeagues.length > 0 &&
                 <EventListFilters
                     sort={sort}
@@ -93,6 +91,8 @@ export const WzLeagues = () => {
                     onClear={clearFilters}
                 />
             }
+
+            <AddYourEventButton />
 
             {loading ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>

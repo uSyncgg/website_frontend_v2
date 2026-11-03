@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { SeoData, HostBanner, HeaderImage, EventListFilters, AddYourEventButton } from "components";
+import { SeoData, HostBanner, HeaderImage, EventListFilters } from "components";
 import { useXpEvents } from "hooks";
 import { buildEventPath } from 'utils/eventPaths';
 import '../../EventBanners.css';
@@ -65,9 +65,6 @@ export const CodHeadToHead = () => {
                 canonicalPath={"/games/call-of-duty/head-to-head"}
             />
             <HeaderImage title={"Head to Head"} imageClass={"codh2hPage"} />
-
-            <AddYourEventButton />
-
 
             <EventListFilters
                 sort={sort}

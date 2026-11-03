@@ -3,21 +3,22 @@ import { gamesCatalog } from "catalog/games.catalog";
 // Games a host can run an event for: the site's supported titles, named as the API names them.
 export const HOST_GAMES = gamesCatalog.entries.map(entry => entry.apiGame);
 
-// The kind of event, the same as the site's sections. LANs are always in person.
+// The kinds of event a host can post. LANs are always in person. Wagers and head-to-head
+// aren't offered (for now), so those pages don't get the "Add your event" button.
 export const EVENT_TYPES = {
     league: 'League',
     lan: 'LAN',
-    wager: 'Wagers',
-    h2h: 'Head-to-head',
+    tournament: 'Tournament',
 };
 
 // Catalog section key -> event type.
-const SECTION_TYPES = { leagues: 'league', lans: 'lan', wagers: 'wager', h2h: 'h2h' };
+const SECTION_TYPES = { leagues: 'league', lans: 'lan', tournaments: 'tournament' };
 
 /**
  * The event type and game a page is about, from its URL: /games/call-of-duty/leagues (and any
- * league under it) is { type: 'league', game: 'Call of Duty' }. Pages outside a game's section
- * give what they can ({} when nothing matches).
+ * league under it) is { type: 'league', game: 'Call of Duty' }, and
+ * /tournaments/call-of-duty-tournaments is a Call of Duty tournament. Pages outside those
+ * sections give {}.
  */
 export const eventContextFromPath = (pathname) => {
     const path = pathname.toLowerCase();

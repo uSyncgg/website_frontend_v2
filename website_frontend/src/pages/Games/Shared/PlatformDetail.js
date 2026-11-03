@@ -1,4 +1,4 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText, AddYourEventButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText } from "components";
 import { useParams } from "react-router";
 import { useEventByPath } from "hooks";
 import { buildEventPath } from "utils/eventPaths";
@@ -32,7 +32,6 @@ export const PlatformDetail = ({ eventType, game, sectionPath }) => {
                 canonicalPath={buildEventPath(sectionPath, slug)}
             />
             <HeaderImage imageUrl={data?.header_img} title={data?.verified ? undefined : data?.name} />
-            <AddYourEventButton type={eventType === 'wagers' ? 'wager' : 'h2h'} game={game} />
 
             {data?.verified &&
                 <div className="verifiedContainer">

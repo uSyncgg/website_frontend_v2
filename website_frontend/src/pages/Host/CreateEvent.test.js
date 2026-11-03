@@ -31,13 +31,20 @@ describe('CreateEvent', () => {
     });
 
     it('lets other event types be online', () => {
-        renderAt('/host/events/new?type=wager');
+        renderAt('/host/events/new?type=tournament');
         const where = screen.getByLabelText('Where');
         expect(where).toHaveValue('online');
         expect(where).not.toBeDisabled();
         fireEvent.change(screen.getByLabelText('Event type'), { target: { value: 'lan' } });
         expect(where).toHaveValue('in_person');
         expect(where).toBeDisabled();
+    });
+
+    it('only offers League, LAN and Tournament, ignoring other pre-filled types', () => {
+        renderAt('/host/events/new?type=wager');
+        const types = [...screen.getByLabelText('Event type').options].map(o => o.value).filter(Boolean);
+        expect(types).toEqual(['league', 'lan', 'tournament']);
+        expect(screen.getByLabelText('Event type')).toHaveValue('');
     });
 
     it('requires an event type when nothing pre-filled it', () => {

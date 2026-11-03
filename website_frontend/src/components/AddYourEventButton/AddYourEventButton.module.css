@@ -1,7 +1,7 @@
 .row {
     display: flex;
-    justify-content: flex-end;
-    margin: 1rem 0 0.5rem;
+    justify-content: center;
+    margin: 1rem 0;
 }
 
 .button {

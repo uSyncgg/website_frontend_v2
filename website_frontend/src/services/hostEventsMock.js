@@ -87,7 +87,7 @@ const readyMatches = (event) =>
     allMatches(buildBracket(event.format, event.bracket.seeds, event.bracket.results)).filter(m => m.status === 'ready');
 
 const baseEvent = {
-    // 'league' | 'lan' | 'wager' | 'h2h' (utils/hostEvents EVENT_TYPES). LANs are always in person.
+    // 'league' | 'lan' | 'tournament' (utils/hostEvents EVENT_TYPES). LANs are always in person.
     eventType: 'league',
     description: '',
     rules: '',
@@ -135,7 +135,7 @@ const buildDemoEvents = () => {
         ...baseEvent,
         id: 'evt-friday-1v1s',
         name: "uSync Friday Night 1v1s",
-        eventType: 'wager',
+        eventType: 'tournament',
         game: "Call of Duty",
         format: 'single_elim',
         teamSize: '1v1',

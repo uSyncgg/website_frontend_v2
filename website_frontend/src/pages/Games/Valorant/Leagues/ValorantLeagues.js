@@ -110,9 +110,6 @@ export const ValorantLeagues = () => {
             />
             <HeaderImage title={"Valorant Leagues"} imageClass={"valLeaguePage"} />
 
-            <AddYourEventButton />
-
-
             <EventListFilters
                 sort={sort}
                 onSortChange={setSort}
@@ -127,6 +124,8 @@ export const ValorantLeagues = () => {
                 resultCount={filteredLeagues.length}
                 onClear={clearFilters}
             />
+
+            <AddYourEventButton />
 
             {loading ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>
