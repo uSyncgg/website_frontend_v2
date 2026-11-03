@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Routes, Route } from 'react-router';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router';
 
 // Navbar & Footer
 import { Navbar, Footer, ScrollToTop, ErrorBoundary } from 'components';
@@ -23,7 +23,7 @@ import { Tournaments } from 'pages/Tournaments';
 // More Pages
 import { ContactUs } from 'pages/More/ContactUs';
 import { Faqs } from 'pages/More/Faqs';
-import { PostYourEvent } from 'pages/More/PostYourEvent';
+import { PostYourEventEntry } from 'pages/More/PostYourEventEntry';
 import { Verification } from 'pages/More/Verification';
 import { ReportProblem } from 'pages/More/ReportProblem';
 import { ComingSoon } from 'pages/More/ComingSoon';
@@ -57,7 +57,15 @@ import TournamentRoutes from './routes/TournamentRoutes';
 import { AuthPage } from 'pages/Accounts/Authentication/AuthPage';
 import { ForgotPassword } from 'pages/Accounts/Authentication/ForgotPassword';
 import { ResetPassword } from 'pages/Accounts/Authentication/ResetPassword';
-import { RequireCompleteProfile, RedirectIfProfileComplete } from 'components';
+import { RequireCompleteProfile, RedirectIfProfileComplete, RequireBracketHost } from 'components';
+import { EventDashboard } from 'pages/Host/EventDashboard';
+import { EVENT_DASHBOARD_PATH, HOSTING_DASHBOARD_PATH } from 'utils/hostEvents';
+import { CreateEvent } from 'pages/Host/CreateEvent';
+import { ManageEvent, EventOverview } from 'pages/Host/ManageEvent';
+import { EventEntrants } from 'pages/Host/EventEntrants';
+import { EventSeeding } from 'pages/Host/EventSeeding';
+import { EventBracket } from 'pages/Host/EventBracket';
+import { PublicBracket } from 'pages/Host/PublicBracket';
 import { Profile, MyProfile } from 'pages/Accounts/Profile/Profile';
 import { ProfileSettings, ProfileSettingsHome, AddProfile } from 'pages/Accounts/Settings/ProfileSettings';
 import { CurrentUserProvider } from 'hooks';
@@ -87,7 +95,7 @@ const app = (
 
             {/* More Pages */}
             <Route path='/more/verification' element={<Verification />} />
-            <Route path='/more/eventhost' element={<PostYourEvent />} />
+            <Route path='/more/eventhost' element={<PostYourEventEntry />} />
             <Route path='/more/contactus' element={<ContactUs />} />
             <Route path='/more/FAQ' element={<Faqs />} />
             <Route path='/more/articles/*' element={<ArticleRoutes />} />
@@ -137,6 +145,7 @@ const app = (
             </Route>
             {/* :username is optional - the page corrects it to the profile's current name. */}
             <Route path='/profile/:publicId/:username?' element={<Profile />} />
+            <Route path='/profile/:publicId/:username/stats/:game?' element={<Profile stats />} />
 
             {/* Profile Completion — the destination RequireCompleteProfile redirects to,
                 so it must not be wrapped by that same guard (that would redirect to itself). */}
@@ -153,6 +162,25 @@ const app = (
               <Route path='add/:type' element={<AddProfile />} />
               <Route path=':type' element={<ProfileSettings />} />
             </Route>
+
+            {/* Event Dashboard - every signed-in account: events entered, and (as a host) events run. */}
+            <Route path={EVENT_DASHBOARD_PATH} element={<RequireCompleteProfile />}>
+              <Route index element={<EventDashboard />} />
+            </Route>
+
+            {/* Bracket hosting - accounts with bracket hosting turned on (see RequireBracketHost). Mock data for now. */}
+            <Route path='/host/events' element={<RequireBracketHost />}>
+              <Route index element={<Navigate to={HOSTING_DASHBOARD_PATH} replace />} />
+              <Route path='new' element={<CreateEvent />} />
+              <Route path=':eventId' element={<ManageEvent />}>
+                <Route index element={<EventOverview />} />
+                <Route path='entrants' element={<EventEntrants />} />
+                <Route path='seeding' element={<EventSeeding />} />
+                <Route path='bracket' element={<EventBracket />} />
+              </Route>
+            </Route>
+            {/* Public, read-only bracket page players are sent to. */}
+            <Route path='/brackets/:eventId' element={<PublicBracket />} />
 
           </Routes>
         </ErrorBoundary>

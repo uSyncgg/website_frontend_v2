@@ -1,0 +1,98 @@
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+/* Divider between the link icons and the game ID chips. */
+.group + .group {
+    padding-left: 10px;
+    border-left: 1px solid var(--line-strong);
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    height: 34px;
+    min-width: 34px;
+    padding: 0 6px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--ink-2);
+    font: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color .15s, background .15s, transform .15s;
+}
+
+.chip:hover,
+.chip:focus-visible {
+    border-color: rgba(155, 111, 224, .5);
+    background: var(--violet-dim);
+    color: var(--ink);
+    transform: translateY(-1px);
+}
+
+.idChip {
+    padding-right: 10px;
+}
+
+.mark {
+    width: 22px;
+    height: 22px;
+    flex: none;
+    display: grid;
+    place-items: center;
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--violet-bright);
+}
+
+.mark img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.mark svg {
+    width: 18px;
+    height: 18px;
+}
+
+.handle {
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+    font-size: 12px;
+}
+
+.edit {
+    height: 34px;
+    padding: 0 12px;
+    border-radius: 10px;
+    border: 1px dashed rgba(155, 111, 224, .5);
+    background: transparent;
+    color: var(--violet-bright);
+    font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.edit:hover,
+.edit:focus-visible {
+    background: var(--violet-dim);
+}

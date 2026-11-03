@@ -5,15 +5,14 @@ import { ProfileBioStep } from "components/MutualSignUpSteps/ProfileBioStep";
 import { ProfileMediaStep } from "components/MutualSignUpSteps/ProfileMediaStep";
 import { LocationStep } from "components/MutualSignUpSteps/LocationStep";
 import { BracketHostingStep } from "components/MutualSignUpSteps/BracketHostingStep";
+import { LinkedAccountsStep } from "components/MutualSignUpSteps/LinkedAccountsStep";
 
 import { PlayerAboutStep } from "components/PlayerSignUpSteps/PlayerAboutStep";
-import { PlayerAccountsStep } from "components/PlayerSignUpSteps/PlayerAccountsStep";
 
 import { HostOrgStep } from "components/HostSignUpSteps/HostOrgStep";
 import { HostEventStep } from "components/HostSignUpSteps/HostEventStep";
-import { HostAccountsStep } from "components/HostSignUpSteps/HostAccountsStep";
 
-import { PROFILE_TYPES, bioField, pictureField, usernameField } from "utils/profiles";
+import { PROFILE_TYPES, bioField, linksField, pictureField, usernameField } from "utils/profiles";
 
 // Shared by the sign-up wizard, the add-a-profile wizard and the profile settings wizard.
 // - `fields`: fields validated (via trigger) before leaving the step.
@@ -23,9 +22,6 @@ import { PROFILE_TYPES, bioField, pictureField, usernameField } from "utils/prof
 // - `saveFields`: every field the step owns, optional ones included. Profile settings uses
 //   it to work out which changed values belong to this step's save.
 
-const SOCIAL_FIELDS = ['twitch', 'twitter', 'youtube', 'kick', 'discord', 'instagram'];
-const PLAYER_PLATFORM_FIELDS = ['battlenet', 'activision', 'steam', 'riot'];
-const PLAYER_COMPETITIVE_FIELDS = ['cmg', 'gankster', 'faceit', 'battlefy'];
 const PLAYER_ABOUT_FIELDS = ['first_name', 'last_name', 'phone_number', 'gender', 'date_of_birth', 'country'];
 
 // Step 0 of sign-up: which profiles to create. Every other step depends on it.
@@ -81,8 +77,18 @@ const bracketStep = (types) => ({ key: 'bracket_hosting', title: 'Bracket Hostin
 const SETTINGS_BRACKET_STEP = { key: 'bracket_hosting', title: 'Bracket Hosting', subtitle: BRACKET_SUBTITLE, Component: BracketHostingStep, fields: [], saveFields: ['bracket_hosting'] };
 const HOST_ORG_STEP = { key: 'host_org', title: 'Organization', subtitle: 'This is the name players will see on every event you run.', Component: HostOrgStep, fields: ['organization', 'host_country'], requiredFields: ['organization', 'host_country'], saveFields: ['organization', 'host_country'] };
 const HOST_EVENTS_STEP = { key: 'host_events', title: 'Event Types', subtitle: 'Pick every format you host.', Component: HostEventStep, fields: [], saveFields: ['event_types'] };
-const PLAYER_ACCOUNTS_STEP = { key: 'player_accounts', title: 'Linked Accounts', subtitle: 'Optional - connect the platforms you use so teammates and organizers can find you.', Component: PlayerAccountsStep, fields: [], saveFields: [...SOCIAL_FIELDS, ...PLAYER_PLATFORM_FIELDS, ...PLAYER_COMPETITIVE_FIELDS] };
-const SOCIAL_ACCOUNTS_STEP = { key: 'social_accounts', title: 'Linked Accounts', subtitle: 'Optional - connect the platforms you use so people can find you.', Component: HostAccountsStep, fields: [], saveFields: SOCIAL_FIELDS };
+// Optional: the accounts each new profile links. Profile settings edits them in the link editor instead.
+const accountsStep = (types) => ({
+    key: 'linked_accounts',
+    title: 'Linked Accounts',
+    subtitle: types.length > 1
+        ? 'Optional - paste a link or type a handle for each profile, so people can find you.'
+        : 'Optional - paste a link or type a handle, so people can find you.',
+    Component: LinkedAccountsStep,
+    props: { types },
+    fields: [],
+    saveFields: types.map(linksField),
+});
 
 // The detail steps for a set of profile types, in order. The order/composition lives entirely
 // here - reorder or interleave steps by editing this function, nothing else needs to change.
@@ -98,7 +104,7 @@ function detailSteps(types, { includeAccounts, media, bracket }) {
         ...(isHost ? [HOST_ORG_STEP, HOST_EVENTS_STEP] : []),
         bracket,
         media,
-        ...(includeAccounts ? [isPlayer ? PLAYER_ACCOUNTS_STEP : SOCIAL_ACCOUNTS_STEP] : []),
+        ...(includeAccounts ? [accountsStep(types)] : []),
     ];
 }
 
@@ -112,10 +118,9 @@ export function buildStepSequence(pathSelection) {
     return [PATH_STEP, identityStep(types, { isSignUp: true }), ...detailSteps(types, { includeAccounts: true, media: mediaStep(types, { isSignUp: true }), bracket: bracketStep(types) })];
 }
 
-// Adding one profile to an existing account: its username, then its details. Linked accounts
-// aren't live yet, so that step is left out.
+// Adding one profile to an existing account: its username, then its details and linked accounts.
 export function buildAddProfileSteps(type) {
-    return [identityStep([type], { isSignUp: false }), ...detailSteps([type], { includeAccounts: false, media: mediaStep([type], { isSignUp: false }), bracket: bracketStep([type]) })];
+    return [identityStep([type], { isSignUp: false }), ...detailSteps([type], { includeAccounts: true, media: mediaStep([type], { isSignUp: false }), bracket: bracketStep([type]) })];
 }
 
 // Profile settings for one profile. The username lives on the settings Account step instead.
