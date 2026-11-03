@@ -114,6 +114,9 @@ import { AccountSettingsStep } from "./AccountSettingsStep/AccountSettingsStep";
 
 // Profile
 import { ProfileHeader } from "./ProfileHeader/ProfileHeader";
+import { ProfileLinks } from "./ProfileLinks/ProfileLinks";
+import { LinkAccountsModal } from "./LinkAccountsModal/LinkAccountsModal";
+import { ShareButton } from "./ShareButton/ShareButton";
 import { ProfileViewToggle } from "./ProfileViewToggle/ProfileViewToggle";
 import { ProfileCard } from "./ProfileCard/ProfileCard";
 
@@ -185,6 +188,9 @@ export {
     VerifiedEvents,
     CheckoutSteps,
     ProfileHeader,
+    ProfileLinks,
+    LinkAccountsModal,
+    ShareButton,
     ProfileViewToggle,
     ProfileCard
 };

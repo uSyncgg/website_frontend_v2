@@ -13,11 +13,17 @@ export const bioField = (type) => `bio_${type}`;
 export const copyPictureField = (type) => `copy_picture_${type}`;
 export const copyBioField = (type) => `copy_bio_${type}`;
 export const bracketField = (type) => `bracket_hosting_${type}`;
+// The profile's linked accounts on sign-up/add-a-profile: { platform: typed value }.
+export const linksField = (type) => `links_${type}`;
 
 // Public profile link. The public_id finds the profile; the username is only there so the
 // URL reads well, and the page fixes it up if the profile has been renamed since.
 export const profileUrl = (profile) =>
     `/profile/${encodeURIComponent(profile.public_id)}/${encodeURIComponent(profile.username)}`;
+
+// A player's stats page: every linked game, or one game by its slug. Shareable like the profile.
+export const statsUrl = (profile, gameSlug) =>
+    `${profileUrl(profile)}/stats${gameSlug ? `/${encodeURIComponent(gameSlug)}` : ''}`;
 
 export const settingsUrl = (type) => `/settings/profile/${type}`;
 
