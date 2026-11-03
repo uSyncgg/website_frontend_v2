@@ -238,9 +238,13 @@
     border-color: rgb(142, 106, 206);
 }
 
+/* Fixed width (fits PLAYER, the longest) so switching views never moves the avatar beside it. */
 .viewLabel {
     display: inline-flex;
     align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 84px;
     gap: 6px;
     padding: 4px 9px;
     border-radius: 999px;

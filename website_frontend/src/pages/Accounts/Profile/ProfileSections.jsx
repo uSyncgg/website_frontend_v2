@@ -1,4 +1,5 @@
-import { Link } from "react-router";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router";
 import { ProfileCard } from "components";
 import { useCurrentUser } from "hooks";
 import { useAsync } from "hooks/useEvents";
@@ -39,6 +40,35 @@ const mockBracketEvents = (events, publicId) => events
     }));
 
 /**
+ * The owner's "+ Add event". Host tools only open while viewing as a host or venue (see
+ * RequireBracketHost), so from your own profile in another view it switches the view first.
+ */
+const AddEventButton = ({ profile }) => {
+    const { defaultProfile, switchProfile } = useCurrentUser();
+    const navigate = useNavigate();
+    const [busy, setBusy] = useState(false);
+
+    if (defaultProfile?.public_id === profile.public_id) {
+        return <Link to={createEventUrl(profile.public_id)} className={styles.cardAction}>+ Add event</Link>;
+    }
+
+    const switchAndGo = async () => {
+        setBusy(true);
+        try {
+            await switchProfile(profile.type);
+            navigate(createEventUrl(profile.public_id));
+        } catch {
+            setBusy(false);
+        }
+    };
+    return (
+        <button type="button" className={styles.cardAction} onClick={switchAndGo} disabled={busy}>
+            {busy ? 'Switching…' : '+ Add event'}
+        </button>
+    );
+};
+
+/**
  * The events a host or venue runs on uSync (the ones its account owns). The owner gets an
  * "Add event" button that opens the bracket event setup, posting as this profile.
  */
@@ -51,8 +81,7 @@ export const EventsCard = ({ profile, isOwner }) => {
     // Until the backend serves this list everywhere, a 404 just means no events to show.
     const events = [...mockBracketEvents(hostEvents, profile.public_id), ...(data ?? [])];
     const failed = error && error.response?.status !== 404 && events.length === 0;
-    const addEvent = isOwner && canHostBrackets(own) &&
-        <Link to={createEventUrl(profile.public_id)} className={styles.cardAction}>+ Add event</Link>;
+    const addEvent = isOwner && canHostBrackets(own) && <AddEventButton profile={own} />;
 
     return (
         <ProfileCard title="Events" action={addEvent}>

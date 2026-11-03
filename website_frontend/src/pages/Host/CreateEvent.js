@@ -23,12 +23,15 @@ const blankTier = () => ({ name: '', price: '', capacity: '' });
 const blankQuestion = () => ({ label: '', type: 'text', options: '', required: false });
 
 // /host/events/new, or /host/events/new?profile=<public_id> from a host or venue profile's
-// "Add event" button: the event is posted as that profile and listed on it.
+// "Add event" button: the event is posted as that profile (or the one you're viewing as) and
+// listed on it.
 export const CreateEvent = () => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
-    const { profiles } = useCurrentUser();
-    const hostProfile = profiles.find(p => p.public_id === searchParams.get('profile') && canHostBrackets(p));
+    const { profiles, defaultProfile } = useCurrentUser();
+    // Posted as the profile the button was on, otherwise the one you're viewing as.
+    const requested = profiles.find(p => p.public_id === searchParams.get('profile') && canHostBrackets(p));
+    const hostProfile = requested ?? (canHostBrackets(defaultProfile) ? defaultProfile : undefined);
     const backTo = hostProfile ? profileUrl(hostProfile) : '/host/events';
     const start = defaultStart();
     const [form, setForm] = useState({
@@ -39,7 +42,7 @@ export const CreateEvent = () => {
         usePayments: true,
     });
     const [payments, setPayments] = useState({
-        payoutEmail: '', tiers: [{ name: 'Player Pass', price: '', capacity: '' }],
+        notifyEmail: '', tiers: [{ name: 'Player Pass', price: '', capacity: '' }],
     });
     // What every player fills in when they sign up (free or paid), so the host knows who joined.
     const [signupForm, setSignupForm] = useState({ playerFields: ['Discord'], questions: [] });
@@ -60,7 +63,7 @@ export const CreateEvent = () => {
         venue: form.locationType === 'in_person' && !form.venue.trim() && 'Add where the event is held',
         maxEntrants: !form.uncapped && (!Number.isInteger(maxNum) || maxNum < 2) && 'Enter a whole number of 2 or more, or tick "No cap"',
         noShowMinutes: !form.noShowOff && !(Number(form.noShowMinutes) >= 0) && 'Enter how many minutes to wait, or turn the timer off',
-        payoutEmail: form.usePayments && !/^\S+@\S+\.\S+$/.test(payments.payoutEmail) && 'Add the email we send payouts to',
+        notifyEmail: form.usePayments && !/^\S+@\S+\.\S+$/.test(payments.notifyEmail) && 'Add the email we should notify about new sign-ups',
         tiers: form.usePayments && payments.tiers.some(t => !t.name.trim() || !(Number(t.price) > 0)) && 'Every pass needs a name and a price above $0',
     };
     const hasErrors = Object.values(errors).some(Boolean);
@@ -303,10 +306,13 @@ export const CreateEvent = () => {
                                 </p>
 
                                 <div className={styles.field}>
-                                    <label htmlFor="payoutEmail">Payout email</label>
-                                    <input id="payoutEmail" type="email" className={styles.input} value={payments.payoutEmail}
-                                        onChange={e => setPay('payoutEmail', e.target.value)} placeholder="you@example.com" />
-                                    {err('payoutEmail')}
+                                    <label htmlFor="notifyEmail">Email for new sign-ups</label>
+                                    <input id="notifyEmail" type="email" className={styles.input} value={payments.notifyEmail}
+                                        onChange={e => setPay('notifyEmail', e.target.value)} placeholder="you@example.com" />
+                                    <p className={styles.fieldHint}>
+                                        We email you here each time someone pays to sign up. Entry fees are collected by uSync and paid out to you separately.
+                                    </p>
+                                    {err('notifyEmail')}
                                 </div>
 
                                 <div>

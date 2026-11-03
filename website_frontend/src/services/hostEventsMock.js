@@ -145,7 +145,7 @@ const buildDemoEvents = () => {
         rules: 'Gunfight, BO3. Higher seed picks the first map.\nBoth players report the score after every match - if you disagree, the host decides.\nNo-shows can be reported 10 minutes after your match is called.',
         payments: {
             enabled: true,
-            payoutEmail: 'host@example.com',
+            notifyEmail: 'host@example.com',
             tiers: [{ name: 'Player Pass', price: '10.00', capacity: '' }],
         },
         signupForm: {
