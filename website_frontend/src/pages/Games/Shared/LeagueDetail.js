@@ -81,7 +81,7 @@ export const LeagueDetail = ({ game, sectionPath }) => {
                 </div>
             )}
 
-            {!loading && data && <ClaimEventPrompt eventType="league" eventName={data.name} />}
+            {!loading && data && <ClaimEventPrompt eventId={data.event_id} />}
 
             <div className="backButtonContainer">
                 <BackButton path={backPath} />

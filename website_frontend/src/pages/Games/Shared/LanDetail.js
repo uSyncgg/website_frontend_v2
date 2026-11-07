@@ -60,7 +60,7 @@ export const LanDetail = () => {
                 </div>
             )}
 
-            {!loading && data && <ClaimEventPrompt eventType="lan" eventName={data.name} />}
+            {!loading && data && <ClaimEventPrompt eventId={data.event_id} />}
 
             <div className="backButtonContainer">
                 <BackButton path={sectionPath} />

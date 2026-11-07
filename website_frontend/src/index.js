@@ -155,8 +155,11 @@ const app = (
               <Route path=':type' element={<ProfileSettings />} />
             </Route>
 
-            {/* Hosts claim an existing event listing as theirs (host accounts only). */}
-            <Route path='/claim-event' element={<ClaimEvent />} />
+            {/* Hosts claim an existing event listing as theirs. Logged-out visitors go through
+                /login (RequireCompleteProfile) and come back here afterwards. */}
+            <Route path='/claim-event/:eventId' element={<RequireCompleteProfile />}>
+              <Route index element={<ClaimEvent />} />
+            </Route>
 
           </Routes>
         </ErrorBoundary>

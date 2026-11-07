@@ -59,7 +59,7 @@ export const PlatformDetail = ({ eventType, game, sectionPath }) => {
                 </div>
             )}
 
-            {!loading && data && <ClaimEventPrompt eventType="platform" eventName={data.name} />}
+            {!loading && data && <ClaimEventPrompt eventId={data.event_id} />}
 
             <div className="backButtonContainer">
                 <BackButton path={sectionPath} />

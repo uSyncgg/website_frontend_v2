@@ -5,6 +5,7 @@ import { useLeagueEvents, useLanEvents, useAllLanEvents, useWagerEvents, useXpEv
 import { useEventPasses, useEventReceipt } from "./useEventRegistration";
 import { useProfile, useSettings } from "./useUsers";
 import { useUsernameAvailability } from "./useUsernameAvailability";
+import { useObjectUrl } from "./useObjectUrl";
 
 export {
     useCheckResize,
@@ -28,5 +29,6 @@ export {
     useVerifiedEventsByType,
     useProfile,
     useSettings,
-    useUsernameAvailability
+    useUsernameAvailability,
+    useObjectUrl
 }
