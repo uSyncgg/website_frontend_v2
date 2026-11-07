@@ -1,7 +1,7 @@
 import { SocialLoginButtons, PasswordChecklist } from "components";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { DEFAULT_AUTH_PATH, getReturnPath, signInWithPassword, signUp } from "services/authServices";
 import { validatePassword, friendlyAuthError } from "utils/passwordRules";
 import styles from "./AuthPage.module.css";
@@ -156,7 +156,11 @@ export const AuthPage = ({ mode }) => {
                     )}
 
                     {isSignup && (
-                        <p className={styles.legal}>By creating an account you agree to uSync's Terms of Service and Privacy Policy.</p>
+                        <p className={styles.legal}>
+                            By creating an account you agree to uSync's{' '}
+                            <Link to="/more/terms-of-service" target="_blank" rel="noopener noreferrer">Terms of Service</Link> and{' '}
+                            <Link to="/more/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</Link>.
+                        </p>
                     )}
                     <p className={styles.footnote}>
                         {copy.footPrompt} <button type="button" onClick={() => goTo(copy.swapTo)}>{copy.footAction}</button>

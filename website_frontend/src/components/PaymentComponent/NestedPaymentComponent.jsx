@@ -5,7 +5,9 @@ import { FaLock } from 'react-icons/fa';
 
 const DEFAULT_RETURN_URL = "https://www.usync.gg/paymentform/test/receipt";
 
-export const NestedPaymentComponent = ({ price, returnUrl = DEFAULT_RETURN_URL }) => {
+// onIntentCanceled: optional. Called instead of showing an error when the PaymentIntent was
+// canceled server-side (e.g. an event pass reservation expired), so the page can explain it.
+export const NestedPaymentComponent = ({ price, returnUrl = DEFAULT_RETURN_URL, onIntentCanceled }) => {
     const stripe = useStripe();
     const elements = useElements();
 
@@ -32,7 +34,9 @@ export const NestedPaymentComponent = ({ price, returnUrl = DEFAULT_RETURN_URL }
         // confirmPayment redirects to return_url on success, so `error` is only
         // populated when it resolves without redirecting (i.e. something failed).
         if (error) {
-            if (error.type === "card_error" || error.type === "validation_error") {
+            if (onIntentCanceled && error.payment_intent?.status === "canceled") {
+                onIntentCanceled();
+            } else if (error.type === "card_error" || error.type === "validation_error") {
                 setMessage(error.message);
             } else {
                 setMessage("An unexpected error occured.");
