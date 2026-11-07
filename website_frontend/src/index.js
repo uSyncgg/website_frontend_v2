@@ -60,6 +60,7 @@ import { ResetPassword } from 'pages/Accounts/Authentication/ResetPassword';
 import { RequireCompleteProfile, RedirectIfProfileComplete } from 'components';
 import { Profile, MyProfile } from 'pages/Accounts/Profile/Profile';
 import { ProfileSettings, ProfileSettingsHome, AddProfile } from 'pages/Accounts/Settings/ProfileSettings';
+import { ClaimEvent } from 'pages/Accounts/ClaimEvent/ClaimEvent';
 import { CurrentUserProvider } from 'hooks';
 
 const root = document.getElementById('root');
@@ -152,6 +153,12 @@ const app = (
               <Route index element={<ProfileSettingsHome />} />
               <Route path='add/:type' element={<AddProfile />} />
               <Route path=':type' element={<ProfileSettings />} />
+            </Route>
+
+            {/* Hosts claim an existing event listing as theirs. Logged-out visitors go through
+                /login (RequireCompleteProfile) and come back here afterwards. */}
+            <Route path='/claim-event/:eventId' element={<RequireCompleteProfile />}>
+              <Route index element={<ClaimEvent />} />
             </Route>
 
           </Routes>
