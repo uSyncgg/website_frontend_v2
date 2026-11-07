@@ -1,20 +1,24 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { supabase } from "services/supabaseClient";
-import { getMe } from "services/user";
+import { deleteProfile, getMe, setDefaultProfile } from "services/user";
+import { byProfileType } from "utils/profiles";
 import { useAuth } from "./useAuth";
 
 // status is one of:
 // - 'loading'    auth session or profile lookup still in flight
 // - 'anonymous'  not logged in
-// - 'incomplete' logged in through Supabase, but no profile row yet (/users/me 404s)
-// - 'complete'   logged in with a profile
-// - 'error'      logged in, but the profile lookup failed for another reason
+// - 'incomplete' logged in through Supabase, but sign-up isn't finished (/users/me 404s)
+// - 'complete'   logged in with at least one profile
+// - 'error'      logged in, but the lookup failed for another reason
+//
+// me is GET /users/me: { verified, default_profile, profiles }. Each profile is a summary
+// ({ type, username, public_id, profile_picture }). defaultProfile is the one the navbar shows.
 const CurrentUserContext = createContext(null);
 
 export function CurrentUserProvider({ children }) {
     const { session, loading: authLoading } = useAuth();
     const [status, setStatus] = useState('loading');
-    const [profile, setProfile] = useState(null);
+    const [me, setMe] = useState(null);
 
     const userId = session?.user?.id;
     const token = session?.access_token;
@@ -22,10 +26,10 @@ export function CurrentUserProvider({ children }) {
     const refresh = useCallback(async () => {
         if (!token) return;
         try {
-            setProfile(await getMe(token));
+            setMe(await getMe(token));
             setStatus('complete');
         } catch (err) {
-            setProfile(null);
+            setMe(null);
             // Only a 404 means "no profile yet" - anything else (network, 5xx) must not
             // tell an existing user to complete their profile.
             setStatus(err.response?.status === 404 ? 'incomplete' : 'error');
@@ -36,7 +40,7 @@ export function CurrentUserProvider({ children }) {
     useEffect(() => {
         if (authLoading) return;
         if (!userId) {
-            setProfile(null);
+            setMe(null);
             setStatus('anonymous');
             return;
         }
@@ -45,14 +49,37 @@ export function CurrentUserProvider({ children }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [authLoading, userId]);
 
+    // Switches which profile the navbar shows. The response is the new /me, so no refetch.
+    // Throws on failure so the caller can show the error.
+    const switchProfile = useCallback(async (type) => {
+        setMe(await setDefaultProfile(type, token));
+    }, [token]);
+
+    // Deletes one profile. The response is the new /me (with the oldest remaining profile as
+    // the default if the deleted one was). Throws on failure so the caller can show the error.
+    const removeProfile = useCallback(async (type) => {
+        setMe(await deleteProfile(type, token));
+    }, [token]);
+
     const logout = useCallback(async () => {
         await supabase.auth.signOut();
         // Hard reload so nothing on the page holds on to the old user's state.
         window.location.assign('/');
     }, []);
 
+    const value = {
+        status,
+        me,
+        defaultProfile: me?.default_profile ?? null,
+        profiles: [...(me?.profiles ?? [])].sort(byProfileType),
+        refresh,
+        switchProfile,
+        removeProfile,
+        logout,
+    };
+
     return (
-        <CurrentUserContext.Provider value={{ status, profile, refresh, logout }}>
+        <CurrentUserContext.Provider value={value}>
             {children}
         </CurrentUserContext.Provider>
     );

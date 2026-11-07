@@ -1,8 +1,9 @@
-import { SocialLoginButtons } from "components";
+import { SocialLoginButtons, PasswordChecklist } from "components";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
-import { signInWithPassword, signUp } from "services/authServices";
+import { useLocation, useNavigate } from "react-router";
+import { DEFAULT_AUTH_PATH, getReturnPath, signInWithPassword, signUp } from "services/authServices";
+import { validatePassword, friendlyAuthError } from "utils/passwordRules";
 import styles from "./AuthPage.module.css";
 
 // /login and /signup both render this page; `mode` picks the copy and the submit action.
@@ -34,9 +35,13 @@ const HIGHLIGHTS = [
 export const AuthPage = ({ mode }) => {
     const isSignup = mode === "signup";
     const copy = COPY[mode];
-    const { register, handleSubmit, reset, getValues, formState: { errors, isSubmitting } } = useForm();
+    const { register, handleSubmit, reset, getValues, control, formState: { errors, isSubmitting } } = useForm();
     const [message, setMessage] = useState(null);
     const navigate = useNavigate();
+    const location = useLocation();
+    // Set when a link sent the user here from a page (e.g. a locked event); otherwise
+    // they land on DEFAULT_AUTH_PATH.
+    const returnTo = getReturnPath(location.state?.from) ?? DEFAULT_AUTH_PATH;
 
     // Switching tabs keeps this component mounted, so clear anything left over from the other tab.
     useEffect(() => {
@@ -44,21 +49,21 @@ export const AuthPage = ({ mode }) => {
         setMessage(null);
     }, [mode, reset]);
 
-    const goTo = (path) => navigate(path, { replace: true });
+    // Carries `from` across the tab switch so the return path isn't lost.
+    const goTo = (path) => navigate(path, { replace: true, state: location.state });
 
     const onSubmit = async ({ email, password }) => {
         if (isSignup) {
-            const { error } = await signUp(email, password);
+            const { error } = await signUp(email, password, returnTo);
             setMessage(error
-                ? { type: "error", text: error.message }
+                ? { type: "error", text: friendlyAuthError(error) }
                 : { type: "success", text: "Check your email to confirm your account." });
             return;
         }
 
         const { error } = await signInWithPassword(email, password);
         if (error) return setMessage({ type: "error", text: error.message });
-        // /complete-profile forwards users who already have a profile on to it.
-        navigate("/complete-profile", { replace: true });
+        navigate(returnTo, { replace: true });
     };
 
     return (
@@ -97,7 +102,7 @@ export const AuthPage = ({ mode }) => {
                     <h1 className={styles.stepTitle}>{copy.title}</h1>
                     <p className={styles.stepSub}>{copy.subtitle}</p>
 
-                    <SocialLoginButtons />
+                    <SocialLoginButtons returnTo={returnTo} />
 
                     <div className={styles.divider}><i /><span>or use your email</span><i /></div>
 
@@ -119,7 +124,7 @@ export const AuthPage = ({ mode }) => {
                             <input
                                 {...register("password", {
                                     required: "Password is required.",
-                                    ...(isSignup && { minLength: { value: 8, message: "Password must be at least 8 characters." } }),
+                                    ...(isSignup && { validate: validatePassword }),
                                 })}
                                 id="auth-pass"
                                 className={styles.input}
@@ -127,6 +132,7 @@ export const AuthPage = ({ mode }) => {
                                 autoComplete={isSignup ? "new-password" : "current-password"}
                                 placeholder="••••••••"
                             />
+                            {isSignup && <PasswordChecklist control={control} />}
                             {errors.password && <span className={styles.fieldError}>{errors.password.message}</span>}
                         </div>
 

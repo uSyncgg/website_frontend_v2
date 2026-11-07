@@ -1,19 +1,11 @@
-import { getProfile, getSettings } from "services/user";
+import { getProfile, getProfileSettings } from "services/user";
 import { useAsync } from "./useEvents";
 
-export function useProfile(username) {
-    return useAsync(() => getProfile(username), [username]);
+export function useProfile(publicId) {
+    return useAsync(() => getProfile(publicId), [publicId]);
 }
 
-export function useSettings(token) {
-    
-
-    return useAsync(
-        () => {
-            if (!token) {
-                return Promise.resolve(null);
-            } else {
-                return getSettings(token);
-            } 
-        }, [token]);
+// One of the signed in user's profiles, by type. Waits (stays loading) until there's a token.
+export function useSettings(token, type) {
+    return useAsync(() => getProfileSettings(type, token), [token, type], { skip: !token || !type });
 }

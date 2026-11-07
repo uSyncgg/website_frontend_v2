@@ -27,6 +27,8 @@ import { PostYourEvent } from 'pages/More/PostYourEvent';
 import { Verification } from 'pages/More/Verification';
 import { ReportProblem } from 'pages/More/ReportProblem';
 import { ComingSoon } from 'pages/More/ComingSoon';
+import { TermsOfService } from 'pages/More/TermsOfService';
+import { PrivacyPolicy } from 'pages/More/PrivacyPolicy';
 
 // Payment Imports
 import GeneralPaymentForm from 'pages/Payment/GeneralPaymentForm/GeneralPaymentForm';
@@ -56,8 +58,8 @@ import { AuthPage } from 'pages/Accounts/Authentication/AuthPage';
 import { ForgotPassword } from 'pages/Accounts/Authentication/ForgotPassword';
 import { ResetPassword } from 'pages/Accounts/Authentication/ResetPassword';
 import { RequireCompleteProfile, RedirectIfProfileComplete } from 'components';
-import { Profile } from 'pages/Accounts/Profile/Profile';
-import { ProfileSettings } from 'pages/Accounts/Settings/ProfileSettings';
+import { Profile, MyProfile } from 'pages/Accounts/Profile/Profile';
+import { ProfileSettings, ProfileSettingsHome, AddProfile } from 'pages/Accounts/Settings/ProfileSettings';
 import { ClaimEvent } from 'pages/Accounts/ClaimEvent/ClaimEvent';
 import { CurrentUserProvider } from 'hooks';
 
@@ -90,6 +92,8 @@ const app = (
             <Route path='/more/contactus' element={<ContactUs />} />
             <Route path='/more/FAQ' element={<Faqs />} />
             <Route path='/more/articles/*' element={<ArticleRoutes />} />
+            <Route path='/more/terms-of-service' element={<TermsOfService />} />
+            <Route path='/more/privacy-policy' element={<PrivacyPolicy />} />
             <Route path='/reportproblem' element={<ReportProblem />} />
             <Route path='/Comingsoon' element={<ComingSoon />} />
 
@@ -127,7 +131,13 @@ const app = (
             <Route path='/reset-password' element={<ResetPassword />} />
 
             {/* Public Profiles */}
-            <Route path='/profile/:username' element={<Profile />} />
+            {/* The signed in user's own profile: forwards to their default profile, or shows a
+                blank "incomplete" profile before sign-up is finished. */}
+            <Route path='/profile' element={<RequireCompleteProfile />}>
+              <Route index element={<MyProfile />} />
+            </Route>
+            {/* :username is optional - the page corrects it to the profile's current name. */}
+            <Route path='/profile/:publicId/:username?' element={<Profile />} />
 
             {/* Profile Completion — the destination RequireCompleteProfile redirects to,
                 so it must not be wrapped by that same guard (that would redirect to itself). */}
@@ -137,9 +147,12 @@ const app = (
               </Route>
             </Route>
 
-            {/* Profile Settings — logged-in users only; RequireCompleteProfile sends everyone else to /login. */}
+            {/* Profile Settings — logged-in users only; RequireCompleteProfile sends everyone else to /login.
+                Each profile (player, host, venue) has its own settings; /add/:type adds a new one. */}
             <Route path='/settings/profile' element={<RequireCompleteProfile />}>
-              <Route index element={<ProfileSettings />} />
+              <Route index element={<ProfileSettingsHome />} />
+              <Route path='add/:type' element={<AddProfile />} />
+              <Route path=':type' element={<ProfileSettings />} />
             </Route>
 
             {/* Hosts claim an existing event listing as theirs (host accounts only). */}

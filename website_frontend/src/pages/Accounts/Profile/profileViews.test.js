@@ -1,28 +1,20 @@
 import { resolveViews } from "./profileViews";
 
-const profile = { is_player: false, is_host: false, other_roles: null, venues: null };
-const keys = ({ views }) => views.map(view => view.key);
+const host = { type: "host", public_id: "h1", username: "MattHosts" };
+const player = { type: "player", public_id: "p1", username: "Matt" };
+const venue = { type: "venue", public_id: "v1", username: "Arena" };
 
-test("only the views the profile has are returned, in toggle order", () => {
-    expect(keys(resolveViews({ ...profile, is_host: true, other_roles: ["Coach", "Venue"] }))).toEqual(["host", "venue"]);
-    expect(keys(resolveViews({ ...profile, is_player: true, other_roles: ["Coach"] }))).toEqual(["player"]);
+test("the shown profile and its others make up the views, in toggle order", () => {
+    const { views, active } = resolveViews({ ...venue, others: [host, player] });
+    expect(views.map(view => view.key)).toEqual(["player", "host", "venue"]);
+    expect(active).toBe("venue");
 });
 
-test("the venue view follows the Venue role, not whether venues are listed", () => {
-    expect(keys(resolveViews({ ...profile, other_roles: ["Venue"], venues: null }))).toEqual(["venue"]);
-    expect(keys(resolveViews({ ...profile, is_player: true, venues: [{ name: "Arena", location: "Austin" }] }))).toEqual(["player"]);
+test("each view links to that profile's own page", () => {
+    const { views } = resolveViews({ ...player, others: [host] });
+    expect(views.map(view => view.path)).toEqual(["/profile/p1/Matt", "/profile/h1/MattHosts"]);
 });
 
-test("the requested view is used when the profile has it", () => {
-    expect(resolveViews({ ...profile, is_player: true, is_host: true }, "host").active).toBe("host");
-});
-
-test("a missing or unavailable requested view falls back to the first available", () => {
-    const both = { ...profile, is_player: true, is_host: true };
-    expect(resolveViews(both, null).active).toBe("player");
-    expect(resolveViews({ ...profile, is_host: true }, "venue").active).toBe("host");
-});
-
-test("a profile with no views has no active view", () => {
-    expect(resolveViews(profile, "player")).toEqual({ views: [], active: null });
+test("a profile with no others has a single view", () => {
+    expect(resolveViews({ ...host, others: [] }).views).toHaveLength(1);
 });

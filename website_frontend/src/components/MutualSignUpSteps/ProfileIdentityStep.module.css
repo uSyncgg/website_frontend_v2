@@ -1,0 +1,50 @@
+.section {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+}
+
+.sectionLabel {
+    color: var(--ink);
+    font-weight: 600;
+    font-size: .85rem;
+    margin: 0 0 .85rem;
+}
+
+.tileRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+}
+
+.tile {
+    flex: 1 1 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: .85rem .75rem;
+    border-radius: .8rem;
+    border: 1.5px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .03);
+    color: inherit;
+    cursor: pointer;
+    font-size: .85rem;
+    font-weight: 600;
+    transition: border-color .2s, background .2s;
+}
+
+.tile:hover {
+    border-color: rgba(255, 255, 255, .3);
+}
+
+.tileSelected {
+    border-color: #8e6ace;
+    background: rgba(142, 106, 206, .12);
+}
+
+.hint {
+    margin: .6rem 0 0;
+    font-size: .8rem;
+    color: var(--muted, rgba(255, 255, 255, .6));
+}

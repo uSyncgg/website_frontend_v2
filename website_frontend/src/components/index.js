@@ -81,6 +81,18 @@ import { VerifiedEvents } from "./VerifiedEvents/VerifiedEvents";
 // SEO
 import { SeoData } from "./SeoData/SeoData";
 
+// Legal pages (Terms of Service, Privacy Policy)
+import {
+    LegalDocument,
+    LegalEmail,
+    SectionRef,
+    LegalNotice,
+    LegalContactCard,
+    LegalListLabel,
+    LegalCaps,
+    LegalTable,
+} from "./LegalDocument/LegalDocument";
+
 // Scroll behaviour
 import { ScrollToTop } from "./ScrollToTop/ScrollToTop";
 
@@ -89,6 +101,7 @@ import { ErrorBoundary } from "./ErrorBoundary/ErrorBoundary";
 
 // Account Related
 import { SocialLoginButtons } from "./SocialLoginButtons/SocialLoginButtons";
+import { PasswordChecklist } from "./PasswordChecklist/PasswordChecklist";
 
 // Route Protection
 import { RequireCompleteProfile } from "./RequiredCompleteProfile/RequiredCompleteProfile";
@@ -130,6 +143,14 @@ export {
     NoEvents,
     BackButton,
     SeoData,
+    LegalDocument,
+    LegalEmail,
+    SectionRef,
+    LegalNotice,
+    LegalContactCard,
+    LegalListLabel,
+    LegalCaps,
+    LegalTable,
     ScrollToTop,
     TournamentFilter,
     CodTournamentCard,
@@ -154,6 +175,7 @@ export {
     PaymentComponent,
     LanMap,
     SocialLoginButtons,
+    PasswordChecklist,
     RequireCompleteProfile,
     ClaimEventPrompt,
     RedirectIfProfileComplete,
