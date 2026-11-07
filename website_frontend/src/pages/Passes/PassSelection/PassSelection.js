@@ -12,13 +12,29 @@ import { getApiErrorMessage, getLoadErrorMessage } from "utils/apiError";
 
 const STEPS = ['Registration', 'Payment', 'Confirmation'];
 
-function getRemaining(tier) {
-    if (tier.capacity == null) return null;
-    return Math.max(tier.capacity - (tier.sold_count || 0), 0);
+const NO_SOLD_OUT = new Set();
+const SOLD_OUT_DETAIL = 'This pass is sold out';
+
+// null means no limit.
+function remainingOf(capacity, soldCount) {
+    if (capacity == null) return null;
+    return Math.max(capacity - (soldCount || 0), 0);
 }
 
-function isTierPurchasable(tier) {
-    if (!tier || !tier.is_active) return false;
+// A tier can sell up to its own capacity, but tiers that share a pool (e.g. regular + VIP team
+// passes) also can't sell past the pool's shared capacity, so the real limit is the smaller one.
+function getRemaining(tier) {
+    const tierLeft = remainingOf(tier.capacity, tier.sold_count);
+    const poolLeft = tier.pool_id ? remainingOf(tier.pool_capacity, tier.pool_sold_count) : null;
+
+    if (tierLeft === null) return poolLeft;
+    if (poolLeft === null) return tierLeft;
+    return Math.min(tierLeft, poolLeft);
+}
+
+// soldOutIds: tiers the backend said were sold out after this page loaded.
+function isTierPurchasable(tier, soldOutIds = NO_SOLD_OUT) {
+    if (!tier || !tier.is_active || soldOutIds.has(tier.id)) return false;
     const remaining = getRemaining(tier);
     return remaining === null || remaining > 0;
 }
@@ -32,6 +48,7 @@ function PassSelection() {
     const [submitting, setSubmitting] = useState(false);
     const [submitError, setSubmitError] = useState(null);
     const [expandedPlayers, setExpandedPlayers] = useState({});
+    const [soldOutIds, setSoldOutIds] = useState(NO_SOLD_OUT);
 
     const methods = useForm({ shouldUnregister: true });
 
@@ -41,10 +58,10 @@ function PassSelection() {
 
     useEffect(() => {
         if (tiers && tiers.length && !selectedTierId) {
-            const firstPurchasable = tiers.find((tier) => isTierPurchasable(tier)) || tiers[0];
+            const firstPurchasable = tiers.find((tier) => isTierPurchasable(tier, soldOutIds)) || tiers[0];
             setSelectedTierId(firstPurchasable.id);
         }
-    }, [tiers, selectedTierId]);
+    }, [tiers, selectedTierId, soldOutIds]);
 
     const selectedTier = useMemo(
         () => (tiers || []).find((tier) => tier.id === selectedTierId) || null,
@@ -60,7 +77,7 @@ function PassSelection() {
     const onSubmit = async (values) => {
         if (!selectedTier) return;
 
-        if (!isTierPurchasable(selectedTier)) {
+        if (!isTierPurchasable(selectedTier, soldOutIds)) {
             setSubmitError('This pass is no longer available. Please choose another option.');
             return;
         }
@@ -87,8 +104,17 @@ function PassSelection() {
 
         try {
             const result = await submitEventRegistration(payload); 
-            navigate(`/passes/registration/${result.registration_id}/payment`);
+            // Remember where the passes page is, so the payment page can send the buyer back here
+            // if their reservation expires. Router state survives a page refresh.
+            navigate(`/passes/registration/${result.registration_id}/payment`, {
+                state: { passesPath: `/passes/${slug}` }
+            });
         } catch (err) {
+            // The tier (or its shared pool) filled up while they were filling in the form. Mark it
+            // sold out here instead of refetching, which would reset everything they typed.
+            if (err?.response?.status === 409 && err?.response?.data?.detail === SOLD_OUT_DETAIL) {
+                setSoldOutIds((prev) => new Set(prev).add(selectedTier.id));
+            }
             setSubmitError(getApiErrorMessage(err));
         } finally {
             setSubmitting(false);
@@ -120,7 +146,7 @@ function PassSelection() {
                                 <div className={pageStyles.tierList}>
                                     {tiers.map((tier) => {
                                         const remaining = getRemaining(tier);
-                                        const purchasable = isTierPurchasable(tier);
+                                        const purchasable = isTierPurchasable(tier, soldOutIds);
 
                                         return (
                                             <label
@@ -137,7 +163,7 @@ function PassSelection() {
                                                 />
                                                 <span className={pageStyles.tierName}>{tier.tier_name}</span>
                                                 <span className={pageStyles.tierPrice}>${(tier.price_cents / 100).toFixed(2)}</span>
-                                                {remaining !== null && (
+                                                {purchasable && remaining !== null && (
                                                     <span className={pageStyles.tierRemaining}>{remaining} passes remaining</span>
                                                 )}
                                                 {!purchasable && <span className={pageStyles.tierSoldOut}>Sold Out</span>}
