@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
-import { useAuth } from "hooks";
+import { useAuth, useCurrentUser } from "hooks";
 import { profileUrl } from "utils/profiles";
 import { searchPlayers, teamUrl, ROLE_LABELS } from "services/teams";
 import styles from "./Teams.module.css";
@@ -68,10 +68,12 @@ export const InviteCard = ({ invite, onRespond, busy, onNavigate }) => (
 // `exclude` is usernames that can't be picked (already on the team or invited).
 export const PlayerPicker = ({ selected, onChange, exclude = [], id = 'player-picker' }) => {
     const { session } = useAuth();
+    // You can't invite yourself (the backend refuses too), so your own player profile never shows.
+    const { profiles: mine = [] } = useCurrentUser();
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
     const timer = useRef(null);
-    const taken = new Set([...exclude, ...selected.map(p => p.username)].map(n => n.toLowerCase()));
+    const taken = new Set([...exclude, ...mine.filter(p => p.type === 'player').map(p => p.username), ...selected.map(p => p.username)].map(n => n.toLowerCase()));
 
     useEffect(() => {
         clearTimeout(timer.current);
