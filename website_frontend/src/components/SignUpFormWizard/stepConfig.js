@@ -31,22 +31,30 @@ const PLAYER_ABOUT_FIELDS = ['first_name', 'last_name', 'phone_number', 'gender'
 // Step 0 of sign-up: which profiles to create. Every other step depends on it.
 export const PATH_STEP = { key: 'signup_path', title: 'Get Started', subtitle: "Pick everything that fits. Each one gets its own profile and username, all on one account.", Component: SignUpPathStep, fields: [], saveFields: ['signup_path', 'other_roles', 'other_role_detail'] };
 
+// An org on its own: its name and location on one step.
+const OrgIdentityStep = (props) => (
+    <>
+        <ProfileIdentityStep {...props} />
+        <OrgDetailsStep />
+    </>
+);
+
 const identityStep = (types, { isSignUp }) => {
     const usernames = types.map(usernameField);
     // An org's username is its organization name, so an org on its own is asked for just that.
     const orgOnly = types.length === 1 && types[0] === 'org';
     return {
         key: 'user_info',
-        title: orgOnly ? 'Organization Name' : types.length > 1 ? 'Usernames' : 'Username',
+        title: orgOnly ? 'Your Organization' : types.length > 1 ? 'Usernames' : 'Username',
         subtitle: orgOnly
-            ? "The name your organization and its teams go by across uSync. Spaces are fine."
+            ? "The name your organization and its teams go by across uSync (spaces are fine), and where it's based."
             : types.length > 1
                 ? "Each profile gets its own name. They can match - a name only has to be unique among profiles of the same kind."
                 : "This is how this profile shows up across uSync.",
-        Component: ProfileIdentityStep,
+        Component: orgOnly ? OrgIdentityStep : ProfileIdentityStep,
         props: { types, isSignUp },
-        fields: isSignUp ? [...usernames, 'email'] : usernames,
-        requiredFields: isSignUp ? [...usernames, 'email'] : usernames,
+        fields: [...(isSignUp ? [...usernames, 'email'] : usernames), ...(orgOnly ? ['org_country'] : [])],
+        requiredFields: [...(isSignUp ? [...usernames, 'email'] : usernames), ...(orgOnly ? ['org_country'] : [])],
         saveFields: [],
     };
 };
@@ -120,7 +128,8 @@ function detailSteps(types, { includeAccounts, media, bracket, isSettings = fals
         ...(isPlayer ? [PLAYER_ABOUT_STEP] : []),
         ...(isPlayer && isHost ? [COMBINED_GAMES_STEP] : isPlayer ? [PLAYER_GAMES_STEP] : isHost ? [HOST_GAMES_STEP] : []),
         ...(isHost ? [HOST_ORG_STEP, HOST_EVENTS_STEP] : []),
-        ...(isOrg ? [ORG_DETAILS_STEP, ORG_GAMES_STEP, isSettings ? ORG_TEAMS_MANAGE_STEP : ORG_TEAMS_STEP] : []),
+        // An org on its own already picked its location on the name step.
+        ...(isOrg ? [...(isSettings || types.length > 1 ? [ORG_DETAILS_STEP] : []), ORG_GAMES_STEP, isSettings ? ORG_TEAMS_MANAGE_STEP : ORG_TEAMS_STEP] : []),
         ...(hostsBrackets ? [bracket] : []),
         media,
         ...(includeAccounts ? [accountsStep(types)] : []),

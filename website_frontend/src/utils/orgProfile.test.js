@@ -39,11 +39,15 @@ test("adding an org profile sends the same shape", () => {
     expect(data.bracket_hosting).toBe(false);
 });
 
-test("org-only sign-up steps: name, location, titles, teams - no bracket hosting step", () => {
+test("org-only sign-up steps: name and location together, titles, teams - no bracket hosting step", () => {
     const steps = buildStepSequence(["org"]);
-    expect(steps.map(s => s.key)).toEqual(["signup_path", "user_info", "org_details", "org_games", "org_teams", "profile_bio", "linked_accounts"]);
-    expect(steps[1].title).toBe("Organization Name");
-    expect(steps.find(s => s.key === "org_details").requiredFields).toEqual(["org_country"]);
+    expect(steps.map(s => s.key)).toEqual(["signup_path", "user_info", "org_games", "org_teams", "profile_bio", "linked_accounts"]);
+    expect(steps[1].title).toBe("Your Organization");
+    expect(steps[1].requiredFields).toEqual(["username_org", "email", "org_country"]);
+});
+
+test("org with another profile keeps a separate location step", () => {
+    expect(buildStepSequence(["player", "org"]).map(s => s.key)).toContain("org_details");
 });
 
 test("org with a player still asks the player about bracket hosting", () => {
