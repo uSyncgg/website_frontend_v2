@@ -41,7 +41,7 @@
     flex-wrap: wrap;
     align-items: center;
     gap: .6rem;
-    margin-top: .85rem;
+    margin-top: 0;
 }
 
 .toolsLabel {
@@ -71,4 +71,16 @@
 .example:hover:not(:disabled) {
     border-color: var(--violet);
     color: var(--ink);
+}
+
+.chatCol {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    height: 100%;
+}
+
+.chatFill {
+    flex: 1;
+    min-height: 0;
 }

@@ -513,3 +513,16 @@
     justify-content: flex-end;
     gap: .6rem;
 }
+
+/* Tall: fills its column on the match page, with the message list taking the spare height. */
+.tall {
+    height: 100%;
+    min-height: 0;
+}
+
+.tall .list {
+    flex: 1;
+    height: auto;
+    max-height: none;
+    min-height: 0;
+}

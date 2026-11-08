@@ -156,7 +156,7 @@ const ReportDialog = ({ message, onClose, onSubmit }) => {
 // as props (see useMatchChat), so the real page and the mock pages share it.
 export const MatchChat = ({
     chat, messages, error, sendError, busy, onSend, onRequestAdmin, onJoin, onLeave, onHide, onReport, onClearError,
-    title = 'Match chat',
+    title = 'Match chat', tall = false,
 }) => {
     const [draft, setDraft] = useState('');
     const [reporting, setReporting] = useState(null);
@@ -197,7 +197,7 @@ export const MatchChat = ({
     const deleteDay = chat.expiresAt ? new Date(chat.expiresAt) : null;
 
     return (
-        <section className={styles.card} aria-labelledby="match-chat-title">
+        <section className={`${styles.card} ${tall ? styles.tall : ''}`} aria-labelledby="match-chat-title">
             <header className={styles.head}>
                 <h2 id="match-chat-title" className={styles.title}><FaComments aria-hidden="true" /> {title}</h2>
                 <div className={styles.chips}>

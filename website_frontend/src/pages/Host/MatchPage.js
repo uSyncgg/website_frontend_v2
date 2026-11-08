@@ -95,6 +95,8 @@ export const MatchPage = () => {
     const noShowOpen = noShowAt != null && now >= noShowAt.getTime();
     const canReport = mine && event.viewerCanAct && match.status === 'ready';
     const round = matchRoundLabel(event.format, built, match);
+    // The chat sits in its own tall column on the right for the two players' sides and the event's admins.
+    const hasChat = mine || event.canManage;
 
     const submitNoShow = () => {
         if (window.confirm(`Report ${byId[opponentId]?.name} as a no-show? The host will review it and decide what happens.`)) {
@@ -126,6 +128,8 @@ export const MatchPage = () => {
                     }
                 </div>
 
+                <div className={`${styles.matchLayout} ${hasChat ? styles.withChat : ''}`}>
+                <div className={styles.matchMain}>
                 <section className={`${styles.card} ${styles.versus}`}>
                     <Side id={match.a} entrant={byId[match.a]} match={match} isYou={match.a === viewerId} team={team} />
                     <span className={styles.versusTag}>vs</span>
@@ -158,12 +162,6 @@ export const MatchPage = () => {
                     </section>
                 }
 
-                {(mine || event.canManage) &&
-                    <div className={styles.chatSlot}>
-                        <MatchChatPanel eventId={event.id} matchId={match.id} />
-                    </div>
-                }
-
                 <div className={styles.twoCol}>
                     <div>
                         <section className={styles.card}>
@@ -194,6 +192,14 @@ export const MatchPage = () => {
                             </dl>
                         </section>
                     </div>
+                </div>
+                </div>
+
+                {hasChat &&
+                    <aside className={styles.matchChat} aria-label="Match chat">
+                        <MatchChatPanel eventId={event.id} matchId={match.id} tall />
+                    </aside>
+                }
                 </div>
             </div>
 

@@ -23,8 +23,10 @@ const TRY_THESE = [
 const Chat = ({ scenario }) => {
     const mock = useMockChat(scenario);
     return (
-        <>
+        <div className={styles.chatCol}>
+            <div className={styles.chatFill}>
             <MatchChat
+                tall
                 chat={mock.chat}
                 messages={mock.messages}
                 error={mock.error}
@@ -38,6 +40,7 @@ const Chat = ({ scenario }) => {
                 onReport={mock.report}
                 onClearError={mock.clearSendError}
             />
+            </div>
             <div className={styles.tools}>
                 <button type="button" className={hostStyles.ghostBtn} onClick={mock.reset}>Reset this scenario</button>
                 <span className={styles.toolsLabel}>Send a message the filters should catch (the real filters run on the server):</span>
@@ -47,7 +50,7 @@ const Chat = ({ scenario }) => {
                     ))}
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
@@ -93,20 +96,52 @@ export const ChatMock = () => {
                     </div>
                 </div>
 
-                <section className={`${hostStyles.card} ${hostStyles.versus}`}>
-                    <div className={`${hostStyles.matchSide} ${hostStyles.matchSideYou}`}>
-                        <h2 className={hostStyles.matchSideName}>Alpha<span className={hostStyles.chip}>You</span></h2>
-                        <p className={hostStyles.muted}>Captain: ace</p>
-                    </div>
-                    <span className={hostStyles.versusTag}>vs</span>
-                    <div className={hostStyles.matchSide}>
-                        <h2 className={hostStyles.matchSideName}>Delta</h2>
-                        <p className={hostStyles.muted}>Captain: cat</p>
-                    </div>
-                </section>
+                <div className={`${hostStyles.matchLayout} ${hostStyles.withChat}`}>
+                    <div className={hostStyles.matchMain}>
+                        <section className={`${hostStyles.card} ${hostStyles.versus}`}>
+                            <div className={`${hostStyles.matchSide} ${hostStyles.matchSideYou}`}>
+                                <h2 className={hostStyles.matchSideName}>Alpha<span className={hostStyles.chip}>You</span></h2>
+                                <p className={hostStyles.muted}>Captain: ace</p>
+                            </div>
+                            <span className={hostStyles.versusTag}>vs</span>
+                            <div className={hostStyles.matchSide}>
+                                <h2 className={hostStyles.matchSideName}>Delta</h2>
+                                <p className={hostStyles.muted}>Captain: cat</p>
+                            </div>
+                        </section>
 
-                <div className={hostStyles.chatSlot} style={{ marginTop: '1rem' }}>
-                    <Chat key={key} scenario={scenario} />
+                        <section className={hostStyles.card}>
+                            <h2 className={hostStyles.sectionTitle}>Your match</h2>
+                            <p className={hostStyles.blurb}>Play your match, then both sides report the score. If they agree, it's final.</p>
+                            <div className={hostStyles.stackBtns}>
+                                <button type="button" className={hostStyles.primaryBtn}>Report score</button>
+                                <button type="button" className={hostStyles.ghostBtn}>Report No Show</button>
+                            </div>
+                        </section>
+
+                        <div className={hostStyles.twoCol}>
+                            <div>
+                                <section className={hostStyles.card}>
+                                    <h2 className={hostStyles.sectionTitle}>Maps</h2>
+                                    <p className={hostStyles.muted}>Maps and modes for this match will be posted here.</p>
+                                </section>
+                                <section className={hostStyles.card}>
+                                    <h2 className={hostStyles.sectionTitle}>Rules</h2>
+                                    <p className={hostStyles.preWrap}>Hardpoint first. Pick, ban, then play.</p>
+                                </section>
+                            </div>
+                            <div>
+                                <section className={hostStyles.card}>
+                                    <h2 className={hostStyles.sectionTitle}>Match details</h2>
+                                    <p className={hostStyles.muted}>Game, where, round, best of, host.</p>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+
+                    <aside className={hostStyles.matchChat} aria-label="Match chat">
+                        <Chat key={key} scenario={scenario} />
+                    </aside>
                 </div>
             </div>
         </div>

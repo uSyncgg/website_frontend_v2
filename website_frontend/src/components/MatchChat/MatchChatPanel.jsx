@@ -3,7 +3,7 @@ import { MatchChat } from "./MatchChat";
 
 // The chat on the match page: the real thing, loaded from the API. Renders nothing for anyone
 // who isn't a player in the match or an admin of the event.
-export const MatchChatPanel = ({ eventId, matchId }) => {
+export const MatchChatPanel = ({ eventId, matchId, tall = false }) => {
     const chat = useMatchChat(eventId, matchId);
 
     const hide = (message) => {
@@ -26,6 +26,7 @@ export const MatchChatPanel = ({ eventId, matchId }) => {
             onHide={hide}
             onReport={chat.report}
             onClearError={chat.clearSendError}
+            tall={tall}
         />
     );
 };

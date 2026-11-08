@@ -1460,7 +1460,45 @@
     width: auto;
 }
 
-/* The match chat sits between the match summary and the details. */
-.chatSlot {
-    margin-bottom: 1rem;
+/* Match page: the summary, reporting, maps and rules in the middle, the chat in a tall column
+   on the right (it stays in view while the page scrolls). */
+.matchLayout {
+    display: block;
+}
+
+.withChat {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(20rem, 24rem);
+    gap: 1rem;
+    align-items: start;
+}
+
+.matchMain {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 0;
+}
+
+.matchMain > .card + .card,
+.matchMain .twoCol .card + .card {
+    margin-top: 0;
+}
+
+.matchChat {
+    position: sticky;
+    top: calc(66px + 1rem);
+    height: calc(100vh - 66px - 2rem);
+    min-height: 28rem;
+}
+
+@media (max-width: 1000px) {
+    .withChat {
+        grid-template-columns: 1fr;
+    }
+
+    .matchChat {
+        position: static;
+        height: 34rem;
+    }
 }
