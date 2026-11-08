@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
-import { LoadingWheel } from "components";
-import { useAuth, useAdminEvents } from "hooks";
+import { LoadingWheel, Segmented } from "components";
+import { useAdminEvents } from "hooks/useAdminAnalytics";
 import { getLoadErrorMessage } from "utils/apiError";
 import styles from "./AdminAnalytics.module.css";
 
@@ -32,8 +32,7 @@ const daysAgoLabel = (ms) => {
 };
 
 export const AdminEventsTab = () => {
-    const { session } = useAuth();
-    const { data, loading, error } = useAdminEvents(session?.access_token);
+    const { data, loading, error } = useAdminEvents();
     const [game, setGame] = useState('all');
     const [type, setType] = useState('all');
     const [sort, setSort] = useState('updated');
@@ -80,19 +79,7 @@ export const AdminEventsTab = () => {
                     {games.map(g => <option key={g} value={g}>{g}</option>)}
                 </select>
                 <span className={styles.filterLabel}>Type</span>
-                <div className={styles.segmented} role="group" aria-label="Event type">
-                    {TYPES.map(t => (
-                        <button
-                            key={t.key}
-                            type="button"
-                            className={`${styles.segment} ${type === t.key ? styles.segmentActive : ''}`}
-                            aria-pressed={type === t.key}
-                            onClick={() => setType(t.key)}
-                        >
-                            {t.label}
-                        </button>
-                    ))}
-                </div>
+                <Segmented options={TYPES} value={type} onChange={setType} label="Event type" />
             </div>
 
             <section className={styles.card}>

@@ -1,12 +1,11 @@
 import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router";
-import { LoadingWheel } from "components";
-import { useAuth, useAdminAnalytics } from "hooks";
-import { isMockAnalytics } from "services/adminAnalytics";
+import { LoadingWheel, Segmented } from "components";
+import { useAdminAnalytics } from "hooks/useAdminAnalytics";
+import { isMockAnalytics, isoDay } from "services/adminAnalytics";
 import { getLoadErrorMessage } from "utils/apiError";
 import { AdminEventsTab } from "./AdminEventsTab";
 import { AdminFinanceTab } from "./AdminFinanceTab";
-import { AdminArticlesTab } from "./AdminArticlesTab";
 import { AdminAccountsTab } from "./AdminAccountsTab";
 import styles from "./AdminAnalytics.module.css";
 
@@ -22,7 +21,7 @@ const RANGES = [
 ];
 
 const ROLES = [
-    { key: 'total', label: 'All accounts' },
+    { key: 'total', label: 'All sign-ups' },
     { key: 'players', label: 'Players' },
     { key: 'hosts', label: 'Hosts' },
     { key: 'venues', label: 'Venues' },
@@ -44,7 +43,7 @@ const bucketKey = (iso, bucket) => {
     if (bucket === 'month') return iso.slice(0, 7);
     if (bucket === 'week') {
         d.setDate(d.getDate() - d.getDay());
-        return d.toISOString().slice(0, 10);
+        return isoDay(d);
     }
     return iso;
 };
@@ -62,8 +61,9 @@ const groupSignups = (rows, bucket) => {
     const groups = new Map();
     for (const row of rows) {
         const key = bucketKey(row.date, bucket);
-        const g = groups.get(key) ?? { key, total: 0, players: 0, hosts: 0, venues: 0 };
+        const g = groups.get(key) ?? { key, total: 0, unfinished: 0, players: 0, hosts: 0, venues: 0 };
         g.total += row.total;
+        g.unfinished += row.unfinished;
         g.players += row.players;
         g.hosts += row.hosts;
         g.venues += row.venues;
@@ -79,22 +79,6 @@ const StatTile = ({ label, value, added, caption }) => (
         <span className={styles.tileDelta}>
             <strong>+{fmt(added)}</strong> {caption}
         </span>
-    </div>
-);
-
-const Segmented = ({ options, value, onChange, label }) => (
-    <div className={styles.segmented} role="group" aria-label={label}>
-        {options.map(opt => (
-            <button
-                key={opt.key}
-                type="button"
-                className={`${styles.segment} ${value === opt.key ? styles.segmentActive : ''}`}
-                aria-pressed={value === opt.key}
-                onClick={() => onChange(opt.key)}
-            >
-                {opt.label}
-            </button>
-        ))}
     </div>
 );
 
@@ -161,7 +145,7 @@ const GameChart = ({ games, base }) => {
     return (
         <div className={styles.barChart}>
             {games.map(g => (
-                <div key={g.game} className={styles.barRow} title={`${g.game}: ${fmt(g.count)} picks`}>
+                <div key={g.game} className={styles.barRow} title={`${g.game}: ${fmt(g.count)} profiles`}>
                     <span className={styles.barLabel}>{g.game}</span>
                     <div className={styles.barTrack}>
                         <div className={styles.bar} style={{ width: `${(g.count / max) * 100}%` }} />
@@ -172,16 +156,15 @@ const GameChart = ({ games, base }) => {
                 </div>
             ))}
             <p className={styles.chartNote}>
-                {fmt(total)} picks from {fmt(base)} accounts. Accounts can pick more than one game,
-                so percentages are share of accounts and add up to more than 100%.
+                {fmt(total)} picks from {fmt(base)} profiles. Each profile counts once per game and can
+                list several games, so percentages are share of profiles and can add up to more than 100%.
             </p>
         </div>
     );
 };
 
 const OverviewTab = () => {
-    const { session } = useAuth();
-    const { data, loading, error } = useAdminAnalytics(session?.access_token);
+    const { data, loading, error } = useAdminAnalytics();
     const [rangeKey, setRangeKey] = useState('30d');
     const [role, setRole] = useState('total');
     const [audience, setAudience] = useState('players');
@@ -195,7 +178,7 @@ const OverviewTab = () => {
 
     const added = useMemo(() => {
         const sum = (key) => inRange.reduce((n, d) => n + d[key], 0);
-        return { total: sum('total'), players: sum('players'), hosts: sum('hosts'), venues: sum('venues') };
+        return { total: sum('total'), unfinished: sum('unfinished'), players: sum('players'), hosts: sum('hosts'), venues: sum('venues') };
     }, [inRange]);
 
     const buckets = useMemo(() => groupSignups(inRange, range.bucket), [inRange, range]);
@@ -232,13 +215,14 @@ const OverviewTab = () => {
             </div>
 
             <section className={styles.tiles} aria-label="Account totals">
-                <StatTile label="Total accounts" value={data.totals.total} added={added.total} caption={range.caption} />
-                <StatTile label="Player accounts" value={data.totals.players} added={added.players} caption={range.caption} />
-                <StatTile label="Host accounts" value={data.totals.hosts} added={added.hosts} caption={range.caption} />
-                <StatTile label="Venue accounts" value={data.totals.venues} added={added.venues} caption={range.caption} />
+                <StatTile label="Signed up" value={data.totals.total} added={added.total} caption={range.caption} />
+                <StatTile label="Not finished" value={data.totals.unfinished} added={added.unfinished} caption={range.caption} />
+                <StatTile label="Player profiles" value={data.totals.players} added={added.players} caption={range.caption} />
+                <StatTile label="Host profiles" value={data.totals.hosts} added={added.hosts} caption={range.caption} />
+                <StatTile label="Venue profiles" value={data.totals.venues} added={added.venues} caption={range.caption} />
             </section>
             <p className={styles.footnote}>
-                One account can be both a player and a host, so the role counts add up to more than the total.
+                One account can have several profiles, so profile counts can add up to more than the accounts that finished.
             </p>
 
             <section className={styles.card}>
@@ -257,9 +241,9 @@ const OverviewTab = () => {
             <section className={styles.card}>
                 <div className={styles.cardHeader}>
                     <div>
-                        <h2 className={styles.cardTitle}>Games picked at sign-up</h2>
+                        <h2 className={styles.cardTitle}>Games on profiles</h2>
                         <p className={styles.cardSubtitle}>
-                            All time{topGame && <> · top game: <strong>{topGame.game}</strong> ({pct(topGame.count, gameBase)} of {audience === 'combined' ? 'accounts' : audience})</>}
+                            Current picks{topGame && <> · top game: <strong>{topGame.game}</strong> ({pct(topGame.count, gameBase)} of {audience === 'combined' ? 'profiles' : audience})</>}
                         </p>
                     </div>
                     <Segmented options={GAME_AUDIENCES} value={audience} onChange={setAudience} label="Audience" />
@@ -275,7 +259,6 @@ const TABS = [
     { key: 'accounts', label: 'Accounts', Component: AdminAccountsTab },
     { key: 'events', label: 'Events', Component: AdminEventsTab },
     { key: 'finance', label: 'Finance', Component: AdminFinanceTab },
-    { key: 'articles', label: 'Articles', Component: AdminArticlesTab },
 ];
 
 export const AdminAnalytics = () => {

@@ -1,7 +1,6 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { Link } from 'react-router';
 import { HeaderImage, SeoData } from "components";
-import { getPublishedArticles } from 'services/adminArticles';
 import styles from './Articles.module.css';
 import problemThumb from 'assets/images/article_bubbles/article-thumb-the-problem-with-esports_9.6.26.webp';
 import fixItThumb from 'assets/images/article_bubbles/article-thumb-how-we-fix-it_9.6.26.webp';
@@ -100,29 +99,15 @@ const CATEGORIES = ["All", "Guide", "Industry", "Platform"];
 export const Articles = () => {
     const [search, setSearch] = useState("");
     const [activeCategory, setActiveCategory] = useState("All");
-    const [published, setPublished] = useState([]);
-
-    // Articles an admin published from /admin/analytics; a failed load just leaves the built-in ones.
-    useEffect(() => {
-        getPublishedArticles()
-            .then(list => setPublished(list.map(a => ({
-                path: `/more/articles/${a.slug}`,
-                thumbnail: a.thumb,
-                category: a.category,
-                title: a.headline,
-                excerpt: a.description,
-            }))))
-            .catch(() => {});
-    }, []);
 
     const filtered = useMemo(() => {
         const q = search.toLowerCase().trim();
-        return [...published, ...ARTICLES].filter((a) => {
+        return ARTICLES.filter((a) => {
             const matchesCategory = activeCategory === "All" || a.category === activeCategory;
             const matchesSearch = !q || a.title.toLowerCase().includes(q) || a.excerpt.toLowerCase().includes(q);
             return matchesCategory && matchesSearch;
         });
-    }, [search, activeCategory, published]);
+    }, [search, activeCategory]);
 
     return (
         <div className="standardContainer">

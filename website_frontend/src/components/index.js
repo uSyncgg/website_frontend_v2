@@ -106,7 +106,7 @@ import { PasswordChecklist } from "./PasswordChecklist/PasswordChecklist";
 // Route Protection
 import { RequireCompleteProfile } from "./RequiredCompleteProfile/RequiredCompleteProfile";
 import { RequireAdmin } from "./RequireAdmin/RequireAdmin";
-import { NudgeHost, NudgeCard } from "./NudgePopup/NudgePopup";
+import { Segmented } from "./Segmented/Segmented";
 import { ClaimEventPrompt } from "./ClaimEventPrompt/ClaimEventPrompt";
 import { RedirectIfProfileComplete } from "./RequiredCompleteProfile/RedirectIfProfileComplete";
 
@@ -180,8 +180,7 @@ export {
     PasswordChecklist,
     RequireCompleteProfile,
     RequireAdmin,
-    NudgeHost,
-    NudgeCard,
+    Segmented,
     ClaimEventPrompt,
     RedirectIfProfileComplete,
     SignUpFormWizard,

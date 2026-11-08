@@ -1,12 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
-import { LoadingWheel, NudgeCard } from "components";
-import { useAuth } from "hooks";
-import { getAdminAccounts, sendNudge, LINK_PLATFORMS, NUDGE_SENDING_ENABLED } from "services/nudges";
+import { useMemo, useState } from "react";
+import { LoadingWheel, Segmented } from "components";
+import { useAdminAccounts } from "hooks/useAdminAnalytics";
+import { LINK_PLATFORMS } from "services/adminAnalytics";
 import { getLoadErrorMessage } from "utils/apiError";
 import styles from "./AdminAnalytics.module.css";
 
-// Accounts tab of /admin/analytics: filter every account (including half-finished sign-ups),
-// then send the matching accounts a nudge popup they see on their next visit.
+// Accounts tab of /admin/analytics: filter every account, including half-finished sign-ups.
 
 const ROLES = [
     { key: 'all', label: 'All' },
@@ -40,49 +39,9 @@ const SHOW_LIMIT = 200;
 
 const linkedCount = (a) => LINK_PLATFORMS.filter(p => a.linked?.[p.key]).length;
 
-const Segmented = ({ options, value, onChange, label }) => (
-    <div className={styles.segmented} role="group" aria-label={label}>
-        {options.map(opt => (
-            <button
-                key={opt.key}
-                type="button"
-                className={`${styles.segment} ${value === opt.key ? styles.segmentActive : ''}`}
-                aria-pressed={value === opt.key}
-                onClick={() => onChange(opt.key)}
-            >
-                {opt.label}
-            </button>
-        ))}
-    </div>
-);
-
-// Toggle chips for a set of platform keys.
-const PlatformChips = ({ value, onChange, label }) => (
-    <div className={styles.segmented} role="group" aria-label={label} style={{ flexWrap: 'wrap' }}>
-        {LINK_PLATFORMS.map(p => {
-            const on = value.includes(p.key);
-            return (
-                <button
-                    key={p.key}
-                    type="button"
-                    className={`${styles.segment} ${on ? styles.segmentActive : ''}`}
-                    aria-pressed={on}
-                    onClick={() => onChange(on ? value.filter(k => k !== p.key) : [...value, p.key])}
-                >
-                    {p.label}
-                </button>
-            );
-        })}
-    </div>
-);
-
-const EMPTY_NUDGE = { title: '', message: '', link_url: '', link_label: '' };
-
 export const AdminAccountsTab = () => {
-    const { session } = useAuth();
-    const token = session?.access_token;
-    const [accounts, setAccounts] = useState(null);
-    const [error, setError] = useState(null);
+    const { data, loading, error } = useAdminAccounts();
+    const accounts = data?.accounts;
 
     const [search, setSearch] = useState('');
     const [role, setRole] = useState('all');
@@ -92,18 +51,6 @@ export const AdminAccountsTab = () => {
     const [linkCount, setLinkCount] = useState('all');
     const [missing, setMissing] = useState([]);
     const [has, setHas] = useState([]);
-
-    const [nudge, setNudge] = useState(EMPTY_NUDGE);
-    const [sending, setSending] = useState(false);
-    const [result, setResult] = useState(null);
-
-    useEffect(() => {
-        let cancelled = false;
-        getAdminAccounts(token)
-            .then(res => { if (!cancelled) setAccounts(res); })
-            .catch(err => { if (!cancelled) setError(err); });
-        return () => { cancelled = true; };
-    }, [token]);
 
     const games = useMemo(() => [...new Set((accounts ?? []).flatMap(a => a.games ?? []))].sort(), [accounts]);
 
@@ -137,26 +84,8 @@ export const AdminAccountsTab = () => {
         setJoined('all'); setLinkCount('all'); setMissing([]); setHas([]);
     };
 
-    const send = async (e) => {
-        e.preventDefault();
-        if (!window.confirm(`Send this popup to ${shown.length.toLocaleString('en-US')} accounts?`)) return;
-        setSending(true);
-        setResult(null);
-        try {
-            const res = await sendNudge(token, nudge, shown.map(a => a.id));
-            setResult({ ok: true, text: `Sent to ${res.sent.toLocaleString('en-US')} accounts.` });
-            setNudge(EMPTY_NUDGE);
-        } catch (err) {
-            setResult({ ok: false, text: getLoadErrorMessage(err, 'Could not send the popup.') });
-        } finally {
-            setSending(false);
-        }
-    };
-
     if (error) return <p className={styles.error}>{getLoadErrorMessage(error, "Unable to load accounts right now.")}</p>;
-    if (!accounts) return <LoadingWheel />;
-
-    const field = (key) => ({ value: nudge[key], onChange: e => setNudge(n => ({ ...n, [key]: e.target.value })) });
+    if (loading || !accounts) return <LoadingWheel />;
 
     return (
         <>
@@ -202,11 +131,11 @@ export const AdminAccountsTab = () => {
                 </div>
                 <div className={styles.filterRow}>
                     <span className={styles.filterLabel}>Missing</span>
-                    <PlatformChips value={missing} onChange={setMissing} label="Platforms not linked" />
+                    <Segmented multiple options={LINK_PLATFORMS} value={missing} onChange={setMissing} label="Platforms not linked" />
                 </div>
                 <div className={styles.filterRow}>
                     <span className={styles.filterLabel}>Has</span>
-                    <PlatformChips value={has} onChange={setHas} label="Platforms linked" />
+                    <Segmented multiple options={LINK_PLATFORMS} value={has} onChange={setHas} label="Platforms linked" />
                 </div>
 
                 <div className={styles.tableWrap}>
@@ -235,41 +164,12 @@ export const AdminAccountsTab = () => {
                         </tbody>
                     </table>
                     {shown.length > SHOW_LIMIT &&
-                        <p className={styles.chartNote}>Showing the first {SHOW_LIMIT}. The popup goes to all {shown.length.toLocaleString('en-US')}.</p>
+                        <p className={styles.chartNote}>Showing the first {SHOW_LIMIT} of {shown.length.toLocaleString('en-US')}.</p>
                     }
                     {!shown.length && <p className={styles.chartNote}>No accounts match these filters.</p>}
                 </div>
             </section>
 
-            <section className={styles.card}>
-                <div className={styles.cardHeader}>
-                    <div>
-                        <h2 className={styles.cardTitle}>Send a popup</h2>
-                        <p className={styles.cardSubtitle}>
-                            Goes to the {shown.length.toLocaleString('en-US')} accounts above. Each one sees it once on their next visit until they close it.
-                        </p>
-                    </div>
-                </div>
-                <form className={styles.filterRow} style={{ alignItems: 'flex-start' }} onSubmit={send}>
-                    <div style={{ display: 'grid', gap: '.6rem', flex: '1 1 20rem' }}>
-                        <input className={styles.input} placeholder="Title (e.g. New CoD league starts Friday)" maxLength={80} required {...field('title')} />
-                        <textarea className={styles.input} placeholder="Message" rows={3} maxLength={300} {...field('message')} />
-                        <input className={styles.input} placeholder="Link URL (optional, e.g. /leagues)" {...field('link_url')} />
-                        <input className={styles.input} placeholder="Button text (optional)" maxLength={30} {...field('link_label')} />
-                        <div className={styles.formActions}>
-                            <button type="submit" className={styles.primaryButton} disabled={!NUDGE_SENDING_ENABLED || sending || !shown.length || !nudge.title.trim()}>
-                                {sending ? 'Sending…' : `Send to ${shown.length.toLocaleString('en-US')}`}
-                            </button>
-                            {!NUDGE_SENDING_ENABLED && <span className={styles.formError}>Sending is off for now (read-only). Use /dev/nudge-test to try the popup.</span>}
-                            {result && <span className={result.ok ? styles.formSuccess : styles.formError}>{result.text}</span>}
-                        </div>
-                    </div>
-                    <div style={{ flex: '0 1 22rem' }}>
-                        <p className={styles.filterLabel}>Preview</p>
-                        <NudgeCard nudge={{ id: 'preview', ...nudge, title: nudge.title || 'Your title' }} onClose={() => {}} />
-                    </div>
-                </form>
-            </section>
         </>
     );
 };

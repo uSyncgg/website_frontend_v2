@@ -3,23 +3,21 @@ import apiClient from "./apiClient";
 // Read-only admin analytics. Nothing here writes to the database.
 //
 // Reads GET /admin/analytics and GET /admin/events. The backend only answers accounts listed in
-// its ADMIN_EMAILS and runs these on a READ ONLY database transaction.
+// the admins table and runs these on a READ ONLY database transaction.
 // Set REACT_APP_ADMIN_ANALYTICS_MOCK=true to use sample data instead (e.g. without a backend).
 const USE_MOCK = process.env.REACT_APP_ADMIN_ANALYTICS_MOCK === 'true';
 
 // Expected response shape (the mock returns the same thing):
 // {
 //   generated_at: ISO timestamp,
-//   totals:  { total, players, hosts, venues },   // total counts each account once,
-//                                                 // so it can be less than the sum
-//   signups: [{ date: 'YYYY-MM-DD', total, players, hosts, venues }],  // days with sign-ups, oldest first
-//   games:   { players: { [game]: count }, hosts: { [game]: count } }  // games picked at sign-up
+//   totals:  { total, unfinished, players, hosts, venues },  // total is every sign-up; the role
+//                                                            // counts are completed profiles
+//   signups: [{ date: 'YYYY-MM-DD', total, unfinished, players, hosts, venues }],  // days with sign-ups, oldest first
+//   games:   { players: { [game]: count }, hosts: { [game]: count } }  // profiles listing each game now
 // }
-export const getAdminAnalytics = (token) => {
+export const getAdminAnalytics = () => {
     if (USE_MOCK) return Promise.resolve(buildMockAnalytics());
-    return apiClient.get(`/admin/analytics`, {
-        headers: { Authorization: `Bearer ${token}` },
-    }).then(res => ({ ...res.data, signups: fillDays(res.data.signups) }));
+    return apiClient.get(`/admin/analytics`).then(res => ({ ...res.data, signups: fillDays(res.data.signups) }));
 };
 
 // Response shape:
@@ -29,14 +27,36 @@ export const getAdminAnalytics = (token) => {
 //              status, verified, host_owned, updated_at, updated_by }]   // newest update first
 // }
 // updated_by is always null until the backend records who made each edit.
-export const getAdminEvents = (token) => {
+export const getAdminEvents = () => {
     if (USE_MOCK) return Promise.resolve(buildMockEvents());
-    return apiClient.get(`/admin/events`, {
-        headers: { Authorization: `Bearer ${token}` },
-    }).then(res => res.data);
+    return apiClient.get(`/admin/events`).then(res => res.data);
 };
 
-const isoDay = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+export const LINK_PLATFORMS = [
+    { key: 'battlenet', label: 'Battle.net' },
+    { key: 'activision', label: 'Activision' },
+    { key: 'steam', label: 'Steam' },
+    { key: 'riot', label: 'Riot' },
+    { key: 'discord', label: 'Discord' },
+    { key: 'twitch', label: 'Twitch' },
+    { key: 'twitter', label: 'X / Twitter' },
+    { key: 'youtube', label: 'YouTube' },
+    { key: 'kick', label: 'Kick' },
+    { key: 'instagram', label: 'Instagram' },
+    { key: 'cmg', label: 'CMG' },
+    { key: 'gankster', label: 'Gankster' },
+    { key: 'faceit', label: 'FACEIT' },
+    { key: 'battlefy', label: 'Battlefy' },
+];
+
+// Response shape: { generated_at, accounts: [{ id, username, email, created_at, is_player, is_host,
+// is_venue, profile_complete, games: [string], linked: { [platform]: handle } }] }
+export const getAdminAccounts = () => {
+    if (USE_MOCK) return Promise.resolve(buildMockAccounts());
+    return apiClient.get(`/admin/accounts`).then(res => res.data);
+};
+
+export const isoDay = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 
 // The backend only returns days that had sign-ups; the charts slice by day count, so add
 // zero rows for every missing day, covering at least the last year up to today.
@@ -50,7 +70,7 @@ function fillDays(rows) {
     const today = isoDay(new Date());
     const filled = [];
     for (let iso = isoDay(day); iso <= today; day.setDate(day.getDate() + 1), iso = isoDay(day)) {
-        filled.push(byDate.get(iso) ?? { date: iso, total: 0, players: 0, hosts: 0, venues: 0 });
+        filled.push(byDate.get(iso) ?? { date: iso, total: 0, unfinished: 0, players: 0, hosts: 0, venues: 0 });
     }
     return filled;
 }
@@ -89,9 +109,11 @@ function buildMockAnalytics() {
         const venues = rand() < 0.08 ? 1 : 0;
         // Some sign-ups are both player and host - one account, counted once in total.
         const both = Math.min(hosts, rand() < 0.3 ? 1 : 0);
+        const unfinished = rand() < 0.3 ? 1 : 0;
         signups.push({
             date: day.toISOString().slice(0, 10),
-            total: players + hosts + venues - both,
+            total: players + hosts + venues - both + unfinished,
+            unfinished,
             players,
             hosts,
             venues,
@@ -99,7 +121,7 @@ function buildMockAnalytics() {
     }
 
     const sum = (key) => signups.reduce((n, d) => n + d[key], 0);
-    const totals = { total: sum('total'), players: sum('players'), hosts: sum('hosts'), venues: sum('venues') };
+    const totals = { total: sum('total'), unfinished: sum('unfinished'), players: sum('players'), hosts: sum('hosts'), venues: sum('venues') };
 
     // Spread each role's accounts across games by weight; people pick ~1.6 games on average.
     const spread = (weights, accounts) => {
@@ -143,4 +165,32 @@ function buildMockEvents() {
     });
     events.sort((a, b) => b.updated_at.localeCompare(a.updated_at));
     return { generated_at: new Date().toISOString(), events };
+}
+
+const MOCK_ACCOUNT_GAMES = ['Call of Duty', 'Valorant', 'Rocket League', 'CS 2', 'Warzone', 'League of Legends', 'Halo'];
+
+function buildMockAccounts() {
+    const rand = seeded(11);
+    const accounts = Array.from({ length: 120 }, (_, i) => {
+        const created = new Date();
+        created.setDate(created.getDate() - Math.floor(rand() * 365));
+        const isHost = rand() < 0.2;
+        const isVenue = rand() < 0.05;
+        const isPlayer = !isVenue || rand() < 0.5;
+        const complete = rand() < 0.7;
+        const linkOdds = complete ? 0.3 : 0.05;
+        return {
+            id: `mock-${i}`,
+            username: `player${i + 1}`,
+            email: `player${i + 1}@example.com`,
+            created_at: created.toISOString(),
+            is_player: isPlayer,
+            is_host: isHost,
+            is_venue: isVenue,
+            profile_complete: complete,
+            games: complete ? MOCK_ACCOUNT_GAMES.filter(() => rand() < 0.25) : [],
+            linked: Object.fromEntries(LINK_PLATFORMS.map(p => [p.key, rand() < linkOdds ? `${p.key}_user${i}` : null])),
+        };
+    });
+    return { generated_at: new Date().toISOString(), accounts };
 }
