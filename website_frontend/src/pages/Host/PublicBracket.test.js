@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router';
 import { PublicBracket } from './PublicBracket';
 import apiClient from 'services/apiClient';
@@ -48,5 +48,54 @@ describe('PublicBracket sign-up', () => {
         fireEvent.click(screen.getByRole('radio', { name: /Organization/ }));
         expect(screen.getByText(/Static Duo/)).toBeInTheDocument();
         expect(screen.queryByText(/My Duo/)).toBeNull();
+    });
+});
+
+describe('PublicBracket paid sign-up', () => {
+    const mate = { public_id: 'matepub', username: 'Mate' };
+    const me = { public_id: 'playpub', username: 'Plays' };
+    const paidEvent = bracketEvent({
+        id: 'evt-paid', teamSize: '2v2', entrants: [], viewerEntrantId: null, refundable: true,
+        payments: { enabled: true, tiers: [{ name: 'Std', price: '10' }] },
+    });
+    const duo = { public_id: 't-duo', name: 'Paid Duo', game: 'Call of Duty', my_role: 'owner', owner: player, members: [me, mate] };
+    const wallet = (balanceCents) => ({ balanceCents });
+
+    const openPaid = async (balanceCents) => {
+        mockUser = { defaultProfile: player, profiles: [player] };
+        apiClient.get.mockImplementation(apiGetFrom({ '/brackets/evt-paid': paidEvent, '/teams/me': [duo], '/wallet': wallet(balanceCents) }));
+        apiClient.post = jest.fn().mockResolvedValue({ data: { ...paidEvent, viewerEntrantId: 'x' } });
+        render(
+            <MemoryRouter initialEntries={['/brackets/evt-paid']}>
+                <Routes><Route path="/brackets/:eventId" element={<PublicBracket />} /></Routes>
+            </MemoryRouter>
+        );
+        fireEvent.click((await screen.findAllByRole('button', { name: 'Sign up' }))[0]);
+        fireEvent.click(await screen.findByRole('radio', { name: /Paid Duo/ }));
+        fireEvent.change(screen.getByLabelText('Contact email'), { target: { value: 'a@b.co' } });
+    };
+
+    it('charges you your own share and warns when your balance is short', async () => {
+        await openPaid(500);
+        expect(await screen.findByText('You pay now')).toBeInTheDocument();
+        expect(screen.getAllByText('$10.50').length).toBeGreaterThan(0);
+        expect(screen.getByText(/You need \$5\.50 more/)).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: 'Pay $10.50 and sign up' })).toBeDisabled();
+    });
+
+    it('lets you pay for a teammate and sends who you covered', async () => {
+        await openPaid(5000);
+        fireEvent.click(await screen.findByRole('checkbox', { name: /Mate/ }));
+        expect(screen.getByRole('button', { name: 'Pay $21.00 and sign up' })).toBeEnabled();
+        fireEvent.click(screen.getByRole('button', { name: 'Pay $21.00 and sign up' }));
+        await waitFor(() => expect(apiClient.post).toHaveBeenCalled());
+        expect(apiClient.post.mock.calls[0][1]).toMatchObject({ teamId: 't-duo', pass: 'Std', payFor: ['Mate'] });
+    });
+
+    it('only charges your own share when you cover nobody', async () => {
+        await openPaid(5000);
+        fireEvent.click(await screen.findByRole('button', { name: 'Pay $10.50 and sign up' }));
+        await waitFor(() => expect(apiClient.post).toHaveBeenCalled());
+        expect(apiClient.post.mock.calls[0][1].payFor).toEqual([]);
     });
 });

@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, NavLink, Outlet, useNavigate, useOutletContext, useParams } from "react-router";
 import { FaCalendarAlt, FaClock, FaGamepad, FaMapMarkerAlt, FaSitemap } from "react-icons/fa";
-import { useHostEvent, eventStage, updateEvent, deleteEvent, delayStart, pendingEntrants, inviteAdmin, removeAdmin } from "services/brackets";
+import { useHostEvent, eventStage, updateEvent, deleteEvent, delayStart, pendingEntrants, inviteAdmin, removeAdmin, cancelEvent, closeEvent, reopenEvent, getEventFinances } from "services/brackets";
+import { formatMoney } from "services/bank";
 import { Avatar, PlayerPicker } from "components/Teams/TeamParts";
 import { buildBracket, bracketProgress } from "utils/bracket";
 import { BracketError, Modal, ShareButton, StageChip, capacityLabel, formatDate, formatLabel, unitLabel, EventLoading, formatSummary, locationLabel, gameDisplayName, RestrictionList } from "./hostShared";
@@ -75,7 +76,8 @@ const NEXT_STEPS = {
     closed: { text: 'Registration is closed. Set the seeding order and generate your bracket.', to: 'seeding', label: 'Set seeding' },
     seeding: { text: 'Your bracket draft is ready. Check the matchups, then publish it so players can see it.', to: 'bracket', label: 'Review bracket' },
     live: { text: 'The bracket is live. Players report their own scores - step in when a match is disputed or a no-show is reported.', to: 'bracket', label: 'Open bracket' },
-    complete: { text: 'Every match is done. Congratulations to your champion!', to: 'bracket', label: 'See final bracket' },
+    complete: { text: 'Every match is done. Close the event below to lock in the winners - prizes and your payout follow 45 minutes later.', to: 'bracket', label: 'See final bracket' },
+    cancelled: { text: 'This event was cancelled and everyone who paid has been refunded.', to: 'entrants', label: 'See entrants' },
 };
 
 const DELAY_OPTIONS = [15, 30, 60];
@@ -205,7 +207,7 @@ export const EventOverview = () => {
                                 ))}
                             </ul>
                         }
-                        <button type="button" className={styles.secondaryBtn} disabled={stage === 'complete'} onClick={() => setDelaying(true)}>
+                        <button type="button" className={styles.secondaryBtn} disabled={stage === 'complete' || stage === 'cancelled'} onClick={() => setDelaying(true)}>
                             <FaClock /> Delay start
                         </button>
                     </section>
@@ -218,7 +220,7 @@ export const EventOverview = () => {
                                 : event.registrationOpen ? 'Players can currently sign up.' : 'New sign-ups are paused.'}
                         </p>
                         <div className={styles.btnRow}>
-                            <button type="button" className={styles.secondaryBtn} disabled={event.bracket?.published}
+                            <button type="button" className={styles.secondaryBtn} disabled={event.bracket?.published || stage === 'cancelled'}
                                 onClick={() => updateEvent(event.id, { registrationOpen: !event.registrationOpen })}>
                                 {event.registrationOpen ? 'Close registration' : 'Reopen registration'}
                             </button>
@@ -227,12 +229,92 @@ export const EventOverview = () => {
                         </div>
                     </section>
 
+                    <FinancesCard event={event} stage={stage} />
+
                     <AdminsCard event={event} />
                 </div>
             </div>
 
             {delaying && <DelayDialog event={event} onClose={() => setDelaying(false)} />}
         </>
+    );
+};
+
+const money = (cents) => formatMoney(cents ?? 0);
+
+const timeLabel = (iso) => new Date(iso).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+
+// Entry revenue for paid events (what's collected, what prizes take, what the host keeps), plus the
+// host's end-of-event controls: close the event once the winners are in (payouts follow 45 minutes
+// later; reopen to fix a result first) or cancel it and refund everyone.
+const FinancesCard = ({ event, stage }) => {
+    const paid = !!event.payments?.enabled;
+    const [finances, setFinances] = useState(null);
+    const [busy, setBusy] = useState(false);
+    const [error, setError] = useState('');
+    // Reloaded whenever the event changes (a sign-up, a refund, a close) and every minute.
+    const stamp = `${event.entrants.length}|${event.closedAt}|${event.paidOutAt}|${event.cancelledAt}|${event.entrants.map(e => e.payment?.paidCount).join(',')}`;
+    useEffect(() => {
+        if (!paid) return undefined;
+        let live = true;
+        const load = () => getEventFinances(event.id).then(f => live && setFinances(f)).catch(() => {});
+        load();
+        const id = setInterval(load, 60000);
+        return () => { live = false; clearInterval(id); };
+    }, [paid, event.id, stamp]);
+
+    const canClose = stage === 'complete' && !event.closedAt && !event.cancelledAt;
+    const canReopen = event.closedAt && !event.paidOutAt && !event.cancelledAt;
+    const canCancel = event.isHost && !event.cancelledAt && !event.paidOutAt;
+    if (!paid && !canClose && !canReopen && !canCancel && !event.paidOutAt) return null;
+
+    const run = async (action, confirmText) => {
+        if (confirmText && !window.confirm(confirmText)) return;
+        setBusy(true);
+        setError('');
+        try {
+            await action(event.id);
+        } finally {
+            setBusy(false);
+        }
+    };
+
+    return (
+        <section className={styles.card}>
+            <h2 className={styles.sectionTitle}>{paid ? 'Entry revenue' : 'Close out'}</h2>
+            {paid && finances &&
+                <dl className={styles.detailList}>
+                    <dt>Collected (pass prices)</dt><dd>{money(finances.collectedCents)}</dd>
+                    <dt>Prizes {finances.final ? 'paid' : 'to pay'}</dt><dd>−{money(finances.prizesCents)}{finances.prizesScaledDown && ' (scaled down to fit)'}</dd>
+                    <dt>uSync fee ({finances.hostFeePercent}% of profit)</dt><dd>−{money(finances.usyncFeeCents)}</dd>
+                    <dt><strong>{finances.final ? 'You received' : 'You\'ll receive'}</strong></dt><dd><strong>{money(finances.hostNetCents)}</strong></dd>
+                    {finances.refundedCents > 0 && <><dt>Refunded to players</dt><dd>{money(finances.refundedCents)}</dd></>}
+                </dl>
+            }
+            {paid && finances?.forfeitedPlayers > 0 &&
+                <p className={styles.fieldHint}>Includes {finances.forfeitedPlayers} share{finances.forfeitedPlayers > 1 ? 's' : ''} from players who left after registration closed.</p>}
+            {event.paidOutAt && <p className={styles.blurb}>Paid out {timeLabel(event.paidOutAt)}. Prizes and your revenue are in the players' and your uSync balances.</p>}
+            {event.closedAt && !event.paidOutAt && !event.cancelledAt &&
+                <p className={styles.blurb}>Event closed. Prizes and your payout are sent automatically around <strong>{timeLabel(event.payoutAt)}</strong>. Spot a mistake? Reopen it before then.</p>}
+            {canClose && <p className={styles.blurb}>Every match is played. Closing the event locks in the winners; payouts follow 45 minutes later.</p>}
+            {error && <p className={styles.fieldError} role="alert">{error}</p>}
+            <div className={styles.btnRow}>
+                {canClose &&
+                    <button type="button" className={styles.primaryBtn} disabled={busy}
+                        onClick={() => run(closeEvent, 'Close this event? Winners are recorded and prizes and your payout are sent in 45 minutes.')}>
+                        Close event &amp; record results
+                    </button>}
+                {canReopen &&
+                    <button type="button" className={styles.secondaryBtn} disabled={busy} onClick={() => run(reopenEvent)}>Reopen to fix results</button>}
+                {canCancel &&
+                    <button type="button" className={styles.dangerBtn} disabled={busy}
+                        onClick={() => run(cancelEvent, paid
+                            ? `Cancel "${event.name}"? Every player is refunded in full (fees included) and sign-ups close. This can't be undone.`
+                            : `Cancel "${event.name}"? Sign-ups close and players are told. This can't be undone.`)}>
+                        Cancel event
+                    </button>}
+            </div>
+        </section>
     );
 };
 

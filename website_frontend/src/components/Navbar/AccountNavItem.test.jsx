@@ -49,3 +49,17 @@ describe('AccountNavItem', () => {
         expect(screen.getByText('Player')).toBeInTheDocument();
     });
 });
+
+describe('AccountNavItem balance', () => {
+    it('puts the balance above the view label, not under the avatar', () => {
+        mockUser = { status: 'complete', defaultProfile: host, profiles: [player, host], switchProfile: jest.fn(), logout: jest.fn() };
+        renderMenu();
+        const balance = screen.getByRole('link', { name: /Open the Bank/ });
+        const column = balance.parentElement;
+        expect(column).toContainElement(screen.getByRole('button', { name: /Viewing as/ }));
+        expect(column).not.toContainElement(screen.getByRole('button', { name: 'Account menu' }));
+        // The balance comes first (on top), the view label after it.
+        expect(balance.compareDocumentPosition(screen.getByRole('button', { name: /Viewing as/ })) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+        expect(balance).toHaveAttribute('href', '/bank');
+    });
+});

@@ -117,7 +117,7 @@ export const viewerMatch = (event) => {
 };
 
 // Finished events move to the Archived tab.
-export const isArchived = (event) => eventStage(event) === 'complete';
+export const isArchived = (event) => ['complete', 'cancelled'].includes(eventStage(event));
 
 // Players a team needs for this event: '4v4' -> 4.
 export const teamSizeOf = (event) => Number(String(event.teamSize).split('v')[0]) || 1;
@@ -134,6 +134,7 @@ export const isFull = (event) => event.maxEntrants != null && signedUpEntrants(e
 
 // Where an event is in its life cycle, derived from its data.
 export const eventStage = (event) => {
+    if (event.cancelledAt) return 'cancelled';
     if (event.bracket?.published) {
         const { done, total } = bracketProgress(buildBracket(event.format, event.bracket.seeds, event.bracket.results));
         return total > 0 && done === total ? 'complete' : 'live';
@@ -148,6 +149,7 @@ export const STAGE_LABELS = {
     seeding: 'Seeding',
     live: 'Live',
     complete: 'Complete',
+    cancelled: 'Cancelled',
 };
 
 // Reports that still apply to the players currently in the match.
@@ -199,6 +201,17 @@ export const register = async (id, fields) => {
     if (event) set(s => ({ lists: { ...s.lists, entered: [...new Set([...(s.lists.entered ?? []), event.id])] } }));
     return event;
 };
+
+// The host cancels the event: every player is refunded in full.
+export const cancelEvent = (id) => eventCall(apiClient.post(url(id, '/cancel')));
+
+// The host closes the event once the winners are in. Prizes and the host's revenue are paid out
+// 45 minutes later; reopen takes the close back until then.
+export const closeEvent = (id) => eventCall(apiClient.post(url(id, '/close')));
+export const reopenEvent = (id) => eventCall(apiClient.post(url(id, '/reopen')));
+
+// The host's view of entry revenue: { stage, collectedCents, feesCents, prizesCents, hostNetCents, ... }.
+export const getEventFinances = (id) => apiClient.get(url(id, '/finances')).then(res => res.data);
 
 export const unregister = (id) => eventCall(apiClient.delete(url(id, '/registration')));
 

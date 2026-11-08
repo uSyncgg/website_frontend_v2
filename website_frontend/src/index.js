@@ -59,6 +59,7 @@ import { ForgotPassword } from 'pages/Accounts/Authentication/ForgotPassword';
 import { ResetPassword } from 'pages/Accounts/Authentication/ResetPassword';
 import { RequireCompleteProfile, RedirectIfProfileComplete, RequireBracketHost } from 'components';
 import { EventDashboard } from 'pages/Host/EventDashboard';
+import { Bank } from 'pages/Bank/Bank';
 import { EVENT_DASHBOARD_PATH, HOSTING_DASHBOARD_PATH } from 'utils/hostEvents';
 import { CreateEvent } from 'pages/Host/CreateEvent';
 import { ManageEvent, EventOverview } from 'pages/Host/ManageEvent';
@@ -169,6 +170,11 @@ const app = (
             {/* Event Dashboard - every signed-in account: events entered, and (as a host) events run. */}
             <Route path={EVENT_DASHBOARD_PATH} element={<RequireCompleteProfile />}>
               <Route index element={<EventDashboard />} />
+            </Route>
+
+            {/* The Bank - your uSync balance, deposits, withdrawals and paid event entries. Needs a finished sign-up. */}
+            <Route path='/bank' element={<RequireCompleteProfile />}>
+              <Route index element={<Bank />} />
             </Route>
 
             {/* A team's page: roster, owner, and (for the owner) managing it. Public. */}

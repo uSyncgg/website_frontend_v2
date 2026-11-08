@@ -2,7 +2,7 @@ import { LegalDocument, LegalEmail, SectionRef, LegalNotice, LegalContactCard, L
 import { Link } from "react-router";
 
 // Update this date whenever the Terms change (see Section 3).
-const LAST_UPDATED = "October 8, 2026";
+const LAST_UPDATED = "November 8, 2026";
 
 const SECTIONS = [
     {
@@ -240,6 +240,12 @@ const SECTIONS = [
                     </li>
                     <li>
                         <strong>Adults 18 and older</strong> may use the Services subject to these Terms.
+                    </li>
+                    <li>
+                        <strong>The uSync Bank</strong> (<SectionRef to="purchases">Section 8.11</SectionRef>) is
+                        available only to users who are 18 or older, or the age of majority where they live. If we
+                        know or reasonably believe you are younger, we may block deposits, withdrawals, and payments
+                        from a Bank balance.
                     </li>
                     <li>
                         <strong>Age-restricted events and platforms.</strong> Some events, Hosts, prizes, venues, and
@@ -623,7 +629,10 @@ const SECTIONS = [
                 <ul>
                     <li>whether an event takes place as scheduled, or at all;</li>
                     <li>event rules, formats, administration, rulings, or dispute outcomes;</li>
-                    <li>the awarding, amount, timing, or payment of any prize or winnings;</li>
+                    <li>
+                        the awarding, amount, timing, or payment of any prize or winnings, except where uSync pays a prize
+                        from the Bank as described in <SectionRef to="purchases">Section 8.17</SectionRef>;
+                    </li>
                     <li>a Host’s refund, cancellation, or transfer policies;</li>
                     <li>the safety, security, accessibility, or condition of any venue; or</li>
                     <li>the conduct of Hosts, admins, participants, spectators, or other third parties.</li>
@@ -707,8 +716,11 @@ const SECTIONS = [
                 <h3>7.6 Prizes, Wagers, and Cash Competitions</h3>
                 <ul>
                     <li>
-                        uSync does not operate wagering services and does not hold prize funds, entry fees, or wagers
-                        on behalf of participants unless we expressly state otherwise.
+                        uSync does not operate wagering services and does not accept wagers. It does hold the balances
+                        you deposit in the uSync Bank, and for events that use uSync payments it collects entry fees and
+                        pays prizes and Host proceeds out of those fees, as described
+                        in <SectionRef to="purchases">Section 8</SectionRef>. Entry fees are not wagers against uSync, and uSync
+                        does not fund prizes beyond the entry fees collected for the event.
                     </li>
                     <li>
                         Wager and cash-match platforms listed on uSync are independent third-party businesses. Listing a
@@ -770,7 +782,7 @@ const SECTIONS = [
     {
         id: "purchases",
         number: 8,
-        title: "Purchases, Billing & Refunds",
+        title: "Purchases, uSync Bank, Billing & Refunds",
         content: (
             <>
                 <h3>8.1 Paid Services</h3>
@@ -785,7 +797,11 @@ const SECTIONS = [
                     </li>
                     <li>
                         <strong>Promotional services</strong> for Hosts, such as featured placements or social media
-                        promotion.
+                        promotion; and
+                    </li>
+                    <li>
+                        <strong>The uSync Bank</strong>, which lets you hold a balance on uSync, pay event entry fees
+                        from it, receive prizes and Host proceeds into it, and withdraw it (Sections 8.11 to 8.22).
                     </li>
                 </ul>
                 <p>Additional terms for a Paid Service may be presented at the time of purchase and form part of these Terms.</p>
@@ -835,6 +851,10 @@ const SECTIONS = [
                         or applicable law requires that transfers be permitted.
                     </li>
                     <li>Your receipt from uSync confirms your payment; it is not a guarantee that the Host will deliver the event.</li>
+                    <li>
+                        On events that use uSync payments, passes are paid from your uSync Bank balance rather than
+                        directly by card, as described in <SectionRef to="purchases">Section 8.14</SectionRef>.
+                    </li>
                 </ul>
 
                 <h3>8.5 Subscriptions and Automatic Renewal</h3>
@@ -884,7 +904,8 @@ const SECTIONS = [
                         <strong>Event passes.</strong> Refunds of the pass price are governed by the Host’s refund
                         policy, and the Host is responsible for honoring it. Please contact the Host first. uSync may
                         help facilitate a refund at its discretion but is not obligated to issue refunds on a Host’s
-                        behalf.
+                        behalf. Events that take payment through the uSync Bank follow the refund rules
+                        in <SectionRef to="purchases">Section 8.16</SectionRef> instead.
                     </li>
                     <li>
                         <strong>Platform fees.</strong> Platform fees are non-refundable once a purchase is complete,{" "}
@@ -936,6 +957,290 @@ const SECTIONS = [
                     delay, withhold, or offset payouts where reasonably necessary to cover refunds owed to
                     participants, chargebacks, suspected fraud, event cancellations, or violations of these Terms.
                 </p>
+
+                <h3>8.11 The uSync Bank</h3>
+                <p>
+                    The uSync Bank gives each eligible account a balance in U.S. dollars (your “Balance”). You can add
+                    funds by depositing, pay event entry fees from your Balance, receive prizes and Host proceeds into
+                    it, and withdraw it. Please understand what the Balance is and is not:
+                </p>
+                <ul>
+                    <li>
+                        <strong>It is a record of what uSync owes you, not a bank account.</strong> uSync is not a bank,
+                        credit union, or trust company. Your Balance is not a deposit, is not insured by the FDIC, NCUA,
+                        or any other government agency, and does not earn interest.
+                    </li>
+                    <li>
+                        <strong>It is for use on uSync.</strong> You can use your Balance only for the purposes in these
+                        Terms. You may not sell, lend, gift, or assign it, and you may not use the Bank to move money
+                        between people except through event entries, refunds, and prizes that these Terms describe.
+                    </li>
+                    <li>
+                        <strong>Payments are handled by our payment processor.</strong> Deposits and payouts run through
+                        Stripe and are subject to its terms (see <SectionRef to="purchases">Section 8.3</SectionRef>). Until
+                        card deposits and payouts are switched on for your account, some Bank features may be
+                        unavailable, and we will say so where they appear.
+                    </li>
+                </ul>
+
+                <h3>8.12 Who Can Use the Bank</h3>
+                <p>To use the Bank you must:</p>
+                <ul>
+                    <li>be 18 or older, or the age of majority where you live (see Section 4.1);</li>
+                    <li>
+                        have one account, give us accurate information, and complete any identity or tax verification
+                        we or our payment processor ask for before a withdrawal;
+                    </li>
+                    <li>
+                        be in a location where paid-entry competitions and the Bank are lawful and where we offer them
+                        (see Section 8.20); and
+                    </li>
+                    <li>use only payment methods and bank accounts that you are authorized to use.</li>
+                </ul>
+                <p>
+                    We may refuse, limit, or end Bank access for any account, including where needed to comply with law
+                    or to prevent fraud.
+                </p>
+
+                <h3>8.13 Deposits</h3>
+                <ul>
+                    <li>
+                        <strong>Minimum and maximum.</strong> The minimum deposit is <strong>$5.00</strong>. The maximum
+                        is $5,000.00 per deposit. We may set other limits, for example to prevent fraud.
+                    </li>
+                    <li>
+                        <strong>Fee.</strong> uSync charges a <strong>5% deposit fee</strong>, added on top of the amount
+                        you choose. If you deposit $20.00, you pay $21.00 and $20.00 is added to your Balance. The fee
+                        is shown before you confirm, appears on your receipt, and is not refundable. We may change the
+                        fee for future deposits after notice as described in
+                        <SectionRef to="changes"> Section 3</SectionRef>.
+                    </li>
+                    <li>
+                        <strong>Timing.</strong> Deposits are credited to your Balance as soon as the payment succeeds.
+                        If a deposit is later reversed, disputed, or found to be unauthorized, we may remove the
+                        credited amount from your Balance, and if the Balance is not enough, we may suspend your account
+                        until the shortfall is resolved.
+                    </li>
+                </ul>
+
+                <h3>8.14 Paying Event Entry Fees, and Paying for Teammates</h3>
+                <ul>
+                    <li>
+                        <strong>What you pay.</strong> For events that use uSync payments, each player owes the Host’s
+                        pass price plus uSync’s 5% platform fee. The amount, and who pays it, is shown before you
+                        confirm.
+                    </li>
+                    <li>
+                        <strong>Team entries.</strong> In a team event every player on the roster (up to the team size)
+                        owes a share. When you enter a team, you pay your own share and can choose to pay the shares of
+                        specific teammates from your Balance. Anything you pay for a teammate is a voluntary payment on
+                        their behalf; uSync does not collect it back from them for you.
+                    </li>
+                    <li>
+                        <strong>Your authorization.</strong> By joining a team’s roster, you authorize uSync to deduct
+                        your share from your Balance, without a separate confirmation, when that team is entered in an
+                        event that uses uSync payments, or when you join a team that is already entered and your share
+                        is unpaid. If your Balance is too low, nothing is deducted: the team stays pending and we notify
+                        you, and your share is deducted when your Balance can cover it. To avoid being charged, leave
+                        the team before it is entered. Refunds are described in
+                        <SectionRef to="purchases"> Section 8.16</SectionRef>.
+                    </li>
+                    <li>
+                        <strong>Confirmed entries.</strong> A team entry is not confirmed, and does not take a spot in
+                        the event, until every player’s share has been paid. If you are not able to pay for a share,
+                        the entry stays pending.
+                    </li>
+                </ul>
+
+                <h3>8.15 Withdrawals</h3>
+                <ul>
+                    <li>
+                        <strong>Minimum.</strong> The minimum withdrawal is <strong>$5.00</strong>, and you can withdraw
+                        only your available Balance. We do not currently charge a withdrawal fee.
+                    </li>
+                    <li>
+                        <strong>Net 30.</strong> Withdrawals are paid out <strong>30 days after you request them</strong>.
+                        The amount leaves your Balance when you request it, so it cannot be spent twice, and the
+                        request shows as pending with its payout date. You can cancel a pending withdrawal from your
+                        Bank history at any time before it is paid, and the amount returns to your Balance.
+                    </li>
+                    <li>
+                        <strong>How and when you are paid.</strong> Payouts go to the payout method you set up with our
+                        payment processor, after any verification it requires. We email you when a withdrawal has been
+                        paid. Your bank or card issuer may need additional time to make the funds available.
+                    </li>
+                    <li>
+                        <strong>Holds.</strong> We may delay, reduce, or refuse a withdrawal where reasonably necessary
+                        to prevent fraud, enforce these Terms, complete a review or investigation, respond to a
+                        chargeback or legal process, or correct an error.
+                    </li>
+                </ul>
+
+                <h3>8.16 Refunds and Cancellations for Events That Use uSync Payments</h3>
+                <p>
+                    These rules apply to entry fees you paid from your Balance. Refunds are returned to your Balance and,
+                    where a teammate’s share was paid by someone else, to the person who paid it.
+                </p>
+                <ul>
+                    <li>
+                        <strong>You leave before registration closes.</strong> If you (or your team) unregister, or a
+                        player leaves the team, before registration closes, what was paid for that spot is refunded in
+                        full, including the platform fee. Registration closes when the Host closes it or publishes the
+                        bracket, whichever happens first.
+                    </li>
+                    <li>
+                        <strong>You leave after registration closes.</strong> The entry fee and platform fee are not
+                        refunded. The pass price stays with the event and counts toward the Host’s proceeds.
+                    </li>
+                    <li>
+                        <strong>The Host removes you.</strong> You are refunded in full.
+                    </li>
+                    <li>
+                        <strong>The event is cancelled or deleted by the Host.</strong> Everyone who paid is refunded in
+                        full, including the platform fee and any amounts that would otherwise have been forfeited. We
+                        notify entrants when this happens.
+                    </li>
+                    <li>
+                        <strong>Deposit fees.</strong> Deposit fees (Section 8.13) are not refunded, even if you later
+                        get a refund of an entry fee.
+                    </li>
+                    <li>
+                        <strong>Postponements and Host rules.</strong> Rescheduling an event is not a cancellation. We
+                        do not refund entry fees because of match results, rulings, no-shows, or disqualifications.
+                    </li>
+                </ul>
+                <p>
+                    Nothing in this section limits any refund or cancellation right you have under applicable law.
+                </p>
+
+                <h3>8.17 Prizes, Host Proceeds, and Results</h3>
+                <ul>
+                    <li>
+                        <strong>Prizes are set by the Host.</strong> A Host can set prizes for first, second, and third
+                        place on an event that uses uSync payments, either as dollar amounts or as a percentage of the
+                        pass prices collected. Prizes are paid <strong>only from the entry fees collected for that
+                        event</strong>. If the prizes the Host set add up to more than was collected, each prize is
+                        reduced proportionally so that the total does not exceed what was collected. The platform fee
+                        is not part of the prize pool. Any prize text a Host publishes beyond this is the Host’s own
+                        promise, not uSync’s.
+                    </li>
+                    <li>
+                        <strong>Closing the event.</strong> When every match has a result, the Host closes the event to
+                        record the winners. After the Host closes the event, there is a 45 minute review period. During
+                        it the Host can reopen the event to correct a result. When the 45 minutes pass with the event
+                        still closed, uSync automatically pays out. Results the Host records are final for payout
+                        purposes. uSync does not referee matches or verify results.
+                    </li>
+                    <li>
+                        <strong>Prizes for teams.</strong> A team’s prize is divided equally between the players on that
+                        entry. A prize of $100.00 for a two-player team is $50.00 to each player. If it does not divide
+                        evenly, the extra cents go to the first player listed. Prizes are credited to each player’s
+                        Balance.
+                    </li>
+                    <li>
+                        <strong>Host proceeds.</strong> After prizes are paid, the Host receives the pass prices
+                        collected minus the prizes paid out, less a <strong>2.5% uSync fee on that profit</strong>, in
+                        their Balance. If prizes equal or exceed the pass prices collected, the Host receives nothing
+                        from the event and owes uSync nothing. uSync keeps the 5% platform fee that players pay on top
+                        of the pass price.
+                    </li>
+                    <li>
+                        <strong>Results and statistics.</strong> When an event is paid out, uSync records each player’s
+                        placement, match wins and losses, and earnings. We use these to build player statistics and may
+                        show them on profiles and in leaderboards.
+                    </li>
+                    <li>
+                        <strong>Withholding and corrections.</strong> We may withhold, delay, reverse, or reclaim a
+                        prize or payout, and adjust Balances, where we reasonably believe there was cheating, collusion,
+                        match-fixing, fraud, an error in the results or in our calculations, or a violation of these
+                        Terms or the event’s rules. We will tell you when we do.
+                    </li>
+                    <li>
+                        <strong>No payout for cancelled events.</strong> If an event is cancelled, no prizes or Host
+                        proceeds are paid and entry fees are refunded under Section 8.16.
+                    </li>
+                </ul>
+
+                <h3>8.18 Records, Receipts, and Taxes</h3>
+                <ul>
+                    <li>
+                        <strong>Receipts and history.</strong> Your Bank page shows your Balance and history of
+                        deposits, withdrawals, entry fees, refunds, prizes, and Host proceeds. You can open a receipt for
+                        any transaction and download your history, or a yearly summary, as a CSV file.
+                    </li>
+                    <li>
+                        <strong>Not tax advice.</strong> The exports and summaries are a record of your activity to help
+                        you keep your own books. They are not tax, legal, or accounting advice.
+                    </li>
+                    <li>
+                        <strong>You are responsible for your taxes.</strong> Prizes and Host proceeds may be taxable
+                        income. We may ask for tax information (such as a taxpayer identification number), may be
+                        required to withhold taxes or file information returns with tax authorities, and may hold
+                        withdrawals until we have the information we need.
+                    </li>
+                    <li>
+                        <strong>Unclaimed property.</strong> If a Balance sits unused for the period set by law, we may
+                        be required to report it to, and send it to, the state where you live. We will try to contact
+                        you first.
+                    </li>
+                </ul>
+
+                <h3>8.19 Security, Fraud, and Prohibited Bank Activity</h3>
+                <p>
+                    In addition to Section 4.4, you agree that you will not use the Bank to launder money, avoid
+                    sanctions, evade taxes, or finance anything unlawful; deposit with a payment method you are not
+                    authorized to use; file a false chargeback; open more than one account or use someone else’s
+                    account to get around limits, fees, or event rules; or arrange with others to lose on purpose,
+                    share winnings off the platform to avoid fees, or otherwise manipulate entries, results, or
+                    payouts. You are responsible for keeping your account secure (see
+                    <SectionRef to="accounts"> Section 5</SectionRef>). Tell us right away at <LegalEmail subject="Unauthorized Bank Activity" /> if
+                    you see activity you did not authorize.
+                </p>
+                <p>
+                    We may monitor Bank activity for fraud and legal compliance, verify your identity, and freeze,
+                    hold, reverse, or limit transactions and Balances, or close accounts, where we reasonably believe it
+                    is necessary to prevent harm or comply with law, including sanctions and anti-money-laundering
+                    rules.
+                </p>
+
+                <h3>8.20 Paid-Entry Competitions and Where They Are Available</h3>
+                <p>
+                    Events on uSync are skill-based competitions. Entry fees buy a place in the competition and prizes
+                    are paid to participants based on their results. Laws about paid-entry competitions and prizes vary
+                    by state and country, and some places restrict or prohibit them. Paid events, deposits, and prizes
+                    are void where prohibited. We may limit or turn off Bank features, paid entry, or prizes in places
+                    where we cannot offer them lawfully, and Hosts may set their own eligibility rules. You are
+                    responsible for making sure you may lawfully take part where you are. Section 7.6 continues to
+                    apply.
+                </p>
+
+                <h3>8.21 Errors and Disputes About Your Balance</h3>
+                <p>
+                    Check your Bank history regularly. If you see a transaction that looks wrong or unauthorized, email
+                    <LegalEmail subject="Bank Billing Error" /> within 60 days of the date it appears, with the receipt
+                    number and what you think is wrong. We will investigate and correct verified errors. We may also
+                    correct errors we find ourselves by adjusting your Balance, and we will tell you if we do. Section
+                    8.7 (billing errors and chargebacks) and Section 8.8 apply to Bank deposits as well.
+                </p>
+
+                <h3>8.22 Changes, Suspension, and Closing Your Account</h3>
+                <ul>
+                    <li>
+                        We may change Bank features, limits, and fees, and we will give notice of material changes as
+                        described in <SectionRef to="changes">Section 3</SectionRef>. Fee changes apply to future
+                        transactions only.
+                    </li>
+                    <li>
+                        We may suspend or end the Bank for any account that breaches these Terms or where the law
+                        requires.
+                    </li>
+                    <li>
+                        If you close your account or we close it without cause, we will pay out your remaining Balance
+                        by the Net 30 withdrawal process in Section 8.15, after any review, refund, or hold that applies.
+                        If we close it for breach or fraud, we may keep amounts we are entitled to keep or are required
+                        by law to hold, and we may reclaim amounts owed to us.
+                    </li>
+                </ul>
             </>
         ),
     },
