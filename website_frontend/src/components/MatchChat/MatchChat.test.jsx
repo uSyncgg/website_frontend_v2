@@ -79,4 +79,51 @@ describe('MatchChat', () => {
         renderChat({ expiresAt: '2030-01-05T12:00:00Z' });
         expect(screen.getByText(/This chat is deleted on/)).toBeInTheDocument();
     });
+
+    it('reports a message to uSync staff, saying that event admins never see it', async () => {
+        const onReport = jest.fn().mockResolvedValue({ ok: true });
+        renderChat({}, { onReport, messages: [msg(1, 'you all suck', { canReport: true })] });
+        fireEvent.click(screen.getByRole('button', { name: /Report cat's message/ }));
+        expect(screen.getByRole('dialog')).toHaveTextContent(/uSync staff only/);
+        fireEvent.change(screen.getByLabelText(/What's wrong/), { target: { value: 'hate' } });
+        fireEvent.change(screen.getByLabelText(/Anything else/), { target: { value: ' repeated ' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Send report' }));
+        await waitFor(() => expect(onReport).toHaveBeenCalledWith(1, 'hate', 'repeated'));
+        expect(await screen.findByText(/uSync staff will review it/)).toBeInTheDocument();
+    });
+
+    it('shows a reported message as reported and gives your own messages no report button', () => {
+        renderChat({}, { onReport: jest.fn(), messages: [msg(1, 'rude', { canReport: true, reported: true }), msg(2, 'mine', { mine: true, canReport: false })] });
+        expect(screen.getByText('Reported')).toBeInTheDocument();
+        expect(screen.queryByRole('button', { name: /Report/ })).not.toBeInTheDocument();
+    });
+
+    it('shows players a placeholder for a hidden message but an admin the text, marked hidden', () => {
+        const hidden = msg(1, 'secret rude words', { hidden: true });
+        const { unmount } = render(<MatchChat chat={base} messages={[{ ...hidden, body: '' }]} />);
+        expect(screen.getByText('Hidden by an admin')).toBeInTheDocument();
+        expect(screen.queryByText('secret rude words')).not.toBeInTheDocument();
+        unmount();
+        render(<MatchChat chat={{ ...base, role: 'admin', joined: true, canLeave: true }} messages={[{ ...hidden, hiddenBy: 'ModMike' }]} />);
+        expect(screen.getByText('secret rude words')).toBeInTheDocument();
+        expect(screen.getByText(/Hidden from players by ModMike/)).toBeInTheDocument();
+    });
+
+    it('lets a joined admin hide a player message and leave, but not delete', () => {
+        const onHide = jest.fn();
+        const onLeave = jest.fn();
+        renderChat({ role: 'admin', joined: true, canLeave: true, canRequestAdmin: false }, { onHide, onLeave, messages: [msg(1, 'rude', { canHide: true })] });
+        fireEvent.click(screen.getByRole('button', { name: /Hide cat's message from players/ }));
+        expect(onHide).toHaveBeenCalledWith(expect.objectContaining({ id: 1 }));
+        fireEvent.click(screen.getByRole('button', { name: /Leave chat/ }));
+        expect(onLeave).toHaveBeenCalled();
+        expect(screen.queryByRole('button', { name: /Delete/ })).not.toBeInTheDocument();
+    });
+
+    it('is read-only once the event has ended', () => {
+        renderChat({ ended: true, closedReason: 'This event has ended, so the chat is read-only.', canWrite: false, canRequestAdmin: false, expiresAt: '2030-01-05T12:00:00Z' });
+        expect(screen.getByText(/read-only/)).toBeInTheDocument();
+        expect(screen.queryByLabelText('Message')).not.toBeInTheDocument();
+        expect(screen.queryByRole('button', { name: /Request an admin/ })).not.toBeInTheDocument();
+    });
 });

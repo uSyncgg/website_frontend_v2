@@ -33,6 +33,9 @@ const Chat = ({ scenario }) => {
                 onSend={mock.send}
                 onRequestAdmin={mock.requestAdmin}
                 onJoin={mock.join}
+                onLeave={mock.leave}
+                onHide={mock.hide}
+                onReport={mock.report}
                 onClearError={mock.clearSendError}
             />
             <div className={styles.tools}>
@@ -60,6 +63,8 @@ export const ChatMock = () => {
                 <p className={hostStyles.mockBanner}>
                     Mock page for review. Nothing here is saved or sent, and it will be deleted later.{' '}
                     <Link to="/mock/chat/notifications" style={{ color: 'inherit', fontWeight: 700 }}>Admin notifications preview</Link>
+                    {' · '}
+                    <Link to="/mock/chat/moderation" style={{ color: 'inherit', fontWeight: 700 }}>Moderation tab preview</Link>
                     {' · '}
                     <Link to="/more/terms-of-service" style={{ color: 'inherit', fontWeight: 700 }}>Terms (7.10)</Link>
                     {' · '}

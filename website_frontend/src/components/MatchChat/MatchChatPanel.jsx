@@ -6,6 +6,12 @@ import { MatchChat } from "./MatchChat";
 export const MatchChatPanel = ({ eventId, matchId }) => {
     const chat = useMatchChat(eventId, matchId);
 
+    const hide = (message) => {
+        if (window.confirm(`Hide ${message.sender?.name}'s message from the players? It is also reported to uSync staff, who review it. You can't undo this yourself.`)) {
+            chat.hide(message.id);
+        }
+    };
+
     return (
         <MatchChat
             chat={chat.chat}
@@ -16,6 +22,9 @@ export const MatchChatPanel = ({ eventId, matchId }) => {
             onSend={chat.send}
             onRequestAdmin={chat.requestAdmin}
             onJoin={chat.join}
+            onLeave={chat.leave}
+            onHide={hide}
+            onReport={chat.report}
             onClearError={chat.clearSendError}
         />
     );

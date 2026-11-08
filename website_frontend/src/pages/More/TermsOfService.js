@@ -792,8 +792,27 @@ const SECTIONS = [
                         admin the Host has appointed for the event (together, “event admins”) can join a match chat in
                         that event to help resolve disputes, no-shows, and other problems. Event admins cannot read a
                         match chat unless they join it. When they join, they can read the entire conversation so far,
-                        and a message in the chat tells the players that they joined. Event admins are independent of
+                        and a message in the chat tells the players that they joined (and when they leave). Event admins
+                        cannot delete messages, but they can hide a player’s message from the other players, for
+                        example because it is inappropriate. Hiding a message automatically reports it to uSync, and we
+                        may restore it if we find it did not break these Terms. Event admins are independent of
                         uSync, and their decisions are subject to Sections 7.4 and 7.5.
+                    </li>
+                    <li>
+                        <strong>Reporting messages.</strong> Anyone in a match chat can report a message using the
+                        Report button. Reports go to uSync only: the Host and event admins do not see who reported
+                        what, and are not told about a report. We review reports and the surrounding conversation, and
+                        we may keep a copy of the reported message and a few lines around it, even after the chat is
+                        deleted, as described in our Privacy Policy. Harassment, hate, threats, sexual content, spam,
+                        scams, or any other abuse of match chat is a violation of these Terms and of Section 4.4. We
+                        may respond with a warning, removal of messages, a temporary or permanent ban from chat or from
+                        the Services, or any other action described in Section 13. Please do not file reports you know
+                        to be false.
+                    </li>
+                    <li>
+                        <strong>Limits.</strong> To prevent spam, we limit how many messages you can send in a short time,
+                        how many links a message can contain, and how many messages a single chat can hold, and we may
+                        block repeated or automated messages.
                     </li>
                     <li>
                         <strong>Not private from us.</strong> Match chats are not private messages. We (and the Host
@@ -803,7 +822,8 @@ const SECTIONS = [
                     </li>
                     <li>
                         <strong>Deletion.</strong> Match chats are temporary. After every match in an event has been
-                        played, the chats for that event are deleted automatically three days later. We may keep a copy
+                        played, its chats become read-only and are deleted automatically three days later. If an event
+                        is never completed, its chats are deleted 30 days after its start date. We may keep a copy
                         of specific messages for longer where needed to handle a report, a dispute, or a legal
                         obligation, as described in our Privacy Policy. Do not rely on match chat to keep a record of
                         anything: take a screenshot of anything you may need.

@@ -1,0 +1,145 @@
+.intro {
+    margin: 0 0 1rem;
+    color: var(--ink-2);
+    font-size: .85rem;
+    line-height: 1.5;
+    max-width: 52rem;
+}
+
+.empty {
+    padding: 2rem 1rem;
+    border: 1px dashed var(--line-strong);
+    border-radius: 10px;
+    color: var(--ink-3);
+    text-align: center;
+}
+
+.report {
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+    margin-bottom: 1rem;
+}
+
+.top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .2rem .6rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    color: var(--ink-2);
+    font-size: .74rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.badgePlayer {
+    border-color: rgba(224, 105, 138, .5);
+    background: rgba(224, 105, 138, .08);
+    color: var(--loss);
+}
+
+.badgeAuto {
+    border-color: rgba(224, 177, 94, .5);
+    background: rgba(224, 177, 94, .08);
+    color: var(--gold);
+}
+
+.status_open {
+    border-color: var(--violet-bright);
+    background: var(--violet-dim);
+    color: white;
+}
+
+.status_actioned {
+    border-color: rgba(107, 207, 143, .5);
+    color: var(--win);
+}
+
+.when {
+    margin-left: auto;
+    color: var(--ink-3);
+    font-size: .78rem;
+}
+
+.where {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: .85rem;
+}
+
+.link {
+    color: var(--violet-bright);
+}
+
+.quote {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: .2rem .6rem;
+    margin: 0;
+    padding: .7rem .9rem;
+    border-left: 3px solid var(--loss);
+    border-radius: 4px;
+    background: rgba(255, 255, 255, .04);
+    font-size: .92rem;
+}
+
+.body {
+    flex-basis: 100%;
+    overflow-wrap: anywhere;
+}
+
+.roleTag {
+    padding: 0 .4rem;
+    border-radius: 999px;
+    background: rgba(224, 177, 94, .18);
+    color: var(--gold);
+    font-size: .68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.reporter,
+.muted {
+    margin: 0;
+    color: var(--ink-3);
+    font-size: .8rem;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .6rem;
+}
+
+.history {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.resolve {
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+    padding-top: .75rem;
+    border-top: 1px solid var(--line);
+}
+
+.noteField {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    color: var(--ink-2);
+    font-size: .8rem;
+}

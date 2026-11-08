@@ -88,7 +88,11 @@ const RETENTION_PERIODS = [
     ],
     [
         "Match chat messages",
-        "Deleted automatically three days after every match in the event has been played. Messages are removed from our live systems at that time, and copies in our backup systems are overwritten on a rolling basis within 90 days. We may keep specific messages longer, and only for as long as needed, if they are part of a report, an investigation, a dispute, or a legal obligation. If a message is copied into a report or dispute record, that copy follows the retention period for that record.",
+        "Deleted automatically three days after every match in the event has been played (the chat is read-only during that time), or 30 days after the event’s start date if the event is never completed. Messages are removed from our live systems at that time, and copies in our backup systems are overwritten on a rolling basis within 90 days. We may keep specific messages longer, and only for as long as needed, if they are part of an investigation, a dispute, or a legal obligation.",
+    ],
+    [
+        "Reports about match chat messages",
+        "The report, with a saved copy of the reported message and a few messages around it, is kept until we have reviewed it and for one year after that, so we can enforce our Terms, handle appeals, and spot repeat abuse; then it is deleted. A report that is still open is kept until it is reviewed. We may keep information longer where needed for a legal obligation or a child-safety report.",
     ],
     [
         "Emails and support requests",
@@ -202,6 +206,13 @@ const SECTIONS = [
                     whether you asked for or joined as an admin. Messages are shown to the players in that match and to
                     any Host or event admin who joins the chat (an admin who joins can read the messages sent before
                     they joined). Messages are not end-to-end encrypted, and they are not private from uSync.
+                </p>
+                <p>
+                    If you report a message in a match chat, or an admin hides a message (which reports it to us
+                    automatically), we collect your report: the category you choose, any note you add, your username,
+                    the reported message and its sender, the event and match, and a copy of a few messages around it.
+                    Reports are visible only to uSync staff, never to the event’s Host or admins, and we record in an
+                    audit log when staff read a chat.
                 </p>
 
                 <h3>2.2 Information We Collect Automatically</h3>
@@ -372,6 +383,7 @@ const SECTIONS = [
                     Match chat is shared with your opponents and, if an admin is requested or invited (for example
                     because of a score dispute or a reported no-show), with the Host and the event’s admins, who can
                     read the whole conversation once they join the chat. They are told in the chat when an admin joins.
+                    Event admins can also hide a player’s message from the other players, and doing so reports it to us.
                     Please do not share information in a match chat that you do not want your opponents, the Host, or
                     event admins to see.
                 </p>
