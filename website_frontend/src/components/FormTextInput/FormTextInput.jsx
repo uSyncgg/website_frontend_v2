@@ -19,12 +19,14 @@ export const FormTextInput = (
         errorClassName,
         labelClassName,
         imageClassName="",
-        onFieldBlur
+        onFieldBlur,
+        rules // extra react-hook-form rules (minLength, validate, ...)
     }
 ) => {
     const { register, formState: { errors } } = useFormContext();
     const { onBlur: rhfOnBlur, ...fieldProps } = register(name, {
-        required: required ? "This field is required" : false
+        required: required ? "This field is required" : false,
+        ...rules,
     });
     const isRow = !!(image || initials);
     // get() walks dotted names like "venues.0.name", which errors[name] can't.

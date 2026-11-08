@@ -107,6 +107,7 @@ import { PasswordChecklist } from "./PasswordChecklist/PasswordChecklist";
 import { RequireCompleteProfile } from "./RequiredCompleteProfile/RequiredCompleteProfile";
 import { RequireBracketHost } from "./RequireBracketHost/RequireBracketHost";
 import { Bracket, ReportMatchDialog } from "./Bracket/Bracket";
+import { ClaimEventPrompt } from "./ClaimEventPrompt/ClaimEventPrompt";
 import { RedirectIfProfileComplete } from "./RequiredCompleteProfile/RedirectIfProfileComplete";
 
 // Sign Up Wizard
@@ -185,6 +186,7 @@ export {
     RequireBracketHost,
     Bracket,
     ReportMatchDialog,
+    ClaimEventPrompt,
     RedirectIfProfileComplete,
     SignUpFormWizard,
     ProfileSettingsWizard,

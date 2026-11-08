@@ -1,4 +1,4 @@
-import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText, AddYourEventButton } from "components";
+import { SeoData, EventInfoCard, HeaderImage, ExternalButton, BackButton, VerifiedText, AddYourEventButton, ClaimEventPrompt } from "components";
 import { useParams } from "react-router";
 import { useLanInfo } from "hooks";
 import { buildEventPath } from "utils/eventPaths";
@@ -60,6 +60,8 @@ export const LanDetail = () => {
                     </div>
                 </div>
             )}
+
+            {!loading && data && <ClaimEventPrompt eventId={data.event_id} />}
 
             <div className="backButtonContainer">
                 <BackButton path={sectionPath} />
