@@ -6,6 +6,7 @@ import { useEventPasses, useEventReceipt } from "./useEventRegistration";
 import { useProfile, useSettings } from "./useUsers";
 import { useUsernameAvailability } from "./useUsernameAvailability";
 import { useAdminAnalytics, useAdminEvents } from "./useAdminAnalytics";
+import { useObjectUrl } from "./useObjectUrl";
 
 export {
     useCheckResize,
@@ -31,5 +32,6 @@ export {
     useSettings,
     useUsernameAvailability,
     useAdminAnalytics,
-    useAdminEvents
+    useAdminEvents,
+    useObjectUrl
 }

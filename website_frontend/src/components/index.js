@@ -107,6 +107,7 @@ import { PasswordChecklist } from "./PasswordChecklist/PasswordChecklist";
 import { RequireCompleteProfile } from "./RequiredCompleteProfile/RequiredCompleteProfile";
 import { RequireAdmin } from "./RequireAdmin/RequireAdmin";
 import { NudgeHost, NudgeCard } from "./NudgePopup/NudgePopup";
+import { ClaimEventPrompt } from "./ClaimEventPrompt/ClaimEventPrompt";
 import { RedirectIfProfileComplete } from "./RequiredCompleteProfile/RedirectIfProfileComplete";
 
 // Sign Up Wizard
@@ -181,6 +182,7 @@ export {
     RequireAdmin,
     NudgeHost,
     NudgeCard,
+    ClaimEventPrompt,
     RedirectIfProfileComplete,
     SignUpFormWizard,
     ProfileSettingsWizard,

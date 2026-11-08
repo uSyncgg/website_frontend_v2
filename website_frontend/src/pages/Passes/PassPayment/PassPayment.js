@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { Link, useLocation, useParams } from "react-router";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import styles from '../../Payment/GeneralPaymentForm/GeneralPaymentForm.module.css';
+import paymentStyles from 'components/PaymentComponent/PaymentComponent.module.css';
 import { CheckoutSteps, PaymentCart, LoadingWheel } from "components";
 import { NestedPaymentComponent } from "components/PaymentComponent/NestedPaymentComponent";
 import { stripeAppearance, stripeLoader } from "utils/stripeAppearance";
@@ -11,6 +12,11 @@ import { useEventReceipt } from "hooks";
 import { getApiErrorMessage } from "utils/apiError";
 
 const STEPS = ['Registration', 'Payment', 'Confirmation'];
+
+// Must match REGISTRATION_HOLD_MINUTES in the backend (app/services/__init__.py).
+const HOLD_MINUTES = 30;
+const EXPIRED_MESSAGE = 'Your reservation expired, so your pass was released. Please register again.';
+const messageStyle = { textAlign: 'center', color: 'white', fontSize: '1.25rem', padding: '2rem 0' };
 
 function PassPayment() {
     // LIVE key. Must stay inside the component (not module scope): CRA
@@ -21,15 +27,20 @@ function PassPayment() {
     const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
 
     const { registrationId } = useParams();
+    const location = useLocation();
+    // Set by PassSelection on navigate. Missing if the buyer opened this URL directly.
+    const passesPath = location.state?.passesPath || '/lans';
     const [clientSecret, setClientSecret] = useState('');
     const [total, setTotal] = useState(null);
     const [intentError, setIntentError] = useState(null);
+    const [expired, setExpired] = useState(false);
 
     const { data: receipt } = useEventReceipt(registrationId);
 
     useEffect(() => {
         let cancelled = false;
         setIntentError(null);
+        setExpired(false);
 
         createPaymentIntent({ registration_id: registrationId })
             .then((data) => {
@@ -38,7 +49,10 @@ function PassPayment() {
                 setTotal(data.total_snapshot_cents);
             })
             .catch((err) => {
-                if (!cancelled) setIntentError(getApiErrorMessage(err));
+                if (cancelled) return;
+                // 410: the unpaid reservation passed its hold window and the slot was released.
+                if (err?.response?.status === 410) setExpired(true);
+                else setIntentError(getApiErrorMessage(err));
             });
 
         return () => { cancelled = true; };
@@ -58,14 +72,30 @@ function PassPayment() {
 
             <div className={styles.generalFormContainer}>
                 <div className={styles.sectionOneForm}>
-                    {intentError ? (
-                        <p style={{ textAlign: 'center', color: 'white', fontSize: '1.25rem', padding: '2rem 0' }}>{intentError}</p>
+                    {expired ? (
+                        <div style={{ textAlign: 'center' }}>
+                            <p style={messageStyle}>{EXPIRED_MESSAGE}</p>
+                            <Link
+                                to={passesPath}
+                                className={paymentStyles.paymentButton}
+                                style={{ display: 'inline-block', textDecoration: 'none' }}
+                            >
+                                {passesPath === '/lans' ? 'Back to events' : 'Register again'}
+                            </Link>
+                        </div>
+                    ) : intentError ? (
+                        <p style={messageStyle}>{intentError}</p>
                     ) : !clientSecret ? (
                         <LoadingWheel />
                     ) : (
-                        <Elements options={{ clientSecret, appearance: stripeAppearance, loader: stripeLoader }} stripe={stripePromise}>
-                            <NestedPaymentComponent price={total} returnUrl={returnUrl} />
-                        </Elements>
+                        <>
+                            <p style={{ textAlign: 'center', color: 'rgba(255, 255, 255, .7)', fontSize: '.9rem', margin: '0 0 1rem' }}>
+                                Your pass is reserved for {HOLD_MINUTES} minutes from registration. Complete payment before then to keep it.
+                            </p>
+                            <Elements options={{ clientSecret, appearance: stripeAppearance, loader: stripeLoader }} stripe={stripePromise}>
+                                <NestedPaymentComponent price={total} returnUrl={returnUrl} onIntentCanceled={() => setExpired(true)} />
+                            </Elements>
+                        </>
                     )}
                 </div>
 

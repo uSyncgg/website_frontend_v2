@@ -62,6 +62,7 @@ import { NudgeTest } from 'pages/Admin/NudgeTest';
 import { AdminAnalytics } from 'pages/Admin/AdminAnalytics';
 import { Profile, MyProfile } from 'pages/Accounts/Profile/Profile';
 import { ProfileSettings, ProfileSettingsHome, AddProfile } from 'pages/Accounts/Settings/ProfileSettings';
+import { ClaimEvent } from 'pages/Accounts/ClaimEvent/ClaimEvent';
 import { CurrentUserProvider } from 'hooks';
 
 const root = document.getElementById('root');
@@ -165,6 +166,12 @@ const app = (
             {process.env.NODE_ENV === 'development' &&
               <Route path='/dev/nudge-test' element={<NudgeTest />} />
             }
+
+            {/* Hosts claim an existing event listing as theirs. Logged-out visitors go through
+                /login (RequireCompleteProfile) and come back here afterwards. */}
+            <Route path='/claim-event/:eventId' element={<RequireCompleteProfile />}>
+              <Route index element={<ClaimEvent />} />
+            </Route>
 
           </Routes>
         </ErrorBoundary>
