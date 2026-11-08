@@ -6,7 +6,7 @@ import styles from "./UserGamesStep.module.css";
 
 // Same icons as the Games page (catalog/gameIcons.js). `value` is what gets saved,
 // so it must stay the same even where the display name differs elsewhere.
-const GAME_OPTIONS = [
+export const GAME_OPTIONS = [
     { value: "Call of Duty", title: "Call of Duty", image: GAME_ICONS['call-of-duty'] },
     { value: "CS 2", title: "CS 2", image: GAME_ICONS['cs2'] },
     { value: "Halo", title: "Halo", image: GAME_ICONS['halo'] },

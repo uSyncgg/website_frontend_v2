@@ -141,6 +141,7 @@ const app = (
             </Route>
             {/* :username is optional - the page corrects it to the profile's current name. */}
             <Route path='/profile/:publicId/:username?' element={<Profile />} />
+            <Route path='/profile/:publicId/:username/stats/:game?' element={<Profile stats />} />
 
             {/* Profile Completion — the destination RequireCompleteProfile redirects to,
                 so it must not be wrapped by that same guard (that would redirect to itself). */}
