@@ -57,7 +57,7 @@ import TournamentRoutes from './routes/TournamentRoutes';
 import { AuthPage } from 'pages/Accounts/Authentication/AuthPage';
 import { ForgotPassword } from 'pages/Accounts/Authentication/ForgotPassword';
 import { ResetPassword } from 'pages/Accounts/Authentication/ResetPassword';
-import { RequireCompleteProfile, RedirectIfProfileComplete, RequireBracketHost } from 'components';
+import { RequireCompleteProfile, RedirectIfProfileComplete, RequireBracketHost, RequireAdmin, NudgeHost } from 'components';
 import { EventDashboard } from 'pages/Host/EventDashboard';
 import { EVENT_DASHBOARD_PATH, HOSTING_DASHBOARD_PATH } from 'utils/hostEvents';
 import { CreateEvent } from 'pages/Host/CreateEvent';
@@ -71,6 +71,8 @@ import { MatchPage } from 'pages/Host/MatchPage';
 import { ChatMock } from 'pages/Mock/ChatMock';
 import { ChatNotificationsMock } from 'pages/Mock/ChatNotificationsMock';
 import { TeamPage } from 'pages/Teams/TeamPage';
+import { NudgeTest } from 'pages/Admin/NudgeTest';
+import { AdminAnalytics } from 'pages/Admin/AdminAnalytics';
 import { Profile, MyProfile } from 'pages/Accounts/Profile/Profile';
 import { ProfileSettings, ProfileSettingsHome, AddProfile } from 'pages/Accounts/Settings/ProfileSettings';
 import { ClaimEvent } from 'pages/Accounts/ClaimEvent/ClaimEvent';
@@ -202,12 +204,22 @@ const app = (
             <Route path='/claim-event/:eventId' element={<RequireCompleteProfile />}>
               <Route index element={<ClaimEvent />} />
             </Route>
+            {/* Admin - authorized accounts only (see RequireAdmin). Read-only. */}
+            <Route path='/admin' element={<RequireAdmin />}>
+              <Route path='analytics' element={<AdminAnalytics />} />
+            </Route>
+
+            {/* Local-only page for previewing admin nudge popups. */}
+            {process.env.NODE_ENV === 'development' &&
+              <Route path='/dev/nudge-test' element={<NudgeTest />} />
+            }
 
           </Routes>
         </ErrorBoundary>
       </main>
       
       <Footer />
+      <NudgeHost />
     </div>
     </CurrentUserProvider>
   </BrowserRouter>

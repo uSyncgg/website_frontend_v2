@@ -108,6 +108,8 @@ import { RequireCompleteProfile } from "./RequiredCompleteProfile/RequiredComple
 import { RequireBracketHost } from "./RequireBracketHost/RequireBracketHost";
 import { Bracket, ReportMatchDialog } from "./Bracket/Bracket";
 import { ClaimEventPrompt } from "./ClaimEventPrompt/ClaimEventPrompt";
+import { RequireAdmin } from "./RequireAdmin/RequireAdmin";
+import { NudgeHost, NudgeCard } from "./NudgePopup/NudgePopup";
 import { RedirectIfProfileComplete } from "./RequiredCompleteProfile/RedirectIfProfileComplete";
 
 // Sign Up Wizard
@@ -187,6 +189,9 @@ export {
     Bracket,
     ReportMatchDialog,
     ClaimEventPrompt,
+    RequireAdmin,
+    NudgeHost,
+    NudgeCard,
     RedirectIfProfileComplete,
     SignUpFormWizard,
     ProfileSettingsWizard,
