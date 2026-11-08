@@ -526,3 +526,50 @@
     max-height: none;
     min-height: 0;
 }
+
+/* ---- quiet scrollbar: no track, a thin thumb that only shows up when you point at the list ---- */
+
+.list {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+}
+
+.list:hover,
+.list:focus-within {
+    scrollbar-color: rgba(255, 255, 255, .2) transparent;
+}
+
+.list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.list::-webkit-scrollbar-track,
+.list::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+.list::-webkit-scrollbar-thumb {
+    border: 2px solid transparent;
+    border-radius: 999px;
+    background: transparent;
+    background-clip: padding-box;
+}
+
+.list:hover::-webkit-scrollbar-thumb,
+.list:focus-within::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, .22);
+    background-clip: padding-box;
+}
+
+.list::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, .38);
+    background-clip: padding-box;
+}
+
+/* The message box grows with the text, so it never needs a scrollbar of its own. */
+.composerInput {
+    max-height: none;
+    overflow: hidden;
+    resize: none;
+    line-height: 1.4;
+}

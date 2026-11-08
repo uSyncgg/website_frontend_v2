@@ -1502,3 +1502,76 @@
         height: 34rem;
     }
 }
+
+/* ---- match page: a compact "A vs B" header, then a roomy Maps section ---- */
+
+.matchMain .versus {
+    gap: .5rem;
+    padding: .65rem .85rem;
+}
+
+.matchMain .versus .matchSide {
+    padding: .5rem .75rem;
+}
+
+.matchMain .versus .matchSideName {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.matchMain .versus .matchSideScore {
+    font-size: 1.25rem;
+}
+
+.matchMain .versus .muted {
+    margin: .1rem 0 0;
+    font-size: .78rem;
+}
+
+.matchMain .versus .rosterList {
+    margin-top: .35rem;
+    gap: .25rem;
+}
+
+.matchMain .versus .rosterList li {
+    padding: .1rem .45rem;
+    font-size: .72rem;
+}
+
+.matchMain .versus .versusTag {
+    font-size: .7rem;
+}
+
+.mapsCard {
+    padding: 1.5rem;
+}
+
+.mapGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    gap: .85rem;
+    margin: 1rem 0;
+}
+
+.mapCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .35rem;
+    min-height: 6.5rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .03);
+}
+
+.mapName {
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+.mapHost {
+    color: var(--ink-2);
+    font-size: .85rem;
+    line-height: 1.35;
+}

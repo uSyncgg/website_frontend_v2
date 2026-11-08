@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { FaArrowLeft, FaCalendarAlt, FaSitemap } from "react-icons/fa";
 import { MatchChat } from "components/MatchChat/MatchChat";
 import hostStyles from "pages/Host/Host.module.css";
+import { mapHosts } from "utils/bracket";
 import { SCENARIOS, useMockChat } from "./mockChat";
 import styles from "./ChatMock.module.css";
 
@@ -119,12 +120,24 @@ export const ChatMock = () => {
                             </div>
                         </section>
 
+                        <section className={`${hostStyles.card} ${hostStyles.mapsCard}`}>
+                            <h2 className={hostStyles.sectionTitle}>Maps</h2>
+                            <p className={hostStyles.muted}>Maps and modes for this match will be posted here.</p>
+                            <div className={hostStyles.mapGrid}>
+                                {mapHosts(5, 'alpha', 'delta', ['alpha', 'x', 'y', 'delta']).map(m => (
+                                    <div key={m.map} className={hostStyles.mapCard}>
+                                        <strong className={hostStyles.mapName}>Map {m.map}</strong>
+                                        <span className={hostStyles.mapHost}>
+                                            {m.host ? `Hosted by ${m.host === 'alpha' ? 'Alpha' : 'Delta'} (seed ${m.seed})` : 'Hosted by whoever won the most rounds so far'}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
+                            <p className={hostStyles.fieldHint}>The higher seed hosts map 1, then hosts swap each map. The last map goes to whoever won the most rounds before it.</p>
+                        </section>
+
                         <div className={hostStyles.twoCol}>
                             <div>
-                                <section className={hostStyles.card}>
-                                    <h2 className={hostStyles.sectionTitle}>Maps</h2>
-                                    <p className={hostStyles.muted}>Maps and modes for this match will be posted here.</p>
-                                </section>
                                 <section className={hostStyles.card}>
                                     <h2 className={hostStyles.sectionTitle}>Rules</h2>
                                     <p className={hostStyles.preWrap}>Hardpoint first. Pick, ban, then play.</p>

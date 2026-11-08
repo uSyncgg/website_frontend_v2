@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { FaComments, FaEyeSlash, FaFlag, FaLock, FaShieldAlt, FaSignOutAlt, FaUserShield } from "react-icons/fa";
 import { chatParts, MAX_CHAT_LENGTH } from "utils/chatText";
 import styles from "./MatchChat.module.css";
@@ -10,7 +10,7 @@ const REQUEST_REASONS = {
 };
 
 export const REPORT_CATEGORIES = [
-    { key: 'harassment', label: 'Harassment or bullying' },
+    { key: 'harassment', label: 'Harassment' },
     { key: 'hate', label: 'Hate or discrimination' },
     { key: 'sexual', label: 'Sexual or inappropriate content' },
     { key: 'threats', label: 'Threats' },
@@ -161,7 +161,17 @@ export const MatchChat = ({
     const [draft, setDraft] = useState('');
     const [reporting, setReporting] = useState(null);
     const listRef = useRef(null);
+    const inputRef = useRef(null);
     const stick = useRef(true);
+
+    // The box grows with what's typed (up to the 500 character limit) instead of scrolling inside itself.
+    useLayoutEffect(() => {
+        const el = inputRef.current;
+        if (!el) return;
+        el.style.height = 'auto';
+        // scrollHeight leaves out the border, which the box's height includes.
+        el.style.height = `${el.scrollHeight + el.offsetHeight - el.clientHeight}px`;
+    }, [draft, chat?.canWrite]);
 
     // Stay at the bottom as lines arrive, unless the reader scrolled up to look back.
     useEffect(() => {
@@ -219,7 +229,12 @@ export const MatchChat = ({
                 </div>
             }
 
-            {chat.closedReason && <p className={styles.notice}><FaLock aria-hidden="true" /> {chat.closedReason}</p>}
+            {chat.closedReason &&
+                <p className={styles.notice}>
+                    <FaLock aria-hidden="true" /> {chat.closedReason}
+                    {chat.ended && deleteDay && <> It will be deleted on {dateOf(deleteDay.toISOString())}.</>}
+                </p>
+            }
 
             {chat.canRead
                 ? (
@@ -239,7 +254,8 @@ export const MatchChat = ({
                     <label htmlFor="match-chat-input" className={styles.srOnly}>Message</label>
                     <textarea
                         id="match-chat-input"
-                        className={styles.input}
+                        ref={inputRef}
+                        className={`${styles.input} ${styles.composerInput}`}
                         rows={1}
                         maxLength={MAX_CHAT_LENGTH}
                         placeholder="Write a message"
@@ -266,13 +282,6 @@ export const MatchChat = ({
                     }
                     {chat.canWrite && <span className={styles.count}>{draft.length}/{MAX_CHAT_LENGTH}</span>}
                 </div>
-                <p className={styles.rules}>
-                    Keep it respectful. Banned words and unsafe links are blocked, and you can report any message to uSync staff.
-                    Admins can only see this chat if they join.
-                    {deleteDay
-                        ? <> This chat is deleted on {dateOf(deleteDay.toISOString())}.</>
-                        : <> Chats are deleted 3 days after the event ends.</>}
-                </p>
             </footer>
 
             {reporting && onReport && <ReportDialog message={reporting} onClose={() => setReporting(null)} onSubmit={onReport} />}

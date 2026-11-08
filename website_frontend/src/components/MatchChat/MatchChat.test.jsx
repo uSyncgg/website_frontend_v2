@@ -76,8 +76,8 @@ describe('MatchChat', () => {
     });
 
     it('shows the deletion date once the event is over', () => {
-        renderChat({ expiresAt: '2030-01-05T12:00:00Z' });
-        expect(screen.getByText(/This chat is deleted on/)).toBeInTheDocument();
+        renderChat({ ended: true, closedReason: 'This event has ended, so the chat is read-only.', canWrite: false, expiresAt: '2030-01-05T12:00:00Z' });
+        expect(screen.getByText(/It will be deleted on/)).toBeInTheDocument();
     });
 
     it('reports a message to uSync staff, saying that event admins never see it', async () => {

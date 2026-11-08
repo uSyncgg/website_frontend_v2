@@ -6,7 +6,7 @@ import { MatchChatPanel } from "components/MatchChat/MatchChatPanel";
 import {
     useHostEvent, matchState, matchReports, noShowUnlocksAt, playerReportMatch, reportNoShow,
 } from "services/brackets";
-import { buildBracket, findMatch, isEntrant, matchBestOf, matchRoundLabel } from "utils/bracket";
+import { buildBracket, findMatch, isEntrant, mapHosts, matchBestOf, matchRoundLabel } from "utils/bracket";
 import { profileUrl } from "utils/profiles";
 import { BracketError, EventLoading, entrantsById, formatDate, gameDisplayName, isTeamEvent, locationLabel, RestrictionList } from "./hostShared";
 import styles from "./Host.module.css";
@@ -97,6 +97,7 @@ export const MatchPage = () => {
     const round = matchRoundLabel(event.format, built, match);
     // The chat sits in its own tall column on the right for the two players' sides and the event's admins.
     const hasChat = mine || event.canManage;
+    const maps = isEntrant(match.a) && isEntrant(match.b) ? mapHosts(bestOf, match.a, match.b, event.bracket.seeds) : null;
 
     const submitNoShow = () => {
         if (window.confirm(`Report ${byId[opponentId]?.name} as a no-show? The host will review it and decide what happens.`)) {
@@ -162,12 +163,36 @@ export const MatchPage = () => {
                     </section>
                 }
 
+                <section className={`${styles.card} ${styles.mapsCard}`}>
+                    <h2 className={styles.sectionTitle}><FaMap /> Maps</h2>
+                    <p className={styles.muted}>Maps and modes for this match will be posted here.</p>
+                    {maps
+                        ? (
+                            <>
+                                <div className={styles.mapGrid}>
+                                    {maps.map(m => (
+                                        <div key={m.map} className={styles.mapCard}>
+                                            <strong className={styles.mapName}>Map {m.map}</strong>
+                                            <span className={styles.mapHost}>
+                                                {m.host
+                                                    ? <>Hosted by {byId[m.host]?.name}{m.seed ? ` (seed ${m.seed})` : ''}</>
+                                                    : 'Hosted by whoever won the most rounds so far'}
+                                            </span>
+                                        </div>
+                                    ))}
+                                </div>
+                                <p className={styles.fieldHint}>
+                                    {bestOf === 1
+                                        ? 'The higher seed hosts.'
+                                        : 'The higher seed hosts map 1, then hosts swap each map. The last map goes to whoever won the most rounds before it.'}
+                                </p>
+                            </>
+                        )
+                        : <p className={styles.fieldHint}>Map hosts are set once both sides are known.</p>}
+                </section>
+
                 <div className={styles.twoCol}>
                     <div>
-                        <section className={styles.card}>
-                            <h2 className={styles.sectionTitle}><FaMap /> Maps</h2>
-                            <p className={styles.muted}>Maps and modes for this match will be posted here.</p>
-                        </section>
                         <section className={styles.card}>
                             <h2 className={styles.sectionTitle}>Rules</h2>
                             {event.rules ? <p className={styles.preWrap}>{event.rules}</p> : <p className={styles.muted}>The host hasn't posted rules.</p>}
