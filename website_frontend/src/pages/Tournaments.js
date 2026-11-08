@@ -1,4 +1,4 @@
-import { CatalogIndex, SeoData } from "components";
+import { CatalogIndex, SeoData, AddYourEventButton } from "components";
 import { tournamentsCatalog } from "catalog/tournaments.catalog";
 
 export const Tournaments = () => {
@@ -10,7 +10,7 @@ export const Tournaments = () => {
                 canonicalPath={"/tournaments"}
             />
 
-            <CatalogIndex catalog={tournamentsCatalog} />
+            <CatalogIndex catalog={tournamentsCatalog} heroAction={<AddYourEventButton type="tournament" align="start" />} />
         </div>
     );
 }

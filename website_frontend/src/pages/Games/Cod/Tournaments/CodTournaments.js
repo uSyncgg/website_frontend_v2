@@ -1,4 +1,4 @@
-import { TournamentList, TournamentFilter, TournamentPagination, filteredTournaments, SeoData } from "components";
+import { TournamentList, TournamentFilter, TournamentPagination, filteredTournaments, SeoData, AddYourEventButton } from "components";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router";
 import axios from "axios";
@@ -164,6 +164,8 @@ export const CodTournaments = () => {
                 </div>
 
                 <div className="rightItem">
+                    <AddYourEventButton />
+
                     <p className={styles.resultCount}>
                         Page {currentPage} of {Math.max(1, totalFilteredPages)} · {filteredTourneys.length} tournaments
                     </p>

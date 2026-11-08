@@ -6,7 +6,7 @@ import styles from "./UserGamesStep.module.css";
 
 // Same icons as the Games page (catalog/gameIcons.js). `value` is what gets saved,
 // so it must stay the same even where the display name differs elsewhere.
-const GAME_OPTIONS = [
+export const GAME_OPTIONS = [
     { value: "Call of Duty", title: "Call of Duty", image: GAME_ICONS['call-of-duty'] },
     { value: "CS 2", title: "CS 2", image: GAME_ICONS['cs2'] },
     { value: "Halo", title: "Halo", image: GAME_ICONS['halo'] },
@@ -69,6 +69,11 @@ const GameTileGroup = ({ heading, fieldName, otherFieldName }) => {
 // mode: 'player' (games played, field `interests`), 'host' (games hosted,
 // field `hosted_games`), or 'combined' (both, shown as two labeled sections).
 export const UserGamesStep = ({ mode = 'player' }) => {
+    // An organization's titles: the games its teams compete in.
+    if (mode === 'org') {
+        return <div><GameTileGroup heading={null} fieldName="org_games" otherFieldName="other_org_games" /></div>;
+    }
+
     const isPlayer = mode === 'player' || mode === 'combined';
     const isHost = mode === 'host' || mode === 'combined';
     const showHeadings = isPlayer && isHost;

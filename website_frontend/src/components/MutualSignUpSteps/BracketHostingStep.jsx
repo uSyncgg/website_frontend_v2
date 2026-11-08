@@ -1,6 +1,6 @@
 import { RadioFormBlock } from "components/RadioFormBlock/RadioFormBlock";
 import { useFormContext, useWatch } from "react-hook-form";
-import { PROFILE_LABELS, bracketField } from "utils/profiles";
+import { NO_BRACKET_TYPES, PROFILE_LABELS, bracketField } from "utils/profiles";
 import styles from "./BracketHostingStep.module.css";
 
 // Yes / not right now for one form field ('yes' | 'no'; unanswered leaves the backend's default, on).
@@ -37,9 +37,12 @@ const BracketChoice = ({ field }) => {
 export const BracketHostingStep = ({ types }) => {
     if (!types) return <BracketChoice field="bracket_hosting" />;
 
-    return <>{types.map(type => (
+    // Organizations never host brackets, so they get no choice here.
+    const hostTypes = types.filter(type => !NO_BRACKET_TYPES.includes(type));
+    return <>{hostTypes.map(type => (
+
         <section key={type} className={styles.profileSection}>
-            {types.length > 1 && <h3 className={styles.profileHeading}>{PROFILE_LABELS[type]} profile</h3>}
+            {hostTypes.length > 1 && <h3 className={styles.profileHeading}>{PROFILE_LABELS[type]} profile</h3>}
             <BracketChoice field={bracketField(type)} />
         </section>
     ))}</>;
