@@ -223,6 +223,11 @@
 .stage_seeding { color: var(--gold); border-color: rgba(224, 177, 94, .45); }
 .stage_live { color: var(--win); border-color: rgba(107, 207, 143, .45); }
 .stage_complete { color: var(--violet-bright); border-color: rgba(177, 138, 240, .45); }
+.paymentList { margin: .4rem 0 0; padding: 0; list-style: none; font-size: .82rem; }
+.paidYes { color: var(--win); }
+.paidNo { color: var(--gold); }
+
+.stage_cancelled { color: var(--loss); border-color: rgba(224, 105, 138, .45); }
 
 /* ---- dashboard ---- */
 

@@ -60,6 +60,20 @@ const fromTemplate = (event, base) => {
     };
 };
 
+// Three podium rows, each a dollar amount or a percent of the entry fees collected.
+const PLACE_LABELS = ['1st place', '2nd place', '3rd place'];
+const blankPrizes = () => PLACE_LABELS.map((_, i) => ({ place: i + 1, kind: 'amount', value: '' }));
+const prizesFromEvent = (saved = []) => blankPrizes().map(row => {
+    const prize = saved.find(p => p.place === row.place);
+    if (!prize) return row;
+    return prize.percent != null
+        ? { ...row, kind: 'percent', value: String(prize.percent) }
+        : { ...row, kind: 'amount', value: String(prize.amountCents / 100) };
+});
+const prizesPayload = (rows) => rows
+    .filter(r => Number(r.value) > 0)
+    .map(r => (r.kind === 'percent' ? { place: r.place, percent: Number(r.value) } : { place: r.place, amount: Number(r.value) }));
+
 const GAME_OPTIONS = HOST_GAMES.map(g => ({ value: g, label: g }));
 const titleOptions = (game) => (GAME_TITLES[game] ?? []).map(([title, year]) => ({ value: title, label: title, hint: String(year) }));
 
@@ -99,6 +113,8 @@ export const CreateEvent = () => {
     const [payments, setPayments] = useState({
         notifyEmail: '', tiers: [{ name: 'Player Pass', price: '', capacity: '' }],
     });
+    // Podium prizes paid from the entry fees: one row per place, a dollar amount or a percent of the fees collected.
+    const [prizes, setPrizes] = useState(blankPrizes());
     // What every player fills in when they sign up (free or paid), so the host knows who joined.
     const [signupForm, setSignupForm] = useState({ playerFields: ['Discord'], questions: [] });
     const [submitted, setSubmitted] = useState(false);
@@ -114,6 +130,7 @@ export const CreateEvent = () => {
         setRestrictions(template.restrictions ?? []);
         setAdmins((template.admins ?? []).filter(a => a.status === 'accepted'));
         if (template.payments?.enabled) {
+            setPrizes(prizesFromEvent(template.prizes));
             setPayments({ notifyEmail: template.payments.notifyEmail ?? '', tiers: template.payments.tiers?.length ? template.payments.tiers : [blankTier()] });
         }
         const form = template.signupForm ?? {};
@@ -126,6 +143,7 @@ export const CreateEvent = () => {
     const set = (field) => (e) => setForm(f => ({ ...f, [field]: e.target.type === 'checkbox' ? e.target.checked : e.target.value }));
     const setValue = (field, value) => setForm(f => ({ ...f, [field]: value }));
     const setPay = (field, value) => setPayments(p => ({ ...p, [field]: value }));
+    const setPrize = (i, field, value) => setPrizes(rows => rows.map((r, j) => (j === i ? { ...r, [field]: value } : r)));
     const setTier = (i, field, value) => setPay('tiers', payments.tiers.map((t, j) => (j === i ? { ...t, [field]: value } : t)));
     const setSignup = (field, value) => setSignupForm(f => ({ ...f, [field]: value }));
     const setQuestion = (i, field, value) => setSignup('questions', signupForm.questions.map((q, j) => (j === i ? { ...q, [field]: value } : q)));
@@ -158,6 +176,9 @@ export const CreateEvent = () => {
         restrictions: restrictions.some(r => !r.trim()) && 'Fill in or remove the empty restriction',
         noShowMinutes: !form.noShowOff && !(Number(form.noShowMinutes) >= 0) && 'Enter how many minutes to wait, or turn the timer off',
         notifyEmail: form.usePayments && !/^\S+@\S+\.\S+$/.test(payments.notifyEmail) && 'Add the email we should notify about new sign-ups',
+        prizes: form.usePayments && (
+            prizes.some(r => r.value !== '' && !(Number(r.value) > 0)) ? 'Prizes need a number above 0, or leave the row empty'
+                : prizes.filter(r => r.kind === 'percent').reduce((sum, r) => sum + (Number(r.value) || 0), 0) > 100 ? 'Prize percents can\'t add up to more than 100%' : false),
         tiers: form.usePayments && payments.tiers.some(t => !t.name.trim() || !(Number(t.price) > 0)) && 'Every pass needs a name and a price above $0',
     };
     const hasErrors = Object.values(errors).some(Boolean);
@@ -190,6 +211,7 @@ export const CreateEvent = () => {
             startsAt: new Date(`${date}T${time}`).toISOString(),
             entryFee: usePayments ? `$${lowestPrice.toFixed(2)}` : 'Free',
             payments: usePayments ? { enabled: true, ...payments } : { enabled: false },
+            prizes: usePayments ? prizesPayload(prizes) : [],
             signupForm: {
                 ...signupForm,
                 questions: signupForm.questions.filter(q => q.label.trim()),
@@ -480,8 +502,8 @@ export const CreateEvent = () => {
                         {form.usePayments &&
                             <div className={styles.paymentPortal}>
                                 <p className={styles.blurb}>
-                                    We'll create a payment portal for this event, like our existing event pass pages. Players pay with Stripe when they
-                                    sign up, and uSync adds a 5% service fee on top of your price.
+                                    We'll create a payment portal for this event, like our existing event pass pages. Players pay when they
+                                    sign up from their uSync balance, and uSync adds a 5% service fee on top of your price.
                                 </p>
 
                                 <div className={styles.field}>
@@ -489,7 +511,7 @@ export const CreateEvent = () => {
                                     <input id="notifyEmail" type="email" className={styles.input} value={payments.notifyEmail}
                                         onChange={e => setPay('notifyEmail', e.target.value)} placeholder="you@example.com" />
                                     <p className={styles.fieldHint}>
-                                        We email you here each time someone pays to sign up. Entry fees are collected by uSync and paid out to you separately.
+                                        We email you here each time someone pays to sign up. Entry fees are collected by uSync and paid to your uSync balance after the event closes (see Prizes below).
                                     </p>
                                     {err('notifyEmail')}
                                 </div>
@@ -521,8 +543,32 @@ export const CreateEvent = () => {
                                     {err('tiers')}
                                 </div>
 
+                                <div>
+                                    <span className={styles.fieldLabel}>Prizes paid by uSync (optional)</span>
+                                    <p className={styles.fieldHint} style={{ margin: '0 0 .6rem' }}>
+                                        Prizes come out of the entry fees you collect and are split between a team's players. After you close the event and
+                                        45 minutes pass, uSync pays winners automatically and pays you the rest - entry fees minus prizes, less a 2.5% uSync fee.
+                                        If prizes add up to more than was collected, they're scaled down to fit.
+                                    </p>
+                                    {prizes.map((row, i) => (
+                                        <div key={row.place} className={styles.tierRow}>
+                                            <span>{PLACE_LABELS[i]}</span>
+                                            <select className={styles.select} value={row.kind} onChange={e => setPrize(i, 'kind', e.target.value)} aria-label={`${PLACE_LABELS[i]} prize type`}>
+                                                <option value="amount">Dollar amount</option>
+                                                <option value="percent">% of entry fees</option>
+                                            </select>
+                                            <div className={styles.money}>
+                                                <span>{row.kind === 'percent' ? '%' : '$'}</span>
+                                                <input className={styles.input} type="number" min={0} step="0.01" value={row.value}
+                                                    onChange={e => setPrize(i, 'value', e.target.value)} placeholder="None" aria-label={`${PLACE_LABELS[i]} prize`} />
+                                            </div>
+                                        </div>
+                                    ))}
+                                    {err('prizes')}
+                                </div>
+
                                 <div className={styles.field}>
-                                    <label htmlFor="prizePaid">Prize (optional)</label>
+                                    <label htmlFor="prizePaid">Prize text shown on the event page (optional)</label>
                                     <input id="prizePaid" className={styles.input} value={form.prize} onChange={set('prize')} placeholder="e.g. 70% of the pot to 1st" />
                                 </div>
                             </div>

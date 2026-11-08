@@ -2,7 +2,7 @@ import { LegalDocument, LegalEmail, SectionRef, LegalNotice, LegalContactCard, L
 import { Link } from "react-router";
 
 // Update this date whenever the policy changes (see Section 13).
-const LAST_UPDATED = "October 8, 2026";
+const LAST_UPDATED = "November 8, 2026";
 
 const ExternalLink = ({ href, children }) => (
     <a href={href} target="_blank" rel="noreferrer">{children}</a>
@@ -32,6 +32,18 @@ const CCPA_CATEGORIES = [
         "Commercial information",
         "Passes and services purchased, subscriptions, and transaction history",
         "Service providers; our payment processor; Hosts (at your direction)",
+        "Not sold or shared",
+    ],
+    [
+        "Financial information (uSync Bank)",
+        "Your uSync Bank balance and history: deposits, withdrawals, event entry payments (including who paid for whom), refunds, prizes, and Host proceeds; payout and verification status; receipt numbers",
+        "Service providers; our payment processor; Hosts and teammates (payment status for an entry only); tax and other government authorities where the law requires",
+        "Not sold or shared",
+    ],
+    [
+        "Competition results and earnings",
+        "Your placement, match wins and losses, and prize earnings in events",
+        "Service providers; the public, through brackets and results and, where we show them, your profile statistics",
         "Not sold or shared",
     ],
     [
@@ -66,8 +78,8 @@ const CCPA_CATEGORIES = [
     ],
     [
         "Sensitive personal information",
-        "Account login credentials (email address and password)",
-        "Our authentication service provider",
+        "Account login credentials (email address and password); and, if you set up deposits or payouts, payment card and bank account details and the government-issued identification and tax numbers our payment processor collects to verify you and meet tax reporting rules (collected and held by the processor, not stored on uSync’s servers)",
+        "Our authentication service provider; our payment processor",
         "Not sold or shared",
     ],
 ];
@@ -81,6 +93,14 @@ const RETENTION_PERIODS = [
     [
         "Transaction and payment records",
         "Seven years after the transaction, to meet tax, accounting, and financial reporting requirements. These records are limited to what those requirements need, such as the item purchased, the pass price, platform fee, and total, the date, the payment reference, refunds and Host payouts, and the contact email used for the purchase.",
+    ],
+    [
+        "uSync Bank records",
+        "Your balance for as long as it is open or you are owed money. Your Bank transaction history (deposits, withdrawals, entry payments, refunds, prizes, and Host proceeds, with receipt numbers and the event concerned) for seven years after each transaction, even if you close your account, to meet tax, accounting, anti-fraud, and anti-money-laundering requirements. Identity and tax information collected by our payment processor is kept by the processor under its own retention rules.",
+    ],
+    [
+        "Competition results and earnings statistics",
+        "For as long as your account remains open, so we can show and update your statistics. When you close your account, we de-identify them, except that the financial amounts are kept in the Bank records described above.",
     ],
     [
         "Other event registration details",
@@ -175,6 +195,19 @@ const SECTIONS = [
                     subscription.
                 </p>
                 <p>
+                    <strong>uSync Bank.</strong> If you use the Bank, we record your balance and every transaction
+                    that changes it: deposits (including the fee), withdrawals and their payout dates, event entry
+                    payments, refunds, prizes, and, for Hosts, event proceeds. For team entries we also record which
+                    player each payment was for and which account paid it, so we can refund the right person and so
+                    Hosts and teammates can see who has paid. When an event is paid out, we record each player’s
+                    placement, match wins and losses, and prize earnings. We generate a receipt number for each
+                    transaction and use your account email to send receipts and payout notices. Card, bank account,
+                    and payout details, and any identity and tax information needed to make payouts or meet tax
+                    reporting rules, are entered into forms provided by our payment processor, Stripe, and go to
+                    Stripe rather than to uSync’s servers. Stripe tells us whether a deposit or payout succeeded and
+                    whether you have completed its verification.
+                </p>
+                <p>
                     When you email us, submit an event through our event submission form, or report a problem, we
                     collect the information you include, such as your name, email address, organization, event
                     details, and the content of your message. Our event submission and problem-report forms are
@@ -215,7 +248,7 @@ const SECTIONS = [
                 <p>
                     We receive information about you from third parties in several situations. Sign-in providers
                     (Google, Discord, and X) share basic profile information when you use them to log in. Stripe shares
-                    payment and transaction status information. Hosts may share information about your participation
+                    payment, payout, and verification status information. Hosts may share information about your participation
                     in their events, such as check-in status, results, and placements. We also collect publicly
                     available information about esports events and organizers, such as event names, dates, locations,
                     and organizer contact details published on their websites and social media, to build our event
@@ -224,9 +257,15 @@ const SECTIONS = [
 
                 <h3>2.4 Sensitive Information</h3>
                 <p>
-                    We do not ask for sensitive personal information such as government identification numbers,
+                    We do not ask you for sensitive personal information such as government identification numbers,
                     health information, biometric data, or information about your racial or ethnic origin, religious
                     beliefs, or sexual orientation, and we ask that you not include it in your profile or messages.
+                    The one exception is payouts: to verify you, pay you, and meet tax reporting laws, our payment
+                    processor may ask you directly for identity and tax information, such as a government ID or a
+                    taxpayer identification number, and for bank account or card details. You give that information
+                    to the processor, which holds it under its own privacy policy; uSync does not store it, and we
+                    receive only the verification status and, where the law requires us to file tax information,
+                    the details needed to file.
                     Some privacy laws treat your account login credentials as sensitive information; we use them only
                     to authenticate you and secure your account. Your gender and date of birth are not displayed on
                     your public profile unless you choose to show them. We use your date of birth to confirm that you
@@ -254,7 +293,7 @@ const SECTIONS = [
                 <p>
                     We use your information to create and manage your account, display your public profile, show you
                     relevant events, process event registrations and send them to the Host, run brackets and record
-                    results, provide uSync Verified and promotional services to Hosts, and respond to your questions
+                    results and the statistics built from them (placements, wins, losses, and earnings), provide uSync Verified and promotional services to Hosts, and respond to your questions
                     and requests. This processing is necessary to perform our contract with you, which is set out in
                     our <Link to="/more/terms-of-service">Terms of Service</Link>.
                 </p>
@@ -263,8 +302,12 @@ const SECTIONS = [
                 <p>
                     We use transaction information to process payments, issue receipts, calculate platform fees,
                     handle refunds and chargebacks, pay out Hosts, and maintain the financial records that tax and
-                    accounting laws require. We rely on contractual necessity and, for record-keeping, on our legal
-                    obligations.
+                    accounting laws require. For the uSync Bank, we also use it to keep your balance accurate, take
+                    entry fees and refund them, work out and credit prizes and Host proceeds, schedule and send
+                    withdrawals, send you receipts and payout emails, produce the history and tax summaries you
+                    download, detect fraud, money laundering, and sanctions issues, and file tax information where the
+                    law requires. We rely on contractual necessity and, for record-keeping, tax reporting, and
+                    financial-crime prevention, on our legal obligations and legitimate interests.
                 </p>
 
                 <h3>3.3 To Communicate With You</h3>
@@ -355,6 +398,14 @@ const SECTIONS = [
                     participant information lawfully and only to run their events, but we are not responsible for how
                     they handle it.
                 </p>
+                <p>
+                    For events that use uSync payments, Hosts and their admins can see, for each entry, whether it has
+                    been paid and which players have paid, and who covered a teammate’s share. People on the same
+                    team can see the same for their own team. Hosts also see the revenue summary for their own events
+                    (amounts collected, prizes, and their proceeds), but not other people’s Bank balances or history.
+                    Your Bank balance and transaction history are private to you. Prize amounts and placements you earn
+                    may appear in event results, and, where we show them, in profile statistics.
+                </p>
 
                 <h3>4.3 Service Providers</h3>
                 <p>
@@ -389,8 +440,10 @@ const SECTIONS = [
                     a law, regulation, court order, subpoena, or other legal process; to respond to lawful requests
                     from public authorities, including to meet national security or law enforcement requirements; to
                     enforce our Terms of Service; to detect, prevent, or address fraud, security, or technical issues;
-                    to report suspected child exploitation to NCMEC and law enforcement; or to protect the rights,
-                    property, or safety of uSync, our users, or the public.
+                    to report suspected child exploitation to NCMEC and law enforcement; to meet tax, anti-money-laundering,
+                    and sanctions obligations, including reporting Bank activity, winnings, and Host earnings to tax
+                    and other government authorities and responding to payment processor and bank inquiries; or to
+                    protect the rights, property, or safety of uSync, our users, or the public.
                 </p>
 
                 <h3>4.6 Business Transfers and Consent</h3>
@@ -580,7 +633,9 @@ const SECTIONS = [
                     it. You have the right to correct information that is inaccurate or incomplete, and you can update
                     much of your profile yourself in your account settings. You have the right to ask us to delete your
                     personal information, subject to the exceptions described
-                    in <SectionRef to="retention">Section 7</SectionRef>, such as records we must keep by law. You have
+                    in <SectionRef to="retention">Section 7</SectionRef>, such as records we must keep by law. We cannot delete the financial records described
+                    in that section while the law requires us to keep them, and we cannot close an account while it
+                    still holds a balance or a pending withdrawal until that money has been paid out to you. You have
                     the right to data portability, which means receiving the information you provided to us in a
                     structured, commonly used, machine-readable format (such as JSON or CSV) and, where technically
                     feasible, having it sent to another company. Where we rely on your consent, you may withdraw it at
@@ -796,7 +851,9 @@ const SECTIONS = [
                     not sell or share it, we do not use it for targeted advertising, and we encourage teens not to
                     include their full name, school, home address, phone number, or other identifying details in their
                     public profile or content. Parents and guardians may contact us to review, correct, or delete their
-                    teen’s personal information or to close their teen’s account. Hosts who run events for minors are
+                    teen’s personal information or to close their teen’s account. The uSync Bank is available only to
+                    users 18 and older, so we do not take deposits or pay out withdrawals for accounts we know belong to
+                    minors. Hosts who run events for minors are
                     responsible for obtaining any parental consent their events require and for protecting
                     participants’ information.
                 </p>

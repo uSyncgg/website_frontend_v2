@@ -6,6 +6,7 @@ import { PROFILE_LABELS, profileUrl } from "utils/profiles";
 import { EVENT_DASHBOARD_PATH } from "utils/hostEvents";
 import { getApiErrorMessage } from "utils/apiError";
 import { NotificationBell } from "components/NotificationBell/NotificationBell";
+import { BalanceChip } from "components/BalanceChip/BalanceChip";
 import styles from '../Navbar/Navbar.module.css';
 
 // react-snap prerenders with no session; render the neutral placeholder so the
@@ -91,6 +92,12 @@ const AccountLinks = ({ itemClass, buttonClass, onNavigate }) => {
                     Event Dashboard
                 </Link>
             }
+            {/* Your uSync balance, deposits, withdrawals and what you've paid to enter events. */}
+            {defaultProfile &&
+                <Link to="/bank" className={itemClass} role="menuitem" onClick={onNavigate}>
+                    Bank
+                </Link>
+            }
             {/* Goes straight to the profile's settings when there's only one, otherwise asks which. */}
             <Link to="/settings/profile" className={itemClass} role="menuitem" onClick={onNavigate}>
                 Settings
@@ -103,7 +110,7 @@ const AccountLinks = ({ itemClass, buttonClass, onNavigate }) => {
     );
 };
 
-// Two menus side by side: the avatar opens the account menu (Profile, Event Dashboard, Settings,
+// Two menus side by side: the avatar opens the account menu (Profile, Event Dashboard, Bank, Settings,
 // Logout) and the view label opens "Viewing as". With a single profile there's nothing to
 // switch to, so the label is just a label.
 const ProfileMenu = () => {
@@ -149,23 +156,29 @@ const ProfileMenu = () => {
                         <Avatar key={defaultProfile?.profile_picture} src={defaultProfile?.profile_picture} />
                     </span>
                 </button>
-                {viewLabel && (canSwitch
-                    ? (
-                        <button
-                            type="button"
-                            className={`${styles.accountTrigger} ${styles.viewTrigger}`}
-                            aria-label={`Viewing as ${viewLabel}, switch view`}
-                            aria-haspopup="menu"
-                            aria-expanded={open === 'view'}
-                            onClick={() => toggle('view')}
-                        >
-                            <span className={styles.viewLabel}>
-                                {viewLabel}
-                                <FaChevronDown aria-hidden="true" />
-                            </span>
-                        </button>
-                    )
-                    : <span className={styles.viewLabel} aria-label={`Viewing as ${viewLabel}`}>{viewLabel}</span>
+                {/* Your uSync balance on top and the view label (dropdown) under it, the same width; the avatar sits centered beside them. */}
+                {viewLabel && (
+                    <div className={styles.viewColumn}>
+                        <BalanceChip onNavigate={() => setOpen(null)} />
+                        {canSwitch
+                            ? (
+                                <button
+                                    type="button"
+                                    className={`${styles.accountTrigger} ${styles.viewTrigger}`}
+                                    aria-label={`Viewing as ${viewLabel}, switch view`}
+                                    aria-haspopup="menu"
+                                    aria-expanded={open === 'view'}
+                                    onClick={() => toggle('view')}
+                                >
+                                    <span className={styles.viewLabel}>
+                                        {viewLabel}
+                                        <FaChevronDown aria-hidden="true" />
+                                    </span>
+                                </button>
+                            )
+                            : <span className={styles.viewLabel} aria-label={`Viewing as ${viewLabel}`}>{viewLabel}</span>
+                        }
+                    </div>
                 )}
             </div>
 

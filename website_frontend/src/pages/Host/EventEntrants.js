@@ -2,8 +2,21 @@ import { Fragment, useState } from "react";
 import { FaSearch, FaTrash } from "react-icons/fa";
 import { removeEntrant, isPending, signedUpEntrants, pendingEntrants, teamSizeOf } from "services/brackets";
 import { useManagedEvent } from "./ManageEvent";
+import { formatMoney } from "services/bank";
 import { Modal, formatDate, isTeamEvent } from "./hostShared";
 import styles from "./Host.module.css";
+
+// Who has paid: "Paid", or "1 of 2" for a team still waiting on a teammate.
+const PaidTag = ({ entrant }) => {
+    const p = entrant.payment;
+    if (!p) return <span className={styles.muted}>-</span>;
+    const all = p.paidCount >= p.totalCount;
+    return (
+        <span className={`${styles.chip} ${all ? styles.stage_live : styles.stage_seeding}`} title={p.players.map(pl => `${pl.username}: ${pl.paid ? 'paid' : 'not paid'}`).join('\n')}>
+            {all ? 'Paid' : `${p.paidCount} of ${p.totalCount} paid`}
+        </span>
+    );
+};
 
 // Everything this entrant filled in when they signed up.
 const EntrantDetails = ({ event, entrant, onClose }) => {
@@ -17,6 +30,16 @@ const EntrantDetails = ({ event, entrant, onClose }) => {
                     ? `Pending - ${entrant.rosterSize ?? 0} of ${teamSizeOf(event)} players`
                     : 'Signed up'}</dd></>}
                 {team && entrant.teammates?.length > 0 && <><dt>Teammates</dt><dd>{entrant.teammates.join(', ')}</dd></>}
+                {entrant.payment && <><dt>Payment</dt><dd>
+                    {entrant.payment.paidCount} of {entrant.payment.totalCount} paid ({formatMoney(entrant.payment.priceCents + entrant.payment.feeCents)} each)
+                    <ul className={styles.paymentList}>
+                        {entrant.payment.players.map(p => (
+                            <li key={p.username} className={p.paid ? styles.paidYes : styles.paidNo}>
+                                @{p.username}: {p.paid ? `paid${p.paidBy && p.paidBy !== p.username ? ` by @${p.paidBy}` : ''}` : 'not paid yet'}
+                            </li>
+                        ))}
+                    </ul>
+                </dd></>}
                 {!team && <><dt>Gamertag</dt><dd>{entrant.captain}</dd></>}
                 <dt>Email</dt><dd>{entrant.email || '-'}</dd>
                 <dt>Signed up</dt><dd>{formatDate(entrant.registeredAt)}</dd>
@@ -44,6 +67,8 @@ export const EventEntrants = () => {
     const [filter, setFilter] = useState('all');
     const teams = isTeamEvent(event);
     const locked = !!event.bracket?.published;
+    const paid = !!event.payments?.enabled;
+    const unpaidCount = event.entrants.filter(e => e.payment && e.payment.paidCount < e.payment.totalCount).length;
 
     const signedUp = signedUpEntrants(event).length;
     const pending = pendingEntrants(event).length;
@@ -77,6 +102,7 @@ export const EventEntrants = () => {
             <p className={styles.muted} style={{ margin: '0 0 .75rem' }}>
                 {event.maxEntrants == null ? `${signedUp} signed up (no cap)` : `${signedUp} of ${event.maxEntrants} spots filled`}
                 {pending > 0 && ` · ${pending} pending (still need players - they don't take a spot or get seeded until their roster is full)`}
+                {paid && unpaidCount > 0 && ` · ${unpaidCount} not fully paid yet - they stay pending until every player has paid`}
                 {locked && ' · The bracket is live, so the entrant list is locked.'}
             </p>
 
@@ -88,6 +114,7 @@ export const EventEntrants = () => {
                             <th>{teams ? 'Team' : 'Player'}</th>
                             {teams && <th>Captain</th>}
                             {teams && <th>Status</th>}
+                            {paid && <th>Paid</th>}
                             <th>Skill rating</th>
                             <th>Signed up</th>
                             <th aria-label="Actions" />
@@ -104,6 +131,7 @@ export const EventEntrants = () => {
                                 {teams && <td>{isPending(event, entrant)
                                     ? <span className={`${styles.chip} ${styles.stage_seeding}`}>Pending · {entrant.rosterSize ?? 0}/{teamSizeOf(event)}</span>
                                     : <span className={`${styles.chip} ${styles.stage_registration}`}>Signed up</span>}</td>}
+                                {paid && <td><PaidTag entrant={entrant} /></td>}
                                 <td className={styles.num}>{entrant.rating}</td>
                                 <td>{new Date(entrant.registeredAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</td>
                                 <td>
@@ -115,7 +143,7 @@ export const EventEntrants = () => {
                             </tr>
                         ))}
                         {rows.length === 0 &&
-                            <tr><td colSpan={teams ? 7 : 5} className={styles.muted} style={{ textAlign: 'center', padding: '2rem' }}>
+                            <tr><td colSpan={(teams ? 7 : 5) + (paid ? 1 : 0)} className={styles.muted} style={{ textAlign: 'center', padding: '2rem' }}>
                                 {event.entrants.length ? 'No one matches that search.' : 'No sign-ups yet.'}
                             </td></tr>
                         }

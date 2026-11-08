@@ -8,6 +8,7 @@ import {
     matchState, matchReports, playerReportMatch, reportNoShow, noShowUnlocksAt,
 } from "services/brackets";
 import { getMyTeams } from "services/teams";
+import { useWallet, formatMoney } from "services/bank";
 import { getApiErrorMessage } from "utils/apiError";
 import { buildBracket, allMatches, matchBestOf } from "utils/bracket";
 import { EVENT_TYPES, matchUrl } from "utils/hostEvents";
@@ -47,11 +48,27 @@ const RegisterDialog = ({ event, username, onClose }) => {
     const [tried, setTried] = useState(false);
     const [saving, setSaving] = useState(false);
     const [tierIndex, setTierIndex] = useState(0);
+    // Teammates whose share you're paying (team events): usernames.
+    const [covering, setCovering] = useState([]);
+    const wallet = useWallet(!!pay);
     const tier = pay?.tiers[tierIndex];
     const price = tier ? Number(tier.price) : 0;
+    // What one player's spot costs, in cents: the pass plus the 5% uSync fee.
+    const shareCents = Math.round(price * 100) + Math.round(Math.round(price * 100) * USYNC_FEE);
     const answer = (key) => (e) => setAnswers(a => ({ ...a, [key]: e.target.value }));
     const chosen = myTeams?.find(t => t.public_id === teamId);
     const short = chosen ? need - chosen.members.length : 0;
+    // The players who each owe a share: the first `need` on the team. You pay your own (if you're
+    // one of them) and anyone you tick; everyone else pays from their own balance.
+    const players = (chosen?.members ?? []).slice(0, need);
+    const isMe = (m) => m.username?.toLowerCase() === username?.toLowerCase();
+    const youPlay = !team || players.some(isMe);
+    const covered = players.filter(m => !isMe(m) && covering.includes(m.username));
+    const youPayShares = pay ? (team ? (youPlay ? 1 : 0) + covered.length : 1) : 0;
+    const youPay = youPayShares * shareCents;
+    const balance = wallet?.balanceCents;
+    const shortOnFunds = pay && balance != null && balance < youPay;
+    const toggleCover = (name) => setCovering(list => (list.includes(name) ? list.filter(n => n !== name) : [...list, name]));
 
     useEffect(() => {
         if (!team || !token) return;
@@ -67,13 +84,14 @@ const RegisterDialog = ({ event, username, onClose }) => {
     const submit = async (e) => {
         e.preventDefault();
         setTried(true);
-        if (missing.length) return;
+        if (missing.length || shortOnFunds) return;
         setSaving(true);
         const done = await register(event.id, {
             teamId: team ? chosen.public_id : null,
             email: email.trim(),
             answers,
             pass: tier?.name ?? null,
+            payFor: covered.map(m => m.username),
         });
         setSaving(false);
         if (done) onClose();
@@ -89,7 +107,7 @@ const RegisterDialog = ({ event, username, onClose }) => {
                             {[['player', 'Player'], ['org', 'Organization']].map(([value, label]) => (
                                 <button key={value} type="button" role="radio" aria-checked={signupAs === value}
                                     className={`${styles.segment} ${signupAs === value ? styles.segmentActive : ''}`}
-                                    onClick={() => { setSignupAs(value); setTeamId(''); }}>
+                                    onClick={() => { setSignupAs(value); setTeamId(''); setCovering([]); }}>
                                     {value === 'org' ? `${label} (${org.username})` : label}
                                 </button>
                             ))}
@@ -111,7 +129,7 @@ const RegisterDialog = ({ event, username, onClose }) => {
                                         const problem = teamEntryProblem(t, event);
                                         return (
                                             <label key={t.public_id} className={`${styles.passOption} ${t.public_id === teamId ? styles.passOptionOn : ''}`}>
-                                                <input type="radio" name="team" disabled={!!problem} checked={t.public_id === teamId} onChange={() => setTeamId(t.public_id)} />
+                                                <input type="radio" name="team" disabled={!!problem} checked={t.public_id === teamId} onChange={() => { setTeamId(t.public_id); setCovering([]); }} />
                                                 <span>{t.name}{t.game ? ` · ${t.game}` : ''}</span>
                                                 <strong>{problem || `${t.members.length} / ${need} players`}</strong>
                                             </label>
@@ -170,18 +188,49 @@ const RegisterDialog = ({ event, username, onClose }) => {
                             </div>
                         </div>
                         <dl className={styles.detailList}>
-                            <dt>Pass</dt><dd>${price.toFixed(2)}</dd>
+                            <dt>Pass{team ? ' (per player)' : ''}</dt><dd>${price.toFixed(2)}</dd>
                             <dt>uSync fee (5%)</dt><dd>${(price * USYNC_FEE).toFixed(2)}</dd>
-                            <dt><strong>Total</strong></dt><dd><strong>${(price * (1 + USYNC_FEE)).toFixed(2)}</strong></dd>
+                            <dt><strong>{team ? 'Cost per player' : 'Total'}</strong></dt><dd><strong>{formatMoney(shareCents)}</strong></dd>
                         </dl>
-                        <p className={styles.fieldHint}>Mockup: in the live version this continues to secure Stripe checkout, the same as our event pass pages.</p>
+                        {team && chosen && players.length > 0 &&
+                            <div>
+                                <span className={styles.fieldLabel}>Who pays?</span>
+                                <p className={styles.fieldHint} style={{ margin: '0 0 .5rem' }}>
+                                    Everyone on the team pays their own {formatMoney(shareCents)} from their uSync balance. Tick a teammate to pay it for them from yours instead.
+                                    The team is only signed up once every player has paid.
+                                </p>
+                                <div className={styles.passList}>
+                                    {players.map(m => (
+                                        <label key={m.username} className={`${styles.passOption} ${isMe(m) || covering.includes(m.username) ? styles.passOptionOn : ''}`}>
+                                            <input type="checkbox" disabled={isMe(m)} checked={isMe(m) || covering.includes(m.username)} onChange={() => toggleCover(m.username)} />
+                                            <span>{isMe(m) ? `${m.username} (you)` : m.username}</span>
+                                            <strong>{isMe(m) ? 'You pay' : covering.includes(m.username) ? 'You pay' : 'Pays their own'}</strong>
+                                        </label>
+                                    ))}
+                                </div>
+                            </div>
+                        }
+                        <dl className={styles.detailList}>
+                            <dt><strong>You pay now</strong></dt><dd><strong>{formatMoney(youPay)}</strong></dd>
+                            <dt>Your uSync balance</dt><dd>{balance == null ? '…' : formatMoney(balance)}</dd>
+                        </dl>
+                        {shortOnFunds &&
+                            <p className={styles.fieldError} role="alert">
+                                You need {formatMoney(youPay - balance)} more. <Link to="/bank">Add funds on the Bank page</Link>, then come back.
+                            </p>
+                        }
+                        <p className={styles.fieldHint}>
+                            {event.refundable
+                                ? 'Leave before registration closes and the money goes back to whoever paid. If the event is cancelled everyone is refunded in full.'
+                                : 'Registration is closed, so leaving won\'t be refunded. If the event is cancelled everyone is refunded in full.'}
+                        </p>
                     </>
                 }
 
                 <div className={styles.formActions}>
                     <button type="button" className={styles.ghostBtn} onClick={onClose}>Cancel</button>
-                    <button type="submit" className={styles.primaryBtn} disabled={saving}>
-                        {saving ? 'Signing up…' : pay ? `Continue to payment` : 'Sign up'}
+                    <button type="submit" className={styles.primaryBtn} disabled={saving || !!shortOnFunds}>
+                        {saving ? 'Signing up…' : pay ? `Pay ${formatMoney(youPay)} and sign up` : 'Sign up'}
                     </button>
                 </div>
             </form>
@@ -239,7 +288,10 @@ export const PublicBracket = () => {
     const activeTab = tab ?? (published ? 'bracket' : 'info');
 
     const unregister = () => {
-        if (window.confirm(`Unregister ${me.name} from ${event.name}?`)) {
+        const refundNote = pay
+            ? (event.refundable ? ' Everything paid for your spot is refunded.' : ' Registration is closed, so what was paid is not refunded.')
+            : '';
+        if (window.confirm(`Unregister ${me.name} from ${event.name}?${refundNote}`)) {
             leaveEvent(event.id);
         }
     };
@@ -256,6 +308,25 @@ export const PublicBracket = () => {
 
             <div className={styles.inner}>
                 <BracketError />
+
+                {event.cancelledAt &&
+                    <div className={styles.delayBanner} role="status">
+                        <FaClock /> <span><strong>This event was cancelled.</strong>{pay && ' Everyone who paid was refunded in full.'}</span>
+                    </div>
+                }
+
+                {me && pay && !me.fullyPaid && !event.cancelledAt &&
+                    <div className={styles.delayBanner} role="status">
+                        <FaTicketAlt />
+                        <span>
+                            <strong>{me.name} isn't fully paid yet.</strong>{' '}
+                            {me.payment
+                                ? `Waiting on ${me.payment.players.filter(p => !p.paid).map(p => p.username).join(', ')}. `
+                                : 'A teammate still needs to pay their share. '}
+                            Until every player has paid, the team stays pending. <Link to="/bank">Add funds</Link> if it's you.
+                        </span>
+                    </div>
+                }
 
                 {lastDelay &&
                     <div className={styles.delayBanner}>
