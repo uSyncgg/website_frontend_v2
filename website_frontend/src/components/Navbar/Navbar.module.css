@@ -538,3 +538,10 @@
         font-size: 12.5px;
     }
 }
+
+/* Notification bell to the left of the avatar. */
+.accountCluster {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}

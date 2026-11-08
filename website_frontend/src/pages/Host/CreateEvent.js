@@ -45,7 +45,7 @@ export const CreateEvent = () => {
         format: 'single_elim', teamSize: '1v1', bestOf: 3,
         maxEntrants: '16', uncapped: false,
         date: start.date, time: start.time, locationType: 'online', venue: '', prize: '',
-        description: '', rules: '', checkInRequired: true, noShowMinutes: '10', noShowOff: false,
+        description: '', rules: '', noShowMinutes: '10', noShowOff: false,
         usePayments: true,
     });
     const [payments, setPayments] = useState({
@@ -229,11 +229,6 @@ export const CreateEvent = () => {
                                 {err('maxEntrants')}
                             </div>
                         </div>
-
-                        <label className={styles.checkRow}>
-                            <input type="checkbox" checked={form.checkInRequired} onChange={set('checkInRequired')} />
-                            Require check-in before the event (only checked-in {unit} get seeded)
-                        </label>
 
                         <div className={styles.field}>
                             <label htmlFor="noShowMinutes">No-show timer in minutes (optional)</label>

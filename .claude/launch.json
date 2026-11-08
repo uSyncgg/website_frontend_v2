@@ -4,9 +4,29 @@
     {
       "name": "website-frontend",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["--prefix", "website_frontend", "start"],
+      "runtimeArgs": [
+        "--prefix",
+        "website_frontend",
+        "start"
+      ],
       "port": 3000,
       "autoPort": true
+    },
+    {
+      "name": "usync-backend",
+      "runtimeExecutable": "uv",
+      "runtimeArgs": [
+        "--directory",
+        "../website_backend_v2/usync_backend",
+        "run",
+        "uvicorn",
+        "main:app",
+        "--reload",
+        "--port",
+        "8000"
+      ],
+      "port": 8000,
+      "url": "http://127.0.0.1:8000"
     }
   ]
 }

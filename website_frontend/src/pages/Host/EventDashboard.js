@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { Link, useSearchParams } from "react-router";
-import { FaCalendarAlt, FaCheckCircle, FaGamepad, FaPlus, FaSitemap } from "react-icons/fa";
+import { FaCalendarAlt, FaGamepad, FaPlus, FaSitemap } from "react-icons/fa";
 import { useCurrentUser } from "hooks";
 import { useHostEvents, useEnteredEvents, eventStage } from "services/hostEventsMock";
 import { EVENT_TYPES } from "utils/hostEvents";
 import { PROFILE_LABELS, addProfileUrl, canHostBrackets } from "utils/profiles";
 import { getApiErrorMessage } from "utils/apiError";
+import { TeamsTab } from "./TeamsTab";
 import { MockBanner, ShareButton, StageChip, capacityLabel, formatDate, formatLabel, unitLabel } from "./hostShared";
 import styles from "./Host.module.css";
 
-const TABS = [['entered', 'Entered'], ['hosting', 'Hosting']];
+const TABS = [['entered', 'Entered'], ['teams', 'Teams'], ['hosting', 'Hosting']];
 
 // The events you're signed up for (any view), each linking to its public page.
 const EnteredTab = () => {
@@ -19,8 +20,8 @@ const EnteredTab = () => {
         return (
             <div className={styles.emptyState}>
                 <h2 className={styles.sectionTitle}>You're not entered in any events</h2>
-                <p className={styles.muted}>Events you sign up for show up here, with your check-in and your bracket.</p>
-                <Link to="/tournaments" className={styles.secondaryBtn}>Find an event</Link>
+                <p className={styles.muted}>Events you sign up for show up here, with your team and your bracket.</p>
+                <Link to="/games" className={styles.secondaryBtn}>Find an event</Link>
             </div>
         );
     }
@@ -43,7 +44,6 @@ const EnteredTab = () => {
                         </div>
                         <p className={styles.blurb}>
                             Entered as <strong>{entrant.name}</strong>
-                            {event.checkInRequired && (entrant.checkedIn ? <> · <FaCheckCircle /> Checked in</> : ' · Not checked in yet')}
                         </p>
                     </Link>
                     <div className={styles.eventCardActions}>
@@ -130,7 +130,6 @@ const HostingTab = () => {
                         <div>
                             <div className={styles.fillLabel}>
                                 <span>{capacityLabel(event)} {unitLabel(event)}</span>
-                                <span>{event.entrants.filter(e => e.checkedIn).length} checked in</span>
                             </div>
                             <div className={styles.fillBar}><span style={{ width: `${filled}%` }} /></div>
                         </div>
@@ -171,7 +170,7 @@ export const EventDashboard = () => {
                         <p className={styles.eyebrow}>Event Dashboard</p>
                         <h1 className={styles.title}>Your events</h1>
                         <p className={styles.subtitle}>
-                            The events you've entered, and the ones you run{canHost ? '' : ' when you view as a host'}.
+                            The events you've entered, your teams, and the ones you run{canHost ? '' : ' when you view as a host'}.
                         </p>
                     </div>
                     {canHost && tab === 'hosting' &&
@@ -191,7 +190,7 @@ export const EventDashboard = () => {
                     ))}
                 </nav>
 
-                {tab === 'entered' ? <EnteredTab /> : <HostingTab />}
+                {tab === 'entered' ? <EnteredTab /> : tab === 'teams' ? <TeamsTab /> : <HostingTab />}
             </div>
         </div>
     );

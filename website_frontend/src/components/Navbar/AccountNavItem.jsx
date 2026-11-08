@@ -5,6 +5,7 @@ import { useCurrentUser } from "hooks";
 import { PROFILE_LABELS, profileUrl } from "utils/profiles";
 import { EVENT_DASHBOARD_PATH } from "utils/hostEvents";
 import { getApiErrorMessage } from "utils/apiError";
+import { NotificationBell } from "components/NotificationBell/NotificationBell";
 import styles from '../Navbar/Navbar.module.css';
 
 // react-snap prerenders with no session; render the neutral placeholder so the
@@ -207,7 +208,7 @@ export const AccountNavItem = ({ closeMenu, variant = 'header' }) => {
     // 'complete', 'incomplete' (sign-up not finished - same menu, Profile and Settings lead to
     // the form), or 'error' (logged in but the lookup failed - still offer Logout).
     if (variant === 'header') {
-        return <ProfileMenu />;
+        return <div className={styles.accountCluster}><NotificationBell /><ProfileMenu /></div>;
     }
 
     return (

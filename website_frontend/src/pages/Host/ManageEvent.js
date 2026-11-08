@@ -145,7 +145,6 @@ export const EventOverview = () => {
     const [delaying, setDelaying] = useState(false);
     const stage = eventStage(event);
     const next = NEXT_STEPS[stage];
-    const checkedIn = event.entrants.filter(e => e.checkedIn).length;
     const progress = event.bracket
         ? bracketProgress(buildBracket(event.format, event.bracket.seeds, event.bracket.results))
         : null;
@@ -161,7 +160,7 @@ export const EventOverview = () => {
         <>
             <div className={styles.statGrid}>
                 <div className={styles.stat}><span className={styles.statLabel}>{unit[0].toUpperCase() + unit.slice(1)} signed up</span><span className={styles.statValue}>{capacityLabel(event)}</span></div>
-                <div className={styles.stat}><span className={styles.statLabel}>Checked in</span><span className={styles.statValue}>{checkedIn}</span></div>
+                
                 <div className={styles.stat}><span className={styles.statLabel}>Matches played</span><span className={styles.statValue}>{progress ? `${progress.done} / ${progress.total}` : '-'}</span></div>
                 <div className={styles.stat}><span className={styles.statLabel}>Registration</span><span className={`${styles.statValue} ${styles.statValueSmall}`}>{event.registrationOpen ? 'Open' : 'Closed'}</span></div>
             </div>
@@ -180,7 +179,6 @@ export const EventOverview = () => {
                             <dt>Location</dt><dd>{event.locationType === 'online' ? 'Online' : event.venue}</dd>
                             <dt>Entry fee</dt><dd>{event.payments?.enabled ? `${event.entryFee} via uSync payments` : (event.entryFee || 'Free')}</dd>
                             <dt>Prize</dt><dd>{event.prize || '-'}</dd>
-                            <dt>Check-in</dt><dd>{event.checkInRequired ? 'Required' : 'Not required'}</dd>
                             <dt>No-show timer</dt><dd>{event.noShowMinutes == null ? 'Off' : `${event.noShowMinutes} min after start`}</dd>
                         </dl>
                     </section>

@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
+import { useCurrentUser } from "hooks";
 import { FaCalendarAlt, FaCheckCircle, FaClock, FaGamepad, FaMapMarkerAlt, FaSitemap, FaTicketAlt, FaTrophy, FaUserSecret } from "react-icons/fa";
 import { Bracket, ReportMatchDialog } from "components/Bracket/Bracket";
 import {
-    useHostEvent, eventStage, isFull, addEntrant, removeEntrant, setCheckedIn,
+    useHostEvent, eventStage, isFull, addEntrant, removeEntrant,
     matchState, matchReports, playerReportMatch, reportNoShow, noShowUnlocksAt, getMockViewer, setMockViewer,
 } from "services/hostEventsMock";
+import { useTeamsState, myTeamsFrom, entryProblem, teamSizeOf } from "services/teamsMock";
 import { buildBracket, allMatches } from "utils/bracket";
 import { EVENT_TYPES } from "utils/hostEvents";
 import { MockBanner, Modal, ShareButton, StageChip, capacityLabel, entrantsById, formatDate, formatLabel, unitLabel, isTeamEvent } from "./hostShared";
@@ -26,25 +28,24 @@ const useMockViewer = (event) => {
     return [valid, choose];
 };
 
-const RegisterDialog = ({ event, onClose, onRegistered }) => {
+const RegisterDialog = ({ event, username, onClose, onRegistered }) => {
     const pay = event.payments?.enabled ? event.payments : null;
     const team = isTeamEvent(event);
     const form = event.signupForm ?? { playerFields: [], questions: [] };
-    const teammateCount = team ? Number(event.teamSize[0]) - 1 : 0;
-    const [name, setName] = useState('');
-    const [captain, setCaptain] = useState('');
+    const teamsState = useTeamsState();
+    const myTeams = myTeamsFrom(teamsState, username);
+    const [teamId, setTeamId] = useState('');
     const [email, setEmail] = useState('');
-    const [teammates, setTeammates] = useState(() => Array(teammateCount).fill(''));
     const [answers, setAnswers] = useState({});
     const [tried, setTried] = useState(false);
     const [tierIndex, setTierIndex] = useState(0);
     const tier = pay?.tiers[tierIndex];
     const price = tier ? Number(tier.price) : 0;
     const answer = (key) => (e) => setAnswers(a => ({ ...a, [key]: e.target.value }));
+    const chosen = myTeams.find(t => t.id === teamId);
 
     const missing = [
-        !name.trim() && 'name',
-        team && !captain.trim() && 'captain',
+        team && (!chosen || entryProblem(chosen, event, username)) && 'a team that can enter',
         !/^\S+@\S+\.\S+$/.test(email) && 'email',
         ...form.questions.filter(q => q.required && !answers[q.label]?.trim()).map(q => q.label),
     ].filter(Boolean);
@@ -53,10 +54,11 @@ const RegisterDialog = ({ event, onClose, onRegistered }) => {
         e.preventDefault();
         setTried(true);
         if (missing.length) return;
-        onRegistered(addEntrant(event.id, name.trim(), {
-            captain: (team ? captain : name).trim(),
+        onRegistered(addEntrant(event.id, team ? chosen.name : username, {
+            captain: username,
+            teamId: team ? chosen.id : undefined,
             email: email.trim(),
-            teammates: teammates.map(t => t.trim()).filter(Boolean),
+            teammates: team ? chosen.members.map(m => m.username).filter(n => n !== username) : [],
             answers,
             pass: tier?.name,
         }));
@@ -66,23 +68,31 @@ const RegisterDialog = ({ event, onClose, onRegistered }) => {
     return (
         <Modal title={`Sign up for ${event.name}`} onClose={onClose}>
             <form onSubmit={submit} className={styles.form}>
-                <div className={styles.field}>
-                    <label htmlFor="reg-name">{team ? 'Team name' : 'Gamertag'}</label>
-                    <input id="reg-name" className={styles.input} value={name} onChange={e => setName(e.target.value)} autoFocus maxLength={40} />
-                </div>
-                {team &&
-                    <div className={styles.field}>
-                        <label htmlFor="reg-captain">Captain's gamertag</label>
-                        <input id="reg-captain" className={styles.input} value={captain} onChange={e => setCaptain(e.target.value)} maxLength={40} />
-                    </div>
+                {team
+                    ? (
+                        <div>
+                            <span className={styles.fieldLabel}>Choose your team ({teamSizeOf(event)} players needed)</span>
+                            {myTeams.length === 0
+                                ? <p className={styles.fieldHint}>You're not on a team yet. <Link to="/dashboard?tab=teams">Make a team</Link>, invite players, then come back.</p>
+                                : (
+                                    <div className={styles.passList}>
+                                        {myTeams.map(t => {
+                                            const problem = entryProblem(t, event, username);
+                                            return (
+                                                <label key={t.id} className={`${styles.passOption} ${t.id === teamId ? styles.passOptionOn : ''}`}>
+                                                    <input type="radio" name="team" disabled={!!problem} checked={t.id === teamId} onChange={() => setTeamId(t.id)} />
+                                                    <span>{t.name}</span>
+                                                    <strong>{problem || `${t.members.length} players`}</strong>
+                                                </label>
+                                            );
+                                        })}
+                                    </div>
+                                )
+                            }
+                        </div>
+                    )
+                    : <p className={styles.blurb}>You'll be entered as <strong>{username}</strong>.</p>
                 }
-                {teammates.map((t, i) => (
-                    <div key={i} className={styles.field}>
-                        <label htmlFor={`reg-mate-${i}`}>Teammate {i + 2} gamertag (optional)</label>
-                        <input id={`reg-mate-${i}`} className={styles.input} value={t}
-                            onChange={e => setTeammates(list => list.map((x, j) => (j === i ? e.target.value : x)))} maxLength={40} />
-                    </div>
-                ))}
                 <div className={styles.field}>
                     <label htmlFor="reg-email">Contact email</label>
                     <input id="reg-email" type="email" className={styles.input} value={email} onChange={e => setEmail(e.target.value)} />
@@ -148,6 +158,8 @@ const RegisterDialog = ({ event, onClose, onRegistered }) => {
 export const PublicBracket = () => {
     const { eventId } = useParams();
     const event = useHostEvent(eventId);
+    const { defaultProfile } = useCurrentUser();
+    const username = defaultProfile?.username;
     const [viewerId, setViewerId] = useMockViewer(event);
     const [registering, setRegistering] = useState(false);
     const [reportingId, setReportingId] = useState(null);
@@ -244,7 +256,9 @@ export const PublicBracket = () => {
                     </div>
                     <div className={styles.btnRow}>
                         <ShareButton event={event} className={styles.ghostBtn} />
-                        {canRegister && <button type="button" className={styles.primaryBtn} onClick={() => setRegistering(true)}>Sign up</button>}
+                        {canRegister && (username
+                            ? <button type="button" className={styles.primaryBtn} onClick={() => setRegistering(true)}>Sign up</button>
+                            : <Link to="/login" className={styles.primaryBtn}>Log in to sign up</Link>)}
                     </div>
                 </div>
 
@@ -281,7 +295,6 @@ export const PublicBracket = () => {
                                 <dt>Entry</dt><dd>{event.entryFee || 'Free'}</dd>
                                 <dt>Prize</dt><dd>{event.prize || '-'}</dd>
                                 <dt>Spots</dt><dd>{event.maxEntrants == null ? 'No limit' : `${event.maxEntrants} ${unit}`}</dd>
-                                <dt>Check-in</dt><dd>{event.checkInRequired ? 'Required before the start' : 'Not required'}</dd>
                             </dl>
                         </section>
 
@@ -311,17 +324,14 @@ export const PublicBracket = () => {
                                 ? (
                                     <>
                                         <p className={styles.registeredNote}><FaCheckCircle /> You're signed up as <strong>{me.name}</strong></p>
-                                        {event.checkInRequired && !published &&
-                                            (me.checkedIn
-                                                ? <p className={styles.blurb}>Checked in. See you at the start!</p>
-                                                : <button type="button" className={`${styles.primaryBtn} ${styles.fullBtn}`} onClick={() => setCheckedIn(event.id, me.id, true)}>Check in</button>)
-                                        }
                                         {!published &&
                                             <button type="button" className={`${styles.dangerBtn} ${styles.fullBtn}`} onClick={unregister}>Unregister</button>}
                                     </>
                                 )
                                 : canRegister
-                                    ? <button type="button" className={`${styles.primaryBtn} ${styles.fullBtn}`} onClick={() => setRegistering(true)}>{pay ? 'Sign up & pay' : 'Sign up'}</button>
+                                    ? (username
+                                        ? <button type="button" className={`${styles.primaryBtn} ${styles.fullBtn}`} onClick={() => setRegistering(true)}>{pay ? 'Sign up & pay' : 'Sign up'}</button>
+                                        : <Link to="/login" className={`${styles.primaryBtn} ${styles.fullBtn}`}>Log in to sign up</Link>)
                                     : <p className={styles.blurb}>{published ? 'The bracket is live - sign-ups are closed.' : isFull(event) ? 'This event is full.' : 'Sign-ups are closed.'}</p>
                             }
                         </section>
@@ -388,7 +398,7 @@ export const PublicBracket = () => {
 
             </div>
 
-            {registering && <RegisterDialog event={event} onClose={() => setRegistering(false)} onRegistered={setViewerId} />}
+            {registering && <RegisterDialog event={event} username={username} onClose={() => setRegistering(false)} onRegistered={setViewerId} />}
 
             {reporting && me &&
                 <ReportMatchDialog

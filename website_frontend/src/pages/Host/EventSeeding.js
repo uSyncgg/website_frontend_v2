@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { FaArrowDown, FaArrowUp, FaGripVertical, FaRandom } from "react-icons/fa";
 import { Bracket } from "components/Bracket/Bracket";
@@ -13,15 +13,11 @@ export const EventSeeding = () => {
     const event = useManagedEvent();
     const navigate = useNavigate();
     const byId = entrantsById(event);
-    const [checkedInOnly, setCheckedInOnly] = useState(event.checkInRequired);
     const [method, setMethod] = useState('rating');
     const [dragIndex, setDragIndex] = useState(null);
     const [overIndex, setOverIndex] = useState(null);
 
-    const pool = useMemo(
-        () => event.entrants.filter(e => !checkedInOnly || e.checkedIn),
-        [event.entrants, checkedInOnly]
-    );
+    const pool = event.entrants;
 
     // Start from a saved draft when there is one, otherwise sort the pool by rating.
     const [order, setOrder] = useState(() => (
@@ -30,7 +26,7 @@ export const EventSeeding = () => {
             : SEEDING_METHODS.rating.sort(pool).map(e => e.id)
     ));
 
-    // Keep the order in step with the pool if check-ins change or the filter flips.
+    // Keep the order in step with the pool if the entrants change.
     const poolIds = pool.map(e => e.id);
     const seeds = [...order.filter(id => poolIds.includes(id)), ...poolIds.filter(id => !order.includes(id))];
 
@@ -88,13 +84,6 @@ export const EventSeeding = () => {
                         {method === 'random' && ' Click Random again to reshuffle.'}
                     </p>
                 </div>
-
-                {event.checkInRequired &&
-                    <label className={`${styles.checkRow} ${styles.optionGroup}`}>
-                        <input type="checkbox" checked={checkedInOnly} onChange={e => setCheckedInOnly(e.target.checked)} />
-                        Only seed checked-in {isTeamEvent(event) ? 'teams' : 'players'} ({event.entrants.filter(e => e.checkedIn).length} of {event.entrants.length})
-                    </label>
-                }
 
                 <ol className={styles.seedList}>
                     {seeds.map((id, i) => (

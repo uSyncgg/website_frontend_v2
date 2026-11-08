@@ -7,7 +7,7 @@ import { buildBracket, bracketProgress, allMatches, sameMatchup, withResult, wit
 // backend will need (noted beside it), so swapping in real requests later only
 // touches this file.
 
-const STORAGE_KEY = 'usync.mock.hostEvents.v3';
+const STORAGE_KEY = 'usync.mock.hostEvents.v4';
 
 // ---- demo data -------------------------------------------------------------
 
@@ -49,12 +49,11 @@ const clearMatchMeta = (bracket, matchId) => ({
     noShows: withoutResult(bracket.noShows ?? {}, matchId),
 });
 
-const makeEntrants = (names, { teams = false, checkedIn = () => true } = {}) => names.map((name, i) => ({
+const makeEntrants = (names, { teams = false } = {}) => names.map((name, i) => ({
     id: `e${i + 1}-${name.toLowerCase().replace(/\W/g, '')}`,
     name,
     captain: teams ? TAGS[(i * 3) % TAGS.length] : name,
     rating: 2400 - ((i * 137) % 1500),
-    checkedIn: checkedIn(i),
     registeredAt: daysFromNow(-10 + i * 0.4, 12),
 }));
 
@@ -95,7 +94,6 @@ const baseEvent = {
     prize: '',
     locationType: 'online',
     venue: '',
-    checkInRequired: true,
     registrationOpen: true,
     noShowMinutes: 10,
     payments: { enabled: false },
@@ -144,7 +142,7 @@ const buildDemoEvents = () => {
         startsAt: daysFromNow(3),
         entryFee: '$10',
         prize: '$100 to 1st',
-        description: 'Weekly open 1v1 bracket. Gunfight maps, first to 6 rounds.\n\nCheck in opens an hour before start. Brackets go live at start time.',
+        description: 'Weekly open 1v1 bracket. Gunfight maps, first to 6 rounds.\n\nBrackets go live at start time.',
         rules: 'Gunfight, BO3. Higher seed picks the first map.\nBoth players report the score after every match - if you disagree, the host decides.\nNo-shows can be reported 10 minutes after your match is called.',
         payments: {
             enabled: true,
@@ -155,7 +153,7 @@ const buildDemoEvents = () => {
             playerFields: ['Activision ID', 'Discord'],
             questions: [{ label: 'Preferred platform', type: 'select', options: 'PC, PlayStation, Xbox', required: true }],
         },
-        entrants: makeEntrants(TAGS.slice(0, 13), { checkedIn: i => i % 4 !== 2 }),
+        entrants: makeEntrants(TAGS.slice(0, 13)),
         createdAt: daysFromNow(-12),
     };
 
@@ -341,7 +339,6 @@ export const addEntrant = (id, name, fields = {}) => {
             name,
             captain: name,
             rating: 1200,
-            checkedIn: !e.checkInRequired,
             registeredAt: new Date().toISOString(),
             ...fields,
         }],
@@ -352,11 +349,6 @@ export const addEntrant = (id, name, fields = {}) => {
 // DELETE /brackets/:id/entrants/:entrantId (host removes) or DELETE /brackets/:id/registration (player unregisters)
 export const removeEntrant = (id, entrantId) => update(id, e => ({
     entrants: e.entrants.filter(x => x.id !== entrantId),
-}));
-
-// PATCH /brackets/:id/entrants/:entrantId { checked_in } or POST /brackets/:id/registration/check-in (player)
-export const setCheckedIn = (id, entrantId, checkedIn) => update(id, e => ({
-    entrants: e.entrants.map(x => (x.id === entrantId ? { ...x, checkedIn } : x)),
 }));
 
 // PUT /brackets/:id/bracket { seeds } - saves a draft bracket from the seeding screen.
