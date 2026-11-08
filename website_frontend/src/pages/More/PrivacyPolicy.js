@@ -2,7 +2,7 @@ import { LegalDocument, LegalEmail, SectionRef, LegalNotice, LegalContactCard, L
 import { Link } from "react-router";
 
 // Update this date whenever the policy changes (see Section 13).
-const LAST_UPDATED = "October 8, 2026";
+const LAST_UPDATED = "November 8, 2026";
 
 const ExternalLink = ({ href, children }) => (
     <a href={href} target="_blank" rel="noreferrer">{children}</a>
@@ -85,6 +85,10 @@ const RETENTION_PERIODS = [
     [
         "Other event registration details",
         "Three years after the event takes place, so we can handle refunds, chargebacks, disputes, and questions from participants and Hosts, and then deleted or de-identified. This includes gamertags, team and teammate details, social media handles, and answers to a Host’s questions. Hosts keep their own copies under their own retention practices.",
+    ],
+    [
+        "Match chat messages",
+        "Deleted automatically three days after every match in the event has been played. Messages are removed from our live systems at that time, and copies in our backup systems are overwritten on a rolling basis within 90 days. We may keep specific messages longer, and only for as long as needed, if they are part of a report, an investigation, a dispute, or a legal obligation. If a message is copied into a report or dispute record, that copy follows the retention period for that record.",
     ],
     [
         "Emails and support requests",
@@ -192,6 +196,14 @@ const SECTIONS = [
                     gender, profile picture, and bio, is optional.
                 </p>
 
+                <p>
+                    If you take part in a match in a bracket hosted on uSync, you can use that match’s chat room. We
+                    collect the messages you send there, along with your username, the time of each message, and
+                    whether you asked for or joined as an admin. Messages are shown to the players in that match and to
+                    any Host or event admin who joins the chat (an admin who joins can read the messages sent before
+                    they joined). Messages are not end-to-end encrypted, and they are not private from uSync.
+                </p>
+
                 <h3>2.2 Information We Collect Automatically</h3>
                 <p>
                     When you use the Services, we and our service providers automatically collect certain technical
@@ -285,10 +297,11 @@ const SECTIONS = [
 
                 <h3>3.5 To Keep uSync Safe and Fair</h3>
                 <p>
-                    We use information to verify Hosts who apply for uSync Verified; to screen usernames and profile
-                    pictures for prohibited content using automated moderation tools, which can block a submission
+                    We use information to verify Hosts who apply for uSync Verified; to screen usernames, match chat
+                    messages, and profile pictures for prohibited content using automated moderation tools, which can block a submission
                     that appears to violate our rules (you can contact us if you believe a submission was blocked in
-                    error); to detect and prevent fraud, payment abuse, cheating, and spam; to enforce our Terms of
+                    error); to review match chat messages when an admin is invited, a player reports a problem, or we
+                    investigate misconduct; to detect and prevent fraud, payment abuse, cheating, and spam; to enforce our Terms of
                     Service; to protect the security of
                     accounts and systems; to investigate reports of misconduct; and to protect the safety of our users,
                     especially minors. This includes reporting apparent child sexual exploitation to the National
@@ -355,6 +368,13 @@ const SECTIONS = [
                     participant information lawfully and only to run their events, but we are not responsible for how
                     they handle it.
                 </p>
+                <p>
+                    Match chat is shared with your opponents and, if an admin is requested or invited (for example
+                    because of a score dispute or a reported no-show), with the Host and the event’s admins, who can
+                    read the whole conversation once they join the chat. They are told in the chat when an admin joins.
+                    Please do not share information in a match chat that you do not want your opponents, the Host, or
+                    event admins to see.
+                </p>
 
                 <h3>4.3 Service Providers</h3>
                 <p>
@@ -364,8 +384,9 @@ const SECTIONS = [
                     authentication, and file storage (including profile pictures); Render, which hosts our
                     application servers; Netlify, which hosts and delivers our website; Stripe, which processes
                     payments; Resend, which delivers our emails, such as receipts and registration confirmations;
-                    OpenAI, which provides the automated moderation that screens usernames and profile pictures for
-                    prohibited content; Google, which provides analytics (Google Analytics), our event submission and
+                    OpenAI, which provides the automated moderation that screens usernames, match chat messages, and
+                    profile pictures for prohibited content (the text of a chat message is sent to OpenAI for this
+                    check); Google, which provides analytics (Google Analytics), our event submission and
                     problem-report forms (Google Forms), and sign-in; and Discord and X, which provide sign-in. Some of these companies also process your information as
                     independent controllers under their own privacy policies: for example, sign-in providers handle
                     your account with them, and Stripe uses payment information for its own fraud prevention and

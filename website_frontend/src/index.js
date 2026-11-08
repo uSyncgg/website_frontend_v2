@@ -67,6 +67,9 @@ import { EventSeeding } from 'pages/Host/EventSeeding';
 import { EventBracket } from 'pages/Host/EventBracket';
 import { PublicBracket } from 'pages/Host/PublicBracket';
 import { MatchPage } from 'pages/Host/MatchPage';
+// MOCK chat preview pages - delete with src/pages/Mock.
+import { ChatMock } from 'pages/Mock/ChatMock';
+import { ChatNotificationsMock } from 'pages/Mock/ChatNotificationsMock';
 import { TeamPage } from 'pages/Teams/TeamPage';
 import { Profile, MyProfile } from 'pages/Accounts/Profile/Profile';
 import { ProfileSettings, ProfileSettingsHome, AddProfile } from 'pages/Accounts/Settings/ProfileSettings';
@@ -190,6 +193,9 @@ const app = (
             <Route path='/brackets/:eventId' element={<PublicBracket />} />
             {/* One match: opponents, rosters, rules, maps, reporting. Public. */}
             <Route path='/brackets/:eventId/matches/:matchId' element={<MatchPage />} />
+            {/* MOCK pages for reviewing the match chat. Delete these two routes and src/pages/Mock. */}
+            <Route path='/mock/chat' element={<ChatMock />} />
+            <Route path='/mock/chat/notifications' element={<ChatNotificationsMock />} />
 
             {/* Hosts claim an existing event listing as theirs. Logged-out visitors go through
                 /login (RequireCompleteProfile) and come back here afterwards. */}

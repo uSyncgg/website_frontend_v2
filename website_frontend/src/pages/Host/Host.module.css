@@ -1459,3 +1459,8 @@
 .archiveSort .select {
     width: auto;
 }
+
+/* The match chat sits between the match summary and the details. */
+.chatSlot {
+    margin-bottom: 1rem;
+}

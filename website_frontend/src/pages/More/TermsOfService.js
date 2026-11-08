@@ -2,7 +2,7 @@ import { LegalDocument, LegalEmail, SectionRef, LegalNotice, LegalContactCard, L
 import { Link } from "react-router";
 
 // Update this date whenever the Terms change (see Section 3).
-const LAST_UPDATED = "October 8, 2026";
+const LAST_UPDATED = "November 8, 2026";
 
 const SECTIONS = [
     {
@@ -565,7 +565,9 @@ const SECTIONS = [
                 <p>
                     We are not obligated to monitor content, but we may review, screen (including with automated
                     moderation tools), edit, refuse, or remove any content at any time and for any reason, including content we believe violates these Terms or could
-                    harm uSync, our users, or third parties. Content posted by users and Hosts reflects their views,
+                    harm uSync, our users, or third parties. For example, we automatically block usernames, match chat
+                    messages, and profile pictures that contain banned words or content, and we block links to certain
+                    websites (see Section 7.10). Content posted by users and Hosts reflects their views,
                     not ours, and we are not responsible for it.
                 </p>
 
@@ -764,6 +766,49 @@ const SECTIONS = [
                     would have materially affected his or her settlement with the debtor or released party.” You also
                     waive any similar law in any other jurisdiction.
                 </p>
+
+                <h3>7.10 Match Chat Rooms</h3>
+                <p>
+                    Where available, every match in a bracket hosted on uSync has a chat room that the players in that
+                    match (a solo player, or the owner, captains, and players of a team) can use to coordinate with
+                    their opponents, for example to agree on when and where to play. Match chats are for that purpose
+                    only, and the rules in Section 4.4 apply to everything you write in them. In particular, you
+                    may not harass, threaten, or discriminate against anyone, share content that is sexual or
+                    otherwise inappropriate for a competition that may include minors, share personal information
+                    about anyone, or post links to websites that are adult-oriented, deceptive, or unsafe.
+                </p>
+                <ul>
+                    <li>
+                        <strong>Filters.</strong> Messages are checked by automated tools, including a banned-word list and
+                        third-party content moderation, before they are delivered. A message that does not pass is not
+                        sent. Links are allowed, but we block links to sites that are adult-oriented, that are known
+                        to be unsafe (for example IP loggers or phishing look-alikes), or that hide where they lead
+                        (for example link shorteners), and links to downloadable programs. These filters are not
+                        perfect, and you click links at your own risk.
+                    </li>
+                    <li>
+                        <strong>Hosts and admins.</strong> A player can ask for an admin to join their match chat, and we
+                        automatically invite one when a score is disputed or a no-show is reported. The Host and any
+                        admin the Host has appointed for the event (together, “event admins”) can join a match chat in
+                        that event to help resolve disputes, no-shows, and other problems. Event admins cannot read a
+                        match chat unless they join it. When they join, they can read the entire conversation so far,
+                        and a message in the chat tells the players that they joined. Event admins are independent of
+                        uSync, and their decisions are subject to Sections 7.4 and 7.5.
+                    </li>
+                    <li>
+                        <strong>Not private from us.</strong> Match chats are not private messages. We (and the Host
+                        and event admins who join) may read, review, and use a match chat to enforce these Terms,
+                        investigate reports, resolve disputes, or comply with the law, and we may remove messages or
+                        restrict your use of chat.
+                    </li>
+                    <li>
+                        <strong>Deletion.</strong> Match chats are temporary. After every match in an event has been
+                        played, the chats for that event are deleted automatically three days later. We may keep a copy
+                        of specific messages for longer where needed to handle a report, a dispute, or a legal
+                        obligation, as described in our Privacy Policy. Do not rely on match chat to keep a record of
+                        anything: take a screenshot of anything you may need.
+                    </li>
+                </ul>
             </>
         ),
     },

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { FaArrowLeft, FaCalendarAlt, FaGamepad, FaMap, FaSitemap, FaUserShield } from "react-icons/fa";
 import { ReportMatchDialog } from "components/Bracket/Bracket";
+import { MatchChatPanel } from "components/MatchChat/MatchChatPanel";
 import {
     useHostEvent, matchState, matchReports, noShowUnlocksAt, playerReportMatch, reportNoShow,
 } from "services/brackets";
@@ -155,6 +156,12 @@ export const MatchPage = () => {
                             : <p className={styles.fieldHint}>Your team's owner or a captain reports scores.</p>
                         }
                     </section>
+                }
+
+                {(mine || event.canManage) &&
+                    <div className={styles.chatSlot}>
+                        <MatchChatPanel eventId={event.id} matchId={match.id} />
+                    </div>
                 }
 
                 <div className={styles.twoCol}>
