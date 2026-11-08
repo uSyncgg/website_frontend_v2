@@ -18,6 +18,11 @@ export const checkUsername = (username, type) =>
     apiClient.get(`/users/check/${encodeURIComponent(username)}`, { params: { type } })
         .then(res => res.data);
 
+// The public events a host or venue profile's account owns: [{ kind, name, game, path, date, location, verified }].
+export const getProfileEvents = (publicId) =>
+    apiClient.get(`/users/profiles/${encodeURIComponent(publicId)}/events`)
+        .then(res => res.data);
+
 // A public profile, plus `others`: the same account's other profiles, for the view switcher.
 export const getProfile = (publicId) =>
     apiClient.get(`/users/profiles/${encodeURIComponent(publicId)}`)

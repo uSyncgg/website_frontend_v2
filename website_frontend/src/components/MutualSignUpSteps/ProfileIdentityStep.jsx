@@ -7,7 +7,7 @@ import { PROFILE_LABELS, usernameField } from "utils/profiles";
 import styles from "./ProfileIdentityStep.module.css";
 
 // One username input, checked live against other profiles of the same type.
-const UsernameInput = ({ type, label }) => {
+const UsernameInput = ({ type, label, placeholder = "uSync" }) => {
     const field = usernameField(type);
     const username = useWatch({ name: field });
     const usernameTaken = useUsernameAvailability(username, type, { field });
@@ -18,7 +18,7 @@ const UsernameInput = ({ type, label }) => {
             required={true}
             name={field}
             label={label}
-            placeholder={"uSync"}
+            placeholder={placeholder}
             disabled={false}
             inputClassName={""}
             errorClassName={""}
@@ -63,7 +63,9 @@ export const ProfileIdentityStep = ({ types, isSignUp }) => {
                 <UsernameInput
                     key={type}
                     type={type}
-                    label={types.length > 1 ? `${PROFILE_LABELS[type]} username` : "Enter your username"}
+                    // An org's username is its organization name, the only time it's asked.
+                    label={type === 'org' ? "Organization name" : types.length > 1 ? `${PROFILE_LABELS[type]} username` : "Enter your username"}
+                    placeholder={type === 'org' ? "e.g. Static Gaming" : "uSync"}
                 />
             ))}
 

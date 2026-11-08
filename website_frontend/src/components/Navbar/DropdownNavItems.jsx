@@ -1,4 +1,5 @@
 import { NavLink, useMatch } from "react-router";
+import { usePostYourEvent } from "hooks/usePostYourEvent";
 import styles from '../Navbar/Navbar.module.css';
 
 var temp = {
@@ -114,6 +115,7 @@ export const LanNavItem = ({ closeMenu, isOpen, onToggle }) => {
 }
 
 export const MoreNavItem = ({ closeMenu, isOpen, onToggle }) => {
+  const postEvent = usePostYourEvent();
   const moreMatch = useMatch("/more/*");
 
   const isActive = moreMatch;
@@ -142,7 +144,9 @@ export const MoreNavItem = ({ closeMenu, isOpen, onToggle }) => {
         <NavLink to="/more/verification" className={styles.dropdownItem} onClick={closeMenu}>
           Verification
         </NavLink>
-        <NavLink to="/more/eventhost" className={styles.dropdownItem} onClick={closeMenu}>
+        {/* Opens the event form for hosts; anyone else gets the "needs a host profile" popup. */}
+        <NavLink to="/more/eventhost" className={styles.dropdownItem}
+          onClick={(e) => { e.preventDefault(); closeMenu(); postEvent(); }}>
           Post Your Event
         </NavLink>
         <NavLink to="/more/contactus" className={styles.dropdownItem} onClick={closeMenu}>
