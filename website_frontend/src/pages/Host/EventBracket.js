@@ -6,7 +6,7 @@ import {
     publishBracket, hostReportMatch, clearMatch, resetBracket, revertDecision, dismissNoShow,
     matchState, matchReports, matchNoShow,
 } from "services/brackets";
-import { buildBracket, bracketProgress, allMatches } from "utils/bracket";
+import { buildBracket, bracketProgress, allMatches, matchBestOf } from "utils/bracket";
 import { useManagedEvent } from "./ManageEvent";
 import { entrantsById } from "./hostShared";
 import styles from "./Host.module.css";
@@ -53,7 +53,6 @@ export const EventBracket = () => {
     };
 
     const close = () => setSelectedId(null);
-    const forfeitScore = Math.ceil(event.bestOf / 2);
 
     return (
         <>
@@ -151,7 +150,7 @@ export const EventBracket = () => {
                     key={selected.id}
                     match={selected}
                     entrants={byId}
-                    bestOf={event.bestOf}
+                    bestOf={matchBestOf(event, built, selected)}
                     mode="host"
                     reports={matchReports(event.bracket, selected)}
                     noShow={matchNoShow(event.bracket, selected)}
@@ -160,6 +159,7 @@ export const EventBracket = () => {
                     onClear={() => { clearMatch(event.id, selected); close(); }}
                     onForfeit={(winnerId) => {
                         const aWins = winnerId === selected.a;
+                        const forfeitScore = Math.ceil(matchBestOf(event, built, selected) / 2);
                         hostReportMatch(event.id, selected, aWins ? forfeitScore : 0, aWins ? 0 : forfeitScore, { forfeit: true });
                         close();
                     }}

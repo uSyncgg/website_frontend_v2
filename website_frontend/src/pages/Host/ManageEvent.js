@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link, NavLink, Outlet, useNavigate, useOutletContext, useParams } from "react-router";
 import { FaCalendarAlt, FaClock, FaGamepad, FaMapMarkerAlt, FaSitemap } from "react-icons/fa";
-import { useHostEvent, eventStage, updateEvent, deleteEvent, delayStart, pendingEntrants } from "services/brackets";
+import { useHostEvent, eventStage, updateEvent, deleteEvent, delayStart, pendingEntrants, inviteAdmin, removeAdmin } from "services/brackets";
+import { Avatar, PlayerPicker } from "components/Teams/TeamParts";
 import { buildBracket, bracketProgress } from "utils/bracket";
-import { BracketError, Modal, ShareButton, StageChip, capacityLabel, formatDate, formatLabel, unitLabel, EventLoading } from "./hostShared";
+import { BracketError, Modal, ShareButton, StageChip, capacityLabel, formatDate, formatLabel, unitLabel, EventLoading, formatSummary, locationLabel, gameDisplayName, RestrictionList } from "./hostShared";
 import styles from "./Host.module.css";
 import { EVENT_TYPES, HOSTING_DASHBOARD_PATH } from "utils/hostEvents";
 
@@ -41,10 +42,10 @@ export const ManageEvent = () => {
                         <h1 className={styles.title}>{event.name}</h1>
                         <div className={styles.metaRow}>
                             <StageChip stage={stage} />
-                            <span><FaGamepad /> {event.game} · {event.teamSize}</span>
+                            <span><FaGamepad /> {gameDisplayName(event)} · {event.teamSize}</span>
                             <span><FaCalendarAlt /> {formatDate(event.startsAt)}{event.delays?.length > 0 && <span className={styles.delayedTag}>Delayed</span>}</span>
                             <span><FaSitemap /> {formatLabel(event.format)} · Bo{event.bestOf}</span>
-                            <span><FaMapMarkerAlt /> {event.locationType === 'online' ? 'Online' : event.venue}</span>
+                            <span><FaMapMarkerAlt /> {locationLabel(event)}</span>
                         </div>
                     </div>
                     <div className={styles.btnRow}>
@@ -164,12 +165,14 @@ export const EventOverview = () => {
                         <h2 className={styles.sectionTitle}>Details</h2>
                         <dl className={styles.detailList}>
                             <dt>Type</dt><dd>{EVENT_TYPES[event.eventType] ?? '-'}</dd>
-                            <dt>Game</dt><dd>{event.game}</dd>
-                            <dt>Format</dt><dd>{formatLabel(event.format)}, best of {event.bestOf}</dd>
+                            <dt>Game</dt><dd>{gameDisplayName(event)}</dd>
+                            <dt>Format</dt><dd>{formatSummary(event)}</dd>
                             <dt>Team size</dt><dd>{event.teamSize}</dd>
                             <dt>Max {unit}</dt><dd>{event.maxEntrants ?? 'No cap'}</dd>
+                            <dt>Min {unit}</dt><dd>{event.minEntrants ?? 'None'}</dd>
                             <dt>Starts</dt><dd>{formatDate(event.startsAt)}</dd>
-                            <dt>Location</dt><dd>{event.locationType === 'online' ? 'Online' : event.venue}</dd>
+                            <dt>Location</dt><dd>{locationLabel(event)}</dd>
+                            <dt>Restrictions</dt><dd>{event.restrictions?.length ? <RestrictionList event={event} /> : 'None'}</dd>
                             <dt>Entry fee</dt><dd>{event.payments?.enabled ? `${event.entryFee} via uSync payments` : (event.entryFee || 'Free')}</dd>
                             <dt>Prize</dt><dd>{event.prize || '-'}</dd>
                             <dt>No-show timer</dt><dd>{event.noShowMinutes == null ? 'Off' : `${event.noShowMinutes} min after start`}</dd>
@@ -220,13 +223,71 @@ export const EventOverview = () => {
                                 {event.registrationOpen ? 'Close registration' : 'Reopen registration'}
                             </button>
                             <ShareButton event={event} className={styles.ghostBtn} />
-                            <button type="button" className={styles.dangerBtn} onClick={remove}>Delete event</button>
+                            {event.isHost && <button type="button" className={styles.dangerBtn} onClick={remove}>Delete event</button>}
                         </div>
                     </section>
+
+                    <AdminsCard event={event} />
                 </div>
             </div>
 
             {delaying && <DelayDialog event={event} onClose={() => setDelaying(false)} />}
         </>
+    );
+};
+
+// Who helps run the event. The host invites players by searching for them; each accepts from
+// their notifications and can then manage the event (everything but deleting it or changing admins).
+const AdminsCard = ({ event }) => {
+    const [busy, setBusy] = useState(false);
+    const admins = event.admins ?? [];
+
+    const invite = async (picked) => {
+        const added = picked[picked.length - 1];
+        if (!added) return;
+        setBusy(true);
+        await inviteAdmin(event.id, added.public_id);
+        setBusy(false);
+    };
+
+    const remove = async (admin) => {
+        const verb = admin.status === 'pending' ? 'Cancel the admin invite for' : 'Remove admin';
+        if (!window.confirm(`${verb} ${admin.username}?`)) return;
+        setBusy(true);
+        await removeAdmin(event.id, admin.id);
+        setBusy(false);
+    };
+
+    return (
+        <section className={styles.card}>
+            <h2 className={styles.sectionTitle}>Admins</h2>
+            <p className={styles.blurb}>
+                {event.isHost
+                    ? 'Admins can edit the event, seed the bracket and report scores like you. Only you can delete the event or change admins.'
+                    : 'You\'re an admin for this event.'}
+            </p>
+            {admins.length > 0 &&
+                <ul className={styles.adminList}>
+                    {admins.map(a => (
+                        <li key={a.id} className={styles.adminRow}>
+                            <Avatar src={a.profile_picture} name={a.username} size={24} />
+                            <span>{a.username}</span>
+                            <span className={styles.muted}>{a.status === 'pending' ? 'Invited' : 'Admin'}</span>
+                            {event.isHost &&
+                                <button type="button" className={`${styles.ghostBtn} ${styles.smallBtn}`} disabled={busy} onClick={() => remove(a)}>
+                                    {a.status === 'pending' ? 'Cancel' : 'Remove'}
+                                </button>
+                            }
+                        </li>
+                    ))}
+                </ul>
+            }
+            {event.isHost &&
+                <>
+                    <label className={styles.fieldLabel} htmlFor="assign-admin">Assign an admin</label>
+                    <PlayerPicker id="assign-admin" selected={[]} onChange={invite} exclude={admins.map(a => a.username)} />
+                </>
+            }
+        </section>
     );
 };

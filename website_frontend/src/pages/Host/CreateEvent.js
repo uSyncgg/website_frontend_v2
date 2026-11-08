@@ -1,18 +1,22 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router";
 import { FaPlus, FaTrash } from "react-icons/fa";
 import { useCurrentUser } from "hooks";
-import { createEvent } from "services/brackets";
-import { FORMATS } from "utils/bracket";
+import { createEvent, useHostEvent } from "services/brackets";
+import { FORMATS, HAS_FINAL } from "utils/bracket";
 import { PROFILE_LABELS, canHostBrackets, profileUrl } from "utils/profiles";
-import { EVENT_TYPES, HOST_GAMES, HOSTING_DASHBOARD_PATH, TOURNAMENT_GAME } from "utils/hostEvents";
+import { EVENT_TYPES, GAME_TITLES, HOST_GAMES, HOSTING_DASHBOARD_PATH, PLATFORMS, TOURNAMENT_GAME } from "utils/hostEvents";
+import { PlayerPicker } from "components/Teams/TeamParts";
 import { BEST_OF, BracketError, TEAM_SIZES } from "./hostShared";
+import { SearchSelect } from "./SearchSelect";
 import styles from "./Host.module.css";
 
 // Same shape as the existing pass portal (/passes/:slug): pass tiers, per-player
 // fields, extra questions, and a 5% uSync fee on top of the pass price.
-const PLAYER_FIELD_OPTIONS = ["Activision ID", "Riot ID", "Epic ID", "Steam", "Battle.net", "Xbox Gamertag", "PSN", "Discord", "Twitter / X"];
+// Gamertag is always asked for; Discord and Twitter / X are the only other IDs.
+const PLAYER_FIELD_OPTIONS = ["Discord", "Twitter / X"];
 const USYNC_FEE = 0.05;
+const MAX_RESTRICTIONS = 10;
 
 const defaultStart = () => {
     const d = new Date();
@@ -22,6 +26,42 @@ const defaultStart = () => {
 
 const blankTier = () => ({ name: '', price: '', capacity: '' });
 const blankQuestion = () => ({ label: '', type: 'text', options: '', required: false });
+
+const pad = (n) => String(n).padStart(2, '0');
+
+// The form's fields filled from an earlier event (Duplicate on the Archived tab). The date moves
+// to next week; the time of day, settings, sign-up form, payments and admins carry over.
+const fromTemplate = (event, base) => {
+    const at = new Date(event.startsAt);
+    return {
+        ...base,
+        name: event.name,
+        eventType: event.eventType,
+        game: HOST_GAMES.includes(event.game) ? event.game : base.game,
+        gameTitle: event.gameTitle ?? '',
+        format: event.format,
+        teamSize: event.teamSize,
+        bestOf: event.bestOf,
+        differentFinals: !!event.finalBestOf,
+        finalBestOf: event.finalBestOf ?? base.finalBestOf,
+        maxEntrants: event.maxEntrants == null ? base.maxEntrants : String(event.maxEntrants),
+        uncapped: event.maxEntrants == null,
+        useMin: event.minEntrants != null,
+        minEntrants: event.minEntrants == null ? base.minEntrants : String(event.minEntrants),
+        platform: event.platform ?? base.platform,
+        time: `${pad(at.getHours())}:${pad(at.getMinutes())}`,
+        venue: event.venue ?? '',
+        prize: event.prize ?? '',
+        description: event.description ?? '',
+        rules: event.rules ?? '',
+        noShowMinutes: event.noShowMinutes == null ? base.noShowMinutes : String(event.noShowMinutes),
+        noShowOff: event.noShowMinutes == null,
+        usePayments: !!event.payments?.enabled,
+    };
+};
+
+const GAME_OPTIONS = HOST_GAMES.map(g => ({ value: g, label: g }));
+const titleOptions = (game) => (GAME_TITLES[game] ?? []).map(([title, year]) => ({ value: title, label: title, hint: String(year) }));
 
 // /host/events/new, or /host/events/new?profile=<public_id> from a host or venue profile's
 // "Add event" button: the event is posted as that profile (or the one you're viewing as) and
@@ -42,12 +82,20 @@ export const CreateEvent = () => {
         name: '',
         eventType: EVENT_TYPES[typeParam] ? typeParam : '',
         game: HOST_GAMES.includes(gameParam) ? gameParam : HOST_GAMES[0],
+        gameTitle: '',
         format: 'single_elim', teamSize: '1v1', bestOf: 3,
+        differentFinals: false, finalBestOf: 5,
         maxEntrants: '16', uncapped: false,
-        date: start.date, time: start.time, locationType: 'online', venue: '', prize: '',
+        useMin: false, minEntrants: '4',
+        platform: 'pc_allowed',
+        date: start.date, time: start.time, venue: '', prize: '',
         description: '', rules: '', noShowMinutes: '10', noShowOff: false,
         usePayments: true,
     });
+    // Custom restrictions the host types in (e.g. "No snipers", "Controller only").
+    const [restrictions, setRestrictions] = useState([]);
+    // Players invited to help run the event; each accepts from their notifications.
+    const [admins, setAdmins] = useState([]);
     const [payments, setPayments] = useState({
         notifyEmail: '', tiers: [{ name: 'Player Pass', price: '', capacity: '' }],
     });
@@ -55,7 +103,28 @@ export const CreateEvent = () => {
     const [signupForm, setSignupForm] = useState({ playerFields: ['Discord'], questions: [] });
     const [submitted, setSubmitted] = useState(false);
 
+    // ?from=<event id>: start from an earlier event's settings (filled once it loads).
+    const fromId = searchParams.get('from');
+    const template = useHostEvent(fromId);
+    const applied = useRef(false);
+    useEffect(() => {
+        if (!template || applied.current) return;
+        applied.current = true;
+        setForm(f => fromTemplate(template, f));
+        setRestrictions(template.restrictions ?? []);
+        setAdmins((template.admins ?? []).filter(a => a.status === 'accepted'));
+        if (template.payments?.enabled) {
+            setPayments({ notifyEmail: template.payments.notifyEmail ?? '', tiers: template.payments.tiers?.length ? template.payments.tiers : [blankTier()] });
+        }
+        const form = template.signupForm ?? {};
+        setSignupForm({
+            playerFields: (form.playerFields ?? []).filter(f => PLAYER_FIELD_OPTIONS.includes(f)),
+            questions: form.questions ?? [],
+        });
+    }, [template]);
+
     const set = (field) => (e) => setForm(f => ({ ...f, [field]: e.target.type === 'checkbox' ? e.target.checked : e.target.value }));
+    const setValue = (field, value) => setForm(f => ({ ...f, [field]: value }));
     const setPay = (field, value) => setPayments(p => ({ ...p, [field]: value }));
     const setTier = (i, field, value) => setPay('tiers', payments.tiers.map((t, j) => (j === i ? { ...t, [field]: value } : t)));
     const setSignup = (field, value) => setSignupForm(f => ({ ...f, [field]: value }));
@@ -64,19 +133,29 @@ export const CreateEvent = () => {
         ? signupForm.playerFields.filter(x => x !== f)
         : [...signupForm.playerFields, f]);
 
-    // LANs are always in person, so they always need a venue.
+    // LANs are in person (they need a venue); everything else is online.
     const isLan = form.eventType === 'lan';
-    const locationType = isLan ? 'in_person' : form.locationType;
     // Only Call of Duty tournaments can be posted for now.
     const isTournament = form.eventType === 'tournament';
     const game = isTournament ? TOURNAMENT_GAME : form.game;
+    const titles = titleOptions(game);
+    const hasFinal = !!HAS_FINAL[form.format];
+
+    const chooseGame = (g) => setForm(f => ({ ...f, game: g, gameTitle: g === f.game ? f.gameTitle : '' }));
 
     const maxNum = Number(form.maxEntrants);
+    const minNum = Number(form.minEntrants);
     const errors = {
         name: !form.name.trim() && 'Give your event a name',
         eventType: !form.eventType && 'Pick what kind of event this is',
-        venue: locationType === 'in_person' && !form.venue.trim() && (isLan ? 'Add where the LAN is held' : 'Add where the event is held'),
+        gameTitle: titles.length > 0 && !form.gameTitle && `Pick which ${game} game`,
+        venue: isLan && !form.venue.trim() && 'Add where the LAN is held',
         maxEntrants: !form.uncapped && (!Number.isInteger(maxNum) || maxNum < 2) && 'Enter a whole number of 2 or more, or tick "No cap"',
+        minEntrants: form.useMin && (
+            (!Number.isInteger(minNum) || minNum < 2) ? 'Enter a whole number of 2 or more'
+                : (!form.uncapped && minNum > maxNum) ? 'The minimum can\'t be more than the maximum' : false),
+        finalBestOf: hasFinal && form.differentFinals && Number(form.finalBestOf) === Number(form.bestOf) && 'Pick a different best of for the finals, or untick the box',
+        restrictions: restrictions.some(r => !r.trim()) && 'Fill in or remove the empty restriction',
         noShowMinutes: !form.noShowOff && !(Number(form.noShowMinutes) >= 0) && 'Enter how many minutes to wait, or turn the timer off',
         notifyEmail: form.usePayments && !/^\S+@\S+\.\S+$/.test(payments.notifyEmail) && 'Add the email we should notify about new sign-ups',
         tiers: form.usePayments && payments.tiers.some(t => !t.name.trim() || !(Number(t.price) > 0)) && 'Every pass needs a name and a price above $0',
@@ -92,16 +171,21 @@ export const CreateEvent = () => {
         if (hasErrors) return;
         if (!hostProfile) return;
         setSaving(true);
-        const { date, time, uncapped, usePayments, noShowOff, ...rest } = form;
+        const { date, time, uncapped, usePayments, noShowOff, differentFinals, useMin, ...rest } = form;
         const lowestPrice = Math.min(...payments.tiers.map(t => Number(t.price)));
         const id = await createEvent({
             ...rest,
             name: form.name.trim(),
             game,
-            locationType,
-            venue: locationType === 'in_person' ? form.venue.trim() : '',
+            gameTitle: titles.length ? form.gameTitle : '',
+            locationType: isLan ? 'in_person' : 'online',
+            venue: isLan ? form.venue.trim() : '',
             bestOf: Number(form.bestOf),
+            finalBestOf: hasFinal && differentFinals ? Number(form.finalBestOf) : null,
             maxEntrants: uncapped ? null : maxNum,
+            minEntrants: useMin ? minNum : null,
+            restrictions: restrictions.map(r => r.trim()),
+            admins: admins.map(a => a.public_id),
             noShowMinutes: noShowOff ? null : Number(form.noShowMinutes),
             startsAt: new Date(`${date}T${time}`).toISOString(),
             entryFee: usePayments ? `$${lowestPrice.toFixed(2)}` : 'Free',
@@ -131,7 +215,8 @@ export const CreateEvent = () => {
                         <p className={styles.eyebrow}>
                             <Link to={backTo} className={styles.eyebrow}>{hostProfile ? hostProfile.username : 'Event Dashboard'}</Link>
                         </p>
-                        <h1 className={styles.title}>Create an event</h1>
+                        <h1 className={styles.title}>{template ? 'Duplicate an event' : 'Create an event'}</h1>
+                        {template && <p className={styles.subtitle}>Starting from <strong>{template.name}</strong>. Check the date and change anything you need.</p>}
                         <p className={styles.subtitle}>
                             {hostProfile && <>Posting as <strong>{hostProfile.username}</strong> ({PROFILE_LABELS[hostProfile.type]}), so it shows on that profile. </>}
                             Players can sign up as soon as you create it. You'll build the bracket once sign-ups close.
@@ -148,6 +233,7 @@ export const CreateEvent = () => {
                                 <option value="" disabled>Choose a type</option>
                                 {Object.entries(EVENT_TYPES).map(([key, label]) => <option key={key} value={key}>{label}</option>)}
                             </select>
+                            {form.eventType && <p className={styles.fieldHint}>{isLan ? 'LANs are held in person.' : 'Played online.'}</p>}
                             {err('eventType')}
                         </div>
 
@@ -160,9 +246,8 @@ export const CreateEvent = () => {
                         <div className={styles.fieldRow}>
                             <div className={styles.field}>
                                 <label htmlFor="game">Game</label>
-                                <select id="game" className={styles.select} value={game} onChange={set('game')} disabled={isTournament}>
-                                    {HOST_GAMES.map(g => <option key={g}>{g}</option>)}
-                                </select>
+                                <SearchSelect id="game" value={game} options={GAME_OPTIONS} onChange={chooseGame}
+                                    disabled={isTournament} searchPlaceholder="Search games" />
                                 {isTournament && <p className={styles.fieldHint}>Only Call of Duty tournaments for now.</p>}
                             </div>
                             <div className={styles.field}>
@@ -172,6 +257,15 @@ export const CreateEvent = () => {
                                 </select>
                             </div>
                         </div>
+
+                        {titles.length > 0 &&
+                            <div className={styles.field}>
+                                <label htmlFor="gameTitle">Which {game} game</label>
+                                <SearchSelect id="gameTitle" value={form.gameTitle} options={titles} onChange={v => setValue('gameTitle', v)}
+                                    placeholder={`Choose a ${game} game`} searchPlaceholder={`Search ${game} games`} />
+                                {err('gameTitle')}
+                            </div>
+                        }
 
                         <div className={styles.fieldRow}>
                             <div className={styles.field}>
@@ -184,22 +278,44 @@ export const CreateEvent = () => {
                             </div>
                         </div>
 
-                        <div className={styles.fieldRow}>
+                        {isLan &&
                             <div className={styles.field}>
-                                <label htmlFor="locationType">Where</label>
-                                <select id="locationType" className={styles.select} value={locationType} onChange={set('locationType')} disabled={isLan}>
-                                    <option value="online">Online</option>
-                                    <option value="in_person">In person</option>
-                                </select>
-                                {isLan && <p className={styles.fieldHint}>LANs are held in person.</p>}
+                                <label htmlFor="venue">Venue / address</label>
+                                <input id="venue" className={styles.input} value={form.venue} onChange={set('venue')} placeholder="Venue name, city" />
+                                {err('venue')}
                             </div>
-                            {locationType === 'in_person' &&
-                                <div className={styles.field}>
-                                    <label htmlFor="venue">Venue / address</label>
-                                    <input id="venue" className={styles.input} value={form.venue} onChange={set('venue')} placeholder="Venue name, city" />
-                                    {err('venue')}
+                        }
+
+                        {!isLan &&
+                            <div className={styles.field}>
+                                <span className={styles.fieldLabel}>Platforms</span>
+                                <div className={styles.segmented} role="radiogroup" aria-label="Platforms">
+                                    {Object.entries(PLATFORMS).map(([value, label]) => (
+                                        <button key={value} type="button" role="radio" aria-checked={form.platform === value}
+                                            className={`${styles.segment} ${form.platform === value ? styles.segmentActive : ''}`}
+                                            onClick={() => setValue('platform', value)}>{label}</button>
+                                    ))}
                                 </div>
+                            </div>
+                        }
+
+                        <div className={styles.field}>
+                            <span className={styles.fieldLabel}>Restrictions (optional)</span>
+                            {restrictions.map((r, i) => (
+                                <div key={i} className={styles.restrictionRow}>
+                                    <input className={styles.input} value={r} maxLength={200} aria-label={`Restriction ${i + 1}`}
+                                        onChange={e => setRestrictions(list => list.map((x, j) => (j === i ? e.target.value : x)))}
+                                        placeholder="e.g. No snipers, controller only, NA servers" />
+                                    <button type="button" className={`${styles.iconBtn} ${styles.removeBtn}`} aria-label="Remove restriction"
+                                        onClick={() => setRestrictions(list => list.filter((_, j) => j !== i))}><FaTrash /></button>
+                                </div>
+                            ))}
+                            {restrictions.length < MAX_RESTRICTIONS &&
+                                <button type="button" className={`${styles.ghostBtn} ${styles.smallBtn}`} onClick={() => setRestrictions(list => [...list, ''])}>
+                                    <FaPlus /> Add a restriction
+                                </button>
                             }
+                            {err('restrictions')}
                         </div>
                     </section>
 
@@ -209,7 +325,7 @@ export const CreateEvent = () => {
                             {Object.entries(FORMATS).map(([key, f]) => (
                                 <button key={key} type="button" role="radio" aria-checked={form.format === key}
                                     className={`${styles.formatCard} ${form.format === key ? styles.formatCardActive : ''}`}
-                                    onClick={() => setForm(prev => ({ ...prev, format: key }))}>
+                                    onClick={() => setValue('format', key)}>
                                     <strong>{f.label}</strong>
                                     <span>{f.blurb}</span>
                                 </button>
@@ -222,6 +338,20 @@ export const CreateEvent = () => {
                                 <select id="bestOf" className={styles.select} value={form.bestOf} onChange={set('bestOf')}>
                                     {BEST_OF.map(b => <option key={b} value={b}>Best of {b}</option>)}
                                 </select>
+                                {hasFinal &&
+                                    <>
+                                        <label className={styles.checkRow} style={{ marginTop: '.5rem' }}>
+                                            <input type="checkbox" checked={form.differentFinals} onChange={set('differentFinals')} /> Finals are a different best of
+                                        </label>
+                                        {form.differentFinals &&
+                                            <select id="finalBestOf" aria-label="Finals best of" className={styles.select} style={{ marginTop: '.5rem' }}
+                                                value={form.finalBestOf} onChange={set('finalBestOf')}>
+                                                {BEST_OF.map(b => <option key={b} value={b}>Finals: best of {b}</option>)}
+                                            </select>
+                                        }
+                                        {err('finalBestOf')}
+                                    </>
+                                }
                             </div>
                             <div className={styles.field}>
                                 <label htmlFor="maxEntrants">Max {unit}</label>
@@ -233,6 +363,19 @@ export const CreateEvent = () => {
                                 </label>
                                 {err('maxEntrants')}
                             </div>
+                        </div>
+
+                        <div className={styles.field}>
+                            <label className={styles.checkRow}>
+                                <input type="checkbox" checked={form.useMin} onChange={set('useMin')} /> Set a minimum number of {unit}
+                            </label>
+                            {form.useMin &&
+                                <input id="minEntrants" type="number" min={2} step={1} inputMode="numeric" className={styles.input}
+                                    style={{ maxWidth: '10rem', marginTop: '.5rem' }} aria-label={`Minimum ${unit}`}
+                                    value={form.minEntrants} onChange={set('minEntrants')} />
+                            }
+                            <p className={styles.fieldHint}>Players see this on the event page, so they know it needs at least this many to run.</p>
+                            {err('minEntrants')}
                         </div>
 
                         <div className={styles.field}>
@@ -308,6 +451,13 @@ export const CreateEvent = () => {
                             </button>
                         </div>
 
+                        <div>
+                            <label className={styles.fieldLabel} htmlFor="admin-picker">Event admins (optional)</label>
+                            <p className={styles.fieldHint} style={{ marginTop: 0 }}>
+                                Invite players to help run this event. They get an invite in their notifications, and once they accept they can manage it like you can.
+                            </p>
+                            <PlayerPicker id="admin-picker" selected={admins} onChange={setAdmins} />
+                        </div>
                     </section>
 
                     <section className={`${styles.card} ${styles.form}`}>
@@ -316,7 +466,7 @@ export const CreateEvent = () => {
                             {[[true, 'Collect entry fees with uSync'], [false, 'Free / handled elsewhere']].map(([value, label]) => (
                                 <button key={label} type="button" role="radio" aria-checked={form.usePayments === value}
                                     className={`${styles.segment} ${form.usePayments === value ? styles.segmentActive : ''}`}
-                                    onClick={() => setForm(f => ({ ...f, usePayments: value }))}>{label}</button>
+                                    onClick={() => setValue('usePayments', value)}>{label}</button>
                             ))}
                         </div>
 

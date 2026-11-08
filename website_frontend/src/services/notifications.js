@@ -25,7 +25,7 @@ export const notificationText = ({ type, data }) => {
             return { text: `${data.event_name} now starts ${when}${data.reason ? ` - ${data.reason}` : ''}.`, to: eventLink(data) };
         }
         case 'match_ready':
-            return { text: `You have a match in ${data.event_name}${data.opponent ? ` vs ${data.opponent}` : ''}.`, to: eventLink(data) };
+            return { text: `You have a match in ${data.event_name}${data.opponent ? ` vs ${data.opponent}` : ''}.`, to: data.match_id ? `${eventLink(data)}/matches/${encodeURIComponent(data.match_id)}` : eventLink(data) };
         case 'opponent_reported':
             return { text: `${data.opponent} reported a score in ${data.event_name}. Report yours to confirm it.`, to: eventLink(data) };
         case 'score_disputed':
@@ -35,6 +35,10 @@ export const notificationText = ({ type, data }) => {
         case 'no_show_reported':
             if (data.host) return { text: `${data.opponent} was reported as a no-show in ${data.event_name}.`, to: manageLink(data) };
             return { text: `${data.opponent} reported you as a no-show in ${data.event_name}. The host will review it.`, to: eventLink(data) };
+        case 'admin_invite':
+            return { text: `${data.host} invited you to help run ${data.event_name}.`, to: eventLink(data) };
+        case 'admin_joined':
+            return { text: `${data.player} is now an admin for ${data.event_name}.`, to: `/host/events/${encodeURIComponent(data.event_id)}` };
         default:
             return { text: 'You have a new notification.', to: null };
     }

@@ -211,7 +211,7 @@ const Slot = ({ id, entrants, seed, score, isWinner, isLoser, isYou, forfeit }) 
     </div>
 );
 
-const MatchCard = ({ match, entrants, label, stateOf, onSelect, canSelect, viewerId }) => {
+const MatchCard = ({ match, entrants, label, stateOf, onSelect, canSelect, viewerId, view }) => {
     const state = stateOf ? stateOf(match) : match.status;
     const done = match.status === 'complete';
     const clickable = onSelect && (canSelect ? canSelect(match, state) : (match.status === 'ready' || done));
@@ -230,7 +230,7 @@ const MatchCard = ({ match, entrants, label, stateOf, onSelect, canSelect, viewe
                 match.status === 'bye' && styles.matchBye,
             ].filter(Boolean).join(' ')}
             onClick={clickable ? () => onSelect(match) : undefined}
-            aria-label={clickable ? `${done ? 'Edit' : 'Report'} result: ${entrants[match.a]?.name} vs ${entrants[match.b]?.name}` : undefined}
+            aria-label={clickable ? `${view ? 'View match' : `${done ? 'Edit' : 'Report'} result`}: ${entrants[match.a]?.name ?? 'TBD'} vs ${entrants[match.b]?.name ?? 'TBD'}` : undefined}
         >
             {label && <span className={styles.matchLabel}>{label}</span>}
             {['a', 'b'].map(side => (
@@ -240,7 +240,8 @@ const MatchCard = ({ match, entrants, label, stateOf, onSelect, canSelect, viewe
                     isYou={viewerId && match[side] === viewerId} forfeit={match.forfeit} />
             ))}
             {badge && <span className={`${styles.badge} ${styles[badge.className]}`}>{badge.label}</span>}
-            {!badge && clickable && state === 'ready' && <span className={styles.reportHint}>Report score</span>}
+            {!badge && clickable && state === 'ready' && (!view || (viewerId && (match.a === viewerId || match.b === viewerId))) &&
+                <span className={styles.reportHint}>{view ? 'Your match' : 'Report score'}</span>}
         </Tag>
     );
 };
@@ -362,17 +363,18 @@ const PoolPlay = ({ built, cardProps }) => (
     </div>
 );
 
-// format: 'single_elim' | 'double_elim' | 'round_robin'.
+// format: 'single_elim' | 'double_elim' | 'round_robin' | 'swiss'.
 // onSelect makes matches clickable (canSelect narrows which); stateOf(match) adds
 // report states (disputed / no-show / awaiting); viewerId highlights "your" matches.
-export const Bracket = ({ format, built, entrants, onSelect, canSelect, stateOf, viewerId }) => {
-    const cardProps = { entrants, onSelect, canSelect, stateOf, viewerId };
+// view: clicking opens the match page (players) rather than score entry (hosts).
+export const Bracket = ({ format, built, entrants, onSelect, canSelect, stateOf, viewerId, view = false }) => {
+    const cardProps = { entrants, onSelect, canSelect, stateOf, viewerId, view };
     const places = placements(format, built);
     return (
         <>
         {places && <Podium places={places} entrants={entrants} />}
         <PanZoom>
-            {format === 'round_robin' && <PoolPlay built={built} cardProps={cardProps} />}
+            {(format === 'round_robin' || format === 'swiss') && <PoolPlay built={built} cardProps={cardProps} />}
             {format === 'double_elim' && <DoubleElim built={built} cardProps={cardProps} />}
             {format === 'single_elim' && <SingleElim built={built} cardProps={cardProps} />}
         </PanZoom>

@@ -13,18 +13,18 @@ export const EventSeeding = () => {
     const event = useManagedEvent();
     const navigate = useNavigate();
     const byId = entrantsById(event);
-    const [method, setMethod] = useState('rating');
+    const [method, setMethod] = useState('registration');
     const [dragIndex, setDragIndex] = useState(null);
     const [overIndex, setOverIndex] = useState(null);
 
     // Pending teams (short-handed) sit out until their roster fills.
     const pool = signedUpEntrants(event);
 
-    // Start from a saved draft when there is one, otherwise sort the pool by rating.
+    // Start from a saved draft when there is one, otherwise in sign-up order.
     const [order, setOrder] = useState(() => (
         event.bracket && !event.bracket.published
             ? event.bracket.seeds.filter(id => byId[id])
-            : SEEDING_METHODS.rating.sort(pool).map(e => e.id)
+            : SEEDING_METHODS.registration.sort(pool).map(e => e.id)
     ));
 
     // Keep the order in step with the pool if the entrants change.
@@ -105,7 +105,6 @@ export const EventSeeding = () => {
                             <span className={styles.seedNum}>{i + 1}</span>
                             <FaGripVertical className={styles.grip} aria-hidden="true" />
                             <span className={styles.seedName}>{byId[id].name}</span>
-                            <span className={styles.seedRating}>{byId[id].rating}</span>
                             <span className={styles.seedMoves}>
                                 <button type="button" className={styles.iconBtn} disabled={i === 0} onClick={() => move(i, i - 1)} aria-label={`Move ${byId[id].name} up`}><FaArrowUp /></button>
                                 <button type="button" className={styles.iconBtn} disabled={i === seeds.length - 1} onClick={() => move(i, i + 1)} aria-label={`Move ${byId[id].name} down`}><FaArrowDown /></button>
@@ -127,6 +126,7 @@ export const EventSeeding = () => {
                                 return byes ? `${byes} top seed${byes > 1 ? 's get' : ' gets'} a first-round bye.` : 'No byes - the field fills the bracket.';
                             })()}
                             {event.format === 'round_robin' && seeds.length > 1 && `${preview.rounds.flat().length} matches over ${preview.rounds.length} rounds.`}
+                            {event.format === 'swiss' && seeds.length > 1 && `${preview.rounds.length} rounds. Each round after the first is paired by record once the last one is played.`}
                         </p>
                     </div>
                     <div className={styles.btnRow}>

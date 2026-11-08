@@ -1,4 +1,4 @@
-import { buildSingleElim, buildRoundRobin, buildBracket, allMatches, bracketProgress, seedPlacement, shuffle, withResult, FORMATS, placements } from "./bracket";
+import { buildSingleElim, buildRoundRobin, buildBracket, allMatches, bracketProgress, seedPlacement, shuffle, withResult, FORMATS, placements, matchBestOf } from "./bracket";
 
 const ids = (n) => Array.from({ length: n }, (_, i) => `p${i + 1}`);
 
@@ -95,8 +95,53 @@ test("double elim: grand final reset appears when the losers-side player wins ga
     expect(buildBracket('double_elim', seeds, results).champion).toBe("p2");
 });
 
-test("pool play is labelled Pool Play", () => {
-    expect(FORMATS.round_robin.label).toBe("Pool Play");
+test("round robin and swiss are offered", () => {
+    expect(FORMATS.round_robin.label).toBe("Round Robin");
+    expect(FORMATS.swiss.label).toBe("Swiss");
+});
+
+const playAll = (format, seeds, winner = (m) => m.a) => {
+    let results = {};
+    for (let i = 0; i < 200; i++) {
+        const ready = allMatches(buildBracket(format, seeds, results)).filter(m => m.status === 'ready');
+        if (!ready.length) break;
+        for (const m of ready) results = winner(m) === m.a ? withResult(results, m, 2, 0) : withResult(results, m, 0, 2);
+    }
+    return buildBracket(format, seeds, results);
+};
+
+test("swiss plays ceil(log2 n) rounds, pairing the next round only once the last is done", () => {
+    const seeds = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8'];
+    const fresh = buildBracket('swiss', seeds, {});
+    expect(fresh.rounds).toHaveLength(3);
+    expect(fresh.rounds[0].map(m => [m.a, m.b])).toEqual([['s1', 's5'], ['s2', 's6'], ['s3', 's7'], ['s4', 's8']]);
+    expect(fresh.rounds[1].every(m => m.status === 'pending' && !m.a)).toBe(true);
+    const done = playAll('swiss', seeds);
+    expect(bracketProgress(done)).toEqual({ done: 12, total: 12 });
+    expect(done.standings[0]).toMatchObject({ id: 's1', wins: 3 });
+    expect(placements('swiss', done)).toHaveLength(3);
+});
+
+test("swiss avoids rematches and gives one bye per round with an odd field", () => {
+    const seeds = ['a', 'b', 'c', 'd', 'e'];
+    const built = playAll('swiss', seeds);
+    const pairs = allMatches(built).filter(m => m.status === 'complete').map(m => [m.a, m.b].sort().join('|'));
+    expect(new Set(pairs).size).toBe(pairs.length);
+    const byes = allMatches(built).filter(m => m.status === 'bye').map(m => m.winner);
+    expect(byes).toHaveLength(built.rounds.length);
+    expect(new Set(byes).size).toBe(byes.length);
+});
+
+test("the finals best of applies to the final only, in elimination formats", () => {
+    const event = { format: 'single_elim', bestOf: 3, finalBestOf: 7 };
+    const built = buildBracket('single_elim', ['a', 'b', 'c', 'd'], {});
+    expect(matchBestOf(event, built, built.rounds[0][0])).toBe(3);
+    expect(matchBestOf(event, built, built.rounds[1][0])).toBe(7);
+    const de = buildBracket('double_elim', ['a', 'b', 'c', 'd'], {});
+    expect(matchBestOf({ ...event, format: 'double_elim' }, de, de.grandFinal[0])).toBe(7);
+    expect(matchBestOf({ ...event, format: 'double_elim' }, de, de.losersRounds[0][0])).toBe(3);
+    const rr = buildBracket('round_robin', ['a', 'b', 'c'], {});
+    expect(matchBestOf({ ...event, format: 'round_robin' }, rr, rr.rounds[0][0])).toBe(3);
 });
 
 test("single elim 3rd place is the semifinal loser who lost to the champion", () => {

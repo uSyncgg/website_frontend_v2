@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import { useAuth, useCurrentUser } from "hooks";
 import { FaCalendarAlt, FaCheckCircle, FaClock, FaGamepad, FaMapMarkerAlt, FaSitemap, FaTicketAlt, FaTrophy } from "react-icons/fa";
 import { Bracket, ReportMatchDialog } from "components/Bracket/Bracket";
@@ -9,9 +9,9 @@ import {
 } from "services/brackets";
 import { getMyTeams } from "services/teams";
 import { getApiErrorMessage } from "utils/apiError";
-import { buildBracket, allMatches } from "utils/bracket";
-import { EVENT_TYPES } from "utils/hostEvents";
-import { BracketError, Modal, ShareButton, StageChip, capacityLabel, entrantsById, formatDate, formatLabel, unitLabel, isTeamEvent, EventLoading } from "./hostShared";
+import { buildBracket, allMatches, matchBestOf } from "utils/bracket";
+import { EVENT_TYPES, matchUrl } from "utils/hostEvents";
+import { BracketError, Modal, ShareButton, StageChip, capacityLabel, entrantsById, formatDate, formatLabel, unitLabel, isTeamEvent, EventLoading, formatSummary, locationLabel, gameDisplayName, RestrictionList } from "./hostShared";
 import styles from "./Host.module.css";
 
 const USYNC_FEE = 0.05;
@@ -30,8 +30,16 @@ const RegisterDialog = ({ event, username, onClose }) => {
     const need = teamSizeOf(event);
     const form = event.signupForm ?? { playerFields: [], questions: [] };
     const { session } = useAuth();
+    const { profiles = [] } = useCurrentUser();
     const token = session?.access_token;
-    const [myTeams, setMyTeams] = useState(team ? null : []);
+    // Accounts with an organization pick whether they're entering as themselves (a player's
+    // teams) or as the organization (its teams). Everyone else never sees the choice.
+    const org = profiles.find(p => p.type === 'org');
+    const [signupAs, setSignupAs] = useState('player');
+    const [allTeams, setMyTeams] = useState(team ? null : []);
+    const myTeams = allTeams && org
+        ? allTeams.filter(t => (signupAs === 'org') === (t.owner?.public_id === org.public_id))
+        : allTeams;
     const [loadError, setLoadError] = useState('');
     const [teamId, setTeamId] = useState('');
     const [email, setEmail] = useState('');
@@ -74,14 +82,29 @@ const RegisterDialog = ({ event, username, onClose }) => {
     return (
         <Modal title={`Sign up for ${event.name}`} onClose={onClose}>
             <form onSubmit={submit} className={styles.form}>
+                {team && org &&
+                    <div className={styles.field}>
+                        <span className={styles.fieldLabel}>Sign up as</span>
+                        <div className={styles.segmented} role="radiogroup" aria-label="Sign up as">
+                            {[['player', 'Player'], ['org', 'Organization']].map(([value, label]) => (
+                                <button key={value} type="button" role="radio" aria-checked={signupAs === value}
+                                    className={`${styles.segment} ${signupAs === value ? styles.segmentActive : ''}`}
+                                    onClick={() => { setSignupAs(value); setTeamId(''); }}>
+                                    {value === 'org' ? `${label} (${org.username})` : label}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                }
                 {team
                     ? (
                         <div>
                             <span className={styles.fieldLabel}>Choose your team ({need} players to be signed up)</span>
                             {myTeams === null && <p className={styles.fieldHint}>Loading your teams…</p>}
                             {loadError && <p className={styles.fieldError}>{loadError}</p>}
-                            {myTeams?.length === 0 && !loadError &&
-                                <p className={styles.fieldHint}>You're not on a team yet. <Link to="/dashboard?tab=teams">Make a team</Link>, invite players, then come back.</p>}
+                            {myTeams?.length === 0 && !loadError && (signupAs === 'org' && org
+                                ? <p className={styles.fieldHint}>{org.username} has no teams yet. <Link to="/dashboard?tab=teams">Make a team</Link>, invite players, then come back.</p>
+                                : <p className={styles.fieldHint}>You're not on a team yet. <Link to="/dashboard?tab=teams">Make a team</Link>, invite players, then come back.</p>)}
                             {myTeams?.length > 0 &&
                                 <div className={styles.passList}>
                                     {myTeams.map(t => {
@@ -172,6 +195,7 @@ export const PublicBracket = () => {
     const { eventId } = useParams();
     const event = useHostEvent(eventId);
     const { defaultProfile } = useCurrentUser();
+    const navigate = useNavigate();
     const username = defaultProfile?.username;
     const [registering, setRegistering] = useState(false);
     const [reportingId, setReportingId] = useState(null);
@@ -248,7 +272,7 @@ export const PublicBracket = () => {
                             <span><FaGamepad /> {event.teamSize}</span>
                             <span><FaCalendarAlt /> {formatDate(event.startsAt)}</span>
                             <span><FaSitemap /> {formatLabel(event.format)} · Bo{event.bestOf}</span>
-                            <span><FaMapMarkerAlt /> {event.locationType === 'online' ? 'Online' : event.venue}</span>
+                            <span><FaMapMarkerAlt /> {locationLabel(event)}</span>
                             {event.prize && <span><FaTrophy /> {event.prize}</span>}
                         </div>
                     </div>
@@ -285,14 +309,16 @@ export const PublicBracket = () => {
                             <h2 className={styles.sectionTitle}>Details</h2>
                             <dl className={styles.detailList}>
                                 <dt>Type</dt><dd>{EVENT_TYPES[event.eventType] ?? '-'}</dd>
-                                <dt>Game</dt><dd>{event.game}</dd>
-                                <dt>Format</dt><dd>{formatLabel(event.format)}, best of {event.bestOf}</dd>
+                                <dt>Game</dt><dd>{gameDisplayName(event)}</dd>
+                                <dt>Format</dt><dd>{formatSummary(event)}</dd>
                                 <dt>Team size</dt><dd>{event.teamSize}</dd>
                                 <dt>Starts</dt><dd>{formatDate(event.startsAt)}</dd>
-                                <dt>Location</dt><dd>{event.locationType === 'online' ? 'Online' : event.venue}</dd>
+                                <dt>Location</dt><dd>{locationLabel(event)}</dd>
+                                {event.restrictions?.length > 0 && <><dt>Restrictions</dt><dd><RestrictionList event={event} /></dd></>}
                                 <dt>Entry</dt><dd>{event.entryFee || 'Free'}</dd>
                                 <dt>Prize</dt><dd>{event.prize || '-'}</dd>
                                 <dt>Spots</dt><dd>{event.maxEntrants == null ? 'No limit' : `${event.maxEntrants} ${unit}`}</dd>
+                                {event.minEntrants != null && <><dt>Minimum</dt><dd>Needs at least {event.minEntrants} {unit} to run</dd></>}
                             </dl>
                         </section>
 
@@ -314,9 +340,9 @@ export const PublicBracket = () => {
                             </p>
 
                             {myMatch &&
-                                <button type="button" className={`${styles.secondaryBtn} ${styles.fullBtn}`} style={{ marginBottom: '.75rem' }} onClick={() => setTab('bracket')}>
-                                    You have a match - go to the bracket
-                                </button>
+                                <Link to={matchUrl(event.id, myMatch.id)} className={`${styles.secondaryBtn} ${styles.fullBtn}`} style={{ marginBottom: '.75rem' }}>
+                                    You have a match vs {opponent?.name} - view it
+                                </Link>
                             }
                             {me
                                 ? (
@@ -345,7 +371,7 @@ export const PublicBracket = () => {
                         {myMatch &&
                             <section className={`${styles.card} ${styles.myMatch}`}>
                                 <h2 className={styles.sectionTitle}>Your match</h2>
-                                <p className={styles.blurb}>vs <strong>{opponent?.name}</strong></p>
+                                <p className={styles.blurb}>vs <strong>{opponent?.name}</strong> · <Link to={matchUrl(event.id, myMatch.id)}>Match page: roster, rules and maps</Link></p>
                                 {myState === 'disputed' && <p className={styles.tagDisputed}>DISPUTED - the host will decide</p>}
                                 {myState === 'no_show' && <p className={styles.tagNoShow}>NO SHOW REPORTED - waiting on the host</p>}
                                 {myState === 'awaiting' && (
@@ -375,8 +401,9 @@ export const PublicBracket = () => {
                                 entrants={byId}
                                 stateOf={stateOf}
                                 viewerId={viewerId}
-                                onSelect={me && canAct ? (m) => setReportingId(m.id) : undefined}
-                                canSelect={(m) => m.status === 'ready' && (m.a === viewerId || m.b === viewerId)}
+                                view
+                                onSelect={(m) => navigate(matchUrl(event.id, m.id))}
+                                canSelect={(m) => m.status === 'ready' || m.status === 'complete'}
                             />
                         </section>
                     )
@@ -409,7 +436,7 @@ export const PublicBracket = () => {
                     key={reporting.id}
                     match={reporting}
                     entrants={byId}
-                    bestOf={event.bestOf}
+                    bestOf={matchBestOf(event, built, reporting)}
                     mode="player"
                     viewerId={me.id}
                     reports={matchReports(event.bracket, reporting)}

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { FaCheck, FaCopy, FaEnvelope, FaShareAlt, FaTimes } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FORMATS } from "utils/bracket";
+import { PLATFORMS, gameDisplayName } from "utils/hostEvents";
 import { isPending, useBracketError, clearBracketError, STAGE_LABELS } from "services/brackets";
 import styles from "./Host.module.css";
 
@@ -9,6 +10,21 @@ export const TEAM_SIZES = ["1v1", "2v2", "3v3", "4v4", "5v5"];
 export const BEST_OF = [1, 3, 5, 7];
 
 export const formatLabel = (format) => FORMATS[format]?.label ?? format;
+
+// "Single Elimination, best of 3 (finals best of 7)".
+export const formatSummary = (event) =>
+    `${formatLabel(event.format)}, best of ${event.bestOf}${event.finalBestOf ? ` (finals best of ${event.finalBestOf})` : ''}`;
+
+// "Online · PC allowed" or the LAN's venue.
+export const locationLabel = (event) =>
+    (event.locationType === 'online' ? `Online${event.platform ? ` · ${PLATFORMS[event.platform]}` : ''}` : event.venue);
+
+export { gameDisplayName };
+
+// The host's custom restrictions, as a list (nothing when there are none).
+export const RestrictionList = ({ event }) => (event.restrictions?.length
+    ? <ul className={styles.restrictionList}>{event.restrictions.map((r, i) => <li key={i}>{r}</li>)}</ul>
+    : null);
 
 export const formatDate = (iso) => new Date(iso).toLocaleString('en-US', {
     weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit',

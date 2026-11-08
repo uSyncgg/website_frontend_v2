@@ -66,6 +66,7 @@ import { EventEntrants } from 'pages/Host/EventEntrants';
 import { EventSeeding } from 'pages/Host/EventSeeding';
 import { EventBracket } from 'pages/Host/EventBracket';
 import { PublicBracket } from 'pages/Host/PublicBracket';
+import { MatchPage } from 'pages/Host/MatchPage';
 import { TeamPage } from 'pages/Teams/TeamPage';
 import { Profile, MyProfile } from 'pages/Accounts/Profile/Profile';
 import { ProfileSettings, ProfileSettingsHome, AddProfile } from 'pages/Accounts/Settings/ProfileSettings';
@@ -187,6 +188,8 @@ const app = (
             </Route>
             {/* Public, read-only bracket page players are sent to. */}
             <Route path='/brackets/:eventId' element={<PublicBracket />} />
+            {/* One match: opponents, rosters, rules, maps, reporting. Public. */}
+            <Route path='/brackets/:eventId/matches/:matchId' element={<MatchPage />} />
 
             {/* Hosts claim an existing event listing as theirs. Logged-out visitors go through
                 /login (RequireCompleteProfile) and come back here afterwards. */}

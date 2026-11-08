@@ -766,7 +766,7 @@
 
 .formatGrid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: .6rem;
 }
 
@@ -1318,4 +1318,144 @@
 
 .myMatch {
     margin-bottom: 1rem;
+}
+
+.restrictionRow {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: .5rem;
+    align-items: center;
+    margin-bottom: .5rem;
+}
+
+.adminList {
+    list-style: none;
+    margin: 0 0 .75rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+}
+
+.adminRow {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .45rem .6rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+}
+
+.adminRow > span:first-of-type {
+    flex: 1;
+}
+
+.restrictionList {
+    margin: .25rem 0 0;
+    padding-left: 1.1rem;
+}
+
+/* ---- match page ---- */
+.versus {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: stretch;
+    gap: 1rem;
+}
+
+.versusTag {
+    align-self: center;
+    font-weight: 800;
+    font-size: .85rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+}
+
+.matchSide {
+    padding: 1rem;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .02);
+}
+
+.matchSideYou {
+    border-color: var(--violet);
+    box-shadow: 0 0 0 3px var(--violet-dim);
+}
+
+.matchSideWon .matchSideScore {
+    color: var(--win);
+}
+
+.matchSideTop {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: .75rem;
+}
+
+.matchSideName {
+    margin: 0 0 .35rem;
+    font-size: 1.15rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    flex-wrap: wrap;
+}
+
+.matchSideScore {
+    font-size: 1.75rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+}
+
+.rosterList {
+    list-style: none;
+    margin: .5rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+}
+
+.rosterList li {
+    padding: .2rem .55rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: .8rem;
+    color: var(--ink-2);
+}
+
+@media (max-width: 640px) {
+    .versus {
+        grid-template-columns: 1fr;
+    }
+
+    .versusTag {
+        justify-self: center;
+    }
+}
+
+/* ---- archived tab ---- */
+.archiveBar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    margin-bottom: 1rem;
+}
+
+.archiveSort {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .85rem;
+    color: var(--ink-2);
+}
+
+.archiveSort .select {
+    width: auto;
 }

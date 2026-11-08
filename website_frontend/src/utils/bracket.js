@@ -5,8 +5,12 @@
 export const FORMATS = {
     single_elim: { label: 'Single Elimination', blurb: 'Lose once and you\'re out. Fast, classic bracket.' },
     double_elim: { label: 'Double Elimination', blurb: 'Winners and losers brackets - lose twice to be out.' },
-    round_robin: { label: 'Pool Play', blurb: 'Everyone in the pool plays everyone. Best for small groups and leagues.' },
+    round_robin: { label: 'Round Robin', blurb: 'Everyone plays everyone once. Best for small groups and leagues.' },
+    swiss: { label: 'Swiss', blurb: 'A set number of rounds; each round pairs teams with the same record.' },
 };
+
+// Formats with a single deciding final (the only ones a different "finals best of" applies to).
+export const HAS_FINAL = { single_elim: true, double_elim: true };
 
 // Stands in for "nobody" where a bracket isn't full: a first-round bye, or the
 // loser of a bye match dropping into the losers bracket.
@@ -26,7 +30,6 @@ export const shuffle = (list, rand = Math.random) => {
 };
 
 export const SEEDING_METHODS = {
-    rating: { label: 'By skill rating', sort: (list) => [...list].sort((a, b) => b.rating - a.rating) },
     registration: { label: 'Registration order', sort: (list) => [...list].sort((a, b) => a.registeredAt.localeCompare(b.registeredAt)) },
     random: { label: 'Random', sort: (list) => shuffle(list) },
 };
@@ -203,8 +206,14 @@ export const buildRoundRobin = (seeds, results = {}) => {
         rotating.unshift(rotating.pop());
     }
 
-    const table = Object.fromEntries(seeds.map(id => [id, { id, played: 0, wins: 0, losses: 0, diff: 0 }]));
-    for (const match of rounds.flat()) {
+    return { rounds, standings: standingsOf(seeds, rounds.flat()) };
+};
+
+// Win/loss table for round robin and swiss: wins, then score difference, then seed. A bye is a win.
+export const standingsOf = (seeds, matches) => {
+    const table = Object.fromEntries(seeds.map((id, i) => [id, { id, seed: i, played: 0, wins: 0, losses: 0, diff: 0 }]));
+    for (const match of matches) {
+        if (match.status === 'bye' && table[match.winner]) { table[match.winner].wins++; continue; }
         if (match.status !== 'complete') continue;
         const margin = Math.abs(match.scoreA - match.scoreB);
         table[match.winner].wins++;
@@ -214,14 +223,88 @@ export const buildRoundRobin = (seeds, results = {}) => {
         table[match.a].played++;
         table[match.b].played++;
     }
-    const standings = Object.values(table).sort((x, y) => y.wins - x.wins || y.diff - x.diff);
-    return { rounds, standings };
+    return Object.values(table).sort((x, y) => y.wins - x.wins || y.diff - x.diff || x.seed - y.seed);
+};
+
+// ---- swiss -------------------------------------------------------------------
+
+// Pairs a ranked list down the table with no rematches when that's possible (a bounded
+// backtracking search); otherwise pairs neighbours in order.
+const PAIRING_BUDGET = 20000;
+const pairUp = (pool, played) => {
+    let steps = 0;
+    const search = (rest) => {
+        if (!rest.length) return [];
+        if (++steps > PAIRING_BUDGET) return null;
+        const [a, ...others] = rest;
+        for (let j = 0; j < others.length; j++) {
+            if (played(a, others[j])) continue;
+            const tail = search([...others.slice(0, j), ...others.slice(j + 1)]);
+            if (tail) return [[a, others[j]], ...tail];
+        }
+        return null;
+    };
+    const found = search(pool);
+    if (found) return found;
+    const pairs = [];
+    for (let i = 0; i < pool.length; i += 2) pairs.push([pool[i], pool[i + 1]]);
+    return pairs;
+};
+
+// ceil(log2(n)) rounds: enough to leave one unbeaten entrant.
+export const swissRoundCount = (n) => Math.max(1, Math.ceil(Math.log2(n)));
+
+// Round 1 pairs the top half of the seeds against the bottom half. Each later round is paired
+// once the previous one is finished: entrants are ranked by record and paired down the table,
+// skipping rematches where possible. With an odd count, the lowest-ranked entrant who hasn't had
+// a bye gets one (counted as a win). Rounds not yet paired are placeholders, so progress counts them.
+export const buildSwiss = (seeds, results = {}) => {
+    if (seeds.length < 2) return { rounds: [], standings: [] };
+    const total = swissRoundCount(seeds.length);
+    const perRound = Math.floor(seeds.length / 2);
+    const rounds = [];
+    const byes = new Set();
+    const met = new Set();
+    const key = (a, b) => [a, b].sort().join('|');
+
+    for (let round = 0; round < total; round++) {
+        const prev = rounds[round - 1];
+        if (prev && prev.some(m => m.status !== 'complete' && m.status !== 'bye')) {
+            rounds.push(Array.from({ length: perRound }, (_, i) =>
+                ({ id: `sw${round}m${i}`, round, slot: i, a: null, b: null, status: 'pending', winner: null, loser: null })));
+            continue;
+        }
+        const pool = round === 0 ? [...seeds] : standingsOf(seeds, rounds.flat()).map(row => row.id);
+        const matches = [];
+        let bye = null;
+        if (pool.length % 2) {
+            let i = pool.length - 1;
+            while (i > 0 && byes.has(pool[i])) i--;
+            [bye] = pool.splice(i, 1);
+            byes.add(bye);
+        }
+        const pairs = [];
+        if (round === 0) {
+            const half = pool.length / 2;
+            for (let i = 0; i < half; i++) pairs.push([pool[i], pool[i + half]]);
+        } else {
+            pairs.push(...pairUp(pool, (a, b) => met.has(key(a, b))));
+        }
+        pairs.forEach(([a, b], i) => {
+            met.add(key(a, b));
+            matches.push(decide({ id: `sw${round}m${i}`, round, slot: i, a, b }, results));
+        });
+        if (bye) matches.push(decide({ id: `sw${round}bye`, round, slot: pairs.length, a: bye, b: BYE }, results));
+        rounds.push(matches);
+    }
+    return { rounds, standings: standingsOf(seeds, rounds.flat()) };
 };
 
 // ---- shared ----------------------------------------------------------------
 
 export const buildBracket = (format, seeds, results) => {
     if (format === 'round_robin') return buildRoundRobin(seeds, results);
+    if (format === 'swiss') return buildSwiss(seeds, results);
     if (format === 'double_elim') return buildDoubleElim(seeds, results);
     return buildSingleElim(seeds, results);
 };
@@ -229,9 +312,9 @@ export const buildBracket = (format, seeds, results) => {
 // Final placings once the event is decided: [1st, 2nd, 3rd] (3rd may be null).
 // - Single elim: 3rd goes to the semifinal loser who lost to the eventual champion.
 // - Double elim: 2nd is the grand-final loser, 3rd is the losers-final loser.
-// - Pool play: the top three in the standings once every match is played.
+// - Round robin / swiss: the top three in the standings once every match is played.
 export const placements = (format, built) => {
-    if (format === 'round_robin') {
+    if (format === 'round_robin' || format === 'swiss') {
         const { done, total } = bracketProgress(built);
         if (!total || done < total) return null;
         return built.standings.slice(0, 3).map(row => row.id);
@@ -274,3 +357,24 @@ export const withoutResult = (results, matchId) => {
     const { [matchId]: _removed, ...rest } = results;
     return rest;
 };
+
+// The deciding match(es): the single-elim final, or the double-elim grand final and its reset.
+export const isFinalMatch = (format, built, match) => {
+    if (format === 'double_elim') return match.bracket === 'grand';
+    if (format === 'single_elim') return match.round === built.rounds.length - 1;
+    return false;
+};
+
+// Best of for a match: the event's, or its finals best of for the final.
+export const matchBestOf = (event, built, match) =>
+    (event.finalBestOf && built && isFinalMatch(event.format, built, match) ? event.finalBestOf : event.bestOf);
+
+// What a match is called on its own page: "Semifinals", "Losers Round 2", "Grand Final", "Round 3".
+export const matchRoundLabel = (format, built, match) => {
+    if (format === 'round_robin' || format === 'swiss') return `Round ${match.round + 1}`;
+    if (match.bracket === 'grand') return match.round === 0 ? 'Grand Final' : 'Grand Final Reset';
+    if (match.bracket === 'losers') return losersRoundName(match.round, built.losersRounds.length);
+    return roundName(match.round, built.rounds.length, format === 'double_elim' ? 'Winners' : '');
+};
+
+export const findMatch = (built, matchId) => allMatches(built).find(m => m.id === matchId) ?? null;

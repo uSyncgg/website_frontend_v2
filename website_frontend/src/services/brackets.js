@@ -1,7 +1,7 @@
 import { useEffect, useSyncExternalStore } from "react";
 import apiClient from "./apiClient";
 import { getApiErrorMessage } from "utils/apiError";
-import { buildBracket, bracketProgress, sameMatchup } from "utils/bracket";
+import { buildBracket, bracketProgress, sameMatchup, allMatches } from "utils/bracket";
 
 // Bracket hosting, backed by the backend's /brackets routes (replaces the old localStorage
 // mock). Events come back in the shape the bracket pages are built on:
@@ -107,6 +107,17 @@ export const useEnteredEvents = () => (useList('entered', '/brackets/entered') ?
     .filter(row => row.entrant);
 
 // ---- derived ---------------------------------------------------------------
+
+// The viewer's match that's waiting to be played, or null.
+export const viewerMatch = (event) => {
+    if (!event.bracket?.published || !event.viewerEntrantId) return null;
+    const built = buildBracket(event.format, event.bracket.seeds, event.bracket.results);
+    const me = event.viewerEntrantId;
+    return allMatches(built).find(m => m.status === 'ready' && (m.a === me || m.b === me)) ?? null;
+};
+
+// Finished events move to the Archived tab.
+export const isArchived = (event) => eventStage(event) === 'complete';
 
 // Players a team needs for this event: '4v4' -> 4.
 export const teamSizeOf = (event) => Number(String(event.teamSize).split('v')[0]) || 1;
@@ -215,3 +226,21 @@ export const dismissNoShow = (id, matchId) => eventCall(apiClient.delete(url(id,
 export const clearMatch = (id, match) => eventCall(apiClient.delete(url(id, `/bracket/matches/${match.id}`)));
 
 export const revertDecision = (id, entryId) => eventCall(apiClient.post(url(id, `/bracket/log/${entryId}/revert`)));
+
+// ---- admins ------------------------------------------------------------------
+
+// The host invites a player profile (by public_id) to help run the event; they accept from the bell.
+export const inviteAdmin = (id, profilePublicId) => eventCall(apiClient.post(url(id, '/admins'), { profile: profilePublicId }));
+
+// The host removes an admin or cancels an invite; an admin can also step down.
+export const removeAdmin = (id, adminId) => eventCall(apiClient.delete(url(id, `/admins/${adminId}`)));
+
+// Admin invites waiting on the signed in account: [{ id, eventId, eventName, game, startsAt, host }].
+export const getAdminInvites = () => apiClient.get('/brackets/admin-invites').then(res => res.data);
+
+// Accept or decline; resolves to the invites still waiting. Accepting refreshes the Hosting list.
+export const respondAdminInvite = async (inviteId, accept) => {
+    const res = await apiClient.post(`/brackets/admin-invites/${inviteId}`, { accept });
+    if (accept) apiClient.get('/brackets/hosting').then(r => putList('hosting', r.data)).catch(() => {});
+    return res.data;
+};

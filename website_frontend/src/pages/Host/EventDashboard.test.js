@@ -58,3 +58,54 @@ describe('EventDashboard', () => {
         expect(await screen.findByText('Zyphr')).toBeInTheDocument();
     });
 });
+
+describe('EventDashboard archive', () => {
+    const two = [
+        { id: 'e1', name: 'Zyphr', captain: 'Zyphr', rating: 1200, registeredAt: '2030-01-02T00:00:00Z', status: 'signed_up', teamId: null, roster: [], rosterSize: 0, teammates: [] },
+        { id: 'e2', name: 'Kova', captain: 'Kova', rating: 1200, registeredAt: '2030-01-03T00:00:00Z', status: 'signed_up', teamId: null, roster: [], rosterSize: 0, teammates: [] },
+    ];
+    const finished = (overrides) => bracketEvent({
+        entrants: two,
+        bracket: { published: true, format: 'single_elim', seeds: ['e1', 'e2'], results: { r0m0: { a: 'e1', b: 'e2', scoreA: 2, scoreB: 0 } } },
+        ...overrides,
+    });
+    const played = finished({ id: 'evt-old-played', name: 'Old Played Cup', startsAt: '2029-01-01T19:00:00Z' });
+    const ran = finished({ id: 'evt-old-hosted', name: 'Old Hosted Cup', canManage: true, isHost: true, viewerEntrantId: null, startsAt: '2029-06-01T19:00:00Z' });
+    const live = bracketEvent({ id: 'evt-live', name: 'Live Cup', entrants: two, bracket: { published: true, format: 'single_elim', seeds: ['e1', 'e2'], results: {} } });
+
+    beforeEach(() => {
+        mockUser = { defaultProfile: host, profiles: [player, host], switchProfile: jest.fn() };
+        apiClient.get.mockImplementation(apiGetFrom({ '/brackets/entered': [played, live], '/brackets/hosting': [ran] }));
+    });
+
+    it('moves finished events to Archived, filterable by hosted and played', async () => {
+        renderAt('/dashboard?tab=archived');
+        expect(await screen.findByText('Old Played Cup')).toBeInTheDocument();
+        expect(screen.getByText('Old Hosted Cup')).toBeInTheDocument();
+        expect(screen.queryByText('Live Cup')).toBeNull();
+        expect(screen.getAllByText('Zyphr').length).toBeGreaterThan(0);
+        fireEvent.click(screen.getByRole('radio', { name: 'Hosted' }));
+        expect(screen.queryByText('Old Played Cup')).toBeNull();
+        expect(screen.getByRole('link', { name: 'Duplicate' })).toHaveAttribute('href', '/host/events/new?from=evt-old-hosted');
+        fireEvent.click(screen.getByRole('radio', { name: 'Played' }));
+        expect(screen.queryByText('Old Hosted Cup')).toBeNull();
+        expect(screen.getByText('Old Played Cup')).toBeInTheDocument();
+        expect(screen.queryByRole('link', { name: 'Duplicate' })).toBeNull();
+    });
+
+    it('sorts newest or oldest first', async () => {
+        renderAt('/dashboard?tab=archived');
+        await screen.findByText('Old Played Cup');
+        const names = () => screen.getAllByRole('heading', { level: 2 }).map(h => h.textContent).filter(t => t.startsWith('Old'));
+        expect(names()).toEqual(['Old Hosted Cup', 'Old Played Cup']);
+        fireEvent.change(screen.getByLabelText('Sort'), { target: { value: 'oldest' } });
+        expect(names()).toEqual(['Old Played Cup', 'Old Hosted Cup']);
+    });
+
+    it('keeps finished events off Entered, and links your live match', async () => {
+        renderAt('/dashboard?tab=entered');
+        expect(await screen.findByText('Live Cup')).toBeInTheDocument();
+        expect(screen.queryByText('Old Played Cup')).toBeNull();
+        expect(screen.getByRole('link', { name: 'Your match vs Kova' })).toHaveAttribute('href', '/brackets/evt-live/matches/r0m0');
+    });
+});
