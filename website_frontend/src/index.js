@@ -66,7 +66,6 @@ import { EventEntrants } from 'pages/Host/EventEntrants';
 import { EventSeeding } from 'pages/Host/EventSeeding';
 import { EventBracket } from 'pages/Host/EventBracket';
 import { PublicBracket } from 'pages/Host/PublicBracket';
-import { JoinTeam } from 'pages/Host/JoinTeam';
 import { TeamPage } from 'pages/Teams/TeamPage';
 import { Profile, MyProfile } from 'pages/Accounts/Profile/Profile';
 import { ProfileSettings, ProfileSettingsHome, AddProfile } from 'pages/Accounts/Settings/ProfileSettings';
@@ -174,10 +173,6 @@ const app = (
             {/* A team's page: roster, owner, and (for the owner) managing it. Public. */}
             <Route path='/teams/:teamId' element={<TeamPage />} />
 
-            {/* Team invite links. */}
-            <Route path='/teams/join/:code' element={<RequireCompleteProfile />}>
-              <Route index element={<JoinTeam />} />
-            </Route>
 
             {/* Bracket hosting - accounts with bracket hosting turned on (see RequireBracketHost). Mock data for now. */}
             <Route path='/host/events' element={<RequireBracketHost />}>

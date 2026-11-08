@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router";
 import { FaPlus, FaTrash } from "react-icons/fa";
 import { useCurrentUser } from "hooks";
-import { createEvent } from "services/hostEventsMock";
+import { createEvent } from "services/brackets";
 import { FORMATS } from "utils/bracket";
 import { PROFILE_LABELS, canHostBrackets, profileUrl } from "utils/profiles";
 import { EVENT_TYPES, HOST_GAMES, HOSTING_DASHBOARD_PATH, TOURNAMENT_GAME } from "utils/hostEvents";
-import { BEST_OF, MockBanner, TEAM_SIZES } from "./hostShared";
+import { BEST_OF, BracketError, TEAM_SIZES } from "./hostShared";
 import styles from "./Host.module.css";
 
 // Same shape as the existing pass portal (/passes/:slug): pass tiers, per-player
@@ -84,13 +84,17 @@ export const CreateEvent = () => {
     const hasErrors = Object.values(errors).some(Boolean);
     const err = (key) => submitted && errors[key] && <p className={styles.fieldError}>{errors[key]}</p>;
 
-    const submit = (e) => {
+    const [saving, setSaving] = useState(false);
+
+    const submit = async (e) => {
         e.preventDefault();
         setSubmitted(true);
         if (hasErrors) return;
+        if (!hostProfile) return;
+        setSaving(true);
         const { date, time, uncapped, usePayments, noShowOff, ...rest } = form;
         const lowestPrice = Math.min(...payments.tiers.map(t => Number(t.price)));
-        const id = createEvent({
+        const id = await createEvent({
             ...rest,
             name: form.name.trim(),
             game,
@@ -107,9 +111,10 @@ export const CreateEvent = () => {
                 questions: signupForm.questions.filter(q => q.label.trim()),
             },
             registrationOpen: true,
-            hostProfile: hostProfile?.public_id ?? null,
+            hostProfile: hostProfile.public_id,
         });
-        navigate(`/host/events/${id}`);
+        setSaving(false);
+        if (id) navigate(`/host/events/${id}`);
     };
 
     const unit = form.teamSize === '1v1' ? 'players' : 'teams';
@@ -120,7 +125,7 @@ export const CreateEvent = () => {
             <meta name="robots" content="noindex, nofollow" />
 
             <div className={styles.narrow}>
-                <MockBanner />
+                <BracketError />
                 <div className={styles.pageHeader}>
                     <div>
                         <p className={styles.eyebrow}>
@@ -377,7 +382,7 @@ export const CreateEvent = () => {
                     {submitted && hasErrors && <p className={styles.fieldError}>Fix the highlighted fields above.</p>}
                     <div className={styles.formActions}>
                         <Link to={backTo} className={styles.ghostBtn}>Cancel</Link>
-                        <button type="submit" className={styles.primaryBtn}>Create event</button>
+                        <button type="submit" className={styles.primaryBtn} disabled={saving}>{saving ? 'Creating…' : 'Create event'}</button>
                     </div>
                 </form>
             </div>

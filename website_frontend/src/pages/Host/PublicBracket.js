@@ -1,68 +1,74 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
-import { useCurrentUser } from "hooks";
-import { FaCalendarAlt, FaCheckCircle, FaClock, FaGamepad, FaMapMarkerAlt, FaSitemap, FaTicketAlt, FaTrophy, FaUserSecret } from "react-icons/fa";
+import { useAuth, useCurrentUser } from "hooks";
+import { FaCalendarAlt, FaCheckCircle, FaClock, FaGamepad, FaMapMarkerAlt, FaSitemap, FaTicketAlt, FaTrophy } from "react-icons/fa";
 import { Bracket, ReportMatchDialog } from "components/Bracket/Bracket";
 import {
-    useHostEvent, eventStage, isFull, addEntrant, removeEntrant,
-    matchState, matchReports, playerReportMatch, reportNoShow, noShowUnlocksAt, getMockViewer, setMockViewer,
-} from "services/hostEventsMock";
-import { useTeamsState, myTeamsFrom, entryProblem, teamSizeOf } from "services/teamsMock";
+    useHostEvent, eventStage, isFull, register, unregister as leaveEvent, isPending, signedUpEntrants, pendingEntrants, teamSizeOf,
+    matchState, matchReports, playerReportMatch, reportNoShow, noShowUnlocksAt,
+} from "services/brackets";
+import { getMyTeams } from "services/teams";
+import { getApiErrorMessage } from "utils/apiError";
 import { buildBracket, allMatches } from "utils/bracket";
 import { EVENT_TYPES } from "utils/hostEvents";
-import { MockBanner, Modal, ShareButton, StageChip, capacityLabel, entrantsById, formatDate, formatLabel, unitLabel, isTeamEvent } from "./hostShared";
+import { BracketError, Modal, ShareButton, StageChip, capacityLabel, entrantsById, formatDate, formatLabel, unitLabel, isTeamEvent, EventLoading } from "./hostShared";
 import styles from "./Host.module.css";
 
 const USYNC_FEE = 0.05;
 
-// MOCKUP ONLY: which entrant this browser is "logged in" as, so player actions
-// (register, report scores, report no-shows) can be tried without real accounts. The Event
-// Dashboard's Entered tab lists the events this is set for.
-const useMockViewer = (event) => {
-    const [viewerId, setViewerId] = useState(() => getMockViewer(event?.id));
-    const valid = event?.entrants.some(e => e.id === viewerId) ? viewerId : '';
-    const choose = (id) => {
-        setViewerId(id);
-        setMockViewer(event.id, id);
-    };
-    return [valid, choose];
+// Why one of your teams can't be entered in this event, or '' when it can. A team that's short
+// of players can still enter - it shows as pending until its roster fills.
+const teamEntryProblem = (team, event) => {
+    if (!['owner', 'captain'].includes(team.my_role)) return 'Only the owner or a captain can enter this team';
+    if (event.entrants.some(e => e.teamId === team.public_id)) return 'Already entered';
+    return '';
 };
 
-const RegisterDialog = ({ event, username, onClose, onRegistered }) => {
+const RegisterDialog = ({ event, username, onClose }) => {
     const pay = event.payments?.enabled ? event.payments : null;
     const team = isTeamEvent(event);
+    const need = teamSizeOf(event);
     const form = event.signupForm ?? { playerFields: [], questions: [] };
-    const teamsState = useTeamsState();
-    const myTeams = myTeamsFrom(teamsState, username);
+    const { session } = useAuth();
+    const token = session?.access_token;
+    const [myTeams, setMyTeams] = useState(team ? null : []);
+    const [loadError, setLoadError] = useState('');
     const [teamId, setTeamId] = useState('');
     const [email, setEmail] = useState('');
     const [answers, setAnswers] = useState({});
     const [tried, setTried] = useState(false);
+    const [saving, setSaving] = useState(false);
     const [tierIndex, setTierIndex] = useState(0);
     const tier = pay?.tiers[tierIndex];
     const price = tier ? Number(tier.price) : 0;
     const answer = (key) => (e) => setAnswers(a => ({ ...a, [key]: e.target.value }));
-    const chosen = myTeams.find(t => t.id === teamId);
+    const chosen = myTeams?.find(t => t.public_id === teamId);
+    const short = chosen ? need - chosen.members.length : 0;
+
+    useEffect(() => {
+        if (!team || !token) return;
+        getMyTeams(token).then(setMyTeams).catch(err => { setMyTeams([]); setLoadError(getApiErrorMessage(err)); });
+    }, [team, token]);
 
     const missing = [
-        team && (!chosen || entryProblem(chosen, event, username)) && 'a team that can enter',
+        team && (!chosen || teamEntryProblem(chosen, event)) && 'a team you can enter',
         !/^\S+@\S+\.\S+$/.test(email) && 'email',
         ...form.questions.filter(q => q.required && !answers[q.label]?.trim()).map(q => q.label),
     ].filter(Boolean);
 
-    const submit = (e) => {
+    const submit = async (e) => {
         e.preventDefault();
         setTried(true);
         if (missing.length) return;
-        onRegistered(addEntrant(event.id, team ? chosen.name : username, {
-            captain: username,
-            teamId: team ? chosen.id : undefined,
+        setSaving(true);
+        const done = await register(event.id, {
+            teamId: team ? chosen.public_id : null,
             email: email.trim(),
-            teammates: team ? chosen.members.map(m => m.username).filter(n => n !== username) : [],
             answers,
-            pass: tier?.name,
-        }));
-        onClose();
+            pass: tier?.name ?? null,
+        });
+        setSaving(false);
+        if (done) onClose();
     };
 
     return (
@@ -71,23 +77,30 @@ const RegisterDialog = ({ event, username, onClose, onRegistered }) => {
                 {team
                     ? (
                         <div>
-                            <span className={styles.fieldLabel}>Choose your team ({teamSizeOf(event)} players needed)</span>
-                            {myTeams.length === 0
-                                ? <p className={styles.fieldHint}>You're not on a team yet. <Link to="/dashboard?tab=teams">Make a team</Link>, invite players, then come back.</p>
-                                : (
-                                    <div className={styles.passList}>
-                                        {myTeams.map(t => {
-                                            const problem = entryProblem(t, event, username);
-                                            return (
-                                                <label key={t.id} className={`${styles.passOption} ${t.id === teamId ? styles.passOptionOn : ''}`}>
-                                                    <input type="radio" name="team" disabled={!!problem} checked={t.id === teamId} onChange={() => setTeamId(t.id)} />
-                                                    <span>{t.name}</span>
-                                                    <strong>{problem || `${t.members.length} players`}</strong>
-                                                </label>
-                                            );
-                                        })}
-                                    </div>
-                                )
+                            <span className={styles.fieldLabel}>Choose your team ({need} players to be signed up)</span>
+                            {myTeams === null && <p className={styles.fieldHint}>Loading your teams…</p>}
+                            {loadError && <p className={styles.fieldError}>{loadError}</p>}
+                            {myTeams?.length === 0 && !loadError &&
+                                <p className={styles.fieldHint}>You're not on a team yet. <Link to="/dashboard?tab=teams">Make a team</Link>, invite players, then come back.</p>}
+                            {myTeams?.length > 0 &&
+                                <div className={styles.passList}>
+                                    {myTeams.map(t => {
+                                        const problem = teamEntryProblem(t, event);
+                                        return (
+                                            <label key={t.public_id} className={`${styles.passOption} ${t.public_id === teamId ? styles.passOptionOn : ''}`}>
+                                                <input type="radio" name="team" disabled={!!problem} checked={t.public_id === teamId} onChange={() => setTeamId(t.public_id)} />
+                                                <span>{t.name}{t.game ? ` · ${t.game}` : ''}</span>
+                                                <strong>{problem || `${t.members.length} / ${need} players`}</strong>
+                                            </label>
+                                        );
+                                    })}
+                                </div>
+                            }
+                            {chosen && short > 0 &&
+                                <p className={styles.fieldHint}>
+                                    {chosen.name} has {chosen.members.length} of {need} players. It'll show to the host as <strong>pending</strong> and
+                                    won't take a spot until {short} more player{short > 1 ? 's join' : ' joins'} - then it's signed up automatically.
+                                </p>
                             }
                         </div>
                     )
@@ -144,8 +157,8 @@ const RegisterDialog = ({ event, username, onClose, onRegistered }) => {
 
                 <div className={styles.formActions}>
                     <button type="button" className={styles.ghostBtn} onClick={onClose}>Cancel</button>
-                    <button type="submit" className={styles.primaryBtn}>
-                        {pay ? `Continue to payment` : 'Sign up'}
+                    <button type="submit" className={styles.primaryBtn} disabled={saving}>
+                        {saving ? 'Signing up…' : pay ? `Continue to payment` : 'Sign up'}
                     </button>
                 </div>
             </form>
@@ -160,7 +173,6 @@ export const PublicBracket = () => {
     const event = useHostEvent(eventId);
     const { defaultProfile } = useCurrentUser();
     const username = defaultProfile?.username;
-    const [viewerId, setViewerId] = useMockViewer(event);
     const [registering, setRegistering] = useState(false);
     const [reportingId, setReportingId] = useState(null);
     const [now, setNow] = useState(() => Date.now());
@@ -172,16 +184,12 @@ export const PublicBracket = () => {
         return () => clearInterval(t);
     }, []);
 
-    if (!event) {
-        return (
-            <div className={`standardContainer ${styles.page}`}>
-                <div className={`${styles.inner} ${styles.emptyState}`}>
-                    <h1 className={styles.sectionTitle}>Event not found</h1>
-                    <Link to="/" className={styles.secondaryBtn}>Back home</Link>
-                </div>
-            </div>
-        );
-    }
+    if (!event) return <EventLoading event={event} backTo="/" backLabel="Back home" />;
+
+    // Your entrant (solo, or a team you're on). Only a solo player, or a team's owner or
+    // captain, can report scores and no-shows; other teammates just see their match.
+    const viewerId = event.viewerEntrantId ?? '';
+    const canAct = event.viewerCanAct;
 
     const stage = eventStage(event);
     const byId = entrantsById(event);
@@ -208,14 +216,13 @@ export const PublicBracket = () => {
 
     const unregister = () => {
         if (window.confirm(`Unregister ${me.name} from ${event.name}?`)) {
-            removeEntrant(event.id, me.id);
-            setViewerId('');
+            leaveEvent(event.id);
         }
     };
 
     const submitNoShow = () => {
         if (window.confirm(`Report ${opponent.name} as a no-show? The host will review it and decide what happens.`)) {
-            reportNoShow(event.id, myMatch, me.id);
+            reportNoShow(event.id, myMatch);
         }
     };
 
@@ -224,16 +231,7 @@ export const PublicBracket = () => {
             <title>{`uSync | ${event.name}`}</title>
 
             <div className={styles.inner}>
-                <MockBanner />
-
-                <div className={styles.viewerBar}>
-                    <FaUserSecret aria-hidden="true" />
-                    <label htmlFor="viewer">Mockup - viewing as</label>
-                    <select id="viewer" className={styles.select} value={viewerId} onChange={e => setViewerId(e.target.value)}>
-                        <option value="">A visitor (not signed up)</option>
-                        {event.entrants.map(e => <option key={e.id} value={e.id}>{e.name}</option>)}
-                    </select>
-                </div>
+                <BracketError />
 
                 {lastDelay &&
                     <div className={styles.delayBanner}>
@@ -323,7 +321,9 @@ export const PublicBracket = () => {
                             {me
                                 ? (
                                     <>
-                                        <p className={styles.registeredNote}><FaCheckCircle /> You're signed up as <strong>{me.name}</strong></p>
+                                        {isPending(event, me)
+                                            ? <p className={styles.blurb}><strong>{me.name}</strong> is pending: {me.rosterSize ?? 0} of {teamSizeOf(event)} players. Invite {teamSizeOf(event) - (me.rosterSize ?? 0)} more from your team page and it's signed up automatically.</p>
+                                            : <p className={styles.registeredNote}><FaCheckCircle /> You're signed up as <strong>{me.name}</strong></p>}
                                         {!published &&
                                             <button type="button" className={`${styles.dangerBtn} ${styles.fullBtn}`} onClick={unregister}>Unregister</button>}
                                     </>
@@ -375,7 +375,7 @@ export const PublicBracket = () => {
                                 entrants={byId}
                                 stateOf={stateOf}
                                 viewerId={viewerId}
-                                onSelect={me ? (m) => setReportingId(m.id) : undefined}
+                                onSelect={me && canAct ? (m) => setReportingId(m.id) : undefined}
                                 canSelect={(m) => m.status === 'ready' && (m.a === viewerId || m.b === viewerId)}
                             />
                         </section>
@@ -385,8 +385,12 @@ export const PublicBracket = () => {
                             <h2 className={styles.sectionTitle}>Who's playing</h2>
                             <p className={styles.blurb}>The bracket is posted once sign-ups close.</p>
                             <div className={styles.chipWrap}>
-                                {event.entrants.map(e => (
+                                {signedUpEntrants(event).map(e => (
                                     <span key={e.id} className={`${styles.chip} ${styles.nameChip} ${e.id === viewerId ? styles.nameChipYou : ''}`}>{e.name}</span>
+                                ))}
+                                {pendingEntrants(event).map(e => (
+                                    <span key={e.id} className={`${styles.chip} ${styles.nameChip} ${e.id === viewerId ? styles.nameChipYou : ''}`} style={{ opacity: .6 }}
+                                        title={`Pending: ${e.rosterSize ?? 0} of ${teamSizeOf(event)} players`}>{e.name} (pending)</span>
                                 ))}
                                 {event.entrants.length === 0 && <span className={styles.muted}>No one yet - be the first.</span>}
                             </div>
@@ -398,9 +402,9 @@ export const PublicBracket = () => {
 
             </div>
 
-            {registering && <RegisterDialog event={event} username={username} onClose={() => setRegistering(false)} onRegistered={setViewerId} />}
+            {registering && <RegisterDialog event={event} username={username} onClose={() => setRegistering(false)} />}
 
-            {reporting && me &&
+            {reporting && me && canAct &&
                 <ReportMatchDialog
                     key={reporting.id}
                     match={reporting}

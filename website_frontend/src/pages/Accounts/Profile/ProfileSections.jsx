@@ -5,7 +5,7 @@ import { useAuth, useCurrentUser } from "hooks";
 import { useAsync } from "hooks/useEvents";
 import { gamesCatalog } from "catalog/games.catalog";
 import { getProfileEvents } from "services/user";
-import { useHostEvents, useEnteredEvents, eventStage, STAGE_LABELS } from "services/hostEventsMock";
+import { useHostEvents, useEnteredEvents, useProfileBracketEvents, signedUpEntrants, eventStage, STAGE_LABELS } from "services/brackets";
 import { getMyTeams } from "services/teams";
 import { TeamCard } from "components/Teams/TeamParts";
 import teamStyles from "components/Teams/Teams.module.css";
@@ -30,10 +30,8 @@ const eventUrl = (event) => {
     return section ? buildEventPath(section, event.path) : null;
 };
 
-// MOCKUP: bracket events created in this browser as this profile, shaped like the API's
-// profile events, until the bracket hosting API is live.
-const mockBracketEvents = (events, publicId) => events
-    .filter(e => e.hostProfile === publicId)
+// Bracket events this profile runs (GET /brackets/profile/:id), shaped like the API's profile events.
+const bracketRows = (events) => events
     .map(e => ({
         kind: 'bracket',
         event_type: e.eventType,
@@ -79,9 +77,9 @@ const AddEventButton = ({ profile }) => {
  */
 export const EventsCard = ({ profile }) => {
     const { data, loading, error } = useAsync(() => getProfileEvents(profile.public_id), [profile.public_id]);
-    const hostEvents = useHostEvents();
-    // Until the backend serves this list everywhere, a 404 just means no events to show.
-    const events = [...mockBracketEvents(hostEvents, profile.public_id), ...(data ?? [])];
+    const hostEvents = useProfileBracketEvents(profile.public_id);
+    // A 404 from the listings API just means no listed events to show.
+    const events = [...bracketRows(hostEvents), ...(data ?? [])];
     const failed = error && error.response?.status !== 404 && events.length === 0;
 
     return (
@@ -136,7 +134,8 @@ export const OwnerEventsCard = ({ profile }) => {
     const own = profiles.find(p => p.public_id === profile.public_id);
     const hosting = profile.type !== 'player';
     const rows = hosting
-        ? hosted.map(event => ({ event, url: `/host/events/${event.id}`, action: 'Manage', note: `${event.entrants.length} signed up` }))
+        ? hosted.filter(event => event.hostProfile === profile.public_id)
+            .map(event => ({ event, url: `/host/events/${event.id}`, action: 'Manage', note: `${signedUpEntrants(event).length} signed up` }))
         : entered.map(({ event, entrant }) => ({ event, url: `/brackets/${event.id}`, action: 'View event', note: `Entered as ${entrant.name}` }));
     const dashboardUrl = `${EVENT_DASHBOARD_PATH}?tab=${hosting ? 'hosting' : 'entered'}`;
 

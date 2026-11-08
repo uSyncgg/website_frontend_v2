@@ -2,12 +2,12 @@ import { useState } from "react";
 import { Link, useSearchParams } from "react-router";
 import { FaCalendarAlt, FaGamepad, FaPlus, FaSitemap } from "react-icons/fa";
 import { useCurrentUser } from "hooks";
-import { useHostEvents, useEnteredEvents, eventStage } from "services/hostEventsMock";
+import { useHostEvents, useEnteredEvents, eventStage, signedUpEntrants } from "services/brackets";
 import { EVENT_TYPES } from "utils/hostEvents";
 import { PROFILE_LABELS, addProfileUrl, canHostBrackets } from "utils/profiles";
 import { getApiErrorMessage } from "utils/apiError";
 import { TeamsTab } from "./TeamsTab";
-import { MockBanner, ShareButton, StageChip, capacityLabel, formatDate, formatLabel, unitLabel } from "./hostShared";
+import { BracketError, ShareButton, StageChip, capacityLabel, formatDate, formatLabel, unitLabel } from "./hostShared";
 import styles from "./Host.module.css";
 
 const TABS = [['entered', 'Entered'], ['teams', 'Teams'], ['hosting', 'Hosting']];
@@ -44,6 +44,7 @@ const EnteredTab = () => {
                         </div>
                         <p className={styles.blurb}>
                             Entered as <strong>{entrant.name}</strong>
+                            {entrant.status === 'pending' && ' · Pending - needs more players'}
                         </p>
                     </Link>
                     <div className={styles.eventCardActions}>
@@ -111,7 +112,7 @@ const HostingTab = () => {
         <div className={styles.eventGrid}>
             {events.map(event => {
                 const stage = eventStage(event);
-                const filled = event.maxEntrants ? Math.min(100, (event.entrants.length / event.maxEntrants) * 100) : 100;
+                const filled = event.maxEntrants ? Math.min(100, (signedUpEntrants(event).length / event.maxEntrants) * 100) : 100;
                 return (
                     <div key={event.id} className={styles.eventCard}>
                         <Link to={`/host/events/${event.id}`} className={styles.eventCardLink}>
@@ -163,7 +164,7 @@ export const EventDashboard = () => {
             <meta name="robots" content="noindex, nofollow" />
 
             <div className={styles.inner}>
-                <MockBanner />
+                <BracketError />
 
                 <div className={styles.pageHeader}>
                     <div>

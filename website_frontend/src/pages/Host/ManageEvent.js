@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link, NavLink, Outlet, useNavigate, useOutletContext, useParams } from "react-router";
 import { FaCalendarAlt, FaClock, FaGamepad, FaMapMarkerAlt, FaSitemap } from "react-icons/fa";
-import { useHostEvent, eventStage, updateEvent, deleteEvent, delayStart } from "services/hostEventsMock";
+import { useHostEvent, eventStage, updateEvent, deleteEvent, delayStart, pendingEntrants } from "services/brackets";
 import { buildBracket, bracketProgress } from "utils/bracket";
-import { MockBanner, Modal, ShareButton, StageChip, capacityLabel, formatDate, formatLabel, unitLabel } from "./hostShared";
+import { BracketError, Modal, ShareButton, StageChip, capacityLabel, formatDate, formatLabel, unitLabel, EventLoading } from "./hostShared";
 import styles from "./Host.module.css";
 import { EVENT_TYPES, HOSTING_DASHBOARD_PATH } from "utils/hostEvents";
 
@@ -14,15 +14,9 @@ export const ManageEvent = () => {
     const { eventId } = useParams();
     const event = useHostEvent(eventId);
 
-    if (!event) {
-        return (
-            <div className={`standardContainer ${styles.page}`}>
-                <div className={`${styles.inner} ${styles.emptyState}`}>
-                    <h1 className={styles.sectionTitle}>Event not found</h1>
-                    <Link to={HOSTING_DASHBOARD_PATH} className={styles.secondaryBtn}>Back to your events</Link>
-                </div>
-            </div>
-        );
+    // Only the host gets the manage screens; for anyone else it doesn't exist.
+    if (!event || !event.canManage) {
+        return <EventLoading event={event === undefined ? undefined : null} backTo={HOSTING_DASHBOARD_PATH} backLabel="Back to your events" />;
     }
 
     const stage = eventStage(event);
@@ -39,7 +33,7 @@ export const ManageEvent = () => {
             <meta name="robots" content="noindex, nofollow" />
 
             <div className={styles.inner}>
-                <MockBanner />
+                <BracketError />
 
                 <div className={styles.pageHeader}>
                     <div>
@@ -100,9 +94,8 @@ const DelayDialog = ({ event, onClose }) => {
         : new Date(new Date(event.startsAt).getTime() + mode * 60000);
     const valid = !Number.isNaN(newStart.getTime()) && newStart > new Date(event.startsAt);
 
-    const confirm = () => {
-        delayStart(event.id, newStart.toISOString(), reason.trim());
-        onClose();
+    const confirm = async () => {
+        if (await delayStart(event.id, newStart.toISOString(), reason.trim())) onClose();
     };
 
     return (
@@ -150,17 +143,17 @@ export const EventOverview = () => {
         : null;
     const unit = unitLabel(event);
 
-    const remove = () => {
+    const remove = async () => {
         if (!window.confirm(`Delete "${event.name}"? This can't be undone.`)) return;
-        deleteEvent(event.id);
-        navigate(HOSTING_DASHBOARD_PATH);
+        if (await deleteEvent(event.id)) navigate(HOSTING_DASHBOARD_PATH);
     };
 
     return (
         <>
             <div className={styles.statGrid}>
                 <div className={styles.stat}><span className={styles.statLabel}>{unit[0].toUpperCase() + unit.slice(1)} signed up</span><span className={styles.statValue}>{capacityLabel(event)}</span></div>
-                
+                {pendingEntrants(event).length > 0 &&
+                    <div className={styles.stat}><span className={styles.statLabel}>Pending teams</span><span className={styles.statValue}>{pendingEntrants(event).length}</span></div>}
                 <div className={styles.stat}><span className={styles.statLabel}>Matches played</span><span className={styles.statValue}>{progress ? `${progress.done} / ${progress.total}` : '-'}</span></div>
                 <div className={styles.stat}><span className={styles.statLabel}>Registration</span><span className={`${styles.statValue} ${styles.statValueSmall}`}>{event.registrationOpen ? 'Open' : 'Closed'}</span></div>
             </div>

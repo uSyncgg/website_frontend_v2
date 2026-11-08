@@ -5,7 +5,7 @@ import { Bracket, ReportMatchDialog } from "components/Bracket/Bracket";
 import {
     publishBracket, hostReportMatch, clearMatch, resetBracket, revertDecision, dismissNoShow,
     matchState, matchReports, matchNoShow,
-} from "services/hostEventsMock";
+} from "services/brackets";
 import { buildBracket, bracketProgress, allMatches } from "utils/bracket";
 import { useManagedEvent } from "./ManageEvent";
 import { entrantsById } from "./hostShared";

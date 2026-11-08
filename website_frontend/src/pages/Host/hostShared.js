@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FaCheck, FaCopy, FaEnvelope, FaShareAlt, FaTimes } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FORMATS } from "utils/bracket";
-import { resetDemoEvents, STAGE_LABELS } from "services/hostEventsMock";
+import { isPending, useBracketError, clearBracketError, STAGE_LABELS } from "services/brackets";
 import styles from "./Host.module.css";
 
 export const TEAM_SIZES = ["1v1", "2v2", "3v3", "4v4", "5v5"];
@@ -20,8 +20,11 @@ export const isTeamEvent = (event) => event.teamSize !== '1v1';
 export const unitLabel = (event, plural = true) => (isTeamEvent(event) ? (plural ? 'teams' : 'team') : (plural ? 'players' : 'player'));
 
 // "13 / 16" or "13 (no cap)" for uncapped events.
-export const capacityLabel = (event) =>
-    event.maxEntrants == null ? `${event.entrants.length} (no cap)` : `${event.entrants.length} / ${event.maxEntrants}`;
+// Counts signed-up entrants only (pending teams don't take a spot).
+export const capacityLabel = (event) => {
+    const count = event.entrants.filter(e => !isPending(event, e)).length;
+    return event.maxEntrants == null ? `${count} (no cap)` : `${count} / ${event.maxEntrants}`;
+};
 
 export const publicEventUrl = (event) => `${window.location.origin}/brackets/${event.id}`;
 
@@ -29,13 +32,30 @@ export const StageChip = ({ stage }) => (
     <span className={`${styles.chip} ${styles[`stage_${stage}`]}`}>{STAGE_LABELS[stage]}</span>
 );
 
-// Shown on every host page while the flow runs on browser-only mock data.
-export const MockBanner = () => (
-    <div className={styles.mockBanner}>
-        Mockup: events, players and brackets here are sample data saved only in this browser. Nothing is sent to uSync's servers.
-        <button type="button" onClick={() => window.confirm('Put the demo events back? Anything you created or changed is lost.') && resetDemoEvents()}>
-            Reset demo data
-        </button>
+// The last thing that went wrong saving to the server (a sign-up, a score, a seeding...).
+export const BracketError = () => {
+    const error = useBracketError();
+    if (!error) return null;
+    return (
+        <div className={styles.mockBanner} role="alert">
+            {error}
+            <button type="button" onClick={clearBracketError}>Dismiss</button>
+        </div>
+    );
+};
+
+// While an event loads (undefined) or when it doesn't exist (null).
+export const EventLoading = ({ event, backTo, backLabel }) => (
+    <div className={`standardContainer ${styles.page}`}>
+        <div className={`${styles.inner} ${styles.emptyState}`}>
+            {event === undefined
+                ? <p className={styles.muted}>Loading event…</p>
+                : <>
+                    <h1 className={styles.sectionTitle}>Event not found</h1>
+                    <a href={backTo} className={styles.secondaryBtn}>{backLabel}</a>
+                </>
+            }
+        </div>
     </div>
 );
 
@@ -111,3 +131,4 @@ export const ShareButton = ({ event, className }) => {
         </>
     );
 };
+

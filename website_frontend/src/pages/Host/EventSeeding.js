@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { FaArrowDown, FaArrowUp, FaGripVertical, FaRandom } from "react-icons/fa";
 import { Bracket } from "components/Bracket/Bracket";
-import { saveBracketDraft, publishBracket } from "services/hostEventsMock";
+import { saveBracketDraft, publishBracket, signedUpEntrants, pendingEntrants } from "services/brackets";
 import { buildBracket, SEEDING_METHODS } from "utils/bracket";
 import { useManagedEvent } from "./ManageEvent";
 import { entrantsById, isTeamEvent } from "./hostShared";
@@ -17,7 +17,8 @@ export const EventSeeding = () => {
     const [dragIndex, setDragIndex] = useState(null);
     const [overIndex, setOverIndex] = useState(null);
 
-    const pool = event.entrants;
+    // Pending teams (short-handed) sit out until their roster fills.
+    const pool = signedUpEntrants(event);
 
     // Start from a saved draft when there is one, otherwise sort the pool by rating.
     const [order, setOrder] = useState(() => (
@@ -57,9 +58,9 @@ export const EventSeeding = () => {
     }
 
     const tooFew = seeds.length < 2;
-    const save = (andPublish) => {
-        saveBracketDraft(event.id, seeds);
-        if (andPublish) publishBracket(event.id);
+    const save = async (andPublish) => {
+        if (!await saveBracketDraft(event.id, seeds)) return;
+        if (andPublish && !await publishBracket(event.id)) return;
         navigate(`/host/events/${event.id}/bracket`);
     };
 
@@ -84,6 +85,12 @@ export const EventSeeding = () => {
                         {method === 'random' && ' Click Random again to reshuffle.'}
                     </p>
                 </div>
+
+                {pendingEntrants(event).length > 0 &&
+                    <p className={styles.fieldHint}>
+                        {pendingEntrants(event).length} pending team{pendingEntrants(event).length > 1 ? 's' : ''} ({pendingEntrants(event).map(e => e.name).join(', ')}) won't be seeded until {pendingEntrants(event).length > 1 ? 'their rosters are' : 'its roster is'} full.
+                    </p>
+                }
 
                 <ol className={styles.seedList}>
                     {seeds.map((id, i) => (
