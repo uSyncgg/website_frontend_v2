@@ -9,7 +9,7 @@ export const markNotificationsRead = (ids = null) => apiClient.post('/notificati
 
 const teamLink = (data) => `/teams/${encodeURIComponent(data.team_id)}`;
 const eventLink = (data) => `/brackets/${encodeURIComponent(data.event_id)}`;
-const manageLink = (data) => `/host/events/${encodeURIComponent(data.event_id)}/bracket`;
+const matchLink = (data) => data.match_id ? `${eventLink(data)}/matches/${encodeURIComponent(data.match_id)}` : eventLink(data);
 
 // { text, to } for one notification: what it says and where it goes.
 export const notificationText = ({ type, data }) => {
@@ -25,16 +25,19 @@ export const notificationText = ({ type, data }) => {
             return { text: `${data.event_name} now starts ${when}${data.reason ? ` - ${data.reason}` : ''}.`, to: eventLink(data) };
         }
         case 'match_ready':
-            return { text: `You have a match in ${data.event_name}${data.opponent ? ` vs ${data.opponent}` : ''}.`, to: data.match_id ? `${eventLink(data)}/matches/${encodeURIComponent(data.match_id)}` : eventLink(data) };
+            return { text: `You have a match in ${data.event_name}${data.opponent ? ` vs ${data.opponent}` : ''}.`, to: matchLink(data) };
         case 'opponent_reported':
             return { text: `${data.opponent} reported a score in ${data.event_name}. Report yours to confirm it.`, to: eventLink(data) };
         case 'score_disputed':
+            // The match page has the match chat, which an admin is invited to on a dispute.
             return data.host
-                ? { text: `Disputed score in ${data.event_name} (${data.opponent}). You decide.`, to: manageLink(data) }
-                : { text: `Your score vs ${data.opponent} in ${data.event_name} is disputed. The host will decide.`, to: eventLink(data) };
+                ? { text: `Disputed score in ${data.event_name} (${data.opponent}). Join the match chat or make the call.`, to: matchLink(data) }
+                : { text: `Your score vs ${data.opponent} in ${data.event_name} is disputed. An admin was invited to your match chat.`, to: matchLink(data) };
         case 'no_show_reported':
-            if (data.host) return { text: `${data.opponent} was reported as a no-show in ${data.event_name}.`, to: manageLink(data) };
-            return { text: `${data.opponent} reported you as a no-show in ${data.event_name}. The host will review it.`, to: eventLink(data) };
+            if (data.host) return { text: `${data.opponent} was reported as a no-show in ${data.event_name}. Join the match chat or make the call.`, to: matchLink(data) };
+            return { text: `${data.opponent} reported you as a no-show in ${data.event_name}. An admin was invited to your match chat.`, to: matchLink(data) };
+        case 'chat_admin_requested':
+            return { text: `Players in ${data.event_name} (${data.opponent}) asked for an admin in their match chat. Open the match to join.`, to: matchLink(data) };
         case 'admin_invite':
             return { text: `${data.host} invited you to help run ${data.event_name}.`, to: eventLink(data) };
         case 'admin_joined':

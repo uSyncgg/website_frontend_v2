@@ -1,4 +1,4 @@
-import { buildSingleElim, buildRoundRobin, buildBracket, allMatches, bracketProgress, seedPlacement, shuffle, withResult, FORMATS, placements, matchBestOf } from "./bracket";
+import { buildSingleElim, buildRoundRobin, buildBracket, allMatches, bracketProgress, seedPlacement, shuffle, withResult, FORMATS, placements, matchBestOf, mapHosts } from "./bracket";
 
 const ids = (n) => Array.from({ length: n }, (_, i) => `p${i + 1}`);
 
@@ -159,4 +159,18 @@ test("placements: double elim and pool play", () => {
     expect(placements('double_elim', playOut('double_elim', ids(8)))).toEqual(["p1", "p2", "p3"]);
     expect(placements('round_robin', playOut('round_robin', ids(5), (m) => m.a < m.b))).toEqual(["p1", "p2", "p3"]);
     expect(placements('single_elim', buildSingleElim(ids(4)))).toBeNull();
+});
+
+test("the higher seed hosts map 1, hosts swap each map, and the last map is left to rounds won", () => {
+    const seeds = ['p1', 'p2', 'p3', 'p4'];
+    expect(mapHosts(3, 'p4', 'p2', seeds)).toEqual([
+        { map: 1, host: 'p2', seed: 2 },
+        { map: 2, host: 'p4', seed: 4 },
+        { map: 3, host: null, seed: null },
+    ]);
+    expect(mapHosts(5, 'p1', 'p3', seeds).map(m => m.host)).toEqual(['p1', 'p3', 'p1', 'p3', null]);
+});
+
+test("a single map goes to the higher seed", () => {
+    expect(mapHosts(1, 'p3', 'p1', ['p1', 'p2', 'p3'])).toEqual([{ map: 1, host: 'p1', seed: 1 }]);
 });

@@ -378,3 +378,19 @@ export const matchRoundLabel = (format, built, match) => {
 };
 
 export const findMatch = (built, matchId) => allMatches(built).find(m => m.id === matchId) ?? null;
+
+// Who hosts each map of a match. The higher seed (closest to 1) hosts map 1, then it swaps every
+// map. The last map of a series (when there's more than one) is hosted by whoever won the most
+// rounds in the earlier maps, which isn't known until they're played, so its host is null.
+// Returns [{ map: 1, host: entrantId | null, seed: number | null }, ...] - one per map in the series.
+export const mapHosts = (bestOf, sideA, sideB, seeds = []) => {
+    const seedOf = (id) => { const i = seeds.indexOf(id); return i === -1 ? Infinity : i + 1; };
+    const [first, second] = seedOf(sideA) <= seedOf(sideB) ? [sideA, sideB] : [sideB, sideA];
+    return Array.from({ length: bestOf }, (_, i) => {
+        const map = i + 1;
+        if (bestOf > 1 && map === bestOf) return { map, host: null, seed: null };
+        const host = map % 2 === 1 ? first : second;
+        const seed = seedOf(host);
+        return { map, host, seed: Number.isFinite(seed) ? seed : null };
+    });
+};
