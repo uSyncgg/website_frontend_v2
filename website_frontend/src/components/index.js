@@ -105,6 +105,8 @@ import { PasswordChecklist } from "./PasswordChecklist/PasswordChecklist";
 
 // Route Protection
 import { RequireCompleteProfile } from "./RequiredCompleteProfile/RequiredCompleteProfile";
+import { RequireAdmin } from "./RequireAdmin/RequireAdmin";
+import { Segmented } from "./Segmented/Segmented";
 import { ClaimEventPrompt } from "./ClaimEventPrompt/ClaimEventPrompt";
 import { RedirectIfProfileComplete } from "./RequiredCompleteProfile/RedirectIfProfileComplete";
 
@@ -177,6 +179,8 @@ export {
     SocialLoginButtons,
     PasswordChecklist,
     RequireCompleteProfile,
+    RequireAdmin,
+    Segmented,
     ClaimEventPrompt,
     RedirectIfProfileComplete,
     SignUpFormWizard,

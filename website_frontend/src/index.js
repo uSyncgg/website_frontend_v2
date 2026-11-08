@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
@@ -57,13 +57,16 @@ import TournamentRoutes from './routes/TournamentRoutes';
 import { AuthPage } from 'pages/Accounts/Authentication/AuthPage';
 import { ForgotPassword } from 'pages/Accounts/Authentication/ForgotPassword';
 import { ResetPassword } from 'pages/Accounts/Authentication/ResetPassword';
-import { RequireCompleteProfile, RedirectIfProfileComplete } from 'components';
+import { RequireCompleteProfile, RedirectIfProfileComplete, RequireAdmin, LoadingWheel } from 'components';
 import { Profile, MyProfile } from 'pages/Accounts/Profile/Profile';
 import { ProfileSettings, ProfileSettingsHome, AddProfile } from 'pages/Accounts/Settings/ProfileSettings';
 import { ClaimEvent } from 'pages/Accounts/ClaimEvent/ClaimEvent';
 import { CurrentUserProvider } from 'hooks';
 
 const root = document.getElementById('root');
+
+// Only admins download the dashboard (see RequireAdmin).
+const AdminAnalytics = lazy(() => import('pages/Admin/AdminAnalytics').then(m => ({ default: m.AdminAnalytics })));
 
 const app = (
   // <React.StrictMode>
@@ -153,6 +156,11 @@ const app = (
               <Route index element={<ProfileSettingsHome />} />
               <Route path='add/:type' element={<AddProfile />} />
               <Route path=':type' element={<ProfileSettings />} />
+            </Route>
+
+            {/* Admin: RequireAdmin asks the backend before anything here is downloaded or shown. */}
+            <Route path='/admin' element={<RequireAdmin />}>
+              <Route path='analytics' element={<Suspense fallback={<LoadingWheel />}><AdminAnalytics /></Suspense>} />
             </Route>
 
             {/* Hosts claim an existing event listing as theirs. Logged-out visitors go through
