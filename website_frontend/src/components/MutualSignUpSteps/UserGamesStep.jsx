@@ -69,6 +69,11 @@ const GameTileGroup = ({ heading, fieldName, otherFieldName }) => {
 // mode: 'player' (games played, field `interests`), 'host' (games hosted,
 // field `hosted_games`), or 'combined' (both, shown as two labeled sections).
 export const UserGamesStep = ({ mode = 'player' }) => {
+    // An organization's titles: the games its teams compete in.
+    if (mode === 'org') {
+        return <div><GameTileGroup heading={null} fieldName="org_games" otherFieldName="other_org_games" /></div>;
+    }
+
     const isPlayer = mode === 'player' || mode === 'combined';
     const isHost = mode === 'host' || mode === 'combined';
     const showHeadings = isPlayer && isHost;

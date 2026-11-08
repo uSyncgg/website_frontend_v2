@@ -31,8 +31,8 @@ import faceitIcon from "assets/images/linked_platforms/faceit_logo_09-17-26.webp
 import battlefyIcon from "assets/images/linked_platforms/battefly_logo_09-17-26.webp";
 
 const enc = encodeURIComponent;
-const ALL = ['player', 'host', 'venue'];
-const ORGS = ['host', 'venue'];
+const ALL = ['player', 'host', 'venue', 'org'];
+const ORGS = ['host', 'venue', 'org'];
 
 // LinkedIn pages live under a section ("company/usync", "in/jake"), which is kept with the name.
 const LINKEDIN_SECTIONS = ['company', 'in', 'school', 'showcase'];

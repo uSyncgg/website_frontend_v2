@@ -12,7 +12,11 @@ import { PlayerAboutStep } from "components/PlayerSignUpSteps/PlayerAboutStep";
 import { HostOrgStep } from "components/HostSignUpSteps/HostOrgStep";
 import { HostEventStep } from "components/HostSignUpSteps/HostEventStep";
 
-import { PROFILE_TYPES, bioField, linksField, pictureField, usernameField } from "utils/profiles";
+import { OrgDetailsStep } from "components/OrgSignUpSteps/OrgDetailsStep";
+import { OrgTeamsStep } from "components/OrgSignUpSteps/OrgTeamsStep";
+import { TeamsTab } from "pages/Host/TeamsTab";
+
+import { NO_BRACKET_TYPES, PROFILE_TYPES, bioField, linksField, pictureField, usernameField } from "utils/profiles";
 
 // Shared by the sign-up wizard, the add-a-profile wizard and the profile settings wizard.
 // - `fields`: fields validated (via trigger) before leaving the step.
@@ -29,12 +33,16 @@ export const PATH_STEP = { key: 'signup_path', title: 'Get Started', subtitle: "
 
 const identityStep = (types, { isSignUp }) => {
     const usernames = types.map(usernameField);
+    // An org's username is its organization name, so an org on its own is asked for just that.
+    const orgOnly = types.length === 1 && types[0] === 'org';
     return {
         key: 'user_info',
-        title: types.length > 1 ? 'Usernames' : 'Username',
-        subtitle: types.length > 1
-            ? "Each profile gets its own name. They can match - a name only has to be unique among profiles of the same kind."
-            : "This is how this profile shows up across uSync.",
+        title: orgOnly ? 'Organization Name' : types.length > 1 ? 'Usernames' : 'Username',
+        subtitle: orgOnly
+            ? "The name your organization and its teams go by across uSync. Spaces are fine."
+            : types.length > 1
+                ? "Each profile gets its own name. They can match - a name only has to be unique among profiles of the same kind."
+                : "This is how this profile shows up across uSync.",
         Component: ProfileIdentityStep,
         props: { types, isSignUp },
         fields: isSignUp ? [...usernames, 'email'] : usernames,
@@ -77,6 +85,14 @@ const bracketStep = (types) => ({ key: 'bracket_hosting', title: 'Bracket Hostin
 const SETTINGS_BRACKET_STEP = { key: 'bracket_hosting', title: 'Bracket Hosting', subtitle: BRACKET_SUBTITLE, Component: BracketHostingStep, fields: [], saveFields: ['bracket_hosting'] };
 const HOST_ORG_STEP = { key: 'host_org', title: 'Organization', subtitle: 'This is the name players will see on every event you run.', Component: HostOrgStep, fields: ['organization', 'host_country'], requiredFields: ['organization', 'host_country'], saveFields: ['organization', 'host_country'] };
 const HOST_EVENTS_STEP = { key: 'host_events', title: 'Event Types', subtitle: 'Pick every format you host.', Component: HostEventStep, fields: [], saveFields: ['event_types'] };
+// Organizations: their name and country, the games their teams play, and their teams. Teams are
+// optional at sign-up (named here, created with the account); settings manages them live.
+// The org's name is its username (asked on the username step), so this is just where it's based.
+const ORG_DETAILS_STEP = { key: 'org_details', title: 'Location', subtitle: 'Where your organization is based. Pick a region if you compete across several countries.', Component: OrgDetailsStep, fields: ['org_country'], requiredFields: ['org_country'], saveFields: ['org_country'] };
+const ORG_GAMES_STEP = { key: 'org_games', title: 'Team Titles', subtitle: 'Pick every game your organization fields teams in.', Component: UserGamesStep, props: { mode: 'org' }, fields: ['other_org_games'], saveFields: ['org_games', 'other_org_games'] };
+const ORG_TEAMS_STEP = { key: 'org_teams', title: 'Teams', subtitle: 'Optional - name the teams in your organization. You can add, rename and fill them with players later from your profile.', Component: OrgTeamsStep, fields: ['org_teams'], saveFields: [] };
+const ORG_TEAMS_MANAGE_STEP = { key: 'org_teams', title: 'Teams', subtitle: 'Create teams, give them an image and invite players. Click a team to manage its roster.', Component: TeamsTab, props: { ownerType: 'org' }, fields: [], saveFields: [] };
+
 // Optional: the accounts each new profile links. Profile settings edits them in the link editor instead.
 const accountsStep = (types) => ({
     key: 'linked_accounts',
@@ -92,17 +108,20 @@ const accountsStep = (types) => ({
 
 // The detail steps for a set of profile types, in order. The order/composition lives entirely
 // here - reorder or interleave steps by editing this function, nothing else needs to change.
-function detailSteps(types, { includeAccounts, media, bracket }) {
+function detailSteps(types, { includeAccounts, media, bracket, isSettings = false }) {
     const isPlayer = types.includes('player');
     const isHost = types.includes('host');
     const isVenue = types.includes('venue');
+    const isOrg = types.includes('org');
+    const hostsBrackets = types.some(type => !NO_BRACKET_TYPES.includes(type));
 
     return [
         ...(isVenue ? [LOCATION_STEP] : []),
         ...(isPlayer ? [PLAYER_ABOUT_STEP] : []),
         ...(isPlayer && isHost ? [COMBINED_GAMES_STEP] : isPlayer ? [PLAYER_GAMES_STEP] : isHost ? [HOST_GAMES_STEP] : []),
         ...(isHost ? [HOST_ORG_STEP, HOST_EVENTS_STEP] : []),
-        bracket,
+        ...(isOrg ? [ORG_DETAILS_STEP, ORG_GAMES_STEP, isSettings ? ORG_TEAMS_MANAGE_STEP : ORG_TEAMS_STEP] : []),
+        ...(hostsBrackets ? [bracket] : []),
         media,
         ...(includeAccounts ? [accountsStep(types)] : []),
     ];
@@ -125,7 +144,7 @@ export function buildAddProfileSteps(type) {
 
 // Profile settings for one profile. The username lives on the settings Account step instead.
 export function buildSettingsSteps(type) {
-    return detailSteps([type], { includeAccounts: false, media: BIO_STEP, bracket: SETTINGS_BRACKET_STEP });
+    return detailSteps([type], { includeAccounts: false, media: BIO_STEP, bracket: SETTINGS_BRACKET_STEP, isSettings: true });
 }
 
 // "Other" is a sub-role tag, not a profile - picking it still requires a real profile type.
@@ -136,7 +155,7 @@ export function otherNeedsProfile(selection) {
 // Fields the sidebar checkmarks care about - kept to a minimal, targeted watch
 // list so typing doesn't re-render the whole wizard on every keystroke.
 export const COMPLETION_WATCH_FIELDS = [
-    'signup_path', 'other_roles', ...PROFILE_TYPES.map(usernameField), 'email', 'first_name', 'last_name', 'organization', 'host_country', 'venues',
+    'signup_path', 'other_roles', ...PROFILE_TYPES.map(usernameField), 'email', 'first_name', 'last_name', 'organization', 'host_country', 'venues', 'org_country',
 ];
 
 // Whether the step has everything the form needs from it. Optional steps always do.

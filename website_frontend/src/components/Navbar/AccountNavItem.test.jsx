@@ -5,7 +5,7 @@ import { AccountNavItem } from './AccountNavItem';
 const host = { type: 'host', username: 'HostCo', public_id: 'hostpub', bracket_hosting: true };
 const player = { type: 'player', username: 'Plays', public_id: 'playpub', bracket_hosting: true };
 let mockUser;
-jest.mock('hooks', () => ({ useCurrentUser: () => mockUser }));
+jest.mock('hooks', () => ({ useCurrentUser: () => mockUser, useAuth: () => ({ session: null }) }));
 
 const renderMenu = () => render(<MemoryRouter><AccountNavItem /></MemoryRouter>);
 

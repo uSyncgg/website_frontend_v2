@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useParams, useNavigate, Link, Navigate } from "react-router";
+import { TeamCard } from "components/Teams/TeamParts";
+import teamStyles from "components/Teams/Teams.module.css";
+import { EVENT_DASHBOARD_PATH } from "utils/hostEvents";
 import { SeoData, LoadingWheel, ProfileHeader, ProfileLinks, LinkAccountsModal, ProfileViewToggle, ProfileCard, ShareButton } from "components";
 import { useCurrentUser, useProfile } from "hooks";
 import { NotFound } from "pages/NotFound";
@@ -8,7 +11,7 @@ import { getLoadErrorMessage } from "utils/apiError";
 import { resolveViews } from "./profileViews";
 import { EditAboutModal, EditGamesModal, EditLocationsModal, EditUsernameModal, usePictureEditor } from "./ProfileEditors";
 import { PlayerStats } from "./PlayerStats";
-import { AboutCard, EventsCard, OwnerEventsCard } from "./ProfileSections";
+import { AboutCard, EventsCard, OwnerEventsCard, OwnerTeamsCard } from "./ProfileSections";
 import { gameEmblem, initials, playerGames } from "./profileGames";
 import { PROFILE_LABELS, profileUrl, statsUrl } from "utils/profiles";
 
@@ -59,6 +62,23 @@ const VenuesCard = ({ locations, onEdit }) => (
     </ProfileCard>
 );
 
+// An organization's teams; each card opens the team's page. The owner manages them from the
+// Teams dashboard.
+const OrgTeamsCard = ({ teams, isOwner }) => (
+    <ProfileCard
+        title="Teams"
+        action={isOwner && <Link to={`${EVENT_DASHBOARD_PATH}?tab=teams`} className={styles.cardAction}>Manage teams</Link>}
+    >
+        {teams?.length > 0 ? (
+            <div className={teamStyles.grid}>
+                {teams.map(team => <TeamCard key={team.public_id} team={team} />)}
+            </div>
+        ) : (
+            <p className={styles.muted}>No teams yet.</p>
+        )}
+    </ProfileCard>
+);
+
 // Main-column content for each profile type. `edit(what)` opens an owner editor (undefined for
 // everyone else). A player's page is their stats: every game, or one game at .../stats/:game.
 // The owner also sees "Your events" first: entered events above a player's stats, and on a host
@@ -67,6 +87,7 @@ const TYPE_CONTENT = {
     player: (profile, { edit, isOwner, gameSlug }) => (
         <>
             {isOwner && <OwnerEventsCard profile={profile} />}
+            {isOwner && <OwnerTeamsCard profile={profile} />}
             <PlayerStats profile={profile} gameSlug={gameSlug} isOwner={isOwner} onEditGames={edit('games')} />
         </>
     ),
@@ -81,6 +102,12 @@ const TYPE_CONTENT = {
             {isOwner && <OwnerEventsCard profile={profile} />}
             <VenuesCard locations={profile.details.locations} onEdit={edit('locations')} />
             {!isOwner && <EventsCard profile={profile} />}
+        </>
+    ),
+    org: (profile, { edit, isOwner }) => (
+        <>
+            <OrgTeamsCard teams={profile.details.teams} isOwner={isOwner} />
+            <GamesCard title="Team Titles" games={profile.details.games} emptyText="No titles added yet." onEdit={edit('games')} />
         </>
     ),
 };
@@ -99,6 +126,10 @@ function applySettings(profile, settings) {
         details.event_types = saved.event_types ?? [];
     }
     if (profile.type === 'venue') details.locations = saved.locations ?? [];
+    if (profile.type === 'org') {
+        details.organization = saved.organization ?? details.organization;
+        details.games = without(saved.games, 'Other');
+    }
     return {
         ...profile,
         username: settings.username,

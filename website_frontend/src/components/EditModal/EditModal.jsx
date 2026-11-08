@@ -7,7 +7,7 @@ import styles from './EditModal.module.css';
  * form fields as children, an error line and Cancel/Save. Escape or clicking outside closes it.
  * `onSubmit` runs on Save. `disabled` greys Save out (e.g. nothing to save yet).
  */
-export const EditModal = ({ title, hint, onClose, onSubmit, saving, disabled = false, error, children }) => {
+export const EditModal = ({ title, hint, onClose, onSubmit, saving, disabled = false, error, children, submitLabel = 'Save', savingLabel = 'Saving…' }) => {
     useEffect(() => {
         const onKey = (e) => e.key === 'Escape' && onClose();
         window.addEventListener('keydown', onKey);
@@ -31,7 +31,7 @@ export const EditModal = ({ title, hint, onClose, onSubmit, saving, disabled = f
 
                 <div className={styles.actions}>
                     <button type="button" className={styles.cancel} onClick={onClose}>Cancel</button>
-                    <button type="submit" className={styles.save} disabled={saving || disabled}>{saving ? 'Saving…' : 'Save'}</button>
+                    <button type="submit" className={styles.save} disabled={saving || disabled}>{saving ? savingLabel : submitLabel}</button>
                 </div>
             </form>
         </div>,

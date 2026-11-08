@@ -39,6 +39,7 @@ const ABOUT_COPY = {
     player: { title: 'About the player', hint: 'Shown on your player profile.', placeholder: 'Your role, your main games, what you compete in...' },
     host: { title: 'About the host', hint: 'Shown on your host profile, with the kinds of events you run.', placeholder: 'Who you are, what events you run, where...' },
     venue: { title: 'About the venue', hint: 'Shown on your venue profile.', placeholder: 'Your space, setups, capacity, what you host...' },
+    org: { title: 'About the organization', hint: 'Shown on your organization profile.', placeholder: 'Who you are, the games you compete in, your achievements...' },
 };
 
 // A host's About also picks which kinds of events it shows (its event_types).
@@ -96,6 +97,7 @@ export const EditAboutModal = ({ profile, onClose, onSaved }) => {
 const GAME_FIELDS = {
     player: { list: 'interests', other: 'other_games', title: 'Games', hint: 'The games you play.' },
     host: { list: 'hosted_games', other: 'other_hosted_games', title: 'Hosted games', hint: 'The games you host events for.' },
+    org: { list: 'games', other: 'other_games', title: 'Team titles', hint: 'The games your teams compete in.' },
 };
 
 export const EditGamesModal = ({ profile, onClose, onSaved }) => {

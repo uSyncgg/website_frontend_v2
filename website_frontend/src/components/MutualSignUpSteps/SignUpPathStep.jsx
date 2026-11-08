@@ -3,9 +3,10 @@ import { FormTextInput } from "components/FormTextInput/FormTextInput";
 import { useFormContext } from "react-hook-form";
 import styles from "./SignUpPathStep.module.css";
 
-// Venue isn't here: it's a profile of its own (a top-level choice above). Must match the
+// Venue and Organization (which replaced "Team") aren't here: each is a profile of its own (a
+// top-level choice above). Must match the
 // backend's OtherRole list.
-const OTHER_ROLE_OPTIONS = ["Coach", "Sponsor", "Team", "Viewer", "Other"];
+const OTHER_ROLE_OPTIONS = ["Coach", "Sponsor", "Viewer", "Other"];
 
 export const SignUpPathStep = () => {
     const { watch, setValue, formState: { errors } } = useFormContext();
@@ -49,6 +50,13 @@ export const SignUpPathStep = () => {
                     title="Venue"
                     selected={selected.includes('venue')}
                     onToggle={() => toggle('venue')}
+                    blockClassName={styles.choice}
+                    selectedClassName={styles.choiceSelected}
+                />
+                <SelectableFormBlock
+                    title="Organization"
+                    selected={selected.includes('org')}
+                    onToggle={() => toggle('org')}
                     blockClassName={styles.choice}
                     selectedClassName={styles.choiceSelected}
                 />

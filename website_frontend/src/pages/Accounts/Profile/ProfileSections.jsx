@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { ProfileCard } from "components";
-import { useCurrentUser } from "hooks";
+import { useAuth, useCurrentUser } from "hooks";
 import { useAsync } from "hooks/useEvents";
 import { gamesCatalog } from "catalog/games.catalog";
 import { getProfileEvents } from "services/user";
 import { useHostEvents, useEnteredEvents, eventStage, STAGE_LABELS } from "services/hostEventsMock";
+import { getMyTeams } from "services/teams";
+import { TeamCard } from "components/Teams/TeamParts";
+import teamStyles from "components/Teams/Teams.module.css";
 import { buildEventPath } from "utils/eventPaths";
 import { EVENT_DASHBOARD_PATH, EVENT_TYPES } from "utils/hostEvents";
 import { canHostBrackets, createEventUrl } from "utils/profiles";
@@ -175,10 +178,38 @@ export const OwnerEventsCard = ({ profile }) => {
     );
 };
 
+/**
+ * The owner's teams on their player profile: each team, their role on it and how many players
+ * it has. Managing teams (invites, roles, deleting) lives on the Event Dashboard.
+ */
+export const OwnerTeamsCard = ({ profile }) => {
+    const { session } = useAuth();
+    const token = session?.access_token;
+    const { data: teams } = useAsync(() => getMyTeams(token), [token], { skip: !token });
+    // This profile's teams: the ones it runs, and (for a player) the ones it plays on.
+    const mine = (teams ?? []).filter(t => t.owner.public_id === profile.public_id || (profile.type === 'player' && t.my_role && t.my_role !== 'owner'));
+
+    return (
+        <ProfileCard
+            title="Your teams"
+            action={<Link to={`${EVENT_DASHBOARD_PATH}?tab=teams`} className={styles.cardAction}>Manage teams</Link>}
+        >
+            {mine.length === 0 ? (
+                <p className={styles.muted}>You aren't on a team yet. Create one or accept an invite from the Teams dashboard.</p>
+            ) : (
+                <div className={teamStyles.grid}>
+                    {mine.map(team => <TeamCard key={team.public_id} team={team} />)}
+                </div>
+            )}
+        </ProfileCard>
+    );
+};
+
 const ABOUT = {
     player: { title: 'About the player', empty: 'No bio yet.' },
     host: { title: 'About the host', empty: 'No description yet.' },
     venue: { title: 'About the venue', empty: 'No description yet.' },
+    org: { title: 'About the organization', empty: 'No description yet.' },
 };
 
 /**
