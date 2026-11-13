@@ -13,13 +13,16 @@ const DETAIL_FIELDS = {
     player: ['first_name', 'last_name', 'phone_number', 'gender', 'date_of_birth', 'country', 'interests', 'other_games'],
     host: ['organization', 'host_country', 'hosted_games', 'other_hosted_games', 'event_types'],
     venue: ['venues'],
+    // Org games get their own form fields so they don't collide with a player profile's games
+    // when both are created at sign-up. The org's name is its username, so it isn't here.
+    org: ['org_country', 'org_games', 'other_org_games', 'website', 'contact_email'],
 };
 
-const DETAIL_KEY = { venues: 'locations' };
+const DETAIL_KEY = { venues: 'locations', org_games: 'games', other_org_games: 'other_games' };
 
 // Optional text columns: a cleared input is saved as null rather than "" (date_of_birth is a
 // DATE, so "" would be rejected).
-const NULLABLE_FIELDS = new Set(['bio', 'other_role_detail', 'phone_number', 'gender', 'date_of_birth', 'country', 'other_games', 'other_hosted_games']);
+const NULLABLE_FIELDS = new Set(['bio', 'other_role_detail', 'phone_number', 'gender', 'date_of_birth', 'country', 'other_games', 'other_hosted_games', 'other_org_games', 'website', 'contact_email']);
 
 const EMPTY_VENUE = { name: '', location: '' };
 
@@ -144,6 +147,7 @@ export function toFormData({ data, files }) {
 export function toFormValues(settings) {
     const text = (value) => value ?? '';
     const details = settings.details ?? {};
+    const isOrg = settings.type === 'org';
 
     return {
         username: settings.username,
@@ -159,13 +163,19 @@ export function toFormValues(settings) {
         date_of_birth: text(details.date_of_birth),
         country: text(details.country),
         interests: details.interests ?? [],
-        other_games: text(details.other_games),
+        other_games: isOrg ? '' : text(details.other_games),
 
         organization: text(details.organization),
         host_country: text(details.host_country),
         hosted_games: details.hosted_games ?? [],
         other_hosted_games: text(details.other_hosted_games),
         event_types: details.event_types ?? [],
+
+        org_country: text(details.org_country),
+        org_games: isOrg ? details.games ?? [] : [],
+        other_org_games: isOrg ? text(details.other_games) : '',
+        website: text(details.website),
+        contact_email: text(details.contact_email),
 
         venues: details.locations?.length > 0
             ? details.locations.map(v => ({ name: v.name, location: v.location }))
