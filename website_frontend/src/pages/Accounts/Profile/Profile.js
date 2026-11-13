@@ -71,15 +71,13 @@ const VenuesCard = ({ locations }) => (
 const safeWebsite = (url) => (/^https?:\/\//i.test(url ?? '') ? url : null);
 const websiteLabel = (url) => url.replace(/^https?:\/\//i, '').replace(/\/$/, '');
 
+// `details.verified` isn't shown yet: org verification is coming later.
 const OrgCard = ({ details }) => {
     const website = safeWebsite(details.website);
     const hasContact = website || details.contact_email;
 
     return (
         <ProfileCard title="Organization">
-            {details.verified && (
-                <div className={styles.tags}><span className={styles.tag}>Verified organization</span></div>
-            )}
             {hasContact ? (
                 <div className={styles.orgContact}>
                     {website && (
@@ -98,7 +96,7 @@ const OrgCard = ({ details }) => {
                     )}
                 </div>
             ) : (
-                !details.verified && <p className={styles.muted}>No contact details yet.</p>
+                <p className={styles.muted}>No contact details yet.</p>
             )}
         </ProfileCard>
     );
