@@ -67,11 +67,52 @@ const VenuesCard = ({ locations }) => (
     </ProfileCard>
 );
 
+// The backend only stores http(s) websites; checked again here since it becomes a link.
+const safeWebsite = (url) => (/^https?:\/\//i.test(url ?? '') ? url : null);
+const websiteLabel = (url) => url.replace(/^https?:\/\//i, '').replace(/\/$/, '');
+
+// `details.verified` isn't shown yet: org verification is coming later.
+const OrgCard = ({ details }) => {
+    const website = safeWebsite(details.website);
+    const hasContact = website || details.contact_email;
+
+    return (
+        <ProfileCard title="Organization">
+            {hasContact ? (
+                <div className={styles.orgContact}>
+                    {website && (
+                        <div>
+                            <div className={styles.location}>Website</div>
+                            <a href={website} target="_blank" rel="noopener noreferrer nofollow ugc" className={styles.orgLink}>
+                                {websiteLabel(website)}
+                            </a>
+                        </div>
+                    )}
+                    {details.contact_email && (
+                        <div>
+                            <div className={styles.location}>Contact</div>
+                            <a href={`mailto:${details.contact_email}`} className={styles.orgLink}>{details.contact_email}</a>
+                        </div>
+                    )}
+                </div>
+            ) : (
+                <p className={styles.muted}>No contact details yet.</p>
+            )}
+        </ProfileCard>
+    );
+};
+
 // Main-column content for each profile type. `details` is shaped by the type.
 const TYPE_CONTENT = {
     player: (details) => <GamesCard title="Games" games={details.games} emptyText="No games added yet." />,
     host: (details) => <GamesCard title="Hosted Games" games={details.hosted_games} emptyText="No hosted games added yet." />,
     venue: (details) => <VenuesCard locations={details.locations} />,
+    org: (details) => (
+        <>
+            <OrgCard details={details} />
+            <GamesCard title="Team Titles" games={details.games} emptyText="No team titles added yet." />
+        </>
+    ),
 };
 
 // /profile/:publicId/:username - the public_id finds the profile; the username is only there

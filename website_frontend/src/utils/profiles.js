@@ -1,7 +1,10 @@
 // Profile types in display order. An account has at most one profile of each.
-export const PROFILE_TYPES = ['player', 'host', 'venue'];
+export const PROFILE_TYPES = ['player', 'host', 'venue', 'org'];
 
-export const PROFILE_LABELS = { player: 'Player', host: 'Host', venue: 'Venue' };
+export const PROFILE_LABELS = { player: 'Player', host: 'Host', venue: 'Venue', org: 'Organization' };
+
+// Types that can't host brackets (the backend rejects it). Orgs enter events but don't run them.
+export const NO_BRACKET_TYPES = ['org'];
 
 // Sign-up and add-a-profile give each profile type its own username form field.
 export const usernameField = (type) => `username_${type}`;

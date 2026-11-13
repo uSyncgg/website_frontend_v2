@@ -165,7 +165,7 @@ export const ProfileSettings = () => {
     );
 };
 
-// /settings/profile/add/:type - add a player, host or venue profile to the account.
+// /settings/profile/add/:type - add a player, host, venue or organization profile to the account.
 export const AddProfile = () => {
     const { type } = useParams();
     const { status, profiles } = useCurrentUser();
