@@ -16,7 +16,8 @@ const REGION_OPTIONS = [
     { label: "Certain Regions", value: "certain_regions" },
 ];
 
-const HOST_COUNTRY_OPTIONS = [
+// Also used by organizations, which are based in a country or compete across a region.
+export const HOST_COUNTRY_OPTIONS = [
     ...REGION_OPTIONS,
     COUNTRY_DIVIDER,
     ...COUNTRIES,

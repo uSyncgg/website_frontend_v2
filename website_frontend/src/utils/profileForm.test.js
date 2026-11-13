@@ -112,3 +112,30 @@ test("buildProfileUpdate splits profile fields from details and drops other type
         .toEqual({ details: { locations: [{ name: "Arena", location: "Austin" }] } });
     expect(buildProfileUpdate("host", ["first_name"], values)).toBeNull();
 });
+
+test("an org profile sends its games as details.games, separate from a player's games", () => {
+    const values = {
+        signup_path: ["player", "org"], default_profile: "player",
+        username_player: "Matt", username_org: " uSync Esports ",
+        first_name: "M", last_name: "O", interests: ["Halo"], other_games: "Apex",
+        org_country: "us", org_games: ["Valorant", "Other"], other_org_games: " Deadlock ",
+        website: " ", contact_email: "team@usync.gg",
+    };
+    const { data } = buildSignUpRequest(values);
+    const org = data.profiles.find(p => p.type === "org");
+    expect(org.username).toBe("uSync Esports");
+    expect(org.details).toEqual({ org_country: "us", games: ["Valorant", "Other"], other_games: "Deadlock", website: null, contact_email: "team@usync.gg" });
+    expect(org.bracket_hosting).toBeUndefined();
+    expect(data.profiles.find(p => p.type === "player").details.other_games).toBe("Apex");
+});
+
+test("org settings round-trip through the form fields", () => {
+    const settings = {
+        type: "org", username: "uSync Esports", bracket_hosting: false,
+        details: { organization: "uSync Esports", verified: false, org_country: "us", games: ["Halo"], other_games: "Apex", website: "https://usync.gg", contact_email: null },
+    };
+    const values = toFormValues(settings);
+    expect(values).toMatchObject({ org_country: "us", org_games: ["Halo"], other_org_games: "Apex", website: "https://usync.gg", contact_email: "", other_games: "" });
+    expect(buildProfileUpdate("org", ["org_games", "website", "contact_email", "interests"], { ...values, org_games: ["Halo", "CS 2"], website: "", contact_email: "a@b.gg" }))
+        .toEqual({ details: { games: ["Halo", "CS 2"], website: null, contact_email: "a@b.gg" } });
+});
