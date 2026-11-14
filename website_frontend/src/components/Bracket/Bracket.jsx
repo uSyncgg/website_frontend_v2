@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { FaTrophy, FaSearchMinus, FaSearchPlus, FaExpand } from "react-icons/fa";
 import { roundName, losersRoundName, isEntrant, placements } from "utils/bracket";
+import { timeAgo } from "utils/humanize";
 import styles from "./Bracket.module.css";
 
 const MIN_ZOOM = 0.3;
@@ -390,12 +391,6 @@ const Stepper = ({ value, onChange, max, name }) => (
     </div>
 );
 
-const timeAgo = (iso) => {
-    const mins = Math.round((Date.now() - new Date(iso).getTime()) / 60000);
-    if (mins < 1) return 'just now';
-    if (mins < 60) return `${mins} min ago`;
-    return `${Math.round(mins / 60)} h ago`;
-};
 
 // Score entry for one match.
 // mode 'host': the host's call is final; shows both players' reports and any no-show report.

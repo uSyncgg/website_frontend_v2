@@ -175,11 +175,17 @@ const app = (
             <Route path='/teams/:teamId' element={<TeamPage />} />
 
 
-            {/* Bracket hosting - accounts with bracket hosting turned on (see RequireBracketHost). Mock data for now. */}
+            {/* Bracket hosting. Creating an event needs a host or venue view with bracket hosting on
+                (RequireBracketHost). Managing one is per event: any signed-in account can open the
+                route, and ManageEvent only shows it to the event's host or one of its admins
+                (canManage, worked out by the API) - admins are player profiles, so the host-view
+                check would lock them out. */}
             <Route path='/host/events' element={<RequireBracketHost />}>
               <Route index element={<Navigate to={HOSTING_DASHBOARD_PATH} replace />} />
               <Route path='new' element={<CreateEvent />} />
-              <Route path=':eventId' element={<ManageEvent />}>
+            </Route>
+            <Route path='/host/events/:eventId' element={<RequireCompleteProfile />}>
+              <Route element={<ManageEvent />}>
                 <Route index element={<EventOverview />} />
                 <Route path='entrants' element={<EventEntrants />} />
                 <Route path='seeding' element={<EventSeeding />} />

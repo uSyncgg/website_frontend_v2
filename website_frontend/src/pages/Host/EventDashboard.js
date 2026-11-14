@@ -252,7 +252,8 @@ const ArchivedTab = () => {
                                     </Link>
                                     <div className={styles.eventCardActions}>
                                         <Link to={`/brackets/${event.id}`} className={`${styles.secondaryBtn} ${styles.smallBtn}`}>Results</Link>
-                                        {hosted && event.canManage &&
+                                        {/* Duplicating creates a new event, which only the host's own host/venue profile can do. */}
+                                        {hosted && event.isHost &&
                                             <Link to={`/host/events/new?from=${encodeURIComponent(event.id)}`} className={`${styles.ghostBtn} ${styles.smallBtn}`}>Duplicate</Link>}
                                     </div>
                                 </div>

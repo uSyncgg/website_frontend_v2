@@ -9,13 +9,13 @@ import { EVENT_TYPES, GAME_TITLES, HOST_GAMES, HOSTING_DASHBOARD_PATH, PLATFORMS
 import { PlayerPicker } from "components/Teams/TeamParts";
 import { BEST_OF, BracketError, TEAM_SIZES } from "./hostShared";
 import { SearchSelect } from "./SearchSelect";
+import { USYNC_FEE_RATE } from "utils/fees";
 import styles from "./Host.module.css";
 
 // Same shape as the existing pass portal (/passes/:slug): pass tiers, per-player
 // fields, extra questions, and a 5% uSync fee on top of the pass price.
 // Gamertag is always asked for; Discord and Twitter / X are the only other IDs.
 const PLAYER_FIELD_OPTIONS = ["Discord", "Twitter / X"];
-const USYNC_FEE = 0.05;
 const MAX_RESTRICTIONS = 10;
 
 const defaultStart = () => {
@@ -139,6 +139,9 @@ export const CreateEvent = () => {
     const isTournament = form.eventType === 'tournament';
     const game = isTournament ? TOURNAMENT_GAME : form.game;
     const titles = titleOptions(game);
+    // A title only counts if it belongs to the game in play: switching game (or to a Tournament,
+    // which is always Call of Duty) drops a title from the old one rather than saving a mismatch.
+    const gameTitle = titles.some(t => t.value === form.gameTitle) ? form.gameTitle : '';
     const hasFinal = !!HAS_FINAL[form.format];
 
     const chooseGame = (g) => setForm(f => ({ ...f, game: g, gameTitle: g === f.game ? f.gameTitle : '' }));
@@ -148,7 +151,7 @@ export const CreateEvent = () => {
     const errors = {
         name: !form.name.trim() && 'Give your event a name',
         eventType: !form.eventType && 'Pick what kind of event this is',
-        gameTitle: titles.length > 0 && !form.gameTitle && `Pick which ${game} game`,
+        gameTitle: titles.length > 0 && !gameTitle && `Pick which ${game} game`,
         venue: isLan && !form.venue.trim() && 'Add where the LAN is held',
         maxEntrants: !form.uncapped && (!Number.isInteger(maxNum) || maxNum < 2) && 'Enter a whole number of 2 or more, or tick "No cap"',
         minEntrants: form.useMin && (
@@ -177,7 +180,7 @@ export const CreateEvent = () => {
             ...rest,
             name: form.name.trim(),
             game,
-            gameTitle: titles.length ? form.gameTitle : '',
+            gameTitle,
             locationType: isLan ? 'in_person' : 'online',
             venue: isLan ? form.venue.trim() : '',
             bestOf: Number(form.bestOf),
@@ -261,7 +264,7 @@ export const CreateEvent = () => {
                         {titles.length > 0 &&
                             <div className={styles.field}>
                                 <label htmlFor="gameTitle">Which {game} game</label>
-                                <SearchSelect id="gameTitle" value={form.gameTitle} options={titles} onChange={v => setValue('gameTitle', v)}
+                                <SearchSelect id="gameTitle" value={gameTitle} options={titles} onChange={v => setValue('gameTitle', v)}
                                     placeholder={`Choose a ${game} game`} searchPlaceholder={`Search ${game} games`} />
                                 {err('gameTitle')}
                             </div>
@@ -510,7 +513,7 @@ export const CreateEvent = () => {
                                                 onClick={() => setPay('tiers', payments.tiers.filter((_, j) => j !== i))} aria-label="Remove pass"><FaTrash /></button>
                                             {Number(tier.price) > 0 &&
                                                 <span className={styles.tierTotal}>
-                                                    Player pays ${(Number(tier.price) * (1 + USYNC_FEE)).toFixed(2)} (${Number(tier.price).toFixed(2)} + ${(Number(tier.price) * USYNC_FEE).toFixed(2)} fee)
+                                                    Player pays ${(Number(tier.price) * (1 + USYNC_FEE_RATE)).toFixed(2)} (${Number(tier.price).toFixed(2)} + ${(Number(tier.price) * USYNC_FEE_RATE).toFixed(2)} fee)
                                                 </span>
                                             }
                                         </div>

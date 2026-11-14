@@ -90,7 +90,7 @@ export const MatchPage = () => {
     const state = matchState(event.bracket, match);
     const reports = matchReports(event.bracket, match);
     const bestOf = matchBestOf(event, built, match);
-    const noShowAt = noShowUnlocksAt(event);
+    const noShowAt = noShowUnlocksAt(event, match);
     const noShowOpen = noShowAt != null && now >= noShowAt.getTime();
     const canReport = mine && event.viewerCanAct && match.status === 'ready';
     const round = matchRoundLabel(event.format, built, match);
@@ -149,7 +149,7 @@ export const MatchPage = () => {
                                     {state !== 'no_show' && noShowAt &&
                                         <button type="button" className={styles.ghostBtn} disabled={!noShowOpen} onClick={submitNoShow}>Report No Show</button>}
                                     {noShowAt && !noShowOpen && state !== 'no_show' &&
-                                        <span className={styles.fieldHint}>Unlocks at {noShowAt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })} ({event.noShowMinutes} min after start)</span>}
+                                        <span className={styles.fieldHint}>Unlocks at {noShowAt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })} ({event.noShowMinutes} min after the match started)</span>}
                                 </div>
                             )
                             : <p className={styles.fieldHint}>Your team's owner or a captain reports scores.</p>
@@ -182,7 +182,7 @@ export const MatchPage = () => {
                                 <dt>Where</dt><dd>{locationLabel(event)}</dd>
                                 <dt>Round</dt><dd>{round}</dd>
                                 <dt>Best of</dt><dd>{bestOf}{event.finalBestOf && bestOf === event.finalBestOf ? ' (finals)' : ''}</dd>
-                                <dt>No-show timer</dt><dd>{event.noShowMinutes == null ? 'Off' : `${event.noShowMinutes} min after start`}</dd>
+                                <dt>No-show timer</dt><dd>{event.noShowMinutes == null ? 'Off' : `${event.noShowMinutes} min after each match starts`}</dd>
                                 <dt>Host</dt><dd>{event.host ? <Link to={profileUrl(event.host)}>{event.host.username}</Link> : '-'}</dd>
                             </dl>
                         </section>

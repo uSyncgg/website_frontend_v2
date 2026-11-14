@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { FaCheck, FaCopy, FaEnvelope, FaShareAlt, FaTimes } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import { useEffect } from "react";
+import { FaTimes } from "react-icons/fa";
+import { ShareButton as SiteShareButton } from "components/ShareButton/ShareButton";
 import { FORMATS } from "utils/bracket";
 import { PLATFORMS, gameDisplayName } from "utils/hostEvents";
 import { isPending, useBracketError, clearBracketError, STAGE_LABELS } from "services/brackets";
@@ -96,55 +96,9 @@ export const Modal = ({ title, onClose, children }) => {
     );
 };
 
-// Share the public event page (where people can see the details and sign up).
-export const ShareButton = ({ event, className }) => {
-    const [open, setOpen] = useState(false);
-    const [copied, setCopied] = useState(false);
-    const url = publicEventUrl(event);
-    const text = `Sign up for ${event.name} on uSync`;
-
-    const copy = async () => {
-        try {
-            await navigator.clipboard.writeText(url);
-        } catch {
-            // clipboard blocked - the link is selectable in the field
-        }
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-    };
-
-    return (
-        <>
-            <button type="button" className={className ?? styles.secondaryBtn} onClick={() => setOpen(true)}>
-                <FaShareAlt /> Share
-            </button>
-            {open &&
-                <Modal title="Share this event" onClose={() => setOpen(false)}>
-                    <p className={styles.blurb}>Anyone with this link can see the event details, sign up, and follow the bracket.</p>
-                    <div className={styles.shareRow}>
-                        <input className={styles.input} value={url} readOnly onFocus={(e) => e.target.select()} aria-label="Event link" />
-                        <button type="button" className={styles.primaryBtn} onClick={copy}>
-                            {copied ? <><FaCheck /> Copied</> : <><FaCopy /> Copy</>}
-                        </button>
-                    </div>
-                    <div className={styles.btnRow} style={{ marginTop: '1rem' }}>
-                        {typeof navigator !== 'undefined' && navigator.share &&
-                            <button type="button" className={styles.ghostBtn}
-                                onClick={() => navigator.share({ title: event.name, text, url }).catch(() => {})}>
-                                <FaShareAlt /> Share via…
-                            </button>
-                        }
-                        <a className={styles.ghostBtn} target="_blank" rel="noreferrer"
-                            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`}>
-                            <FaXTwitter /> Post on X
-                        </a>
-                        <a className={styles.ghostBtn} href={`mailto:?subject=${encodeURIComponent(event.name)}&body=${encodeURIComponent(`${text}: ${url}`)}`}>
-                            <FaEnvelope /> Email
-                        </a>
-                    </div>
-                </Modal>
-            }
-        </>
-    );
-};
+// Share the public event page (where people can see the details and sign up), with the site's
+// one ShareButton (copy link, share sheet, X, email).
+export const ShareButton = ({ event, className }) => (
+    <SiteShareButton title={event.name} text={`Sign up for ${event.name} on uSync`} url={publicEventUrl(event)} className={className} />
+);
 

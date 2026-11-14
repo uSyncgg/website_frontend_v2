@@ -2,9 +2,10 @@ import { Navigate, Outlet, useLocation } from "react-router";
 import { useCurrentUser } from "hooks";
 import { canHostBrackets, profileUrl } from "utils/profiles";
 
-// Host tools: only while viewing as a host or venue profile with bracket hosting on (the view
-// picked in the navbar's "Viewing as" menu). Switching to another view sends you back to that
-// profile. The API enforces the same rule on every host request.
+// Creating events: only while viewing as a host or venue profile with bracket hosting on (the
+// view picked in the navbar's "Viewing as" menu). Switching to another view sends you back to
+// that profile. The API checks the same rule when an event is created. Managing an existing
+// event isn't gated here - see the /host/events/:eventId routes in index.js.
 // Logged out -> /login. Sign-up unfinished -> /complete-profile.
 export function RequireBracketHost() {
     const { status, defaultProfile } = useCurrentUser();

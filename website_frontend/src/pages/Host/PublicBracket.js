@@ -2,19 +2,19 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { useAuth, useCurrentUser } from "hooks";
 import { FaCalendarAlt, FaCheckCircle, FaClock, FaGamepad, FaMapMarkerAlt, FaSitemap, FaTicketAlt, FaTrophy } from "react-icons/fa";
-import { Bracket, ReportMatchDialog } from "components/Bracket/Bracket";
+import { Bracket } from "components/Bracket/Bracket";
 import {
     useHostEvent, eventStage, isFull, register, unregister as leaveEvent, isPending, signedUpEntrants, pendingEntrants, teamSizeOf,
-    matchState, matchReports, playerReportMatch, reportNoShow, noShowUnlocksAt,
+    matchState,
 } from "services/brackets";
 import { getMyTeams } from "services/teams";
 import { getApiErrorMessage } from "utils/apiError";
-import { buildBracket, allMatches, matchBestOf } from "utils/bracket";
+import { buildBracket, allMatches } from "utils/bracket";
 import { EVENT_TYPES, matchUrl } from "utils/hostEvents";
 import { BracketError, Modal, ShareButton, StageChip, capacityLabel, entrantsById, formatDate, formatLabel, unitLabel, isTeamEvent, EventLoading, formatSummary, locationLabel, gameDisplayName, RestrictionList } from "./hostShared";
+import { USYNC_FEE_RATE } from "utils/fees";
 import styles from "./Host.module.css";
 
-const USYNC_FEE = 0.05;
 
 // Why one of your teams can't be entered in this event, or '' when it can. A team that's short
 // of players can still enter - it shows as pending until its roster fills.
@@ -171,8 +171,8 @@ const RegisterDialog = ({ event, username, onClose }) => {
                         </div>
                         <dl className={styles.detailList}>
                             <dt>Pass</dt><dd>${price.toFixed(2)}</dd>
-                            <dt>uSync fee (5%)</dt><dd>${(price * USYNC_FEE).toFixed(2)}</dd>
-                            <dt><strong>Total</strong></dt><dd><strong>${(price * (1 + USYNC_FEE)).toFixed(2)}</strong></dd>
+                            <dt>uSync fee (5%)</dt><dd>${(price * USYNC_FEE_RATE).toFixed(2)}</dd>
+                            <dt><strong>Total</strong></dt><dd><strong>${(price * (1 + USYNC_FEE_RATE)).toFixed(2)}</strong></dd>
                         </dl>
                         <p className={styles.fieldHint}>Mockup: in the live version this continues to secure Stripe checkout, the same as our event pass pages.</p>
                     </>
@@ -198,20 +198,12 @@ export const PublicBracket = () => {
     const navigate = useNavigate();
     const username = defaultProfile?.username;
     const [registering, setRegistering] = useState(false);
-    const [reportingId, setReportingId] = useState(null);
-    const [now, setNow] = useState(() => Date.now());
     const [tab, setTab] = useState(null);
-
-    // Keep the no-show countdown current.
-    useEffect(() => {
-        const t = setInterval(() => setNow(Date.now()), 30000);
-        return () => clearInterval(t);
-    }, []);
 
     if (!event) return <EventLoading event={event} backTo="/" backLabel="Back home" />;
 
     // Your entrant (solo, or a team you're on). Only a solo player, or a team's owner or
-    // captain, can report scores and no-shows; other teammates just see their match.
+    // captain, can unregister or report (on the match page); teammates don't see those buttons.
     const viewerId = event.viewerEntrantId ?? '';
     const canAct = event.viewerCanAct;
 
@@ -230,23 +222,17 @@ export const PublicBracket = () => {
         : null;
     const myState = myMatch && stateOf(myMatch);
     const opponent = myMatch && byId[myMatch.a === me.id ? myMatch.b : myMatch.a];
-    const noShowAt = noShowUnlocksAt(event);
-    const noShowOpen = noShowAt != null && now >= noShowAt.getTime();
-    const reporting = reportingId && built && allMatches(built).find(m => m.id === reportingId);
 
-    const canRegister = !me && event.registrationOpen && !published && !isFull(event);
+    // Before the bracket is live a full event still shows its sign-up button, disabled.
+    const full = isFull(event);
+    const canRegister = !me && event.registrationOpen && !published && !full;
+    const showFull = !me && event.registrationOpen && !published && full;
     // Live events open on the bracket; upcoming ones on the event info.
     const activeTab = tab ?? (published ? 'bracket' : 'info');
 
     const unregister = () => {
         if (window.confirm(`Unregister ${me.name} from ${event.name}?`)) {
             leaveEvent(event.id);
-        }
-    };
-
-    const submitNoShow = () => {
-        if (window.confirm(`Report ${opponent.name} as a no-show? The host will review it and decide what happens.`)) {
-            reportNoShow(event.id, myMatch);
         }
     };
 
@@ -281,6 +267,7 @@ export const PublicBracket = () => {
                         {canRegister && (username
                             ? <button type="button" className={styles.primaryBtn} onClick={() => setRegistering(true)}>Sign up</button>
                             : <Link to="/login" className={styles.primaryBtn}>Log in to sign up</Link>)}
+                        {showFull && <button type="button" className={styles.primaryBtn} disabled>Event is Full</button>}
                     </div>
                 </div>
 
@@ -350,15 +337,19 @@ export const PublicBracket = () => {
                                         {isPending(event, me)
                                             ? <p className={styles.blurb}><strong>{me.name}</strong> is pending: {me.rosterSize ?? 0} of {teamSizeOf(event)} players. Invite {teamSizeOf(event) - (me.rosterSize ?? 0)} more from your team page and it's signed up automatically.</p>
                                             : <p className={styles.registeredNote}><FaCheckCircle /> You're signed up as <strong>{me.name}</strong></p>}
-                                        {!published &&
+                                        {!published && canAct &&
                                             <button type="button" className={`${styles.dangerBtn} ${styles.fullBtn}`} onClick={unregister}>Unregister</button>}
+                                        {!published && !canAct &&
+                                            <p className={styles.fieldHint}>Your team's owner or a captain manages its sign-up.</p>}
                                     </>
                                 )
                                 : canRegister
                                     ? (username
                                         ? <button type="button" className={`${styles.primaryBtn} ${styles.fullBtn}`} onClick={() => setRegistering(true)}>{pay ? 'Sign up & pay' : 'Sign up'}</button>
                                         : <Link to="/login" className={`${styles.primaryBtn} ${styles.fullBtn}`}>Log in to sign up</Link>)
-                                    : <p className={styles.blurb}>{published ? 'The bracket is live - sign-ups are closed.' : isFull(event) ? 'This event is full.' : 'Sign-ups are closed.'}</p>
+                                    : showFull
+                                        ? <button type="button" className={`${styles.primaryBtn} ${styles.fullBtn}`} disabled>Event is Full</button>
+                                        : <p className={styles.blurb}>{published ? 'The bracket is live - sign-ups are closed.' : 'Sign-ups are closed.'}</p>
                             }
                         </section>
 
@@ -374,21 +365,10 @@ export const PublicBracket = () => {
                                 <p className={styles.blurb}>vs <strong>{opponent?.name}</strong> · <Link to={matchUrl(event.id, myMatch.id)}>Match page: roster, rules and maps</Link></p>
                                 {myState === 'disputed' && <p className={styles.tagDisputed}>DISPUTED - the host will decide</p>}
                                 {myState === 'no_show' && <p className={styles.tagNoShow}>NO SHOW REPORTED - waiting on the host</p>}
-                                {myState === 'awaiting' && (
-                                    matchReports(event.bracket, myMatch)[me.id]
-                                        ? <p className={styles.blurb}>You reported a score. Waiting for {opponent?.name} to confirm.</p>
-                                        : <p className={styles.blurb}>{opponent?.name} reported a score. Report yours to confirm it.</p>
-                                )}
-                                <div className={styles.stackBtns}>
-                                    <button type="button" className={styles.primaryBtn} onClick={() => setReportingId(myMatch.id)}>Report score</button>
-                                    {myState !== 'no_show' && noShowAt &&
-                                        <button type="button" className={styles.ghostBtn} disabled={!noShowOpen} onClick={submitNoShow}>
-                                            Report No Show
-                                        </button>
-                                    }
-                                    {noShowAt && !noShowOpen && myState !== 'no_show' &&
-                                        <span className={styles.fieldHint}>Unlocks at {noShowAt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })} ({event.noShowMinutes} min after start)</span>}
-                                </div>
+                                {myState === 'awaiting' && <p className={styles.blurb}>One side has reported a score.</p>}
+                                <Link to={matchUrl(event.id, myMatch.id)} className={styles.primaryBtn}>
+                                    {canAct ? 'Go to your match to report' : 'View your match'}
+                                </Link>
                             </section>
                         }
                 {published
@@ -431,19 +411,6 @@ export const PublicBracket = () => {
 
             {registering && <RegisterDialog event={event} username={username} onClose={() => setRegistering(false)} />}
 
-            {reporting && me && canAct &&
-                <ReportMatchDialog
-                    key={reporting.id}
-                    match={reporting}
-                    entrants={byId}
-                    bestOf={matchBestOf(event, built, reporting)}
-                    mode="player"
-                    viewerId={me.id}
-                    reports={matchReports(event.bracket, reporting)}
-                    onClose={() => setReportingId(null)}
-                    onSave={(a, b) => { playerReportMatch(event.id, reporting, me.id, a, b); setReportingId(null); }}
-                />
-            }
         </div>
     );
 };

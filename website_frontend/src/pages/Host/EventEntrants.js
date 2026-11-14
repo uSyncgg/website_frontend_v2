@@ -21,7 +21,6 @@ const EntrantDetails = ({ event, entrant, onClose }) => {
                 <dt>Email</dt><dd>{entrant.email || '-'}</dd>
                 <dt>Signed up</dt><dd>{formatDate(entrant.registeredAt)}</dd>
                 {event.payments?.enabled && <><dt>Pass</dt><dd>{entrant.pass ?? event.payments.tiers[0]?.name ?? '-'}</dd></>}
-                <dt>Skill rating</dt><dd>{entrant.rating}</dd>
             </dl>
             <h4 className={styles.sectionTitle} style={{ margin: '1.25rem 0 .6rem', fontSize: '.9rem' }}>Sign-up answers</h4>
             {answers.length
@@ -88,7 +87,6 @@ export const EventEntrants = () => {
                             <th>{teams ? 'Team' : 'Player'}</th>
                             {teams && <th>Captain</th>}
                             {teams && <th>Status</th>}
-                            <th>Skill rating</th>
                             <th>Signed up</th>
                             <th aria-label="Actions" />
                         </tr>
@@ -104,7 +102,6 @@ export const EventEntrants = () => {
                                 {teams && <td>{isPending(event, entrant)
                                     ? <span className={`${styles.chip} ${styles.stage_seeding}`}>Pending · {entrant.rosterSize ?? 0}/{teamSizeOf(event)}</span>
                                     : <span className={`${styles.chip} ${styles.stage_registration}`}>Signed up</span>}</td>}
-                                <td className={styles.num}>{entrant.rating}</td>
                                 <td>{new Date(entrant.registeredAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</td>
                                 <td>
                                     <button type="button" className={`${styles.iconBtn} ${styles.removeBtn}`} disabled={locked}

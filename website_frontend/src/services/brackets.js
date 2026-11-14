@@ -50,7 +50,8 @@ export const clearBracketError = () => set(() => ({ error: '' }));
 const run = async (request) => {
     try {
         const res = await request;
-        return res.data ?? true;
+        // 204 No Content (a delete) comes back with an empty body: that's a success too.
+        return res.status === 204 || res.data === '' || res.data == null ? true : res.data;
     } catch (err) {
         set(() => ({ error: getApiErrorMessage(err) }));
         return null;
@@ -169,9 +170,12 @@ export const matchReports = (bracket, match) => Object.fromEntries(liveReports(b
 export const matchNoShow = (bracket, match) =>
     sameMatchup(bracket.noShows?.[match.id], match) ? bracket.noShows[match.id] : null;
 
-// When players can start reporting no-shows: the host's timer after the start time.
-export const noShowUnlocksAt = (event) =>
-    event.noShowMinutes == null ? null : new Date(new Date(event.startsAt).getTime() + event.noShowMinutes * 60000);
+// When a match's no-show button unlocks: the server works it out (the no-show window after the
+// match started, not the event) and sends it per playable match. null when there's no timer.
+export const noShowUnlocksAt = (event, match) => {
+    const at = match && event.noShowUnlocks?.[match.id];
+    return at ? new Date(at) : null;
+};
 
 // ---- writes ----------------------------------------------------------------
 
@@ -207,7 +211,13 @@ export const removeEntrant = (id, entrantId) => eventCall(apiClient.delete(url(i
 
 export const saveBracketDraft = (id, seeds) => eventCall(apiClient.put(url(id, '/bracket'), { seeds }));
 
-export const publishBracket = (id) => eventCall(apiClient.post(url(id, '/bracket/publish')));
+// If the entrants changed since the draft was seeded, the server rebuilds the draft and refuses
+// (409): reload the event so the host reviews the new bracket before publishing again.
+export const publishBracket = async (id) => {
+    const event = await eventCall(apiClient.post(url(id, '/bracket/publish')));
+    if (!event) await fetchEvent(id);
+    return event;
+};
 
 export const resetBracket = (id) => eventCall(apiClient.delete(url(id, '/bracket')));
 

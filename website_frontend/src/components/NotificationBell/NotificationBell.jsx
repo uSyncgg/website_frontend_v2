@@ -8,17 +8,11 @@ import { getMyInvites, respondToInvite } from "services/teams";
 import { getNotifications, markNotificationsRead, notificationText } from "services/notifications";
 import { getAdminInvites, respondAdminInvite } from "services/brackets";
 import { InviteCard } from "components/Teams/TeamParts";
+import { timeAgo } from "utils/humanize";
 import styles from "./NotificationBell.module.css";
 
 const REFRESH_MS = 60 * 1000;
 
-const timeAgo = (iso) => {
-    const minutes = Math.max(0, Math.round((Date.now() - new Date(iso).getTime()) / 60000));
-    if (minutes < 1) return 'Just now';
-    if (minutes < 60) return `${minutes}m ago`;
-    if (minutes < 1440) return `${Math.round(minutes / 60)}h ago`;
-    return `${Math.round(minutes / 1440)}d ago`;
-};
 
 // The bell to the left of the profile avatar. Team invites waiting on you come first (accept or
 // decline right here), then everything else: someone joined your team, your team is signed up or
@@ -50,18 +44,25 @@ export const NotificationBell = () => {
         return () => clearInterval(id);
     }, [load]);
 
+    // However the bell closes (its button, a link, Esc or a click outside), what was shown counts
+    // as read, so the badge never sticks at a stale number.
+    const close = useCallback(() => {
+        setOpen(false);
+        setItems(list => list.map(n => ({ ...n, read: true })));
+    }, []);
+
     useEffect(() => {
         if (!open) return;
         load();
-        const outside = (e) => { if (!ref.current?.contains(e.target)) setOpen(false); };
-        const escape = (e) => { if (e.key === 'Escape') setOpen(false); };
+        const outside = (e) => { if (!ref.current?.contains(e.target)) close(); };
+        const escape = (e) => { if (e.key === 'Escape') close(); };
         document.addEventListener('mousedown', outside);
         document.addEventListener('keydown', escape);
         return () => {
             document.removeEventListener('mousedown', outside);
             document.removeEventListener('keydown', escape);
         };
-    }, [open, load]);
+    }, [open, load, close]);
 
     if (!defaultProfile) return null;
 
@@ -69,15 +70,10 @@ export const NotificationBell = () => {
     const count = invites.length + adminInvites.length + unread;
 
     const toggle = () => {
-        const opening = !open;
-        setOpen(opening);
+        if (open) return close();
+        setOpen(true);
         // Seen once the bell is opened; they stay highlighted until it closes.
-        if (opening && unread) markNotificationsRead().catch(() => {});
-    };
-
-    const close = () => {
-        setOpen(false);
-        setItems(list => list.map(n => ({ ...n, read: true })));
+        if (unread) markNotificationsRead().catch(() => {});
     };
 
     const respond = async (inviteId, accept) => {
