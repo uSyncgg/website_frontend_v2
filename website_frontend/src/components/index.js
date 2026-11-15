@@ -107,6 +107,8 @@ import { PasswordChecklist } from "./PasswordChecklist/PasswordChecklist";
 import { RequireCompleteProfile } from "./RequiredCompleteProfile/RequiredCompleteProfile";
 import { RequireBracketHost } from "./RequireBracketHost/RequireBracketHost";
 import { Bracket, ReportMatchDialog } from "./Bracket/Bracket";
+import { RequireAdmin } from "./RequireAdmin/RequireAdmin";
+import { Segmented } from "./Segmented/Segmented";
 import { ClaimEventPrompt } from "./ClaimEventPrompt/ClaimEventPrompt";
 import { RedirectIfProfileComplete } from "./RequiredCompleteProfile/RedirectIfProfileComplete";
 
@@ -186,6 +188,8 @@ export {
     RequireBracketHost,
     Bracket,
     ReportMatchDialog,
+    RequireAdmin,
+    Segmented,
     ClaimEventPrompt,
     RedirectIfProfileComplete,
     SignUpFormWizard,

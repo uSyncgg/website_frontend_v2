@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
@@ -57,7 +57,7 @@ import TournamentRoutes from './routes/TournamentRoutes';
 import { AuthPage } from 'pages/Accounts/Authentication/AuthPage';
 import { ForgotPassword } from 'pages/Accounts/Authentication/ForgotPassword';
 import { ResetPassword } from 'pages/Accounts/Authentication/ResetPassword';
-import { RequireCompleteProfile, RedirectIfProfileComplete, RequireBracketHost } from 'components';
+import { RequireCompleteProfile, RedirectIfProfileComplete, RequireBracketHost, RequireAdmin, LoadingWheel } from 'components';
 import { EventDashboard } from 'pages/Host/EventDashboard';
 import { EVENT_DASHBOARD_PATH, HOSTING_DASHBOARD_PATH } from 'utils/hostEvents';
 import { CreateEvent } from 'pages/Host/CreateEvent';
@@ -75,6 +75,9 @@ import { ClaimEvent } from 'pages/Accounts/ClaimEvent/ClaimEvent';
 import { CurrentUserProvider } from 'hooks';
 
 const root = document.getElementById('root');
+
+// Only admins download the dashboard (see RequireAdmin).
+const AdminAnalytics = lazy(() => import('pages/Admin/AdminAnalytics').then(m => ({ default: m.AdminAnalytics })));
 
 const app = (
   // <React.StrictMode>
@@ -198,6 +201,11 @@ const app = (
             <Route path='/brackets/:eventId' element={<PublicBracket />} />
             {/* One match: opponents, rosters, rules, maps, reporting. Public. */}
             <Route path='/brackets/:eventId/matches/:matchId' element={<MatchPage />} />
+
+            {/* Admin: RequireAdmin asks the backend before anything here is downloaded or shown. */}
+            <Route path='/admin' element={<RequireAdmin />}>
+              <Route path='analytics' element={<Suspense fallback={<LoadingWheel />}><AdminAnalytics /></Suspense>} />
+            </Route>
 
             {/* Hosts claim an existing event listing as theirs. Logged-out visitors go through
                 /login (RequireCompleteProfile) and come back here afterwards. */}
