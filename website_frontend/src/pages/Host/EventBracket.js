@@ -100,7 +100,7 @@ export const EventBracket = () => {
 
                 {live &&
                     <p className={styles.blurb}>
-                        Players report their own scores - when both report the same score, the winner advances. Click any match to
+                        Players report their own scores - when both name the same winner, that winner advances. Click any match to
                         decide it yourself. Your decisions are final.
                     </p>
                 }

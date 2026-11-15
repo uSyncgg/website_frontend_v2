@@ -245,7 +245,7 @@ export const resetBracket = (id) => eventCall(apiClient.delete(url(id, '/bracket
 
 const matchUrlOf = (id, code, rest) => url(id, `/matches/${encodeURIComponent(code)}${rest}`);
 
-// A side reports its score; when both report the same score the winner advances.
+// A side reports its score; when both name the same winner, that winner advances.
 export const reportScore = (id, code, scoreA, scoreB) => eventCall(apiClient.post(matchUrlOf(id, code, '/reports'), { scoreA, scoreB }));
 
 export const reportNoShow = (id, code) => eventCall(apiClient.post(matchUrlOf(id, code, '/no-show')));

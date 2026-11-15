@@ -12,7 +12,7 @@ const STATUS_TEXT = {
     pending: 'Waiting on earlier matches',
     ready: 'Ready to play',
     awaiting: 'One side has reported a score',
-    disputed: 'The reports disagree - an admin will decide',
+    disputed: 'Each side says it won - an admin will decide',
     no_show: 'No-show reported - waiting on an admin',
     locked: 'On hold while a dispute about the match before it is reviewed',
     complete: 'Final',
@@ -153,10 +153,10 @@ export const MatchPage = () => {
                         {state === 'locked' && <p className={styles.tagNoShow}>ON HOLD - the match before this one is being reviewed</p>}
                         {state === 'awaiting' && (
                             view.reports?.[viewerId]
-                                ? <p className={styles.blurb}>You reported a score. Waiting for {byId[opponentId]?.name} to report the same.</p>
-                                : <p className={styles.blurb}>{byId[opponentId]?.name} reported a score. Report yours - if it matches, the result is final.</p>
+                                ? <p className={styles.blurb}>You reported a score. Waiting for {byId[opponentId]?.name} to report.</p>
+                                : <p className={styles.blurb}>{byId[opponentId]?.name} reported a score. Report yours - if you both name the same winner, it's final.</p>
                         )}
-                        {state === 'ready' && <p className={styles.blurb}>Play your match, then both sides report the score. If they match, it's final.</p>}
+                        {state === 'ready' && <p className={styles.blurb}>Play your match, then both sides report the score. If you both name the same winner, it's final.</p>}
                         {event.viewerCanAct
                             ? (
                                 <div className={styles.stackBtns}>

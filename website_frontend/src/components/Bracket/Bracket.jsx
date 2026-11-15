@@ -408,7 +408,7 @@ const ISSUE_LABELS = {
 // mode 'host': a host or admin ruling - final. Shows the players' reports and open queue items,
 // and offers award (or forfeit to either side), clear and, after a post-advancement dispute,
 // uphold the result.
-// mode 'player': the viewer reports their own match; the other side has to report the same score.
+// mode 'player': the viewer reports their own match; if the other side names the same winner, it's final.
 export const ReportMatchDialog = ({
     match, entrants, bestOf, mode = 'host', viewerId, reports = {}, issues = [],
     onSave, onClear, onForfeit, onUphold, onClose,
@@ -439,7 +439,7 @@ export const ReportMatchDialog = ({
                 </h3>
                 <p className={styles.dialogHint}>
                     Best of {bestOf} · first to {maxScore}
-                    {mode === 'player' ? ' · the other side has to report the same score' : ' · your decision is final'}
+                    {mode === 'player' ? ' · if the other side names the same winner, it\'s final' : ' · your decision is final'}
                 </p>
 
                 {mode === 'host' && issues.map(type => (
@@ -470,7 +470,7 @@ export const ReportMatchDialog = ({
                 }
 
                 {mode === 'player' && mine &&
-                    <div className={styles.notice}><p>You reported: {claimOf(match, name, mine)}. Waiting for the other side to report the same.</p></div>
+                    <div className={styles.notice}><p>You reported: {claimOf(match, name, mine)}. Waiting for the other side to report.</p></div>
                 }
 
                 {[[match.a, scoreA, setScoreA], [match.b, scoreB, setScoreB]].map(([id, value, set]) => (
