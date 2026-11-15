@@ -65,6 +65,7 @@ import { ManageEvent, EventOverview } from 'pages/Host/ManageEvent';
 import { EventEntrants } from 'pages/Host/EventEntrants';
 import { EventSeeding } from 'pages/Host/EventSeeding';
 import { EventBracket } from 'pages/Host/EventBracket';
+import { EventQueue } from 'pages/Host/EventQueue';
 import { PublicBracket } from 'pages/Host/PublicBracket';
 import { MatchPage } from 'pages/Host/MatchPage';
 import { TeamPage } from 'pages/Teams/TeamPage';
@@ -190,6 +191,7 @@ const app = (
                 <Route path='entrants' element={<EventEntrants />} />
                 <Route path='seeding' element={<EventSeeding />} />
                 <Route path='bracket' element={<EventBracket />} />
+                <Route path='queue' element={<EventQueue />} />
               </Route>
             </Route>
             {/* Public, read-only bracket page players are sent to. */}

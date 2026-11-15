@@ -1,28 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { FaUndo } from "react-icons/fa";
 import { Bracket, ReportMatchDialog } from "components/Bracket/Bracket";
-import {
-    publishBracket, hostReportMatch, clearMatch, resetBracket, revertDecision, dismissNoShow,
-    matchState, matchReports, matchNoShow,
-} from "services/brackets";
-import { buildBracket, bracketProgress, allMatches, matchBestOf } from "utils/bracket";
+import { publishBracket, resetBracket, ruleOnMatch, getDecisions, revertDecision, matchState, matchView } from "services/brackets";
+import { allMatches } from "utils/bracket";
 import { useManagedEvent } from "./ManageEvent";
 import { entrantsById } from "./hostShared";
 import styles from "./Host.module.css";
 
-const SOURCE_LABELS = {
-    players: 'Both players agreed',
-    host: 'Host decision',
-    forfeit: 'No-show forfeit',
-    cleared: 'Result cleared',
+const ACTION_LABELS = {
+    award: 'Result awarded',
+    forfeit: 'Forfeit awarded',
+    clear: 'Result cleared',
+    uphold: 'Result upheld',
+    revert: 'Decision reverted',
 };
 
-// /host/events/:eventId/bracket - publish the draft, then run the event:
-// resolve disputes and no-shows, report or fix scores, revert decisions.
+// /host/events/:eventId/bracket - publish the draft, then run the event: rule on matches (award
+// a result or a forfeit, clear a match, uphold a disputed result) and revert decisions. Issues
+// raised by players come in through the Queue tab.
 export const EventBracket = () => {
     const event = useManagedEvent();
     const [selectedId, setSelectedId] = useState(null);
+    const [decisions, setDecisions] = useState([]);
+    const live = event.bracket && event.bracket.status !== 'draft';
+    const progressKey = event.bracket?.built?.progress?.done;
+
+    useEffect(() => {
+        if (!live) return;
+        getDecisions(event.id).then(setDecisions).catch(() => {});
+    }, [event.id, live, progressKey, event.bracket?.matches]);
 
     if (!event.bracket) {
         return (
@@ -36,69 +43,65 @@ export const EventBracket = () => {
 
     const byId = entrantsById(event);
     const name = (id) => byId[id]?.name ?? 'Unknown';
-    const { seeds, results, published, log = [] } = event.bracket;
-    const built = buildBracket(event.format, seeds, results);
-    const matches = allMatches(built);
-    const { done, total } = bracketProgress(built);
-    const stateOf = (m) => matchState(event.bracket, m);
-    const needsHost = matches.filter(m => ['disputed', 'no_show'].includes(stateOf(m)));
+    const { built } = event.bracket;
+    const { done, total } = built.progress;
+    const stateOf = (m) => matchState(event, m);
     // Re-find the match each render so the dialog always shows current data.
-    const selected = selectedId && matches.find(m => m.id === selectedId);
+    const selected = selectedId && allMatches(built).find(m => m.id === selectedId);
+    const view = matchView(event, selected);
 
     const reset = () => {
-        const warning = published && done
-            ? `Reset the bracket? All ${done} reported results will be lost.`
+        const warning = live && done
+            ? `Reset the bracket? All ${done} reported results and its queue items will be lost.`
             : 'Discard this bracket and go back to seeding?';
         if (window.confirm(warning)) resetBracket(event.id);
     };
 
     const close = () => setSelectedId(null);
+    const rule = async (ruling) => {
+        if (await ruleOnMatch(event.id, selected.id, ruling)) close();
+    };
+
+    const result = (r) => (r.status === 'complete' && r.scoreA != null
+        ? `${name(r.winner)} ${Math.max(r.scoreA, r.scoreB)}-${Math.min(r.scoreA, r.scoreB)}`
+        : 'no result');
 
     return (
         <>
-            {published && needsHost.length > 0 &&
+            {live && event.openIssues > 0 &&
                 <section className={`${styles.card} ${styles.alertCard}`}>
-                    <h2 className={styles.sectionTitle}>Needs your decision ({needsHost.length})</h2>
-                    <div className={styles.alertList}>
-                        {needsHost.map(m => (
-                            <button key={m.id} type="button" className={styles.alertItem} onClick={() => setSelectedId(m.id)}>
-                                <span className={stateOf(m) === 'disputed' ? styles.tagDisputed : styles.tagNoShow}>
-                                    {stateOf(m) === 'disputed' ? 'DISPUTED' : 'NO SHOW REPORTED'}
-                                </span>
-                                <span>{name(m.a)} vs {name(m.b)}</span>
-                                <span className={styles.alertGo}>Resolve</span>
-                            </button>
-                        ))}
-                    </div>
+                    <h2 className={styles.sectionTitle}>{event.openIssues} issue{event.openIssues > 1 ? 's' : ''} in the queue</h2>
+                    <p className={styles.blurb}>Disputes, no-shows and unanswered reports wait in the queue for you or another admin.</p>
+                    <Link to={`/host/events/${event.id}/queue`} className={styles.primaryBtn}>Open the queue</Link>
                 </section>
             }
 
             <section className={styles.card}>
                 <div className={styles.cardHeader}>
                     <div>
-                        <h2 className={styles.sectionTitle}>{published ? 'Bracket' : 'Bracket draft'}</h2>
-                        {published
+                        <h2 className={styles.sectionTitle}>{live ? 'Bracket' : 'Bracket draft'}</h2>
+                        {live
                             ? (
                                 <div className={styles.progress} style={{ marginTop: '.4rem' }}>
-                                    <span>{done} of {total} matches reported</span>
+                                    <span>{done} of {total} matches decided</span>
                                     <div className={styles.fillBar}><span style={{ width: `${total ? (done / total) * 100 : 0}%` }} /></div>
                                 </div>
                             )
-                            : <p className={styles.muted} style={{ margin: '.25rem 0 0' }}>Only you can see this. Publish it to show players and start reporting scores.</p>
+                            : <p className={styles.muted} style={{ margin: '.25rem 0 0' }}>Only you and your admins can see this. Publish it to show players and start the matches.</p>
                         }
                     </div>
                     <div className={styles.btnRow}>
-                        {!published && <Link to={`/host/events/${event.id}/seeding`} className={styles.ghostBtn}>Edit seeding</Link>}
+                        {!live && <Link to={`/host/events/${event.id}/seeding`} className={styles.ghostBtn}>Edit seeding</Link>}
                         <button type="button" className={styles.dangerBtn} onClick={reset}>Reset bracket</button>
-                        {!published && <button type="button" className={styles.primaryBtn} onClick={() => publishBracket(event.id)}>Publish bracket</button>}
-                        {published && <Link to={`/brackets/${event.id}`} className={styles.secondaryBtn}>Player view</Link>}
+                        {!live && <button type="button" className={styles.primaryBtn} onClick={() => publishBracket(event.id)}>Publish bracket</button>}
+                        {live && <Link to={`/brackets/${event.id}`} className={styles.secondaryBtn}>Player view</Link>}
                     </div>
                 </div>
 
-                {published &&
+                {live &&
                     <p className={styles.blurb}>
-                        Players report their own scores - when both agree, the winner advances automatically. Click any match to
-                        settle a dispute, handle a no-show, or report and fix a score yourself.
+                        Players report their own scores - when both report the same score, the winner advances. Click any match to
+                        decide it yourself. Your decisions are final.
                     </p>
                 }
 
@@ -107,38 +110,39 @@ export const EventBracket = () => {
                     built={built}
                     entrants={byId}
                     stateOf={stateOf}
-                    onSelect={published ? (m) => setSelectedId(m.id) : undefined}
+                    onSelect={live ? (m) => setSelectedId(m.id) : undefined}
                 />
             </section>
 
-            {published &&
+            {live &&
                 <section className={styles.card}>
                     <h2 className={styles.sectionTitle}>Decision history</h2>
-                    {log.length === 0
-                        ? <p className={styles.muted}>No results yet.</p>
+                    {decisions.length === 0
+                        ? <p className={styles.muted}>No decisions yet.</p>
                         : (
                             <ul className={styles.logList}>
-                                {[...log].reverse().map(entry => (
-                                    <li key={entry.id} className={`${styles.logItem} ${entry.reverted ? styles.logReverted : ''}`}>
-                                        <div>
-                                            <span className={styles.logMatch}>{name(entry.a)} vs {name(entry.b)}</span>
-                                            <span className={styles.logDetail}>
-                                                {entry.source === 'cleared'
-                                                    ? 'Result cleared'
-                                                    : `${name(entry.scoreA > entry.scoreB ? entry.a : entry.b)} won ${Math.max(entry.scoreA, entry.scoreB)}-${Math.min(entry.scoreA, entry.scoreB)}`}
-                                                {' · '}{SOURCE_LABELS[entry.source]}
-                                                {' · '}{new Date(entry.at).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}
-                                                {entry.reverted && ' · Reverted'}
-                                            </span>
-                                        </div>
-                                        {!entry.reverted &&
-                                            <button type="button" className={`${styles.ghostBtn} ${styles.smallBtn}`}
-                                                onClick={() => window.confirm('Revert this decision? The match goes back to how it was before, and any later matches it fed into reset.') && revertDecision(event.id, entry.id)}>
-                                                <FaUndo /> Revert
-                                            </button>
-                                        }
-                                    </li>
-                                ))}
+                                {decisions.map(d => {
+                                    const m = allMatches(built).find(x => x.id === d.matchId);
+                                    return (
+                                        <li key={d.id} className={`${styles.logItem} ${d.reverted ? styles.logReverted : ''}`}>
+                                            <div>
+                                                <span className={styles.logMatch}>{m ? `${name(m.a)} vs ${name(m.b)}` : d.matchId}</span>
+                                                <span className={styles.logDetail}>
+                                                    {ACTION_LABELS[d.action] ?? d.action}: {result(d.before)} → {result(d.after)}
+                                                    {d.by && ` · ${d.by}`}
+                                                    {' · '}{new Date(d.at).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}
+                                                    {d.reverted && ' · Reverted'}
+                                                </span>
+                                            </div>
+                                            {d.canRevert &&
+                                                <button type="button" className={`${styles.ghostBtn} ${styles.smallBtn}`}
+                                                    onClick={() => window.confirm('Revert this decision? The match goes back to how it was before it.') && revertDecision(event.id, d.id)}>
+                                                    <FaUndo /> Revert
+                                                </button>
+                                            }
+                                        </li>
+                                    );
+                                })}
                             </ul>
                         )
                     }
@@ -150,20 +154,19 @@ export const EventBracket = () => {
                     key={selected.id}
                     match={selected}
                     entrants={byId}
-                    bestOf={matchBestOf(event, built, selected)}
+                    bestOf={selected.bestOf ?? event.bestOf}
                     mode="host"
-                    reports={matchReports(event.bracket, selected)}
-                    noShow={matchNoShow(event.bracket, selected)}
+                    reports={view.reports ?? {}}
+                    issues={view.issues ?? []}
                     onClose={close}
-                    onSave={(a, b) => { hostReportMatch(event.id, selected, a, b); close(); }}
-                    onClear={() => { clearMatch(event.id, selected); close(); }}
+                    onSave={(a, b) => rule({ action: 'award', scoreA: a, scoreB: b })}
+                    onClear={() => rule({ action: 'clear' })}
+                    onUphold={() => rule({ action: 'uphold' })}
                     onForfeit={(winnerId) => {
+                        const win = Math.ceil((selected.bestOf ?? event.bestOf) / 2);
                         const aWins = winnerId === selected.a;
-                        const forfeitScore = Math.ceil(matchBestOf(event, built, selected) / 2);
-                        hostReportMatch(event.id, selected, aWins ? forfeitScore : 0, aWins ? 0 : forfeitScore, { forfeit: true });
-                        close();
+                        rule({ action: 'award', scoreA: aWins ? win : 0, scoreB: aWins ? 0 : win, forfeit: true });
                     }}
-                    onDismissNoShow={() => { dismissNoShow(event.id, selected.id); close(); }}
                 />
             }
         </>

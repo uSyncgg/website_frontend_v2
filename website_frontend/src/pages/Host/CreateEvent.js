@@ -2,10 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router";
 import { FaPlus, FaTrash } from "react-icons/fa";
 import { useCurrentUser } from "hooks";
-import { createEvent, useHostEvent } from "services/brackets";
-import { FORMATS, HAS_FINAL } from "utils/bracket";
+import { createEvent, useHostEvent, useBracketMeta } from "services/brackets";
 import { PROFILE_LABELS, canHostBrackets, profileUrl } from "utils/profiles";
-import { EVENT_TYPES, GAME_TITLES, HOST_GAMES, HOSTING_DASHBOARD_PATH, PLATFORMS, TOURNAMENT_GAME } from "utils/hostEvents";
+import { EVENT_TYPES, HOSTING_DASHBOARD_PATH, PLATFORMS, TOURNAMENT_GAME } from "utils/hostEvents";
 import { PlayerPicker } from "components/Teams/TeamParts";
 import { BEST_OF, BracketError, TEAM_SIZES } from "./hostShared";
 import { SearchSelect } from "./SearchSelect";
@@ -37,8 +36,9 @@ const fromTemplate = (event, base) => {
         ...base,
         name: event.name,
         eventType: event.eventType,
-        game: HOST_GAMES.includes(event.game) ? event.game : base.game,
-        gameTitle: event.gameTitle ?? '',
+        game: event.gameKey ?? base.game,
+        gameTitle: event.gameTitleKey ?? '',
+        gameMode: event.gameModeKey ?? '',
         format: event.format,
         teamSize: event.teamSize,
         bestOf: event.bestOf,
@@ -60,8 +60,8 @@ const fromTemplate = (event, base) => {
     };
 };
 
-const GAME_OPTIONS = HOST_GAMES.map(g => ({ value: g, label: g }));
-const titleOptions = (game) => (GAME_TITLES[game] ?? []).map(([title, year]) => ({ value: title, label: title, hint: String(year) }));
+// Games, titles, modes and formats come from the lookup tables (GET /brackets/meta).
+const sameName = (a, b) => (a ?? '').replace(/\s/g, '').toLowerCase() === (b ?? '').replace(/\s/g, '').toLowerCase();
 
 // /host/events/new, or /host/events/new?profile=<public_id> from a host or venue profile's
 // "Add event" button: the event is posted as that profile (or the one you're viewing as) and
@@ -81,8 +81,9 @@ export const CreateEvent = () => {
     const [form, setForm] = useState({
         name: '',
         eventType: EVENT_TYPES[typeParam] ? typeParam : '',
-        game: HOST_GAMES.includes(gameParam) ? gameParam : HOST_GAMES[0],
+        game: '',
         gameTitle: '',
+        gameMode: '',
         format: 'single_elim', teamSize: '1v1', bestOf: 3,
         differentFinals: false, finalBestOf: 5,
         maxEntrants: '16', uncapped: false,
@@ -102,6 +103,14 @@ export const CreateEvent = () => {
     // What every player fills in when they sign up (free or paid), so the host knows who joined.
     const [signupForm, setSignupForm] = useState({ playerFields: ['Discord'], questions: [] });
     const [submitted, setSubmitted] = useState(false);
+    const meta = useBracketMeta();
+
+    // ?game= is a game's name (from the page the host came from); match it to a lookup key.
+    useEffect(() => {
+        if (!meta || form.game) return;
+        const fromParam = meta.games.find(g => sameName(g.name, gameParam));
+        setForm(f => ({ ...f, game: (fromParam ?? meta.games[0])?.key ?? '' }));
+    }, [meta, form.game, gameParam]);
 
     // ?from=<event id>: start from an earlier event's settings (filled once it loads).
     const fromId = searchParams.get('from');
@@ -137,21 +146,34 @@ export const CreateEvent = () => {
     const isLan = form.eventType === 'lan';
     // Only Call of Duty tournaments can be posted for now.
     const isTournament = form.eventType === 'tournament';
-    const game = isTournament ? TOURNAMENT_GAME : form.game;
-    const titles = titleOptions(game);
-    // A title only counts if it belongs to the game in play: switching game (or to a Tournament,
-    // which is always Call of Duty) drops a title from the old one rather than saving a mismatch.
+    const games = meta?.games ?? [];
+    const gameEntry = isTournament ? games.find(g => sameName(g.name, TOURNAMENT_GAME)) : games.find(g => g.key === form.game);
+    const game = gameEntry?.key ?? '';
+    const gameName = gameEntry?.name ?? 'game';
+    const gameOptions = games.map(g => ({ value: g.key, label: g.name }));
+    const titles = (gameEntry?.titles ?? []).map(t => ({ value: t.key, label: t.name, hint: t.year ? String(t.year) : undefined }));
+    // A title or mode only counts if it belongs to the game in play: switching game (or to a
+    // Tournament, which is always Call of Duty) drops one from the old game rather than saving a
+    // mismatch. Games without titles never show the title picker.
     const gameTitle = titles.some(t => t.value === form.gameTitle) ? form.gameTitle : '';
-    const hasFinal = !!HAS_FINAL[form.format];
+    const titleEntry = gameEntry?.titles.find(t => t.key === gameTitle);
+    const modes = (gameEntry?.modes ?? [])
+        .filter(m => !titleEntry || titleEntry.modes.includes(m.key))
+        .map(m => ({ value: m.key, label: m.name }));
+    const gameMode = modes.some(m => m.value === form.gameMode) ? form.gameMode : '';
+    const formats = meta?.formats ?? [];
+    const hasFinal = !!formats.find(f => f.key === form.format)?.hasFinal;
 
-    const chooseGame = (g) => setForm(f => ({ ...f, game: g, gameTitle: g === f.game ? f.gameTitle : '' }));
+    const chooseGame = (g) => setForm(f => ({ ...f, game: g, gameTitle: g === f.game ? f.gameTitle : '', gameMode: g === f.game ? f.gameMode : '' }));
 
     const maxNum = Number(form.maxEntrants);
     const minNum = Number(form.minEntrants);
     const errors = {
         name: !form.name.trim() && 'Give your event a name',
         eventType: !form.eventType && 'Pick what kind of event this is',
-        gameTitle: titles.length > 0 && !gameTitle && `Pick which ${game} game`,
+        game: !game && 'Pick a game',
+        gameTitle: titles.length > 0 && !gameTitle && `Pick which ${gameName} game`,
+        gameMode: modes.length > 0 && !gameMode && 'Pick a game mode',
         venue: isLan && !form.venue.trim() && 'Add where the LAN is held',
         maxEntrants: !form.uncapped && (!Number.isInteger(maxNum) || maxNum < 2) && 'Enter a whole number of 2 or more, or tick "No cap"',
         minEntrants: form.useMin && (
@@ -180,8 +202,8 @@ export const CreateEvent = () => {
             ...rest,
             name: form.name.trim(),
             game,
-            gameTitle,
-            locationType: isLan ? 'in_person' : 'online',
+            gameTitle: gameTitle || null,
+            gameMode: gameMode || null,
             venue: isLan ? form.venue.trim() : '',
             bestOf: Number(form.bestOf),
             finalBestOf: hasFinal && differentFinals ? Number(form.finalBestOf) : null,
@@ -249,8 +271,9 @@ export const CreateEvent = () => {
                         <div className={styles.fieldRow}>
                             <div className={styles.field}>
                                 <label htmlFor="game">Game</label>
-                                <SearchSelect id="game" value={game} options={GAME_OPTIONS} onChange={chooseGame}
-                                    disabled={isTournament} searchPlaceholder="Search games" />
+                                <SearchSelect id="game" value={game} options={gameOptions} onChange={chooseGame}
+                                    disabled={isTournament || !meta} placeholder={meta ? 'Choose a game' : 'Loading games…'} searchPlaceholder="Search games" />
+                                {err('game')}
                                 {isTournament && <p className={styles.fieldHint}>Only Call of Duty tournaments for now.</p>}
                             </div>
                             <div className={styles.field}>
@@ -263,10 +286,19 @@ export const CreateEvent = () => {
 
                         {titles.length > 0 &&
                             <div className={styles.field}>
-                                <label htmlFor="gameTitle">Which {game} game</label>
+                                <label htmlFor="gameTitle">Which {gameName} game</label>
                                 <SearchSelect id="gameTitle" value={gameTitle} options={titles} onChange={v => setValue('gameTitle', v)}
-                                    placeholder={`Choose a ${game} game`} searchPlaceholder={`Search ${game} games`} />
+                                    placeholder={`Choose a ${gameName} game`} searchPlaceholder={`Search ${gameName} games`} />
                                 {err('gameTitle')}
+                            </div>
+                        }
+
+                        {modes.length > 0 &&
+                            <div className={styles.field}>
+                                <label htmlFor="gameMode">Game mode</label>
+                                <SearchSelect id="gameMode" value={gameMode} options={modes} onChange={v => setValue('gameMode', v)}
+                                    placeholder="Choose a mode" searchPlaceholder="Search modes" />
+                                {err('gameMode')}
                             </div>
                         }
 
@@ -325,12 +357,12 @@ export const CreateEvent = () => {
                     <section className={`${styles.card} ${styles.form}`}>
                         <h2 className={styles.sectionTitle}>Format</h2>
                         <div className={styles.formatGrid} role="radiogroup" aria-label="Format">
-                            {Object.entries(FORMATS).map(([key, f]) => (
-                                <button key={key} type="button" role="radio" aria-checked={form.format === key}
-                                    className={`${styles.formatCard} ${form.format === key ? styles.formatCardActive : ''}`}
-                                    onClick={() => setValue('format', key)}>
+                            {formats.map(f => (
+                                <button key={f.key} type="button" role="radio" aria-checked={form.format === f.key}
+                                    className={`${styles.formatCard} ${form.format === f.key ? styles.formatCardActive : ''}`}
+                                    onClick={() => setValue('format', f.key)}>
                                     <strong>{f.label}</strong>
-                                    <span>{f.blurb}</span>
+                                    <span>{f.description}</span>
                                 </button>
                             ))}
                         </div>

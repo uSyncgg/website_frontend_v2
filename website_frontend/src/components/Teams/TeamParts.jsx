@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { useAuth, useCurrentUser } from "hooks";
 import { profileUrl } from "utils/profiles";
 import { searchPlayers, teamUrl, ROLE_LABELS } from "services/teams";
+import { useBracketMeta } from "services/brackets";
 import styles from "./Teams.module.css";
 
 const initial = (name) => (name ?? '?').trim().charAt(0).toUpperCase();
@@ -23,6 +24,30 @@ export const ProfileLink = ({ profile, onClick }) => (
     <Link to={profileUrl(profile)} onClick={onClick}>{profile.username}</Link>
 );
 
+// "Call of Duty, Halo" - the games a team plays.
+export const gameNames = (team) => (team.games ?? []).map(g => g.name).join(', ');
+
+// Pick the games a team plays (at least one), from the supported games (GET /brackets/meta).
+// `value` and `onChange` work with game keys.
+export const GamesPicker = ({ value, onChange, id = 'team-games' }) => {
+    const meta = useBracketMeta();
+    if (!meta) return <p className={styles.hint}>Loading games…</p>;
+    return (
+        <div id={id} className={styles.avatarRow} role="group" aria-label="Games" style={{ flexWrap: 'wrap', gap: '.4rem' }}>
+            {meta.games.map(g => {
+                const on = value.includes(g.key);
+                return (
+                    <button key={g.key} type="button" aria-pressed={on} className={styles.rolePill}
+                        style={{ position: 'static', cursor: 'pointer', opacity: on ? 1 : 0.55 }}
+                        onClick={() => onChange(on ? value.filter(k => k !== g.key) : [...value, g.key])}>
+                        {g.name}
+                    </button>
+                );
+            })}
+        </div>
+    );
+};
+
 // A team in the dashboard grid. The whole card opens the team page.
 export const TeamCard = ({ team }) => (
     <Link to={teamUrl(team)} className={styles.teamCard}>
@@ -33,7 +58,7 @@ export const TeamCard = ({ team }) => (
             <Avatar src={team.picture} name={team.name} size={56} team />
             <h3 className={styles.cardName}>{team.name}</h3>
             <div className={styles.cardMeta}>
-                {[team.game, `${team.members.length} player${team.members.length === 1 ? '' : 's'}`].filter(Boolean).join(' · ')}
+                {[gameNames(team), `${team.members.length} player${team.members.length === 1 ? '' : 's'}`].filter(Boolean).join(' · ')}
             </div>
             <div className={styles.cardMeta}>Run by {team.owner.username}</div>
             {team.members.length > 0 &&

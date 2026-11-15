@@ -1,16 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { EditModal } from "components/EditModal/EditModal";
-import { GAME_OPTIONS } from "components/MutualSignUpSteps/UserGamesStep";
 import { useAuth, useCurrentUser } from "hooks";
 import { getApiErrorMessage } from "utils/apiError";
 import { PROFILE_LABELS, byProfileType } from "utils/profiles";
 import { createTeam } from "services/teams";
-import { Avatar, PlayerPicker } from "./TeamParts";
+import { Avatar, GamesPicker, PlayerPicker } from "./TeamParts";
 import styles from "./Teams.module.css";
 
 const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
 
-// "Create team": name it, give it an image, pick its game, invite players, then Create.
+// "Create team": name it, give it an image, pick its games (at least one), invite players, then Create.
 // The team belongs to one of the account's profiles: `ownerType` fixes it (an org's settings),
 // otherwise the user picks when they have more than one (org first, as orgs exist to run teams).
 export const CreateTeamModal = ({ onClose, onCreated, ownerType = null }) => {
@@ -19,7 +18,7 @@ export const CreateTeamModal = ({ onClose, onCreated, ownerType = null }) => {
     const owners = [...profiles].sort(byProfileType).sort((a, b) => (b.type === 'org') - (a.type === 'org'));
     const [owner, setOwner] = useState(ownerType ?? owners[0]?.type ?? 'player');
     const [name, setName] = useState('');
-    const [game, setGame] = useState('');
+    const [games, setGames] = useState([]);
     const [file, setFile] = useState(null);
     const [preview, setPreview] = useState(null);
     const [invites, setInvites] = useState([]);
@@ -46,13 +45,14 @@ export const CreateTeamModal = ({ onClose, onCreated, ownerType = null }) => {
 
     const submit = async () => {
         if (name.trim().length < 2) return setError('Give your team a name (at least 2 characters).');
+        if (games.length === 0) return setError('Pick at least one game your team plays.');
         setSaving(true);
         setError('');
         try {
             const team = await createTeam({
                 owner_type: owner,
                 name: name.trim(),
-                game: game || null,
+                games,
                 invites: invites.map(p => p.username),
                 picture: file,
             }, session?.access_token);
@@ -93,11 +93,9 @@ export const CreateTeamModal = ({ onClose, onCreated, ownerType = null }) => {
             </div>
 
             <div className={styles.field}>
-                <label className={styles.label} htmlFor="team-game">Game</label>
-                <select id="team-game" className={styles.input} value={game} onChange={e => setGame(e.target.value)}>
-                    <option value="">Any / not set</option>
-                    {GAME_OPTIONS.filter(g => g.value !== 'Other').map(g => <option key={g.value} value={g.value}>{g.title}</option>)}
-                </select>
+                <span className={styles.label}>Games</span>
+                <GamesPicker value={games} onChange={setGames} />
+                <p className={styles.hint}>Your team can enter events for any of these. Change them any time.</p>
             </div>
 
             {!ownerType && owners.length > 1 &&

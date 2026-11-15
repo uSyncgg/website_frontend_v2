@@ -11,7 +11,7 @@ import {
     getTeam, getMyInvites, respondToInvite, invitePlayer, cancelInvite, setMemberRole, removeMember,
     deleteTeam, leaveTeam, updateTeam, updateTeamPicture, ROLE_LABELS,
 } from "services/teams";
-import { Avatar, PlayerPicker } from "components/Teams/TeamParts";
+import { Avatar, GamesPicker, PlayerPicker, gameNames } from "components/Teams/TeamParts";
 import host from "pages/Host/Host.module.css";
 import styles from "components/Teams/Teams.module.css";
 
@@ -80,6 +80,11 @@ export const TeamPage = () => {
         }
     };
 
+    const saveGames = async (games) => {
+        if (games.length === 0) return setError('A team plays at least one game.');
+        await run(t => updateTeam(team.public_id, { games }, t));
+    };
+
     const saveName = async () => {
         if (name.trim().length >= 2 && name.trim() !== team.name) {
             if (!(await run(t => updateTeam(team.public_id, { name: name.trim() }, t)))) return;
@@ -118,7 +123,7 @@ export const TeamPage = () => {
                     <input ref={fileInput} type="file" accept="image/jpeg,image/png,image/webp" className={styles.hidden} onChange={pickImage} />
 
                     <div style={{ flex: 1, minWidth: '12rem' }}>
-                        {team.game && <p className={host.eyebrow}>{team.game}</p>}
+                        {team.games?.length > 0 && <p className={host.eyebrow}>{gameNames(team)}</p>}
                         {renaming ? (
                             <div className={styles.actions}>
                                 <input className={styles.input} style={{ maxWidth: '18rem' }} value={name} maxLength={40} onChange={e => setName(e.target.value)} aria-label="Team name" autoFocus />
@@ -181,6 +186,14 @@ export const TeamPage = () => {
                         ))}
                     </ul>
                 </section>
+
+                {isOwner &&
+                    <section className={host.card}>
+                        <h2 className={host.sectionTitle}>Games</h2>
+                        <p className={host.muted}>The team can enter events for any of these. It needs at least one.</p>
+                        <GamesPicker value={(team.games ?? []).map(g => g.key)} onChange={saveGames} />
+                    </section>
+                }
 
                 {isOwner &&
                     <section className={host.card}>

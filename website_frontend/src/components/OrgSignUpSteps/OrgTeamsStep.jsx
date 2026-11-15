@@ -1,16 +1,17 @@
-import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
+import { Controller, useFieldArray, useFormContext } from "react-hook-form";
 import { FormButton } from "components/FormButton/FormButton";
+import { GamesPicker } from "components/Teams/TeamParts";
 import styles from "components/MutualSignUpSteps/LocationStep.module.css";
 import own from "./OrgTeamsStep.module.css";
 
-const EMPTY_TEAM = { name: '', game: '' };
+const EMPTY_TEAM = { name: '', games: [] };
 
 // Optional teams to create along with the org (org_teams). Blank rows are ignored on submit,
-// so skipping this step is fine. Players are invited later, once the teams exist.
+// so skipping this step is fine. A named team plays at least one game (the supported games, by
+// key). Players are invited later, once the teams exist.
 export const OrgTeamsStep = () => {
-    const { control, register } = useFormContext();
+    const { control, register, getValues, formState: { errors } } = useFormContext();
     const { fields, append, remove } = useFieldArray({ control, name: "org_teams" });
-    const orgGames = (useWatch({ name: "org_games" }) ?? []).filter(g => g !== 'Other');
 
     return (
         <div>
@@ -32,15 +33,16 @@ export const OrgTeamsStep = () => {
                         maxLength={40}
                         {...register(`org_teams.${index}.name`)}
                     />
-                    {orgGames.length > 0 && (
-                        <>
-                            <label className={own.label} htmlFor={`org_teams.${index}.game`}>Game</label>
-                            <select id={`org_teams.${index}.game`} className={own.input} {...register(`org_teams.${index}.game`)}>
-                                <option value="">Any / not set</option>
-                                {orgGames.map(game => <option key={game} value={game}>{game}</option>)}
-                            </select>
-                        </>
-                    )}
+                    <span className={own.label}>Games</span>
+                    <Controller
+                        control={control}
+                        name={`org_teams.${index}.games`}
+                        rules={{
+                            validate: (games) => !getValues(`org_teams.${index}.name`)?.trim() || (games?.length > 0) || 'Pick at least one game this team plays.',
+                        }}
+                        render={({ field: { value, onChange } }) => <GamesPicker id={`org_teams.${index}.games`} value={value ?? []} onChange={onChange} />}
+                    />
+                    {errors.org_teams?.[index]?.games && <p className={own.empty} role="alert">{errors.org_teams[index].games.message}</p>}
                 </div>
             ))}
 

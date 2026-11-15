@@ -9,9 +9,33 @@ jest.mock('hooks', () => ({
     useCurrentUser: () => ({ profiles: [host], defaultProfile: host }),
     useAuth: () => ({ session: { access_token: 't' } }),
 }));
+// What GET /brackets/meta returns (the lookup tables), trimmed down.
+const META = {
+    games: [
+        { key: 'call_of_duty', name: 'Call of Duty', modes: [], titles: [
+            { key: 'modern_warfare_4', name: 'Modern Warfare 4', year: 2026, modes: [] },
+            { key: 'black_ops_7', name: 'Black Ops 7', year: 2025, modes: [] },
+            { key: 'call_of_duty', name: 'Call of Duty', year: 2003, modes: [] },
+        ] },
+        { key: 'halo', name: 'Halo', modes: [{ key: 'slayer', name: 'Slayer' }, { key: 'ctf', name: 'Capture the Flag' }], titles: [
+            { key: 'halo_infinite', name: 'Halo Infinite', year: 2021, modes: ['slayer', 'ctf'] },
+            { key: 'halo_2', name: 'Halo 2', year: 2004, modes: ['slayer'] },
+        ] },
+        { key: 'cs2', name: 'CS2', modes: [], titles: [] },
+        { key: 'rocket_league', name: 'Rocket League', modes: [], titles: [] },
+    ],
+    formats: [
+        { key: 'single_elim', label: 'Single Elimination', description: 'Lose once and you are out.', hasFinal: true, minEntrants: 2 },
+        { key: 'double_elim', label: 'Double Elimination', description: 'Lose twice to be out.', hasFinal: true, minEntrants: 2 },
+        { key: 'round_robin', label: 'Round Robin', description: 'Everyone plays everyone once.', hasFinal: false, minEntrants: 2 },
+        { key: 'swiss', label: 'Swiss', description: 'Paired by record.', hasFinal: false, minEntrants: 2 },
+    ],
+};
+
 jest.mock('services/brackets', () => ({
     ...jest.requireActual('services/brackets'),
     createEvent: jest.fn().mockResolvedValue(null),
+    useBracketMeta: () => META,
 }));
 
 const renderAt = (url) => render(
@@ -96,9 +120,7 @@ describe('CreateEvent', () => {
         renderAt('/host/events/new?type=league&game=Call%20of%20Duty');
         fireEvent.click(picker('Which Call of Duty game'));
         const titles = within(screen.getByRole('listbox')).getAllByRole('option').map(o => o.textContent);
-        expect(titles[0]).toBe('Modern Warfare 42026');
-        expect(titles[1]).toBe('Black Ops 72025');
-        expect(titles[titles.length - 1]).toBe('Call of Duty2003');
+        expect(titles).toEqual(['Modern Warfare 42026', 'Black Ops 72025', 'Call of Duty2003']);
         fireEvent.keyDown(screen.getByLabelText('Search Call of Duty games'), { key: 'Escape' });
         fillRequired();
         fireEvent.click(screen.getByRole('button', { name: 'Create event' }));
@@ -114,6 +136,24 @@ describe('CreateEvent', () => {
         expect(screen.queryByLabelText('Which Halo game')).toBeNull();
         pick('Game', 'Halo');
         expect(picker('Which Halo game')).toHaveTextContent('Choose a Halo game');
+    });
+
+    it("offers a game's modes, narrowed to the title, and requires one", () => {
+        renderAt('/host/events/new?type=league&game=Halo');
+        pick('Which Halo game', 'Halo 2');
+        fireEvent.click(picker('Game mode'));
+        expect(within(screen.getByRole('listbox')).getAllByRole('option').map(o => o.textContent)).toEqual(['Slayer']);
+        fireEvent.keyDown(screen.getByLabelText('Search modes'), { key: 'Escape' });
+        fillRequired();
+        fireEvent.click(screen.getByRole('button', { name: 'Create event' }));
+        expect(screen.getByText('Pick a game mode')).toBeInTheDocument();
+        expect(createEvent).not.toHaveBeenCalled();
+    });
+
+    it("never shows a title or mode picker for a game without them", () => {
+        renderAt('/host/events/new?type=league&game=CS2');
+        expect(screen.queryByLabelText(/Which .* game/)).toBeNull();
+        expect(screen.queryByLabelText('Game mode')).toBeNull();
     });
 
     it('offers round robin and swiss, and a finals best of only for elimination formats', () => {
@@ -149,7 +189,7 @@ describe('CreateEvent', () => {
         fireEvent.change(screen.getByLabelText('Minimum players'), { target: { value: '6' } });
         fireEvent.click(screen.getByRole('button', { name: 'Create event' }));
         expect(createEvent).toHaveBeenCalledWith(expect.objectContaining({
-            game: 'Call of Duty', gameTitle: 'Black Ops 7', locationType: 'online', platform: 'console_only',
+            game: 'call_of_duty', gameTitle: 'black_ops_7', gameMode: null, platform: 'console_only',
             restrictions: ['No snipers'], bestOf: 3, finalBestOf: 7, minEntrants: 6, maxEntrants: 16, admins: [],
         }));
     });

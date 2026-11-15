@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { FaArrowDown, FaArrowUp, FaGripVertical, FaRandom } from "react-icons/fa";
 import { Bracket } from "components/Bracket/Bracket";
 import { saveBracketDraft, publishBracket, signedUpEntrants, pendingEntrants } from "services/brackets";
-import { buildBracket, SEEDING_METHODS } from "utils/bracket";
+import { SEEDING_METHODS, firstRoundByes } from "utils/bracket";
 import { useManagedEvent } from "./ManageEvent";
 import { entrantsById, isTeamEvent } from "./hostShared";
 import styles from "./Host.module.css";
 
+const SAVE_DELAY_MS = 400;
+
 // /host/events/:eventId/seeding - order the field, preview the bracket, then publish.
+// The preview is the server's: each change to the order is saved as the draft (after a short
+// pause) and the bracket that comes back is what's drawn. Only the host and admins see drafts.
 export const EventSeeding = () => {
     const event = useManagedEvent();
     const navigate = useNavigate();
@@ -16,20 +20,33 @@ export const EventSeeding = () => {
     const [method, setMethod] = useState('registration');
     const [dragIndex, setDragIndex] = useState(null);
     const [overIndex, setOverIndex] = useState(null);
+    const draft = event.bracket?.status === 'draft' ? event.bracket : null;
 
-    // Pending teams (short-handed) sit out until their roster fills.
+    // Pending teams (not enough players picked) sit out until their roster fills.
     const pool = signedUpEntrants(event);
 
-    // Start from a saved draft when there is one, otherwise in sign-up order.
+    // Start from the saved draft when there is one, otherwise in sign-up order.
     const [order, setOrder] = useState(() => (
-        event.bracket && !event.bracket.published
-            ? event.bracket.seeds.filter(id => byId[id])
-            : SEEDING_METHODS.registration.sort(pool).map(e => e.id)
+        draft ? draft.seeds.filter(id => byId[id]) : SEEDING_METHODS.registration.sort(pool).map(e => e.id)
     ));
 
     // Keep the order in step with the pool if the entrants change.
     const poolIds = pool.map(e => e.id);
     const seeds = [...order.filter(id => poolIds.includes(id)), ...poolIds.filter(id => !order.includes(id))];
+    const seedKey = seeds.join(',');
+    const tooFew = seeds.length < 2;
+
+    // Save the draft (and so refresh the preview) once the order settles.
+    const saved = useRef(draft ? draft.seeds.join(',') : '');
+    const live = !!event.bracket && event.bracket.status !== 'draft';
+    useEffect(() => {
+        if (tooFew || seedKey === saved.current || live) return undefined;
+        const t = setTimeout(() => {
+            saved.current = seedKey;
+            saveBracketDraft(event.id, seedKey.split(','));
+        }, SAVE_DELAY_MS);
+        return () => clearTimeout(t);
+    }, [seedKey, tooFew, event.id, live]);
 
     const applyMethod = (key) => {
         setMethod(key);
@@ -45,9 +62,7 @@ export const EventSeeding = () => {
         setMethod('manual');
     };
 
-    const preview = buildBracket(event.format, seeds, {});
-
-    if (event.bracket?.published) {
+    if (live) {
         return (
             <div className={styles.emptyState}>
                 <h2 className={styles.sectionTitle}>The bracket is already live</h2>
@@ -57,11 +72,14 @@ export const EventSeeding = () => {
         );
     }
 
-    const tooFew = seeds.length < 2;
-    const save = async (andPublish) => {
-        if (!await saveBracketDraft(event.id, seeds)) return;
-        if (andPublish && !await publishBracket(event.id)) return;
-        navigate(`/host/events/${event.id}/bracket`);
+    const preview = draft && draft.seeds.join(',') === seedKey ? draft.built : null;
+
+    const publish = async () => {
+        if (seedKey !== saved.current) {
+            saved.current = seedKey;
+            if (!await saveBracketDraft(event.id, seeds)) return;
+        }
+        if (await publishBracket(event.id)) navigate(`/host/events/${event.id}/bracket`);
     };
 
     return (
@@ -88,7 +106,7 @@ export const EventSeeding = () => {
 
                 {pendingEntrants(event).length > 0 &&
                     <p className={styles.fieldHint}>
-                        {pendingEntrants(event).length} pending team{pendingEntrants(event).length > 1 ? 's' : ''} ({pendingEntrants(event).map(e => e.name).join(', ')}) won't be seeded until {pendingEntrants(event).length > 1 ? 'their rosters are' : 'its roster is'} full.
+                        {pendingEntrants(event).length} pending team{pendingEntrants(event).length > 1 ? 's' : ''} ({pendingEntrants(event).map(e => e.name).join(', ')}) won't be seeded until {pendingEntrants(event).length > 1 ? 'their captains pick' : 'its captain picks'} enough players.
                     </p>
                 }
 
@@ -113,6 +131,8 @@ export const EventSeeding = () => {
                     ))}
                 </ol>
                 {tooFew && <p className={styles.fieldError}>You need at least 2 {isTeamEvent(event) ? 'teams' : 'players'} to build a bracket.</p>}
+                {event.minEntrants != null && seeds.length < event.minEntrants &&
+                    <p className={styles.fieldHint}>This event needs at least {event.minEntrants} signed up before it can start.</p>}
             </section>
 
             <section className={styles.card}>
@@ -120,21 +140,20 @@ export const EventSeeding = () => {
                     <div>
                         <h2 className={styles.sectionTitle}>Bracket preview</h2>
                         <p className={styles.muted} style={{ margin: '.25rem 0 0' }}>
-                            {event.format === 'single_elim' && seeds.length > 1 && (() => {
-                                const size = preview.rounds[0].length * 2;
-                                const byes = size - seeds.length;
-                                return byes ? `${byes} top seed${byes > 1 ? 's get' : ' gets'} a first-round bye.` : 'No byes - the field fills the bracket.';
-                            })()}
-                            {event.format === 'round_robin' && seeds.length > 1 && `${preview.rounds.flat().length} matches over ${preview.rounds.length} rounds.`}
-                            {event.format === 'swiss' && seeds.length > 1 && `${preview.rounds.length} rounds. Each round after the first is paired by record once the last one is played.`}
+                            {!preview && !tooFew && 'Updating the preview…'}
+                            {preview && event.format === 'single_elim' && (firstRoundByes(preview)
+                                ? `${firstRoundByes(preview)} top seed${firstRoundByes(preview) > 1 ? 's get' : ' gets'} a first-round bye.`
+                                : 'No byes - the field fills the bracket.')}
+                            {preview && event.format === 'round_robin' && `${preview.rounds.flat().length} matches over ${preview.rounds.length} rounds.`}
+                            {preview && event.format === 'swiss' && `${preview.rounds.length} rounds. Each round after the first is paired by record once the last one is played.`}
                         </p>
                     </div>
                     <div className={styles.btnRow}>
-                        <button type="button" className={styles.ghostBtn} disabled={tooFew} onClick={() => save(false)}>Save draft</button>
-                        <button type="button" className={styles.primaryBtn} disabled={tooFew} onClick={() => save(true)}>Publish bracket</button>
+                        <button type="button" className={styles.primaryBtn} disabled={tooFew} onClick={publish}>Publish bracket</button>
                     </div>
                 </div>
-                {!tooFew && <Bracket format={event.format} built={preview} entrants={byId} />}
+                <p className={styles.fieldHint}>The order saves as a draft automatically. Publishing rechecks who's signed up.</p>
+                {preview && <Bracket format={event.format} built={preview} entrants={byId} />}
             </section>
         </div>
     );

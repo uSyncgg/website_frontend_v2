@@ -14,9 +14,9 @@ const EntrantDetails = ({ event, entrant, onClose }) => {
             <dl className={styles.detailList}>
                 {team && <><dt>Captain</dt><dd>@{entrant.captain}</dd></>}
                 {team && <><dt>Status</dt><dd>{isPending(event, entrant)
-                    ? `Pending - ${entrant.rosterSize ?? 0} of ${teamSizeOf(event)} players`
+                    ? `Pending - ${entrant.rosterSize ?? 0} of ${teamSizeOf(event)} players picked`
                     : 'Signed up'}</dd></>}
-                {team && entrant.teammates?.length > 0 && <><dt>Teammates</dt><dd>{entrant.teammates.join(', ')}</dd></>}
+                {team && <><dt>Playing</dt><dd>{entrant.players?.length ? entrant.players.map(p => p.username).join(', ') : 'No players picked yet'}</dd></>}
                 {!team && <><dt>Gamertag</dt><dd>{entrant.captain}</dd></>}
                 <dt>Email</dt><dd>{entrant.email || '-'}</dd>
                 <dt>Signed up</dt><dd>{formatDate(entrant.registeredAt)}</dd>
@@ -42,7 +42,7 @@ export const EventEntrants = () => {
     const [viewingId, setViewingId] = useState(null);
     const [filter, setFilter] = useState('all');
     const teams = isTeamEvent(event);
-    const locked = !!event.bracket?.published;
+    const locked = !!event.bracket && event.bracket.status !== 'draft';
 
     const signedUp = signedUpEntrants(event).length;
     const pending = pendingEntrants(event).length;

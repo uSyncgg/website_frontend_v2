@@ -1,25 +1,27 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { FaBell } from "react-icons/fa";
 import { useAuth, useCurrentUser } from "hooks";
 import { getApiErrorMessage } from "utils/apiError";
 import { EVENT_DASHBOARD_PATH } from "utils/hostEvents";
 import { getMyInvites, respondToInvite } from "services/teams";
-import { getNotifications, markNotificationsRead, notificationText } from "services/notifications";
+import { getNotifications, markNotificationsRead, notificationText, subscribeToNotifications } from "services/notifications";
 import { getAdminInvites, respondAdminInvite } from "services/brackets";
 import { InviteCard } from "components/Teams/TeamParts";
 import { timeAgo } from "utils/humanize";
 import styles from "./NotificationBell.module.css";
 
-const REFRESH_MS = 60 * 1000;
-
-
-// The bell to the left of the profile avatar. Team invites waiting on you come first (accept or
-// decline right here), then everything else: someone joined your team, your team is signed up or
-// back to pending, an event was delayed, you have a match, the other side reported a score, a
-// score is disputed, a no-show was reported. Opening the bell marks them read.
+// The bell to the left of the profile avatar. Invites waiting on you come first (accept or
+// decline right here), then your unread notifications, each with its own action ("Go to match",
+// "Go to queue", ...) and Dismiss. Acting on one or dismissing it marks it read, which takes it out
+// of the bell; nothing is marked read just by opening the bell.
+//
+// New notifications arrive live over Supabase Realtime - no polling. The bell also reloads when
+// it opens and when you come back to the tab (invites aren't streamed).
 export const NotificationBell = () => {
     const { session } = useAuth();
+    const navigate = useNavigate();
+    const accountId = session?.user?.id;
     const { defaultProfile } = useCurrentUser();
     const token = session?.access_token;
     const [invites, setInvites] = useState([]);
@@ -37,19 +39,25 @@ export const NotificationBell = () => {
         getAdminInvites().then(setAdminInvites).catch(() => {});
     }, [token]);
 
-    // Checked on load, every minute, and whenever the bell opens.
+    // On load, when you come back to the tab, and live as notifications are created.
     useEffect(() => {
         load();
-        const id = setInterval(load, REFRESH_MS);
-        return () => clearInterval(id);
+        const onVisible = () => { if (document.visibilityState === 'visible') load(); };
+        document.addEventListener('visibilitychange', onVisible);
+        return () => document.removeEventListener('visibilitychange', onVisible);
     }, [load]);
 
-    // However the bell closes (its button, a link, Esc or a click outside), what was shown counts
-    // as read, so the badge never sticks at a stale number.
-    const close = useCallback(() => {
-        setOpen(false);
-        setItems(list => list.map(n => ({ ...n, read: true })));
-    }, []);
+    useEffect(() => {
+        if (!accountId) return undefined;
+        return subscribeToNotifications(accountId, (n) => {
+            setItems(list => (list.some(x => x.id === n.id) ? list : [n, ...list]));
+            // A new notification often comes with a new invite or a change worth reloading.
+            getMyInvites(token).then(setInvites).catch(() => {});
+            getAdminInvites().then(setAdminInvites).catch(() => {});
+        });
+    }, [accountId, token]);
+
+    const close = useCallback(() => setOpen(false), []);
 
     useEffect(() => {
         if (!open) return;
@@ -66,14 +74,19 @@ export const NotificationBell = () => {
 
     if (!defaultProfile) return null;
 
-    const unread = items.filter(n => !n.read).length;
-    const count = invites.length + adminInvites.length + unread;
+    const count = invites.length + adminInvites.length + items.length;
 
-    const toggle = () => {
-        if (open) return close();
-        setOpen(true);
-        // Seen once the bell is opened; they stay highlighted until it closes.
-        if (unread) markNotificationsRead().catch(() => {});
+    const toggle = () => (open ? close() : setOpen(true));
+
+    // Acting on or dismissing a notification marks it read, which removes it from the bell.
+    const markRead = (n) => {
+        setItems(list => list.filter(x => x.id !== n.id));
+        markNotificationsRead([n.id]).catch(() => {});
+    };
+    const goTo = (n, to) => {
+        markRead(n);
+        close();
+        navigate(to);
     };
 
     const respond = async (inviteId, accept) => {
@@ -131,14 +144,15 @@ export const NotificationBell = () => {
                                     </div>
                                 ))}
                                 {items.map(n => {
-                                    const { text, to } = notificationText(n);
-                                    const body = <>
-                                        <p className={styles.text}>{text}</p>
-                                        <span className={styles.time}>{timeAgo(n.created_at)}</span>
-                                    </>;
+                                    const { text, to, action } = notificationText(n);
                                     return (
-                                        <div key={n.id} className={`${styles.item} ${n.read ? '' : styles.unread}`}>
-                                            {to ? <Link to={to} className={styles.itemLink} onClick={close}>{body}</Link> : body}
+                                        <div key={n.id} className={`${styles.item} ${styles.unread}`}>
+                                            <p className={styles.text}>{text}</p>
+                                            <span className={styles.time}>{timeAgo(n.created_at)}</span>
+                                            <div className={styles.actions}>
+                                                {to && <button type="button" className={styles.accept} onClick={() => goTo(n, to)}>{action}</button>}
+                                                <button type="button" className={styles.decline} onClick={() => markRead(n)}>Dismiss</button>
+                                            </div>
                                         </div>
                                     );
                                 })}

@@ -5,7 +5,7 @@ import { useAuth, useCurrentUser } from "hooks";
 import { useAsync } from "hooks/useEvents";
 import { gamesCatalog } from "catalog/games.catalog";
 import { getProfileEvents } from "services/user";
-import { useHostEvents, useEnteredEvents, useProfileBracketEvents, signedUpEntrants, eventStage, STAGE_LABELS } from "services/brackets";
+import { useHostEvents, useEnteredEvents, useProfileBracketEvents, STAGE_LABELS } from "services/brackets";
 import { getMyTeams } from "services/teams";
 import { TeamCard } from "components/Teams/TeamParts";
 import teamStyles from "components/Teams/Teams.module.css";
@@ -39,7 +39,6 @@ const bracketRows = (events) => events
         game: e.game,
         path: `/brackets/${e.id}`,
         date: e.startsAt,
-        location: e.locationType === 'online' ? 'Online' : e.venue,
     }));
 
 /**
@@ -77,7 +76,7 @@ const AddEventButton = ({ profile }) => {
  */
 export const EventsCard = ({ profile }) => {
     const { data, loading, error } = useAsync(() => getProfileEvents(profile.public_id), [profile.public_id]);
-    const hostEvents = useProfileBracketEvents(profile.public_id);
+    const hostEvents = useProfileBracketEvents(profile.public_id).events;
     // A 404 from the listings API just means no listed events to show.
     const events = [...bracketRows(hostEvents), ...(data ?? [])];
     const failed = error && error.response?.status !== 404 && events.length === 0;
@@ -128,15 +127,15 @@ const OWNER_EVENTS_SHOWN = 5;
  * manage page for ones you host), and the card links to the Event Dashboard.
  */
 export const OwnerEventsCard = ({ profile }) => {
-    const entered = useEnteredEvents();
-    const hosted = useHostEvents();
+    const entered = useEnteredEvents().events;
+    const hosted = useHostEvents().events;
     const { profiles } = useCurrentUser();
     const own = profiles.find(p => p.public_id === profile.public_id);
     const hosting = profile.type !== 'player';
     const rows = hosting
         ? hosted.filter(event => event.hostProfile === profile.public_id)
-            .map(event => ({ event, url: `/host/events/${event.id}`, action: 'Manage', note: `${signedUpEntrants(event).length} signed up` }))
-        : entered.map(({ event, entrant }) => ({ event, url: `/brackets/${event.id}`, action: 'View event', note: `Entered as ${entrant.name}` }));
+            .map(event => ({ event, url: `/host/events/${event.id}`, action: 'Manage', note: `${event.signedUp} signed up` }))
+        : entered.map(event => ({ event, url: `/brackets/${event.id}`, action: 'View event', note: `Entered as ${event.viewerEntrantName}` }));
     const dashboardUrl = `${EVENT_DASHBOARD_PATH}?tab=${hosting ? 'hosting' : 'entered'}`;
 
     return (
@@ -159,7 +158,7 @@ export const OwnerEventsCard = ({ profile }) => {
                         <div key={event.id} className={styles.game}>
                             <div className={styles.emblem}>{initials(event.name)}</div>
                             <div>
-                                <div className={styles.eyebrow}>{event.game} · {EVENT_TYPES[event.eventType] ?? 'Event'} · {STAGE_LABELS[eventStage(event)]}</div>
+                                <div className={styles.eyebrow}>{event.game} · {EVENT_TYPES[event.eventType] ?? 'Event'} · {STAGE_LABELS[event.stage]}</div>
                                 <div className={styles.gameName}>{event.name}</div>
                                 <div className={styles.location}>{formatDate(event.startsAt)} · {note}</div>
                             </div>

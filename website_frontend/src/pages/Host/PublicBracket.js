@@ -4,24 +4,73 @@ import { useAuth, useCurrentUser } from "hooks";
 import { FaCalendarAlt, FaCheckCircle, FaClock, FaGamepad, FaMapMarkerAlt, FaSitemap, FaTicketAlt, FaTrophy } from "react-icons/fa";
 import { Bracket } from "components/Bracket/Bracket";
 import {
-    useHostEvent, eventStage, isFull, register, unregister as leaveEvent, isPending, signedUpEntrants, pendingEntrants, teamSizeOf,
-    matchState,
+    useHostEvent, isFull, register, setPlayers, unregister as leaveEvent, isPending, signedUpEntrants, pendingEntrants, teamSizeOf,
+    matchState, viewerMatch,
 } from "services/brackets";
-import { getMyTeams } from "services/teams";
+import { getMyTeams, getTeam } from "services/teams";
 import { getApiErrorMessage } from "utils/apiError";
-import { buildBracket, allMatches } from "utils/bracket";
 import { EVENT_TYPES, matchUrl } from "utils/hostEvents";
 import { BracketError, Modal, ShareButton, StageChip, capacityLabel, entrantsById, formatDate, formatLabel, unitLabel, isTeamEvent, EventLoading, formatSummary, locationLabel, gameDisplayName, RestrictionList } from "./hostShared";
 import { USYNC_FEE_RATE } from "utils/fees";
 import styles from "./Host.module.css";
 
 
-// Why one of your teams can't be entered in this event, or '' when it can. A team that's short
-// of players can still enter - it shows as pending until its roster fills.
+// Why one of your teams can't be entered in this event, or '' when it can. A team can enter
+// with fewer players picked than the event needs - it shows as pending until the captain picks
+// the rest. (The server checks all of this too.)
 const teamEntryProblem = (team, event) => {
     if (!['owner', 'captain'].includes(team.my_role)) return 'Only the owner or a captain can enter this team';
     if (event.entrants.some(e => e.teamId === team.public_id)) return 'Already entered';
+    if (!(team.games ?? []).some(g => g.key === event.gameKey)) return `Doesn't play ${event.game}`;
     return '';
+};
+
+// Pick which of a team's players play in this event (up to the team size). Used when signing up
+// and by the captain to change the picks until the event starts.
+const PlayerPicks = ({ members, need, picked, onChange }) => (
+    <div className={styles.passList}>
+        {members.map(m => {
+            const on = picked.includes(m.public_id);
+            return (
+                <label key={m.public_id} className={`${styles.passOption} ${on ? styles.passOptionOn : ''}`}>
+                    <input type="checkbox" checked={on} disabled={!on && picked.length >= need}
+                        onChange={() => onChange(on ? picked.filter(x => x !== m.public_id) : [...picked, m.public_id])} />
+                    <span>{m.username}</span>
+                    <strong>{m.role === 'captain' ? 'Captain' : ''}</strong>
+                </label>
+            );
+        })}
+        <p className={styles.fieldHint}>{picked.length} of {need} picked. Each player can only play for one team in this event.</p>
+    </div>
+);
+
+// The captain changes which players play, until the bracket is published.
+const EditPlayersDialog = ({ event, entrant, onClose }) => {
+    const { session } = useAuth();
+    const need = teamSizeOf(event);
+    const [members, setMembers] = useState(null);
+    const [picked, setPicked] = useState(entrant.players.map(p => p.public_id));
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        getTeam(entrant.teamId, session?.access_token).then(t => setMembers(t.members)).catch(err => setError(getApiErrorMessage(err)));
+    }, [entrant.teamId, session?.access_token]);
+
+    const save = async () => {
+        if (await setPlayers(event.id, picked)) onClose();
+    };
+
+    return (
+        <Modal title={`Players for ${event.name}`} onClose={onClose}>
+            {error && <p className={styles.fieldError}>{error}</p>}
+            {members === null && !error && <p className={styles.fieldHint}>Loading your team…</p>}
+            {members && <PlayerPicks members={members} need={need} picked={picked} onChange={setPicked} />}
+            <div className={styles.formActions}>
+                <button type="button" className={styles.ghostBtn} onClick={onClose}>Cancel</button>
+                <button type="button" className={styles.primaryBtn} onClick={save}>Save players</button>
+            </div>
+        </Modal>
+    );
 };
 
 const RegisterDialog = ({ event, username, onClose }) => {
@@ -42,6 +91,7 @@ const RegisterDialog = ({ event, username, onClose }) => {
         : allTeams;
     const [loadError, setLoadError] = useState('');
     const [teamId, setTeamId] = useState('');
+    const [picked, setPicked] = useState([]);
     const [email, setEmail] = useState('');
     const [answers, setAnswers] = useState({});
     const [tried, setTried] = useState(false);
@@ -51,7 +101,7 @@ const RegisterDialog = ({ event, username, onClose }) => {
     const price = tier ? Number(tier.price) : 0;
     const answer = (key) => (e) => setAnswers(a => ({ ...a, [key]: e.target.value }));
     const chosen = myTeams?.find(t => t.public_id === teamId);
-    const short = chosen ? need - chosen.members.length : 0;
+    const short = chosen ? need - picked.length : 0;
 
     useEffect(() => {
         if (!team || !token) return;
@@ -71,6 +121,7 @@ const RegisterDialog = ({ event, username, onClose }) => {
         setSaving(true);
         const done = await register(event.id, {
             teamId: team ? chosen.public_id : null,
+            players: team ? picked : [],
             email: email.trim(),
             answers,
             pass: tier?.name ?? null,
@@ -111,18 +162,25 @@ const RegisterDialog = ({ event, username, onClose }) => {
                                         const problem = teamEntryProblem(t, event);
                                         return (
                                             <label key={t.public_id} className={`${styles.passOption} ${t.public_id === teamId ? styles.passOptionOn : ''}`}>
-                                                <input type="radio" name="team" disabled={!!problem} checked={t.public_id === teamId} onChange={() => setTeamId(t.public_id)} />
-                                                <span>{t.name}{t.game ? ` · ${t.game}` : ''}</span>
-                                                <strong>{problem || `${t.members.length} / ${need} players`}</strong>
+                                                <input type="radio" name="team" disabled={!!problem} checked={t.public_id === teamId}
+                                                    onChange={() => { setTeamId(t.public_id); setPicked([]); }} />
+                                                <span>{t.name}</span>
+                                                <strong>{problem || `${t.members.length} on the team`}</strong>
                                             </label>
                                         );
                                     })}
                                 </div>
                             }
+                            {chosen &&
+                                <>
+                                    <span className={styles.fieldLabel} style={{ marginTop: '1rem' }}>Who's playing</span>
+                                    <PlayerPicks members={chosen.members} need={need} picked={picked} onChange={setPicked} />
+                                </>
+                            }
                             {chosen && short > 0 &&
                                 <p className={styles.fieldHint}>
-                                    {chosen.name} has {chosen.members.length} of {need} players. It'll show to the host as <strong>pending</strong> and
-                                    won't take a spot until {short} more player{short > 1 ? 's join' : ' joins'} - then it's signed up automatically.
+                                    With {picked.length} of {need} picked, {chosen.name} shows to the host as <strong>pending</strong> and won't
+                                    take a spot until you pick {short} more - you can do that from the event page later.
                                 </p>
                             }
                         </div>
@@ -198,6 +256,7 @@ export const PublicBracket = () => {
     const navigate = useNavigate();
     const username = defaultProfile?.username;
     const [registering, setRegistering] = useState(false);
+    const [editingPlayers, setEditingPlayers] = useState(false);
     const [tab, setTab] = useState(null);
 
     if (!event) return <EventLoading event={event} backTo="/" backLabel="Back home" />;
@@ -207,19 +266,17 @@ export const PublicBracket = () => {
     const viewerId = event.viewerEntrantId ?? '';
     const canAct = event.viewerCanAct;
 
-    const stage = eventStage(event);
+    const stage = event.stage;
     const byId = entrantsById(event);
     const me = byId[viewerId];
-    const published = event.bracket?.published;
-    const built = published ? buildBracket(event.format, event.bracket.seeds, event.bracket.results) : null;
-    const stateOf = (m) => matchState(event.bracket, m);
+    const published = !!event.bracket && event.bracket.status !== 'draft';
+    const built = published ? event.bracket.built : null;
+    const stateOf = (m) => matchState(event, m);
     const unit = unitLabel(event);
     const pay = event.payments?.enabled ? event.payments : null;
     const lastDelay = event.delays?.[event.delays.length - 1];
 
-    const myMatch = built && me
-        ? allMatches(built).find(m => m.status === 'ready' && (m.a === me.id || m.b === me.id))
-        : null;
+    const myMatch = viewerMatch(event, built);
     const myState = myMatch && stateOf(myMatch);
     const opponent = myMatch && byId[myMatch.a === me.id ? myMatch.b : myMatch.a];
 
@@ -257,7 +314,7 @@ export const PublicBracket = () => {
                             <StageChip stage={stage} />
                             <span><FaGamepad /> {event.teamSize}</span>
                             <span><FaCalendarAlt /> {formatDate(event.startsAt)}</span>
-                            <span><FaSitemap /> {formatLabel(event.format)} · Bo{event.bestOf}</span>
+                            <span><FaSitemap /> {formatLabel(event)} · Bo{event.bestOf}</span>
                             <span><FaMapMarkerAlt /> {locationLabel(event)}</span>
                             {event.prize && <span><FaTrophy /> {event.prize}</span>}
                         </div>
@@ -335,8 +392,13 @@ export const PublicBracket = () => {
                                 ? (
                                     <>
                                         {isPending(event, me)
-                                            ? <p className={styles.blurb}><strong>{me.name}</strong> is pending: {me.rosterSize ?? 0} of {teamSizeOf(event)} players. Invite {teamSizeOf(event) - (me.rosterSize ?? 0)} more from your team page and it's signed up automatically.</p>
+                                            ? <p className={styles.blurb}><strong>{me.name}</strong> is pending: {me.rosterSize ?? 0} of {teamSizeOf(event)} players picked{isFull(event) ? ', and the event is full' : ''}.</p>
                                             : <p className={styles.registeredNote}><FaCheckCircle /> You're signed up as <strong>{me.name}</strong></p>}
+                                        {me.players?.length > 0 && isTeamEvent(event) &&
+                                            <p className={styles.fieldHint}>Playing: {me.players.map(p => p.username).join(', ')}</p>}
+                                        {!published && canAct && isTeamEvent(event) &&
+                                            <button type="button" className={`${styles.secondaryBtn} ${styles.fullBtn}`} style={{ marginBottom: '.5rem' }}
+                                                onClick={() => setEditingPlayers(true)}>Change players</button>}
                                         {!published && canAct &&
                                             <button type="button" className={`${styles.dangerBtn} ${styles.fullBtn}`} onClick={unregister}>Unregister</button>}
                                         {!published && !canAct &&
@@ -363,8 +425,9 @@ export const PublicBracket = () => {
                             <section className={`${styles.card} ${styles.myMatch}`}>
                                 <h2 className={styles.sectionTitle}>Your match</h2>
                                 <p className={styles.blurb}>vs <strong>{opponent?.name}</strong> · <Link to={matchUrl(event.id, myMatch.id)}>Match page: roster, rules and maps</Link></p>
-                                {myState === 'disputed' && <p className={styles.tagDisputed}>DISPUTED - the host will decide</p>}
-                                {myState === 'no_show' && <p className={styles.tagNoShow}>NO SHOW REPORTED - waiting on the host</p>}
+                                {myState === 'disputed' && <p className={styles.tagDisputed}>DISPUTED - an admin will decide</p>}
+                                {myState === 'no_show' && <p className={styles.tagNoShow}>NO SHOW REPORTED - waiting on an admin</p>}
+                                {myState === 'locked' && <p className={styles.tagNoShow}>ON HOLD - the match before this one is being reviewed</p>}
                                 {myState === 'awaiting' && <p className={styles.blurb}>One side has reported a score.</p>}
                                 <Link to={matchUrl(event.id, myMatch.id)} className={styles.primaryBtn}>
                                     {canAct ? 'Go to your match to report' : 'View your match'}
@@ -410,6 +473,7 @@ export const PublicBracket = () => {
             </div>
 
             {registering && <RegisterDialog event={event} username={username} onClose={() => setRegistering(false)} />}
+            {editingPlayers && me && <EditPlayersDialog event={event} entrant={me} onClose={() => setEditingPlayers(false)} />}
 
         </div>
     );

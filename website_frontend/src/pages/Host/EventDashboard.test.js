@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { EventDashboard } from './EventDashboard';
 import apiClient from 'services/apiClient';
-import { bracketEvent, apiGetFrom } from 'test/bracketFixtures';
+import { bracketSummary, page } from 'test/bracketFixtures';
 
 const host = { type: 'host', username: 'HostCo', public_id: 'hostpub', bracket_hosting: true };
 const player = { type: 'player', username: 'Plays', public_id: 'playpub', bracket_hosting: true };
@@ -10,13 +10,16 @@ let mockUser;
 jest.mock('hooks', () => ({ useCurrentUser: () => mockUser, useAuth: () => ({ session: null }) }));
 jest.mock('services/apiClient', () => ({ __esModule: true, default: { get: jest.fn() } }));
 
-const entered = bracketEvent();
-const hosted = bracketEvent({ id: 'evt-cup', name: 'Valorant Community Cup', canManage: true, viewerEntrantId: null, entrants: [] });
+// The list endpoints return pages of summaries.
+const routes = (map) => (path) => (path in map ? Promise.resolve({ data: map[path] }) : Promise.reject({ response: { status: 404 } }));
+
+const entered = bracketSummary();
+const hosted = bracketSummary({ id: 'evt-cup', name: 'Valorant Community Cup', canManage: true, isHost: true, viewerEntrantId: null, viewerEntrantName: null, openIssues: 2 });
 
 const renderAt = (url = '/dashboard') => render(<MemoryRouter initialEntries={[url]}><EventDashboard /></MemoryRouter>);
 
 describe('EventDashboard', () => {
-    beforeEach(() => apiClient.get.mockImplementation(apiGetFrom({ '/brackets/entered': [entered], '/brackets/hosting': [hosted] })));
+    beforeEach(() => apiClient.get.mockImplementation(routes({ '/brackets/entered': page([entered]), '/brackets/hosting': page([hosted]) })));
 
     it('opens a player on Entered, listing the events they signed up for', async () => {
         mockUser = { defaultProfile: player, profiles: [player], switchProfile: jest.fn() };
@@ -28,7 +31,7 @@ describe('EventDashboard', () => {
     });
 
     it('shows an empty Entered tab when they have not signed up for anything', async () => {
-        apiClient.get.mockImplementation(apiGetFrom({ '/brackets/entered': [], '/brackets/hosting': [] }));
+        apiClient.get.mockImplementation(routes({ '/brackets/entered': page([]), '/brackets/hosting': page([]) }));
         mockUser = { defaultProfile: player, profiles: [player], switchProfile: jest.fn() };
         renderAt();
         expect(await screen.findByText("You're not entered in any events")).toBeInTheDocument();
@@ -48,34 +51,36 @@ describe('EventDashboard', () => {
         expect(screen.getByRole('link', { name: 'Add a host profile' })).toHaveAttribute('href', '/settings/profile/add/host');
     });
 
-    it('opens a host on Hosting, and still shows the events they entered', async () => {
+    it('opens a host on Hosting with the queue count, and still shows the events they entered', async () => {
         mockUser = { defaultProfile: host, profiles: [player, host], switchProfile: jest.fn() };
         renderAt();
         expect(screen.getByRole('button', { name: 'Hosting' })).toHaveAttribute('aria-pressed', 'true');
         expect(await screen.findByText('Valorant Community Cup')).toBeInTheDocument();
+        expect(screen.getByRole('link', { name: 'Queue (2)' })).toHaveAttribute('href', '/host/events/evt-cup/queue');
         expect(screen.getByRole('link', { name: /Create event/ })).toBeInTheDocument();
         fireEvent.click(screen.getByRole('button', { name: 'Entered' }));
         expect(await screen.findByText('Zyphr')).toBeInTheDocument();
     });
+
+    it('loads more when the server says there is another page', async () => {
+        mockUser = { defaultProfile: player, profiles: [player], switchProfile: jest.fn() };
+        apiClient.get.mockImplementation((path, opts) => Promise.resolve({
+            data: opts?.params?.cursor ? page([bracketSummary({ id: 'evt-2', name: 'Second Page Cup' })]) : page([entered], 'cur-1'),
+        }));
+        renderAt();
+        fireEvent.click(await screen.findByRole('button', { name: 'Load more' }));
+        expect(await screen.findByText('Second Page Cup')).toBeInTheDocument();
+    });
 });
 
 describe('EventDashboard archive', () => {
-    const two = [
-        { id: 'e1', name: 'Zyphr', captain: 'Zyphr', rating: 1200, registeredAt: '2030-01-02T00:00:00Z', status: 'signed_up', teamId: null, roster: [], rosterSize: 0, teammates: [] },
-        { id: 'e2', name: 'Kova', captain: 'Kova', rating: 1200, registeredAt: '2030-01-03T00:00:00Z', status: 'signed_up', teamId: null, roster: [], rosterSize: 0, teammates: [] },
-    ];
-    const finished = (overrides) => bracketEvent({
-        entrants: two,
-        bracket: { published: true, format: 'single_elim', seeds: ['e1', 'e2'], results: { r0m0: { a: 'e1', b: 'e2', scoreA: 2, scoreB: 0 } } },
-        ...overrides,
-    });
-    const played = finished({ id: 'evt-old-played', name: 'Old Played Cup', startsAt: '2029-01-01T19:00:00Z' });
-    const ran = finished({ id: 'evt-old-hosted', name: 'Old Hosted Cup', canManage: true, isHost: true, viewerEntrantId: null, startsAt: '2029-06-01T19:00:00Z' });
-    const live = bracketEvent({ id: 'evt-live', name: 'Live Cup', entrants: two, bracket: { published: true, format: 'single_elim', seeds: ['e1', 'e2'], results: {} } });
+    const played = bracketSummary({ id: 'evt-old-played', name: 'Old Played Cup', startsAt: '2029-01-01T19:00:00Z', stage: 'complete', winner: 'Zyphr', viewerPlace: 1 });
+    const ran = bracketSummary({ id: 'evt-old-hosted', name: 'Old Hosted Cup', canManage: true, isHost: true, viewerEntrantId: null, viewerEntrantName: null, startsAt: '2029-06-01T19:00:00Z', stage: 'complete', winner: 'Kova' });
+    const live = bracketSummary({ id: 'evt-live', name: 'Live Cup', stage: 'live', viewerMatch: { id: 'r0m0', opponent: 'Kova' } });
 
     beforeEach(() => {
         mockUser = { defaultProfile: host, profiles: [player, host], switchProfile: jest.fn() };
-        apiClient.get.mockImplementation(apiGetFrom({ '/brackets/entered': [played, live], '/brackets/hosting': [ran] }));
+        apiClient.get.mockImplementation(routes({ '/brackets/entered': page([played, live]), '/brackets/hosting': page([ran]) }));
     });
 
     it('moves finished events to Archived, filterable by hosted and played', async () => {
@@ -83,7 +88,7 @@ describe('EventDashboard archive', () => {
         expect(await screen.findByText('Old Played Cup')).toBeInTheDocument();
         expect(screen.getByText('Old Hosted Cup')).toBeInTheDocument();
         expect(screen.queryByText('Live Cup')).toBeNull();
-        expect(screen.getAllByText('Zyphr').length).toBeGreaterThan(0);
+        expect(screen.getByText(/\(1st\)/)).toBeInTheDocument();
         fireEvent.click(screen.getByRole('radio', { name: 'Hosted' }));
         expect(screen.queryByText('Old Played Cup')).toBeNull();
         expect(screen.getByRole('link', { name: 'Duplicate' })).toHaveAttribute('href', '/host/events/new?from=evt-old-hosted');

@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { FaArrowLeft, FaCalendarAlt, FaGamepad, FaMap, FaSitemap, FaUserShield } from "react-icons/fa";
 import { ReportMatchDialog } from "components/Bracket/Bracket";
-import {
-    useHostEvent, matchState, matchReports, noShowUnlocksAt, playerReportMatch, reportNoShow,
-} from "services/brackets";
-import { buildBracket, findMatch, isEntrant, matchBestOf, matchRoundLabel } from "utils/bracket";
+import { useHostEvent, matchState, matchView, reportScore, reportNoShow, disputeResult, ruleOnMatch } from "services/brackets";
+import { findMatch, isEntrant, matchRoundLabel } from "utils/bracket";
 import { profileUrl } from "utils/profiles";
 import { BracketError, EventLoading, entrantsById, formatDate, gameDisplayName, isTeamEvent, locationLabel, RestrictionList } from "./hostShared";
 import styles from "./Host.module.css";
@@ -14,13 +12,16 @@ const STATUS_TEXT = {
     pending: 'Waiting on earlier matches',
     ready: 'Ready to play',
     awaiting: 'One side has reported a score',
-    disputed: 'Scores disagree - the host will decide',
-    no_show: 'No-show reported - waiting on the host',
+    disputed: 'The reports disagree - an admin will decide',
+    no_show: 'No-show reported - waiting on an admin',
+    locked: 'On hold while a dispute about the match before it is reviewed',
     complete: 'Final',
     bye: 'Bye - advances automatically',
 };
 
-// One side of the match: name, captain and roster (for teams), score once it's played.
+const clock = (iso) => new Date(iso).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+
+// One side of the match: name, players, score once it's played.
 const Side = ({ id, entrant, match, isYou, team }) => {
     const done = match.status === 'complete';
     const score = done ? (id === match.a ? match.scoreA : match.scoreB) : null;
@@ -49,24 +50,26 @@ const Side = ({ id, entrant, match, isYou, team }) => {
     );
 };
 
-// /brackets/:eventId/matches/:matchId - everything a player needs for one match: who they're
-// playing (and their roster), its round, best of and start time, the rules and restrictions,
-// maps (posted later), and - for the two sides - reporting the score or a no-show.
+// /brackets/:eventId/matches/:matchId - everything for one match: who's playing (and their
+// players), its round, best of and rules, and - for the two sides - reporting the score, a
+// no-show, or disputing the result in the 5 minutes after it's decided. The host and admins
+// decide the match here (this is where "Go to issue" in the queue leads). What each viewer may
+// do comes from the server.
 export const MatchPage = () => {
     const { eventId, matchId } = useParams();
     const event = useHostEvent(eventId);
-    const [reporting, setReporting] = useState(false);
+    const [dialog, setDialog] = useState(null);
     const [now, setNow] = useState(() => Date.now());
 
     useEffect(() => {
-        const t = setInterval(() => setNow(Date.now()), 30000);
+        const t = setInterval(() => setNow(Date.now()), 15000);
         return () => clearInterval(t);
     }, []);
 
     if (!event) return <EventLoading event={event} backTo={`/brackets/${eventId}`} backLabel="Back to the event" />;
 
     const backTo = `/brackets/${event.id}`;
-    const built = event.bracket?.published ? buildBracket(event.format, event.bracket.seeds, event.bracket.results) : null;
+    const built = event.bracket && event.bracket.status !== 'draft' ? event.bracket.built : null;
     const match = built && findMatch(built, matchId);
     if (!match) {
         return (
@@ -87,18 +90,27 @@ export const MatchPage = () => {
     const viewerId = event.viewerEntrantId ?? '';
     const mine = viewerId && (match.a === viewerId || match.b === viewerId);
     const opponentId = mine ? (match.a === viewerId ? match.b : match.a) : null;
-    const state = matchState(event.bracket, match);
-    const reports = matchReports(event.bracket, match);
-    const bestOf = matchBestOf(event, built, match);
-    const noShowAt = noShowUnlocksAt(event, match);
-    const noShowOpen = noShowAt != null && now >= noShowAt.getTime();
-    const canReport = mine && event.viewerCanAct && match.status === 'ready';
+    const view = matchView(event, match);
+    const state = matchState(event, match);
+    const bestOf = match.bestOf ?? event.bestOf;
     const round = matchRoundLabel(event.format, built, match);
+    const noShowAt = view.noShowUnlocksAt ? new Date(view.noShowUnlocksAt) : null;
+    const disputeUntil = view.disputeClosesAt ? new Date(view.disputeClosesAt) : null;
+    const canNoShow = view.canReportNoShow || (noShowAt && now >= noShowAt.getTime() && view.canReport);
+    const canDispute = view.canDispute && disputeUntil && now <= disputeUntil.getTime();
 
     const submitNoShow = () => {
-        if (window.confirm(`Report ${byId[opponentId]?.name} as a no-show? The host will review it and decide what happens.`)) {
-            reportNoShow(event.id, match);
+        if (window.confirm(`Report ${byId[opponentId]?.name} as a no-show? An admin will review it and decide what happens.`)) {
+            reportNoShow(event.id, match.id);
         }
+    };
+    const submitDispute = () => {
+        if (window.confirm('Dispute this result? The next match is put on hold until an admin reviews it. Each side can dispute a match once.')) {
+            disputeResult(event.id, match.id);
+        }
+    };
+    const rule = async (ruling) => {
+        if (await ruleOnMatch(event.id, match.id, ruling)) setDialog(null);
     };
 
     return (
@@ -120,7 +132,9 @@ export const MatchPage = () => {
                     </div>
                     {event.canManage &&
                         <div className={styles.btnRow}>
-                            <Link to={`/host/events/${event.id}/bracket`} className={styles.ghostBtn}><FaUserShield /> Manage in bracket</Link>
+                            {['ready', 'complete'].includes(match.status) &&
+                                <button type="button" className={styles.primaryBtn} onClick={() => setDialog('host')}>Decide this match</button>}
+                            <Link to={`/host/events/${event.id}/queue`} className={styles.ghostBtn}><FaUserShield /> Queue</Link>
                         </div>
                     }
                 </div>
@@ -134,26 +148,38 @@ export const MatchPage = () => {
                 {mine && match.status === 'ready' &&
                     <section className={`${styles.card} ${styles.myMatch}`}>
                         <h2 className={styles.sectionTitle}>Your match</h2>
-                        {state === 'disputed' && <p className={styles.tagDisputed}>DISPUTED - the host will decide</p>}
-                        {state === 'no_show' && <p className={styles.tagNoShow}>NO SHOW REPORTED - waiting on the host</p>}
+                        {state === 'disputed' && <p className={styles.tagDisputed}>DISPUTED - an admin will decide</p>}
+                        {state === 'no_show' && <p className={styles.tagNoShow}>NO SHOW REPORTED - waiting on an admin</p>}
+                        {state === 'locked' && <p className={styles.tagNoShow}>ON HOLD - the match before this one is being reviewed</p>}
                         {state === 'awaiting' && (
-                            reports[viewerId]
-                                ? <p className={styles.blurb}>You reported a score. Waiting for {byId[opponentId]?.name} to confirm.</p>
-                                : <p className={styles.blurb}>{byId[opponentId]?.name} reported a score. Report yours to confirm it.</p>
+                            view.reports?.[viewerId]
+                                ? <p className={styles.blurb}>You reported a score. Waiting for {byId[opponentId]?.name} to report the same.</p>
+                                : <p className={styles.blurb}>{byId[opponentId]?.name} reported a score. Report yours - if it matches, the result is final.</p>
                         )}
-                        {state === 'ready' && <p className={styles.blurb}>Play your match, then both sides report the score. If they agree, it's final.</p>}
-                        {canReport
+                        {state === 'ready' && <p className={styles.blurb}>Play your match, then both sides report the score. If they match, it's final.</p>}
+                        {event.viewerCanAct
                             ? (
                                 <div className={styles.stackBtns}>
-                                    <button type="button" className={styles.primaryBtn} onClick={() => setReporting(true)}>Report score</button>
-                                    {state !== 'no_show' && noShowAt &&
-                                        <button type="button" className={styles.ghostBtn} disabled={!noShowOpen} onClick={submitNoShow}>Report No Show</button>}
-                                    {noShowAt && !noShowOpen && state !== 'no_show' &&
-                                        <span className={styles.fieldHint}>Unlocks at {noShowAt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })} ({event.noShowMinutes} min after the match started)</span>}
+                                    {view.canReport && <button type="button" className={styles.primaryBtn} onClick={() => setDialog('player')}>Report score</button>}
+                                    {noShowAt && state !== 'no_show' && state !== 'locked' &&
+                                        <button type="button" className={styles.ghostBtn} disabled={!canNoShow} onClick={submitNoShow}>Report No Show</button>}
+                                    {noShowAt && !canNoShow && state !== 'no_show' &&
+                                        <span className={styles.fieldHint}>Unlocks at {clock(noShowAt)} ({event.noShowMinutes} min after the match started)</span>}
                                 </div>
                             )
                             : <p className={styles.fieldHint}>Your team's owner or a captain reports scores.</p>
                         }
+                    </section>
+                }
+
+                {mine && match.status === 'complete' && event.viewerCanAct && canDispute &&
+                    <section className={`${styles.card} ${styles.myMatch}`}>
+                        <h2 className={styles.sectionTitle}>Think this result is wrong?</h2>
+                        <p className={styles.blurb}>
+                            You can dispute it until {clock(disputeUntil)}, as long as the next match hasn't been reported. The next match is put on
+                            hold until an admin reviews it.
+                        </p>
+                        <button type="button" className={styles.dangerBtn} onClick={submitDispute}>Dispute this result</button>
                     </section>
                 }
 
@@ -179,10 +205,11 @@ export const MatchPage = () => {
                             <h2 className={styles.sectionTitle}>Match details</h2>
                             <dl className={styles.detailList}>
                                 <dt>Game</dt><dd><FaGamepad /> {gameDisplayName(event)}</dd>
+                                {event.gameMode && <><dt>Mode</dt><dd>{event.gameMode}</dd></>}
                                 <dt>Where</dt><dd>{locationLabel(event)}</dd>
                                 <dt>Round</dt><dd>{round}</dd>
-                                <dt>Best of</dt><dd>{bestOf}{event.finalBestOf && bestOf === event.finalBestOf ? ' (finals)' : ''}</dd>
-                                <dt>No-show timer</dt><dd>{event.noShowMinutes == null ? 'Off' : `${event.noShowMinutes} min after each match starts`}</dd>
+                                <dt>Best of</dt><dd>{bestOf}{event.finalBestOf && bestOf === event.finalBestOf && bestOf !== event.bestOf ? ' (finals)' : ''}</dd>
+                                <dt>No-show timer</dt><dd>{event.noShowMinutes == null ? 'Off' : `${event.noShowMinutes} min after the match starts`}</dd>
                                 <dt>Host</dt><dd>{event.host ? <Link to={profileUrl(event.host)}>{event.host.username}</Link> : '-'}</dd>
                             </dl>
                         </section>
@@ -190,16 +217,35 @@ export const MatchPage = () => {
                 </div>
             </div>
 
-            {reporting && canReport &&
+            {dialog === 'player' && view.canReport &&
                 <ReportMatchDialog
                     match={match}
                     entrants={byId}
                     bestOf={bestOf}
                     mode="player"
                     viewerId={viewerId}
-                    reports={reports}
-                    onClose={() => setReporting(false)}
-                    onSave={(a, b) => { playerReportMatch(event.id, match, viewerId, a, b); setReporting(false); }}
+                    reports={view.reports ?? {}}
+                    onClose={() => setDialog(null)}
+                    onSave={async (a, b) => { if (await reportScore(event.id, match.id, a, b)) setDialog(null); }}
+                />
+            }
+            {dialog === 'host' && event.canManage &&
+                <ReportMatchDialog
+                    match={match}
+                    entrants={byId}
+                    bestOf={bestOf}
+                    mode="host"
+                    reports={view.reports ?? {}}
+                    issues={view.issues ?? []}
+                    onClose={() => setDialog(null)}
+                    onSave={(a, b) => rule({ action: 'award', scoreA: a, scoreB: b })}
+                    onClear={() => rule({ action: 'clear' })}
+                    onUphold={() => rule({ action: 'uphold' })}
+                    onForfeit={(winnerId) => {
+                        const win = Math.ceil(bestOf / 2);
+                        const aWins = winnerId === match.a;
+                        rule({ action: 'award', scoreA: aWins ? win : 0, scoreB: aWins ? 0 : win, forfeit: true });
+                    }}
                 />
             }
         </div>

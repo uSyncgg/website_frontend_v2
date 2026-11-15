@@ -1,23 +1,37 @@
 import { useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router";
-import { FaCalendarAlt, FaGamepad, FaPlus, FaSitemap } from "react-icons/fa";
+import { FaCalendarAlt, FaPlus, FaSitemap } from "react-icons/fa";
 import { useCurrentUser } from "hooks";
-import { useHostEvents, useEnteredEvents, eventStage, signedUpEntrants, viewerMatch, isArchived } from "services/brackets";
-import { buildBracket, placements } from "utils/bracket";
+import { useHostEvents, useEnteredEvents, isArchived } from "services/brackets";
 import { EVENT_TYPES, gameDisplayName, matchUrl } from "utils/hostEvents";
 import { PROFILE_LABELS, addProfileUrl, canHostBrackets } from "utils/profiles";
 import { getApiErrorMessage } from "utils/apiError";
 import { TeamsTab } from "./TeamsTab";
-import { BracketError, ShareButton, StageChip, capacityLabel, formatDate, formatLabel, unitLabel } from "./hostShared";
+import { BracketError, ShareButton, StageChip, formatDate, formatLabel } from "./hostShared";
 import styles from "./Host.module.css";
 
+// The cards here are summaries the server sends a page at a time (see services/brackets):
+// counts, stage, the viewer's entrant and match, and for finished events the winner.
+
 const TABS = [['entered', 'Entered'], ['teams', 'Teams'], ['hosting', 'Hosting'], ['archived', 'Archived']];
+const PLACES = ['1st', '2nd', '3rd'];
+
+const isTeam = (event) => event.teamSize !== '1v1';
+const unitOf = (event) => (isTeam(event) ? 'teams' : 'players');
+const capacityOf = (event) => (event.maxEntrants == null ? `${event.signedUp} (no cap)` : `${event.signedUp} / ${event.maxEntrants}`);
+
+const LoadMore = ({ page }) => (page.nextCursor
+    ? <div className={styles.btnRow} style={{ justifyContent: 'center', marginTop: '1rem' }}>
+        <button type="button" className={styles.ghostBtn} onClick={page.loadMore}>Load more</button>
+    </div>
+    : null);
 
 // The events you're signed up for (any view), each linking to its public page.
 const EnteredTab = () => {
-    const entered = useEnteredEvents().filter(({ event }) => !isArchived(event));
+    const page = useEnteredEvents();
+    const entered = page.events.filter(e => !isArchived(e));
 
-    if (entered.length === 0) {
+    if (!page.loading && entered.length === 0) {
         return (
             <div className={styles.emptyState}>
                 <h2 className={styles.sectionTitle}>You're not entered in any events</h2>
@@ -28,47 +42,46 @@ const EnteredTab = () => {
     }
 
     return (
-        <div className={styles.eventGrid}>
-            {entered.map(({ event, entrant }) => (
-                <div key={event.id} className={styles.eventCard}>
-                    <Link to={`/brackets/${event.id}`} className={styles.eventCardLink}>
-                        <div className={styles.eventCardTop}>
-                            <div>
-                                <h2 className={styles.eventName}>{event.name}</h2>
-                                <p className={styles.eventGame}>{event.game} · {EVENT_TYPES[event.eventType] ?? 'Event'} · {event.teamSize}</p>
+        <>
+            <div className={styles.eventGrid}>
+                {entered.map(event => (
+                    <div key={event.id} className={styles.eventCard}>
+                        <Link to={`/brackets/${event.id}`} className={styles.eventCardLink}>
+                            <div className={styles.eventCardTop}>
+                                <div>
+                                    <h2 className={styles.eventName}>{event.name}</h2>
+                                    <p className={styles.eventGame}>{gameDisplayName(event)} · {EVENT_TYPES[event.eventType] ?? 'Event'} · {event.teamSize}</p>
+                                </div>
+                                <StageChip stage={event.stage} />
                             </div>
-                            <StageChip stage={eventStage(event)} />
+                            <div className={styles.metaRow}>
+                                <span><FaCalendarAlt /> {formatDate(event.startsAt)}</span>
+                                <span><FaSitemap /> {formatLabel(event)}</span>
+                            </div>
+                            {event.viewerEntrantName && <p className={styles.blurb}>Entered as <strong>{event.viewerEntrantName}</strong></p>}
+                        </Link>
+                        <div className={styles.eventCardActions}>
+                            {event.viewerMatch &&
+                                <Link to={matchUrl(event.id, event.viewerMatch.id)} className={`${styles.primaryBtn} ${styles.smallBtn}`}>
+                                    Your match vs {event.viewerMatch.opponent}
+                                </Link>}
+                            <Link to={`/brackets/${event.id}`} className={`${styles.secondaryBtn} ${styles.smallBtn}`}>Event page</Link>
                         </div>
-                        <div className={styles.metaRow}>
-                            <span><FaCalendarAlt /> {formatDate(event.startsAt)}</span>
-                            <span><FaSitemap /> {formatLabel(event.format)}</span>
-                        </div>
-                        <p className={styles.blurb}>
-                            Entered as <strong>{entrant.name}</strong>
-                            {entrant.status === 'pending' && ' · Pending - needs more players'}
-                        </p>
-                    </Link>
-                    <div className={styles.eventCardActions}>
-                        {(() => {
-                            const match = viewerMatch(event);
-                            if (!match) return null;
-                            const opponent = event.entrants.find(e => e.id === (match.a === entrant.id ? match.b : match.a));
-                            return <Link to={matchUrl(event.id, match.id)} className={`${styles.primaryBtn} ${styles.smallBtn}`}>Your match vs {opponent?.name ?? 'TBD'}</Link>;
-                        })()}
-                        <Link to={`/brackets/${event.id}`} className={`${styles.secondaryBtn} ${styles.smallBtn}`}>Event page</Link>
                     </div>
-                </div>
-            ))}
-        </div>
+                ))}
+            </div>
+            <LoadMore page={page} />
+        </>
     );
 };
 
 // The events you run. Only while viewing as a host or venue; from another view it offers to
-// switch (or to add a host profile if the account has none).
+// switch (or to add a host profile if the account has none). Events you're an admin of show in
+// any view, since admins are player profiles.
 const HostingTab = () => {
     const { defaultProfile, profiles, switchProfile } = useCurrentUser();
-    const events = useHostEvents().filter(e => !isArchived(e));
-    // Events you were invited to help run (from any view, since admins are player profiles).
+    const page = useHostEvents();
+    const events = page.events.filter(e => !isArchived(e));
     const adminEvents = events.filter(e => !e.isHost);
     const [switching, setSwitching] = useState(false);
     const [error, setError] = useState('');
@@ -115,7 +128,7 @@ const HostingTab = () => {
         );
     }
 
-    if (events.length === 0) {
+    if (!page.loading && events.length === 0) {
         return (
             <div className={styles.emptyState}>
                 <h2 className={styles.sectionTitle}>No events yet</h2>
@@ -129,19 +142,19 @@ const HostingTab = () => {
         <>
             {adminEvents.length > 0 && <p className={styles.muted}>Includes {adminEvents.length} event{adminEvents.length > 1 ? 's' : ''} you're an admin for.</p>}
             <HostedGrid events={events} />
+            <LoadMore page={page} />
         </>
     );
 };
 
 // Cards for events you run or help run, each linking to its manage screens.
 const HostedGrid = ({ events }) => (
-        <div className={styles.eventGrid}>
-            {events.map(event => {
-                const stage = eventStage(event);
-                const filled = event.maxEntrants ? Math.min(100, (signedUpEntrants(event).length / event.maxEntrants) * 100) : 100;
-                return (
-                    <div key={event.id} className={styles.eventCard}>
-                        <Link to={`/host/events/${event.id}`} className={styles.eventCardLink}>
+    <div className={styles.eventGrid}>
+        {events.map(event => {
+            const filled = event.maxEntrants ? Math.min(100, (event.signedUp / event.maxEntrants) * 100) : 100;
+            return (
+                <div key={event.id} className={styles.eventCard}>
+                    <Link to={`/host/events/${event.id}`} className={styles.eventCardLink}>
                         <div className={styles.eventCardTop}>
                             <div>
                                 <h2 className={styles.eventName}>{event.name}</h2>
@@ -149,30 +162,31 @@ const HostedGrid = ({ events }) => (
                             </div>
                             <div className={styles.btnRow}>
                                 {!event.isHost && <span className={styles.chip}>Admin</span>}
-                                <StageChip stage={stage} />
+                                <StageChip stage={event.stage} />
                             </div>
                         </div>
                         <div className={styles.metaRow}>
                             <span><FaCalendarAlt /> {formatDate(event.startsAt)}</span>
-                            <span><FaSitemap /> {formatLabel(event.format)}</span>
-                            <span><FaGamepad /> Bo{event.bestOf}</span>
+                            <span><FaSitemap /> {formatLabel(event)}</span>
                         </div>
                         <div>
                             <div className={styles.fillLabel}>
-                                <span>{capacityLabel(event)} {unitLabel(event)}</span>
+                                <span>{capacityOf(event)} {unitOf(event)}{event.pending > 0 ? ` · ${event.pending} pending` : ''}</span>
                             </div>
                             <div className={styles.fillBar}><span style={{ width: `${filled}%` }} /></div>
                         </div>
-                        </Link>
-                        <div className={styles.eventCardActions}>
-                            <Link to={`/host/events/${event.id}`} className={`${styles.secondaryBtn} ${styles.smallBtn}`}>Manage</Link>
-                            <ShareButton event={event} className={`${styles.ghostBtn} ${styles.smallBtn}`} />
-                            <Link to={`/brackets/${event.id}`} className={`${styles.ghostBtn} ${styles.smallBtn}`}>Public page</Link>
-                        </div>
+                    </Link>
+                    <div className={styles.eventCardActions}>
+                        <Link to={`/host/events/${event.id}`} className={`${styles.secondaryBtn} ${styles.smallBtn}`}>Manage</Link>
+                        {event.openIssues > 0 &&
+                            <Link to={`/host/events/${event.id}/queue`} className={`${styles.primaryBtn} ${styles.smallBtn}`}>Queue ({event.openIssues})</Link>}
+                        <ShareButton event={event} className={`${styles.ghostBtn} ${styles.smallBtn}`} />
+                        <Link to={`/brackets/${event.id}`} className={`${styles.ghostBtn} ${styles.smallBtn}`}>Public page</Link>
                     </div>
-                );
-            })}
-        </div>
+                </div>
+            );
+        })}
+    </div>
 );
 
 const ARCHIVE_FILTERS = [['all', 'All'], ['hosted', 'Hosted'], ['played', 'Played']];
@@ -187,14 +201,14 @@ const ArchivedTab = () => {
 
     const rows = useMemo(() => {
         const byId = new Map();
-        for (const event of hosting.filter(isArchived)) byId.set(event.id, { event, hosted: true, entrant: null });
-        for (const { event, entrant } of entered.filter(({ event }) => isArchived(event))) {
-            byId.set(event.id, { ...(byId.get(event.id) ?? { event, hosted: false }), entrant });
+        for (const event of hosting.events.filter(isArchived)) byId.set(event.id, { event, hosted: true, played: false });
+        for (const event of entered.events.filter(isArchived)) {
+            byId.set(event.id, { ...(byId.get(event.id) ?? { event, hosted: false }), event, played: true });
         }
-        const list = [...byId.values()].filter(r => filter === 'all' || (filter === 'hosted' ? r.hosted : r.entrant));
+        const list = [...byId.values()].filter(r => filter === 'all' || (filter === 'hosted' ? r.hosted : r.played));
         const time = (r) => new Date(r.event.startsAt).getTime();
         return list.sort((x, y) => (sort === 'newest' ? time(y) - time(x) : time(x) - time(y)));
-    }, [hosting, entered, filter, sort]);
+    }, [hosting.events, entered.events, filter, sort]);
 
     return (
         <>
@@ -224,44 +238,42 @@ const ArchivedTab = () => {
                 )
                 : (
                     <div className={styles.eventGrid}>
-                        {rows.map(({ event, hosted, entrant }) => {
-                            const places = placements(event.format, buildBracket(event.format, event.bracket.seeds, event.bracket.results));
-                            const winner = places && event.entrants.find(e => e.id === places[0]);
-                            const myPlace = entrant && places ? places.indexOf(entrant.id) : -1;
-                            return (
-                                <div key={event.id} className={styles.eventCard}>
-                                    <Link to={`/brackets/${event.id}`} className={styles.eventCardLink}>
-                                        <div className={styles.eventCardTop}>
-                                            <div>
-                                                <h2 className={styles.eventName}>{event.name}</h2>
-                                                <p className={styles.eventGame}>{gameDisplayName(event)} · {EVENT_TYPES[event.eventType] ?? 'Event'} · {event.teamSize}</p>
-                                            </div>
-                                            <div className={styles.btnRow}>
-                                                {hosted && <span className={styles.chip}>{event.isHost ? 'Hosted' : 'Admin'}</span>}
-                                                {entrant && <span className={styles.chip}>Played</span>}
-                                            </div>
+                        {rows.map(({ event, hosted, played }) => (
+                            <div key={event.id} className={styles.eventCard}>
+                                <Link to={`/brackets/${event.id}`} className={styles.eventCardLink}>
+                                    <div className={styles.eventCardTop}>
+                                        <div>
+                                            <h2 className={styles.eventName}>{event.name}</h2>
+                                            <p className={styles.eventGame}>{gameDisplayName(event)} · {EVENT_TYPES[event.eventType] ?? 'Event'} · {event.teamSize}</p>
                                         </div>
-                                        <div className={styles.metaRow}>
-                                            <span><FaCalendarAlt /> {formatDate(event.startsAt)}</span>
-                                            <span><FaSitemap /> {formatLabel(event.format)}</span>
+                                        <div className={styles.btnRow}>
+                                            {hosted && <span className={styles.chip}>{event.isHost ? 'Hosted' : 'Admin'}</span>}
+                                            {played && <span className={styles.chip}>Played</span>}
                                         </div>
-                                        <p className={styles.blurb}>
-                                            {winner && <>Winner: <strong>{winner.name}</strong></>}
-                                            {entrant && <>{winner ? ' · ' : ''}You played as <strong>{entrant.name}</strong>{myPlace >= 0 ? ` (${['1st', '2nd', '3rd'][myPlace]})` : ''}</>}
-                                        </p>
-                                    </Link>
-                                    <div className={styles.eventCardActions}>
-                                        <Link to={`/brackets/${event.id}`} className={`${styles.secondaryBtn} ${styles.smallBtn}`}>Results</Link>
-                                        {/* Duplicating creates a new event, which only the host's own host/venue profile can do. */}
-                                        {hosted && event.isHost &&
-                                            <Link to={`/host/events/new?from=${encodeURIComponent(event.id)}`} className={`${styles.ghostBtn} ${styles.smallBtn}`}>Duplicate</Link>}
                                     </div>
+                                    <div className={styles.metaRow}>
+                                        <span><FaCalendarAlt /> {formatDate(event.startsAt)}</span>
+                                        <span><FaSitemap /> {formatLabel(event)}</span>
+                                    </div>
+                                    <p className={styles.blurb}>
+                                        {event.winner && <>Winner: <strong>{event.winner}</strong></>}
+                                        {played && event.viewerEntrantName &&
+                                            <>{event.winner ? ' · ' : ''}You played as <strong>{event.viewerEntrantName}</strong>
+                                                {event.viewerPlace ? ` (${PLACES[event.viewerPlace - 1]})` : ''}</>}
+                                    </p>
+                                </Link>
+                                <div className={styles.eventCardActions}>
+                                    <Link to={`/brackets/${event.id}`} className={`${styles.secondaryBtn} ${styles.smallBtn}`}>Results</Link>
+                                    {/* Duplicating creates a new event, which only the host's own host/venue profile can do. */}
+                                    {hosted && event.isHost &&
+                                        <Link to={`/host/events/new?from=${encodeURIComponent(event.id)}`} className={`${styles.ghostBtn} ${styles.smallBtn}`}>Duplicate</Link>}
                                 </div>
-                            );
-                        })}
+                            </div>
+                        ))}
                     </div>
                 )
             }
+            <LoadMore page={hosting} />
         </>
     );
 };

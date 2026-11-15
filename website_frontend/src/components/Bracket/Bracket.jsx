@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { FaTrophy, FaSearchMinus, FaSearchPlus, FaExpand } from "react-icons/fa";
-import { roundName, losersRoundName, isEntrant, placements } from "utils/bracket";
+import { roundName, losersRoundName, isEntrant } from "utils/bracket";
 import { timeAgo } from "utils/humanize";
 import styles from "./Bracket.module.css";
 
@@ -199,6 +199,7 @@ const STATE_BADGES = {
     disputed: { label: 'DISPUTED', className: 'badgeDisputed' },
     no_show: { label: 'NO SHOW REPORTED', className: 'badgeNoShow' },
     awaiting: { label: '1 of 2 reported', className: 'badgeAwaiting' },
+    locked: { label: 'ON HOLD', className: 'badgeNoShow' },
 };
 
 const Slot = ({ id, entrants, seed, score, isWinner, isLoser, isYou, forfeit }) => (
@@ -227,7 +228,7 @@ const MatchCard = ({ match, entrants, label, stateOf, onSelect, canSelect, viewe
                 clickable && styles.matchClickable,
                 state === 'ready' && onSelect && styles.matchReady,
                 state === 'disputed' && styles.matchDisputed,
-                state === 'no_show' && styles.matchNoShow,
+                (state === 'no_show' || state === 'locked') && styles.matchNoShow,
                 match.status === 'bye' && styles.matchBye,
             ].filter(Boolean).join(' ')}
             onClick={clickable ? () => onSelect(match) : undefined}
@@ -364,13 +365,14 @@ const PoolPlay = ({ built, cardProps }) => (
     </div>
 );
 
-// format: 'single_elim' | 'double_elim' | 'round_robin' | 'swiss'.
-// onSelect makes matches clickable (canSelect narrows which); stateOf(match) adds
-// report states (disputed / no-show / awaiting); viewerId highlights "your" matches.
-// view: clicking opens the match page (players) rather than score entry (hosts).
+// Draws the bracket the server built (event.bracket.built). format: 'single_elim' |
+// 'double_elim' | 'round_robin' | 'swiss'. onSelect makes matches clickable (canSelect narrows
+// which); stateOf(match) adds report states (disputed / no-show / awaiting / on hold); viewerId
+// highlights "your" matches. view: clicking opens the match page (players) rather than the
+// ruling dialog (host and admins).
 export const Bracket = ({ format, built, entrants, onSelect, canSelect, stateOf, viewerId, view = false }) => {
     const cardProps = { entrants, onSelect, canSelect, stateOf, viewerId, view };
-    const places = placements(format, built);
+    const places = built.placements;
     return (
         <>
         {places && <Podium places={places} entrants={entrants} />}
@@ -392,12 +394,24 @@ const Stepper = ({ value, onChange, max, name }) => (
 );
 
 
+const claimOf = (match, name, r) =>
+    `${name(r.scoreA > r.scoreB ? match.a : match.b)} won ${Math.max(r.scoreA, r.scoreB)}-${Math.min(r.scoreA, r.scoreB)}`;
+
+const ISSUE_LABELS = {
+    dispute: 'DISPUTED - the two reports disagree',
+    one_sided_report: 'ONE-SIDED REPORT - the other side hasn\'t answered',
+    no_show: 'NO SHOW REPORTED',
+    post_advancement_dispute: 'DISPUTED AFTER ADVANCING - the next match is on hold',
+};
+
 // Score entry for one match.
-// mode 'host': the host's call is final; shows both players' reports and any no-show report.
-// mode 'player': the viewer reports their own match; the opponent has to agree.
+// mode 'host': a host or admin ruling - final. Shows the players' reports and open queue items,
+// and offers award (or forfeit to either side), clear and, after a post-advancement dispute,
+// uphold the result.
+// mode 'player': the viewer reports their own match; the other side has to report the same score.
 export const ReportMatchDialog = ({
-    match, entrants, bestOf, mode = 'host', viewerId, reports = {}, noShow,
-    onSave, onClear, onForfeit, onDismissNoShow, onClose,
+    match, entrants, bestOf, mode = 'host', viewerId, reports = {}, issues = [],
+    onSave, onClear, onForfeit, onUphold, onClose,
 }) => {
     const mine = mode === 'player' ? reports[viewerId] : null;
     const start = match.status === 'complete' ? [match.scoreA, match.scoreB] : mine ? [mine.scoreA, mine.scoreB] : [0, 0];
@@ -412,53 +426,51 @@ export const ReportMatchDialog = ({
         return () => document.removeEventListener('keydown', onKey);
     }, [onClose]);
 
-    const tied = scoreA === scoreB;
-    const winnerName = tied ? null : name(scoreA > scoreB ? match.a : match.b);
+    // Best of N: the winner has exactly ceil(N / 2), the loser fewer (the server checks too).
+    const valid = Math.max(scoreA, scoreB) === maxScore && Math.min(scoreA, scoreB) < maxScore;
+    const winnerName = valid ? name(scoreA > scoreB ? match.a : match.b) : null;
     const reportList = Object.entries(reports);
-    const claim = (r) => `${name(r.scoreA > r.scoreB ? r.a : r.b)} won ${Math.max(r.scoreA, r.scoreB)}-${Math.min(r.scoreA, r.scoreB)}`;
 
     return (
         <div className={styles.overlay} role="dialog" aria-modal="true" aria-labelledby="report-title" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
             <div className={styles.dialog}>
                 <h3 id="report-title" className={styles.dialogTitle}>
-                    {mode === 'player' ? 'Report your result' : match.status === 'complete' ? 'Edit result' : 'Report result'}
+                    {mode === 'player' ? 'Report your result' : match.status === 'complete' ? 'Change the result' : 'Decide this match'}
                 </h3>
                 <p className={styles.dialogHint}>
                     Best of {bestOf} · first to {maxScore}
-                    {mode === 'player' && ' · your opponent has to confirm'}
+                    {mode === 'player' ? ' · the other side has to report the same score' : ' · your decision is final'}
                 </p>
 
-                {mode === 'host' && noShow &&
-                    <div className={`${styles.notice} ${styles.noticeNoShow}`}>
-                        <strong>NO SHOW REPORTED</strong>
-                        <p>{name(noShow.reportedBy)} says {name(noShow.against)} didn't show up ({timeAgo(noShow.at)}).</p>
-                        <div className={styles.noticeActions}>
-                            <button type="button" className={styles.primaryBtn} onClick={() => onForfeit(noShow.reportedBy)}>
-                                Advance {name(noShow.reportedBy)}
-                            </button>
-                            <button type="button" className={styles.ghostBtn} onClick={onDismissNoShow}>Dismiss report</button>
-                        </div>
+                {mode === 'host' && issues.map(type => (
+                    <div key={type} className={`${styles.notice} ${type === 'dispute' ? styles.noticeDisputed : styles.noticeNoShow}`}>
+                        <strong>{ISSUE_LABELS[type] ?? type}</strong>
+                        {type === 'no_show' &&
+                            <div className={styles.noticeActions}>
+                                {[match.a, match.b].map(id => (
+                                    <button key={id} type="button" className={styles.ghostBtn} onClick={() => onForfeit(id)}>{name(id)} wins by forfeit</button>
+                                ))}
+                            </div>
+                        }
+                        {type === 'post_advancement_dispute' &&
+                            <div className={styles.noticeActions}>
+                                <button type="button" className={styles.primaryBtn} onClick={onUphold}>The result stands</button>
+                                <span className={styles.ago}>or give the win to the other side below.</span>
+                            </div>
+                        }
                     </div>
-                }
+                ))}
 
                 {mode === 'host' && reportList.length > 0 &&
-                    <div className={`${styles.notice} ${reportList.length > 1 ? styles.noticeDisputed : ''}`}>
-                        {reportList.length > 1 && <strong>DISPUTED</strong>}
+                    <div className={styles.notice}>
                         {reportList.map(([who, r]) => (
-                            <p key={who}><b>{name(who)}</b> reported: {claim(r)} <span className={styles.ago}>({timeAgo(r.at)})</span></p>
+                            <p key={who}><b>{name(who)}</b> reported: {claimOf(match, name, r)} <span className={styles.ago}>({timeAgo(r.at)})</span></p>
                         ))}
-                        {reportList.length === 1 && <p className={styles.ago}>Waiting for {name(reportList[0][0] === match.a ? match.b : match.a)} to confirm.</p>}
                     </div>
                 }
 
-                {mode === 'player' && Object.keys(reports).length > 1 &&
-                    <div className={`${styles.notice} ${styles.noticeDisputed}`}>
-                        <strong>DISPUTED</strong>
-                        <p>You and your opponent reported different winners. The host will decide - you can update your report below.</p>
-                    </div>
-                }
-                {mode === 'player' && mine && Object.keys(reports).length === 1 &&
-                    <div className={styles.notice}><p>You reported: {claim(mine)}. Waiting for your opponent to confirm.</p></div>
+                {mode === 'player' && mine &&
+                    <div className={styles.notice}><p>You reported: {claimOf(match, name, mine)}. Waiting for the other side to report the same.</p></div>
                 }
 
                 {[[match.a, scoreA, setScoreA], [match.b, scoreB, setScoreB]].map(([id, value, set]) => (
@@ -469,16 +481,16 @@ export const ReportMatchDialog = ({
                 ))}
 
                 <p className={styles.dialogStatus}>
-                    {tied ? 'Scores can\'t be tied.' : <>Winner: <strong>{winnerName}</strong>{mode === 'host' ? ' advances' : ''}</>}
+                    {valid ? <>Winner: <strong>{winnerName}</strong>{mode === 'host' ? ' advances' : ''}</> : `The winner needs ${maxScore}, the loser fewer.`}
                 </p>
 
                 <div className={styles.dialogActions}>
-                    {mode === 'host' && match.status === 'complete' &&
-                        <button type="button" className={styles.dangerBtn} onClick={onClear}>Clear result</button>}
+                    {mode === 'host' && (match.status === 'complete' || reportList.length > 0) &&
+                        <button type="button" className={styles.dangerBtn} onClick={onClear}>Clear so it's replayed</button>}
                     <span className={styles.spacer} />
                     <button type="button" className={styles.ghostBtn} onClick={onClose}>Cancel</button>
-                    <button type="button" className={styles.primaryBtn} disabled={tied} onClick={() => onSave(scoreA, scoreB)}>
-                        {mode === 'player' ? 'Submit report' : 'Save'}
+                    <button type="button" className={styles.primaryBtn} disabled={!valid} onClick={() => onSave(scoreA, scoreB)}>
+                        {mode === 'player' ? 'Submit report' : 'Save decision'}
                     </button>
                 </div>
             </div>

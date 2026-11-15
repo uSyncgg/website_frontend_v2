@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Link, NavLink, Outlet, useNavigate, useOutletContext, useParams } from "react-router";
 import { FaCalendarAlt, FaClock, FaGamepad, FaMapMarkerAlt, FaSitemap } from "react-icons/fa";
-import { useHostEvent, eventStage, updateEvent, deleteEvent, delayStart, pendingEntrants, inviteAdmin, removeAdmin } from "services/brackets";
+import { useHostEvent, updateEvent, deleteEvent, delayStart, pendingEntrants, inviteAdmin, removeAdmin } from "services/brackets";
 import { Avatar, PlayerPicker } from "components/Teams/TeamParts";
-import { buildBracket, bracketProgress } from "utils/bracket";
 import { BracketError, Modal, ShareButton, StageChip, capacityLabel, formatDate, formatLabel, unitLabel, EventLoading, formatSummary, locationLabel, gameDisplayName, RestrictionList } from "./hostShared";
 import styles from "./Host.module.css";
 import { EVENT_TYPES, HOSTING_DASHBOARD_PATH } from "utils/hostEvents";
@@ -20,12 +19,13 @@ export const ManageEvent = () => {
         return <EventLoading event={event === undefined ? undefined : null} backTo={HOSTING_DASHBOARD_PATH} backLabel="Back to your events" />;
     }
 
-    const stage = eventStage(event);
+    const stage = event.stage;
     const tabs = [
         { to: '', label: 'Overview', end: true },
         { to: 'entrants', label: 'Entrants', count: event.entrants.length },
         { to: 'seeding', label: 'Seeding' },
         { to: 'bracket', label: 'Bracket' },
+        { to: 'queue', label: 'Queue', count: event.openIssues || null },
     ];
 
     return (
@@ -44,7 +44,7 @@ export const ManageEvent = () => {
                             <StageChip stage={stage} />
                             <span><FaGamepad /> {gameDisplayName(event)} · {event.teamSize}</span>
                             <span><FaCalendarAlt /> {formatDate(event.startsAt)}{event.delays?.length > 0 && <span className={styles.delayedTag}>Delayed</span>}</span>
-                            <span><FaSitemap /> {formatLabel(event.format)} · Bo{event.bestOf}</span>
+                            <span><FaSitemap /> {formatLabel(event)} · Bo{event.bestOf}</span>
                             <span><FaMapMarkerAlt /> {locationLabel(event)}</span>
                         </div>
                     </div>
@@ -137,11 +137,9 @@ export const EventOverview = () => {
     const event = useManagedEvent();
     const navigate = useNavigate();
     const [delaying, setDelaying] = useState(false);
-    const stage = eventStage(event);
+    const stage = event.stage;
     const next = NEXT_STEPS[stage];
-    const progress = event.bracket
-        ? bracketProgress(buildBracket(event.format, event.bracket.seeds, event.bracket.results))
-        : null;
+    const progress = event.bracket?.status && event.bracket.status !== 'draft' ? event.bracket.built.progress : null;
     const unit = unitLabel(event);
 
     const remove = async () => {
@@ -175,7 +173,7 @@ export const EventOverview = () => {
                             <dt>Restrictions</dt><dd>{event.restrictions?.length ? <RestrictionList event={event} /> : 'None'}</dd>
                             <dt>Entry fee</dt><dd>{event.payments?.enabled ? `${event.entryFee} via uSync payments` : (event.entryFee || 'Free')}</dd>
                             <dt>Prize</dt><dd>{event.prize || '-'}</dd>
-                            <dt>No-show timer</dt><dd>{event.noShowMinutes == null ? 'Off' : `${event.noShowMinutes} min after start`}</dd>
+                            <dt>No-show timer</dt><dd>{event.noShowMinutes == null ? 'Off' : `${event.noShowMinutes} min after each match starts`}</dd>
                         </dl>
                     </section>
                     {(event.description || event.rules) &&
@@ -213,12 +211,12 @@ export const EventOverview = () => {
                     <section className={styles.card}>
                         <h2 className={styles.sectionTitle}>Registration</h2>
                         <p className={styles.blurb}>
-                            {event.bracket?.published
+                            {(event.stage === 'live' || event.stage === 'complete')
                                 ? 'Registration closed automatically when the bracket was published.'
                                 : event.registrationOpen ? 'Players can currently sign up.' : 'New sign-ups are paused.'}
                         </p>
                         <div className={styles.btnRow}>
-                            <button type="button" className={styles.secondaryBtn} disabled={event.bracket?.published}
+                            <button type="button" className={styles.secondaryBtn} disabled={event.stage === 'live' || event.stage === 'complete'}
                                 onClick={() => updateEvent(event.id, { registrationOpen: !event.registrationOpen })}>
                                 {event.registrationOpen ? 'Close registration' : 'Reopen registration'}
                             </button>

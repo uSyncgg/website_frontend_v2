@@ -10,7 +10,7 @@ const orgValues = {
     org_country: "north_america",
     org_games: ["Halo", "Other"],
     other_org_games: "Apex",
-    org_teams: [{ name: " Static Black ", game: "Halo" }, { name: "  ", game: "" }, { name: "Static White", game: "" }],
+    org_teams: [{ name: " Static Black ", games: ["halo"] }, { name: "  ", games: [] }, { name: "Static White", games: ["cs2", "valorant"] }],
     bracket_hosting_org: "yes",
 };
 
@@ -28,7 +28,7 @@ test("org sign-up asks for the name once: no separate organization field is sent
 
 test("org sign-up sends named teams only, and never bracket hosting", () => {
     const [org] = buildSignUpRequest(orgValues).data.profiles;
-    expect(org.details.teams).toEqual([{ name: "Static Black", game: "Halo" }, { name: "Static White", game: null }]);
+    expect(org.details.teams).toEqual([{ name: "Static Black", games: ["halo"] }, { name: "Static White", games: ["cs2", "valorant"] }]);
     expect(org.bracket_hosting).toBe(false);
 });
 

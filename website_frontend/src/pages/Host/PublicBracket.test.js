@@ -10,11 +10,12 @@ let mockUser;
 jest.mock('hooks', () => ({ useCurrentUser: () => mockUser, useAuth: () => ({ session: { access_token: 't' } }) }));
 jest.mock('services/apiClient', () => ({ __esModule: true, default: { get: jest.fn() } }));
 
-const team = (public_id, name, owner) => ({
-    public_id, name, game: 'Call of Duty', my_role: 'owner', owner, members: [{}, {}],
+const team = (public_id, name, owner, games = [{ key: 'call_of_duty', name: 'Call of Duty' }]) => ({
+    public_id, name, games, my_role: 'owner', owner,
+    members: [{ public_id: `${public_id}-a`, username: `${name} Ace`, role: 'captain' }, { public_id: `${public_id}-b`, username: `${name} Bee`, role: 'player' }],
 });
 const event = bracketEvent({ id: 'evt-2s', teamSize: '2v2', entrants: [], viewerEntrantId: null });
-const teams = [team('t-mine', 'My Duo', player), team('t-org', 'Static Duo', org)];
+const teams = [team('t-mine', 'My Duo', player), team('t-org', 'Static Duo', org), team('t-halo', 'Halo Duo', player, [{ key: 'halo', name: 'Halo' }])];
 
 const open = async () => {
     render(
@@ -23,7 +24,11 @@ const open = async () => {
         </MemoryRouter>
     );
     fireEvent.click((await screen.findAllByRole('button', { name: 'Sign up' }))[0]);
-    await screen.findByText(/My Duo/, {}, { timeout: 2000 }).catch(() => {});
+    try {
+        await screen.findByText(/My Duo/, {}, { timeout: 2000 });
+    } catch {
+        // Some tests have no teams to list.
+    }
 };
 
 describe('PublicBracket sign-up', () => {
@@ -48,5 +53,17 @@ describe('PublicBracket sign-up', () => {
         fireEvent.click(screen.getByRole('radio', { name: /Organization/ }));
         expect(screen.getByText(/Static Duo/)).toBeInTheDocument();
         expect(screen.queryByText(/My Duo/)).toBeNull();
+    });
+
+    it("won't enter a team that doesn't play the game, and has the captain pick who plays", async () => {
+        mockUser = { defaultProfile: player, profiles: [player] };
+        await open();
+        expect(await screen.findByText("Doesn't play Call of Duty")).toBeInTheDocument();
+        fireEvent.click(screen.getByRole('radio', { name: /My Duo/ }));
+        fireEvent.click(screen.getByRole('checkbox', { name: /My Duo Ace/ }));
+        expect(screen.getByText('1 of 2 picked. Each player can only play for one team in this event.')).toBeInTheDocument();
+        expect(screen.getByText(/shows to the host as/)).toHaveTextContent('pending');
+        fireEvent.click(screen.getByRole('checkbox', { name: /My Duo Bee/ }));
+        expect(screen.getByText(/2 of 2 picked/)).toBeInTheDocument();
     });
 });

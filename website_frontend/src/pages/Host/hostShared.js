@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 import { ShareButton as SiteShareButton } from "components/ShareButton/ShareButton";
-import { FORMATS } from "utils/bracket";
 import { PLATFORMS, gameDisplayName } from "utils/hostEvents";
 import { isPending, useBracketError, clearBracketError, STAGE_LABELS } from "services/brackets";
 import styles from "./Host.module.css";
@@ -9,11 +8,12 @@ import styles from "./Host.module.css";
 export const TEAM_SIZES = ["1v1", "2v2", "3v3", "4v4", "5v5"];
 export const BEST_OF = [1, 3, 5, 7];
 
-export const formatLabel = (format) => FORMATS[format]?.label ?? format;
+// An event's (or summary's) format name, as the server sends it.
+export const formatLabel = (event) => event.formatLabel ?? event.format;
 
 // "Single Elimination, best of 3 (finals best of 7)".
 export const formatSummary = (event) =>
-    `${formatLabel(event.format)}, best of ${event.bestOf}${event.finalBestOf ? ` (finals best of ${event.finalBestOf})` : ''}`;
+    `${formatLabel(event)}, best of ${event.bestOf}${event.finalBestOf ? ` (finals best of ${event.finalBestOf})` : ''}`;
 
 // "Online · PC allowed" or the LAN's venue.
 export const locationLabel = (event) =>

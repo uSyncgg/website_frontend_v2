@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { OwnerEventsCard } from './ProfileSections';
 import apiClient from 'services/apiClient';
-import { bracketEvent, apiGetFrom } from 'test/bracketFixtures';
+import { bracketSummary, page, apiGetFrom } from 'test/bracketFixtures';
 
 // The components index pulls in the map library, which Jest can't load; the card's frame is all that's needed.
 jest.mock('components', () => ({
@@ -17,8 +17,8 @@ const renderCard = (profile) => render(<MemoryRouter><OwnerEventsCard profile={p
 
 describe('OwnerEventsCard', () => {
     beforeEach(() => apiClient.get.mockImplementation(apiGetFrom({
-        '/brackets/entered': [bracketEvent()],
-        '/brackets/hosting': [bracketEvent({ id: 'evt-cup', name: 'Cup', canManage: true, viewerEntrantId: null })],
+        '/brackets/entered': page([bracketSummary()]),
+        '/brackets/hosting': page([bracketSummary({ id: 'evt-cup', name: 'Cup', canManage: true, isHost: true, viewerEntrantId: null, viewerEntrantName: null })]),
     })));
 
     it("lists a player's entered events and links to the Entered tab", async () => {

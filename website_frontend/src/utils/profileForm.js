@@ -38,7 +38,7 @@ export function toApiValue(field, value) {
     // Teams named at sign-up; blank rows are skipped.
     if (field === 'org_teams') {
         return (value ?? [])
-            .map(t => ({ name: (t.name ?? '').trim(), game: t.game || null }))
+            .map(t => ({ name: (t.name ?? '').trim(), games: t.games ?? [] }))
             .filter(t => t.name);
     }
     if (typeof value === 'string') {
