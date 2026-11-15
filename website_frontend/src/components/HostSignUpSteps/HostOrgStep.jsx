@@ -16,7 +16,8 @@ const REGION_OPTIONS = [
     { label: "Certain Regions", value: "certain_regions" },
 ];
 
-const HOST_COUNTRY_OPTIONS = [
+// Shared with the org sign-up's country picker.
+export const HOST_COUNTRY_OPTIONS = [
     ...REGION_OPTIONS,
     COUNTRY_DIVIDER,
     ...COUNTRIES,

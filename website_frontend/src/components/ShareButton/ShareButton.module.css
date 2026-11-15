@@ -1,0 +1,69 @@
+.share {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 38px;
+    padding: 0 14px;
+    border-radius: 10px;
+    border: 1px solid var(--line-strong);
+    background: rgba(255, 255, 255, .04);
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: border-color .16s, background .16s;
+}
+
+.share:hover,
+.share:focus-visible {
+    border-color: var(--violet);
+    background: var(--violet-dim);
+}
+
+.share svg {
+    width: 13px;
+    height: 13px;
+}
+
+.wrap {
+    position: relative;
+    display: inline-block;
+}
+
+.menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    z-index: 30;
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+    padding: 6px;
+    border-radius: 12px;
+    border: 1px solid var(--line-strong);
+    background: var(--panel-solid);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .45);
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 600;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.item:hover,
+.item:focus-visible {
+    background: var(--violet-dim);
+    color: var(--ink);
+}

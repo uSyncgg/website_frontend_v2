@@ -3,6 +3,7 @@ import styles from './Navbar.module.css'
 import { LeaguesNavItem, LanNavItem, MoreNavItem } from "./DropdownNavItems";
 import { GamesNavItem, TournamentNavItem} from "./SingleNavItems";
 import { AccountNavItem } from "./AccountNavItem";
+import { HostRequiredNotice } from "components/HostRequiredNotice/HostRequiredNotice";
 import { useState } from "react";
 import navbarLogo from 'assets/images/misc/usync-navbar-logo_9.6.26.webp';
 
@@ -67,6 +68,8 @@ function Navbar() {
             <div className={`${styles.headerRight} ${menuOpen ? styles.menuOpen : ''}`}>
                 <AccountNavItem closeMenu={closeMenu} />
             </div>
+
+            <HostRequiredNotice />
         </header>
     )
 }

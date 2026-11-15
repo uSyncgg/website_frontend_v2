@@ -99,7 +99,80 @@
     color: var(--ink);
 }
 
+/* ---------- card actions (Edit, All stats) ---------- */
+.cardActions {
+    display: flex;
+    gap: 8px;
+}
+
+.cardAction {
+    padding: 4px 11px;
+    border-radius: 8px;
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: var(--ink-2);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.cardAction:hover,
+.cardAction:focus-visible {
+    border-color: var(--violet);
+    background: var(--violet-dim);
+    color: var(--ink);
+}
+
+/* ---------- stats ---------- */
+.statTabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.statTab {
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--line-strong);
+    color: var(--ink-2);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.statTab:hover {
+    border-color: var(--violet);
+    color: var(--ink);
+}
+
+.statTabActive {
+    border-color: var(--violet);
+    background: var(--violet-dim);
+    color: var(--ink);
+}
+
 /* ---------- about / roles ---------- */
+.fact {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 12px;
+}
+
+.factValue {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.aboutTags {
+    margin-top: 12px;
+}
+
 .bio {
     margin: 0;
     font-size: 15px;

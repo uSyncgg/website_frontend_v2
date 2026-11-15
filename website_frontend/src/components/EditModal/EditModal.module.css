@@ -1,0 +1,78 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10000001;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    /* On a short screen the whole page scrolls, not the form. */
+    overflow-y: auto;
+    background: rgba(10, 9, 14, .78);
+    backdrop-filter: blur(4px);
+}
+
+.modal {
+    width: min(100%, 34rem);
+    padding: 1.25rem;
+    background: var(--panel-solid);
+    border: 1px solid var(--line-strong);
+    border-radius: 1rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .55);
+    color: var(--ink);
+}
+
+.title {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.hint {
+    margin: .3rem 0 1rem;
+    color: var(--ink-3);
+    font-size: .82rem;
+}
+
+.error {
+    margin: .5rem 0 0;
+    color: #ff8a8a;
+    font-size: .85rem;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: .6rem;
+    margin-top: 1rem;
+}
+
+.cancel,
+.save {
+    padding: .65rem 1.2rem;
+    border-radius: 8px;
+    font-size: .9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cancel {
+    color: var(--ink-2);
+    background: transparent;
+    border: 1px solid var(--line-strong);
+}
+
+.cancel:hover {
+    color: var(--ink);
+    border-color: var(--violet);
+}
+
+.save {
+    color: white;
+    border: none;
+    background: linear-gradient(135deg, var(--violet), var(--violet-deep));
+}
+
+.save:disabled {
+    opacity: .6;
+    cursor: default;
+}

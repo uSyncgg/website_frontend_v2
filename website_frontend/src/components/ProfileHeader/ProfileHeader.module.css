@@ -36,6 +36,58 @@
     overflow: hidden;
 }
 
+.avatarButton {
+    position: relative;
+    padding: 0;
+    color: inherit;
+    cursor: pointer;
+}
+
+/* The owner's "change photo" hint over the avatar. */
+.avatarOverlay {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(10, 9, 14, .55);
+    opacity: 0;
+    transition: opacity .16s;
+}
+
+.avatarOverlay svg {
+    width: 26px;
+    height: 26px;
+}
+
+.avatarButton:hover .avatarOverlay,
+.avatarButton:focus-visible .avatarOverlay {
+    opacity: 1;
+}
+
+.rename {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: var(--ink-2);
+    cursor: pointer;
+}
+
+.rename svg {
+    width: 12px;
+    height: 12px;
+}
+
+.rename:hover,
+.rename:focus-visible {
+    border-color: var(--violet);
+    background: var(--violet-dim);
+    color: var(--ink);
+}
+
 .avatarImage {
     width: 100%;
     height: 100%;
@@ -61,7 +113,6 @@
     font-weight: 900;
     line-height: .96;
     letter-spacing: -.01em;
-    text-transform: uppercase;
     overflow-wrap: anywhere;
 }
 

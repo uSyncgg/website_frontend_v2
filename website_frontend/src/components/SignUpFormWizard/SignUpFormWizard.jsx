@@ -35,7 +35,7 @@ function fieldForErrorLoc(loc, types) {
     return last ?? null;
 }
 
-const TAKEN_USERNAME = /^That (player|host|venue) username is taken/;
+const TAKEN_USERNAME = /^That (player|host|venue|org) username is taken/;
 
 // Sign-up (no addType) creates the account with one profile per type picked on Get Started.
 // With addType ('player' | 'host' | 'venue') it adds that one profile to the signed in account,
@@ -43,7 +43,7 @@ const TAKEN_USERNAME = /^That (player|host|venue) username is taken/;
 export const SignUpFormWizard = ({ addType = null }) => {
     const isSignUp = !addType;
     const methods = useForm({
-        defaultValues: { signup_path: [], venues: [EMPTY_VENUE] },
+        defaultValues: { signup_path: [], venues: [EMPTY_VENUE], org_teams: [] },
         mode: 'onBlur',
     });
     const { watch, trigger, setError, clearErrors, handleSubmit, formState: { isSubmitting, errors } } = methods;
@@ -79,11 +79,11 @@ export const SignUpFormWizard = ({ addType = null }) => {
     const handleNext = async () => {
         if (isSignUp && isFirstStep) {
             if (types.length === 0) {
-                setError('signup_path', { type: 'manual', message: 'Pick Player, Host or Venue to continue.' });
+                setError('signup_path', { type: 'manual', message: 'Pick Player, Host, Venue or Organization to continue.' });
                 return;
             }
             if (otherNeedsProfile(pathSelection)) {
-                setError('signup_path', { type: 'manual', message: 'Other must be paired with Player, Host or Venue.' });
+                setError('signup_path', { type: 'manual', message: 'Other must be paired with Player, Host, Venue or Organization.' });
                 return;
             }
             if (pathSelection.includes('other') && (watch('other_roles') ?? []).length === 0) {

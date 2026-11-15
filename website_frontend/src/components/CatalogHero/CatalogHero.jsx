@@ -6,9 +6,10 @@ import styles from './CatalogHero.module.css';
  *
  * Type treatment matches the site's existing HeaderImage (same eyebrow colour,
  * same gradient-clipped accent, same muted lede) so this reads as the same
- * site, just laid out as a split hero rather than a centred banner.
+ * site, just laid out as a split hero rather than a centred banner. `action` sits under the
+ * lede (e.g. a host's "Add your League" button).
  */
-export const CatalogHero = ({ eyebrow, headline, accent, lede, aside }) => {
+export const CatalogHero = ({ eyebrow, headline, accent, lede, aside, action }) => {
     return (
         <section className={styles.hero}>
             <div className={`${styles.inner} ${aside === undefined ? styles.noAside : ''}`}>
@@ -23,6 +24,8 @@ export const CatalogHero = ({ eyebrow, headline, accent, lede, aside }) => {
                     <hr className={styles.slant} />
 
                     {lede !== undefined && <p className={styles.lede}>{lede}</p>}
+
+                    {action}
                 </div>
 
                 {aside !== undefined && <div className={styles.aside}>{aside}</div>}

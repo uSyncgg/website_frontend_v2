@@ -1,7 +1,10 @@
 // Profile types in display order. An account has at most one profile of each.
-export const PROFILE_TYPES = ['player', 'host', 'venue'];
+export const PROFILE_TYPES = ['player', 'host', 'venue', 'org'];
 
-export const PROFILE_LABELS = { player: 'Player', host: 'Host', venue: 'Venue' };
+export const PROFILE_LABELS = { player: 'Player', host: 'Host', venue: 'Venue', org: 'Organization' };
+
+// Organizations run teams and enter events, but never post events or host brackets.
+export const NO_BRACKET_TYPES = ['org'];
 
 // Sign-up and add-a-profile give each profile type its own username form field.
 export const usernameField = (type) => `username_${type}`;
@@ -13,13 +16,32 @@ export const bioField = (type) => `bio_${type}`;
 export const copyPictureField = (type) => `copy_picture_${type}`;
 export const copyBioField = (type) => `copy_bio_${type}`;
 export const bracketField = (type) => `bracket_hosting_${type}`;
+// The profile's linked accounts on sign-up/add-a-profile: { platform: typed value }.
+export const linksField = (type) => `links_${type}`;
 
 // Public profile link. The public_id finds the profile; the username is only there so the
 // URL reads well, and the page fixes it up if the profile has been renamed since.
 export const profileUrl = (profile) =>
     `/profile/${encodeURIComponent(profile.public_id)}/${encodeURIComponent(profile.username)}`;
 
+// A player's stats page: every linked game, or one game by its slug. Shareable like the profile.
+export const statsUrl = (profile, gameSlug) =>
+    `${profileUrl(profile)}/stats${gameSlug ? `/${encodeURIComponent(gameSlug)}` : ''}`;
+
 export const settingsUrl = (type) => `/settings/profile/${type}`;
+
+// Host and venue profiles post bracket events, unless they turned bracket hosting off. It's on
+// by default, so a profile summary from before /users/me listed bracket_hosting counts as on.
+export const canHostBrackets = (profile) => !!profile && profile.type !== 'player' && !NO_BRACKET_TYPES.includes(profile.type) && profile.bracket_hosting !== false;
+
+// Creating a bracket event, posted as the given host or venue profile (by public_id). `type`
+// and `game` pre-fill the form, e.g. from the Leagues page you were on.
+export const createEventUrl = (publicId, { type, game } = {}) => {
+    const params = new URLSearchParams({ profile: publicId });
+    if (type) params.set('type', type);
+    if (game) params.set('game', game);
+    return `/host/events/new?${params}`;
+};
 
 export const addProfileUrl = (type) => `/settings/profile/add/${type}`;
 
