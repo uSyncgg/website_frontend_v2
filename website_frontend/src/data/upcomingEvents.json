@@ -1,0 +1,149 @@
+{
+  "generatedAt": "2026-10-24T22:26:59.183Z",
+  "events": [
+    {
+      "name": "S59 EU Main B - Regular Season",
+      "game": "Counter-Strike 2",
+      "start": "2026-10-06",
+      "end": "2026-10-24",
+      "location": "Online",
+      "online": true,
+      "prizePool": null,
+      "tier": null,
+      "url": "https://la-scene.gg/championships/01a0f925-c1ac-750e-ba9a-42e7c921d4c3",
+      "source": "la-scene.gg"
+    },
+    {
+      "name": "Synex League Saison 5 - Division 3",
+      "game": "Counter-Strike 2",
+      "start": "2026-10-20",
+      "end": "2026-10-24",
+      "location": "Online",
+      "online": true,
+      "prizePool": null,
+      "tier": null,
+      "url": "https://la-scene.gg/championships/01a1180a-275d-7379-88a0-435448700530",
+      "source": "la-scene.gg"
+    },
+    {
+      "name": "PGL Masters Bucharest 2026",
+      "game": "Counter-Strike 2",
+      "start": "2026-10-24",
+      "end": "2026-10-24",
+      "location": "Online",
+      "online": true,
+      "prizePool": null,
+      "tier": null,
+      "url": "https://la-scene.gg/championships/01a16fa6-3a8d-7eaf-9696-e182f92c295a",
+      "source": "la-scene.gg"
+    },
+    {
+      "name": "CCT Europe 2026 Contenders #10",
+      "game": "Counter-Strike 2",
+      "start": "2026-10-24",
+      "end": null,
+      "location": "Online",
+      "online": true,
+      "prizePool": null,
+      "tier": null,
+      "url": "https://la-scene.gg/championships/01a164dd-c820-736a-a892-3198a96047e5",
+      "source": "la-scene.gg"
+    },
+    {
+      "name": "Tesla Cup 2026",
+      "game": "Counter-Strike 2",
+      "start": "2026-10-27",
+      "end": null,
+      "location": "Online",
+      "online": true,
+      "prizePool": null,
+      "tier": null,
+      "url": "https://la-scene.gg/championships/01a16fa7-c7e1-7455-a941-29449b0b9d6f",
+      "source": "la-scene.gg"
+    },
+    {
+      "name": "Stake Ranked Episode 5",
+      "game": "Counter-Strike 2",
+      "start": "2026-10-27",
+      "end": "2026-10-30",
+      "location": "Barcelona, Spain",
+      "online": false,
+      "prizePool": null,
+      "tier": "A-Tier",
+      "url": "https://liquipedia.net/counterstrike/Stake_Ranked%2FEpisode_5",
+      "source": "Liquipedia"
+    },
+    {
+      "name": "Esports Nations Cup 2026",
+      "game": "Counter-Strike 2",
+      "start": "2026-11-10",
+      "end": "2026-11-15",
+      "location": "Riyadh, Saudi Arabia",
+      "online": false,
+      "prizePool": null,
+      "tier": "A-Tier",
+      "url": "https://liquipedia.net/counterstrike/Esports_Nations_Cup%2F2026",
+      "source": "Liquipedia"
+    },
+    {
+      "name": "Stake Ranked Episode 6",
+      "game": "Counter-Strike 2",
+      "start": "2026-11-17",
+      "end": "2026-11-20",
+      "location": "Europe",
+      "online": false,
+      "prizePool": null,
+      "tier": "A-Tier",
+      "url": "https://liquipedia.net/counterstrike/Stake_Ranked%2FEpisode_6",
+      "source": "Liquipedia"
+    },
+    {
+      "name": "eXTREMESLAND 2026",
+      "game": "Counter-Strike 2",
+      "start": "2026-12-16",
+      "end": "2026-12-20",
+      "location": "Shanghai, China",
+      "online": false,
+      "prizePool": null,
+      "tier": "A-Tier",
+      "url": "https://liquipedia.net/counterstrike/EXTREMESLAND%2F2026",
+      "source": "Liquipedia"
+    },
+    {
+      "name": "Intel Extreme Masters Kraków 2027",
+      "game": "Counter-Strike 2",
+      "start": "2027-01-27",
+      "end": "2027-02-07",
+      "location": "Kraków, Poland",
+      "online": false,
+      "prizePool": null,
+      "tier": "S-Tier",
+      "url": "https://liquipedia.net/counterstrike/Intel_Extreme_Masters%2F2027%2FKrak%C3%B3w",
+      "source": "Liquipedia"
+    },
+    {
+      "name": "ESL Pro League Season 25",
+      "game": "Counter-Strike 2",
+      "start": "2027-03-06",
+      "end": "2027-03-14",
+      "location": "Saudi Arabia",
+      "online": false,
+      "prizePool": null,
+      "tier": "S-Tier",
+      "url": "https://liquipedia.net/counterstrike/ESL%2FPro_League%2FSeason_25",
+      "source": "Liquipedia"
+    },
+    {
+      "name": "Intel Extreme Masters USA 2027",
+      "game": "Counter-Strike 2",
+      "start": "2027-04-05",
+      "end": "2027-04-11",
+      "location": "United States",
+      "online": false,
+      "prizePool": null,
+      "tier": "S-Tier",
+      "url": "https://liquipedia.net/counterstrike/Intel_Extreme_Masters%2F2027%2FUnited_States",
+      "source": "Liquipedia"
+    }
+  ]
+}

@@ -26,3 +26,6 @@ yarn-error.log*
 
 # local planning docs
 /plans
+
+# scraped event data (regenerate with scripts/scrape-esports.mjs)
+/data/scraped
