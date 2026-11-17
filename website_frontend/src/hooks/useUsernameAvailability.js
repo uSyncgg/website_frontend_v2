@@ -7,7 +7,7 @@ const USERNAME_CHECK_DEBOUNCE_MS = 300;
 
 // Live availability check for a username field of the surrounding form. Used by sign-up,
 // adding a profile and the settings username change.
-// - type: the profile type ('player' | 'host' | 'venue'). A name only clashes within its type.
+// - type: the profile type ('player' | 'host' | 'venue' | 'org'). A name only clashes within its type.
 // - field: the form field to put errors on.
 // - skip(value) returns true for values that shouldn't be checked (e.g. the profile's current name).
 // Returns the value that was found taken ("" when it's free), for FormTextInput's `taken` prop.

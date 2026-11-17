@@ -15,7 +15,7 @@ const DETAIL_FIELDS = {
     host: ['organization', 'host_country', 'hosted_games', 'other_hosted_games', 'event_types'],
     venue: ['venues'],
     // The org's name is its username, so it isn't a detail field.
-    org: ['org_country', 'org_games', 'other_org_games', 'org_teams'],
+    org: ['org_country', 'org_games', 'other_org_games', 'org_teams', 'website', 'contact_email'],
 };
 
 // The org form fields are prefixed so they can't clash with a host's on a combined sign-up.
@@ -23,7 +23,7 @@ const DETAIL_KEY = { venues: 'locations', org_games: 'games', other_org_games: '
 
 // Optional text columns: a cleared input is saved as null rather than "" (date_of_birth is a
 // DATE, so "" would be rejected).
-const NULLABLE_FIELDS = new Set(['bio', 'other_role_detail', 'phone_number', 'gender', 'date_of_birth', 'country', 'other_games', 'other_hosted_games', 'other_org_games']);
+const NULLABLE_FIELDS = new Set(['bio', 'other_role_detail', 'phone_number', 'gender', 'date_of_birth', 'country', 'other_games', 'other_hosted_games', 'other_org_games', 'website', 'contact_email']);
 
 const EMPTY_VENUE = { name: '', location: '' };
 
@@ -159,6 +159,7 @@ export function toFormData({ data, files }) {
 export function toFormValues(settings) {
     const text = (value) => value ?? '';
     const details = settings.details ?? {};
+    const isOrg = settings.type === 'org';
 
     return {
         username: settings.username,
@@ -174,7 +175,7 @@ export function toFormValues(settings) {
         date_of_birth: text(details.date_of_birth),
         country: text(details.country),
         interests: details.interests ?? [],
-        other_games: text(details.other_games),
+        other_games: isOrg ? '' : text(details.other_games),
 
         organization: text(details.organization),
         host_country: text(details.host_country),
@@ -186,6 +187,8 @@ export function toFormValues(settings) {
         org_country: settings.type === 'org' ? text(details.org_country) : '',
         org_games: settings.type === 'org' ? details.games ?? [] : [],
         other_org_games: settings.type === 'org' ? text(details.other_games) : '',
+        website: settings.type === 'org' ? text(details.website) : '',
+        contact_email: settings.type === 'org' ? text(details.contact_email) : '',
 
         venues: details.locations?.length > 0
             ? details.locations.map(v => ({ name: v.name, location: v.location }))
