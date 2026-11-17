@@ -1,12 +1,13 @@
 import { useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { FormButton } from "components/FormButton/FormButton";
 import { useAuth, useCurrentUser } from "hooks";
 import { getApiErrorMessage, isRateLimited, RATE_LIMIT_MESSAGE } from "utils/apiError";
 import { PROFILE_LABELS, pictureField, profileUrl, usernameField } from "utils/profiles";
 import { buildSignUpRequest, buildAddProfileRequest, toFormData } from "utils/profileForm";
 import { submitSignUpForm, addProfile } from "services/user";
+import { TOS_URL } from "utils/legal";
 import styles from "./SignUpFormWizard.module.css";
 
 import { buildStepSequence, buildAddProfileSteps, selectedTypes, otherNeedsProfile, isStepComplete, hasRequiredInfo, COMPLETION_WATCH_FIELDS } from "./stepConfig";
@@ -66,7 +67,10 @@ export const SignUpFormWizard = ({ addType = null }) => {
     const completionValues = Object.fromEntries(COMPLETION_WATCH_FIELDS.map((name, i) => [name, completionWatch[i]]));
     // Submitting only needs the required information. Optional steps (and the last step, which
     // has Submit instead of Continue) never block it.
-    const canSubmit = types.length > 0 && stepSequence.every(step => hasRequiredInfo(step, completionValues));
+    // Sign-up also needs the Terms of Service box ticked (shown on the last step).
+    const tosAccepted = watch('tos_accepted') === true;
+    const hasStepInfo = types.length > 0 && stepSequence.every(step => hasRequiredInfo(step, completionValues));
+    const canSubmit = hasStepInfo && (!isSignUp || tosAccepted);
 
     const currentStep = stepSequence[Math.min(stepIndex, stepSequence.length - 1)];
     const isFirstStep = stepIndex === 0;
@@ -214,6 +218,16 @@ export const SignUpFormWizard = ({ addType = null }) => {
 
                             <currentStep.Component {...(currentStep.props ?? {})} />
 
+                            {isSignUp && isLastStep && (
+                                <label className={styles.tosCheck}>
+                                    <input type="checkbox" {...methods.register('tos_accepted')} />
+                                    <span>
+                                        I have read and agree to the{' '}
+                                        <Link to={TOS_URL} target="_blank" rel="noopener noreferrer">Terms of Service</Link>.
+                                    </span>
+                                </label>
+                            )}
+
                             {errors.root && <span className={styles.errorRoot}>{errors.root.message}</span>}
 
                             <div className={styles.stepFooter}>
@@ -227,8 +241,11 @@ export const SignUpFormWizard = ({ addType = null }) => {
                                     <FormButton key="submit" type="submit" disabled={!canSubmit || isSubmitting} label={isSubmitting ? 'Submitting...' : 'Submit'} className={styles.btnPrimary} />
                                 )}
                             </div>
-                            {isLastStep && !canSubmit &&
+                            {isLastStep && !hasStepInfo &&
                                 <p className={styles.submitHint}>Finish the steps without a ✓ in the sidebar to submit.</p>
+                            }
+                            {isLastStep && hasStepInfo && !canSubmit &&
+                                <p className={styles.submitHint}>Agree to the Terms of Service to submit.</p>
                             }
                         </div>
                     </div>
