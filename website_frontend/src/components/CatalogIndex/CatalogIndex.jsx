@@ -16,10 +16,11 @@ const NO_SECTIONS = [];
  * empty state.
  *
  * Everything comes from `catalog` — see catalog/games.catalog.js for the shape.
+ * `heroAction` goes under the hero's lede.
  * A second catalog needs a new config and a page that renders this component;
  * no changes here.
  */
-export const CatalogIndex = ({ catalog }) => {
+export const CatalogIndex = ({ catalog, heroAction }) => {
     const {
         query, setQuery,
         activeFacets, toggleFacet, clearFacets,
@@ -60,7 +61,7 @@ export const CatalogIndex = ({ catalog }) => {
 
     return (
         <>
-            <CatalogHero {...catalog.hero} aside={aside} />
+            <CatalogHero {...catalog.hero} aside={aside} action={heroAction} />
 
             <CatalogFacets
                 search={catalog.search}

@@ -2,23 +2,24 @@
 // { type, username, picture, bio, bracket_hosting, other_roles, other_role_detail, details: {...} }.
 // Used by sign-up, adding a profile and profile settings, so all three send the same thing.
 
-import { PROFILE_TYPES, bioField, bracketField, copyBioField, copyPictureField, pictureField, usernameField } from "./profiles";
+import { PROFILE_TYPES, bioField, bracketField, copyBioField, copyPictureField, linksField, pictureField, usernameField } from "./profiles";
+import { linkChanges } from "./linkedPlatforms";
 
 // Fields stored on the profile itself (shared by every type).
 const PROFILE_FIELDS = ['bio', 'bracket_hosting', 'other_roles', 'other_role_detail'];
 
 // Fields stored in `details`, per type. The form's `venues` is sent as `details.locations`.
-// Game account IDs (battlenet, steam, ...) aren't collected yet - linking is "coming soon".
+// Game accounts (battlenet, steam, ...) will be linked by signing in to the platform, not typed in.
 const DETAIL_FIELDS = {
     player: ['first_name', 'last_name', 'phone_number', 'gender', 'date_of_birth', 'country', 'interests', 'other_games'],
     host: ['organization', 'host_country', 'hosted_games', 'other_hosted_games', 'event_types'],
     venue: ['venues'],
-    // Org games get their own form fields so they don't collide with a player profile's games
-    // when both are created at sign-up. The org's name is its username, so it isn't here.
-    org: ['org_country', 'org_games', 'other_org_games', 'website', 'contact_email'],
+    // The org's name is its username, so it isn't a detail field.
+    org: ['org_country', 'org_games', 'other_org_games', 'org_teams', 'website', 'contact_email'],
 };
 
-const DETAIL_KEY = { venues: 'locations', org_games: 'games', other_org_games: 'other_games' };
+// The org form fields are prefixed so they can't clash with a host's on a combined sign-up.
+const DETAIL_KEY = { venues: 'locations', org_games: 'games', other_org_games: 'other_games', org_teams: 'teams' };
 
 // Optional text columns: a cleared input is saved as null rather than "" (date_of_birth is a
 // DATE, so "" would be rejected).
@@ -33,6 +34,12 @@ export function toApiValue(field, value) {
         return (value ?? [])
             .map(v => ({ name: v.name.trim(), location: v.location.trim() }))
             .filter(v => v.name && v.location);
+    }
+    // Teams named at sign-up; blank rows are skipped.
+    if (field === 'org_teams') {
+        return (value ?? [])
+            .map(t => ({ name: (t.name ?? '').trim(), games: t.games ?? [] }))
+            .filter(t => t.name);
     }
     if (typeof value === 'string') {
         const trimmed = value.trim();
@@ -66,8 +73,13 @@ export function buildProfileEntry(type, values, { picture = null, bio = '', incl
         details: detailsFor(type, values),
     };
 
+    const links = linkChanges({ type }, values[linksField(type)]);
+    if (Object.keys(links).length > 0) entry.links = links;
+
     // Asked per profile. Left unanswered, the backend defaults it to on.
-    if (values[bracketField(type)] !== undefined) {
+    if (type === 'org') {
+        entry.bracket_hosting = false;
+    } else if (values[bracketField(type)] !== undefined) {
         entry.bracket_hosting = toApiValue('bracket_hosting', values[bracketField(type)]);
     }
 
@@ -171,11 +183,12 @@ export function toFormValues(settings) {
         other_hosted_games: text(details.other_hosted_games),
         event_types: details.event_types ?? [],
 
-        org_country: text(details.org_country),
-        org_games: isOrg ? details.games ?? [] : [],
-        other_org_games: isOrg ? text(details.other_games) : '',
-        website: text(details.website),
-        contact_email: text(details.contact_email),
+        // An org's details share key names with a host's, so only read them for an org.
+        org_country: settings.type === 'org' ? text(details.org_country) : '',
+        org_games: settings.type === 'org' ? details.games ?? [] : [],
+        other_org_games: settings.type === 'org' ? text(details.other_games) : '',
+        website: settings.type === 'org' ? text(details.website) : '',
+        contact_email: settings.type === 'org' ? text(details.contact_email) : '',
 
         venues: details.locations?.length > 0
             ? details.locations.map(v => ({ name: v.name, location: v.location }))

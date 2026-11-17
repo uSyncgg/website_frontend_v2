@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { SeoData, HostBanner, HeaderImage, EventListFilters, NoEvents } from "components";
+import { SeoData, HostBanner, HeaderImage, EventListFilters, NoEvents, AddYourEventButton } from "components";
 import { useLeagueEvents } from "hooks";
 import { buildEventPath } from 'utils/eventPaths';
 import '../../EventBanners.css';
@@ -125,6 +125,8 @@ export const RLLeagues = () => {
                 resultCount={filteredLeagues.length}
                 onClear={clearFilters}
             />
+
+            <AddYourEventButton />
 
             {loading ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading leagues...</h2>

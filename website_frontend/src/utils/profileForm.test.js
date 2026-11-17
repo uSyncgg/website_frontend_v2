@@ -113,6 +113,34 @@ test("buildProfileUpdate splits profile fields from details and drops other type
     expect(buildProfileUpdate("host", ["first_name"], values)).toBeNull();
 });
 
+describe('buildSignUpRequest linked accounts', () => {
+    test('each profile sends its own links, and no game accounts', () => {
+        const { data } = buildSignUpRequest({
+            signup_path: ['player', 'host'],
+            default_profile: 'player',
+            username_player: 'Brewskie',
+            username_host: 'uSync',
+            first_name: 'Jake',
+            last_name: 'B',
+            organization: 'uSync',
+            host_country: 'US',
+            links_player: { twitter: '@JakeBrewskie', steam: '765611', faceit: 'nope' },
+            links_host: { website: 'https://usync.gg', twitter: 'https://x.com/usyncgg' },
+        });
+
+        const [player, host] = data.profiles;
+        expect(player.links).toEqual({ twitter: 'JakeBrewskie' });
+        expect(player.details).not.toHaveProperty('steam');
+        expect(host.links).toEqual({ website: 'usync.gg', twitter: 'usyncgg' });
+        expect(host.details).not.toHaveProperty('steam');
+    });
+
+    test('no links typed sends no links', () => {
+        const { data } = buildSignUpRequest({ signup_path: ['venue'], username_venue: 'Hall', venues: [] });
+        expect(data.profiles[0]).not.toHaveProperty('links');
+    });
+});
+
 test("an org profile sends its games as details.games, separate from a player's games", () => {
     const values = {
         signup_path: ["player", "org"], default_profile: "player",
@@ -125,7 +153,7 @@ test("an org profile sends its games as details.games, separate from a player's 
     const org = data.profiles.find(p => p.type === "org");
     expect(org.username).toBe("uSync Esports");
     expect(org.details).toEqual({ org_country: "us", games: ["Valorant", "Other"], other_games: "Deadlock", website: null, contact_email: "team@usync.gg" });
-    expect(org.bracket_hosting).toBeUndefined();
+    expect(org.bracket_hosting).toBe(false);
     expect(data.profiles.find(p => p.type === "player").details.other_games).toBe("Apex");
 });
 

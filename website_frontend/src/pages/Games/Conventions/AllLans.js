@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { SeoData, HostBanner, NoEvents, LanMap, EventListFilters } from "components";
+import { SeoData, HostBanner, NoEvents, LanMap, EventListFilters, AddYourEventButton } from "components";
 import { useAllLans } from "hooks";
 import { toLanMarkers } from 'data/lanMarkers';
 import { buildEventPath } from 'utils/eventPaths';
@@ -104,6 +104,8 @@ export const AllLans = () => {
                 resultCount={filteredLans.length}
                 onClear={clearFilters}
             />
+
+            <AddYourEventButton type="lan" />
 
             {loading ? (
                 <h2 className="eventSeparationTitle" style={{ fontSize: "2rem" }}>Loading LANs...</h2>

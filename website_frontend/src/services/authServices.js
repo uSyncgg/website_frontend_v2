@@ -42,5 +42,11 @@ export function signInWithProvider(provider, returnTo = DEFAULT_AUTH_PATH) {
 // The hash is dropped because the provider redirect puts the session in it.
 export function getReturnPath(from) {
     const path = from?.pathname ? `${from.pathname}${from.search ?? ""}` : null;
-    return path?.startsWith("/") && !path.startsWith("//") ? path : null;
+    return isSameSitePath(path) ? path : null;
+}
+
+// True for a path on this site. Browsers treat "//evil.com" and "/\evil.com" as links to another
+// site, so both are rejected.
+export function isSameSitePath(path) {
+    return typeof path === "string" && path.startsWith("/") && !path.startsWith("//") && !path.startsWith("/\\");
 }

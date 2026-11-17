@@ -105,6 +105,11 @@ import { PasswordChecklist } from "./PasswordChecklist/PasswordChecklist";
 
 // Route Protection
 import { RequireCompleteProfile } from "./RequiredCompleteProfile/RequiredCompleteProfile";
+import { RequireBracketHost } from "./RequireBracketHost/RequireBracketHost";
+import { Bracket, ReportMatchDialog } from "./Bracket/Bracket";
+import { RequireAdmin } from "./RequireAdmin/RequireAdmin";
+import { Segmented } from "./Segmented/Segmented";
+import { ClaimEventPrompt } from "./ClaimEventPrompt/ClaimEventPrompt";
 import { RedirectIfProfileComplete } from "./RequiredCompleteProfile/RedirectIfProfileComplete";
 
 // Sign Up Wizard
@@ -114,8 +119,12 @@ import { AccountSettingsStep } from "./AccountSettingsStep/AccountSettingsStep";
 
 // Profile
 import { ProfileHeader } from "./ProfileHeader/ProfileHeader";
+import { ProfileLinks } from "./ProfileLinks/ProfileLinks";
+import { LinkAccountsModal } from "./LinkAccountsModal/LinkAccountsModal";
+import { ShareButton } from "./ShareButton/ShareButton";
 import { ProfileViewToggle } from "./ProfileViewToggle/ProfileViewToggle";
 import { ProfileCard } from "./ProfileCard/ProfileCard";
+import { AddYourEventButton } from "./AddYourEventButton/AddYourEventButton";
 
 export {
     Navbar,
@@ -176,6 +185,12 @@ export {
     SocialLoginButtons,
     PasswordChecklist,
     RequireCompleteProfile,
+    RequireBracketHost,
+    Bracket,
+    ReportMatchDialog,
+    RequireAdmin,
+    Segmented,
+    ClaimEventPrompt,
     RedirectIfProfileComplete,
     SignUpFormWizard,
     ProfileSettingsWizard,
@@ -185,6 +200,10 @@ export {
     VerifiedEvents,
     CheckoutSteps,
     ProfileHeader,
+    ProfileLinks,
+    LinkAccountsModal,
+    ShareButton,
     ProfileViewToggle,
-    ProfileCard
+    ProfileCard,
+    AddYourEventButton
 };

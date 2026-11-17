@@ -3,9 +3,10 @@ import { FormTextInput } from "components/FormTextInput/FormTextInput";
 import { useFormContext } from "react-hook-form";
 import styles from "./SignUpPathStep.module.css";
 
-// Venue and Organization aren't here: each is a profile of its own (a top-level choice above).
-// "Team" stays until teams ship as their own feature. Must match the backend's OtherRole list.
-const OTHER_ROLE_OPTIONS = ["Coach", "Sponsor", "Team", "Viewer", "Other"];
+// Venue and Organization (which replaced "Team") aren't here: each is a profile of its own (a
+// top-level choice above). Must match the
+// backend's OtherRole list.
+const OTHER_ROLE_OPTIONS = ["Coach", "Sponsor", "Viewer", "Other"];
 
 export const SignUpPathStep = () => {
     const { watch, setValue, formState: { errors } } = useFormContext();

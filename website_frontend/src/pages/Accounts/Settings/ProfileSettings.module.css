@@ -30,6 +30,21 @@
     color: #b89cf0;
 }
 
+.barButton {
+    padding: .45rem .9rem;
+    border-radius: 8px;
+    border: 1px dashed rgba(155, 111, 224, .5);
+    background: transparent;
+    color: var(--violet-bright);
+    font-size: .8rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.barButton:hover {
+    background: var(--violet-dim);
+}
+
 /* /settings/profile with 2+ profiles: pick which one to edit. */
 .pickerPage {
     flex: 1;

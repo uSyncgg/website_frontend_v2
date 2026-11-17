@@ -16,7 +16,7 @@ const REGION_OPTIONS = [
     { label: "Certain Regions", value: "certain_regions" },
 ];
 
-// Also used by organizations, which are based in a country or compete across a region.
+// Shared with the org sign-up's country picker.
 export const HOST_COUNTRY_OPTIONS = [
     ...REGION_OPTIONS,
     COUNTRY_DIVIDER,
