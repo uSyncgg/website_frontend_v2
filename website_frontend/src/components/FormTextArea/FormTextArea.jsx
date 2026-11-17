@@ -14,13 +14,15 @@ export const FormTextArea = (
         errorClassName, 
         counterClassName,
         labelClassName,
-        onFieldBlur 
+        onFieldBlur,
+        rules // extra react-hook-form rules (minLength, validate, ...)
     }
 ) => {
     const { register, watch, formState: { errors } } = useFormContext();
     const { onBlur: rhfOnBlur, ...fieldProps } = register(name, {
         required: required ? "This field is required" : false,
         maxLength: maxLength ? { value: maxLength, message: `Must be ${maxLength} characters or fewer` } : undefined,
+        ...rules,
     });
     const value = watch(name) ?? "";
 

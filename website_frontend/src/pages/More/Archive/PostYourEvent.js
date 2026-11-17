@@ -1,7 +1,9 @@
 import { SeoData, HeaderImage } from "components";
 import { Link } from "react-router";
-import styles from '../Home.module.css';
+import styles from '../../Home.module.css';
 
+// ARCHIVED: the old Google Form for submitting an event, no longer routed. Hosts now post events
+// through the event form (/host/events/new); /more/eventhost goes there (PostYourEventEntry).
 export const PostYourEvent = () => {
     return (
         <div className="standardContainer">

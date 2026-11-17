@@ -43,7 +43,7 @@ const TAKEN_USERNAME = /^That (player|host|venue|org) username is taken/;
 export const SignUpFormWizard = ({ addType = null }) => {
     const isSignUp = !addType;
     const methods = useForm({
-        defaultValues: { signup_path: [], venues: [EMPTY_VENUE] },
+        defaultValues: { signup_path: [], venues: [EMPTY_VENUE], org_teams: [] },
         mode: 'onBlur',
     });
     const { watch, trigger, setError, clearErrors, handleSubmit, formState: { isSubmitting, errors } } = methods;

@@ -63,9 +63,9 @@ export const ProfileIdentityStep = ({ types, isSignUp }) => {
                 <UsernameInput
                     key={type}
                     type={type}
-                    // An org's username is its organization name (spaces allowed, up to 40 characters).
+                    // An org's username is its organization name, the only time it's asked.
                     label={type === 'org' ? "Organization name" : types.length > 1 ? `${PROFILE_LABELS[type]} username` : "Enter your username"}
-                    placeholder={type === 'org' ? "uSync Esports" : "uSync"}
+                    placeholder={type === 'org' ? "e.g. Static Gaming" : "uSync"}
                 />
             ))}
 

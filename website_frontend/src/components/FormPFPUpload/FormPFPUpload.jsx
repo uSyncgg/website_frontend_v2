@@ -1,15 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
+import { useObjectUrl } from "hooks/useObjectUrl";
+import { ACCEPTED_IMAGE_TYPES, imageFileRules } from "utils/imageUpload";
 import { ImageCropModal } from "./ImageCropModal";
 import styles from "./FormPFPUpload.module.css";
-
-const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/webp"];
-const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
 // currentUrl: an already-saved picture to show until a new file is picked (profile settings).
 export const FormPFPUpload = ({ id, name, label, required, currentUrl, inputClassName, labelClassName, errorClassName, onFieldChange }) => {
     const { register, watch, getValues, formState: { errors } } = useFormContext();
-    const [previewUrl, setPreviewUrl] = useState(null);
     // The picked image waiting in the crop dialog, and the uncropped original of the
     // file the form currently holds (so "Adjust" re-crops from the full image).
     const [cropFile, setCropFile] = useState(null);
@@ -18,27 +16,17 @@ export const FormPFPUpload = ({ id, name, label, required, currentUrl, inputClas
     const inputRef = useRef(null);
     const { onChange: rhfOnChange, ref: rhfRef, ...fieldProps } = register(name, {
         required: required ? "This field is required" : false,
-        validate: {
-            fileType: (files) =>
-                !files?.length || ACCEPTED_TYPES.includes(files[0].type) || "File must be a JPG, PNG, or WEBP image",
-            fileSize: (files) =>
-                !files?.length || files[0].size <= MAX_FILE_SIZE || "File must be 5MB or smaller",
-        },
+        validate: imageFileRules,
     });
 
     // The preview always follows react-hook-form's value, so it stays right after a
     // remount (stepping Back and forward) or a parent resetField.
     const file = watch(name)?.[0] ?? null;
+    const previewUrl = useObjectUrl(file);
 
+    // No file any more (e.g. a parent resetField): there's nothing left to re-crop.
     useEffect(() => {
-        if (!file) {
-            setPreviewUrl(null);
-            setOriginalFile(null);
-            return;
-        }
-        const url = URL.createObjectURL(file);
-        setPreviewUrl(url);
-        return () => URL.revokeObjectURL(url);
+        if (!file) setOriginalFile(null);
     }, [file]);
 
     // Puts `files` in the real input and tells react-hook-form, as if picked by hand.
@@ -65,7 +53,7 @@ export const FormPFPUpload = ({ id, name, label, required, currentUrl, inputClas
         const picked = e.target.files?.[0] ?? null;
         setCropError(null);
         // Nothing picked, or a type we can't crop: hand straight to validation.
-        if (!picked || !ACCEPTED_TYPES.includes(picked.type)) {
+        if (!picked || !ACCEPTED_IMAGE_TYPES.includes(picked.type)) {
             commitFiles(e.target.files);
             return;
         }
@@ -107,7 +95,7 @@ export const FormPFPUpload = ({ id, name, label, required, currentUrl, inputClas
                 <input
                     id={id}
                     type="file"
-                    accept={ACCEPTED_TYPES.join(',')}
+                    accept={ACCEPTED_IMAGE_TYPES.join(',')}
                     {...fieldProps}
                     ref={(el) => {
                         rhfRef(el);
