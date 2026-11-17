@@ -69,6 +69,7 @@
     ],
     "concurrency": 1,
     "crawl": false,
+    "preconnectThirdParty": false,
     "include": [
       "/",
       "/home",
