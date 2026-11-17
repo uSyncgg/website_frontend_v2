@@ -2,7 +2,7 @@ import { LegalDocument, LegalEmail, SectionRef, LegalNotice, LegalContactCard, L
 import { Link } from "react-router";
 
 // Update this date whenever the Terms change (see Section 3).
-const LAST_UPDATED = "October 8, 2026";
+const LAST_UPDATED = "November 16, 2026";
 
 const SECTIONS = [
     {
@@ -42,9 +42,10 @@ const SECTIONS = [
                     </li>
                 </ul>
                 <p>
-                    Rules, refund policies, and waivers published by the organizer of an event or bracket you join are
-                    an agreement between you and that organizer. They do not modify these Terms or create obligations
-                    for uSync.
+                    The uSync-approved ruleset for a Paid Event forms part of these Terms for that event (see Section
+                    7.4). Rules, refund policies, and waivers published by the organizer of a Listed Event are an
+                    agreement between you and that organizer. They do not modify these Terms or create obligations for
+                    uSync.
                 </p>
 
                 <h3>1.3 Accepting on Behalf of an Organization</h3>
@@ -87,7 +88,7 @@ const SECTIONS = [
                     </li>
                     <li>
                         <strong>Event promotion and marketing.</strong> Tools and services that let event organizers
-                        (“Hosts”) submit events for listing on uSync and, where offered, purchase promotional services
+                        and Hosts (Commission-Based Admins) submit events for listing on uSync and, where offered, purchase promotional services
                         such as featured placement, sponsored listings, or promotion on uSync’s social media channels.
                     </li>
                     <li>
@@ -95,13 +96,14 @@ const SECTIONS = [
                         organization reviewed and, if approved, display the uSync Verified badge.
                     </li>
                     <li>
-                        <strong>Event registration and passes.</strong> A checkout flow, powered by our third-party
-                        payment processor, through which participants can register for and purchase passes or entries to
-                        events run by Hosts.
+                        <strong>Paid Events.</strong> Tournaments, leagues, brackets, and matches with an entry fee or
+                        pass paid through uSync’s checkout or uSync balance. uSync is the host of every Paid Event (see{" "}
+                        <SectionRef to="events-hosts">Section 7</SectionRef>).
                     </li>
                     <li>
-                        <strong>Bracket and tournament hosting.</strong> Tools that allow users to create, manage, and
-                        run their own brackets and tournaments, including seeding, scheduling, and results reporting.
+                        <strong>Bracket and tournament tools.</strong> Tools that Host and venue profiles can use, as
+                        Commission-Based Admins, to set up and administer brackets and tournaments, including seeding,
+                        scheduling, and results reporting. Player profiles cannot create brackets.
                     </li>
                     <li>
                         <strong>Accounts and profiles.</strong> Player and Host accounts with public profiles, linked
@@ -112,13 +114,26 @@ const SECTIONS = [
                     </li>
                 </ul>
 
-                <h3>2.2 uSync Is Not the Event Organizer</h3>
+                <h3>2.2 Who Hosts an Event: uSync and Commission-Based Admins</h3>
                 <p>
-                    Unless we expressly state otherwise for a particular event, uSync does not organize, operate,
-                    sponsor, or control the events, leagues, tournaments, platforms, or brackets listed on or hosted
-                    through the Services. They are run by independent third parties. When you register for, purchase a
-                    pass to, or participate in an event, your agreement for that event is with its Host, not with
-                    uSync. See <SectionRef to="events-hosts">Section 7</SectionRef> for more detail.
+                    <strong>uSync is the host of every Paid Event.</strong> A “Paid Event” is any event, tournament,
+                    league, bracket, or match for which an entry fee, pass price, or other payment is collected through
+                    the Services, including from a uSync balance. When you enter a Paid Event, your agreement for that
+                    event is with uSync.
+                </p>
+                <p>
+                    <strong>“Host” on uSync means a Commission-Based Admin.</strong> We use the word “Host” (and
+                    “admin”) openly across the Services for the people and organizations who set up and administer
+                    events. A Host is a <strong>commission-based admin</strong> who administers events on uSync’s behalf
+                    and is paid a sales-based commission by uSync. Being called a “Host” does not mean that person or
+                    organization hosts, operates, or owns a Paid Event, holds any entry fees or prize money, or can
+                    make any promise on uSync’s behalf.
+                </p>
+                <p>
+                    Events that are only listed on uSync, with no payment taken through the Services (“Listed
+                    Events”), such as free community events and third-party platforms we link to, are run by
+                    independent third parties and are not hosted by uSync. See{" "}
+                    <SectionRef to="events-hosts">Section 7</SectionRef> for more detail.
                 </p>
 
                 <h3>2.3 Sponsored and Featured Content</h3>
@@ -611,137 +626,153 @@ const SECTIONS = [
     {
         id: "events-hosts",
         number: 7,
-        title: "Events, Hosts & Third-Party Services",
+        title: "Paid Events, Hosts (Commission-Based Admins) & Third Parties",
         content: (
             <>
-                <h3>7.1 Events Are Run by Independent Hosts</h3>
+                <h3>7.1 uSync Is the Host of All Paid Events</h3>
                 <p>
-                    Events, leagues, tournaments, brackets, H2H platforms, and wager platforms listed on or hosted
-                    through the Services are operated by independent third parties (each a “Host”). uSync does not
-                    control and is not responsible for:
+                    uSync is the host and operator of record for every Paid Event. uSync collects all entry fees and
+                    pass payments for Paid Events, holds and pays out prize money, approves each Paid Event’s rules,
+                    and has final authority over Paid Event rulings, results, and disputes as described in Section 7.4.
+                    No Host, venue, or other user hosts a Paid Event, even if their name, branding, or “Host” label
+                    appears on it.
+                </p>
+
+                <h3>7.2 Hosts Are Commission-Based Admins</h3>
+                <LegalNotice>
+                    <p>
+                        <strong>Important:</strong> every “Host” or “admin” on uSync is a{" "}
+                        <strong>COMMISSION-BASED ADMIN</strong>. The word “Host” is a label used on the Services; it does
+                        not mean the Host hosts the event. uSync is the technical host of all Paid Events.
+                    </p>
+                </LegalNotice>
+                <p>
+                    Any user, Host profile, venue profile, or organization that sets up or administers a Paid Event
+                    (a “Host” or “Commission-Based Admin”) does so on uSync’s behalf, under these Terms and any separate
+                    agreement between uSync and that Host. A Host:
                 </p>
                 <ul>
-                    <li>whether an event takes place as scheduled, or at all;</li>
-                    <li>event rules, formats, administration, rulings, or dispute outcomes;</li>
-                    <li>the awarding, amount, timing, or payment of any prize or winnings;</li>
-                    <li>a Host’s refund, cancellation, or transfer policies;</li>
-                    <li>the safety, security, accessibility, or condition of any venue; or</li>
-                    <li>the conduct of Hosts, admins, participants, spectators, or other third parties.</li>
+                    <li>is an independent contractor, and not an employee, partner, joint venturer, or agent of uSync;</li>
+                    <li>has no authority to make any promise, guarantee, or agreement on uSync’s behalf;</li>
+                    <li>
+                        does not receive, hold, or control entry fees, pass payments, or prize money for Paid Events,
+                        and must not collect any payment for a Paid Event outside the Services; and
+                    </li>
+                    <li>is paid only the commission described in Section 7.3.</li>
+                </ul>
+
+                <h3>7.3 Host Commissions</h3>
+                <p>
+                    uSync pays each Host a sales-based commission calculated on the entries to (or passes sold for) the
+                    Paid Events that Host administers. A commission may be a fixed amount or a percentage, may differ
+                    from event to event, and may change over time. Commission terms, rates, and payout schedules are set
+                    in uSync’s separate agreement with each Host and are not published in these Terms. Commissions may be
+                    paid out of the entry fees for a Paid Event, including out of the amount that would otherwise go to
+                    its prize pool, as described in Section 7.6. Participants pay no separate fee to a Host.
+                </p>
+
+                <h3>7.4 uSync-Approved Rulesets</h3>
+                <p>
+                    Every Paid Event runs on a ruleset approved by uSync. Hosts may propose rules, formats, and settings,
+                    but no Paid Event may open for entries until uSync has approved its ruleset, and a Host may not
+                    change an approved ruleset without uSync’s approval. uSync may require changes to, or reject, any
+                    proposed ruleset. Hosts apply the approved ruleset when administering a Paid Event; uSync may review
+                    and overturn a Host’s ruling, and uSync’s decision on rulings, results, disqualifications, and
+                    prize awards for a Paid Event is final, to the extent permitted by law. By entering a Paid Event, you
+                    agree to its approved ruleset.
+                </p>
+
+                <h3>7.5 Host Responsibilities</h3>
+                <p>If you act as a Host, you agree to:</p>
+                <ul>
+                    <li>
+                        provide accurate, complete, and current information about each event you administer, including
+                        dates, location, format, and eligibility rules;
+                    </li>
+                    <li>administer each Paid Event fairly, impartially, and only under its uSync-approved ruleset;</li>
+                    <li>
+                        not collect money, accept side payments or wagers, or promise prizes for a Paid Event outside the
+                        Services, and not describe yourself as the host, owner, or operator of a Paid Event;
+                    </li>
+                    <li>
+                        comply with all applicable laws, including laws relating to contests, consumer protection, taxes
+                        on your commissions, privacy, accessibility, and the protection of minors;
+                    </li>
+                    <li>
+                        obtain any game-publisher tournament licenses, venue permits, and other permissions your role
+                        requires, where uSync asks you to;
+                    </li>
+                    <li>
+                        put appropriate safeguards in place when minors take part, including supervision and parental
+                        consent where required; and
+                    </li>
+                    <li>use participants’ personal information only to administer the event, and protect it.</li>
                 </ul>
                 <p>
-                    Your participation in an event is at your own discretion and risk and is governed by your agreement
-                    with the Host. Please review the Host’s rules and policies before registering.
+                    uSync may remove events, withhold or reverse commissions as described in{" "}
+                    <SectionRef to="purchases">Section 8</SectionRef>, or suspend Hosts who do not meet these
+                    requirements. Only Host and venue profiles that uSync permits may create brackets; player profiles
+                    cannot. uSync does not guarantee that its bracket tools will be uninterrupted or error-free.
                 </p>
 
-                <h3>7.2 Listing Accuracy</h3>
-                <p>
-                    Event information on uSync is provided by Hosts or gathered from publicly available sources. Dates,
-                    locations, formats, prize pools, prices, and other details can change and may be inaccurate,
-                    incomplete, or out of date. Always confirm important details directly with the Host. We may
-                    decline, edit, or remove any listing at our discretion.
-                </p>
-
-                <h3>7.3 What uSync Verified Does and Does Not Mean</h3>
-                <p>
-                    The uSync Verified badge means that a Host met uSync’s verification criteria at the time of our
-                    review. It is not a guarantee, warranty, insurance policy, or endorsement of any particular event,
-                    and it does not mean that uSync supervises the Host’s operations. Verification may be suspended or
-                    revoked at any time, and a Verified Host can still cancel an event, fail to pay a prize, or
-                    otherwise fall short of expectations.
-                </p>
-
-                <h3>7.4 Host Responsibilities</h3>
-                <p>
-                    If you list an event, sell passes through uSync, or run a bracket using our tools, you are a Host,
-                    and you agree to:
-                </p>
+                <h3>7.6 Prizes for Paid Events</h3>
                 <ul>
                     <li>
-                        provide accurate, complete, and current information about your event, including dates,
-                        location, format, eligibility rules, entry costs, prizes, and your refund policy;
+                        Each Paid Event’s page states its prize terms, including whether the prize is a{" "}
+                        <strong>fixed prize</strong> or an <strong>entry-based prize pool</strong>.
                     </li>
                     <li>
-                        advertise pass prices lawfully, including by showing the total price with all mandatory fees
-                        (including uSync’s platform fee) wherever you display a price;
-                    </li>
-                    <li>publish clear rules and prize terms, and administer your event fairly and consistently with them;</li>
-                    <li>
-                        deliver the event, passes, and prizes as advertised, and handle customer support, refunds, and
-                        disputes for your event;
+                        A <strong>fixed prize</strong> is the advertised amount, paid by uSync, subject to any minimum
+                        entry or cancellation terms stated on the event page.
                     </li>
                     <li>
-                        comply with all applicable laws, including laws relating to contests, sweepstakes, gambling,
-                        consumer protection, taxes (including tax reporting on prizes), privacy, accessibility, and the
-                        protection of minors;
+                        An <strong>entry-based prize pool</strong> is made up of the entry fees collected for the event,
+                        minus uSync’s platform fee and the Host’s commission, as shown on the event page. The final prize
+                        pool depends on how many people enter.
                     </li>
                     <li>
-                        obtain any licenses, permits, insurance, and permissions your event requires, including
-                        tournament licenses or community-competition approvals required by game publishers and any
-                        permits required by your venue;
+                        Prizes are paid by uSync, only to eligible winners under the approved ruleset, and are credited
+                        to the winner’s uSync balance as Winnings (see Section 8.11). uSync may withhold a prize while it
+                        investigates cheating, collusion, ineligibility, or other violations.
                     </li>
+                    <li>Winners are responsible for any taxes on prizes they receive.</li>
                     <li>
-                        put appropriate safeguards in place when minors participate in your event, including
-                        supervision and parental consent where required; and
-                    </li>
-                    <li>
-                        collect, use, and protect participants’ personal information lawfully and only to run your
-                        event.
-                    </li>
-                </ul>
-                <p>
-                    You are solely responsible for your events. uSync may remove listings, disable passes, withhold or
-                    reverse payouts as described in <SectionRef to="purchases">Section 8</SectionRef>, or suspend Host accounts that
-                    do not meet these requirements.
-                </p>
-
-                <h3>7.5 Bracket and Tournament Hosting Tools</h3>
-                <p>
-                    Where available, our bracket and tournament tools are provided to help you organize competitions.
-                    You are responsible for how you configure and run your bracket, including seeding, scheduling,
-                    check-in, result reporting, and dispute resolution. uSync does not referee matches or verify
-                    results, does not guarantee that the tools will be uninterrupted or error-free, and is not
-                    responsible for disputes about outcomes. We may pause, modify, or remove a bracket that violates
-                    these Terms.
-                </p>
-
-                <h3>7.6 Prizes, Wagers, and Cash Competitions</h3>
-                <ul>
-                    <li>
-                        uSync does not operate wagering services and does not hold prize funds, entry fees, or wagers
-                        on behalf of participants unless we expressly state otherwise.
-                    </li>
-                    <li>
-                        Wager and cash-match platforms listed on uSync are independent third-party businesses. Listing a
-                        platform is not a statement that its services are legal where you live, or that the platform is
-                        safe or reputable.
-                    </li>
-                    <li>
-                        Laws governing skill-based competitions, paid entries, and prizes vary by state and country, and
-                        many platforms require users to be 18 or older. You are solely responsible for determining
-                        whether you are legally permitted and eligible to participate.
-                    </li>
-                    <li>
-                        Minors must not participate in wagers, cash matches, or other paid-entry competitions where
-                        prohibited by law or by the platform’s or Host’s rules.
-                    </li>
-                    <li>
-                        Each prize is the sole responsibility of the Host offering it. Winners are responsible for any
-                        taxes on prizes they receive.
+                        Laws on paid-entry competitions and prizes vary by state and country. You may enter a Paid Event
+                        only where it is lawful for you to do so, and uSync may block entries from places where it is not.
+                        Minors may not enter Paid Events where that is prohibited by law or by the event’s ruleset.
                     </li>
                 </ul>
 
-                <h3>7.7 In-Person Events: Assumption of Risk</h3>
+                <h3>7.7 Listed Events and Third-Party Platforms</h3>
+                <p>
+                    Listed Events, including free community events and wager, H2H, and cash-match platforms that uSync
+                    only lists or links to, are run by independent third parties, not uSync. uSync does not control and
+                    is not responsible for whether a Listed Event takes place, its rules or results, its prizes or
+                    refunds, or the conduct of its organizers. Listing a platform is not a statement that it is legal
+                    where you live, or that it is safe or reputable. uSync does not hold entry fees, prizes, or wagers
+                    for Listed Events.
+                </p>
+
+                <h3>7.8 Listing Accuracy and uSync Verified</h3>
+                <p>
+                    Information about Listed Events may come from organizers or public sources and can be inaccurate,
+                    incomplete, or out of date. We may decline, edit, or remove any listing at our discretion. The uSync
+                    Verified badge means an organization met uSync’s verification criteria at the time of our review; it
+                    is not a guarantee, warranty, or endorsement, and it may be suspended or revoked at any time.
+                </p>
+
+                <h3>7.9 In-Person Events: Assumption of Risk</h3>
                 <p>
                     In-person events such as LANs and conventions involve travel, crowds, equipment, and venues that
                     uSync does not own or control. You attend at your own risk and are responsible for your own
                     conduct, safety, and personal property. Parents and guardians are responsible for supervising
                     minors who attend. You agree to follow venue rules and the Host’s instructions, and you acknowledge
-                    that Hosts may require you to sign their own waivers. To the fullest extent permitted by law, uSync
+                    that uSync or a venue may require you to sign a waiver. To the fullest extent permitted by law, uSync
                     is not liable for any injury, illness, loss, theft, or damage arising from your attendance at any
                     event.
                 </p>
 
-                <h3>7.8 Third-Party Websites and Services</h3>
+                <h3>7.10 Third-Party Websites and Services</h3>
                 <p>
                     The Services contain links to, and integrations with, third-party websites and services, including
                     Host websites and registration pages, wager and H2H platforms, social media, embedded videos and
@@ -750,9 +781,9 @@ const SECTIONS = [
                     third-party services is governed by their terms, and you access them at your own risk.
                 </p>
 
-                <h3>7.9 Disputes With Hosts or Other Users</h3>
+                <h3>7.11 Disputes With Hosts or Other Users</h3>
                 <p>
-                    Any dispute you have with a Host or another user is between you and that party. uSync may help
+                    Any dispute you have with a Host, another user, or the organizer of a Listed Event is between you and that party. Disputes about a Paid Event’s rulings, results, or prizes are decided by uSync under Section 7.4. uSync may help
                     resolve such disputes but is not required to. To the fullest extent permitted by law, you release
                     uSync and its members, managers, officers, employees, and agents from claims, demands, and damages
                     of every kind, known and unknown, arising out of or in any way connected with such disputes.
@@ -777,8 +808,8 @@ const SECTIONS = [
                 <p>uSync offers the following paid products and services (each a “Paid Service”), which may change over time:</p>
                 <ul>
                     <li>
-                        <strong>Event passes and registrations</strong> for events run by Hosts, purchased through
-                        uSync’s checkout;
+                        <strong>Entries and passes for Paid Events</strong>, which uSync hosts, paid through uSync’s
+                        checkout or from your uSync balance;
                     </li>
                     <li>
                         <strong>uSync Verified</strong> and other subscriptions or memberships for Hosts or players; and
@@ -816,25 +847,25 @@ const SECTIONS = [
                     checkout, including any recurring charges you agree to.
                 </p>
 
-                <h3>8.4 Event Passes and Platform Fees</h3>
+                <h3>8.4 Paid Event Entries and Platform Fees</h3>
                 <ul>
                     <li>
-                        The price of each event pass is set by the Host. uSync collects the pass price on the Host’s
-                        behalf as its limited payment collection agent and passes it on to the Host, and your payment
-                        to uSync satisfies your obligation to pay the Host for the pass.
+                        Entry fees and pass prices for Paid Events are paid to uSync, as the host of the event. You can
+                        pay at checkout or from your uSync balance. Payment is not made to, or held by, any Host.
                     </li>
                     <li>
-                        uSync charges a mandatory platform fee, currently <strong>5% of the pass price</strong>, for
-                        providing the registration, checkout, and payment services used to sell the pass. The fee is
-                        included in the total price shown before you pay and is listed separately in your order summary
-                        and receipt. We may change the platform fee for future purchases.
+                        uSync may charge a platform fee on Paid Event entries. Any fee is included in the total price
+                        shown before you pay. uSync pays Hosts their commission out of the amounts it collects, as
+                        described in Section 7.3 and Section 7.6.
                     </li>
                     <li>
-                        A pass gives you the right to attend or participate in the event as described by the Host,
-                        subject to the Host’s rules. Passes may not be transferred or resold unless the Host allows it
-                        or applicable law requires that transfers be permitted.
+                        An entry gives you the right to take part in the Paid Event under its uSync-approved ruleset.
+                        Entries may not be transferred or resold unless uSync allows it or the law requires it.
                     </li>
-                    <li>Your receipt from uSync confirms your payment; it is not a guarantee that the Host will deliver the event.</li>
+                    <li>
+                        <strong>Money you pay to enter is not withdrawable.</strong> Entry fees, deposits, and refunds
+                        can never be withdrawn as cash. Only Winnings can be withdrawn (see Section 8.11).
+                    </li>
                 </ul>
 
                 <h3>8.5 Subscriptions and Automatic Renewal</h3>
@@ -881,15 +912,11 @@ const SECTIONS = [
                 <h3>8.7 Refund Policy</h3>
                 <ul>
                     <li>
-                        <strong>Event passes.</strong> Refunds of the pass price are governed by the Host’s refund
-                        policy, and the Host is responsible for honoring it. Please contact the Host first. uSync may
-                        help facilitate a refund at its discretion but is not obligated to issue refunds on a Host’s
-                        behalf.
-                    </li>
-                    <li>
-                        <strong>Platform fees.</strong> Platform fees are non-refundable once a purchase is complete,{" "}
-                        <strong>except</strong> that if an event is cancelled and not rescheduled and the Host issues a
-                        full refund of the pass price, uSync will also refund its platform fee.
+                        <strong>Paid Event entries.</strong> Entry fees are non-refundable once you have entered, except
+                        as stated on the event page or required by law. If uSync cancels a Paid Event and does not
+                        reschedule it, or removes you from it through no fault of your own, uSync will refund your entry
+                        fee (including any platform fee) <strong>as non-withdrawable credit to your uSync balance</strong>,
+                        whether you paid at checkout or from your balance.
                     </li>
                     <li>
                         <strong>Subscriptions.</strong> Subscription fees are non-refundable except where required by
@@ -927,14 +954,45 @@ const SECTIONS = [
                     permission, contact us at <LegalEmail subject="Unauthorized Purchase" />.
                 </p>
 
-                <h3>8.10 Host Payouts</h3>
+                <h3>8.10 Host Commission Payouts</h3>
                 <p>
-                    uSync pays pass proceeds, minus any amounts described below, to Hosts on the schedule and by the
-                    method set out in our agreement with each Host. Hosts may be required to provide identity, tax, and
-                    banking information, and, if we route payouts through our payment processor, to create an account
-                    with it and agree to its terms. Payout timing also depends on processing times. uSync may
-                    delay, withhold, or offset payouts where reasonably necessary to cover refunds owed to
-                    participants, chargebacks, suspected fraud, event cancellations, or violations of these Terms.
+                    uSync pays Host commissions on the schedule and by the method set out in its agreement with each
+                    Host. Hosts may be required to provide identity, tax, and banking information, and to create an
+                    account with our payment processor. uSync may delay, withhold, or offset commissions where
+                    reasonably necessary to cover refunds, chargebacks, suspected fraud, event cancellations, or
+                    violations of these Terms.
+                </p>
+
+                <h3>8.11 Your uSync Balance and Withdrawals</h3>
+                <LegalNotice>
+                    <p>
+                        <strong>You can ONLY withdraw Winnings.</strong> Money you deposit or pay into uSync can be used
+                        only to enter Paid Events. It cannot be withdrawn, unless you win it back as a prize.
+                    </p>
+                </LegalNotice>
+                <p>Your uSync balance can hold two kinds of funds:</p>
+                <ul>
+                    <li>
+                        <strong>Deposited Funds:</strong> money you add to your balance, refunds and credits from uSync
+                        (including refunds for cancelled Paid Events), and any promotional credit. Deposited Funds can
+                        be used only to enter Paid Events and buy other Paid Services. They{" "}
+                        <strong>cannot be withdrawn, transferred to another user, or exchanged for cash</strong>, except
+                        where applicable law requires otherwise.
+                    </li>
+                    <li>
+                        <strong>Winnings:</strong> prizes you are awarded in Paid Events. Winnings are the{" "}
+                        <strong>only</strong> funds that can be withdrawn.
+                    </li>
+                </ul>
+                <p>
+                    When you pay from your balance, Deposited Funds are used before Winnings. Withdrawals are subject to
+                    identity and tax verification, minimum amounts, processing times, and our payment processor’s
+                    terms, and we may hold a withdrawal while we review it for fraud, cheating, or other violations of
+                    these Terms. uSync may reverse Winnings awarded in error or through a violation of these Terms. If
+                    your account is closed, we will pay out any withdrawable Winnings you are entitled to, unless the
+                    law or these Terms allow us to withhold them; Deposited Funds have no cash value and are forfeited
+                    except where the law requires otherwise. A uSync balance is not a bank account and does not earn
+                    interest.
                 </p>
             </>
         ),
@@ -1247,7 +1305,7 @@ const SECTIONS = [
                 <h3>13.5 Survival</h3>
                 <p>
                     Any provision of these Terms that by its nature should survive termination will survive, including
-                    Sections 6 (Intellectual Property Rights), 7.9 (Disputes With Hosts or Other Users), 8 (as to
+                    Sections 6 (Intellectual Property Rights), 7.11 (Disputes With Hosts or Other Users), 8 (as to
                     amounts owed and refunds), 9 (Disclaimers of Warranties), 10 (Limitation of Liability),
                     11 (Indemnification), 12 (Governing Law and Dispute Resolution), 13 (Termination), and 14 (General
                     Provisions).

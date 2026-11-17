@@ -46,8 +46,14 @@ test("org-only sign-up steps: name, location, titles, teams - no bracket hosting
     expect(steps.find(s => s.key === "org_details").requiredFields).toEqual(["org_country"]);
 });
 
-test("org with a player still asks the player about bracket hosting", () => {
-    expect(buildStepSequence(["player", "org"]).map(s => s.key)).toContain("bracket_hosting");
+test("players and orgs are never asked about bracket hosting", () => {
+    expect(buildStepSequence(["player", "org"]).map(s => s.key)).not.toContain("bracket_hosting");
+    expect(buildSettingsSteps("player").map(s => s.key)).not.toContain("bracket_hosting");
+});
+
+test("a player with a host profile is asked about the host profile only", () => {
+    const step = buildStepSequence(["player", "host"]).find(s => s.key === "bracket_hosting");
+    expect(step).toBeDefined();
 });
 
 test("org settings: location, titles, teams dashboard - no bracket hosting", () => {

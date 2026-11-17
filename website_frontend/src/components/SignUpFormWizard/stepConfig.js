@@ -78,7 +78,7 @@ const HOST_GAMES_STEP = { key: 'user_games', title: 'Hosted Titles', subtitle: '
 const COMBINED_GAMES_STEP = { key: 'user_games', title: 'Games You Play & Host', subtitle: 'Pick as many as you like in each - this drives the events we surface for you.', Component: UserGamesStep, props: { mode: 'combined' }, fields: ['other_games', 'other_hosted_games'], saveFields: ['interests', 'other_games', 'hosted_games', 'other_hosted_games'] };
 
 const PLAYER_ABOUT_STEP = { key: 'player_about', title: 'About You', subtitle: 'Only your name shows publicly by default.', Component: PlayerAboutStep, fields: PLAYER_ABOUT_FIELDS, requiredFields: ['first_name', 'last_name'], saveFields: PLAYER_ABOUT_FIELDS };
-// Bracket hosting is per profile and every type can have it. Sign-up and add-a-profile ask for
+// Bracket hosting is per profile, for host and venue profiles only (see NO_BRACKET_TYPES). Sign-up and add-a-profile ask for
 // each profile being created; settings edits the one profile's `bracket_hosting`.
 const BRACKET_SUBTITLE = 'Want to run your own brackets for friends, your team or your community? You can change this later.';
 const bracketStep = (types) => ({ key: 'bracket_hosting', title: 'Bracket Hosting', subtitle: BRACKET_SUBTITLE, Component: BracketHostingStep, props: { types }, fields: [], saveFields: [] });

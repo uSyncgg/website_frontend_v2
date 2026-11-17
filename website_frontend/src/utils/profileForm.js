@@ -2,7 +2,8 @@
 // { type, username, picture, bio, bracket_hosting, other_roles, other_role_detail, details: {...} }.
 // Used by sign-up, adding a profile and profile settings, so all three send the same thing.
 
-import { PROFILE_TYPES, bioField, bracketField, copyBioField, copyPictureField, linksField, pictureField, usernameField } from "./profiles";
+import { TOS_VERSION } from "./legal";
+import { NO_BRACKET_TYPES, PROFILE_TYPES, bioField, bracketField, copyBioField, copyPictureField, linksField, pictureField, usernameField } from "./profiles";
 import { linkChanges } from "./linkedPlatforms";
 
 // Fields stored on the profile itself (shared by every type).
@@ -77,7 +78,7 @@ export function buildProfileEntry(type, values, { picture = null, bio = '', incl
     if (Object.keys(links).length > 0) entry.links = links;
 
     // Asked per profile. Left unanswered, the backend defaults it to on.
-    if (type === 'org') {
+    if (NO_BRACKET_TYPES.includes(type)) {
         entry.bracket_hosting = false;
     } else if (values[bracketField(type)] !== undefined) {
         entry.bracket_hosting = toApiValue('bracket_hosting', values[bracketField(type)]);
@@ -129,7 +130,10 @@ export function buildSignUpRequest(values) {
         return buildProfileEntry(type, values, { picture, bio, includeOtherRoles: true });
     });
 
-    return { data: { default_profile: defaultProfile, profiles }, files };
+    // The sign-up wizard can't submit until the Terms box is ticked; the backend refuses
+    // registration without it and stamps the acceptance time itself.
+    const tos = { tos_accepted: !!values.tos_accepted, tos_version: TOS_VERSION };
+    return { data: { default_profile: defaultProfile, profiles, ...tos }, files };
 }
 
 // POST /me/profiles: one profile. "Same as my default" copies the account's default profile's

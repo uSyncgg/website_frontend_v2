@@ -1,3 +1,4 @@
+import { MockHostTos } from "pages/Mock/MockHostTos"; // TEMPORARY host-TOS review
 import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -107,6 +108,7 @@ const app = (
             <Route path='/more/FAQ' element={<Faqs />} />
             <Route path='/more/articles/*' element={<ArticleRoutes />} />
             <Route path='/more/terms-of-service' element={<TermsOfService />} />
+            <Route path='/mock/host-tos' element={<MockHostTos />} /> {/* TEMPORARY host-TOS review */}
             <Route path='/more/privacy-policy' element={<PrivacyPolicy />} />
             <Route path='/reportproblem' element={<ReportProblem />} />
             <Route path='/Comingsoon' element={<ComingSoon />} />
