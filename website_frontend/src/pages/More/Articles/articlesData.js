@@ -7,6 +7,7 @@ import provideThumb from 'assets/images/article_bubbles/article-thumb-what-we-pr
 import joinLeagueThumb from 'assets/images/article_bubbles/article-thumb-how-to-join-esports-league_9.6.26.webp';
 import esportsBetterThumb from 'assets/images/article_bubbles/article-thumb-how-esports-can-be-better_9.6.26.webp';
 import uniqueThumb from 'assets/images/article_bubbles/article-thumb-why-usync-is-unique_9.6.26.webp';
+import mw4Thumb from 'assets/images/article_bubbles/article-thumb-mw4-best-loadouts_10.24.26.webp';
 import bo7Thumb from 'assets/images/article_bubbles/article-thumb-bo7-controller-settings_9.6.26.webp';
 import dpiThumb from 'assets/images/article_bubbles/article-thumb-best-dpi-valorant_9.6.26.webp';
 import ps5Thumb from 'assets/images/article_bubbles/article-thumb-enable-120hz-ps5_9.6.26.webp';
@@ -19,6 +20,7 @@ import provideHero from 'assets/images/article_specific/article-hero-what-we-pro
 import joinLeagueHero from 'assets/images/article_specific/article-hero-how-to-join-esports-league_9.6.26.webp';
 import esportsBetterHero from 'assets/images/article_specific/article-hero-how-esports-can-be-better_9.6.26.webp';
 import uniqueAndTournamentsHero from 'assets/images/article_specific/article-hero-why-usync-unique-and-tournaments-near-you_9.6.26.webp';
+import mw4Hero from 'assets/images/article_specific/article-hero-mw4-best-loadouts_10.24.26.webp';
 import bo7Hero from 'assets/images/article_specific/article-hero-bo7-controller-settings_9.6.26.webp';
 import dpiHero from 'assets/images/article_specific/article-hero-best-dpi-valorant_9.6.26.webp';
 import ps5Hero from 'assets/images/article_specific/article-hero-enable-120hz-ps5_9.6.26.webp';
@@ -215,6 +217,23 @@ export const articles = {
         dateModified: "2026-07-11",
         readTime: 6,
         keywords: ["how to join online gaming tournaments", "online esports tournaments", "tournament check-in", "tournament registration", "beginner esports tournaments"],
+    },
+    mw4Loadouts: {
+        slug: "best-modern-warfare-4-loadouts",
+        name: "Best Modern Warfare 4 Loadouts",
+        category: "Guide",
+        title: "Best Modern Warfare 4 Loadouts: The Top 5 Meta Builds",
+        headline: "Best Modern Warfare 4 Loadouts: The Top 5 Meta Builds",
+        dek: "Three assault rifles and two SMGs carry the early Modern Warfare 4 meta. Here is every attachment, the alternates, and the gear to run with them.",
+        description: "The best Modern Warfare 4 loadouts: full attachment lists for the Han 86, VEL 46, M4, ISO Nightshade and Castoff 762, plus the perks and equipment to pair them with.",
+        image: mw4Hero,
+        imageAlt: "Modern Warfare 4 Create a Class screen showing a loadout next to Ghost",
+        imageCredit: "Instagram",
+        thumb: mw4Thumb,
+        datePublished: "2026-10-24",
+        dateModified: "2026-10-24",
+        readTime: 5,
+        keywords: ["best Modern Warfare 4 loadouts", "MW4 meta loadouts", "MW4 M4 loadout", "Han 86 loadout", "Call of Duty attachments"],
     },
 };
 
