@@ -77,8 +77,13 @@ export const DepositDialog = ({ walletTotal, onClose, onDeposited, start }) => {
         setStarting(true);
         setError('');
         try {
-            setDeposit(await start(amountCents, key));
+            const started = await start(amountCents, key);
+            // Same key as a deposit that already went through (e.g. paid in another tab).
+            if (started.status === 'succeeded') setDone(true);
+            setDeposit(started);
         } catch (err) {
+            // 410: this dialog sat open past the 30 minute hold. A new key starts a fresh deposit.
+            if (err?.response?.status === 410) setKey(newIdempotencyKey());
             setError(getApiErrorMessage(err));
         }
         setStarting(false);
