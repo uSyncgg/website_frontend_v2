@@ -75,6 +75,7 @@ export const bracketSummary = (overrides = {}) => ({
     hostProfile: 'hostpub',
     maxEntrants: 16,
     signedUp: 1,
+    needsPlayers: 0,
     pending: 0,
     canManage: false,
     isHost: false,

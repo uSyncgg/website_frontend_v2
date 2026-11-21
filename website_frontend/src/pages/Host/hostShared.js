@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 import { ShareButton as SiteShareButton } from "components/ShareButton/ShareButton";
 import { PLATFORMS, gameDisplayName } from "utils/hostEvents";
-import { isPending, useBracketError, clearBracketError, STAGE_LABELS } from "services/brackets";
+import { useBracketError, clearBracketError, STAGE_LABELS } from "services/brackets";
 import styles from "./Host.module.css";
 
 export const TEAM_SIZES = ["1v1", "2v2", "3v3", "4v4", "5v5"];
@@ -36,9 +36,9 @@ export const isTeamEvent = (event) => event.teamSize !== '1v1';
 export const unitLabel = (event, plural = true) => (isTeamEvent(event) ? (plural ? 'teams' : 'team') : (plural ? 'players' : 'player'));
 
 // "13 / 16" or "13 (no cap)" for uncapped events.
-// Counts signed-up entrants only (pending teams don't take a spot).
+// Every entrant takes a spot, including ones that still need players.
 export const capacityLabel = (event) => {
-    const count = event.entrants.filter(e => !isPending(event, e)).length;
+    const count = event.entrants.length;
     return event.maxEntrants == null ? `${count} (no cap)` : `${count} / ${event.maxEntrants}`;
 };
 

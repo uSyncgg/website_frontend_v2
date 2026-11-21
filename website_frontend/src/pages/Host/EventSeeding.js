@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { FaArrowDown, FaArrowUp, FaGripVertical, FaRandom } from "react-icons/fa";
 import { Bracket } from "components/Bracket/Bracket";
-import { saveBracketDraft, publishBracket, signedUpEntrants, pendingEntrants } from "services/brackets";
+import { saveBracketDraft, publishBracket, signedUpEntrants, entrantsNeedingPlayers } from "services/brackets";
 import { SEEDING_METHODS, firstRoundByes } from "utils/bracket";
 import { useManagedEvent } from "./ManageEvent";
 import { entrantsById, isTeamEvent } from "./hostShared";
@@ -104,9 +104,10 @@ export const EventSeeding = () => {
                     </p>
                 </div>
 
-                {pendingEntrants(event).length > 0 &&
+                {entrantsNeedingPlayers(event).length > 0 &&
                     <p className={styles.fieldHint}>
-                        {pendingEntrants(event).length} pending team{pendingEntrants(event).length > 1 ? 's' : ''} ({pendingEntrants(event).map(e => e.name).join(', ')}) won't be seeded until {pendingEntrants(event).length > 1 ? 'their captains pick' : 'its captain picks'} enough players.
+                        {entrantsNeedingPlayers(event).map(e => e.name).join(', ')} {entrantsNeedingPlayers(event).length > 1 ? 'need' : 'needs'} players
+                        and won't be seeded. If {entrantsNeedingPlayers(event).length > 1 ? 'they are' : "it's"} still short when you publish, {entrantsNeedingPlayers(event).length > 1 ? 'they' : 'it'} will be dropped from the event.
                     </p>
                 }
 
