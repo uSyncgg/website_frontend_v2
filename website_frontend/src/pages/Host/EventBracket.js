@@ -50,11 +50,9 @@ export const EventBracket = () => {
     const selected = selectedId && allMatches(built).find(m => m.id === selectedId);
     const view = matchView(event, selected);
 
+    // Hosts can only throw away a draft. Once published, only uSync support can reset it.
     const reset = () => {
-        const warning = live && done
-            ? `Reset the bracket? All ${done} reported results and its queue items will be lost.`
-            : 'Discard this bracket and go back to seeding?';
-        if (window.confirm(warning)) resetBracket(event.id);
+        if (window.confirm('Discard this bracket and go back to seeding?')) resetBracket(event.id);
     };
 
     const close = () => setSelectedId(null);
@@ -92,7 +90,7 @@ export const EventBracket = () => {
                     </div>
                     <div className={styles.btnRow}>
                         {!live && <Link to={`/host/events/${event.id}/seeding`} className={styles.ghostBtn}>Edit seeding</Link>}
-                        <button type="button" className={styles.dangerBtn} onClick={reset}>Reset bracket</button>
+                        {!live && <button type="button" className={styles.dangerBtn} onClick={reset}>Reset bracket</button>}
                         {!live && <button type="button" className={styles.primaryBtn} onClick={() => publishBracket(event.id)}>Publish bracket</button>}
                         {live && <Link to={`/brackets/${event.id}`} className={styles.secondaryBtn}>Player view</Link>}
                     </div>

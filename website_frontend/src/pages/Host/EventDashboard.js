@@ -171,7 +171,7 @@ const HostedGrid = ({ events }) => (
                         </div>
                         <div>
                             <div className={styles.fillLabel}>
-                                <span>{capacityOf(event)} {unitOf(event)}{event.pending > 0 ? ` · ${event.pending} pending` : ''}</span>
+                                <span>{capacityOf(event)} {unitOf(event)}{(event.needsPlayers ?? event.pending) > 0 ? ` · ${event.needsPlayers ?? event.pending} need players` : ''}</span>
                             </div>
                             <div className={styles.fillBar}><span style={{ width: `${filled}%` }} /></div>
                         </div>

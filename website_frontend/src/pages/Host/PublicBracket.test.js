@@ -61,9 +61,33 @@ describe('PublicBracket sign-up', () => {
         expect(await screen.findByText("Doesn't play Call of Duty")).toBeInTheDocument();
         fireEvent.click(screen.getByRole('radio', { name: /My Duo/ }));
         fireEvent.click(screen.getByRole('checkbox', { name: /My Duo Ace/ }));
-        expect(screen.getByText('1 of 2 picked. Each player can only play for one team in this event.')).toBeInTheDocument();
-        expect(screen.getByText(/shows to the host as/)).toHaveTextContent('pending');
+        expect(screen.getByText('1 of 2 picked. Each player can only play once in this event.')).toBeInTheDocument();
+        fireEvent.click(screen.getAllByRole('button', { name: 'Sign up' }).find(b => b.type === 'submit'));
+        expect(await screen.findByText(/Fill in: 2 players/)).toBeInTheDocument();
         fireEvent.click(screen.getByRole('checkbox', { name: /My Duo Bee/ }));
         expect(screen.getByText(/2 of 2 picked/)).toBeInTheDocument();
+    });
+
+    it("says when a team's roster is too small for the event", async () => {
+        mockUser = { defaultProfile: player, profiles: [player] };
+        const small = { ...team('t-solo', 'Lone Wolf', player), members: [{ public_id: 'lw-a', username: 'Wolf', role: 'captain' }] };
+        apiClient.get.mockImplementation(apiGetFrom({ '/brackets/evt-2s': event, '/teams/me': [small] }));
+        await open();
+        expect(await screen.findByText('Not enough players on the roster (needs 2, has 1)')).toBeInTheDocument();
+        expect(screen.getByRole('radio', { name: /Lone Wolf/ })).toBeDisabled();
+    });
+});
+
+describe('PublicBracket solo sign-up', () => {
+    const solo = bracketEvent({ id: 'evt-2s', teamSize: '1v1', entrants: [], viewerEntrantId: null });
+
+    it('enters a team and has the captain pick the one player who competes', async () => {
+        mockUser = { defaultProfile: player, profiles: [player] };
+        apiClient.get.mockImplementation(apiGetFrom({ '/brackets/evt-2s': solo, '/teams/me': [team('t-mine', 'My Duo', player)] }));
+        await open();
+        fireEvent.click(await screen.findByRole('radio', { name: /My Duo/ }));
+        expect(screen.getByText(/Pick who competes/)).toBeInTheDocument();
+        fireEvent.click(screen.getByRole('radio', { name: /My Duo Bee/ }));
+        expect(screen.getByRole('radio', { name: /My Duo Bee/ })).toBeChecked();
     });
 });
