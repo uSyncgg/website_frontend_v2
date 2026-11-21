@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { adminGetWallet, adminAdjustWallet, adminRefundDeposit, formatMoney, parseDollars } from "services/wallet";
+import { adminGetWallet, adminAdjustWallet, adminRefundDeposit, formatMoney, parseDollars, newIdempotencyKey } from "services/wallet";
 import { getApiErrorMessage } from "utils/apiError";
 import hostStyles from "pages/Host/Host.module.css";
 import styles from "./AdminAnalytics.module.css";
@@ -29,7 +29,10 @@ export const AdminFinanceTab = () => {
     const [error, setError] = useState('');
     const [notice, setNotice] = useState('');
     const [busy, setBusy] = useState(false);
-    const [move, setMove] = useState({ direction: 'credit', amount: '', reason: '', reference: '' });
+    // key: one per adjustment, so a double click or a retried request posts it once. A new one
+    // is made after each success and whenever the form changes.
+    const [move, setMove] = useState(() => ({ direction: 'credit', amount: '', reason: '', reference: '', key: newIdempotencyKey() }));
+    const edit = (field) => (value) => setMove(m => ({ ...m, [field]: value, key: newIdempotencyKey() }));
 
     const run = async (action, success) => {
         setBusy(true);
@@ -38,10 +41,13 @@ export const AdminFinanceTab = () => {
         try {
             setWallet(await action());
             if (success) setNotice(success);
+            setBusy(false);
+            return true;
         } catch (err) {
             setError(getApiErrorMessage(err));
+            setBusy(false);
+            return false;
         }
-        setBusy(false);
     };
 
     const lookUp = (e) => {
@@ -59,7 +65,10 @@ export const AdminFinanceTab = () => {
         if (!window.confirm(`${verb} ${formatMoney(amountCents)} ${move.direction === 'credit' ? 'to' : 'from'} ${wallet.email}'s Deposited Funds?`)) return;
         run(() => adminAdjustWallet({
             email: wallet.email, direction: move.direction, amountCents, reason: move.reason.trim(), reference: move.reference.trim(),
-        }), `${verb === 'Add' ? 'Added' : 'Removed'} ${formatMoney(amountCents)}.`).then(() => setMove(m => ({ ...m, amount: '', reason: '', reference: '' })));
+            idempotencyKey: move.key,
+        }), `${verb === 'Add' ? 'Added' : 'Removed'} ${formatMoney(amountCents)}.`).then(ok => {
+            if (ok) setMove(m => ({ ...m, amount: '', reason: '', reference: '', key: newIdempotencyKey() }));
+        });
     };
 
     const refund = (deposit) => {
@@ -100,15 +109,15 @@ export const AdminFinanceTab = () => {
                             {[['credit', 'Add (credit)'], ['debit', 'Remove (debit)']].map(([value, label]) => (
                                 <button key={value} type="button" role="radio" aria-checked={move.direction === value}
                                     className={`${hostStyles.segment} ${move.direction === value ? hostStyles.segmentActive : ''}`}
-                                    onClick={() => setMove(m => ({ ...m, direction: value }))}>{label}</button>
+                                    onClick={() => edit('direction')(value)}>{label}</button>
                             ))}
                         </div>
                         <input className={styles.input} inputMode="decimal" placeholder="Amount, e.g. 2500.00" value={move.amount}
-                            onChange={e => setMove(m => ({ ...m, amount: e.target.value }))} aria-label="Amount" />
+                            onChange={e => edit('amount')(e.target.value)} aria-label="Amount" />
                         <input className={styles.input} placeholder="Reason (the user sees this)" value={move.reason}
-                            onChange={e => setMove(m => ({ ...m, reason: e.target.value }))} aria-label="Reason" />
+                            onChange={e => edit('reason')(e.target.value)} aria-label="Reason" />
                         <input className={styles.input} placeholder="Reference, e.g. wire confirmation number (internal)" value={move.reference}
-                            onChange={e => setMove(m => ({ ...m, reference: e.target.value }))} aria-label="Reference" />
+                            onChange={e => edit('reference')(e.target.value)} aria-label="Reference" />
                         <div>
                             <button type="submit" className={hostStyles.primaryBtn} disabled={busy || !canMove}>
                                 {move.direction === 'credit' ? 'Add funds' : 'Remove funds'}

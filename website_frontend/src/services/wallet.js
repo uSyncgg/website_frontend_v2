@@ -77,13 +77,35 @@ export const waitForDeposit = async (fromTotal, { tries = 10, everyMs = 2000 } =
 };
 
 // ---- calls -------------------------------------------------------------------------
+//
+// Every call that moves money carries an idempotency key: one per deposit dialog (or admin form
+// submission). The backend does the action once per key and returns the same result for
+// repeats, so a request whose answer got lost can safely be sent again - which `retrying` does
+// for network errors and server hiccups.
+
+export const newIdempotencyKey = () =>
+    (window.crypto?.randomUUID ? window.crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}-${Math.random().toString(36).slice(2)}`);
+
+const transient = (err) => !err?.response || err.response.status >= 500;
+
+const retrying = async (call, { tries = 3, waitMs = 800 } = {}) => {
+    for (let attempt = 1; ; attempt++) {
+        try {
+            return await call();
+        } catch (err) {
+            if (attempt >= tries || !transient(err)) throw err;
+            await new Promise(resolve => setTimeout(resolve, waitMs * attempt));
+        }
+    }
+};
 
 // { items: [{ id, kind, bucket: 'deposited' | 'earnings', amountCents, createdAt, reason }], nextBefore }
 export const getWalletHistory = (before = null) =>
     apiClient.get('/wallet/history', { params: before ? { before } : {} }).then(res => res.data);
 
-// { depositId, clientSecret, amountCents, feeCents, totalCents }
-export const startDeposit = (amountCents) => apiClient.post('/wallet/deposits', { amountCents }).then(res => res.data);
+// { depositId, clientSecret, amountCents, feeCents, totalCents, status }. Same key -> same deposit.
+export const startDeposit = (amountCents, idempotencyKey) =>
+    retrying(() => apiClient.post('/wallet/deposits', { amountCents, idempotencyKey })).then(res => res.data);
 
 export const KIND_LABELS = {
     deposit: 'Deposit',
@@ -98,8 +120,9 @@ export const KIND_LABELS = {
 
 export const adminGetWallet = (email) => apiClient.get('/admin/wallets', { params: { email } }).then(res => res.data);
 
-// { email, direction: 'credit' | 'debit', amountCents, reason, reference }
-export const adminAdjustWallet = (fields) => apiClient.post('/admin/wallets/adjustments', fields).then(res => res.data);
+// { email, direction: 'credit' | 'debit', amountCents, reason, reference, idempotencyKey }
+export const adminAdjustWallet = (fields) => retrying(() => apiClient.post('/admin/wallets/adjustments', fields)).then(res => res.data);
 
+// Safe to repeat: a deposit is only ever refunded once, whatever happens.
 export const adminRefundDeposit = (depositId, reason) =>
-    apiClient.post(`/admin/deposits/${depositId}/refund`, { reason }).then(res => res.data);
+    retrying(() => apiClient.post(`/admin/deposits/${depositId}/refund`, { reason })).then(res => res.data);

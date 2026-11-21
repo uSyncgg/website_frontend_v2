@@ -6,6 +6,7 @@ import { stripeAppearance, stripeLoader } from "utils/stripeAppearance";
 import { getApiErrorMessage } from "utils/apiError";
 import {
     DEPOSIT_MIN_CENTS, DEPOSIT_FEE_PERCENT, DEPOSIT_DAILY_LIMIT_CENTS, depositFee, formatMoney, parseDollars, waitForDeposit,
+    newIdempotencyKey,
 } from "services/wallet";
 import hostStyles from "pages/Host/Host.module.css";
 import styles from "./Wallet.module.css";
@@ -62,6 +63,9 @@ export const DepositDialog = ({ walletTotal, onClose, onDeposited, start }) => {
     const [error, setError] = useState('');
     const [starting, setStarting] = useState(false);
     const [done, setDone] = useState(null);
+    // One key per amount in this dialog: pressing Continue again (or a retried request) returns
+    // the same deposit; changing the amount starts a new one.
+    const [key, setKey] = useState(newIdempotencyKey);
 
     const amountCents = parseDollars(amountText);
     const valid = amountCents != null && amountCents >= DEPOSIT_MIN_CENTS && amountCents <= DEPOSIT_DAILY_LIMIT_CENTS;
@@ -73,7 +77,7 @@ export const DepositDialog = ({ walletTotal, onClose, onDeposited, start }) => {
         setStarting(true);
         setError('');
         try {
-            setDeposit(await start(amountCents));
+            setDeposit(await start(amountCents, key));
         } catch (err) {
             setError(getApiErrorMessage(err));
         }
@@ -114,7 +118,7 @@ export const DepositDialog = ({ walletTotal, onClose, onDeposited, start }) => {
                     <div className={hostStyles.field}>
                         <label htmlFor="deposit-amount">Amount to deposit (minimum {formatMoney(DEPOSIT_MIN_CENTS)})</label>
                         <input id="deposit-amount" className={hostStyles.input} inputMode="decimal" placeholder="$25.00"
-                            value={amountText} onChange={e => setAmountText(e.target.value)} />
+                            value={amountText} onChange={e => { setAmountText(e.target.value); setKey(newIdempotencyKey()); }} />
                         {amountText && !valid &&
                             <p className={hostStyles.fieldError}>
                                 Enter an amount between {formatMoney(DEPOSIT_MIN_CENTS)} and {formatMoney(DEPOSIT_DAILY_LIMIT_CENTS)}.
