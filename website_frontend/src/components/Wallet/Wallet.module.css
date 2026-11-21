@@ -1,0 +1,136 @@
+/* Wallet balances (navbar dropdown and the owner's profile card) and the deposit dialog. */
+
+.balances {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.balance {
+    background: rgba(255, 255, 255, .03);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+}
+
+.balanceLabel {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+}
+
+.balanceValue {
+    display: block;
+    margin-top: 4px;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--ink);
+}
+
+.balanceHint {
+    display: block;
+    margin-top: 2px;
+    font-size: 12px;
+    color: var(--ink-3);
+}
+
+.private {
+    font-size: 12px;
+    color: var(--ink-3);
+}
+
+.frozen {
+    margin: 0 0 14px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(220, 80, 80, .12);
+    border: 1px solid rgba(220, 80, 80, .4);
+    color: #ffb4b4;
+    font-size: 14px;
+}
+
+.history {
+    list-style: none;
+    margin: 14px 0 0;
+    padding: 0;
+}
+
+.historyRow {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+}
+
+.historyWhat {
+    color: var(--ink);
+}
+
+.historyMeta {
+    display: block;
+    font-size: 12px;
+    color: var(--ink-3);
+}
+
+.plus {
+    color: #8fe0a6;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.minus {
+    color: var(--ink-2);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* The navbar dropdown's compact version, above the menu links. */
+.menuBalances {
+    display: block;
+    padding: .75rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+    color: white;
+    text-decoration: none;
+    min-width: 12rem;
+}
+
+.menuRow {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    font-size: .9rem;
+    line-height: 1.7;
+}
+
+.menuRow span:first-child {
+    color: rgba(255, 255, 255, .6);
+}
+
+.menuRow strong {
+    font-weight: 700;
+}
+
+.menuFrozen {
+    display: block;
+    font-size: .8rem;
+    color: #ffb4b4;
+}
+
+.breakdown {
+    margin: 12px 0;
+}
+
+.consent {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin: 12px 0;
+    font-size: 13px;
+    color: var(--ink-2);
+}

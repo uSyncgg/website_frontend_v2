@@ -28,6 +28,9 @@ export const subscribeToNotifications = (accountId, onNew) => {
 const teamLink = (data) => `/teams/${encodeURIComponent(data.team_id)}`;
 const eventLink = (data) => `/brackets/${encodeURIComponent(data.event_id)}`;
 const matchLink = (data) => (data.match_id ? `${eventLink(data)}/matches/${encodeURIComponent(data.match_id)}` : eventLink(data));
+// Your wallet lives on your own profile; /profile sends you to it.
+const walletLink = () => '/profile#wallet';
+const money = (cents) => `$${(Math.abs(cents ?? 0) / 100).toFixed(2)}`;
 const queueLink = (data) => `/host/events/${encodeURIComponent(data.event_id)}/queue`;
 
 // { text, to, action } for one notification: what it says, where its button goes and what the
@@ -56,6 +59,14 @@ export const notificationText = ({ type, data }) => {
             return { text: `${data.opponent} reported you as a no-show in ${data.event_name}. An admin will review it.`, to: matchLink(data), action: 'Go to match' };
         case 'issue_opened':
             return { text: `${data.label} in ${data.event_name}${data.summary ? `: ${data.summary}` : ''}`, to: queueLink(data), action: 'Go to queue' };
+        case 'wallet_deposit':
+            return { text: `${money(data.amount_cents)} was added to your wallet.`, to: walletLink(), action: 'View wallet' };
+        case 'wallet_frozen':
+            return { text: 'A deposit was disputed with your bank, so your wallet is frozen until it is back to $0 or more.', to: walletLink(), action: 'View wallet' };
+        case 'wallet_adjusted':
+            return { text: `uSync ${data.amount_cents >= 0 ? 'added' : 'removed'} ${money(Math.abs(data.amount_cents))} ${data.amount_cents >= 0 ? 'to' : 'from'} your wallet${data.reason ? `: ${data.reason}` : '.'}`, to: walletLink(), action: 'View wallet' };
+        case 'deposit_refunded':
+            return { text: `${money(data.amount_cents)} was refunded to your card from your wallet.`, to: walletLink(), action: 'View wallet' };
         case 'team_ownership':
             return { text: `You now own ${data.team_name}: its previous owner left uSync.`, to: teamLink(data), action: 'View team' };
         case 'admin_joined':
