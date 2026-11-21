@@ -7,9 +7,13 @@ import { getApiErrorMessage } from "utils/apiError";
 // be disputed); this file only fetches, caches and sends. A full event (GET /brackets/:id):
 // { id, name, eventType, game, gameTitle, gameMode, format, formatLabel, teamSize, bestOf,
 //   finalBestOf, startsAt, stage: 'registration' | 'closed' | 'seeding' | 'live' | 'complete',
-//   entrants: [{ id, name, captain, status: 'signed_up' | 'pending', teamId, players, rosterSize }],
+//   entrants: [{ id, name, captain, status: 'signed_up' | 'needs_players', teamId, teamName, players, rosterSize }],
 //   bracket: { status, format, seeds, built, matches: { [code]: view } } | null,
-//   canManage, isHost, openIssues, viewerEntrantId, viewerCanAct }
+//   canManage, isHost, openIssues, viewerEntrantId, viewerCanAct, viewerActsFor: [entrant ids] }
+// Every entrant is a team's, and every entrant takes a spot (there's no waitlist). One that lost a
+// picked player is 'needs_players' until its captain picks someone else; still short when the
+// bracket is published, it's dropped. In a solo event (1v1) a team can enter several of its
+// players, one entrant each, named after the player.
 // where each match view is { state, reportedBy, issues, reports?, noShowUnlocksAt,
 //   disputeClosesAt, canReport, canReportNoShow, canDispute }.
 //
@@ -93,7 +97,7 @@ export const useHostEvent = (id) => {
 // ---- lists: pages of summaries ---------------------------------------------------
 //
 // A summary: { id, name, eventType, game, gameTitle, format, formatLabel, teamSize, startsAt,
-// stage, maxEntrants, signedUp, pending, canManage, isHost, openIssues, viewerEntrantId,
+// stage, maxEntrants, signedUp, needsPlayers, canManage, isHost, openIssues, viewerEntrantId,
 // viewerEntrantName, viewerMatch: { id, opponent } | null, winner, viewerPlace }.
 
 const EMPTY_PAGE = { events: [], nextCursor: null, loading: true };
@@ -137,7 +141,7 @@ const usePage = (key, path) => {
 // Events the signed in account runs or helps run (any view).
 export const useHostEvents = () => usePage('hosting', '/brackets/hosting');
 
-// Events the account is in (solo, or through a team it owns, captains or plays on).
+// Events the account is in (playing, or through a team it owns, captains or plays on).
 export const useEnteredEvents = () => usePage('entered', '/brackets/entered');
 
 // Events a host or venue profile runs, for its public profile page.
@@ -166,13 +170,17 @@ export const isArchived = (event) => event.stage === 'complete';
 // Players a team needs for this event: '4v4' -> 4.
 export const teamSizeOf = (event) => Number(String(event.teamSize).split('v')[0]) || 1;
 
-export const isPending = (_event, entrant) => entrant.status === 'pending';
+export const isSolo = (event) => teamSizeOf(event) === 1;
 
-export const signedUpEntrants = (event) => event.entrants.filter(e => e.status !== 'pending');
+// An entrant that lost a picked player and needs another before the bracket is published.
+export const needsPlayers = (_event, entrant) => entrant.status === 'needs_players';
 
-export const pendingEntrants = (event) => event.entrants.filter(e => e.status === 'pending');
+export const signedUpEntrants = (event) => event.entrants.filter(e => e.status === 'signed_up');
 
-export const isFull = (event) => event.maxEntrants != null && signedUpEntrants(event).length >= event.maxEntrants;
+export const entrantsNeedingPlayers = (event) => event.entrants.filter(e => e.status === 'needs_players');
+
+// Every entrant takes a spot, signed up or not.
+export const isFull = (event) => event.maxEntrants != null && event.entrants.length >= event.maxEntrants;
 
 export const isLive = (event) => event.stage === 'live' || event.stage === 'complete';
 
@@ -217,13 +225,17 @@ export const deleteEvent = async (id) => {
 // The backend tells everyone entered.
 export const delayStart = (id, startsAt, reason) => eventCall(apiClient.post(url(id, '/delays'), { startsAt, reason }));
 
-// { teamId (team events), players (profile public ids the captain picks), email, answers, pass }
+// { teamId, players (exactly the team size in profile public ids, picked by the team's owner or a
+// captain), email, answers, pass }
 export const register = (id, fields) => eventCall(apiClient.post(url(id, '/registration'), fields));
 
-// The captain changes who plays, until the bracket is published.
-export const setPlayers = (id, players) => eventCall(apiClient.put(url(id, '/registration/players'), { players }));
+// The captain changes who plays, until the bracket is published. entrantId says which entrant
+// when they have several (a team's entrants in a solo event).
+export const setPlayers = (id, players, entrantId = null) =>
+    eventCall(apiClient.put(url(id, '/registration/players'), { players, entrantId }));
 
-export const unregister = (id) => eventCall(apiClient.delete(url(id, '/registration')));
+export const unregister = (id, entrantId = null) =>
+    eventCall(apiClient.delete(url(id, '/registration'), entrantId ? { params: { entrantId } } : undefined));
 
 // The host or an admin removes an entrant.
 export const removeEntrant = (id, entrantId) => eventCall(apiClient.delete(url(id, `/entrants/${entrantId}`)));

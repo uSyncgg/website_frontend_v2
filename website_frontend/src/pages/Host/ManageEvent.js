@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, NavLink, Outlet, useNavigate, useOutletContext, useParams } from "react-router";
 import { FaCalendarAlt, FaClock, FaGamepad, FaMapMarkerAlt, FaSitemap } from "react-icons/fa";
-import { useHostEvent, updateEvent, deleteEvent, delayStart, pendingEntrants, inviteAdmin, removeAdmin } from "services/brackets";
+import { useHostEvent, updateEvent, deleteEvent, delayStart, entrantsNeedingPlayers, inviteAdmin, removeAdmin } from "services/brackets";
 import { Avatar, PlayerPicker } from "components/Teams/TeamParts";
 import { BracketError, Modal, ShareButton, StageChip, capacityLabel, formatDate, formatLabel, unitLabel, EventLoading, formatSummary, locationLabel, gameDisplayName, RestrictionList } from "./hostShared";
 import styles from "./Host.module.css";
@@ -151,8 +151,8 @@ export const EventOverview = () => {
         <>
             <div className={styles.statGrid}>
                 <div className={styles.stat}><span className={styles.statLabel}>{unit[0].toUpperCase() + unit.slice(1)} signed up</span><span className={styles.statValue}>{capacityLabel(event)}</span></div>
-                {pendingEntrants(event).length > 0 &&
-                    <div className={styles.stat}><span className={styles.statLabel}>Pending teams</span><span className={styles.statValue}>{pendingEntrants(event).length}</span></div>}
+                {entrantsNeedingPlayers(event).length > 0 &&
+                    <div className={styles.stat}><span className={styles.statLabel}>Need players</span><span className={styles.statValue}>{entrantsNeedingPlayers(event).length}</span></div>}
                 <div className={styles.stat}><span className={styles.statLabel}>Matches played</span><span className={styles.statValue}>{progress ? `${progress.done} / ${progress.total}` : '-'}</span></div>
                 <div className={styles.stat}><span className={styles.statLabel}>Registration</span><span className={`${styles.statValue} ${styles.statValueSmall}`}>{event.registrationOpen ? 'Open' : 'Closed'}</span></div>
             </div>

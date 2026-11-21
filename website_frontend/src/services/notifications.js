@@ -37,9 +37,11 @@ export const notificationText = ({ type, data }) => {
         case 'team_joined':
             return { text: `${data.who} joined ${data.team_name}.`, to: teamLink(data), action: 'View team' };
         case 'team_signed_up':
-            return { text: `${data.team_name} has enough players and is now signed up for ${data.event_name}.`, to: eventLink(data), action: 'Go to event' };
+            return { text: `${data.team_name} has a full roster again and is signed up for ${data.event_name}.`, to: eventLink(data), action: 'Go to event' };
         case 'team_pending':
-            return { text: `${data.team_name} is pending for ${data.event_name}: ${data.have} of ${data.need} players picked.`, to: eventLink(data), action: 'Go to event' };
+            return { text: `${data.team_name} lost a player in ${data.event_name} (${data.have} of ${data.need}). Pick another before the bracket is published or it'll be dropped.`, to: eventLink(data), action: 'Pick players' };
+        case 'entry_dropped':
+            return { text: `${data.team_name} was dropped from ${data.event_name}: it was still short of players when the bracket was published.`, to: eventLink(data), action: 'Go to event' };
         case 'event_delayed': {
             const when = new Date(data.starts_at).toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
             return { text: `${data.event_name} now starts ${when}${data.reason ? ` - ${data.reason}` : ''}.`, to: eventLink(data), action: 'Go to event' };
