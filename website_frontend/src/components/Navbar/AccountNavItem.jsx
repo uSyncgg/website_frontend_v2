@@ -6,6 +6,7 @@ import { PROFILE_LABELS, profileUrl } from "utils/profiles";
 import { EVENT_DASHBOARD_PATH } from "utils/hostEvents";
 import { getApiErrorMessage } from "utils/apiError";
 import { NotificationBell } from "components/NotificationBell/NotificationBell";
+import { WalletMenuBalances } from "components/Wallet/WalletMenuBalances";
 import styles from '../Navbar/Navbar.module.css';
 
 // react-snap prerenders with no session; render the neutral placeholder so the
@@ -103,8 +104,8 @@ const AccountLinks = ({ itemClass, buttonClass, onNavigate }) => {
     );
 };
 
-// Two menus side by side: the avatar opens the account menu (Profile, Event Dashboard, Settings,
-// Logout) and the view label opens "Viewing as". With a single profile there's nothing to
+// Two menus side by side: the avatar opens the account menu (your wallet balances, then Profile,
+// Event Dashboard, Settings, Logout) and the view label opens "Viewing as". With a single profile there's nothing to
 // switch to, so the label is just a label.
 const ProfileMenu = () => {
     const { defaultProfile, profiles } = useCurrentUser();
@@ -171,6 +172,7 @@ const ProfileMenu = () => {
 
             {open === 'account' &&
                 <div className={styles.accountDropdown} role="menu">
+                    <WalletMenuBalances onNavigate={() => setOpen(null)} />
                     <AccountLinks
                         itemClass={styles.dropdownItem}
                         buttonClass={`${styles.dropdownItem} ${styles.dropdownButton}`}
@@ -213,6 +215,7 @@ export const AccountNavItem = ({ closeMenu, variant = 'header' }) => {
 
     return (
         <div className={styles.mobileAccount}>
+            <WalletMenuBalances onNavigate={closeMenu} />
             <AccountLinks itemClass={styles.navLink} buttonClass={styles.navLink} onNavigate={closeMenu} />
         </div>
     );
