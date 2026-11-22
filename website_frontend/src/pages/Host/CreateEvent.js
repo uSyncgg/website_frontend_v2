@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router";
 import { FaPlus, FaTrash } from "react-icons/fa";
 import { useCurrentUser } from "hooks";
-import { createEvent, useHostEvent, useBracketMeta, projectedPrizeCents } from "services/brackets";
+import { createEvent, useHostEvent, useBracketMeta, projectedPrizeCents, rulesetsFor } from "services/brackets";
 import { useWallet, formatMoney, parseDollars } from "services/wallet";
 import { PROFILE_LABELS, canHostBrackets, profileUrl } from "utils/profiles";
 import { EVENT_TYPES, HOSTING_DASHBOARD_PATH, PLATFORMS, TOURNAMENT_GAME } from "utils/hostEvents";
@@ -91,6 +91,7 @@ const fromTemplate = (event, base) => {
         game: event.gameKey ?? base.game,
         gameTitle: event.gameTitleKey ?? '',
         gameMode: event.gameModeKey ?? '',
+        ruleset: event.ruleset?.key ?? '',
         format: event.format,
         teamSize: event.teamSize,
         bestOf: event.bestOf,
@@ -105,14 +106,13 @@ const fromTemplate = (event, base) => {
         venue: event.venue ?? '',
         prize: event.prize ?? '',
         description: event.description ?? '',
-        rules: event.rules ?? '',
         noShowMinutes: event.noShowMinutes == null ? base.noShowMinutes : String(event.noShowMinutes),
         noShowOff: event.noShowMinutes == null,
         payMode: event.money?.entryFeeCents ? 'wallet' : event.payments?.enabled ? 'passes' : 'free',
     };
 };
 
-// Games, titles, modes and formats come from the lookup tables (GET /brackets/meta).
+// Games, titles, modes, rulesets and formats come from the lookup tables (GET /brackets/meta).
 const sameName = (a, b) => (a ?? '').replace(/\s/g, '').toLowerCase() === (b ?? '').replace(/\s/g, '').toLowerCase();
 
 // /host/events/new, or /host/events/new?profile=<public_id> from a host or venue profile's
@@ -136,13 +136,14 @@ export const CreateEvent = () => {
         game: '',
         gameTitle: '',
         gameMode: '',
+        ruleset: '',
         format: 'single_elim', teamSize: '1v1', bestOf: 3,
         differentFinals: false, finalBestOf: 5,
         maxEntrants: '16', uncapped: false,
         useMin: false, minEntrants: '4',
         platform: 'pc_allowed',
         date: start.date, time: start.time, venue: '', prize: '',
-        description: '', rules: '', noShowMinutes: '10', noShowOff: false,
+        description: '', noShowMinutes: '10', noShowOff: false,
         payMode: 'free',
     });
     const [money, setMoney] = useState(blankMoney());
@@ -219,10 +220,14 @@ export const CreateEvent = () => {
         .filter(m => !titleEntry || titleEntry.modes.includes(m.key))
         .map(m => ({ value: m.key, label: m.name }));
     const gameMode = modes.some(m => m.value === form.gameMode) ? form.gameMode : '';
+    // Rulesets work the same way: a general one survives a title change, a title's own doesn't.
+    const rulesetEntries = rulesetsFor(gameEntry, gameTitle);
+    const rulesets = rulesetEntries.map(r => ({ value: r.key, label: r.name }));
+    const ruleset = rulesetEntries.find(r => r.key === form.ruleset);
     const formats = meta?.formats ?? [];
     const hasFinal = !!formats.find(f => f.key === form.format)?.hasFinal;
 
-    const chooseGame = (g) => setForm(f => ({ ...f, game: g, gameTitle: g === f.game ? f.gameTitle : '', gameMode: g === f.game ? f.gameMode : '' }));
+    const chooseGame = (g) => setForm(f => (g === f.game ? f : { ...f, game: g, gameTitle: '', gameMode: '', ruleset: '' }));
 
     const maxNum = Number(form.maxEntrants);
     const minNum = Number(form.minEntrants);
@@ -232,6 +237,7 @@ export const CreateEvent = () => {
         game: !game && 'Pick a game',
         gameTitle: titles.length > 0 && !gameTitle && `Pick which ${gameName} game`,
         gameMode: modes.length > 0 && !gameMode && 'Pick a game mode',
+        ruleset: rulesets.length > 0 && !ruleset && 'Pick the ruleset your event is played under',
         venue: isLan && !form.venue.trim() && 'Add where the LAN is held',
         maxEntrants: !form.uncapped && (!Number.isInteger(maxNum) || maxNum < 2) && 'Enter a whole number of 2 or more, or tick "No cap"',
         minEntrants: form.useMin && (
@@ -266,6 +272,7 @@ export const CreateEvent = () => {
             game,
             gameTitle: gameTitle || null,
             gameMode: gameMode || null,
+            ruleset: ruleset?.key ?? null,
             venue: isLan ? form.venue.trim() : '',
             bestOf: Number(form.bestOf),
             finalBestOf: hasFinal && differentFinals ? Number(form.finalBestOf) : null,
@@ -367,6 +374,20 @@ export const CreateEvent = () => {
                                 <SearchSelect id="gameMode" value={gameMode} options={modes} onChange={v => setValue('gameMode', v)}
                                     placeholder="Choose a mode" searchPlaceholder="Search modes" />
                                 {err('gameMode')}
+                            </div>
+                        }
+
+                        {rulesets.length > 0 &&
+                            <div className={styles.field}>
+                                <label htmlFor="ruleset">Ruleset</label>
+                                <SearchSelect id="ruleset" value={ruleset?.key ?? ''} options={rulesets} onChange={v => setValue('ruleset', v)}
+                                    placeholder="Choose a ruleset" searchPlaceholder="Search rulesets" />
+                                {err('ruleset')}
+                                <p className={styles.fieldHint}>
+                                    {ruleset
+                                        ? <>Players see this ruleset on your event. <a href={ruleset.url} target="_blank" rel="noopener noreferrer" className={styles.externalLink}>Read the {ruleset.name} rules ↗</a></>
+                                        : 'Your event is played under an official ruleset, exactly as published.'}
+                                </p>
                             </div>
                         }
 
@@ -503,11 +524,6 @@ export const CreateEvent = () => {
                         <div className={styles.field}>
                             <label htmlFor="description">Description</label>
                             <textarea id="description" className={styles.textarea} value={form.description} onChange={set('description')} maxLength={1000} />
-                        </div>
-                        <div className={styles.field}>
-                            <label htmlFor="rules">Rules</label>
-                            <textarea id="rules" className={styles.textarea} value={form.rules} onChange={set('rules')} maxLength={3000}
-                                placeholder="Maps, settings, how to report scores, no-show policy..." />
                         </div>
                     </section>
 

@@ -11,7 +11,7 @@ const team = (id, name, roster) => bracketEntrant(id, name, {
     players: roster.map(u => ({ username: u, public_id: u, type: 'player' })),
 });
 const event = bracketEvent({
-    id: 'evt-4s', teamSize: '2v2', rules: 'Hardpoint first.', restrictions: ['No snipers'], platform: 'console_only',
+    id: 'evt-4s', teamSize: '2v2', ruleset: { key: 'cdl', name: 'CDL Competitive Settings', url: 'https://callofdutyleague.com/en-us/competitive-settings' }, restrictions: ['No snipers'], platform: 'console_only',
     gameTitle: 'Black Ops 7', gameMode: 'Hardpoint', finalBestOf: 5, stage: 'live',
     entrants: [team('e1', 'Alpha', ['ace', 'bee']), team('e2', 'Bravo', ['cat', 'dog']), team('e3', 'Charlie', ['eel', 'fox']), team('e4', 'Delta', ['gnu', 'hen'])],
     bracket: {
@@ -45,7 +45,8 @@ describe('MatchPage', () => {
         expect(screen.getByRole('heading', { name: /Alpha/ })).toHaveTextContent('You');
         expect(screen.getByRole('heading', { name: 'Delta' })).toBeInTheDocument();
         for (const name of ['ace', 'bee', 'gnu', 'hen']) expect(screen.getByText(name)).toBeInTheDocument();
-        expect(screen.getByText('Hardpoint first.')).toBeInTheDocument();
+        expect(screen.getByText('CDL Competitive Settings')).toBeInTheDocument();
+        expect(screen.getByRole('link', { name: /View official rules/ })).toHaveAttribute('href', 'https://callofdutyleague.com/en-us/competitive-settings');
         expect(screen.getByText('No snipers')).toBeInTheDocument();
         expect(screen.getByText('Call of Duty: Black Ops 7')).toBeInTheDocument();
         expect(screen.getByText('Hardpoint')).toBeInTheDocument();

@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link, NavLink, Outlet, useNavigate, useOutletContext, useParams } from "react-router";
 import { FaCalendarAlt, FaClock, FaGamepad, FaMapMarkerAlt, FaSitemap } from "react-icons/fa";
-import { useHostEvent, updateEvent, deleteEvent, cancelEvent, delayStart, entrantsNeedingPlayers, inviteAdmin, removeAdmin, hasEntryFee, payoutPercents, payoutStatus } from "services/brackets";
+import { useHostEvent, useBracketMeta, rulesetsFor, updateEvent, deleteEvent, cancelEvent, delayStart, entrantsNeedingPlayers, inviteAdmin, removeAdmin, hasEntryFee, payoutPercents, payoutStatus } from "services/brackets";
 import { formatMoney, refreshWallet } from "services/wallet";
 import { Avatar, PlayerPicker } from "components/Teams/TeamParts";
-import { BracketError, Modal, ShareButton, StageChip, capacityLabel, formatDate, formatLabel, unitLabel, EventLoading, formatSummary, locationLabel, gameDisplayName, RestrictionList } from "./hostShared";
+import { BracketError, Modal, ShareButton, StageChip, capacityLabel, formatDate, formatLabel, unitLabel, EventLoading, formatSummary, locationLabel, gameDisplayName, RestrictionList, RulesetInfo } from "./hostShared";
+import { SearchSelect } from "./SearchSelect";
 import styles from "./Host.module.css";
 import { EVENT_TYPES, HOSTING_DASHBOARD_PATH } from "utils/hostEvents";
 
@@ -146,6 +147,28 @@ const DelayDialog = ({ event, onClose }) => {
     );
 };
 
+// The event's ruleset, which the host can switch to another one on offer until the bracket goes
+// live (the server ignores changes after that).
+const RulesetSection = ({ event }) => {
+    const meta = useBracketMeta();
+    const offered = rulesetsFor(meta?.games.find(g => g.key === event.gameKey), event.gameTitleKey);
+    const editable = ['registration', 'closed', 'seeding'].includes(event.stage) && offered.length > 1;
+    const choose = (key) => { if (key !== event.ruleset?.key) updateEvent(event.id, { ruleset: key }); };
+    return (
+        <>
+            <RulesetInfo event={event} />
+            {editable &&
+                <div className={styles.field} style={{ marginTop: '.75rem' }}>
+                    <label htmlFor="ruleset">Change ruleset</label>
+                    <SearchSelect id="ruleset" value={event.ruleset?.key ?? ''} options={offered.map(r => ({ value: r.key, label: r.name }))}
+                        onChange={choose} placeholder="Choose a ruleset" searchPlaceholder="Search rulesets" />
+                    <p className={styles.fieldHint}>Locked once the bracket is live.</p>
+                </div>
+            }
+        </>
+    );
+};
+
 export const EventOverview = () => {
     const event = useManagedEvent();
     const navigate = useNavigate();
@@ -208,12 +231,11 @@ export const EventOverview = () => {
                             <dt>No-show timer</dt><dd>{event.noShowMinutes == null ? 'Off' : `${event.noShowMinutes} min after each match starts`}</dd>
                         </dl>
                     </section>
-                    {(event.description || event.rules) &&
-                        <section className={styles.card}>
-                            {event.description && <><h2 className={styles.sectionTitle}>Description</h2><p className={styles.preWrap}>{event.description}</p></>}
-                            {event.rules && <><h2 className={styles.sectionTitle} style={{ marginTop: event.description ? '1.25rem' : 0 }}>Rules</h2><p className={styles.preWrap}>{event.rules}</p></>}
-                        </section>
-                    }
+                    <section className={styles.card}>
+                        {event.description && <><h2 className={styles.sectionTitle}>Description</h2><p className={styles.preWrap}>{event.description}</p></>}
+                        <h2 className={styles.sectionTitle} style={{ marginTop: event.description ? '1.25rem' : 0 }}>Rules</h2>
+                        <RulesetSection event={event} />
+                    </section>
                 </div>
 
                 <div>

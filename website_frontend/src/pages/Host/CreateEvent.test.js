@@ -16,6 +16,9 @@ const META = {
             { key: 'modern_warfare_4', name: 'Modern Warfare 4', year: 2026, modes: [] },
             { key: 'black_ops_7', name: 'Black Ops 7', year: 2025, modes: [] },
             { key: 'call_of_duty', name: 'Call of Duty', year: 2003, modes: [] },
+        ], rulesets: [
+            { key: 'cdl', name: 'CDL Competitive Settings', url: 'https://cdl.example/rules', title: null },
+            { key: 'codagent_mw4', name: 'CodAgent – Modern Warfare 4', url: 'https://codagent.example/mw4', title: 'modern_warfare_4' },
         ] },
         { key: 'halo', name: 'Halo', modes: [{ key: 'slayer', name: 'Slayer' }, { key: 'ctf', name: 'Capture the Flag' }], titles: [
             { key: 'halo_infinite', name: 'Halo Infinite', year: 2021, modes: ['slayer', 'ctf'] },
@@ -155,10 +158,42 @@ describe('CreateEvent', () => {
         expect(createEvent).not.toHaveBeenCalled();
     });
 
-    it("never shows a title or mode picker for a game without them", () => {
+    it("never shows a title, mode or ruleset picker for a game without them", () => {
         renderAt('/host/events/new?type=league&game=CS2');
         expect(screen.queryByLabelText(/Which .* game/)).toBeNull();
         expect(screen.queryByLabelText('Game mode')).toBeNull();
+        expect(screen.queryByLabelText('Ruleset')).toBeNull();
+    });
+
+    it("offers the game's general rulesets plus the title's own, and requires one", () => {
+        renderAt('/host/events/new?type=league&game=Call%20of%20Duty');
+        pick('Which Call of Duty game', 'Black Ops 7');
+        fireEvent.click(picker('Ruleset'));
+        expect(within(screen.getByRole('listbox')).getAllByRole('option').map(o => o.textContent)).toEqual(['CDL Competitive Settings']);
+        fireEvent.keyDown(screen.getByLabelText('Search rulesets'), { key: 'Escape' });
+        pick('Which Call of Duty game', 'Modern Warfare 4');
+        fireEvent.click(picker('Ruleset'));
+        expect(within(screen.getByRole('listbox')).getAllByRole('option').map(o => o.textContent))
+            .toEqual(['CDL Competitive Settings', 'CodAgent – Modern Warfare 4']);
+        fireEvent.keyDown(screen.getByLabelText('Search rulesets'), { key: 'Escape' });
+        fillRequired();
+        fireEvent.click(screen.getByRole('button', { name: 'Create event' }));
+        expect(screen.getByText('Pick the ruleset your event is played under')).toBeInTheDocument();
+        expect(createEvent).not.toHaveBeenCalled();
+    });
+
+    it("drops a title's own ruleset when the title changes, and links to the picked one", () => {
+        renderAt('/host/events/new?type=league&game=Call%20of%20Duty');
+        pick('Which Call of Duty game', 'Modern Warfare 4');
+        pick('Ruleset', 'CodAgent');
+        expect(screen.getByRole('link', { name: /Read the CodAgent – Modern Warfare 4 rules/ })).toHaveAttribute('href', 'https://codagent.example/mw4');
+        pick('Which Call of Duty game', 'Black Ops 7');
+        expect(picker('Ruleset')).toHaveTextContent('Choose a ruleset');
+    });
+
+    it('has no free-text rules box', () => {
+        renderAt('/host/events/new?type=league&game=CS2');
+        expect(screen.queryByLabelText('Rules')).toBeNull();
     });
 
     it('offers round robin and swiss, and a finals best of only for elimination formats', () => {
@@ -185,6 +220,7 @@ describe('CreateEvent', () => {
         renderAt('/host/events/new?profile=hostpub&type=league&game=Call%20of%20Duty');
         fillRequired();
         pick('Which Call of Duty game', 'Black Ops 7');
+        pick('Ruleset', 'CDL Competitive Settings');
         fireEvent.click(screen.getByRole('radio', { name: 'Console only' }));
         fireEvent.click(screen.getByRole('button', { name: /Add a restriction/ }));
         fireEvent.change(screen.getByLabelText('Restriction 1'), { target: { value: 'No snipers' } });
@@ -194,7 +230,7 @@ describe('CreateEvent', () => {
         fireEvent.change(screen.getByLabelText('Minimum players'), { target: { value: '6' } });
         fireEvent.click(screen.getByRole('button', { name: 'Create event' }));
         expect(createEvent).toHaveBeenCalledWith(expect.objectContaining({
-            game: 'call_of_duty', gameTitle: 'black_ops_7', gameMode: null, platform: 'console_only',
+            game: 'call_of_duty', gameTitle: 'black_ops_7', gameMode: null, ruleset: 'cdl', platform: 'console_only',
             restrictions: ['No snipers'], bestOf: 3, finalBestOf: 7, minEntrants: 6, maxEntrants: 16, admins: [],
         }));
     });
