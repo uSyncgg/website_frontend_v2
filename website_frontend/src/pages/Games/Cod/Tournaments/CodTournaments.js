@@ -1,4 +1,4 @@
-import { TournamentList, TournamentFilter, TournamentPagination, filteredTournaments, SeoData, AddYourEventButton } from "components";
+import { TournamentList, TournamentFilter, TournamentPagination, filteredTournaments, SeoData, AddYourEventButton, HostedEvents } from "components";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router";
 import axios from "axios";
@@ -115,6 +115,8 @@ export const CodTournaments = () => {
                     </div>
                 </div>
             </div>
+
+            <HostedEvents />
 
             <div className="totalTournamentContainer">
                 <div className="leftItem">
