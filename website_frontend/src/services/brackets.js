@@ -160,6 +160,16 @@ export const useEnteredEvents = () => usePage('entered', '/brackets/entered');
 export const useProfileBracketEvents = (publicId) =>
     usePage(`profile:${publicId}`, publicId ? `/brackets/profile/${encodeURIComponent(publicId)}` : null);
 
+// The Hosted Events a game's Leagues / LANs / Tournaments page lists (GET /brackets/discover),
+// soonest first, 6 at a time. Public. A card: { id, name, eventType, hostProfile, hostName, game,
+// gameTitle, gameMode, format, formatLabel, teamSize, startsAt, platform, locationType, venue,
+// entryFeeCents, prizeFunding, guaranteeCents, poolCents, signedUp, maxEntrants, stage }.
+export const DISCOVER_PAGE_SIZE = 6;
+export const useDiscoverEvents = (gameKey, type) => {
+    const params = gameKey && type ? new URLSearchParams({ game: gameKey, type, limit: DISCOVER_PAGE_SIZE }) : null;
+    return usePage(`discover:${gameKey}:${type}`, params ? `/brackets/discover?${params}` : null);
+};
+
 // ---- the event form's options -------------------------------------------------------
 
 // { games: [{ key, name, titles: [{ key, name, year, modes }], modes: [{ key, name }] }],

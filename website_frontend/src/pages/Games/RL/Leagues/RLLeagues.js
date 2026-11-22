@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { SeoData, HostBanner, HeaderImage, EventListFilters, NoEvents, AddYourEventButton } from "components";
+import { SeoData, HostBanner, HeaderImage, EventListFilters, NoEvents, AddYourEventButton, HostedEvents } from "components";
 import { useLeagueEvents } from "hooks";
 import { buildEventPath } from 'utils/eventPaths';
 import '../../EventBanners.css';
@@ -110,6 +110,8 @@ export const RLLeagues = () => {
                 canonicalPath={"/games/RocketLeague/leagues"}
             />
             <HeaderImage title={"Rocket League Leagues"} imageClass={"rlLeaguePage"} />
+
+            <HostedEvents />
 
             <EventListFilters
                 sort={sort}

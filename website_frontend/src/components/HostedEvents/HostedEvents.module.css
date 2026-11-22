@@ -1,0 +1,80 @@
+.section {
+    width: 100%;
+    margin: 1.5rem auto 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    width: 90%;
+    margin: 0 auto 1rem;
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 800;
+    text-align: left;
+}
+
+.empty {
+    width: 90%;
+    margin: 0 auto;
+    color: rgb(170, 166, 178);
+    text-align: left;
+}
+
+.empty a {
+    color: #b18af0;
+    font-weight: 700;
+}
+
+/* The card is a div so the host link isn't nested in the event link; the title's link is
+   stretched over the whole card instead. */
+.card {
+    position: relative;
+}
+
+.cardLink {
+    color: inherit;
+    text-decoration: none;
+}
+
+.cardLink::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+}
+
+.hostLink {
+    position: relative;
+    z-index: 1;
+    color: #cbb8f0;
+}
+
+.details {
+    margin: 0;
+    color: rgb(170, 166, 178);
+    font-size: 0.92rem;
+}
+
+.stage {
+    display: inline-flex;
+    vertical-align: middle;
+    margin-left: .6rem;
+    padding: .2rem .65rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, .15);
+    color: rgb(200, 196, 208);
+    font-size: .7rem;
+    font-weight: 700;
+}
+
+.live {
+    border-color: rgba(61, 220, 151, .6);
+    color: #3ddc97;
+    background: rgba(61, 220, 151, .1);
+}
+
+.more {
+    margin-top: .5rem;
+}

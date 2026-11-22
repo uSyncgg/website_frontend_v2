@@ -125,6 +125,7 @@ import { ShareButton } from "./ShareButton/ShareButton";
 import { ProfileViewToggle } from "./ProfileViewToggle/ProfileViewToggle";
 import { ProfileCard } from "./ProfileCard/ProfileCard";
 import { AddYourEventButton } from "./AddYourEventButton/AddYourEventButton";
+import { HostedEvents } from "./HostedEvents/HostedEvents";
 
 export {
     Navbar,
@@ -205,5 +206,6 @@ export {
     ShareButton,
     ProfileViewToggle,
     ProfileCard,
-    AddYourEventButton
+    AddYourEventButton,
+    HostedEvents
 };
