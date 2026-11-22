@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link, NavLink, Outlet, useNavigate, useOutletContext, useParams } from "react-router";
 import { FaCalendarAlt, FaClock, FaGamepad, FaMapMarkerAlt, FaSitemap } from "react-icons/fa";
-import { useHostEvent, updateEvent, deleteEvent, delayStart, pendingEntrants, inviteAdmin, removeAdmin } from "services/brackets";
+import { useHostEvent, useBracketMeta, rulesetsFor, updateEvent, deleteEvent, cancelEvent, delayStart, entrantsNeedingPlayers, inviteAdmin, removeAdmin, hasEntryFee, payoutPercents, payoutStatus } from "services/brackets";
+import { formatMoney, refreshWallet } from "services/wallet";
 import { Avatar, PlayerPicker } from "components/Teams/TeamParts";
-import { BracketError, Modal, ShareButton, StageChip, capacityLabel, formatDate, formatLabel, unitLabel, EventLoading, formatSummary, locationLabel, gameDisplayName, RestrictionList } from "./hostShared";
+import { BracketError, Modal, ShareButton, StageChip, capacityLabel, formatDate, formatLabel, unitLabel, EventLoading, formatSummary, locationLabel, gameDisplayName, RestrictionList, RulesetInfo } from "./hostShared";
+import { SearchSelect } from "./SearchSelect";
 import styles from "./Host.module.css";
 import { EVENT_TYPES, HOSTING_DASHBOARD_PATH } from "utils/hostEvents";
 
@@ -76,6 +78,18 @@ const NEXT_STEPS = {
     seeding: { text: 'Your bracket draft is ready. Check the matchups, then publish it so players can see it.', to: 'bracket', label: 'Review bracket' },
     live: { text: 'The bracket is live. Players report their own scores - step in when a match is disputed or a no-show is reported.', to: 'bracket', label: 'Open bracket' },
     complete: { text: 'Every match is done. Congratulations to your champion!', to: 'bracket', label: 'See final bracket' },
+    cancelled: { text: 'This event was cancelled. Every entry fee and guaranteed prize went back to the wallet it came from.', to: 'entrants', label: 'See entrants' },
+};
+
+// Whether money was ever paid into the event: then it can only be cancelled, never deleted.
+const heldMoney = (event) => !!(event.money?.poolCents || event.money?.guaranteeFunded || event.entrants.some(e => e.payMode));
+
+const prizeText = (event) => {
+    const money = event.money ?? {};
+    const split = money.payoutStructure ? ` · ${payoutPercents(money.payoutStructure).map(p => `${p}%`).join(' / ')}` : '';
+    if (money.prizeFunding === 'guaranteed') return `${formatMoney(money.guaranteeCents)} guaranteed by you${money.guaranteeFunded ? ' (held)' : ''}${split}`;
+    if (money.prizeFunding === 'entry_funded') return `From entry fees, after uSync's ${money.platformFeeBps / 100}% and your ${money.hostCutBps / 100}% cut${split}`;
+    return event.prize || '-';
 };
 
 const DELAY_OPTIONS = [15, 30, 60];
@@ -133,6 +147,28 @@ const DelayDialog = ({ event, onClose }) => {
     );
 };
 
+// The event's ruleset, which the host can switch to another one on offer until the bracket goes
+// live (the server ignores changes after that).
+const RulesetSection = ({ event }) => {
+    const meta = useBracketMeta();
+    const offered = rulesetsFor(meta?.games.find(g => g.key === event.gameKey), event.gameTitleKey);
+    const editable = ['registration', 'closed', 'seeding'].includes(event.stage) && offered.length > 1;
+    const choose = (key) => { if (key !== event.ruleset?.key) updateEvent(event.id, { ruleset: key }); };
+    return (
+        <>
+            <RulesetInfo event={event} />
+            {editable &&
+                <div className={styles.field} style={{ marginTop: '.75rem' }}>
+                    <label htmlFor="ruleset">Change ruleset</label>
+                    <SearchSelect id="ruleset" value={event.ruleset?.key ?? ''} options={offered.map(r => ({ value: r.key, label: r.name }))}
+                        onChange={choose} placeholder="Choose a ruleset" searchPlaceholder="Search rulesets" />
+                    <p className={styles.fieldHint}>Locked once the bracket is live.</p>
+                </div>
+            }
+        </>
+    );
+};
+
 export const EventOverview = () => {
     const event = useManagedEvent();
     const navigate = useNavigate();
@@ -142,19 +178,35 @@ export const EventOverview = () => {
     const progress = event.bracket?.status && event.bracket.status !== 'draft' ? event.bracket.built.progress : null;
     const unit = unitLabel(event);
 
+    const cancelled = stage === 'cancelled';
+    const payout = payoutStatus(event);
     const remove = async () => {
         if (!window.confirm(`Delete "${event.name}"? This can't be undone.`)) return;
         if (await deleteEvent(event.id)) navigate(HOSTING_DASHBOARD_PATH);
+    };
+    const callOff = async () => {
+        const refunds = heldMoney(event) ? ' Every entry fee and your guaranteed prize go back to the wallets they came from.' : '';
+        if (!window.confirm(`Cancel "${event.name}"? Everyone entered is told, and it can't be undone.${refunds}`)) return;
+        if (await cancelEvent(event.id)) refreshWallet();
+    };
+    // Opening sign-ups on a guaranteed event takes the prize from the host's wallet (once).
+    const toggleRegistration = async () => {
+        const money = event.money ?? {};
+        if (!event.registrationOpen && money.prizeFunding === 'guaranteed' && !money.guaranteeFunded
+            && !window.confirm(`Opening sign-ups takes your ${formatMoney(money.guaranteeCents)} guaranteed prize from your wallet. It's held for the event and comes back if you cancel. Continue?`)) return;
+        if (await updateEvent(event.id, { registrationOpen: !event.registrationOpen })) refreshWallet();
     };
 
     return (
         <>
             <div className={styles.statGrid}>
                 <div className={styles.stat}><span className={styles.statLabel}>{unit[0].toUpperCase() + unit.slice(1)} signed up</span><span className={styles.statValue}>{capacityLabel(event)}</span></div>
-                {pendingEntrants(event).length > 0 &&
-                    <div className={styles.stat}><span className={styles.statLabel}>Pending teams</span><span className={styles.statValue}>{pendingEntrants(event).length}</span></div>}
+                {entrantsNeedingPlayers(event).length > 0 &&
+                    <div className={styles.stat}><span className={styles.statLabel}>Need players</span><span className={styles.statValue}>{entrantsNeedingPlayers(event).length}</span></div>}
                 <div className={styles.stat}><span className={styles.statLabel}>Matches played</span><span className={styles.statValue}>{progress ? `${progress.done} / ${progress.total}` : '-'}</span></div>
                 <div className={styles.stat}><span className={styles.statLabel}>Registration</span><span className={`${styles.statValue} ${styles.statValueSmall}`}>{event.registrationOpen ? 'Open' : 'Closed'}</span></div>
+                {hasEntryFee(event) &&
+                    <div className={styles.stat}><span className={styles.statLabel}>Entry fees paid in</span><span className={styles.statValue}>{formatMoney(event.money.poolCents ?? 0)}</span></div>}
             </div>
 
             <div className={styles.twoCol}>
@@ -171,23 +223,28 @@ export const EventOverview = () => {
                             <dt>Starts</dt><dd>{formatDate(event.startsAt)}</dd>
                             <dt>Location</dt><dd>{locationLabel(event)}</dd>
                             <dt>Restrictions</dt><dd>{event.restrictions?.length ? <RestrictionList event={event} /> : 'None'}</dd>
-                            <dt>Entry fee</dt><dd>{event.payments?.enabled ? `${event.entryFee} via uSync payments` : (event.entryFee || 'Free')}</dd>
-                            <dt>Prize</dt><dd>{event.prize || '-'}</dd>
+                            <dt>Entry fee</dt><dd>{hasEntryFee(event) ? `${formatMoney(event.money.entryFeeCents)} per player, from wallets` : event.payments?.enabled ? `${event.entryFee} via uSync payments` : (event.entryFee || 'Free')}</dd>
+                            <dt>Prize</dt><dd>{prizeText(event)}</dd>
+                            {payout && <><dt>Payout</dt><dd>{payout.state === 'paid'
+                                ? `Paid out ${formatDate(payout.at)}`
+                                : `Due ${formatDate(payout.at)} if nothing is open in your queue (a corrected result restarts the 24 hours)`}</dd></>}
                             <dt>No-show timer</dt><dd>{event.noShowMinutes == null ? 'Off' : `${event.noShowMinutes} min after each match starts`}</dd>
                         </dl>
                     </section>
-                    {(event.description || event.rules) &&
-                        <section className={styles.card}>
-                            {event.description && <><h2 className={styles.sectionTitle}>Description</h2><p className={styles.preWrap}>{event.description}</p></>}
-                            {event.rules && <><h2 className={styles.sectionTitle} style={{ marginTop: event.description ? '1.25rem' : 0 }}>Rules</h2><p className={styles.preWrap}>{event.rules}</p></>}
-                        </section>
-                    }
+                    <section className={styles.card}>
+                        {event.description && <><h2 className={styles.sectionTitle}>Description</h2><p className={styles.preWrap}>{event.description}</p></>}
+                        <h2 className={styles.sectionTitle} style={{ marginTop: event.description ? '1.25rem' : 0 }}>Rules</h2>
+                        <RulesetSection event={event} />
+                    </section>
                 </div>
 
                 <div>
                     <section className={`${styles.card} ${styles.nextStep}`}>
                         <h2 className={styles.sectionTitle}>Next step</h2>
-                        <p>{next.text}</p>
+                        <p>{next.text}{stage === 'complete' && payout &&
+                            (payout.state === 'paid'
+                                ? ' Prizes and your share have been paid out to wallets.'
+                                : ` Prizes and your share pay out ${formatDate(payout.at)}. Settle anything in your queue first: an open issue holds the payout.`)}</p>
                         <Link to={next.to} className={styles.primaryBtn}>{next.label}</Link>
                     </section>
 
@@ -203,7 +260,7 @@ export const EventOverview = () => {
                                 ))}
                             </ul>
                         }
-                        <button type="button" className={styles.secondaryBtn} disabled={stage === 'complete'} onClick={() => setDelaying(true)}>
+                        <button type="button" className={styles.secondaryBtn} disabled={stage === 'complete' || cancelled} onClick={() => setDelaying(true)}>
                             <FaClock /> Delay start
                         </button>
                     </section>
@@ -211,18 +268,23 @@ export const EventOverview = () => {
                     <section className={styles.card}>
                         <h2 className={styles.sectionTitle}>Registration</h2>
                         <p className={styles.blurb}>
-                            {(event.stage === 'live' || event.stage === 'complete')
-                                ? 'Registration closed automatically when the bracket was published.'
-                                : event.registrationOpen ? 'Players can currently sign up.' : 'New sign-ups are paused.'}
+                            {cancelled ? 'The event was cancelled.'
+                                : (event.stage === 'live' || event.stage === 'complete')
+                                    ? 'Registration closed automatically when the bracket was published.'
+                                    : event.registrationOpen ? 'Players can currently sign up.' : 'New sign-ups are paused.'}
                         </p>
                         <div className={styles.btnRow}>
-                            <button type="button" className={styles.secondaryBtn} disabled={event.stage === 'live' || event.stage === 'complete'}
-                                onClick={() => updateEvent(event.id, { registrationOpen: !event.registrationOpen })}>
+                            <button type="button" className={styles.secondaryBtn} disabled={event.stage === 'live' || event.stage === 'complete' || cancelled}
+                                onClick={toggleRegistration}>
                                 {event.registrationOpen ? 'Close registration' : 'Reopen registration'}
                             </button>
                             <ShareButton event={event} className={styles.ghostBtn} />
-                            {event.isHost && <button type="button" className={styles.dangerBtn} onClick={remove}>Delete event</button>}
+                            {event.isHost && !cancelled && stage !== 'complete' &&
+                                <button type="button" className={styles.dangerBtn} onClick={callOff}>Cancel event</button>}
+                            {event.isHost && !heldMoney(event) && <button type="button" className={styles.dangerBtn} onClick={remove}>Delete event</button>}
                         </div>
+                        {event.isHost && heldMoney(event) && !cancelled &&
+                            <p className={styles.fieldHint}>Money has been paid into this event, so it can be cancelled (everyone is refunded) but not deleted.</p>}
                     </section>
 
                     <AdminsCard event={event} />

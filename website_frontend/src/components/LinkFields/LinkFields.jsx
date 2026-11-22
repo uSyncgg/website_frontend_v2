@@ -24,9 +24,10 @@ export const linkPreview = (p, value) => {
 /**
  * The link inputs for one profile type, grouped (socials, game accounts, ...). Used by the link
  * editor and the sign-up/add-a-profile "Linked Accounts" step. `values` maps platform key to
- * what's typed; `onChange(key, value)` updates it.
+ * what's typed; `onChange(key, value)` updates it. `comingSoon` shows every platform as
+ * "Coming soon" and can't be filled in (sign-up and add-a-profile, until linking is built).
  */
-export const LinkFields = ({ type, values, onChange }) => {
+export const LinkFields = ({ type, values, onChange, comingSoon = false }) => {
     const platforms = platformsFor(type);
 
     return GROUPS.map(group => {
@@ -35,19 +36,22 @@ export const LinkFields = ({ type, values, onChange }) => {
         return (
             <fieldset key={group.key} className={styles.group}>
                 <legend className={styles.legend}>{group.title}</legend>
-                {inGroup.map(p => {
+                {inGroup.map(platform => {
+                    const p = comingSoon ? { ...platform, comingSoon: true } : platform;
                     // Game accounts get linked by signing in to the platform (for live stats).
                     // That isn't built yet, so the button doesn't do anything for now.
                     if (p.group === 'game') {
                         return (
-                            <div key={p.key} className={`${styles.field} ${styles.gameField}`}>
+                            <div key={p.key} className={`${styles.field} ${styles.gameField} ${p.comingSoon ? styles.soon : ''}`}>
                                 <span className={styles.mark} aria-hidden="true"><img src={p.icon} alt="" /></span>
                                 <span className={styles.label}>{p.label}</span>
-                                <button type="button" className={styles.linkButton} aria-label={`Link ${p.label} account`}>Link account</button>
+                                <button type="button" className={styles.linkButton} disabled={p.comingSoon} aria-label={p.comingSoon ? `Linking ${p.label} is coming soon` : `Link ${p.label} account`}>
+                                    {p.comingSoon ? 'Coming soon' : 'Link account'}
+                                </button>
                             </div>
                         );
                     }
-                    const preview = linkPreview(p, values[p.key]);
+                    const preview = p.comingSoon ? null : linkPreview(p, values[p.key]);
                     return (
                         <label key={p.key} className={`${styles.field} ${p.comingSoon ? styles.soon : ''}`}>
                             <span className={styles.mark} aria-hidden="true">

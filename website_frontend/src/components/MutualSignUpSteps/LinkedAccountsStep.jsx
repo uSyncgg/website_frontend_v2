@@ -4,9 +4,10 @@ import { LinkFields } from "components/LinkFields/LinkFields";
 import { PROFILE_LABELS, linksField } from "utils/profiles";
 import styles from "./LinkedAccountsStep.module.css";
 
-// Sign-up and add-a-profile: the accounts each new profile links (socials, game IDs, brand
-// links - whatever its type can have). Each profile has its own set, stored in the form as
-// links_<type>: { platform: typed value }. With more than one profile, tabs switch between them.
+// Sign-up and add-a-profile: the accounts each new profile will be able to link (socials, game
+// accounts, brand links - whatever its type can have). Linking isn't built yet, so every
+// platform shows as "Coming soon" and nothing is saved. With more than one profile, tabs
+// switch between them.
 export const LinkedAccountsStep = ({ types }) => {
     const { watch, setValue } = useFormContext();
     const [active, setActive] = useState(types[0]);
@@ -36,6 +37,7 @@ export const LinkedAccountsStep = ({ types }) => {
                 key={type}
                 type={type}
                 values={values}
+                comingSoon
                 onChange={(key, value) => setValue(`${linksField(type)}.${key}`, value, { shouldDirty: true })}
             />
         </div>

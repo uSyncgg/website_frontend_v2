@@ -3,8 +3,9 @@ export const PROFILE_TYPES = ['player', 'host', 'venue', 'org'];
 
 export const PROFILE_LABELS = { player: 'Player', host: 'Host', venue: 'Venue', org: 'Organization' };
 
-// Organizations run teams and enter events, but never post events or host brackets.
-export const NO_BRACKET_TYPES = ['org'];
+// Profile types that can never create brackets: organizations, and players (only Host and venue
+// profiles, acting as commission-based admins, run brackets - see the Terms of Service, Section 7).
+export const NO_BRACKET_TYPES = ['org', 'player'];
 
 // Sign-up and add-a-profile give each profile type its own username form field.
 export const usernameField = (type) => `username_${type}`;
@@ -32,7 +33,7 @@ export const settingsUrl = (type) => `/settings/profile/${type}`;
 
 // Host and venue profiles post bracket events, unless they turned bracket hosting off. It's on
 // by default, so a profile summary from before /users/me listed bracket_hosting counts as on.
-export const canHostBrackets = (profile) => !!profile && profile.type !== 'player' && !NO_BRACKET_TYPES.includes(profile.type) && profile.bracket_hosting !== false;
+export const canHostBrackets = (profile) => !!profile && !NO_BRACKET_TYPES.includes(profile.type) && profile.bracket_hosting !== false;
 
 // Creating a bracket event, posted as the given host or venue profile (by public_id). `type`
 // and `game` pre-fill the form, e.g. from the Leagues page you were on.

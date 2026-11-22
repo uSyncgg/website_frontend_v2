@@ -73,6 +73,8 @@ import { Profile, MyProfile } from 'pages/Accounts/Profile/Profile';
 import { ProfileSettings, ProfileSettingsHome, AddProfile } from 'pages/Accounts/Settings/ProfileSettings';
 import { ClaimEvent } from 'pages/Accounts/ClaimEvent/ClaimEvent';
 import { CurrentUserProvider } from 'hooks';
+import { ChatProvider } from 'components/Chat/ChatContext';
+import { ChatWindow } from 'components/Chat/ChatWindow';
 
 const root = document.getElementById('root');
 
@@ -83,6 +85,7 @@ const app = (
   // <React.StrictMode>
   <BrowserRouter>
     <CurrentUserProvider>
+    <ChatProvider>
     <ScrollToTop />
     <div className='app-container'>
       <Navbar />
@@ -218,7 +221,9 @@ const app = (
       </main>
       
       <Footer />
+      <ChatWindow />
     </div>
+    </ChatProvider>
     </CurrentUserProvider>
   </BrowserRouter>
   // </React.StrictMode>

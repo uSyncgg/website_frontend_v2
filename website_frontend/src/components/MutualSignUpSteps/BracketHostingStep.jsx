@@ -37,7 +37,7 @@ const BracketChoice = ({ field }) => {
 export const BracketHostingStep = ({ types }) => {
     if (!types) return <BracketChoice field="bracket_hosting" />;
 
-    // Organizations never host brackets, so they get no choice here.
+    // Organizations and players never host brackets, so they get no choice here.
     const hostTypes = types.filter(type => !NO_BRACKET_TYPES.includes(type));
     return <>{hostTypes.map(type => (
 

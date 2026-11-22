@@ -12,6 +12,7 @@ import { resolveViews } from "./profileViews";
 import { EditAboutModal, EditGamesModal, EditLocationsModal, EditUsernameModal, usePictureEditor } from "./ProfileEditors";
 import { PlayerStats } from "./PlayerStats";
 import { AboutCard, EventsCard, OwnerEventsCard, OwnerTeamsCard } from "./ProfileSections";
+import { WalletCard } from "components/Wallet/WalletCard";
 import { gameEmblem, initials, playerGames } from "./profileGames";
 import { PROFILE_LABELS, profileUrl, statsUrl } from "utils/profiles";
 
@@ -278,6 +279,8 @@ export const Profile = ({ stats = false }) => {
 
                 <div className={styles.cols}>
                     <div>
+                        {/* The account's wallet: only on your own profiles, never anyone else's. */}
+                        {isOwner && <WalletCard />}
                         {TYPE_CONTENT[profile.type]({ ...profile, details: profile.details ?? {} }, { edit, isOwner, gameSlug: gameStats ? gameSlug : null })}
                     </div>
 

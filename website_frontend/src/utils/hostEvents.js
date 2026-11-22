@@ -18,6 +18,17 @@ export const HOSTING_DASHBOARD_PATH = `${EVENT_DASHBOARD_PATH}?tab=hosting`;
 // Tournaments can only be posted for Call of Duty for now (the only title with a tournaments page).
 export const TOURNAMENT_GAME = 'Call of Duty';
 
+// The API's game keys (the games lookup table), by the name the site uses for the game.
+export const GAME_KEYS = {
+    'Call of Duty': 'call_of_duty',
+    'Warzone': 'warzone',
+    'Halo': 'halo',
+    'CS2': 'cs2',
+    'League of Legends': 'league_of_legends',
+    'Rocket League': 'rocket_league',
+    'Valorant': 'valorant',
+};
+
 // Catalog section key -> event type.
 const SECTION_TYPES = { leagues: 'league', lans: 'lan', tournaments: 'tournament' };
 

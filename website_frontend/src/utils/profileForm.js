@@ -2,8 +2,8 @@
 // { type, username, picture, bio, bracket_hosting, other_roles, other_role_detail, details: {...} }.
 // Used by sign-up, adding a profile and profile settings, so all three send the same thing.
 
-import { PROFILE_TYPES, bioField, bracketField, copyBioField, copyPictureField, linksField, pictureField, usernameField } from "./profiles";
-import { linkChanges } from "./linkedPlatforms";
+import { TOS_VERSION } from "./legal";
+import { NO_BRACKET_TYPES, PROFILE_TYPES, bioField, bracketField, copyBioField, copyPictureField, pictureField, usernameField } from "./profiles";
 
 // Fields stored on the profile itself (shared by every type).
 const PROFILE_FIELDS = ['bio', 'bracket_hosting', 'other_roles', 'other_role_detail'];
@@ -73,11 +73,12 @@ export function buildProfileEntry(type, values, { picture = null, bio = '', incl
         details: detailsFor(type, values),
     };
 
-    const links = linkChanges({ type }, values[linksField(type)]);
-    if (Object.keys(links).length > 0) entry.links = links;
+    // Linked accounts are "coming soon" at sign-up and add-a-profile, so no `links` are sent;
+    // they're edited later from the profile page's link editor.
 
-    // Asked per profile. Left unanswered, the backend defaults it to on.
-    if (type === 'org') {
+    // Asked per profile for host and venue profiles (left unanswered, the backend defaults it to
+    // on). Players and organizations can never host brackets, so they always send false.
+    if (NO_BRACKET_TYPES.includes(type)) {
         entry.bracket_hosting = false;
     } else if (values[bracketField(type)] !== undefined) {
         entry.bracket_hosting = toApiValue('bracket_hosting', values[bracketField(type)]);
@@ -129,7 +130,10 @@ export function buildSignUpRequest(values) {
         return buildProfileEntry(type, values, { picture, bio, includeOtherRoles: true });
     });
 
-    return { data: { default_profile: defaultProfile, profiles }, files };
+    // The sign-up wizard can't submit until the Terms box is ticked; the backend refuses
+    // registration without it and stamps the acceptance time itself.
+    const tos = { tos_accepted: !!values.tos_accepted, tos_version: TOS_VERSION };
+    return { data: { default_profile: defaultProfile, profiles, ...tos }, files };
 }
 
 // POST /me/profiles: one profile. "Same as my default" copies the account's default profile's
