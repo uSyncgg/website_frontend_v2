@@ -53,7 +53,7 @@ const PayStep = ({ deposit, walletTotal, onDone }) => {
     );
 };
 
-// Deposit flow: pick an amount (at least $5), see the 5% fee on top, agree to the terms, then pay.
+// Deposit flow: pick an amount (at least $5), see the 10% fee on top, agree to the terms, then pay.
 export const DepositDialog = ({ walletTotal, onClose, onDeposited, start }) => {
     // Inside the component, not module scope (see PassPayment: prerendering has no key).
     const [stripePromise] = useState(() => loadStripe(process.env.REACT_APP_STRIPE_PK));

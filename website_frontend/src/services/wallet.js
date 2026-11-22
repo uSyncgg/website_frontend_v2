@@ -11,12 +11,12 @@ import apiClient from "./apiClient";
 // One small shared copy, so the navbar dropdown and the profile's wallet card always agree.
 
 export const DEPOSIT_MIN_CENTS = 500;
-export const DEPOSIT_FEE_PERCENT = 5;
+export const DEPOSIT_FEE_PERCENT = 10;
 export const DEPOSIT_DAILY_LIMIT_CENTS = 100_000;
 // Withdrawals: any amount of Earnings from $1, or all of them (the only option below $1).
 export const WITHDRAWAL_MIN_CENTS = 100;
 
-// Must match deposit_fee() in the backend: 5%, rounded half up to the cent.
+// Must match deposit_fee() in the backend: 10%, rounded half up to the cent.
 export const depositFee = (amountCents) => Math.floor((amountCents * DEPOSIT_FEE_PERCENT + 50) / 100);
 
 export const formatMoney = (cents) => {

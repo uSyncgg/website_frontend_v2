@@ -4,11 +4,11 @@ import apiClient from './apiClient';
 jest.mock('./apiClient', () => ({ __esModule: true, default: { get: jest.fn(), post: jest.fn() } }));
 
 describe('wallet money helpers', () => {
-    it('adds a 5% fee rounded half up to the cent, like the backend', () => {
-        expect(depositFee(500)).toBe(25);
-        expect(depositFee(1234)).toBe(62);
-        expect(depositFee(1230)).toBe(62);
-        expect(depositFee(1229)).toBe(61);
+    it('adds a 10% fee rounded half up to the cent, like the backend', () => {
+        expect(depositFee(500)).toBe(50);
+        expect(depositFee(1235)).toBe(124);
+        expect(depositFee(1234)).toBe(123);
+        expect(depositFee(1225)).toBe(123);
     });
 
     it('reads dollar amounts into cents', () => {
