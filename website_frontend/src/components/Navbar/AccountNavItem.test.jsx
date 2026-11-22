@@ -6,11 +6,15 @@ const host = { type: 'host', username: 'HostCo', public_id: 'hostpub', bracket_h
 const player = { type: 'player', username: 'Plays', public_id: 'playpub', bracket_hosting: true };
 let mockUser;
 jest.mock('hooks', () => ({ useCurrentUser: () => mockUser, useAuth: () => ({ session: null }) }));
+jest.mock('components/NotificationBell/NotificationBell', () => ({ NotificationBell: () => null }));
+jest.mock('services/apiClient', () => ({ __esModule: true, default: { get: jest.fn() } }));
+const apiClient = require('services/apiClient').default;
 
 const renderMenu = () => render(<MemoryRouter><AccountNavItem /></MemoryRouter>);
 
 describe('AccountNavItem', () => {
     beforeEach(() => {
+        apiClient.get.mockResolvedValue({ data: { depositedCents: 2500, earningsCents: 1050, totalCents: 3550, frozen: false, frozenAt: null } });
         mockUser = { status: 'complete', defaultProfile: host, profiles: [player, host], switchProfile: jest.fn(), logout: jest.fn() };
     });
 
@@ -47,5 +51,14 @@ describe('AccountNavItem', () => {
         renderMenu();
         expect(screen.queryByRole('button', { name: /switch view/ })).toBeNull();
         expect(screen.getByText('Player')).toBeInTheDocument();
+    });
+
+    it('shows your wallet balances above the menu links', async () => {
+        renderMenu();
+        fireEvent.click(screen.getByRole('button', { name: 'Account menu' }));
+        const wallet = await screen.findByRole('menuitem', { name: /Wallet: \$25\.00 deposited, \$10\.50 earnings/ });
+        expect(wallet.getAttribute('href')).toMatch(/hostpub.*#wallet$/);
+        const items = screen.getAllByRole('menuitem');
+        expect(items[0]).toBe(wallet);
     });
 });

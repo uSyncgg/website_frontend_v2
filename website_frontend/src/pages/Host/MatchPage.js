@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
-import { FaArrowLeft, FaCalendarAlt, FaGamepad, FaMap, FaSitemap, FaUserShield } from "react-icons/fa";
+import { FaArrowLeft, FaCalendarAlt, FaComments, FaGamepad, FaMap, FaSitemap, FaUserShield } from "react-icons/fa";
 import { ReportMatchDialog } from "components/Bracket/Bracket";
+import { useChats } from "components/Chat/ChatContext";
+import { joinMatchChat } from "services/chats";
+import { getApiErrorMessage } from "utils/apiError";
 import { useHostEvent, matchState, matchView, reportScore, reportNoShow, disputeResult, ruleOnMatch } from "services/brackets";
 import { findMatch, isEntrant, matchRoundLabel } from "utils/bracket";
 import { profileUrl } from "utils/profiles";
-import { BracketError, EventLoading, entrantsById, formatDate, gameDisplayName, isTeamEvent, locationLabel, RestrictionList } from "./hostShared";
+import { BracketError, EventLoading, entrantsById, formatDate, gameDisplayName, isTeamEvent, locationLabel, RestrictionList, RulesetInfo } from "./hostShared";
 import styles from "./Host.module.css";
 
 const STATUS_TEXT = {
@@ -60,6 +63,8 @@ export const MatchPage = () => {
     const event = useHostEvent(eventId);
     const [dialog, setDialog] = useState(null);
     const [now, setNow] = useState(() => Date.now());
+    const { chatForMatch, openChat, showChat } = useChats();
+    const [chatError, setChatError] = useState('');
 
     useEffect(() => {
         const t = setInterval(() => setNow(Date.now()), 15000);
@@ -98,6 +103,18 @@ export const MatchPage = () => {
     const disputeUntil = view.disputeClosesAt ? new Date(view.disputeClosesAt) : null;
     const canNoShow = view.canReportNoShow || (noShowAt && now >= noShowAt.getTime() && view.canReport);
     const canDispute = view.canDispute && disputeUntil && now <= disputeUntil.getTime();
+    // Picked players act in their own match, as well as the team's owner and captains.
+    const canAct = view.canAct ?? event.viewerCanAct;
+    // The match chat: open it if you're in it; the host and admins can join it.
+    const myChat = chatForMatch(event.id, match.id);
+    const joinChat = async () => {
+        setChatError('');
+        try {
+            showChat(await joinMatchChat(event.id, match.id));
+        } catch (err) {
+            setChatError(getApiErrorMessage(err));
+        }
+    };
 
     const submitNoShow = () => {
         if (window.confirm(`Report ${byId[opponentId]?.name} as a no-show? An admin will review it and decide what happens.`)) {
@@ -130,11 +147,16 @@ export const MatchPage = () => {
                             <span><FaCalendarAlt /> {formatDate(event.startsAt)}</span>
                         </div>
                     </div>
-                    {event.canManage &&
+                    {(event.canManage || myChat) &&
                         <div className={styles.btnRow}>
-                            {['ready', 'complete'].includes(match.status) &&
+                            {myChat
+                                ? <button type="button" className={styles.ghostBtn} onClick={() => openChat(myChat.id)}><FaComments /> Open chat</button>
+                                : event.canManage && view.chatId &&
+                                    <button type="button" className={styles.ghostBtn} onClick={joinChat}><FaComments /> Join chat</button>}
+                            {event.canManage && ['ready', 'complete'].includes(match.status) &&
                                 <button type="button" className={styles.primaryBtn} onClick={() => setDialog('host')}>Decide this match</button>}
-                            <Link to={`/host/events/${event.id}/queue`} className={styles.ghostBtn}><FaUserShield /> Queue</Link>
+                            {event.canManage && <Link to={`/host/events/${event.id}/queue`} className={styles.ghostBtn}><FaUserShield /> Queue</Link>}
+                            {chatError && <span className={styles.fieldHint} role="alert">{chatError}</span>}
                         </div>
                     }
                 </div>
@@ -157,7 +179,7 @@ export const MatchPage = () => {
                                 : <p className={styles.blurb}>{byId[opponentId]?.name} reported a score. Report yours - if you both name the same winner, it's final.</p>
                         )}
                         {state === 'ready' && <p className={styles.blurb}>Play your match, then both sides report the score. If you both name the same winner, it's final.</p>}
-                        {event.viewerCanAct
+                        {canAct
                             ? (
                                 <div className={styles.stackBtns}>
                                     {view.canReport && <button type="button" className={styles.primaryBtn} onClick={() => setDialog('player')}>Report score</button>}
@@ -172,7 +194,7 @@ export const MatchPage = () => {
                     </section>
                 }
 
-                {mine && match.status === 'complete' && event.viewerCanAct && canDispute &&
+                {mine && match.status === 'complete' && canAct && canDispute &&
                     <section className={`${styles.card} ${styles.myMatch}`}>
                         <h2 className={styles.sectionTitle}>Think this result is wrong?</h2>
                         <p className={styles.blurb}>
@@ -191,7 +213,7 @@ export const MatchPage = () => {
                         </section>
                         <section className={styles.card}>
                             <h2 className={styles.sectionTitle}>Rules</h2>
-                            {event.rules ? <p className={styles.preWrap}>{event.rules}</p> : <p className={styles.muted}>The host hasn't posted rules.</p>}
+                            <RulesetInfo event={event} />
                             {event.restrictions?.length > 0 &&
                                 <>
                                     <h3 className={styles.fieldLabel} style={{ marginTop: '1rem' }}>Restrictions</h3>

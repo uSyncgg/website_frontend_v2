@@ -2,7 +2,8 @@ import { useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router";
 import { FaCalendarAlt, FaPlus, FaSitemap } from "react-icons/fa";
 import { useCurrentUser } from "hooks";
-import { useHostEvents, useEnteredEvents, isArchived } from "services/brackets";
+import { useHostEvents, useEnteredEvents, isArchived, ordinal } from "services/brackets";
+import { formatMoney } from "services/wallet";
 import { EVENT_TYPES, gameDisplayName, matchUrl } from "utils/hostEvents";
 import { PROFILE_LABELS, addProfileUrl, canHostBrackets } from "utils/profiles";
 import { getApiErrorMessage } from "utils/apiError";
@@ -14,7 +15,6 @@ import styles from "./Host.module.css";
 // counts, stage, the viewer's entrant and match, and for finished events the winner.
 
 const TABS = [['entered', 'Entered'], ['teams', 'Teams'], ['hosting', 'Hosting'], ['archived', 'Archived']];
-const PLACES = ['1st', '2nd', '3rd'];
 
 const isTeam = (event) => event.teamSize !== '1v1';
 const unitOf = (event) => (isTeam(event) ? 'teams' : 'players');
@@ -171,7 +171,7 @@ const HostedGrid = ({ events }) => (
                         </div>
                         <div>
                             <div className={styles.fillLabel}>
-                                <span>{capacityOf(event)} {unitOf(event)}{event.pending > 0 ? ` · ${event.pending} pending` : ''}</span>
+                                <span>{capacityOf(event)} {unitOf(event)}{(event.needsPlayers ?? event.pending) > 0 ? ` · ${event.needsPlayers ?? event.pending} need players` : ''}</span>
                             </div>
                             <div className={styles.fillBar}><span style={{ width: `${filled}%` }} /></div>
                         </div>
@@ -259,7 +259,8 @@ const ArchivedTab = () => {
                                         {event.winner && <>Winner: <strong>{event.winner}</strong></>}
                                         {played && event.viewerEntrantName &&
                                             <>{event.winner ? ' · ' : ''}You played as <strong>{event.viewerEntrantName}</strong>
-                                                {event.viewerPlace ? ` (${PLACES[event.viewerPlace - 1]})` : ''}</>}
+                                                {event.viewerPlace ? ` (${ordinal(event.viewerPlace)})` : ''}
+                                                {event.viewerPrizeCents > 0 && <> · won <strong>{formatMoney(event.viewerPrizeCents)}</strong></>}</>}
                                     </p>
                                 </Link>
                                 <div className={styles.eventCardActions}>

@@ -1267,6 +1267,20 @@
     cursor: pointer;
 }
 
+.externalLink {
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--line-strong);
+    text-underline-offset: 3px;
+    white-space: nowrap;
+}
+
+.externalLink:hover {
+    color: var(--violet-bright);
+    text-decoration-color: var(--violet-bright);
+}
+
 .linkBtn:hover {
     color: var(--violet-bright);
     text-decoration-color: var(--violet-bright);
@@ -1458,4 +1472,103 @@
 
 .archiveSort .select {
     width: auto;
+}
+
+.stage_cancelled { color: var(--loss); border-color: rgba(224, 105, 138, .45); }
+
+.cancelBanner {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    margin-bottom: 1.25rem;
+    padding: .75rem 1rem;
+    border-radius: 10px;
+    background: rgba(224, 105, 138, .12);
+    color: var(--loss);
+    font-size: .88rem;
+}
+
+.cancelBanner strong {
+    color: var(--ink);
+}
+
+/* Money: the entry fee box in the sign-up dialog and the payout split. */
+.feeBox {
+    padding: .85rem 1rem;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+}
+
+.payoutList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem .9rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.payoutRow {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 8rem) auto;
+    gap: .6rem;
+    align-items: center;
+    margin-bottom: .4rem;
+}
+
+/* Payout status on a finished event with money */
+.payoutBanner {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    margin-bottom: 1.25rem;
+    padding: .75rem 1rem;
+    border-radius: 10px;
+    background: rgba(94, 200, 140, .12);
+    color: var(--win, #5ec88c);
+}
+
+.payoutBanner strong {
+    color: var(--ink);
+}
+
+/* Final standings: placement, name, prize */
+.standingsList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.standingsList li {
+    display: grid;
+    grid-template-columns: 3.5rem minmax(0, 1fr) auto;
+    gap: .75rem;
+    align-items: center;
+    padding: .5rem .25rem;
+    border-bottom: 1px solid var(--line, rgba(255, 255, 255, .08));
+}
+
+.standingsList li:last-child {
+    border-bottom: none;
+}
+
+.standingsMine {
+    background: rgba(255, 255, 255, .04);
+    border-radius: 6px;
+}
+
+.standingsPlace {
+    font-weight: 700;
+    color: var(--gold);
+}
+
+.standingsName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.standingsPrize {
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
 }

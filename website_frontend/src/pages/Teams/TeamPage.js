@@ -109,7 +109,7 @@ export const TeamPage = () => {
     };
 
     return (
-        <div className={host.page}>
+        <div className={`standardContainer ${host.page}`}>
             <SeoData title={`${team.name} | uSync`} description={`${team.name}, a team on uSync.`} />
             <div className={`${host.inner} ${host.narrow}`}>
                 <Link to={`${EVENT_DASHBOARD_PATH}?tab=teams`} className={host.muted}>← Teams</Link>
