@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { useAuth, useCurrentUser } from "hooks";
-import { FaBan, FaCalendarAlt, FaCheckCircle, FaClock, FaGamepad, FaMapMarkerAlt, FaSitemap, FaTicketAlt, FaTrophy } from "react-icons/fa";
+import { FaBan, FaCalendarAlt, FaCheckCircle, FaClock, FaGamepad, FaMapMarkerAlt, FaMoneyBillWave, FaSitemap, FaTicketAlt, FaTrophy } from "react-icons/fa";
 import { Bracket } from "components/Bracket/Bracket";
 import {
     useHostEvent, isFull, isSolo, register, setPlayers, unregister as leaveEvent, needsPlayers, signedUpEntrants, entrantsNeedingPlayers, teamSizeOf,
     matchState, viewerMatch, hasEntryFee, entryCostCents, payoutPercents, requestAutoPay, useBracketError, clearBracketError,
+    ordinal, payoutStatus,
 } from "services/brackets";
 import { useWallet, refreshWallet, formatMoney } from "services/wallet";
 import { getMyTeams, getTeam } from "services/teams";
@@ -28,8 +29,7 @@ const teamEntryProblem = (team, event) => {
     return '';
 };
 
-const ORDINALS = ['1st', '2nd', '3rd'];
-export const placeLabel = (i) => ORDINALS[i] ?? `${i + 1}th`;
+const placeLabel = (i) => ordinal(i + 1);
 
 // "1st 70% · 2nd 30%"
 const PayoutSplit = ({ structure }) => (
@@ -44,6 +44,25 @@ const prizeSummary = (event) => {
     if (money.prizeFunding === 'guaranteed') return `${formatMoney(money.guaranteeCents)} guaranteed`;
     if (money.prizeFunding === 'entry_funded') return `From entry fees (${formatMoney(money.poolCents ?? 0)} paid in so far)`;
     return event.prize || '';
+};
+
+// Final standings, best first: each entrant's placement (shared placements say so) and, once the
+// event has paid out, what it won.
+const Standings = ({ event }) => {
+    const names = Object.fromEntries(event.entrants.map(e => [e.id, e.name]));
+    const counts = event.standings.reduce((n, s) => ({ ...n, [s.placement]: (n[s.placement] ?? 0) + 1 }), {});
+    const paid = !!event.money?.paidOutAt;
+    return (
+        <ol className={styles.standingsList}>
+            {event.standings.map(s => (
+                <li key={s.entrantId} className={s.entrantId === event.viewerEntrantId ? styles.standingsMine : undefined}>
+                    <span className={styles.standingsPlace}>{counts[s.placement] > 1 ? `T-${ordinal(s.placement)}` : ordinal(s.placement)}</span>
+                    <span className={styles.standingsName}>{names[s.entrantId] ?? 'Removed entrant'}</span>
+                    {paid && s.prizeCents > 0 && <span className={styles.standingsPrize}>{formatMoney(s.prizeCents)}</span>}
+                </li>
+            ))}
+        </ol>
+    );
 };
 
 // Profile public ids already playing in this event (for any entrant).
@@ -389,6 +408,7 @@ export const PublicBracket = () => {
 
     const cancelled = stage === 'cancelled';
     const prize = prizeSummary(event);
+    const payout = payoutStatus(event);
 
     const unregister = async (entrant) => {
         const refund = entrant.payMode ? ' Entry fees go back to the wallets they came from.' : '';
@@ -435,6 +455,14 @@ export const PublicBracket = () => {
                     </div>
                 }
 
+                {payout &&
+                    <div className={styles.payoutBanner}>
+                        <FaMoneyBillWave /> <span>{payout.state === 'paid'
+                            ? <><strong>Prizes paid out</strong> on {formatDate(payout.at)}. Winnings are in each player's wallet Earnings.</>
+                            : <><strong>Prizes pay out {formatDate(payout.at)}</strong>, as long as nothing is under review. A corrected result restarts the 24-hour wait.</>}</span>
+                    </div>
+                }
+
                 {lastDelay && !cancelled &&
                     <div className={styles.delayBanner}>
                         <FaClock /> <span>Start time moved to <strong>{formatDate(event.startsAt)}</strong>{lastDelay.reason && <> - {lastDelay.reason}</>}</span>
@@ -477,6 +505,13 @@ export const PublicBracket = () => {
                 {activeTab === 'info' &&
                 <div className={styles.publicLayout}>
                     <div className={styles.publicMain}>
+                        {event.standings?.length > 0 &&
+                            <section className={styles.card}>
+                                <h2 className={styles.sectionTitle}>Final standings</h2>
+                                <Standings event={event} />
+                            </section>
+                        }
+
                         {event.description &&
                             <section className={styles.card}>
                                 <h2 className={styles.sectionTitle}>About this event</h2>

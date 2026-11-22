@@ -12,10 +12,14 @@ import { getApiErrorMessage } from "utils/apiError";
 //   canManage, isHost, openIssues, viewerEntrantId, viewerCanAct, viewerActsFor: [entrant ids],
 //   money: { entryFeeCents, prizeFunding: 'guaranteed' | 'entry_funded' | null, guaranteeCents,
 //            guaranteeFunded, hostCutBps, payoutStructure: [bps], platformFeeBps, poolCents,
-//            cancelledAt, cancelReason } }
+//            cancelledAt, cancelReason, payoutDueAt, paidOutAt },
+//   standings: [{ entrantId, placement, prizeCents }] (best first, once the bracket is complete) }
 // An entry fee is per player and taken from wallets as the team signs up (payMode 'team': the
 // captain pays for everyone; 'each': every player pays their own, needing Auto-Pay on). A
-// cancelled event (stage 'cancelled') is read-only; everyone was refunded.
+// cancelled event (stage 'cancelled') is read-only; everyone was refunded. Entrants can share a
+// placement. An event with money pays out 24 hours after its standings last changed (as long as
+// nothing is open in its admin queue): prizeCents fills in and paidOutAt is set; after that the
+// event is read-only too.
 // Every entrant is a team's, and every entrant takes a spot (there's no waitlist). One that lost a
 // picked player is 'needs_players' until its captain picks someone else; still short when the
 // bracket is published, it's dropped. In a solo event (1v1) a team can enter several of its
@@ -104,7 +108,7 @@ export const useHostEvent = (id) => {
 //
 // A summary: { id, name, eventType, game, gameTitle, format, formatLabel, teamSize, startsAt,
 // stage, maxEntrants, signedUp, needsPlayers, canManage, isHost, openIssues, viewerEntrantId,
-// viewerEntrantName, viewerMatch: { id, opponent } | null, winner, viewerPlace }.
+// viewerEntrantName, viewerMatch: { id, opponent } | null, winner, viewerPlace, viewerPrizeCents }.
 
 const EMPTY_PAGE = { events: [], nextCursor: null, loading: true };
 
@@ -217,6 +221,23 @@ export const projectedPrizeCents = (money, entrants, teamSize) => {
     const pool = (money.entryFeeCents ?? 0) * teamSize * entrants;
     const afterFee = pool - Math.round(pool * (money.platformFeeBps ?? 500) / 10000);
     return afterFee - Math.round(afterFee * (money.hostCutBps ?? 0) / 10000);
+};
+
+// 1 -> '1st', 2 -> '2nd', 11 -> '11th', 23 -> '23rd'.
+export const ordinal = (n) => {
+    const tens = n % 100, ones = n % 10;
+    const suffix = tens >= 11 && tens <= 13 ? 'th' : ones === 1 ? 'st' : ones === 2 ? 'nd' : ones === 3 ? 'rd' : 'th';
+    return `${n}${suffix}`;
+};
+
+// Whether the event's prizes are paid out, or when they will be.
+// { state: 'paid', at } | { state: 'due', at } | null (no money, or not finished yet).
+export const payoutStatus = (event) => {
+    const money = event?.money;
+    if (!money?.prizeFunding || event.stage === 'cancelled') return null;
+    if (money.paidOutAt) return { state: 'paid', at: money.paidOutAt };
+    if (money.payoutDueAt) return { state: 'due', at: money.payoutDueAt };
+    return null;
 };
 
 // What the viewer sees and may do in one match (from the server), or {} for one not underway.

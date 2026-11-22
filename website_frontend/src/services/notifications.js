@@ -1,5 +1,6 @@
 import apiClient from "./apiClient";
 import { supabase } from "./supabaseClient";
+import { ordinal } from "./brackets";
 
 // The navbar bell's notifications. Each is { id, type, data, read, created_at } - see
 // notificationText. A notification stays in the bell until you act on it ("Go to ...") or
@@ -71,6 +72,10 @@ export const notificationText = ({ type, data }) => {
             return { text: `Your ${money(data.amount_cents)} entry fee for ${data.event_name} was refunded to your wallet.`, to: walletLink(), action: 'View wallet' };
         case 'event_cancelled':
             return { text: `${data.event_name} was cancelled${data.reason === 'min_entrants' ? ': not enough teams signed up' : ''}. Any entry fees were refunded to wallets.`, to: eventLink(data), action: 'Go to event' };
+        case 'prize_paid':
+            return { text: `You won ${money(data.amount_cents)} in ${data.event_name}${data.placement ? ` (${ordinal(data.placement)})` : ''}. It's in your Earnings.`, to: walletLink(), action: 'View wallet' };
+        case 'host_payout':
+            return { text: `${data.event_name} paid out. Your ${money(data.amount_cents)} is in your Earnings.`, to: walletLink(), action: 'View wallet' };
         case 'auto_pay_requested':
             return { text: `${data.from || 'Your captain'} wants to sign ${data.team_name} up for ${data.event_name} (${money(data.amount_cents)} entry fee each). Turn on Auto-Pay so they can take your fee.`, to: walletLink(), action: 'Turn on Auto-Pay' };
         case 'deposit_refunded':

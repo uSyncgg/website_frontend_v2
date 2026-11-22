@@ -119,6 +119,7 @@ export const KIND_LABELS = {
     entry_refund: 'Entry fee refunded',
     guarantee_fund: 'Guaranteed prize held',
     guarantee_refund: 'Guaranteed prize returned',
+    event_payout: 'Event payout',
 };
 
 // Auto-Pay lets your team captains take entry fees from your wallet when they sign you up.
