@@ -125,6 +125,17 @@
 /profile/* /200.html 200
 /settings/* /200.html 200
 
+# Teams, hosted events, brackets and event claims. Client-only, same /200.html app shell.
+/teams/* /200.html 200
+/host/events /200.html 200
+/host/events/* /200.html 200
+/brackets/* /200.html 200
+/claim-event/* /200.html 200
+
+# Admin. Client-only; RequireAdmin and the backend's require_admin decide who sees anything.
+/admin /200.html 200
+/admin/* /200.html 200
+
 # LANs
 /LanMap /index.html 200
 /other-lans /index.html 200
