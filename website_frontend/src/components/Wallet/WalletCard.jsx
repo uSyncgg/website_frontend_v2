@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { ProfileCard } from "components/ProfileCard/ProfileCard";
-import { useWallet, refreshWallet, getWalletHistory, startDeposit, waitForDeposit, formatMoney, KIND_LABELS } from "services/wallet";
+import { useWallet, refreshWallet, getWalletHistory, startDeposit, waitForDeposit, formatMoney, KIND_LABELS, AUTO_PAY_DAYS, setAutoPay } from "services/wallet";
+import { Link } from "react-router";
 import { getApiErrorMessage } from "utils/apiError";
 import { DepositDialog } from "./DepositDialog";
 import hostStyles from "pages/Host/Host.module.css";
@@ -16,6 +17,20 @@ export const WalletCard = () => {
     const [history, setHistory] = useState(null);
     const [nextBefore, setNextBefore] = useState(null);
     const [historyError, setHistoryError] = useState('');
+    const [autoPayDays, setAutoPayDays] = useState(30);
+    const [autoPayBusy, setAutoPayBusy] = useState(false);
+    const [autoPayError, setAutoPayError] = useState('');
+
+    const changeAutoPay = async (days) => {
+        setAutoPayBusy(true);
+        setAutoPayError('');
+        try {
+            await setAutoPay(days);
+        } catch (err) {
+            setAutoPayError(getApiErrorMessage(err));
+        }
+        setAutoPayBusy(false);
+    };
 
     const loadHistory = useCallback(async (before = null) => {
         try {
@@ -72,6 +87,30 @@ export const WalletCard = () => {
                 </div>
                 <span className={styles.private}>Only you can see your wallet.</span>
 
+                <div className={styles.autoPay}>
+                    <span className={styles.balanceLabel}>Auto-Pay</span>
+                    {wallet.autoPayUntil
+                        ? <p className={styles.autoPayText}>
+                            On until {new Date(wallet.autoPayUntil).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}.
+                            Your team captains can pay your entry fees from this wallet when they sign you up.
+                        </p>
+                        : <p className={styles.autoPayText}>
+                            Off. Turn it on so your team captains can pay your entry fee from this wallet when they sign the team up with "each player pays".
+                        </p>}
+                    <div className={styles.autoPayControls}>
+                        <select className={hostStyles.select} value={autoPayDays} onChange={e => setAutoPayDays(Number(e.target.value))}
+                            aria-label="How long Auto-Pay stays on" disabled={autoPayBusy}>
+                            {AUTO_PAY_DAYS.map(d => <option key={d} value={d}>For {d} days</option>)}
+                        </select>
+                        <button type="button" className={hostStyles.ghostBtn} disabled={autoPayBusy} onClick={() => changeAutoPay(autoPayDays)}>
+                            {wallet.autoPayUntil ? 'Extend' : 'Turn on'}
+                        </button>
+                        {wallet.autoPayUntil &&
+                            <button type="button" className={hostStyles.ghostBtn} disabled={autoPayBusy} onClick={() => changeAutoPay(0)}>Turn off</button>}
+                    </div>
+                    {autoPayError && <p className={hostStyles.fieldError}>{autoPayError}</p>}
+                </div>
+
                 {historyError && <p className={hostStyles.fieldError}>{historyError}</p>}
                 {history && history.length === 0 && <p className={styles.private} style={{ marginTop: 12 }}>No activity yet.</p>}
                 {history && history.length > 0 &&
@@ -79,7 +118,10 @@ export const WalletCard = () => {
                         {history.map(item => (
                             <li key={item.id} className={styles.historyRow}>
                                 <span>
-                                    <span className={styles.historyWhat}>{KIND_LABELS[item.kind] ?? item.kind}</span>
+                                    <span className={styles.historyWhat}>
+                                        {KIND_LABELS[item.kind] ?? item.kind}
+                                        {item.eventName && <> · <Link to={`/brackets/${encodeURIComponent(item.eventId)}`}>{item.eventName}</Link></>}
+                                    </span>
                                     <span className={styles.historyMeta}>
                                         {when(item.createdAt)} · {item.bucket === 'earnings' ? 'Earnings' : 'Deposited funds'}{item.reason ? ` · ${item.reason}` : ''}
                                     </span>

@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { useAuth, useCurrentUser } from "hooks";
-import { FaCalendarAlt, FaCheckCircle, FaClock, FaGamepad, FaMapMarkerAlt, FaSitemap, FaTicketAlt, FaTrophy } from "react-icons/fa";
+import { FaBan, FaCalendarAlt, FaCheckCircle, FaClock, FaGamepad, FaMapMarkerAlt, FaSitemap, FaTicketAlt, FaTrophy } from "react-icons/fa";
 import { Bracket } from "components/Bracket/Bracket";
 import {
     useHostEvent, isFull, isSolo, register, setPlayers, unregister as leaveEvent, needsPlayers, signedUpEntrants, entrantsNeedingPlayers, teamSizeOf,
-    matchState, viewerMatch,
+    matchState, viewerMatch, hasEntryFee, entryCostCents, payoutPercents, requestAutoPay, useBracketError, clearBracketError,
 } from "services/brackets";
+import { useWallet, refreshWallet, formatMoney } from "services/wallet";
 import { getMyTeams, getTeam } from "services/teams";
 import { getApiErrorMessage } from "utils/apiError";
 import { EVENT_TYPES, matchUrl } from "utils/hostEvents";
@@ -25,6 +26,24 @@ const teamEntryProblem = (team, event) => {
     if (!(team.games ?? []).some(g => g.key === event.gameKey)) return `Doesn't play ${event.game}`;
     if (team.members.length < need) return `Not enough players on the roster (needs ${need}, has ${team.members.length})`;
     return '';
+};
+
+const ORDINALS = ['1st', '2nd', '3rd'];
+export const placeLabel = (i) => ORDINALS[i] ?? `${i + 1}th`;
+
+// "1st 70% · 2nd 30%"
+const PayoutSplit = ({ structure }) => (
+    <ul className={styles.payoutList}>
+        {payoutPercents(structure).map((pct, i) => <li key={i}>{placeLabel(i)} <strong>{pct}%</strong></li>)}
+    </ul>
+);
+
+// The prize line for the details card and header: the guarantee, or the pool so far.
+const prizeSummary = (event) => {
+    const money = event.money ?? {};
+    if (money.prizeFunding === 'guaranteed') return `${formatMoney(money.guaranteeCents)} guaranteed`;
+    if (money.prizeFunding === 'entry_funded') return `From entry fees (${formatMoney(money.poolCents ?? 0)} paid in so far)`;
+    return event.prize || '';
 };
 
 // Profile public ids already playing in this event (for any entrant).
@@ -72,7 +91,10 @@ const EditPlayersDialog = ({ event, entrant, onClose }) => {
     }, [entrant.teamId, session?.access_token]);
 
     const save = async () => {
-        if (await setPlayers(event.id, picked, entrant.id)) onClose();
+        if (await setPlayers(event.id, picked, entrant.id)) {
+            if (entrant.payMode) refreshWallet();
+            onClose();
+        }
     };
 
     return (
@@ -80,6 +102,11 @@ const EditPlayersDialog = ({ event, entrant, onClose }) => {
             {error && <p className={styles.fieldError}>{error}</p>}
             {members === null && !error && <p className={styles.fieldHint}>Loading your team…</p>}
             {members && <PlayerPicks members={members} need={need} picked={picked} onChange={setPicked} taken={taken} />}
+            {entrant.payMode === 'each' &&
+                <p className={styles.fieldHint}>
+                    Each player pays their own {formatMoney(event.money.entryFeeCents)} entry fee: anyone new pays from their wallet now
+                    (they need Auto-Pay on), and anyone you take out gets theirs back.
+                </p>}
             <div className={styles.formActions}>
                 <button type="button" className={styles.ghostBtn} onClick={onClose}>Cancel</button>
                 <button type="button" className={styles.primaryBtn} onClick={save} disabled={picked.length !== need}>Save players</button>
@@ -118,6 +145,25 @@ const RegisterDialog = ({ event, onClose }) => {
     const price = tier ? Number(tier.price) : 0;
     const answer = (key) => (e) => setAnswers(a => ({ ...a, [key]: e.target.value }));
     const chosen = myTeams?.find(t => t.public_id === teamId);
+    // Wallet entry fee: the captain pays for the team, or each picked player pays their own.
+    const fee = hasEntryFee(event) ? event.money.entryFeeCents : 0;
+    const teamCost = entryCostCents(event);
+    const [payMode, setPayMode] = useState('team');
+    const { wallet } = useWallet(!!fee);
+    const shortForTeam = fee > 0 && payMode === 'team' && !!wallet && (wallet.frozen || wallet.totalCents < teamCost);
+    const error = useBracketError();
+    const myIds = new Set(profiles.map(p => p.public_id));
+    const teammates = picked.filter(id => !myIds.has(id));
+    const [asked, setAsked] = useState(false);
+    const askForAutoPay = async () => {
+        if (await requestAutoPay(event.id, chosen.public_id, teammates)) {
+            setAsked(true);
+            clearBracketError();
+        }
+    };
+
+    // Start clean: an old error from elsewhere on the page shouldn't show in here.
+    useEffect(() => { clearBracketError(); }, []);
 
     useEffect(() => {
         if (!token) return;
@@ -142,9 +188,13 @@ const RegisterDialog = ({ event, onClose }) => {
             email: email.trim(),
             answers,
             pass: tier?.name ?? null,
+            payMode: fee ? payMode : null,
         });
         setSaving(false);
-        if (done) onClose();
+        if (done) {
+            if (fee) refreshWallet();
+            onClose();
+        }
     };
 
     return (
@@ -219,7 +269,42 @@ const RegisterDialog = ({ event, onClose }) => {
                         }
                     </div>
                 ))}
+                {fee > 0 &&
+                    <div className={styles.feeBox}>
+                        <span className={styles.fieldLabel}>Entry fee: {formatMoney(fee)} per player{need > 1 ? ` (${formatMoney(teamCost)} a team)` : ''}</span>
+                        <div className={styles.passList}>
+                            <label className={`${styles.passOption} ${payMode === 'team' ? styles.passOptionOn : ''}`}>
+                                <input type="radio" name="payMode" checked={payMode === 'team'} onChange={() => setPayMode('team')} />
+                                <span>{need > 1 ? 'I pay for the whole team' : 'I pay'}</span>
+                                <strong>{formatMoney(teamCost)} from your wallet</strong>
+                            </label>
+                            <label className={`${styles.passOption} ${payMode === 'each' ? styles.passOptionOn : ''}`}>
+                                <input type="radio" name="payMode" checked={payMode === 'each'} onChange={() => setPayMode('each')} />
+                                <span>{need > 1 ? 'Each player pays their own' : 'The player pays their own'}</span>
+                                <strong>{formatMoney(fee)} each</strong>
+                            </label>
+                        </div>
+                        {payMode === 'team' && wallet &&
+                            <p className={styles.fieldHint}>
+                                Your wallet: {formatMoney(wallet.totalCents)}.{' '}
+                                {shortForTeam && (wallet.frozen
+                                    ? "It's frozen, so it can't pay entry fees right now."
+                                    : <>That's not enough. <Link to="/profile#wallet">Add funds</Link>, then sign up.</>)}
+                            </p>}
+                        {payMode === 'each' &&
+                            <p className={styles.fieldHint}>
+                                Each player's fee comes out of their own wallet when you sign up. Your teammates need Auto-Pay turned on
+                                (in their wallet) and enough in it.
+                            </p>}
+                        {payMode === 'each' && chosen && teammates.length > 0 && /Auto-Pay/.test(error) && !asked &&
+                            <button type="button" className={styles.secondaryBtn} onClick={askForAutoPay}>Ask my teammates to turn on Auto-Pay</button>}
+                        {asked && <p className={styles.fieldHint}>Asked. You'll be able to sign up once they've turned it on.</p>}
+                        <p className={styles.fieldHint}>Refunded to the same wallets if you unregister before the bracket is posted, or if the event is cancelled.</p>
+                    </div>
+                }
+
                 {tried && missing.length > 0 && <p className={styles.fieldError}>Fill in: {missing.join(', ')}.</p>}
+                {error && <p className={styles.fieldError}>{error}</p>}
 
                 {pay &&
                     <>
@@ -246,8 +331,9 @@ const RegisterDialog = ({ event, onClose }) => {
 
                 <div className={styles.formActions}>
                     <button type="button" className={styles.ghostBtn} onClick={onClose}>Cancel</button>
-                    <button type="submit" className={styles.primaryBtn} disabled={saving}>
-                        {saving ? 'Signing up…' : pay ? `Continue to payment` : 'Sign up'}
+                    <button type="submit" className={styles.primaryBtn} disabled={saving || shortForTeam}>
+                        {saving ? 'Signing up…' : pay ? `Continue to payment`
+                            : fee ? (payMode === 'team' ? `Sign up & pay ${formatMoney(teamCost)}` : 'Sign up & take entry fees') : 'Sign up'}
                     </button>
                 </div>
             </form>
@@ -301,9 +387,13 @@ export const PublicBracket = () => {
     // Live events open on the bracket; upcoming ones on the event info.
     const activeTab = tab ?? (published ? 'bracket' : 'info');
 
-    const unregister = (entrant) => {
-        if (window.confirm(`Unregister ${entrant.name} from ${event.name}?`)) {
-            leaveEvent(event.id, entrant.id);
+    const cancelled = stage === 'cancelled';
+    const prize = prizeSummary(event);
+
+    const unregister = async (entrant) => {
+        const refund = entrant.payMode ? ' Entry fees go back to the wallets they came from.' : '';
+        if (window.confirm(`Unregister ${entrant.name} from ${event.name}?${refund}`)) {
+            if (await leaveEvent(event.id, entrant.id) && entrant.payMode) refreshWallet();
         }
     };
 
@@ -316,10 +406,14 @@ export const PublicBracket = () => {
             {solo && entrant.teamName && <p className={styles.fieldHint}>For {entrant.teamName}</p>}
             {entrant.players?.length > 0 && isTeamEvent(event) &&
                 <p className={styles.fieldHint}>Playing: {entrant.players.map(p => p.username).join(', ')}</p>}
-            {!published && acting &&
+            {entrant.payMode &&
+                <p className={styles.fieldHint}>
+                    {entrant.payMode === 'team' ? 'Entry fees paid by the captain.' : `Each player pays their own: ${entrant.paidPlayers?.length ?? 0} of ${teamSizeOf(event)} paid.`}
+                </p>}
+            {!published && !cancelled && acting &&
                 <button type="button" className={`${styles.secondaryBtn} ${styles.fullBtn}`} style={{ marginBottom: '.5rem' }}
                     onClick={() => setEditingPlayers(entrant.id)}>{solo ? 'Change player' : 'Change players'}</button>}
-            {!published && acting &&
+            {!published && !cancelled && acting &&
                 <button type="button" className={`${styles.dangerBtn} ${styles.fullBtn}`} onClick={() => unregister(entrant)}>Unregister</button>}
         </div>
     );
@@ -334,7 +428,14 @@ export const PublicBracket = () => {
             <div className={styles.inner}>
                 <BracketError />
 
-                {lastDelay &&
+                {cancelled &&
+                    <div className={styles.cancelBanner}>
+                        <FaBan /> <span><strong>This event was cancelled</strong>{event.money?.cancelReason === 'min_entrants' ? ': not enough signed up by the start time' : ''}.
+                            {event.money?.entryFeeCents || event.money?.guaranteeCents ? ' Every entry fee and prize was refunded to the wallet it came from.' : ''}</span>
+                    </div>
+                }
+
+                {lastDelay && !cancelled &&
                     <div className={styles.delayBanner}>
                         <FaClock /> <span>Start time moved to <strong>{formatDate(event.startsAt)}</strong>{lastDelay.reason && <> - {lastDelay.reason}</>}</span>
                     </div>
@@ -350,7 +451,7 @@ export const PublicBracket = () => {
                             <span><FaCalendarAlt /> {formatDate(event.startsAt)}</span>
                             <span><FaSitemap /> {formatLabel(event)} · Bo{event.bestOf}</span>
                             <span><FaMapMarkerAlt /> {locationLabel(event)}</span>
-                            {event.prize && <span><FaTrophy /> {event.prize}</span>}
+                            {prize && <span><FaTrophy /> {prize}</span>}
                         </div>
                     </div>
                     <div className={styles.btnRow}>
@@ -393,8 +494,11 @@ export const PublicBracket = () => {
                                 <dt>Starts</dt><dd>{formatDate(event.startsAt)}</dd>
                                 <dt>Location</dt><dd>{locationLabel(event)}</dd>
                                 {event.restrictions?.length > 0 && <><dt>Restrictions</dt><dd><RestrictionList event={event} /></dd></>}
-                                <dt>Entry</dt><dd>{event.entryFee || 'Free'}</dd>
-                                <dt>Prize</dt><dd>{event.prize || '-'}</dd>
+                                <dt>Entry</dt><dd>{hasEntryFee(event) ? `${formatMoney(event.money.entryFeeCents)} per player, paid from your uSync wallet` : (event.entryFee || 'Free')}</dd>
+                                <dt>Prize</dt><dd>{prize || '-'}</dd>
+                                {event.money?.payoutStructure && <><dt>Payout</dt><dd><PayoutSplit structure={event.money.payoutStructure} /></dd></>}
+                                {event.money?.prizeFunding === 'entry_funded' &&
+                                    <><dt>Fees</dt><dd>uSync takes {event.money.platformFeeBps / 100}% of the entry fees, then the host takes {event.money.hostCutBps / 100}% of the rest. The remainder is the prize pool.</dd></>}
                                 <dt>Spots</dt><dd>{event.maxEntrants == null ? 'No limit' : `${event.maxEntrants} ${unit}`}</dd>
                                 {event.minEntrants != null && <><dt>Minimum</dt><dd>Needs at least {event.minEntrants} {unit} to run</dd></>}
                             </dl>
@@ -415,6 +519,7 @@ export const PublicBracket = () => {
                             <p className={styles.blurb}>
                                 {capacityLabel(event)} {unit} signed up
                                 {pay && <> · <FaTicketAlt /> from ${Math.min(...pay.tiers.map(t => Number(t.price))).toFixed(2)}</>}
+                                {hasEntryFee(event) && <> · <FaTicketAlt /> {formatMoney(event.money.entryFeeCents)} per player</>}
                             </p>
 
                             {myMatch &&
@@ -429,11 +534,11 @@ export const PublicBracket = () => {
                                 ? null
                                 : canRegister
                                     ? (username
-                                        ? <button type="button" className={`${styles.primaryBtn} ${styles.fullBtn}`} onClick={() => setRegistering(true)}>{panels.length ? 'Enter another player' : pay ? 'Sign up & pay' : 'Sign up'}</button>
+                                        ? <button type="button" className={`${styles.primaryBtn} ${styles.fullBtn}`} onClick={() => setRegistering(true)}>{panels.length ? 'Enter another player' : (pay || hasEntryFee(event)) ? 'Sign up & pay' : 'Sign up'}</button>
                                         : <Link to="/login" className={`${styles.primaryBtn} ${styles.fullBtn}`}>Log in to sign up</Link>)
                                     : showFull
                                         ? <button type="button" className={`${styles.primaryBtn} ${styles.fullBtn}`} disabled>Currently full</button>
-                                        : <p className={styles.blurb}>{published ? 'The bracket is live - sign-ups are closed.' : 'Sign-ups are closed.'}</p>
+                                        : <p className={styles.blurb}>{cancelled ? 'This event was cancelled.' : published ? 'The bracket is live - sign-ups are closed.' : 'Sign-ups are closed.'}</p>
                             }
                         </section>
 
