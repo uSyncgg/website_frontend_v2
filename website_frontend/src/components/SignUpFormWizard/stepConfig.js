@@ -81,17 +81,11 @@ const PLAYER_ABOUT_STEP = { key: 'player_about', title: 'About You', subtitle: '
 // Bracket hosting is per profile, for host and venue profiles only (see NO_BRACKET_TYPES). Sign-up and add-a-profile ask for
 // each profile being created; settings edits the one profile's `bracket_hosting`.
 const BRACKET_SUBTITLE = 'Want to run your own brackets for friends, your team or your community? You can change this later.';
-const bracketStep = (types) => ({ key: 'bracket_hosting', title: 'Bracket Hosting', subtitle: BRACKET_SUBTITLE, Component: BracketHostingStep, props: { types }, fields: [], saveFields: [] });
+// Only the picked types that can host brackets get a choice.
+const bracketStep = (types) => ({ key: 'bracket_hosting', title: 'Bracket Hosting', subtitle: BRACKET_SUBTITLE, Component: BracketHostingStep, props: { types: types.filter(type => !NO_BRACKET_TYPES.includes(type)) }, fields: [], saveFields: [] });
 const SETTINGS_BRACKET_STEP = { key: 'bracket_hosting', title: 'Bracket Hosting', subtitle: BRACKET_SUBTITLE, Component: BracketHostingStep, fields: [], saveFields: ['bracket_hosting'] };
 const HOST_ORG_STEP = { key: 'host_org', title: 'Organization', subtitle: 'This is the name players will see on every event you run.', Component: HostOrgStep, fields: ['organization', 'host_country'], requiredFields: ['organization', 'host_country'], saveFields: ['organization', 'host_country'] };
 const HOST_EVENTS_STEP = { key: 'host_events', title: 'Event Types', subtitle: 'Pick every format you host.', Component: HostEventStep, fields: [], saveFields: ['event_types'] };
-// Organizations: their name and country, the games their teams play, and their teams. Teams are
-// optional at sign-up (named here, created with the account); settings manages them live.
-// The org's name is its username (asked on the username step), so this is just where it's based.
-const ORG_DETAILS_STEP = { key: 'org_details', title: 'Location', subtitle: 'Where your organization is based. Pick a region if you compete across several countries.', Component: OrgDetailsStep, fields: ['org_country'], requiredFields: ['org_country'], saveFields: ['org_country'] };
-const ORG_GAMES_STEP = { key: 'org_games', title: 'Team Titles', subtitle: 'Pick every game your organization fields teams in.', Component: UserGamesStep, props: { mode: 'org' }, fields: ['other_org_games'], saveFields: ['org_games', 'other_org_games'] };
-const ORG_TEAMS_STEP = { key: 'org_teams', title: 'Teams', subtitle: 'Optional - name the teams in your organization. You can add, rename and fill them with players later from your profile.', Component: OrgTeamsStep, fields: ['org_teams'], saveFields: [] };
-const ORG_TEAMS_MANAGE_STEP = { key: 'org_teams', title: 'Teams', subtitle: 'Create teams, give them an image and invite players. Click a team to manage its roster.', Component: TeamsTab, props: { ownerType: 'org' }, fields: [], saveFields: [] };
 
 // Optional: the accounts each new profile links. Profile settings edits them in the link editor instead.
 const accountsStep = (types) => ({
@@ -105,6 +99,16 @@ const accountsStep = (types) => ({
     fields: [],
     saveFields: types.map(linksField),
 });
+
+// Organizations: where they're based plus an optional website and contact email, the games
+// they field teams in, and their teams. The org's name is its username (asked on the username
+// step). Teams are optional at sign-up (named here, created with the account); settings manages
+// them live.
+const ORG_DETAIL_FIELDS = ['org_country', 'website', 'contact_email'];
+const ORG_DETAILS_STEP = { key: 'org_details', title: 'Organization', subtitle: 'Where your organization is based and how people can reach you.', Component: OrgDetailsStep, fields: ORG_DETAIL_FIELDS, requiredFields: ['org_country'], saveFields: ORG_DETAIL_FIELDS };
+const ORG_GAMES_STEP = { key: 'org_games', title: 'Team Titles', subtitle: 'Pick every game your organization fields teams in.', Component: UserGamesStep, props: { mode: 'org' }, fields: ['other_org_games'], saveFields: ['org_games', 'other_org_games'] };
+const ORG_TEAMS_STEP = { key: 'org_teams', title: 'Teams', subtitle: 'Optional - name the teams in your organization. You can add, rename and fill them with players later from your profile.', Component: OrgTeamsStep, fields: ['org_teams'], saveFields: [] };
+const ORG_TEAMS_MANAGE_STEP = { key: 'org_teams', title: 'Teams', subtitle: 'Create teams, give them an image and invite players. Click a team to manage its roster.', Component: TeamsTab, props: { ownerType: 'org' }, fields: [], saveFields: [] };
 
 // The detail steps for a set of profile types, in order. The order/composition lives entirely
 // here - reorder or interleave steps by editing this function, nothing else needs to change.

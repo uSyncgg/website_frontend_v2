@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 import { FaSearch, FaTrash } from "react-icons/fa";
-import { removeEntrant, isPending, signedUpEntrants, pendingEntrants, teamSizeOf } from "services/brackets";
+import { removeEntrant, needsPlayers, signedUpEntrants, entrantsNeedingPlayers, teamSizeOf } from "services/brackets";
 import { useManagedEvent } from "./ManageEvent";
 import { Modal, formatDate, isTeamEvent } from "./hostShared";
 import styles from "./Host.module.css";
@@ -12,12 +12,12 @@ const EntrantDetails = ({ event, entrant, onClose }) => {
     return (
         <Modal title={entrant.name} onClose={onClose}>
             <dl className={styles.detailList}>
-                {team && <><dt>Captain</dt><dd>@{entrant.captain}</dd></>}
-                {team && <><dt>Status</dt><dd>{isPending(event, entrant)
-                    ? `Pending - ${entrant.rosterSize ?? 0} of ${teamSizeOf(event)} players picked`
-                    : 'Signed up'}</dd></>}
-                {team && <><dt>Playing</dt><dd>{entrant.players?.length ? entrant.players.map(p => p.username).join(', ') : 'No players picked yet'}</dd></>}
-                {!team && <><dt>Gamertag</dt><dd>{entrant.captain}</dd></>}
+                {!team && entrant.teamName && <><dt>Team</dt><dd>{entrant.teamName}</dd></>}
+                <dt>{team ? 'Captain' : 'Entered by'}</dt><dd>@{entrant.captain}</dd>
+                <dt>Status</dt><dd>{needsPlayers(event, entrant)
+                    ? `Needs players - ${entrant.rosterSize ?? 0} of ${teamSizeOf(event)} picked`
+                    : 'Signed up'}</dd>
+                {team && <><dt>Playing</dt><dd>{entrant.players?.length ? entrant.players.map(p => p.username).join(', ') : 'No players picked'}</dd></>}
                 <dt>Email</dt><dd>{entrant.email || '-'}</dd>
                 <dt>Signed up</dt><dd>{formatDate(entrant.registeredAt)}</dd>
                 {event.payments?.enabled && <><dt>Pass</dt><dd>{entrant.pass ?? event.payments.tiers[0]?.name ?? '-'}</dd></>}
@@ -45,10 +45,10 @@ export const EventEntrants = () => {
     const locked = !!event.bracket && event.bracket.status !== 'draft';
 
     const signedUp = signedUpEntrants(event).length;
-    const pending = pendingEntrants(event).length;
+    const short = entrantsNeedingPlayers(event).length;
     const rows = event.entrants
-        .filter(e => filter === 'all' || (filter === 'pending') === isPending(event, e))
-        .filter(e => `${e.name} ${e.captain}`.toLowerCase().includes(query.trim().toLowerCase()));
+        .filter(e => filter === 'all' || (filter === 'short') === needsPlayers(event, e))
+        .filter(e => `${e.name} ${e.captain} ${e.teamName ?? ''}`.toLowerCase().includes(query.trim().toLowerCase()));
 
     const remove = (entrant) => {
         if (window.confirm(`Remove ${entrant.name} from this event?`)) removeEntrant(event.id, entrant.id);
@@ -60,11 +60,11 @@ export const EventEntrants = () => {
                 <div className={`${styles.grow}`} style={{ position: 'relative' }}>
                     <FaSearch style={{ position: 'absolute', left: '.8rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--ink-4)' }} />
                     <input className={styles.input} style={{ paddingLeft: '2.2rem' }} value={query} onChange={e => setQuery(e.target.value)}
-                        placeholder={`Search ${teams ? 'teams or captains' : 'players'}`} aria-label="Search entrants" />
+                        placeholder={`Search ${teams ? 'teams or captains' : 'players or teams'}`} aria-label="Search entrants" />
                 </div>
-                {teams &&
+                {short > 0 &&
                     <div className={styles.segmented} role="group" aria-label="Filter by status">
-                        {[['all', 'All'], ['signed', `Signed up (${signedUp})`], ['pending', `Pending (${pending})`]].map(([key, label]) => (
+                        {[['all', 'All'], ['signed', `Signed up (${signedUp})`], ['short', `Need players (${short})`]].map(([key, label]) => (
                             <button key={key} type="button" aria-pressed={filter === key}
                                 className={`${styles.segment} ${filter === key ? styles.segmentActive : ''}`}
                                 onClick={() => setFilter(key)}>{label}</button>
@@ -74,8 +74,8 @@ export const EventEntrants = () => {
             </div>
 
             <p className={styles.muted} style={{ margin: '0 0 .75rem' }}>
-                {event.maxEntrants == null ? `${signedUp} signed up (no cap)` : `${signedUp} of ${event.maxEntrants} spots filled`}
-                {pending > 0 && ` · ${pending} pending (still need players - they don't take a spot or get seeded until their roster is full)`}
+                {event.maxEntrants == null ? `${event.entrants.length} entered (no cap)` : `${event.entrants.length} of ${event.maxEntrants} spots filled`}
+                {short > 0 && ` · ${short} lost a player and need${short > 1 ? '' : 's'} another (still short when the bracket is published, they're dropped)`}
                 {locked && ' · The bracket is live, so the entrant list is locked.'}
             </p>
 
@@ -85,8 +85,8 @@ export const EventEntrants = () => {
                         <tr>
                             <th>#</th>
                             <th>{teams ? 'Team' : 'Player'}</th>
-                            {teams && <th>Captain</th>}
-                            {teams && <th>Status</th>}
+                            {teams ? <th>Captain</th> : <th>Team</th>}
+                            <th>Status</th>
                             <th>Signed up</th>
                             <th aria-label="Actions" />
                         </tr>
@@ -98,10 +98,10 @@ export const EventEntrants = () => {
                                 <td>
                                     <button type="button" className={styles.linkBtn} onClick={() => setViewingId(entrant.id)}>{entrant.name}</button>
                                 </td>
-                                {teams && <td>@{entrant.captain}</td>}
-                                {teams && <td>{isPending(event, entrant)
-                                    ? <span className={`${styles.chip} ${styles.stage_seeding}`}>Pending · {entrant.rosterSize ?? 0}/{teamSizeOf(event)}</span>
-                                    : <span className={`${styles.chip} ${styles.stage_registration}`}>Signed up</span>}</td>}
+                                {teams ? <td>@{entrant.captain}</td> : <td>{entrant.teamName ?? '-'}</td>}
+                                <td>{needsPlayers(event, entrant)
+                                    ? <span className={`${styles.chip} ${styles.stage_seeding}`}>Needs players · {entrant.rosterSize ?? 0}/{teamSizeOf(event)}</span>
+                                    : <span className={`${styles.chip} ${styles.stage_registration}`}>Signed up</span>}</td>
                                 <td>{new Date(entrant.registeredAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</td>
                                 <td>
                                     <button type="button" className={`${styles.iconBtn} ${styles.removeBtn}`} disabled={locked}

@@ -12,6 +12,7 @@ import { resolveViews } from "./profileViews";
 import { EditAboutModal, EditGamesModal, EditLocationsModal, EditUsernameModal, usePictureEditor } from "./ProfileEditors";
 import { PlayerStats } from "./PlayerStats";
 import { AboutCard, EventsCard, OwnerEventsCard, OwnerTeamsCard } from "./ProfileSections";
+import { WalletCard } from "components/Wallet/WalletCard";
 import { gameEmblem, initials, playerGames } from "./profileGames";
 import { PROFILE_LABELS, profileUrl, statsUrl } from "utils/profiles";
 
@@ -79,6 +80,41 @@ const OrgTeamsCard = ({ teams, isOwner }) => (
     </ProfileCard>
 );
 
+// The backend only stores http(s) websites; checked again here since it becomes a link.
+const safeWebsite = (url) => (/^https?:\/\//i.test(url ?? '') ? url : null);
+const websiteLabel = (url) => url.replace(/^https?:\/\//i, '').replace(/\/$/, '');
+
+// `details.verified` isn't shown yet: org verification is coming later.
+const OrgCard = ({ details }) => {
+    const website = safeWebsite(details.website);
+    const hasContact = website || details.contact_email;
+
+    return (
+        <ProfileCard title="Organization">
+            {hasContact ? (
+                <div className={styles.orgContact}>
+                    {website && (
+                        <div>
+                            <div className={styles.location}>Website</div>
+                            <a href={website} target="_blank" rel="noopener noreferrer nofollow ugc" className={styles.orgLink}>
+                                {websiteLabel(website)}
+                            </a>
+                        </div>
+                    )}
+                    {details.contact_email && (
+                        <div>
+                            <div className={styles.location}>Contact</div>
+                            <a href={`mailto:${details.contact_email}`} className={styles.orgLink}>{details.contact_email}</a>
+                        </div>
+                    )}
+                </div>
+            ) : (
+                <p className={styles.muted}>No contact details yet.</p>
+            )}
+        </ProfileCard>
+    );
+};
+
 // Main-column content for each profile type. `edit(what)` opens an owner editor (undefined for
 // everyone else). A player's page is their stats: every game, or one game at .../stats/:game.
 // The owner also sees "Your events" first: entered events above a player's stats, and on a host
@@ -106,6 +142,7 @@ const TYPE_CONTENT = {
     ),
     org: (profile, { edit, isOwner }) => (
         <>
+            <OrgCard details={profile.details} />
             <OrgTeamsCard teams={profile.details.teams} isOwner={isOwner} />
             <GamesCard title="Team Titles" games={profile.details.games} emptyText="No titles added yet." onEdit={edit('games')} />
         </>
@@ -242,6 +279,8 @@ export const Profile = ({ stats = false }) => {
 
                 <div className={styles.cols}>
                     <div>
+                        {/* The account's wallet: only on your own profiles, never anyone else's. */}
+                        {isOwner && <WalletCard />}
                         {TYPE_CONTENT[profile.type]({ ...profile, details: profile.details ?? {} }, { edit, isOwner, gameSlug: gameStats ? gameSlug : null })}
                     </div>
 

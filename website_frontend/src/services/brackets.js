@@ -7,11 +7,27 @@ import { getApiErrorMessage } from "utils/apiError";
 // be disputed); this file only fetches, caches and sends. A full event (GET /brackets/:id):
 // { id, name, eventType, game, gameTitle, gameMode, format, formatLabel, teamSize, bestOf,
 //   finalBestOf, startsAt, stage: 'registration' | 'closed' | 'seeding' | 'live' | 'complete',
-//   entrants: [{ id, name, captain, status: 'signed_up' | 'pending', teamId, players, rosterSize }],
+//   entrants: [{ id, name, captain, status: 'signed_up' | 'needs_players', teamId, teamName, players, rosterSize }],
 //   bracket: { status, format, seeds, built, matches: { [code]: view } } | null,
-//   canManage, isHost, openIssues, viewerEntrantId, viewerCanAct }
+//   canManage, isHost, openIssues, viewerEntrantId, viewerCanAct, viewerActsFor: [entrant ids],
+//   money: { entryFeeCents, prizeFunding: 'guaranteed' | 'entry_funded' | null, guaranteeCents,
+//            guaranteeFunded, hostCutBps, payoutStructure: [bps], platformFeeBps, poolCents,
+//            cancelledAt, cancelReason, payoutDueAt, paidOutAt },
+//   standings: [{ entrantId, placement, prizeCents }] (best first, once the bracket is complete) }
+// An entry fee is per player and taken from wallets as the team signs up (payMode 'team': the
+// captain pays for everyone; 'each': every player pays their own, needing Auto-Pay on). A
+// cancelled event (stage 'cancelled') is read-only; everyone was refunded. Entrants can share a
+// placement. An event with money pays out 24 hours after its standings last changed (as long as
+// nothing is open in its admin queue): prizeCents fills in and paidOutAt is set; after that the
+// event is read-only too.
+// Every entrant is a team's, and every entrant takes a spot (there's no waitlist). One that lost a
+// picked player is 'needs_players' until its captain picks someone else; still short when the
+// bracket is published, it's dropped. In a solo event (1v1) a team can enter several of its
+// players, one entrant each, named after the player.
 // where each match view is { state, reportedBy, issues, reports?, noShowUnlocksAt,
-//   disputeClosesAt, canReport, canReportNoShow, canDispute }.
+//   disputeClosesAt, canAct, canReport, canReportNoShow, canDispute, chatId? }. canAct: the
+//   viewer may act in this match (any picked player of a side, or its owner or captains);
+//   chatId (managers and the two sides): the match's open chat, see services/chats.js.
 //
 // Lists (hosting, entered, a profile's events) are pages of summaries, not full events.
 //
@@ -93,8 +109,8 @@ export const useHostEvent = (id) => {
 // ---- lists: pages of summaries ---------------------------------------------------
 //
 // A summary: { id, name, eventType, game, gameTitle, format, formatLabel, teamSize, startsAt,
-// stage, maxEntrants, signedUp, pending, canManage, isHost, openIssues, viewerEntrantId,
-// viewerEntrantName, viewerMatch: { id, opponent } | null, winner, viewerPlace }.
+// stage, maxEntrants, signedUp, needsPlayers, canManage, isHost, openIssues, viewerEntrantId,
+// viewerEntrantName, viewerMatch: { id, opponent } | null, winner, viewerPlace, viewerPrizeCents }.
 
 const EMPTY_PAGE = { events: [], nextCursor: null, loading: true };
 
@@ -137,12 +153,22 @@ const usePage = (key, path) => {
 // Events the signed in account runs or helps run (any view).
 export const useHostEvents = () => usePage('hosting', '/brackets/hosting');
 
-// Events the account is in (solo, or through a team it owns, captains or plays on).
+// Events the account is in (playing, or through a team it owns, captains or plays on).
 export const useEnteredEvents = () => usePage('entered', '/brackets/entered');
 
 // Events a host or venue profile runs, for its public profile page.
 export const useProfileBracketEvents = (publicId) =>
     usePage(`profile:${publicId}`, publicId ? `/brackets/profile/${encodeURIComponent(publicId)}` : null);
+
+// The Hosted Events a game's Leagues / LANs / Tournaments page lists (GET /brackets/discover),
+// soonest first, 6 at a time. Public. A card: { id, name, eventType, hostProfile, hostName, game,
+// gameTitle, gameMode, format, formatLabel, teamSize, startsAt, platform, locationType, venue,
+// entryFeeCents, prizeFunding, guaranteeCents, poolCents, signedUp, maxEntrants, stage }.
+export const DISCOVER_PAGE_SIZE = 6;
+export const useDiscoverEvents = (gameKey, type) => {
+    const params = gameKey && type ? new URLSearchParams({ game: gameKey, type, limit: DISCOVER_PAGE_SIZE }) : null;
+    return usePage(`discover:${gameKey}:${type}`, params ? `/brackets/discover?${params}` : null);
+};
 
 // ---- the event form's options -------------------------------------------------------
 
@@ -166,13 +192,17 @@ export const isArchived = (event) => event.stage === 'complete';
 // Players a team needs for this event: '4v4' -> 4.
 export const teamSizeOf = (event) => Number(String(event.teamSize).split('v')[0]) || 1;
 
-export const isPending = (_event, entrant) => entrant.status === 'pending';
+export const isSolo = (event) => teamSizeOf(event) === 1;
 
-export const signedUpEntrants = (event) => event.entrants.filter(e => e.status !== 'pending');
+// An entrant that lost a picked player and needs another before the bracket is published.
+export const needsPlayers = (_event, entrant) => entrant.status === 'needs_players';
 
-export const pendingEntrants = (event) => event.entrants.filter(e => e.status === 'pending');
+export const signedUpEntrants = (event) => event.entrants.filter(e => e.status === 'signed_up');
 
-export const isFull = (event) => event.maxEntrants != null && signedUpEntrants(event).length >= event.maxEntrants;
+export const entrantsNeedingPlayers = (event) => event.entrants.filter(e => e.status === 'needs_players');
+
+// Every entrant takes a spot, signed up or not.
+export const isFull = (event) => event.maxEntrants != null && event.entrants.length >= event.maxEntrants;
 
 export const isLive = (event) => event.stage === 'live' || event.stage === 'complete';
 
@@ -182,6 +212,44 @@ export const STAGE_LABELS = {
     seeding: 'Seeding',
     live: 'Live',
     complete: 'Complete',
+    cancelled: 'Cancelled',
+};
+
+// ---- money ------------------------------------------------------------------
+
+export const hasEntryFee = (event) => !!event?.money?.entryFeeCents;
+
+// What one entry costs: the fee per player times the team size.
+export const entryCostCents = (event) => (event?.money?.entryFeeCents ?? 0) * teamSizeOf(event);
+
+// The prize split as whole percents, e.g. [70, 30].
+export const payoutPercents = (structure) => (structure ?? []).map(bps => bps / 100);
+
+// What the prize pool would be for an event with `entrants` entries (cents), or the guarantee.
+// Entry-funded: the pool minus the platform fee, minus the host's cut of what's left.
+export const projectedPrizeCents = (money, entrants, teamSize) => {
+    if (!money?.prizeFunding) return 0;
+    if (money.prizeFunding === 'guaranteed') return money.guaranteeCents ?? 0;
+    const pool = (money.entryFeeCents ?? 0) * teamSize * entrants;
+    const afterFee = pool - Math.round(pool * (money.platformFeeBps ?? 500) / 10000);
+    return afterFee - Math.round(afterFee * (money.hostCutBps ?? 0) / 10000);
+};
+
+// 1 -> '1st', 2 -> '2nd', 11 -> '11th', 23 -> '23rd'.
+export const ordinal = (n) => {
+    const tens = n % 100, ones = n % 10;
+    const suffix = tens >= 11 && tens <= 13 ? 'th' : ones === 1 ? 'st' : ones === 2 ? 'nd' : ones === 3 ? 'rd' : 'th';
+    return `${n}${suffix}`;
+};
+
+// Whether the event's prizes are paid out, or when they will be.
+// { state: 'paid', at } | { state: 'due', at } | null (no money, or not finished yet).
+export const payoutStatus = (event) => {
+    const money = event?.money;
+    if (!money?.prizeFunding || event.stage === 'cancelled') return null;
+    if (money.paidOutAt) return { state: 'paid', at: money.paidOutAt };
+    if (money.payoutDueAt) return { state: 'due', at: money.payoutDueAt };
+    return null;
 };
 
 // What the viewer sees and may do in one match (from the server), or {} for one not underway.
@@ -217,13 +285,17 @@ export const deleteEvent = async (id) => {
 // The backend tells everyone entered.
 export const delayStart = (id, startsAt, reason) => eventCall(apiClient.post(url(id, '/delays'), { startsAt, reason }));
 
-// { teamId (team events), players (profile public ids the captain picks), email, answers, pass }
+// { teamId, players (exactly the team size in profile public ids, picked by the team's owner or a
+// captain), email, answers, pass }
 export const register = (id, fields) => eventCall(apiClient.post(url(id, '/registration'), fields));
 
-// The captain changes who plays, until the bracket is published.
-export const setPlayers = (id, players) => eventCall(apiClient.put(url(id, '/registration/players'), { players }));
+// The captain changes who plays, until the bracket is published. entrantId says which entrant
+// when they have several (a team's entrants in a solo event).
+export const setPlayers = (id, players, entrantId = null) =>
+    eventCall(apiClient.put(url(id, '/registration/players'), { players, entrantId }));
 
-export const unregister = (id) => eventCall(apiClient.delete(url(id, '/registration')));
+export const unregister = (id, entrantId = null) =>
+    eventCall(apiClient.delete(url(id, '/registration'), entrantId ? { params: { entrantId } } : undefined));
 
 // The host or an admin removes an entrant.
 export const removeEntrant = (id, entrantId) => eventCall(apiClient.delete(url(id, `/entrants/${entrantId}`)));
@@ -240,6 +312,13 @@ export const publishBracket = async (id) => {
 };
 
 export const resetBracket = (id) => eventCall(apiClient.delete(url(id, '/bracket')));
+
+// The host calls the event off: every entry fee and the guaranteed prize are refunded. Final.
+export const cancelEvent = (id) => eventCall(apiClient.post(url(id, '/cancel')));
+
+// A captain asks teammates (profile public ids) to turn Auto-Pay on, so the team can sign up
+// with each player paying their own fee. Resolves to true, or null on failure.
+export const requestAutoPay = (id, teamId, players) => run(apiClient.post(url(id, '/auto-pay-requests'), { teamId, players }));
 
 // ---- playing ------------------------------------------------------------------
 
