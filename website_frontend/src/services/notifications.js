@@ -90,6 +90,12 @@ export const notificationText = ({ type, data }) => {
             return { text: `${data.event_name} paid out. Your ${money(data.amount_cents)} is in your Earnings.`, to: walletLink(), action: 'View wallet' };
         case 'auto_pay_requested':
             return { text: `${data.from || 'Your captain'} wants to sign ${data.team_name} up for ${data.event_name} (${money(data.amount_cents)} entry fee each). Turn on Auto-Pay so they can take your fee.`, to: walletLink(), action: 'Turn on Auto-Pay' };
+        case 'withdrawal_requested':
+            return { text: `Your ${money(data.amount_cents)} withdrawal is pending. It should arrive in 3 - 5 business days.`, to: walletLink(), action: 'View wallet' };
+        case 'withdrawal_completed':
+            return { text: `Your ${money(data.amount_cents)} withdrawal was sent.`, to: walletLink(), action: 'View wallet' };
+        case 'withdrawal_returned':
+            return { text: `Your ${money(data.amount_cents)} withdrawal was returned to your Earnings${data.reason ? `: ${data.reason}` : '.'}`, to: walletLink(), action: 'View wallet' };
         case 'deposit_refunded':
             return { text: `${money(data.amount_cents)} was refunded to your card from your wallet.`, to: walletLink(), action: 'View wallet' };
         case 'team_ownership':

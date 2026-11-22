@@ -3,7 +3,9 @@ import apiClient from "./apiClient";
 
 // The signed in account's wallet, backed by the backend's /wallet routes. Money is always integer
 // cents. A wallet has two balances: Deposited Funds (spendable on entry fees, never withdrawable)
-// and Earnings (prizes and host cuts; the only money that can be withdrawn). The backend credits a
+// and Earnings (prizes and host cuts; the only money that can be withdrawn). A withdrawal moves
+// Earnings into Pending Withdrawal (pendingWithdrawalCents, not spendable and not in totalCents)
+// until uSync sends it or returns it. The backend credits a
 // deposit only when Stripe confirms it, so after paying we poll until the balance moves.
 //
 // One small shared copy, so the navbar dropdown and the profile's wallet card always agree.
@@ -11,6 +13,8 @@ import apiClient from "./apiClient";
 export const DEPOSIT_MIN_CENTS = 500;
 export const DEPOSIT_FEE_PERCENT = 5;
 export const DEPOSIT_DAILY_LIMIT_CENTS = 100_000;
+// Withdrawals: any amount of Earnings from $1, or all of them (the only option below $1).
+export const WITHDRAWAL_MIN_CENTS = 100;
 
 // Must match deposit_fee() in the backend: 5%, rounded half up to the cent.
 export const depositFee = (amountCents) => Math.floor((amountCents * DEPOSIT_FEE_PERCENT + 50) / 100);
@@ -99,13 +103,22 @@ const retrying = async (call, { tries = 3, waitMs = 800 } = {}) => {
     }
 };
 
-// { items: [{ id, kind, bucket: 'deposited' | 'earnings', amountCents, createdAt, reason, eventId, eventName }], nextBefore }
+// { items: [{ id, kind, bucket: 'deposited' | 'earnings' | 'pending_withdrawal', amountCents, createdAt, reason, eventId, eventName }], nextBefore }
 export const getWalletHistory = (before = null) =>
     apiClient.get('/wallet/history', { params: before ? { before } : {} }).then(res => res.data);
 
 // { depositId, clientSecret, amountCents, feeCents, totalCents, status }. Same key -> same deposit.
 export const startDeposit = (amountCents, idempotencyKey) =>
     retrying(() => apiClient.post('/wallet/deposits', { amountCents, idempotencyKey })).then(res => res.data);
+
+// Asks to withdraw `amountCents` of Earnings, or every cent of them with { all: true }. Resolves
+// to the updated wallet. One key per withdraw dialog: a retry or double click asks once.
+export const requestWithdrawal = async ({ amountCents = null, all = false }, idempotencyKey) => {
+    const body = all ? { all: true, idempotencyKey } : { amountCents, idempotencyKey };
+    const { data } = await retrying(() => apiClient.post('/wallet/withdrawals', body));
+    set({ wallet: data, error: '' });
+    return data;
+};
 
 export const KIND_LABELS = {
     deposit: 'Deposit',
@@ -120,6 +133,15 @@ export const KIND_LABELS = {
     guarantee_fund: 'Guaranteed prize held',
     guarantee_refund: 'Guaranteed prize returned',
     event_payout: 'Event payout',
+    withdrawal_request: 'Withdrawal requested',
+    withdrawal_complete: 'Withdrawal completed',
+    withdrawal_return: 'Withdrawal returned',
+};
+
+export const BUCKET_LABELS = {
+    deposited: 'Deposited funds',
+    earnings: 'Earnings',
+    pending_withdrawal: 'Pending withdrawal',
 };
 
 // Auto-Pay lets your team captains take entry fees from your wallet when they sign you up.
@@ -146,3 +168,15 @@ export const adminAdjustWallet = (fields) => retrying(() => apiClient.post('/adm
 // Safe to repeat: a deposit is only ever refunded once, whatever happens.
 export const adminRefundDeposit = (depositId, reason) =>
     retrying(() => apiClient.post(`/admin/deposits/${depositId}/refund`, { reason })).then(res => res.data);
+
+// { items: [{ id, accountId, email, usernames, amountCents, status, requestedAt, decidedAt,
+// returnReason, externalReference, walletFrozen, earningsCents }] }, oldest first.
+export const adminListWithdrawals = (status = 'pending') =>
+    apiClient.get('/admin/withdrawals', { params: { status } }).then(res => res.data);
+
+// Both safe to repeat: the backend completes or returns a withdrawal once, whatever happens.
+export const adminCompleteWithdrawal = (withdrawalId, externalReference) =>
+    retrying(() => apiClient.post(`/admin/withdrawals/${withdrawalId}/complete`, { externalReference: externalReference || null })).then(res => res.data);
+
+export const adminReturnWithdrawal = (withdrawalId, reason) =>
+    retrying(() => apiClient.post(`/admin/withdrawals/${withdrawalId}/return`, { reason })).then(res => res.data);
