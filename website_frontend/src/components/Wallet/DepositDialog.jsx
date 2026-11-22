@@ -5,7 +5,7 @@ import { Modal } from "pages/Host/hostShared";
 import { stripeAppearance, stripeLoader } from "utils/stripeAppearance";
 import { getApiErrorMessage } from "utils/apiError";
 import {
-    DEPOSIT_MIN_CENTS, DEPOSIT_FEE_PERCENT, DEPOSIT_DAILY_LIMIT_CENTS, depositFee, formatMoney, parseDollars, waitForDeposit,
+    DEPOSIT_MIN_CENTS, DEPOSIT_DAILY_LIMIT_CENTS, depositFee, depositFeeLabel, formatMoney, parseDollars, waitForDeposit,
     newIdempotencyKey,
 } from "services/wallet";
 import hostStyles from "pages/Host/Host.module.css";
@@ -53,7 +53,7 @@ const PayStep = ({ deposit, walletTotal, onDone }) => {
     );
 };
 
-// Deposit flow: pick an amount (at least $5), see the 10% fee on top, agree to the terms, then pay.
+// Deposit flow: pick an amount (at least $5), see the fee on top, agree to the terms, then pay.
 export const DepositDialog = ({ walletTotal, onClose, onDeposited, start }) => {
     // Inside the component, not module scope (see PassPayment: prerendering has no key).
     const [stripePromise] = useState(() => loadStripe(process.env.REACT_APP_STRIPE_PK));
@@ -111,7 +111,7 @@ export const DepositDialog = ({ walletTotal, onClose, onDeposited, start }) => {
                 <>
                     <dl className={`${hostStyles.detailList} ${styles.breakdown}`}>
                         <dt>Deposit</dt><dd>{formatMoney(deposit.amountCents)}</dd>
-                        <dt>uSync fee ({DEPOSIT_FEE_PERCENT}%)</dt><dd>{formatMoney(deposit.feeCents)}</dd>
+                        <dt>uSync fee ({depositFeeLabel(deposit.amountCents)})</dt><dd>{formatMoney(deposit.feeCents)}</dd>
                         <dt><strong>Total charged</strong></dt><dd><strong>{formatMoney(deposit.totalCents)}</strong></dd>
                     </dl>
                     <Elements stripe={stripePromise} options={{ clientSecret: deposit.clientSecret, appearance: stripeAppearance, loader: stripeLoader }}>
@@ -132,7 +132,7 @@ export const DepositDialog = ({ walletTotal, onClose, onDeposited, start }) => {
                     {valid &&
                         <dl className={`${hostStyles.detailList} ${styles.breakdown}`}>
                             <dt>Deposit</dt><dd>{formatMoney(amountCents)}</dd>
-                            <dt>uSync fee ({DEPOSIT_FEE_PERCENT}%)</dt><dd>{formatMoney(fee)}</dd>
+                            <dt>uSync fee ({depositFeeLabel(amountCents)})</dt><dd>{formatMoney(fee)}</dd>
                             <dt><strong>Total charged</strong></dt><dd><strong>{formatMoney(amountCents + fee)}</strong></dd>
                         </dl>}
                     <label className={styles.consent}>

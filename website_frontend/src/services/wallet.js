@@ -11,13 +11,24 @@ import apiClient from "./apiClient";
 // One small shared copy, so the navbar dropdown and the profile's wallet card always agree.
 
 export const DEPOSIT_MIN_CENTS = 500;
-export const DEPOSIT_FEE_PERCENT = 10;
+// Deposit fee: up to $15 it's 3% + 30c, over $15 it's 5% (both give 75c at $15).
+export const DEPOSIT_FEE_SMALL_MAX_CENTS = 1500;
+export const DEPOSIT_FEE_SMALL_PERCENT = 3;
+export const DEPOSIT_FEE_SMALL_FLAT_CENTS = 30;
+export const DEPOSIT_FEE_PERCENT = 5;
 export const DEPOSIT_DAILY_LIMIT_CENTS = 100_000;
 // Withdrawals: any amount of Earnings from $1, or all of them (the only option below $1).
 export const WITHDRAWAL_MIN_CENTS = 100;
 
-// Must match deposit_fee() in the backend: 10%, rounded half up to the cent.
-export const depositFee = (amountCents) => Math.floor((amountCents * DEPOSIT_FEE_PERCENT + 50) / 100);
+// Must match deposit_fee() in the backend: percentages rounded half up to the cent.
+export const depositFee = (amountCents) => (amountCents <= DEPOSIT_FEE_SMALL_MAX_CENTS
+    ? Math.floor((amountCents * DEPOSIT_FEE_SMALL_PERCENT + 50) / 100) + DEPOSIT_FEE_SMALL_FLAT_CENTS
+    : Math.floor((amountCents * DEPOSIT_FEE_PERCENT + 50) / 100));
+
+// The rate shown next to the fee, e.g. "3% + $0.30" or "5%".
+export const depositFeeLabel = (amountCents) => (amountCents <= DEPOSIT_FEE_SMALL_MAX_CENTS
+    ? `${DEPOSIT_FEE_SMALL_PERCENT}% + ${formatMoney(DEPOSIT_FEE_SMALL_FLAT_CENTS)}`
+    : `${DEPOSIT_FEE_PERCENT}%`);
 
 export const formatMoney = (cents) => {
     const value = Math.abs(cents ?? 0) / 100;
