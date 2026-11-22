@@ -3,8 +3,7 @@
 // Used by sign-up, adding a profile and profile settings, so all three send the same thing.
 
 import { TOS_VERSION } from "./legal";
-import { NO_BRACKET_TYPES, PROFILE_TYPES, bioField, bracketField, copyBioField, copyPictureField, linksField, pictureField, usernameField } from "./profiles";
-import { linkChanges } from "./linkedPlatforms";
+import { NO_BRACKET_TYPES, PROFILE_TYPES, bioField, bracketField, copyBioField, copyPictureField, pictureField, usernameField } from "./profiles";
 
 // Fields stored on the profile itself (shared by every type).
 const PROFILE_FIELDS = ['bio', 'bracket_hosting', 'other_roles', 'other_role_detail'];
@@ -74,10 +73,11 @@ export function buildProfileEntry(type, values, { picture = null, bio = '', incl
         details: detailsFor(type, values),
     };
 
-    const links = linkChanges({ type }, values[linksField(type)]);
-    if (Object.keys(links).length > 0) entry.links = links;
+    // Linked accounts are "coming soon" at sign-up and add-a-profile, so no `links` are sent;
+    // they're edited later from the profile page's link editor.
 
-    // Asked per profile. Left unanswered, the backend defaults it to on.
+    // Asked per profile for host and venue profiles (left unanswered, the backend defaults it to
+    // on). Players and organizations can never host brackets, so they always send false.
     if (NO_BRACKET_TYPES.includes(type)) {
         entry.bracket_hosting = false;
     } else if (values[bracketField(type)] !== undefined) {

@@ -33,12 +33,19 @@ test("optional steps only check off after continuing past them; required ones on
     expect(isStepComplete(location, filled, new Set())).toBe(true);
 });
 
-test("an org gets its details and team titles steps but no bracket hosting step", () => {
+test("an org gets its details and team steps but no bracket hosting step", () => {
     const keys = buildStepSequence(["org"]).map(step => step.key);
-    expect(keys).toEqual(["signup_path", "user_info", "org_details", "org_games", "profile_bio", "social_accounts"]);
-    expect(buildStepSequence(["player", "org"]).map(step => step.key)).toContain("bracket_hosting");
-    const bracket = buildStepSequence(["player", "org"]).find(step => step.key === "bracket_hosting");
-    expect(bracket.props.types).toEqual(["player"]);
+    expect(keys).toEqual(["signup_path", "user_info", "org_details", "org_games", "org_teams", "profile_bio", "linked_accounts"]);
+    // Players can't host brackets either, so a player + org sign-up has no bracket step at all.
+    expect(buildStepSequence(["player", "org"]).map(step => step.key)).not.toContain("bracket_hosting");
+    const bracket = buildStepSequence(["player", "org", "host", "venue"]).find(step => step.key === "bracket_hosting");
+    expect(bracket.props.types).toEqual(["host", "venue"]);
+});
+
+test("the linked accounts step saves nothing (linking is coming soon)", () => {
+    const step = buildStepSequence(["player", "host"]).find(s => s.key === "linked_accounts");
+    expect(step.saveFields).toEqual([]);
+    expect(step.subtitle).toMatch(/coming soon/i);
 });
 
 test("an org needs its name and country before submitting", () => {

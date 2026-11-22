@@ -1,3 +1,4 @@
+import { TOS_VERSION } from "./legal";
 import { buildSignUpRequest, buildAddProfileRequest, toFormValues, buildProfileUpdate } from "./profileForm";
 
 const file = { name: "me.png" };
@@ -114,7 +115,7 @@ test("buildProfileUpdate splits profile fields from details and drops other type
 });
 
 describe('buildSignUpRequest linked accounts', () => {
-    test('each profile sends its own links, and no game accounts', () => {
+    test('linked accounts are coming soon, so sign-up sends no links (even if some were in the form)', () => {
         const { data } = buildSignUpRequest({
             signup_path: ['player', 'host'],
             default_profile: 'player',
@@ -129,10 +130,20 @@ describe('buildSignUpRequest linked accounts', () => {
         });
 
         const [player, host] = data.profiles;
-        expect(player.links).toEqual({ twitter: 'JakeBrewskie' });
+        expect(player).not.toHaveProperty('links');
         expect(player.details).not.toHaveProperty('steam');
-        expect(host.links).toEqual({ website: 'usync.gg', twitter: 'usyncgg' });
-        expect(host.details).not.toHaveProperty('steam');
+        expect(host).not.toHaveProperty('links');
+    });
+
+    test('sign-up sends the Terms acceptance and version', () => {
+        const { data } = buildSignUpRequest({ signup_path: ['venue'], username_venue: 'Hall', venues: [], tos_accepted: true });
+        expect(data.tos_accepted).toBe(true);
+        expect(data.tos_version).toBe(TOS_VERSION);
+    });
+
+    test('players and orgs always send bracket_hosting false, even if a value is in the form', () => {
+        const { data } = buildSignUpRequest({ signup_path: ['player', 'org'], username_player: 'P', username_org: 'O', first_name: 'A', last_name: 'B', bracket_hosting_player: 'yes', bracket_hosting_org: 'yes' });
+        expect(data.profiles.map(p => p.bracket_hosting)).toEqual([false, false]);
     });
 
     test('no links typed sends no links', () => {

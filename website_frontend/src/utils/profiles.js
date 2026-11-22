@@ -3,7 +3,6 @@ export const PROFILE_TYPES = ['player', 'host', 'venue', 'org'];
 
 export const PROFILE_LABELS = { player: 'Player', host: 'Host', venue: 'Venue', org: 'Organization' };
 
-// Organizations run teams and enter events, but never post events or host brackets.
 // Profile types that can never create brackets: organizations, and players (only Host and venue
 // profiles, acting as commission-based admins, run brackets - see the Terms of Service, Section 7).
 export const NO_BRACKET_TYPES = ['org', 'player'];
