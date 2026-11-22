@@ -9,7 +9,13 @@ import { getApiErrorMessage } from "utils/apiError";
 //   finalBestOf, startsAt, stage: 'registration' | 'closed' | 'seeding' | 'live' | 'complete',
 //   entrants: [{ id, name, captain, status: 'signed_up' | 'needs_players', teamId, teamName, players, rosterSize }],
 //   bracket: { status, format, seeds, built, matches: { [code]: view } } | null,
-//   canManage, isHost, openIssues, viewerEntrantId, viewerCanAct, viewerActsFor: [entrant ids] }
+//   canManage, isHost, openIssues, viewerEntrantId, viewerCanAct, viewerActsFor: [entrant ids],
+//   money: { entryFeeCents, prizeFunding: 'guaranteed' | 'entry_funded' | null, guaranteeCents,
+//            guaranteeFunded, hostCutBps, payoutStructure: [bps], platformFeeBps, poolCents,
+//            cancelledAt, cancelReason } }
+// An entry fee is per player and taken from wallets as the team signs up (payMode 'team': the
+// captain pays for everyone; 'each': every player pays their own, needing Auto-Pay on). A
+// cancelled event (stage 'cancelled') is read-only; everyone was refunded.
 // Every entrant is a team's, and every entrant takes a spot (there's no waitlist). One that lost a
 // picked player is 'needs_players' until its captain picks someone else; still short when the
 // bracket is published, it's dropped. In a solo event (1v1) a team can enter several of its
@@ -190,6 +196,27 @@ export const STAGE_LABELS = {
     seeding: 'Seeding',
     live: 'Live',
     complete: 'Complete',
+    cancelled: 'Cancelled',
+};
+
+// ---- money ------------------------------------------------------------------
+
+export const hasEntryFee = (event) => !!event?.money?.entryFeeCents;
+
+// What one entry costs: the fee per player times the team size.
+export const entryCostCents = (event) => (event?.money?.entryFeeCents ?? 0) * teamSizeOf(event);
+
+// The prize split as whole percents, e.g. [70, 30].
+export const payoutPercents = (structure) => (structure ?? []).map(bps => bps / 100);
+
+// What the prize pool would be for an event with `entrants` entries (cents), or the guarantee.
+// Entry-funded: the pool minus the platform fee, minus the host's cut of what's left.
+export const projectedPrizeCents = (money, entrants, teamSize) => {
+    if (!money?.prizeFunding) return 0;
+    if (money.prizeFunding === 'guaranteed') return money.guaranteeCents ?? 0;
+    const pool = (money.entryFeeCents ?? 0) * teamSize * entrants;
+    const afterFee = pool - Math.round(pool * (money.platformFeeBps ?? 500) / 10000);
+    return afterFee - Math.round(afterFee * (money.hostCutBps ?? 0) / 10000);
 };
 
 // What the viewer sees and may do in one match (from the server), or {} for one not underway.
@@ -252,6 +279,13 @@ export const publishBracket = async (id) => {
 };
 
 export const resetBracket = (id) => eventCall(apiClient.delete(url(id, '/bracket')));
+
+// The host calls the event off: every entry fee and the guaranteed prize are refunded. Final.
+export const cancelEvent = (id) => eventCall(apiClient.post(url(id, '/cancel')));
+
+// A captain asks teammates (profile public ids) to turn Auto-Pay on, so the team can sign up
+// with each player paying their own fee. Resolves to true, or null on failure.
+export const requestAutoPay = (id, teamId, players) => run(apiClient.post(url(id, '/auto-pay-requests'), { teamId, players }));
 
 // ---- playing ------------------------------------------------------------------
 

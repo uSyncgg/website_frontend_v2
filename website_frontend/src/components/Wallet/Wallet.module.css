@@ -134,3 +134,26 @@
     font-size: 13px;
     color: var(--ink-2);
 }
+
+.autoPay {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line, rgba(255, 255, 255, .08));
+}
+
+.autoPayText {
+    margin: 4px 0 10px;
+    font-size: 13px;
+    color: var(--ink-2, inherit);
+}
+
+.autoPayControls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.autoPayControls select {
+    width: auto;
+}

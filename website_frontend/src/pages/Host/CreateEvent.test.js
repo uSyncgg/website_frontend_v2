@@ -38,6 +38,11 @@ jest.mock('services/brackets', () => ({
     useBracketMeta: () => META,
 }));
 
+jest.mock('services/wallet', () => ({
+    ...jest.requireActual('services/wallet'),
+    useWallet: () => ({ wallet: { totalCents: 5000, frozen: false } }),
+}));
+
 const renderAt = (url) => render(
     <MemoryRouter initialEntries={[url]}>
         <CreateEvent />
@@ -53,7 +58,7 @@ const pick = (label, option) => {
 
 const fillRequired = () => {
     fireEvent.change(screen.getByLabelText('Event name'), { target: { value: 'Friday Cup' } });
-    fireEvent.click(screen.getByRole('radio', { name: 'Free / handled elsewhere' }));
+    fireEvent.click(screen.getByRole('radio', { name: 'Free entry' }));
 };
 
 describe('CreateEvent', () => {
@@ -191,6 +196,41 @@ describe('CreateEvent', () => {
         expect(createEvent).toHaveBeenCalledWith(expect.objectContaining({
             game: 'call_of_duty', gameTitle: 'black_ops_7', gameMode: null, platform: 'console_only',
             restrictions: ['No snipers'], bestOf: 3, finalBestOf: 7, minEntrants: 6, maxEntrants: 16, admins: [],
+        }));
+    });
+
+    it('sends a wallet entry fee with a prize from the entry fees', () => {
+        renderAt('/host/events/new?profile=hostpub&type=league&game=CS2');
+        fireEvent.change(screen.getByLabelText('Event name'), { target: { value: 'Money Cup' } });
+        fireEvent.click(screen.getByRole('radio', { name: 'Entry fee (uSync wallets)' }));
+        fireEvent.change(screen.getByLabelText('Entry fee per player'), { target: { value: '5' } });
+        fireEvent.click(screen.getByRole('radio', { name: 'From entry fees' }));
+        fireEvent.change(screen.getByLabelText('Your cut of the entry fees (%)'), { target: { value: '15' } });
+        fireEvent.change(screen.getByLabelText('Places paid'), { target: { value: '2' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Create event' }));
+        expect(createEvent).toHaveBeenCalledWith(expect.objectContaining({
+            entryFeeCents: 500, prizeFunding: 'entry_funded', hostCutBps: 1500, guaranteeCents: null,
+            payoutStructure: [7000, 3000], entryFee: '$5.00', payments: { enabled: false },
+        }));
+    });
+
+    it('lets a free event guarantee a prize, and checks the split adds up', () => {
+        renderAt('/host/events/new?profile=hostpub&type=league&game=CS2');
+        fillRequired();
+        fireEvent.click(screen.getByRole('radio', { name: 'Guaranteed by me' }));
+        expect(screen.queryByRole('radio', { name: 'From entry fees' })).not.toBeInTheDocument();
+        fireEvent.change(screen.getByLabelText('Guaranteed prize pool'), { target: { value: '100' } });
+        fireEvent.change(screen.getByLabelText('2nd place percent'), { target: { value: '20' } });
+        fireEvent.change(screen.getByLabelText('3rd place percent'), { target: { value: '30' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Create event' }));
+        expect(screen.getByText("A place can't be paid more than the place above it")).toBeInTheDocument();
+        fireEvent.change(screen.getByLabelText('3rd place percent'), { target: { value: '20' } });
+        expect(screen.getByText('The percentages add up to 90%, not 100%')).toBeInTheDocument();
+        expect(createEvent).not.toHaveBeenCalled();
+        fireEvent.change(screen.getByLabelText('2nd place percent'), { target: { value: '30' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Create event' }));
+        expect(createEvent).toHaveBeenCalledWith(expect.objectContaining({
+            entryFeeCents: null, prizeFunding: 'guaranteed', guaranteeCents: 10000, hostCutBps: null, payoutStructure: [5000, 3000, 2000],
         }));
     });
 

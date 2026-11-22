@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router";
 import { FaPlus, FaTrash } from "react-icons/fa";
 import { useCurrentUser } from "hooks";
-import { createEvent, useHostEvent, useBracketMeta } from "services/brackets";
+import { createEvent, useHostEvent, useBracketMeta, projectedPrizeCents } from "services/brackets";
+import { useWallet, formatMoney, parseDollars } from "services/wallet";
 import { PROFILE_LABELS, canHostBrackets, profileUrl } from "utils/profiles";
 import { EVENT_TYPES, HOSTING_DASHBOARD_PATH, PLATFORMS, TOURNAMENT_GAME } from "utils/hostEvents";
 import { PlayerPicker } from "components/Teams/TeamParts";
@@ -27,6 +28,57 @@ const blankTier = () => ({ name: '', price: '', capacity: '' });
 const blankQuestion = () => ({ label: '', type: 'text', options: '', required: false });
 
 const pad = (n) => String(n).padStart(2, '0');
+
+// ---- entry fee and prize money (see GLOSSARY.md on the backend) -------------------------
+// Payments: 'free', 'wallet' (an entry fee per player, paid from uSync wallets) or 'passes'
+// (the Stripe pass portal). Prize money: 'none', 'guaranteed' (the host pays it up front, when
+// sign-ups open) or 'entry_funded' (what's left of the entry fees after uSync's 5% and the
+// host's cut). The payout structure is whole percents per place, 1 to 16 places.
+const MAX_PLACES = 16;
+const SPLIT_PRESETS = { 1: [100], 2: [70, 30], 3: [50, 30, 20], 4: [40, 30, 20, 10] };
+const PLATFORM_FEE_BPS = 500;
+
+const defaultSplit = (places) => {
+    if (SPLIT_PRESETS[places]) return SPLIT_PRESETS[places].map(String);
+    const each = Math.floor(100 / places);
+    return Array.from({ length: places }, (_, i) => String(i === 0 ? each + (100 - each * places) : each));
+};
+
+const blankMoney = () => ({ fee: '', prize: 'none', guarantee: '', hostCut: '10', places: 3, split: defaultSplit(3) });
+
+const moneyFromTemplate = (money) => {
+    if (!money?.prizeFunding && !money?.entryFeeCents) return blankMoney();
+    const split = (money.payoutStructure ?? [10000]).map(bps => String(bps / 100));
+    return {
+        fee: money.entryFeeCents ? (money.entryFeeCents / 100).toFixed(2) : '',
+        prize: money.prizeFunding ?? 'none',
+        guarantee: money.guaranteeCents ? String(money.guaranteeCents / 100) : '',
+        hostCut: money.hostCutBps != null ? String(money.hostCutBps / 100) : '10',
+        places: split.length,
+        split,
+    };
+};
+
+// What's wrong with the money settings, or '' (the server checks all of this again).
+const moneyProblems = (mode, money) => {
+    const out = {};
+    const fee = parseDollars(money.fee);
+    if (mode === 'wallet' && (fee == null || fee < 100 || fee > 50000)) out.fee = 'Entry fees are $1.00 to $500.00 per player';
+    if (mode === 'wallet' && money.prize === 'none') out.prize = 'Choose how the prize is paid: guaranteed by you, or from the entry fees';
+    if (money.prize === 'guaranteed' && (!/^\d+$/.test(money.guarantee.trim()) || Number(money.guarantee) < 1)) out.guarantee = 'Enter the guaranteed prize in whole dollars';
+    const cut = Number(money.hostCut);
+    if (money.prize === 'entry_funded' && !(Number.isInteger(cut) && cut >= 0 && cut <= 50)) out.hostCut = 'Your cut is a whole percent from 0 to 50';
+    if (money.prize !== 'none') {
+        const shares = money.split.map(Number);
+        if (shares.some(x => !Number.isInteger(x) || x < 1)) out.split = 'Every paid place gets a whole percent, at least 1%';
+        else if (shares.some((x, i) => i > 0 && x > shares[i - 1])) out.split = "A place can't be paid more than the place above it";
+        else if (shares.reduce((a, b) => a + b, 0) !== 100) out.split = `The percentages add up to ${shares.reduce((a, b) => a + b, 0)}%, not 100%`;
+    }
+    return out;
+};
+
+const ORDINALS = ['1st', '2nd', '3rd'];
+const placeLabel = (i) => ORDINALS[i] ?? `${i + 1}th`;
 
 // The form's fields filled from an earlier event (Duplicate on the Archived tab). The date moves
 // to next week; the time of day, settings, sign-up form, payments and admins carry over.
@@ -56,7 +108,7 @@ const fromTemplate = (event, base) => {
         rules: event.rules ?? '',
         noShowMinutes: event.noShowMinutes == null ? base.noShowMinutes : String(event.noShowMinutes),
         noShowOff: event.noShowMinutes == null,
-        usePayments: !!event.payments?.enabled,
+        payMode: event.money?.entryFeeCents ? 'wallet' : event.payments?.enabled ? 'passes' : 'free',
     };
 };
 
@@ -91,8 +143,13 @@ export const CreateEvent = () => {
         platform: 'pc_allowed',
         date: start.date, time: start.time, venue: '', prize: '',
         description: '', rules: '', noShowMinutes: '10', noShowOff: false,
-        usePayments: true,
+        payMode: 'free',
     });
+    const [money, setMoney] = useState(blankMoney());
+    const setMoneyField = (field, value) => setMoney(m => ({ ...m, [field]: value }));
+    const setPlaces = (places) => setMoney(m => ({ ...m, places, split: defaultSplit(places) }));
+    const setShare = (i, value) => setMoney(m => ({ ...m, split: m.split.map((x, j) => (j === i ? value : x)) }));
+    const { wallet } = useWallet(true);
     // Custom restrictions the host types in (e.g. "No snipers", "Controller only").
     const [restrictions, setRestrictions] = useState([]);
     // Players invited to help run the event; each accepts from their notifications.
@@ -120,6 +177,7 @@ export const CreateEvent = () => {
         if (!template || applied.current) return;
         applied.current = true;
         setForm(f => fromTemplate(template, f));
+        setMoney(moneyFromTemplate(template.money));
         setRestrictions(template.restrictions ?? []);
         setAdmins((template.admins ?? []).filter(a => a.status === 'accepted'));
         if (template.payments?.enabled) {
@@ -182,8 +240,9 @@ export const CreateEvent = () => {
         finalBestOf: hasFinal && form.differentFinals && Number(form.finalBestOf) === Number(form.bestOf) && 'Pick a different best of for the finals, or untick the box',
         restrictions: restrictions.some(r => !r.trim()) && 'Fill in or remove the empty restriction',
         noShowMinutes: !form.noShowOff && !(Number(form.noShowMinutes) >= 0) && 'Enter how many minutes to wait, or turn the timer off',
-        notifyEmail: form.usePayments && !/^\S+@\S+\.\S+$/.test(payments.notifyEmail) && 'Add the email we should notify about new sign-ups',
-        tiers: form.usePayments && payments.tiers.some(t => !t.name.trim() || !(Number(t.price) > 0)) && 'Every pass needs a name and a price above $0',
+        notifyEmail: form.payMode === 'passes' && !/^\S+@\S+\.\S+$/.test(payments.notifyEmail) && 'Add the email we should notify about new sign-ups',
+        tiers: form.payMode === 'passes' && payments.tiers.some(t => !t.name.trim() || !(Number(t.price) > 0)) && 'Every pass needs a name and a price above $0',
+        ...(form.payMode === 'passes' ? {} : moneyProblems(form.payMode, money)),
     };
     const hasErrors = Object.values(errors).some(Boolean);
     const err = (key) => submitted && errors[key] && <p className={styles.fieldError}>{errors[key]}</p>;
@@ -196,8 +255,11 @@ export const CreateEvent = () => {
         if (hasErrors) return;
         if (!hostProfile) return;
         setSaving(true);
-        const { date, time, uncapped, usePayments, noShowOff, differentFinals, useMin, ...rest } = form;
+        const { date, time, uncapped, payMode, noShowOff, differentFinals, useMin, ...rest } = form;
+        const usePayments = payMode === 'passes';
         const lowestPrice = Math.min(...payments.tiers.map(t => Number(t.price)));
+        const feeCents = payMode === 'wallet' ? parseDollars(money.fee) : null;
+        const prizeMoney = payMode !== 'passes' && money.prize !== 'none';
         const id = await createEvent({
             ...rest,
             name: form.name.trim(),
@@ -213,8 +275,14 @@ export const CreateEvent = () => {
             admins: admins.map(a => a.public_id),
             noShowMinutes: noShowOff ? null : Number(form.noShowMinutes),
             startsAt: new Date(`${date}T${time}`).toISOString(),
-            entryFee: usePayments ? `$${lowestPrice.toFixed(2)}` : 'Free',
+            entryFee: usePayments ? `$${lowestPrice.toFixed(2)}` : feeCents ? formatMoney(feeCents) : 'Free',
+            prize: prizeMoney ? '' : form.prize,
             payments: usePayments ? { enabled: true, ...payments } : { enabled: false },
+            entryFeeCents: feeCents,
+            prizeFunding: prizeMoney ? money.prize : null,
+            guaranteeCents: prizeMoney && money.prize === 'guaranteed' ? Number(money.guarantee) * 100 : null,
+            hostCutBps: prizeMoney && money.prize === 'entry_funded' ? Number(money.hostCut) * 100 : null,
+            payoutStructure: prizeMoney ? money.split.map(x => Number(x) * 100) : null,
             signupForm: {
                 ...signupForm,
                 questions: signupForm.questions.filter(q => q.label.trim()),
@@ -496,23 +564,114 @@ export const CreateEvent = () => {
                     </section>
 
                     <section className={`${styles.card} ${styles.form}`}>
-                        <h2 className={styles.sectionTitle}>Payments</h2>
-                        <div className={styles.segmented} role="radiogroup" aria-label="Payments">
-                            {[[true, 'Collect entry fees with uSync'], [false, 'Free / handled elsewhere']].map(([value, label]) => (
-                                <button key={label} type="button" role="radio" aria-checked={form.usePayments === value}
-                                    className={`${styles.segment} ${form.usePayments === value ? styles.segmentActive : ''}`}
-                                    onClick={() => setValue('usePayments', value)}>{label}</button>
+                        <h2 className={styles.sectionTitle}>Entry fee & prize</h2>
+                        <div className={styles.segmented} role="radiogroup" aria-label="Entry fee">
+                            {[['free', 'Free entry'], ['wallet', 'Entry fee (uSync wallets)'], ['passes', 'Sell passes']].map(([value, label]) => (
+                                <button key={value} type="button" role="radio" aria-checked={form.payMode === value}
+                                    className={`${styles.segment} ${form.payMode === value ? styles.segmentActive : ''}`}
+                                    onClick={() => { setValue('payMode', value); if (value === 'free' && money.prize === 'entry_funded') setMoneyField('prize', 'none'); }}>{label}</button>
                             ))}
                         </div>
 
-                        {!form.usePayments &&
+                        {form.payMode === 'wallet' &&
                             <div className={styles.field}>
-                                <label htmlFor="prize">Prize (optional)</label>
-                                <input id="prize" className={styles.input} value={form.prize} onChange={set('prize')} placeholder="e.g. $100 to 1st" />
+                                <label htmlFor="entryFee">Entry fee per player</label>
+                                <div className={styles.money} style={{ maxWidth: '12rem' }}>
+                                    <span>$</span>
+                                    <input id="entryFee" className={styles.input} inputMode="decimal" value={money.fee}
+                                        onChange={e => setMoneyField('fee', e.target.value)} placeholder="5.00" />
+                                </div>
+                                <p className={styles.fieldHint}>
+                                    Paid from players' uSync wallets when their team signs up{form.teamSize !== '1v1' ? ` (${form.teamSize.split('v')[0]} players a team)` : ''}.
+                                    Refunded if they unregister before the bracket is posted, or if you cancel.
+                                </p>
+                                {err('fee')}
                             </div>
                         }
 
-                        {form.usePayments &&
+                        {form.payMode !== 'passes' &&
+                            <div className={styles.field}>
+                                <span className={styles.fieldLabel}>Prize money</span>
+                                <div className={styles.segmented} role="radiogroup" aria-label="Prize money">
+                                    {[['none', 'None'], ['guaranteed', 'Guaranteed by me'], ...(form.payMode === 'wallet' ? [['entry_funded', 'From entry fees']] : [])].map(([value, label]) => (
+                                        <button key={value} type="button" role="radio" aria-checked={money.prize === value}
+                                            className={`${styles.segment} ${money.prize === value ? styles.segmentActive : ''}`}
+                                            onClick={() => setMoneyField('prize', value)}>{label}</button>
+                                    ))}
+                                </div>
+                                {err('prize')}
+                            </div>
+                        }
+
+                        {form.payMode !== 'passes' && money.prize === 'none' &&
+                            <div className={styles.field}>
+                                <label htmlFor="prize">Prize description (optional)</label>
+                                <input id="prize" className={styles.input} value={form.prize} onChange={set('prize')} placeholder="e.g. Bragging rights, a trophy" />
+                            </div>
+                        }
+
+                        {form.payMode !== 'passes' && money.prize === 'guaranteed' &&
+                            <div className={styles.field}>
+                                <label htmlFor="guarantee">Guaranteed prize pool</label>
+                                <div className={styles.money} style={{ maxWidth: '12rem' }}>
+                                    <span>$</span>
+                                    <input id="guarantee" className={styles.input} inputMode="numeric" value={money.guarantee}
+                                        onChange={e => setMoneyField('guarantee', e.target.value)} placeholder="100" />
+                                </div>
+                                <p className={styles.fieldHint}>
+                                    Taken from your uSync wallet when sign-ups open (as soon as you create this event) and held for the event; it comes back if
+                                    you cancel. {form.payMode === 'wallet' ? `You keep the entry fees after uSync's ${PLATFORM_FEE_BPS / 100}%.` : ''}
+                                    {wallet && <> Your wallet: {formatMoney(wallet.totalCents)}.</>}
+                                    {wallet && Number(money.guarantee) * 100 > wallet.totalCents && <> <Link to="/profile#wallet">Add funds</Link> first.</>}
+                                </p>
+                                {err('guarantee')}
+                            </div>
+                        }
+
+                        {form.payMode === 'wallet' && money.prize === 'entry_funded' &&
+                            <div className={styles.field}>
+                                <label htmlFor="hostCut">Your cut of the entry fees (%)</label>
+                                <input id="hostCut" type="number" min={0} max={50} step={1} className={styles.input} style={{ maxWidth: '8rem' }}
+                                    value={money.hostCut} onChange={e => setMoneyField('hostCut', e.target.value)} />
+                                <p className={styles.fieldHint}>
+                                    uSync takes {PLATFORM_FEE_BPS / 100}% of the entry fees, then you take this much of what's left (0-50%). The rest is the prize pool.
+                                    {(() => {
+                                        const entrants = form.uncapped ? 8 : Math.max(2, Number(form.maxEntrants) || 8);
+                                        const teamSize = Number(form.teamSize.split('v')[0]) || 1;
+                                        const fee = parseDollars(money.fee) ?? 0;
+                                        if (!fee) return null;
+                                        const pool = fee * teamSize * entrants;
+                                        const prizeCents = projectedPrizeCents({ prizeFunding: 'entry_funded', entryFeeCents: fee, platformFeeBps: PLATFORM_FEE_BPS, hostCutBps: Number(money.hostCut) * 100 }, entrants, teamSize);
+                                        const platform = Math.round(pool * PLATFORM_FEE_BPS / 10000);
+                                        return <> With {entrants} {unit} entered: {formatMoney(pool)} paid in, uSync {formatMoney(platform)}, you {formatMoney(pool - platform - prizeCents)}, prize pool {formatMoney(prizeCents)}.</>;
+                                    })()}
+                                </p>
+                                {err('hostCut')}
+                            </div>
+                        }
+
+                        {form.payMode !== 'passes' && money.prize !== 'none' &&
+                            <div className={styles.field}>
+                                <label htmlFor="places">Places paid</label>
+                                <select id="places" className={styles.select} style={{ maxWidth: '10rem' }} value={money.places} onChange={e => setPlaces(Number(e.target.value))}>
+                                    {Array.from({ length: MAX_PLACES }, (_, i) => i + 1).map(n => <option key={n} value={n}>{n === 1 ? 'Winner takes all' : `Top ${n}`}</option>)}
+                                </select>
+                                <div style={{ marginTop: '.6rem' }}>
+                                    {money.split.map((share, i) => (
+                                        <div key={i} className={styles.payoutRow}>
+                                            <span>{placeLabel(i)}</span>
+                                            <input className={styles.input} type="number" min={1} max={100} step={1} value={share}
+                                                onChange={e => setShare(i, e.target.value)} aria-label={`${placeLabel(i)} place percent`} />
+                                            <span className={styles.muted}>%</span>
+                                        </div>
+                                    ))}
+                                </div>
+                                <p className={styles.fieldHint}>Each place's share of the prize pool. A team's share is split equally between the players who played for it.</p>
+                                {err('split')}
+                            </div>
+                        }
+
+                        {form.payMode === 'passes' &&
                             <div className={styles.paymentPortal}>
                                 <p className={styles.blurb}>
                                     We'll create a payment portal for this event, like our existing event pass pages. Players pay with Stripe when they

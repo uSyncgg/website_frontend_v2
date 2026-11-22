@@ -99,7 +99,7 @@ const retrying = async (call, { tries = 3, waitMs = 800 } = {}) => {
     }
 };
 
-// { items: [{ id, kind, bucket: 'deposited' | 'earnings', amountCents, createdAt, reason }], nextBefore }
+// { items: [{ id, kind, bucket: 'deposited' | 'earnings', amountCents, createdAt, reason, eventId, eventName }], nextBefore }
 export const getWalletHistory = (before = null) =>
     apiClient.get('/wallet/history', { params: before ? { before } : {} }).then(res => res.data);
 
@@ -114,9 +114,28 @@ export const KIND_LABELS = {
     chargeback_reversal: 'Dispute resolved, deposit restored',
     manual_credit: 'Added by uSync',
     manual_debit: 'Removed by uSync',
+    deposit_refund_reversal: 'Refund failed, money put back',
+    entry_fee: 'Entry fee',
+    entry_refund: 'Entry fee refunded',
+    guarantee_fund: 'Guaranteed prize held',
+    guarantee_refund: 'Guaranteed prize returned',
+};
+
+// Auto-Pay lets your team captains take entry fees from your wallet when they sign you up.
+export const AUTO_PAY_DAYS = [7, 30, 90];
+
+// Turns Auto-Pay on for `days` (7, 30 or 90) or off (0); resolves to the updated wallet.
+export const setAutoPay = async (days) => {
+    const { data } = await apiClient.put('/wallet/auto-pay', { days });
+    set({ wallet: data, error: '' });
+    return data;
 };
 
 // ---- uSync staff (admins with can_manage_money) ---------------------------------------
+
+// Cancels an event and refunds everyone (audit logged). Safe to repeat.
+export const adminCancelEvent = (eventId, reason) =>
+    retrying(() => apiClient.post(`/admin/events/${encodeURIComponent(eventId)}/cancel`, { reason })).then(res => res.data);
 
 export const adminGetWallet = (email) => apiClient.get('/admin/wallets', { params: { email } }).then(res => res.data);
 
