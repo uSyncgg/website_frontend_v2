@@ -1,14 +1,23 @@
-import { depositFee, parseDollars, formatMoney, startDeposit, newIdempotencyKey, requestWithdrawal } from './wallet';
+import { depositFee, depositFeeLabel, parseDollars, formatMoney, startDeposit, newIdempotencyKey, requestWithdrawal } from './wallet';
 import apiClient from './apiClient';
 
 jest.mock('./apiClient', () => ({ __esModule: true, default: { get: jest.fn(), post: jest.fn() } }));
 
 describe('wallet money helpers', () => {
-    it('adds a 5% fee rounded half up to the cent, like the backend', () => {
-        expect(depositFee(500)).toBe(25);
-        expect(depositFee(1234)).toBe(62);
-        expect(depositFee(1230)).toBe(62);
-        expect(depositFee(1229)).toBe(61);
+    it('adds 3% + 30c up to $15 and 5% over it, rounded half up like the backend', () => {
+        expect(depositFee(500)).toBe(45);
+        expect(depositFee(1000)).toBe(60);
+        expect(depositFee(1234)).toBe(67);
+        expect(depositFee(1500)).toBe(75);
+        expect(depositFee(1501)).toBe(75);
+        expect(depositFee(1550)).toBe(78);
+        expect(depositFee(2000)).toBe(100);
+        expect(depositFee(100000)).toBe(5000);
+    });
+
+    it('labels the fee rate for the amount', () => {
+        expect(depositFeeLabel(1500)).toBe('3% + $0.30');
+        expect(depositFeeLabel(1501)).toBe('5%');
     });
 
     it('reads dollar amounts into cents', () => {
