@@ -16,7 +16,7 @@ import { OrgDetailsStep } from "components/OrgSignUpSteps/OrgDetailsStep";
 import { OrgTeamsStep } from "components/OrgSignUpSteps/OrgTeamsStep";
 import { TeamsTab } from "pages/Host/TeamsTab";
 
-import { NO_BRACKET_TYPES, PROFILE_TYPES, bioField, linksField, pictureField, usernameField } from "utils/profiles";
+import { NO_BRACKET_TYPES, PROFILE_TYPES, bioField, pictureField, usernameField } from "utils/profiles";
 
 // Shared by the sign-up wizard, the add-a-profile wizard and the profile settings wizard.
 // - `fields`: fields validated (via trigger) before leaving the step.
@@ -78,7 +78,7 @@ const HOST_GAMES_STEP = { key: 'user_games', title: 'Hosted Titles', subtitle: '
 const COMBINED_GAMES_STEP = { key: 'user_games', title: 'Games You Play & Host', subtitle: 'Pick as many as you like in each - this drives the events we surface for you.', Component: UserGamesStep, props: { mode: 'combined' }, fields: ['other_games', 'other_hosted_games'], saveFields: ['interests', 'other_games', 'hosted_games', 'other_hosted_games'] };
 
 const PLAYER_ABOUT_STEP = { key: 'player_about', title: 'About You', subtitle: 'Only your name shows publicly by default.', Component: PlayerAboutStep, fields: PLAYER_ABOUT_FIELDS, requiredFields: ['first_name', 'last_name'], saveFields: PLAYER_ABOUT_FIELDS };
-// Bracket hosting is per profile; every type except an org (NO_BRACKET_TYPES) can have it. Sign-up and add-a-profile ask for
+// Bracket hosting is per profile, for host and venue profiles only (see NO_BRACKET_TYPES). Sign-up and add-a-profile ask for
 // each profile being created; settings edits the one profile's `bracket_hosting`.
 const BRACKET_SUBTITLE = 'Want to run your own brackets for friends, your team or your community? You can change this later.';
 // Only the picked types that can host brackets get a choice.
@@ -87,17 +87,16 @@ const SETTINGS_BRACKET_STEP = { key: 'bracket_hosting', title: 'Bracket Hosting'
 const HOST_ORG_STEP = { key: 'host_org', title: 'Organization', subtitle: 'This is the name players will see on every event you run.', Component: HostOrgStep, fields: ['organization', 'host_country'], requiredFields: ['organization', 'host_country'], saveFields: ['organization', 'host_country'] };
 const HOST_EVENTS_STEP = { key: 'host_events', title: 'Event Types', subtitle: 'Pick every format you host.', Component: HostEventStep, fields: [], saveFields: ['event_types'] };
 
-// Optional: the accounts each new profile links. Profile settings edits them in the link editor instead.
+// The accounts each new profile will be able to link, all shown as "Coming soon" for now (nothing
+// is saved). Profile settings edits links in the link editor instead.
 const accountsStep = (types) => ({
     key: 'linked_accounts',
     title: 'Linked Accounts',
-    subtitle: types.length > 1
-        ? 'Optional - paste a link or type a handle for each profile, so people can find you.'
-        : 'Optional - paste a link or type a handle, so people can find you.',
+    subtitle: 'Linking accounts is coming soon - you\'ll be able to connect these from your profile.',
     Component: LinkedAccountsStep,
     props: { types },
     fields: [],
-    saveFields: types.map(linksField),
+    saveFields: [],
 });
 
 // Organizations: where they're based plus an optional website and contact email, the games

@@ -115,6 +115,13 @@
     border-color: var(--violet);
 }
 
+.soon .linkButton {
+    cursor: not-allowed;
+    border-style: dashed;
+    background: transparent;
+    color: var(--violet-bright);
+}
+
 @media (max-width: 480px) {
     .field {
         grid-template-columns: 28px minmax(0, 1fr);
