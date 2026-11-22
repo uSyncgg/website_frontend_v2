@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, NavLink, Outlet, useNavigate, useOutletContext, useParams } from "react-router";
 import { FaCalendarAlt, FaClock, FaGamepad, FaMapMarkerAlt, FaSitemap } from "react-icons/fa";
-import { useHostEvent, updateEvent, deleteEvent, cancelEvent, delayStart, entrantsNeedingPlayers, inviteAdmin, removeAdmin, hasEntryFee, payoutPercents } from "services/brackets";
+import { useHostEvent, updateEvent, deleteEvent, cancelEvent, delayStart, entrantsNeedingPlayers, inviteAdmin, removeAdmin, hasEntryFee, payoutPercents, payoutStatus } from "services/brackets";
 import { formatMoney, refreshWallet } from "services/wallet";
 import { Avatar, PlayerPicker } from "components/Teams/TeamParts";
 import { BracketError, Modal, ShareButton, StageChip, capacityLabel, formatDate, formatLabel, unitLabel, EventLoading, formatSummary, locationLabel, gameDisplayName, RestrictionList } from "./hostShared";
@@ -156,6 +156,7 @@ export const EventOverview = () => {
     const unit = unitLabel(event);
 
     const cancelled = stage === 'cancelled';
+    const payout = payoutStatus(event);
     const remove = async () => {
         if (!window.confirm(`Delete "${event.name}"? This can't be undone.`)) return;
         if (await deleteEvent(event.id)) navigate(HOSTING_DASHBOARD_PATH);
@@ -201,6 +202,9 @@ export const EventOverview = () => {
                             <dt>Restrictions</dt><dd>{event.restrictions?.length ? <RestrictionList event={event} /> : 'None'}</dd>
                             <dt>Entry fee</dt><dd>{hasEntryFee(event) ? `${formatMoney(event.money.entryFeeCents)} per player, from wallets` : event.payments?.enabled ? `${event.entryFee} via uSync payments` : (event.entryFee || 'Free')}</dd>
                             <dt>Prize</dt><dd>{prizeText(event)}</dd>
+                            {payout && <><dt>Payout</dt><dd>{payout.state === 'paid'
+                                ? `Paid out ${formatDate(payout.at)}`
+                                : `Due ${formatDate(payout.at)} if nothing is open in your queue (a corrected result restarts the 24 hours)`}</dd></>}
                             <dt>No-show timer</dt><dd>{event.noShowMinutes == null ? 'Off' : `${event.noShowMinutes} min after each match starts`}</dd>
                         </dl>
                     </section>
@@ -215,7 +219,10 @@ export const EventOverview = () => {
                 <div>
                     <section className={`${styles.card} ${styles.nextStep}`}>
                         <h2 className={styles.sectionTitle}>Next step</h2>
-                        <p>{next.text}</p>
+                        <p>{next.text}{stage === 'complete' && payout &&
+                            (payout.state === 'paid'
+                                ? ' Prizes and your share have been paid out to wallets.'
+                                : ` Prizes and your share pay out ${formatDate(payout.at)}. Settle anything in your queue first: an open issue holds the payout.`)}</p>
                         <Link to={next.to} className={styles.primaryBtn}>{next.label}</Link>
                     </section>
 
