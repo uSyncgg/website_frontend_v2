@@ -70,6 +70,25 @@ describe('MatchPage', () => {
         expect(await screen.findByRole('button', { name: 'Dispute this result' })).toBeInTheDocument();
     });
 
+    it('lets a picked player who is not a captain report (canAct)', async () => {
+        const picked = JSON.parse(JSON.stringify(event));
+        picked.viewerCanAct = false;
+        picked.bracket.matches.r0m0.canAct = true;
+        apiClient.get.mockImplementation(apiGetFrom({ '/brackets/evt-4s': picked }));
+        renderMatch('r0m0');
+        expect(await screen.findByRole('button', { name: 'Report score' })).toBeInTheDocument();
+        expect(screen.queryByText(/owner or a captain reports/)).toBeNull();
+    });
+
+    it('lets the host join the match chat', async () => {
+        const hosted = JSON.parse(JSON.stringify(event));
+        Object.assign(hosted, { canManage: true, viewerEntrantId: null });
+        hosted.bracket.matches.r0m1.chatId = 'chat-1';
+        apiClient.get.mockImplementation(apiGetFrom({ '/brackets/evt-4s': hosted }));
+        renderMatch('r0m1');
+        expect(await screen.findByRole('button', { name: 'Join chat' })).toBeInTheDocument();
+    });
+
     it('says so when the match is not in the bracket', async () => {
         renderMatch('nope');
         expect(await screen.findByText('Match not found')).toBeInTheDocument();
