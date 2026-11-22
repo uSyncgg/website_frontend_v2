@@ -1,19 +1,24 @@
 import { useCallback, useEffect, useState } from "react";
 import { ProfileCard } from "components/ProfileCard/ProfileCard";
-import { useWallet, refreshWallet, getWalletHistory, startDeposit, waitForDeposit, formatMoney, KIND_LABELS, AUTO_PAY_DAYS, setAutoPay } from "services/wallet";
+import {
+    useWallet, refreshWallet, getWalletHistory, startDeposit, waitForDeposit, formatMoney, KIND_LABELS, BUCKET_LABELS, AUTO_PAY_DAYS, setAutoPay,
+} from "services/wallet";
 import { Link } from "react-router";
 import { getApiErrorMessage } from "utils/apiError";
 import { DepositDialog } from "./DepositDialog";
+import { WithdrawDialog } from "./WithdrawDialog";
 import hostStyles from "pages/Host/Host.module.css";
 import styles from "./Wallet.module.css";
 
 const when = (iso) => new Date(iso).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
 
-// The wallet on your own profile (never shown on anyone else's): both balances, deposits, and the
-// history of every movement.
+// The wallet on your own profile (never shown on anyone else's): both balances, deposits,
+// withdrawals, and the history of every movement. A Pending Withdrawal line shows only while
+// some Earnings are waiting to be sent (here only, not in the navbar).
 export const WalletCard = () => {
     const { wallet, error } = useWallet(true);
     const [depositing, setDepositing] = useState(false);
+    const [withdrawing, setWithdrawing] = useState(false);
     const [history, setHistory] = useState(null);
     const [nextBefore, setNextBefore] = useState(null);
     const [historyError, setHistoryError] = useState('');
@@ -62,11 +67,24 @@ export const WalletCard = () => {
         return error ? <ProfileCard title="Wallet"><p className={styles.private}>{error}</p></ProfileCard> : null;
     }
 
+    const pending = wallet.pendingWithdrawalCents ?? 0;
+    // One withdrawal at a time, only from Earnings, never while frozen.
+    const withdrawBlocked = wallet.frozen ? 'Your wallet is frozen.'
+        : pending > 0 ? 'You already have a pending withdrawal.'
+        : wallet.earningsCents <= 0 ? 'You have no Earnings to withdraw.'
+        : '';
+
     return (
         <div id="wallet">
             <ProfileCard
                 title="Wallet"
-                action={<button type="button" className={hostStyles.primaryBtn} onClick={() => setDepositing(true)}>Deposit</button>}
+                action={
+                    <div className={styles.walletActions}>
+                        <button type="button" className={hostStyles.ghostBtn} disabled={!!withdrawBlocked} title={withdrawBlocked || undefined}
+                            onClick={() => setWithdrawing(true)}>Withdraw</button>
+                        <button type="button" className={hostStyles.primaryBtn} onClick={() => setDepositing(true)}>Deposit</button>
+                    </div>
+                }
             >
                 {wallet.frozen &&
                     <p className={styles.frozen}>
@@ -84,6 +102,14 @@ export const WalletCard = () => {
                         <span className={styles.balanceValue}>{formatMoney(wallet.earningsCents)}</span>
                         <span className={styles.balanceHint}>Prizes and host payouts. Withdrawable.</span>
                     </div>
+                    {pending > 0 &&
+                        <div className={`${styles.balance} ${styles.balanceWide}`}>
+                            <span className={styles.balanceLabel}>Pending withdrawal</span>
+                            <span className={styles.balanceValue}>{formatMoney(pending)}</span>
+                            <span className={styles.balanceHint}>
+                                On its way to you: it should arrive in 3 - 5 business days. It can't be spent while it's pending.
+                            </span>
+                        </div>}
                 </div>
                 <span className={styles.private}>Only you can see your wallet.</span>
 
@@ -123,7 +149,7 @@ export const WalletCard = () => {
                                         {item.eventName && <> · <Link to={`/brackets/${encodeURIComponent(item.eventId)}`}>{item.eventName}</Link></>}
                                     </span>
                                     <span className={styles.historyMeta}>
-                                        {when(item.createdAt)} · {item.bucket === 'earnings' ? 'Earnings' : 'Deposited funds'}{item.reason ? ` · ${item.reason}` : ''}
+                                        {when(item.createdAt)} · {BUCKET_LABELS[item.bucket] ?? item.bucket}{item.reason ? ` · ${item.reason}` : ''}
                                     </span>
                                 </span>
                                 <span className={item.amountCents > 0 ? styles.plus : styles.minus}>
@@ -135,6 +161,13 @@ export const WalletCard = () => {
                 {nextBefore &&
                     <button type="button" className={hostStyles.ghostBtn} style={{ marginTop: 10 }} onClick={() => loadHistory(nextBefore)}>Show more</button>}
             </ProfileCard>
+
+            {withdrawing &&
+                <WithdrawDialog
+                    earningsCents={wallet.earningsCents}
+                    onRequested={() => loadHistory()}
+                    onClose={() => setWithdrawing(false)}
+                />}
 
             {depositing &&
                 <DepositDialog

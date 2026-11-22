@@ -3,6 +3,7 @@ import { adminGetWallet, adminAdjustWallet, adminRefundDeposit, formatMoney, par
 import { getApiErrorMessage } from "utils/apiError";
 import hostStyles from "pages/Host/Host.module.css";
 import styles from "./AdminAnalytics.module.css";
+import { AdminWithdrawals } from "./AdminWithdrawals";
 
 // Finance tab of /admin/analytics: wallet tools for admins allowed to manage money
 // (admins.can_manage_money). Look an account up by email, then:
@@ -79,6 +80,8 @@ export const AdminFinanceTab = () => {
     };
 
     return (
+        <>
+        <AdminWithdrawals />
         <section className={styles.card}>
             <h2 className={styles.cardTitle}>Wallet tools</h2>
             <p className={styles.cardSubtitle}>
@@ -100,6 +103,7 @@ export const AdminFinanceTab = () => {
                         <dt>Account</dt><dd>{wallet.email}</dd>
                         <dt>Deposited funds</dt><dd>{formatMoney(wallet.depositedCents)}</dd>
                         <dt>Earnings</dt><dd>{formatMoney(wallet.earningsCents)}</dd>
+                        <dt>Pending withdrawal</dt><dd>{formatMoney(wallet.pendingWithdrawalCents ?? 0)}</dd>
                         <dt>Frozen</dt><dd>{wallet.frozen ? `Yes, since ${new Date(wallet.frozenAt).toLocaleDateString()}` : 'No'}</dd>
                     </dl>
 
@@ -139,5 +143,6 @@ export const AdminFinanceTab = () => {
                 </>
             }
         </section>
+        </>
     );
 };
