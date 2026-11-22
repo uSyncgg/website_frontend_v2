@@ -13,6 +13,15 @@ export const getNotifications = () => apiClient.get('/notifications').then(res =
 // Marks the given ids read (or all of them).
 export const markNotificationsRead = (ids = null) => apiClient.post('/notifications/read', { ids }).then(res => res.data);
 
+// Other parts of the site that react to new notifications (the chat list reloads on
+// match_ready) listen here instead of opening a second Realtime subscription. Returns an
+// unsubscribe function.
+const listeners = new Set();
+export const onNotification = (fn) => {
+    listeners.add(fn);
+    return () => listeners.delete(fn);
+};
+
 // New notifications as they're created, over Supabase Realtime. Row Level Security on the
 // notifications table only lets a signed-in user read their own rows, so the subscription only
 // ever delivers this account's notifications (the filter just saves Supabase some work).
@@ -21,7 +30,10 @@ export const subscribeToNotifications = (accountId, onNew) => {
     const channel = supabase
         .channel(`notifications:${accountId}`)
         .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'notifications', filter: `account_id=eq.${accountId}` },
-            payload => onNew(payload.new))
+            payload => {
+                onNew(payload.new);
+                listeners.forEach(fn => fn(payload.new));
+            })
         .subscribe();
     return () => { supabase.removeChannel(channel); };
 };

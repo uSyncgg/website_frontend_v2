@@ -25,7 +25,9 @@ import { getApiErrorMessage } from "utils/apiError";
 // bracket is published, it's dropped. In a solo event (1v1) a team can enter several of its
 // players, one entrant each, named after the player.
 // where each match view is { state, reportedBy, issues, reports?, noShowUnlocksAt,
-//   disputeClosesAt, canReport, canReportNoShow, canDispute }.
+//   disputeClosesAt, canAct, canReport, canReportNoShow, canDispute, chatId? }. canAct: the
+//   viewer may act in this match (any picked player of a side, or its owner or captains);
+//   chatId (managers and the two sides): the match's open chat, see services/chats.js.
 //
 // Lists (hosting, entered, a profile's events) are pages of summaries, not full events.
 //

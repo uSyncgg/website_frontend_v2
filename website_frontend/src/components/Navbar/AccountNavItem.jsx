@@ -6,6 +6,7 @@ import { PROFILE_LABELS, profileUrl } from "utils/profiles";
 import { EVENT_DASHBOARD_PATH } from "utils/hostEvents";
 import { getApiErrorMessage } from "utils/apiError";
 import { NotificationBell } from "components/NotificationBell/NotificationBell";
+import { ChatButton } from "components/Chat/ChatButton";
 import { WalletMenuBalances } from "components/Wallet/WalletMenuBalances";
 import styles from '../Navbar/Navbar.module.css';
 
@@ -210,7 +211,7 @@ export const AccountNavItem = ({ closeMenu, variant = 'header' }) => {
     // 'complete', 'incomplete' (sign-up not finished - same menu, Profile and Settings lead to
     // the form), or 'error' (logged in but the lookup failed - still offer Logout).
     if (variant === 'header') {
-        return <div className={styles.accountCluster}><NotificationBell /><ProfileMenu /></div>;
+        return <div className={styles.accountCluster}><ChatButton /><NotificationBell /><ProfileMenu /></div>;
     }
 
     return (
