@@ -8,7 +8,7 @@ import { getApiErrorMessage } from "utils/apiError";
 import { useHostEvent, matchState, matchView, reportScore, reportNoShow, disputeResult, ruleOnMatch } from "services/brackets";
 import { findMatch, isEntrant, matchRoundLabel } from "utils/bracket";
 import { profileUrl } from "utils/profiles";
-import { BracketError, EventLoading, entrantsById, formatDate, gameDisplayName, isTeamEvent, locationLabel, RestrictionList } from "./hostShared";
+import { BracketError, EventLoading, entrantsById, formatDate, gameDisplayName, isTeamEvent, locationLabel, RestrictionList, RulesetInfo } from "./hostShared";
 import styles from "./Host.module.css";
 
 const STATUS_TEXT = {
@@ -213,7 +213,7 @@ export const MatchPage = () => {
                         </section>
                         <section className={styles.card}>
                             <h2 className={styles.sectionTitle}>Rules</h2>
-                            {event.rules ? <p className={styles.preWrap}>{event.rules}</p> : <p className={styles.muted}>The host hasn't posted rules.</p>}
+                            <RulesetInfo event={event} />
                             {event.restrictions?.length > 0 &&
                                 <>
                                     <h3 className={styles.fieldLabel} style={{ marginTop: '1rem' }}>Restrictions</h3>

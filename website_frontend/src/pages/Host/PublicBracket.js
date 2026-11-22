@@ -12,7 +12,7 @@ import { useWallet, refreshWallet, formatMoney } from "services/wallet";
 import { getMyTeams, getTeam } from "services/teams";
 import { getApiErrorMessage } from "utils/apiError";
 import { EVENT_TYPES, matchUrl } from "utils/hostEvents";
-import { BracketError, Modal, ShareButton, StageChip, capacityLabel, entrantsById, formatDate, formatLabel, unitLabel, isTeamEvent, EventLoading, formatSummary, locationLabel, gameDisplayName, RestrictionList } from "./hostShared";
+import { BracketError, Modal, ShareButton, StageChip, capacityLabel, entrantsById, formatDate, formatLabel, unitLabel, isTeamEvent, EventLoading, formatSummary, locationLabel, gameDisplayName, RestrictionList, RulesetInfo } from "./hostShared";
 import { USYNC_FEE_RATE } from "utils/fees";
 import styles from "./Host.module.css";
 
@@ -539,10 +539,10 @@ export const PublicBracket = () => {
                             </dl>
                         </section>
 
-                        {event.rules &&
+                        {event.ruleset &&
                             <section className={styles.card}>
                                 <h2 className={styles.sectionTitle}>Rules</h2>
-                                <p className={styles.preWrap}>{event.rules}</p>
+                                <RulesetInfo event={event} />
                             </section>
                         }
 

@@ -185,6 +185,11 @@ export const useBracketMeta = () => {
     return useSyncExternalStore(subscribe, () => state.meta);
 };
 
+// The rulesets a host can pick for a game (an entry from meta.games) and title: the game's
+// general ones plus the title's own. Once there are any, the event has to pick one.
+export const rulesetsFor = (gameEntry, titleKey) =>
+    (gameEntry?.rulesets ?? []).filter(r => !r.title || r.title === titleKey);
+
 // ---- reading an event ---------------------------------------------------------
 
 export const isArchived = (event) => event.stage === 'complete';
