@@ -171,6 +171,10 @@ export const setAutoPay = async (days) => {
 export const adminCancelEvent = (eventId, reason) =>
     retrying(() => apiClient.post(`/admin/events/${encodeURIComponent(eventId)}/cancel`, { reason })).then(res => res.data);
 
+// Every account's wallet with totals over all wallets (Finance and Accounts tabs). 403 for
+// admins without can_manage_money.
+export const adminWalletSummary = () => apiClient.get('/admin/wallets/summary').then(res => res.data);
+
 export const adminGetWallet = (email) => apiClient.get('/admin/wallets', { params: { email } }).then(res => res.data);
 
 // { email, direction: 'credit' | 'debit', amountCents, reason, reference, idempotencyKey }

@@ -1,11 +1,15 @@
 import { useMemo, useState } from "react";
 import { LoadingWheel, Segmented } from "components";
-import { useAdminAccounts } from "hooks/useAdminAnalytics";
+import { useAdminAccounts, useAdminWalletSummary } from "hooks/useAdminAnalytics";
 import { LINK_PLATFORMS } from "services/adminAnalytics";
 import { getLoadErrorMessage } from "utils/apiError";
 import styles from "./AdminAnalytics.module.css";
+import { Money } from "./AdminWallets";
 
 // Accounts tab of /admin/analytics: filter every account, including half-finished sign-ups.
+// Admins allowed to manage money also see each wallet's Deposited Funds and Earnings (the
+// wallet summary is a 403 for everyone else, and the columns stay hidden). Accounts without
+// a profile have no wallet and show a dash.
 
 const ROLES = [
     { key: 'all', label: 'All' },
@@ -39,9 +43,24 @@ const SHOW_LIMIT = 200;
 
 const linkedCount = (a) => LINK_PLATFORMS.filter(p => a.linked?.[p.key]).length;
 
+const WalletCells = ({ wallet }) => wallet
+    ? <>
+        <td className={styles.money}><Money cents={wallet.depositedCents} /></td>
+        <td className={styles.money}>
+            <Money cents={wallet.earningsCents} />
+            {wallet.frozen && <span className={styles.frozenBadge}>Frozen</span>}
+        </td>
+    </>
+    : <><td className={styles.money}>—</td><td className={styles.money}>—</td></>;
+
 export const AdminAccountsTab = () => {
     const { data, loading, error } = useAdminAccounts();
     const accounts = data?.accounts;
+    const walletSummary = useAdminWalletSummary();
+    const wallets = useMemo(
+        () => walletSummary.data && new Map(walletSummary.data.items.map(w => [w.accountId, w])),
+        [walletSummary.data]);
+    const walletsFailed = walletSummary.error && walletSummary.error.response?.status !== 403;
 
     const [search, setSearch] = useState('');
     const [role, setRole] = useState('all');
@@ -148,6 +167,8 @@ export const AdminAccountsTab = () => {
                                 <th>Profile</th>
                                 <th>Linked</th>
                                 <th>Joined</th>
+                                {wallets && <th className={styles.money}>Deposited funds</th>}
+                                {wallets && <th className={styles.money}>Earnings</th>}
                             </tr>
                         </thead>
                         <tbody>
@@ -159,6 +180,7 @@ export const AdminAccountsTab = () => {
                                     <td>{a.profile_complete ? 'Complete' : 'Not finished'}</td>
                                     <td title={LINK_PLATFORMS.filter(p => a.linked?.[p.key]).map(p => p.label).join(', ')}>{linkedCount(a)}</td>
                                     <td>{new Date(a.created_at).toLocaleDateString('en-US', { dateStyle: 'medium' })}</td>
+                                    {wallets && <WalletCells wallet={wallets.get(a.id)} />}
                                 </tr>
                             ))}
                         </tbody>
@@ -167,6 +189,7 @@ export const AdminAccountsTab = () => {
                         <p className={styles.chartNote}>Showing the first {SHOW_LIMIT} of {shown.length.toLocaleString('en-US')}.</p>
                     }
                     {!shown.length && <p className={styles.chartNote}>No accounts match these filters.</p>}
+                    {walletsFailed && <p className={styles.chartNote}>Wallet amounts couldn't load.</p>}
                 </div>
             </section>
 
