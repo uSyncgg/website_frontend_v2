@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { adminGetWallet, adminAdjustWallet, adminRefundDeposit, formatMoney, parseDollars, newIdempotencyKey } from "services/wallet";
 import { getApiErrorMessage } from "utils/apiError";
 import hostStyles from "pages/Host/Host.module.css";
 import styles from "./AdminAnalytics.module.css";
 import { AdminWithdrawals } from "./AdminWithdrawals";
+import { AdminWallets } from "./AdminWallets";
+import { useAdminWalletSummary } from "hooks/useAdminAnalytics";
 
 // Finance tab of /admin/analytics: wallet tools for admins allowed to manage money
-// (admins.can_manage_money). Look an account up by email, then:
+// (admins.can_manage_money). The Wallets table lists every wallet with totals; pick one there or
+// look an account up by email, then:
 //   - credit or debit its Deposited Funds by hand (e.g. a wired guaranteed prize), with a reason
 //     and a reference; never Earnings, so wired money can't become withdrawable;
 //   - refund one of its deposits to the card (amount + fee), while that much is still deposited.
@@ -30,6 +33,8 @@ export const AdminFinanceTab = () => {
     const [error, setError] = useState('');
     const [notice, setNotice] = useState('');
     const [busy, setBusy] = useState(false);
+    const summary = useAdminWalletSummary();
+    const toolsRef = useRef(null);
     // key: one per adjustment, so a double click or a retried request posts it once. A new one
     // is made after each success and whenever the form changes.
     const [move, setMove] = useState(() => ({ direction: 'credit', amount: '', reason: '', reference: '', key: newIdempotencyKey() }));
@@ -41,7 +46,10 @@ export const AdminFinanceTab = () => {
         setNotice('');
         try {
             setWallet(await action());
-            if (success) setNotice(success);
+            if (success) {
+                setNotice(success);
+                summary.reload();
+            }
             setBusy(false);
             return true;
         } catch (err) {
@@ -54,6 +62,12 @@ export const AdminFinanceTab = () => {
     const lookUp = (e) => {
         e.preventDefault();
         if (email.trim()) run(() => adminGetWallet(email.trim()));
+    };
+
+    const pick = (picked) => {
+        setEmail(picked);
+        run(() => adminGetWallet(picked));
+        toolsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
 
     const amountCents = parseDollars(move.amount);
@@ -82,7 +96,8 @@ export const AdminFinanceTab = () => {
     return (
         <>
         <AdminWithdrawals />
-        <section className={styles.card}>
+        <AdminWallets {...summary} onPick={pick} />
+        <section className={styles.card} ref={toolsRef}>
             <h2 className={styles.cardTitle}>Wallet tools</h2>
             <p className={styles.cardSubtitle}>
                 For admins allowed to manage money. Every action is logged, emailed to uSync, and the user is notified.

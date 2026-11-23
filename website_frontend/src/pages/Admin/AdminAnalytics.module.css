@@ -471,6 +471,49 @@
 }
 
 /* Finance tab */
+.money {
+    text-align: right !important;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.negative {
+    color: var(--loss);
+    font-weight: 600;
+}
+
+.frozenBadge {
+    margin-left: .5rem;
+    padding: .05rem .45rem;
+    border: 1px solid var(--loss);
+    border-radius: 999px;
+    color: var(--loss);
+    font-size: .7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.clickableRow {
+    cursor: pointer;
+}
+
+.clickableRow:hover td,
+.clickableRow:focus-visible td {
+    background: var(--panel);
+}
+
+.clickableRow:focus-visible {
+    outline: 2px solid var(--violet);
+    outline-offset: -2px;
+}
+
+.table tfoot td {
+    border-top: 1px solid var(--line-strong);
+    border-bottom: none;
+    color: var(--ink);
+    font-weight: 700;
+}
+
 .plannedList {
     margin: .75rem 0 0;
     padding-left: 1.25rem;
